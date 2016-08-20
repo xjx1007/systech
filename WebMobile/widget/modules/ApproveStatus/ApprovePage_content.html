@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/module_js/ApproveStatus.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style type="text/css"> 
+.outline-energized {
+    background: transparent;
+	border-color: #f0b840;
+	color: #f0b840;
+}
+.outline-energized:active {
+    background-color: #f0b840;
+    color: #fff;
+    box-shadow: none; 
+}
+
+.outline-positive {
+    background: transparent;
+	border-color: #4a87ee;
+	color: #4a87ee;
+}
+.outline-positive:active {
+    background-color: #4a87ee;
+    color: #fff;
+    box-shadow: none; 
+}
+</style>
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+     <div id="content" class="ub-f1 tx-l b-gra c-wh t-bla uinn">
+     	<h3 id="approve_title"></h3>
+    	<!--块容器开始-->
+		<div class="ub ub-ver" id="createform">	
+		
+		</div>
+		
+		<!--块容器结束-->
+		<div id="buttondiv" style="display: none;">
+			<!--块容器开始-->
+			<div class="ub">
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<!--div ontouchstart="zy_touch('btn-act');" onclick="submitApprove()" id="save" class="btn uinn5 c-blu3 uc-a1 uba t-wh outline-positive"></div-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="submitApprove()" id="save" class="btn uinn5 c-blu3 uc-a1 t-wh"></div>
+				<!--按钮结束-->
+				</div>
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="uexWindow.evaluateScript('ApprovePage','0','back()')" id="cancle" class="btn uinn5 c-org1 uc-a1 t-wh"></div>
+				<!--按钮结束-->
+				</div>
+			</div>
+			<!--块容器结束-->
+		</div>
+    </div>
+</body>
+<script>
+	zy_init();
+	setHtml("save", '<i class="icon-ok"></i>&nbsp;'+RES_SAVE_BUTTON);
+	setHtml("cancle", '<i class="icon-reply"></i>&nbsp;'+RES_CANCEL_BUTTON);
+	window.uexOnload = function(type){
+		if (!type) {
+		   setCreateApprovePageBind();
+		}
+	}
+	
+</script>
+</html>

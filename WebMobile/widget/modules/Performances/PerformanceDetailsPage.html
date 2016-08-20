@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../font-sae/font-sae.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-gra4" ontouchstart>
+  	<!--员工绩效详细页面-->
+    <div id="PerformanceDetailsPage" class="up ub ub-ver " tabindex="0">
+  		<div id="header" class="uh" >
+  			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title" >员工绩效</div>
+			</div>
+				<div ontouchstart="zy_touch('btn-act');" onclick="backHome()" id="BackHomeLabel" class="btn uinn btn-r c-blu2 c-m1 uc-a1 t-wh"></div>
+				<!--div class="c-gra uinn t-bla ">
+					<span id="performanceDetailsTitle"></span>
+				</div-->
+				<div class="c-gra4 t-bla uinn">
+					<div class="c-wh uinn ulev-1 ub uba ub-ac b-gra uc-a1">
+						<i class="icon-user"></i><div class="ub-f1 ulev-1 long_hide" id="employeename">管理员 </div>
+						<div class="tx-c ub-f1" id="perfDate" style="color:#CC0000">2013-07-01 - 2013-07-15</div>
+						<div class="ufr" id="perfEmplName" style="color:#669900">销售机会</div>
+					</div>
+				</div>
+		</div>
+        <div id="content" class="ub-f1 c-gra4">
+   
+        </div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+<script>
+	zy_init();
+	window.uexOnload = function(type){
+		if (!type) {
+			var item = getstorage('CurrentPerformanceItem');
+			var employeename = getstorage('CurrPerfEmplName');
+			var startDate = getstorage("startDate");
+			startDate = startDate.replace(/-/g,"/");
+			var endDate = getstorage("endDate");
+			endDate = endDate.replace(/-/g,'/');
+			setHtml("employeename",employeename);
+			setHtml("perfDate",startDate+' - '+endDate);
+			setHtml("perfEmplName",item);
+			//setHtml("performanceDetailsTitle",employeename+' '+item+' <br>'+startDate+'--'+endDate);
+		    zy_con("content", "DetailList.html", 0, $$("header").offsetHeight);
+		}
+		window.onorientationchange=window.onresize=function(){
+			zy_resize("content",0,$$("header").offsetHeight);
+		}
+	}
+</script>
+</html>

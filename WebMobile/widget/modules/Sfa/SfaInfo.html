@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui-on.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../font-sae/font-sae.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Sfa.js"></script>
+		<script type="text/javascript" src="../../js/RelativeModule.js"></script>
+		<script type="text/javascript" src="../../js/DateOrTime.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+	<div id="content" class="ub-f1 t-bla c-gra4">
+		
+		<div class=" uc-a1 umar-a uba b-gra c-wh">
+			<div class="ub ub-f1 ubb ulab b-gra ub-ac uinn3">
+				<div class="umar-a ub-f1 tx-c">基本信息</div>
+			</div>
+			<div class="ubb b-gra uinn uc-t">
+				<div class="ub t-bla ulab ub-ac">
+			 		<div class="detail_bt t-gra1">客户名称</div>
+			 		<div class="ub-f1 detail_nr ub" id="sfa_accountname"></div>
+				</div>
+			</div>
+			<div class="ubb b-gra uinn uc-t">
+				<div class="ub t-bla ulab ub-ac">
+					<div class="detail_bt t-gra1" >SFA方案</div>
+					<div class="ub-f1 ilogin uinn4" id="SFA_fa"></div>
+				</div>
+			</div>
+			<div class="ubb b-gra uinn uc-t">
+				<div class="ub t-bla ulab ub-ac">
+					<div class="detail_bt t-gra1" >SFA序列</div>
+					<div class="ub-f1 ilogin uinn4" id="SFA_xl"></div>
+				</div>
+			</div>
+			<div class="ubb b-gra uinn uc-t">
+				<div class="ub t-bla ulab ub-ac">
+					<div class="detail_bt t-gra1" >事件</div>
+					<div class="ub-f1 ilogin uinn4" id="SFA_sj"></div>
+				</div>
+			</div>
+			<div class="ubb b-gra uinn uc-t">
+				<div class="ub t-bla ulab ub-ac">
+					<div class="detail_bt t-gra1" >开始日期</div>
+					<div class="ub-f1 ilogin uinn4" id="SFA_datestart"></div>
+				</div>
+			</div>
+			<div class="ubb b-gra uinn uc-t">
+				<div class="ub t-bla ulab ub-ac">
+					<div class="detail_bt t-gra1" >结束日期</div>
+					<div class="ub-f1 ilogin uinn4" id="SFA_dateend"></div>
+				</div>
+			</div>
+		</div>
+		<div class=" uc-a1 umar-a uba b-gra c-wh">
+			<div class="ub ub-f1 ubb ulab b-gra ub-ac uinn3">
+				<div class="umar-a ub-f1 tx-c">执行动作信息</div>
+			</div>
+			<div id="SFA_zxdz"></div>
+		</div>
+		
+		<div class=" uc-a1 umar-a uba b-gra c-wh">
+			<div class="ub ub-f1 ubb ulab b-gra ub-ac uinn3">
+				<div class="umar-a ub-f1 tx-c">执行说明及结果</div>
+			</div>
+		<div class="ubb b-gra uinn uc-t">
+			<div class="ub t-bla ulab ub-ac">
+				<div class="detail_bt t-gra1" >执行说明</div>
+				<div class="ub-f1 ilogin uinn4 detail_li_text" id="SFA_zxsm"></div>
+			</div>
+		</div>
+		<div class="ubb b-gra uinn uc-t">
+			<div class="ub t-bla ulab ub-ac">
+				<div class="detail_bt t-gra1" >执行结果</div>
+				<div class="ub-f1 ilogin uinn4" id="SFA_zxjg"></div>
+			</div>
+		</div>
+		</div>
+		<div id="buttondiv" style="display: none;">
+			<div class="ub">
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="sfaobj.SaveRunEvent();" class="btn uinn5 uc-a1 c-blu3 t-wh tx-c"><i class="icon-pencil"></i>&nbsp;修改事件</div>
+				<!--按钮结束-->
+				</div>
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="sfaobj.JumpRunEvent();" class="btn uinn5 c-org1 uc-a1 t-wh"><i class="icon-share"></i>&nbsp;跳过事件</div>	
+				<!--按钮结束-->
+				</div>
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="sfaobj.DoRunEvent();" class="btn uinn5 uc-a1 t-wh tx-c c-blu3"><i class="icon-ok"></i>&nbsp;执行事件</div>	
+				<!--按钮结束-->
+				</div>
+			</div>
+		</div>
+		<div id="buttondiv2" style="display: none;">
+			<div class="ub">
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="sfaobj.JumpRunEvent();" class="btn uinn5 uc-a1 c-blu3 t-wh tx-c"><i class="icon-share"></i>&nbsp;跳过事件</div>	
+				<!--按钮结束-->
+				</div>
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="sfaobj.DoAgainRunEvent();" class="btn uinn5 c-org1 uc-a1 t-wh"><i class="icon-ok"></i>&nbsp;再次执行</div>	
+				<!--按钮结束-->
+				</div>
+			</div>
+		</div>
+		<div id="buttondiv3" style="display: none;">
+			<div class="ub">
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="sfaobj.DoAgainRunEvent();" class="btn uinn5 uc-a1 t-wh tx-c c-blu3"><i class="icon-ok"></i>&nbsp;再次执行</div>	
+				<!--按钮结束-->
+				</div>
+			</div>
+		</div>
+</body>
+<script>
+	zy_init();
+	var sfaobj = new SFAObj('Sfas');
+	window.uexOnload=function(type){
+		uexControl.cbOpenDatePicker=changeDateMore;
+		sfaobj.setDetailsInfo();//加载详细信息
+	}
+	
+</script>
+</html>

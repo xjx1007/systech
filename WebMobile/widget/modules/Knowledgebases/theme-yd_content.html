@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/RelativeModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style type="text/css">
+		img{max-width:100%;}
+		</style> 
+		<style type="text/css"> 
+.arrow_box {
+	position: relative;
+	background: #EEEEEE;
+	border: 1px solid #CCCCCC;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(238, 238, 238, 0);
+	border-bottom-color: #EEEEEE;
+	border-width: 8px;
+	left: 6%;
+	margin-left: -8px;
+}
+.arrow_box:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #CCCCCC;
+	border-width: 9px;
+	left: 6%;
+	margin-left: -9px;
+}
+</style> 
+        <title>易客 CRM</title>
+</head>
+<body class="um-vp" ontouchstart>
+	<div class="ub ub-pc ub-ac  t-bla tx_bold" style="padding:.7em;" id="title">
+		&nbsp;&nbsp;
+	</div>
+
+	<div class="ub t-bla umh4 lis3" id="titlelist">	 
+		<div class="avatar">
+			<img src="../../css/images/avatar_default1299eb.png" id="avatar_pic"/>
+		</div>
+		<div class="ub-f1 ub ub-ver lis3">	
+			<div class="ub ub-hor umar-b"> 
+				<div class="ub-f1 ub-hor ufl ulev-1 tx_bold"> 
+					<div class="umar-l">
+						<span id="author">&nbsp;&nbsp;</span>
+					</div> 
+				</div>  		
+				<div class="ub ub-hor ufr ulev-2"> 
+					<div class="umar-l">
+						<span class="t-gra" id="isstick">置顶</span>&nbsp;|
+						<span class="t-gra" id="isessence">精华</span>&nbsp;|
+						<span class="t-gra" id="ismajor">重要</span>&nbsp;|
+						<span class="t-gra" id="islock">锁帖</span>&nbsp;
+					</div>
+				</div>    
+			</div>	 
+			<div class="ub ub-ac t-gra ulev-2 umar-t"> 
+				<div class="ub ub-hor ufl"> 
+					发表于<div class="umar-l" id="modifiedtime">&nbsp;&nbsp;</div>
+				</div> 
+			</div>	 
+		</div>      
+	</div>
+	<div class="ub ub-ver">
+		<!--<div class="con-img umar-a"><img src="css/images/sds.jpg" class="img-con"/></div>-->	
+		<div class="umar-a linh2 ulev0 umh8" >
+			<div class="arrow_box uc-a1 uinn" id="tztext"> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			<div class="uhide" style="border: 2px dotted #DDD;" id="relativeAcc_div"> 
+				<div class="t-gra ulev-1">关联客户:</div>
+				<div class="ub-f1 ulev-1" id="relativeAcc"></div>
+			</div>
+			<div class="uhide" style="border: 2px dotted #DDD;" id="relativeAtt_div"> 
+				<div class="t-gra ulev-1">关联附件:</div>
+				<div class="ub-f1 ulev-1" id="relativeAtt"></div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	<div id="comlist">
+	</div>
+
+	<div class="uhide" id="more" >   
+ 		<div ontouchstart="zy_touch('btn-act')" onclick="ltobj.getComments()" class="ub-f1 ub ubr b-gra c-m2 t-bla ub-ac ub-pc umh4 lis"id="synum">     
+			剩余20楼  加载更多...    
+ 		</div> 
+ 		<div class="umw3 umh3 ub ub-ac ub-pc btl-k" >
+			<div class="res12 uwh-search ub-img"  onclick="gotop()"></div>
+ 		</div>      
+  	</div>
+</body>
+<script>
+zy_init();
+var ltobj = new LunTanObj('mobileKnowledges');
+var ii = 0;
+var imglists = [];
+var picshow=[];
+var showpic=[];
+function gotop(){
+	window.scroll(0,0);
+}
+
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","rgba(170,170,170,0)","1");
+		uexWindow.showBounceView("1","rgba(170,170,170,0)","0");
+		ltobj.articleid = getstorage('CurrentArticleId');
+		ltobj.setArticleDetails(); //获取文章详细
+	}
+	
+	uexWindow.onBounceStateChange = function (type,status){
+		uexWindow.resetBounceView('0');
+		if (status == 1) {
+			ltobj.setArticleDetails(); //获取文章详细
+		}
+	}
+	uexWindow.notifyBounceEvent("0","1");
+}
+</script>
+</html>

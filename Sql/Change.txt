@@ -1,0 +1,65 @@
+
+        <br />
+        <table width="70%" border="0" align="center"  cellpadding="0" cellspacing="0" class="tablecss_Select">
+            <tr>
+                <td class="tableBotcss" width="15%" style="height: 30px; text-align: right">姓名：</td>
+                <td class="tableBotcss" width="35%" style="height: 30px; text-align: left"><asp:TextBox ID="Tbx_Name" runat="server"></asp:TextBox></td>
+                <td class="tableBotcss" width="15%" style="height: 30px; text-align: right">客户：</td>
+                <td class="tableBotcss1" width="35%" style="height: 30px; text-align: left">
+                    <asp:TextBox ID="Tbx_CustomerName" runat="server"></asp:TextBox></td>
+            </tr>
+            <tr>
+                <td class="tableBotcss" width="15%" style="text-align: right">电话：</td>
+                <td class="tableBotcss" width="35%" style="text-align: left"><asp:TextBox ID="Tbx_Tel" runat="server"></asp:TextBox></td>
+                <td class="tableBotcss" width="15%" style="text-align: right">地址：</td>
+                <td class="tableBotcss1" width="35%" style="text-align: left"><asp:TextBox ID="Tbx_Address" runat="server"></asp:TextBox></td>
+            </tr>
+        </table>
+        <br />
+        
+    <div align="center">           
+        <asp:Button ID="Btn_Query" runat="server" Text="查 询" CssClass="Custom_Button" OnClick="Btn_Query_Click" Height="23px" Width="57px"></asp:Button>&nbsp;
+        <asp:Button ID="Btn_Del" runat="server" Text="删 除" CssClass="Custom_Button"  Height="23px" Width="57px" OnClick="Btn_Del_Click"></asp:Button>&nbsp;
+        <input id="Btn_All" type="button" class="Custom_Button" value="全 选" onclick="javascript:selectAllButton(this);"   style="width: 57px; height: 23px"/>&nbsp;
+        <input class="Custom_Button" id="Btn_Reset" onclick="PageGo('KNet_Sales_LinkMan_List.aspx')" type="button" value="复 位"  style="width: 57px; height: 23px" />  
+    </div>
+
+
+Create Table Cg_Order_Checklist
+(
+COC_Code VarChar(50) primary key ,
+COC_HouseNo VarCHar(50),
+COC_Stime DateTime,
+COC_BeginDate DateTime,
+COC_EndDate DateTime,
+COC_Details  VarCHar(2000),
+COC_CTime DateTime,
+COC_Creator VarChar(50),
+COC_MTime DateTime,
+COC_Mender varChar(50)
+)
+Create Table Cg_Order_Checklist_Details
+(
+COD_Code VarChar(50) primary key ,
+COD_DirectOutID VarChar(50),
+COD_CustomerValue varChar(50),
+COD_GetPerson VarCHar(50),
+COD_Wuliu varChar(50),
+COD_ProductsBarCode varChar(50),
+COD_ProductsEdition varChar(50),
+COD_CkNumber Decimal(18,3),
+COD_DZNumber Decimal(18,3),
+COD_Price Decimal(18,3),
+COD_HandPrice Decimal(18,3),
+COD_Money Decimal(18,3),
+COD_Details varChar(50)
+)
+
+alter table KNet_WareHouse_DirectOutList add WuliuName varchar(50)
+alter table KNet_WareHouse_DirectOutList add WuliuNameCode varchar(50)
+alter table KNet_WareHouse_DirectOutList add WuliuCode varchar(50)
+alter table KNet_WareHouse_DirectOutList add WuliuState varchar(50)
+
+update KNet_Sales_ContractList_details
+set ContractAmount=3000,Contract_SalesTotalNet=Contract_SalesUnitPrice*3000
+where ContractNo='HTP201302270001'

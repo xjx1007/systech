@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+   		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-on.css">
+        <link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+    	<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+	  	 <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/WorkMaps.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+    </head>
+    <body class="um-vp c-gra4" ontouchstart>
+       <div id="page_0" class="up ub ub-ver" tabindex="0">
+       		<div id="header" class="uh">
+	  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+	  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+					<div class="h1 title">请假申请</div>
+					<div ontouchstart="zy_touch('btn-act');" onclick="openwin('QJListPage','')" id="BackHomeLabel" class="btn uinn btn-r  t-wh">历史</div>
+				</div>
+			</div>
+            <!--header结束--><!--content开始-->
+            <div id="content" class="ub-f1 umar-a uba uc-a1 b-gra c-wh ">
+            	<div class="ub t-bla ulab uinn" style="border-bottom: 2px dotted #DDD;">  
+					<div class="uinn ulim">请假对象:</div> 
+					<div class="ub-f1 uinn" id="recevier_name"></div>
+					<div class="uinn ulim uc-a1 t-gra" ontouchstart="zy_touch('btn-act')" onclick="openSelectUserPage();"  style="left:.2em;height:1.1em;"><i class="ion-chevron-right"></i>
+					</div> 
+				</div>
+				<div class="ub t-bla ulab uinn" style="border-bottom: 2px dotted #DDD;"> 
+					<div class="uinn ulim">请假原因:</div>
+					<div class="ub-f1 c-wh uba uc-a1 b-gra uinput uinn4 ub ub-ver">  
+						<textarea placeholder="请输入原因"  name="area1" class="uc-a1 ub-f1" style="min-height:5em;" id="text"></textarea> 
+					</div>
+				</div>
+				<div class="ub t-bla ulab uinn"> 
+					<div class="uinn">是否发送短信:&nbsp;</div>
+					<input class="uhide" type="checkbox" id="sendmsg_check">	
+					<div class="swi uc-a1 uba b-gra"  ontouchstart="zy_touch('',zy_for)">
+					<div class="uabs swi-btn us"></div>
+					</div>
+				</div>
+				<div class="ub">
+					<div class="ub-f1 uinn">
+					<!--按钮开始-->
+					<div ontouchstart="zy_touch('btn-act');" onclick="sendQingJia()" id="save" class="btn uinn5 uc-a1 uba t-wh" style="background-color:#5097CD">提交</div>
+					<!--按钮结束-->
+					</div>
+				</div>
+            </div>
+            <!--content结束-->
+        </div>
+    </body>
+    <script>
+    	zy_init();
+		var receiverid = '';
+		var workmap = new WorkMapObj('workMaps');
+		
+		function openSelectUserPage(){
+			openwin('userlist','../',10,0);
+		}
+		
+		function sendQingJia(){
+			workmap.sendQJ();
+		}
+		
+		function cbSendSMS(opCode,dataType,data){
+			if(data==0){//发送成功
+				myalert("短信发送成功!");
+			}else{
+				myalert("短信发送失败!");
+			}
+		}
+
+		//添加共享人
+		function addReceiver(userInfo){
+			var userInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+			receiverid = userInfo.id;
+			var forumObj = '';
+			forumObj += '<a onclick="openpop_user(\'' + userInfo.id + '\');return false;" id="user_'+userInfo.id+'" href="">' + userInfo.user_name + '</a>';
+			setHtml('recevier_name', forumObj);
+		}; 
+		
+        window.uexOnload = function(type){
+            if (!type) {
+				setstorage('theMode','QingJia');
+            }
+			uexSMS.cbSend=cbSendSMS;
+			uexWidgetOne.cbError = function(opCode,errorCode,errorInfo){
+				myalert("errorCode:" + errorCode + "\n"+"errorInfo:" + errorInfo);
+			}
+			window.onorientationchange=window.onresize=function()
+			{
+				zy_resize("content",0,$$("header").offsetHeight);				
+			}
+        }
+    </script>
+</html>

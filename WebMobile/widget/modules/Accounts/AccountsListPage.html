@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/CustomView.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	客户页面	 	-->
+    <div class="ub ub-fv ub-ver " tabindex="0">
+    	
+  		<div id="header">
+  			<div id="header_title" class="ub bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<!--div class="h1 title">我的客户</div-->
+				
+				<div class="ub-f1 ut ub ub-ver ulev1 ub-ac tx-c tx_bold uinn " style="margin-left:2.2em;margin-right:2.2em">
+					<div class="btn b-gra ub ub-f1 sel" >
+					  <div class="ub-f1 tx-c" id="AccountListPageTitle">我的客户</div>
+					  <div class="umh1 umw1" style="left:0.2em;color:#B7B8B8"><i class="icon ion-arrow-down-b t-wh"></i></div>
+						<select name="viewscope" selectedindex="0" id="viewscope" onchange="zy_selectmenu(this.id);changeSectionSel();">
+							<option value="current_user" selected >我的客户</option>
+							<option value="all_to_me">所有客户</option>
+							<option value="sub_user" >下属客户</option>
+						</select>
+					</div>
+				</div> 
+				<!--下拉列表开始-->
+				<!--div class="ub t-wh uinn ub-ac btn btn-r"> 
+				  	<div class="ub-f1 ub sel ut-s"> 
+				  		<div class="ub-f1 ut-s uinn ulev-1 tx-l">我的客户</div>  
+						<div class="umw2 ub ub-pc ub-ac">  
+				   			<div class="ub-img umw1 umh1 res3"></div>   
+						</div>  
+						<select name="selpooltype" selectedindex="0" id="selpooltype" onchange="zy_selectmenu(this.id);selPoolType()">
+						  	<option ontouchstart="zy_touch('focuss')" id="type_1" value="unassigned" selected >未分配</option> 
+						  	<option ontouchstart="zy_touch('focuss')" id="type_2" value="assigned" >已分配</option> 
+						</select> 
+					 </div>
+				</div--> 
+				<!--下拉列表结束-->
+				
+				<button class="button button-icon icon ion-plus t-wh " onclick="openCreatePage('account','../../')" id="createButton" style="display:none;margin-left:-2.2em"></button>
+			</div>
+			<div class="uinn7 t-wh" id="view_sel_div">
+				<div class="ub ulev-1 t-blu3" >
+					<input class="uhide" type="radio" name="viewmenu" >
+					<div class="ub-con  ub-f1 tx-c tp-view uof">视图列表加载中...</div>
+				</div>
+			</div>
+			<div class="uinn7">
+				<div class="t-bla ub c-wh uinput  uinn4" >	
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="searchList()">
+				   		<div style="width:1em"></div>
+				   		<div class="res_search1 umw1 ub-img"></div>
+					</div>
+				   <div class="ub-f1 uinn1">
+				   		<input placeholder="搜索" id="searchtext" type="text"  oninput="searchList()"> 
+					</div> 
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="cancelSearch()">
+				   		<div style="width:1em"></div>
+						<div class="res-clear umw1 ub-img"></div> 
+				   </div>
+				 </div>
+			</div>
+		</div>
+		<div id="content" class="ub-f1 tx-l t-bla c-gra4">
+   
+        </div>
+		<div id="footer" class="uf c-m2 c-bla t-wh">
+			
+		</div>
+	</div>
+</body>
+<script>
+setstorage('thePage', 'Account');
+accountslistpageonload();
+function getPageNewInfo(){
+	uexWindow.evaluatePopoverScript("AccountsListPage", "content", "acobj.GetListFromServer()");
+}
+
+function getListByView(viewId){
+	setstorage('account_viewId', viewId);
+	setstorage('viewscope',$$('viewscope').value);//ligangze on 2014/11/25
+	searchList();
+}
+
+//修改查询条件
+function changeSectionSel(){
+	setstorage('viewscope',$$('viewscope').value);//ligangze on 2014/11/25
+	searchList();
+} 
+
+zy_init();
+	
+window.uexOnload = function(type){	
+	if (!type) {
+		setstorage('currPage', 1);
+		setstorage('searchtext', $$("searchtext").value);
+		setstorage('theMainWindow', 'AccountsListPage');
+		setNavDiv();
+		var s = window.getComputedStyle($$('header'), null);
+		var em = int(s.fontSize);
+		var x = 0;
+		var y = int($$("header").offsetHeight);
+		var w = int(s.width);
+		var h = int(window.innerHeight) - int($$("header").offsetHeight)-int(2.2*em);
+		uexWindow.openPopover('content', "0", 'AccountsListPageContent.html', "", x, y, w, h, em, "0");
+		getViews('Accounts');
+		//alert($$('view0'));
+		//setViewMenuSelected(getstorage('account_viewId'));
+	}
+
+	window.onorientationchange=window.onresize=orientationChange_havNav;
+}
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>
+		<script type="text/javascript" src="../../js/DateOrTime.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+    <div class="up ub ub-ver uof" tabindex="0">
+  		<div id="header">
+  			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title">统计</div>
+			</div>
+		</div>
+		<div id="content" class="ub-f1 tx-l c-gra4 t-bla" >
+        </div>
+		<div id="footer" class="uf uhide">
+			<div class="ub c-wh t-gra1">
+				<div class="uinn ub-f1 tx-c" ontouchstart="zy_touch('btn-act');" onclick="getLast()"><div class="ub-f1 tx-c"><i class="icon-chevron-left"></i></div></div>
+				<div class="uinn ub-f3 tx-c" ><span id="startDate"></span><span id="endDate"></span></div>
+				<div class="uinn ub-f1 tx-c" ontouchstart="zy_touch('btn-act');" onclick="getNext(1)"><div class="ub-f1 tx-c"><i class="icon-chevron-right"></i></div></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+
+var reType = getstorage('reType');
+datemenus = 'month';
+switch(reType){
+	case 'huikuan_month':
+	case 'qianyue_month':
+		datemenus = 'year';
+		$$("footer").className = "uf c-m2 c-bla t-wh";
+		getTheYearDate(myDate.getFullYear());
+		$$('startDate').innerHTML = getstorage("startDate").replace(/-/g,'/');
+		$$('endDate').innerHTML = '--'+getstorage("endDate").replace(/-/g,'/');
+		break;
+	case 'salesorder_smowner':
+	case 'huikuan_day':
+	case 'qianyue_day':
+		$$("footer").className = "uf c-m2 c-bla t-wh";
+		getTheMonthDate(myDate.getFullYear(),myDate.getMonth());
+		$$('startDate').innerHTML = getstorage("startDate").replace(/-/g,'/');
+		$$('endDate').innerHTML = '--'+getstorage("endDate").replace(/-/g,'/');
+		break;
+}
+
+function updatePageInfo(){
+	$$('startDate').innerHTML = getstorage("startDate").replace(/-/g,'/');
+	$$('endDate').innerHTML = '--'+getstorage("endDate").replace(/-/g,'/');
+	getPageNewInfo();
+}
+
+function getPageNewInfo(){
+	uexWindow.evaluatePopoverScript("ReportPage", "content", "ureportobj.GetChartDataFromServer()");
+}
+
+window.uexOnload = function(type){	
+	if (!type) {
+		var s = window.getComputedStyle($$('header'), null);
+		var em = int(s.fontSize);
+		var x = 0;
+		var y = int($$("header").offsetHeight);
+		var w = int(s.width);
+		var h = int(window.innerHeight) - int($$("header").offsetHeight)-int($$("footer").offsetHeight);
+		uexWindow.openPopover('content', "0", 'ReportPageContent.html', "", x, y, w, h, em, 128);
+		//zy_con("content", "ReportPageContent.html", 0, $$("header").offsetHeight);
+	}
+	window.onorientationchange=window.onresize=function(){
+        zy_resize("content", 0, $$("header").offsetHeight);
+    }
+}
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/DateOrTime.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	客户页面	 	-->
+    <div id="DailylogsListPage" class="up ub ub-ver" tabindex="0">
+  		<div id="header" class="uh" >
+  			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title" id="LowLvDailylogsListPageTitle">日报</div>
+			</div>
+			<!--div class="c-wh uinn7 t-bla">
+				<span class="name_h1_text" id="LowLvDescriptionP"></span>
+				&nbsp;&nbsp;<span id="DailylogsDayH1"></span>
+				<div ontouchstart="zy_touch('btn-act');" onclick="setDate()" class="btn uinn5 c-blu2 uc-a1 t-wh"><i class="icon-calendar"></i>&nbsp;<span id="SettingsDateLabel"></div>
+			</div-->
+
+				<div class="c-wh uinn t-bla tx-c" style="padding-bottom:0">
+					<span class="name_h1_text" id="LowLvDescriptionP"></span>
+					<span id="DailylogsDayH1"></span>
+					<div ontouchstart="zy_touch('btn-act');" onclick="setDate()" class="btn uinn5  t-blu"><i class="icon-calendar"></i>&nbsp;<span id="SettingsDateLabel"></span></div>
+				</div>
+
+		</div>
+        <div id="content" class="ub-f1 tx-l t-bla c-gra4">
+        	
+        </div>
+		<div id="footer">
+		</div>
+		
+	</div>
+</body>
+<script>
+zy_init();
+lowlvdailylogslistpageonload();
+
+//更新浮动窗口的信息
+function updateFloatWinInfo(){
+	uexWindow.evaluatePopoverScript("LowLvDailylogsDetailPage", "content", "daobj.GetLowLvDailylogsInfo()");	
+}
+
+window.uexOnload = function(type){
+	if (!type) {
+		var dailyLogsDate = getstorage("dailyLogsDate");
+		$$('DailylogsDayH1').innerHTML = dailyLogsDate;
+		$$('LowLvDescriptionP').innerHTML = getstorage("CurrentLowLvUserName");
+		zy_con("content", "LowLvDailylogsInfo.html", 0, $$("header").offsetHeight);
+	} 
+	uexControl.cbOpenDatePicker=changeDate;
+	window.onorientationchange=window.onresize=function(){
+		zy_resize("content",0,$$("header").offsetHeight);
+	}
+}
+
+</script>
+</html>

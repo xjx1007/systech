@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui-fold.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/DateOrTime.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style>
+	input[type="radio"]+div.ip-sta{
+		display:none !important;
+	}
+	input[type="radio"]:checked+div.ip-sta{	
+		display:block !important;
+	}
+	</style>
+</head>
+<body class="um-vp" ontouchstart>
+	<div class="ub t-bla c-gra4 ulab ub-fv">  
+		<div class="ub-f1 c-wh uc-a1 b-gra  uinn ub ub-ver umar-a uba">  
+		    <input id="item_type" type="text" style="display:none" value=0>
+			<textarea placeholder="请填写内容"  name="area1" id="description" class="uc-a1 ub-f1" ></textarea> 
+			<div id="pics"></div> 
+			<div id="content">
+	        	
+	        </div>
+			<div id="adr_div" class="uhide" style="padding-bottom:0.4em;border-bottom: 1px dotted #DDD;">
+				<input id="new_lng" type="text" style="display:none">
+				<input id="new_lat" type="text" style="display:none">
+				<div ><span class="uc-a1 t-gra1">我的位置&nbsp;</span></div>
+				<div id="new_address" class="c-gra uc-a1 uinn3 ub-f1 long_hide" ></div>
+			</div>
+			<div id="date_time" class="uinn1_1 umar-t" style="padding-bottom:0.4em">
+				<span class="uc-a1 t-gra1">截止时间 </span>
+				<span id="date" class="c-gra uc-a1 uinn3" onclick="setDate();"></span>  
+				<span id="time" class="c-gra uc-a1 uinn3" onclick="setTime();"></span>
+			</div> 
+			<div id="reciver_div" class="ub" style="padding-bottom:0.4em;border-top: 1px dotted #DDD;border-bottom: 1px dotted #DDD;">  
+				<div class="umar-t t-gra1"><span id="reciver_user_title">执行人</span></div> 
+				<div class="ub-f1" id="reciver_user_name"></div>
+				<div class="ulev1 umar-t" onclick="selCommandPerson();"><i class="icon ion-android-contact positive"></i></div> 
+			</div>
+			<div id="reciver_div" class="ub">
+				<div class="umar-t t-gra1">抄送范围</div> 
+				<div class="ub-f1" id="cc_user_name"></div>
+				<div class="ulev1 umar-t" onclick="selCcPerson();"><i class="icon ion-android-earth assertive"></i></div> 
+			</div>
+		</div>
+	</div>
+</body>
+<script src="../../js/dy_upload.js"></script>
+<script type="text/javascript" src="../../js/bd_convertor.js"></script>
+<script type="text/javascript" src="../../js/my_bdMap.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=123694c09683eb102283b4679c07dfd0"></script>
+<script type="text/javascript" src="../../js/module_js/CommandApprove.js"></script>
+<script>
+zy_init();
+var eimg = $$('pics');
+var img_idx = 1;
+var attachnew = [];
+var map;
+var myMark;
+var myUpload = null;
+var attachdel = [];
+var at_ids = [];
+var reciver_user_ids = [];
+var cc_user_ids = [];
+var cmobj = new CMObj('commandApprove');
+function getpic(){
+	var forum_url = getstorage("CurrentServerAddress")+'/mobile_upload.php';
+	var uploadHttp = forum_url;
+	if(!myUpload) myUpload = new disUpload(uploadHttp, 'thread', actCb, susCb);
+	myUpload.upSelect();
+}
+
+function actCb(val){
+	//logs('actCb()-->val='+val);
+}
+
+function susCb(val){
+	var node = document.createElement("span");
+	var imgId = 'img_'+img_idx;
+	var newsrc = myUpload.src;
+	node.innerHTML = '<img src="'+newsrc+'" class="uc-a1 edpic"  onclick="imgoperate(\''+imgId+'\');" id=\''+imgId+'\'/>';
+	eimg.insertBefore(node,eimg.lastElementChild);
+	attachnew.push({
+		'id': imgId,
+		'src': val
+	});
+	img_idx++;
+}
+
+function imgoperate(id){
+	var el = $$(id);
+	uexWindow.cbActionSheet = function(opId, dataType, data){
+		if (data == "0") {
+			removeNode(id);
+			for(var k in attachnew){
+				var itm = attachnew[k].id;
+				if (itm == id) {
+					attachdel.push(attachnew[k].src);
+					attachnew.splice(k, 1);
+					break;
+				}
+			}
+		} else if (data == "1") {
+			var array = [];
+			array[0] = el.src;
+			uexImageBrowser.open(array);
+		}
+	}
+	
+	var value = ["删除","预览"];
+	uexWindow.actionSheet('', '取消', value);
+}
+//显示执行时间
+function showDateTime(){
+	if($$('item_type').value == 0){
+		var tomorrow = new Date(myDate.getTime()+24*60*60*1000);  //下一日
+		var tomorrowDate = formatDate(tomorrow);
+		var currTime = getFullFormat(tomorrow.getHours())+':'+getFullFormat(tomorrow.getMinutes());
+		$$('date').innerHTML = tomorrowDate;
+		$$('time').innerHTML = currTime;
+		$$('date_time').className = 'umar-t';
+	}else{
+		$$('date_time').className = 'uhide';
+	}
+}
+
+function checkCmTime(work_end_date,work_end_time){//检查开始时间/结束时间
+	var d1= new Date();//取今天的日期  
+	var arrDueDate = work_end_date.split("-");   
+	var arrEndTime = work_end_time.split(":");   
+	var d2 = new Date(arrDueDate[0],arrDueDate[1]-1,arrDueDate[2],arrEndTime[0],arrEndTime[1]);
+	if(d1.getTime()>d2.getTime()){   //超时了
+		uexWindow.toast('0', '5', "指定的时间不能小于当前时间", 2000);
+		return false;
+	}
+	return true;
+}
+
+function changeDate(opCode,dataType,data){
+	if(dataType==1){
+		var obj = eval('('+data+')');
+		var work_end_date = obj.year+"-"+getFullFormat(obj.month)+"-"+getFullFormat(obj.day);
+		var work_end_time = $$('time').innerHTML;
+		if(checkCmTime(work_end_date,work_end_time)){
+			$$('date').innerHTML = work_end_date;
+		}
+	}
+}
+
+function changeTime(opCode, dataType, data){
+	if (dataType == 1) {
+		var obj = eval('(' + data + ')');
+		var work_end_date = $$('date').innerHTML;
+		var work_end_time = getFullFormat(obj.hour) + ":" + getFullFormat(obj.minute);
+		if(checkCmTime(work_end_date,work_end_time)){
+			$$('time').innerHTML = work_end_time;
+		}
+	}
+}
+
+//选择日期
+function setDate(){
+	var date = $$('date').innerHTML;
+	var arrDate = date.split("-");  
+	uexControl.openDatePicker(arrDate[0],arrDate[1],arrDate[2]);
+}
+
+//选择时间
+function setTime(){
+	var time = $$('time').innerHTML;
+	var arrTime = time.split(":"); 
+	uexControl.openTimePicker(arrTime[0],arrTime[1]);
+}
+//显示地址
+function showAddress(){
+	if($$('adr_div').className == 'uhide'){
+		lbs_to_location();
+		$$('adr_div').className = 'umar-t ub ub-fh';
+	}else{
+		$$('adr_div').className = 'uhide';
+	}
+}
+//更改指令type
+function changCommandTxt(){
+	$$('reciver_user_title').innerHTML = $$('item_type').value == 0 ? '审批人' : '执行人';
+	$$('item_type').value = $$('item_type').value == 0 ?1:0;
+	showDateTime();
+}
+
+//定位到当前位置后回调
+function lbs_to_location_Callback(){ 
+
+}
+var userOpt = 0;
+//添加@对象
+function addAt(){
+	userOpt = 1;
+	openwin('userlist','../',10,0);
+}
+
+//选择执行人
+function selCommandPerson(){
+	userOpt = 2;
+	openwin('userlist','../',10,0);
+}
+
+//选择抄送人
+function selCcPerson(){
+	userOpt = 3;
+	openwin('userlist','../',10,0);
+}
+
+function addUser(){
+	var userInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+	if (userOpt == 1) {
+		if (isDefine(userInfo.id) && !at_ids.in_array(userInfo.id)) { //如果客户没有在关联列表
+			at_ids.push(userInfo.id);
+			$$('description').innerHTML = $$('description').innerHTML + '@' + userInfo.user_name;
+		}
+	}else if(userOpt == 2){
+		if (isDefine(userInfo.id) && !reciver_user_ids.in_array(userInfo.id)) { //如果客户没有在关联列表
+			reciver_user_ids.push(userInfo.id);
+			var forumObj = $$('reciver_user_name').innerHTML;
+			forumObj += '<span onclick="openpop_user(\'' + userInfo.id + '\');return false;" class="c-blu uc-a1 t-wh uinn3 umar-l umar-t ufl" id="user_' + userInfo.id + '" href="">' + userInfo.user_name + '</span>';
+			setHtml('reciver_user_name', forumObj);
+		}
+	}else if(userOpt == 3){
+		if (isDefine(userInfo.id) && !cc_user_ids.in_array(userInfo.id)) { //如果客户没有在关联列表
+			cc_user_ids.push(userInfo.id);
+			var forumObj = $$('cc_user_name').innerHTML;
+			forumObj += '<span onclick="openpop_ccuser(\'' + userInfo.id + '\');return false;"  class="c-blu uc-a1 t-wh uinn3 umar-l umar-t ufl" id="cc_user_' + userInfo.id + '" href="">' + userInfo.user_name + '</span>';
+			setHtml('cc_user_name', forumObj);
+		}
+	}
+}
+
+function openpop_user(id){
+	uexWindow.cbActionSheet = function(opId, dataType, data){
+		if (data == "0") {
+			removeNode('user_'+id);
+			for (var k in reciver_user_ids) {
+				if (reciver_user_ids[k] == id) {
+					reciver_user_ids.splice(k, 1);
+					break;
+				}
+			}
+		}
+	}
+	var value = ["删除"];
+	uexWindow.actionSheet('', '取消', value);
+}
+
+function openpop_ccuser(id){
+	uexWindow.cbActionSheet = function(opId, dataType, data){
+		if (data == "0") {
+			removeNode('cc_user_'+id);
+			for (var k in cc_user_ids) {
+				if (cc_user_ids[k] == id) {
+					cc_user_ids.splice(k, 1);
+					break;
+				}
+			}
+		}
+	}
+	var value = ["删除"];
+	uexWindow.actionSheet('', '取消', value);
+}
+
+function fabu(){
+//	$$('description').value = removeHTMLTag($$('description').value);
+//	var text = $$('description').value;
+//	if ('' == text) {
+//		uexWindow.toast('0', '5', "请输入内容", 2000);
+//		return false;
+//	}
+//	var item_type = $$('item_type').value;
+//	if($$('reciver_user').value == -1){
+//		uexWindow.toast('0', '5', "请选择"+$$('reciver_user_name').innerHTML, 2000);
+//		return false;
+//	}
+//	cmobj.SendCommand();
+}
+
+window.uexOnload=function(type){
+	uexControl.cbOpenDatePicker=changeDate;
+	uexControl.cbOpenTimePicker=changeTime;
+	if(!type){
+		setstorage('theMode','fbcommandc');
+		showDateTime();
+		initMap();
+		//定位监控相关代码
+		uexLocation.onChange = locationRequestCallBack;
+		//lbs_to_location();
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+	}
+}
+</script>
+</html>

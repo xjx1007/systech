@@ -1,0 +1,27 @@
+﻿
+alter table Cg_Order_Checklist_Details add COD_RealMoney decimal(18,3) default 0
+update Cg_Order_Checklist_Details set COD_RealMoney=0
+
+alter table CG_Payment_For add CPF_Type int default 0
+update CG_Payment_For set CPF_Type=0
+
+alter table CG_Payment_For add CPF_WuliuID varchar(50)
+
+UNION ALL
+SELECT     a.id, dd.v_State,'', 
+CASE WHEN CAO_OutTime = '1900-01-01' THEN 0 ELSE DATEDIFF(DAY, CAO_OutTime, GETDATE()) END AS CqDays, f.CustomerName, f.CustomerValue, 
+                      a.DirectOutNo, a.ProductsBarCode, a.DirectOutAmount, a.KWD_SalesUnitPrice, a.KWD_SalesTotalNet, CAO_OutTime, cc.CAO_Money, KWD_CwOutTime, b.KWD_CwCode, b.KWD_Custmoer, 
+                      v_HxMoney, a.KWD_SalesTotalNet - ff.CAO_Money AS Money, b.KWD_ShipNo, b.DirectOutDateTime, b.DirectOutStaffBranch, b.HouseNo, b.DirectOutStaffNo, CAB_BillNumber, CAB_STime, 
+                      1 type,v_LeftMoney
+FROM         KNet_WareHouse_DirectOutList_Details a JOIN
+                      KNet_WareHouse_DirectOutList b ON a.DirectOutNo = b.DirectOutNo JOIN
+                      KNet_Sales_OutWareList c ON c.OutWareNo = b.KWD_ShipNo JOIN
+                      KNet_Sales_ClientList f ON f.CustomerValue = b.KWD_Custmoer JOIN
+                      v_FPhx_Money e ON e.v_DetailsID = a.ID LEFT JOIN
+                      v_DirectOut_ReceiveState dd ON dd.v_DirectOutNo = a.DirectOutNo JOIN
+                      v_FpOutDetails cc ON cc.CAD_OutNo = a.ID AND e.v_CAO_ID = isnull(cc.CAO_ID, '')  JOIN
+                          (SELECT     CAD_OutNo, sum(CAO_Money) AS CAO_Money
+                            FROM          v_FpOutDetails
+                            GROUP BY CAD_OutNo) ff ON ff.CAD_OutNo = a.ID
+WHERE     isNull(KWD_Type, '101') = '101' AND c.KSO_Type = 0 AND KWD_SalesUnitPrice <> 0 AND KWD_Del = 0 AND v_LeftMoney <> 0 AND KWD_Del = 0 AND dd.v_State = 2 AND 
+                      a.KWD_SalesTotalNet > ff.CAO_Money

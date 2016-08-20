@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+       <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+			<div id="header" class="uh">
+				<div id="header_title" class="bar bar-blue pos-relative">
+					<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+			    	<div class="h1 title" id="titlename">分类</div>
+					<button class="button button-icon icon ion-plus t-wh" onclick="addNewThread();"></button>
+				</div>
+				<!--div class="ub c-wh">	 
+					<div class="ub ub-fh t-gra1 ulev-1">
+						<input id="sort_1" class="uhide" type="radio" name="tabsort" checked="true">	
+						<div ontouchstart="zy_touch('focuss')" onclick="sortArticle(1)" class="btn-head ub-f1 ubb1 tx-c" style="padding: 0.4em .3em;">最新发表</div>
+						<input id="sort_2" class="uhide" type="radio" name="tabsort" >
+						<div ontouchstart="zy_touch('focuss')" onclick="sortArticle(2)" class="btn-head ub-f1 ubb1 tx-c" style="padding: 0.4em .3em;">最后回复</div>	
+					</div>
+				</div-->
+			<div class="c-wh uinn7">
+				<div class="ub ulev-1" >
+					<input class="uhide" type="radio" name="tabsort" id="sort_1" checked="true">
+					<div class="ub-con1 ubb1 ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="sortArticle(1)">最新发表</div>
+					<input class="uhide" type="radio" name="tabsort" id="sort_2" >
+					<div class="ub-con1 ubb1 ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="sortArticle(2)" >最后回复</div>
+				</div>
+			</div>
+            </div>
+            <!--header结束-->
+			<!--content开始-->
+            <div id="sczmcontent" class="ub-f1 tx-l t-bla ub-img6 c-gra4">
+                
+            </div>
+            
+             <!--content结束-->
+	        <div id="footer">
+	        </div>
+    	</div>
+	</body>
+<script>
+zy_init();
+function Selected(i){
+	back();
+	uexWindow.evaluateScript("KnowlesListPage", "0", "ppobj.navSelected("+i+")");
+}
+
+function sortArticle(p){
+	var id = 'sort_'+p;
+	var ch = $$(id);
+	if (!ch.checked) {
+		ch.checked = true;
+		uexWindow.evaluatePopoverScript('sczm', 'sczmcontent', 'ltobj.changeBKArticleSort('+p+')');
+	}
+}
+
+function showFaTieBt(){
+	$$('fatie').style.display = 'block';	
+}
+
+window.uexOnload = function(type){
+    if (!type) {
+		setHtml('titlename',getstorage('title'));
+        zy_con("sczmcontent", "sczm_content.html", 0, $$("header").offsetHeight);
+    }
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("sczmcontent",0,$$("header").offsetHeight);				
+	}
+
+}
+   </script>
+</html>

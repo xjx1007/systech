@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui-fold.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../font-sae/font-sae.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/BaseModule.js"></script>  
+		<script type="text/javascript" src="../../js/module_js/Pools.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style>
+			/*x轴平移-20%*/
+.animotion{
+-webkit-transform: translateX(-18%);
+-webkit-transition-property:all;
+-webkit-transition-duration:0.6s;
+-webkit-transition-delay:0;
+-webkit-transition-timing-function:ease;
+}
+/*x轴平移会原位置*/
+.ooanimotion{
+-webkit-transform: translateX(0px);
+-webkit-transition-property:all;
+-webkit-transition-duration:0.3s;
+-webkit-transition-delay:0;
+-webkit-transition-timing-function:ease;
+}
+		</style>
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+	<div id="content" class="ub-f1 t-bla c-gra4">
+		<!--列表开始-->
+		<div id="record_list">  
+		</div>
+		<!--列表结束-->
+     </div>
+</body>
+<script>
+	zy_init();
+	var poolobj = new PoolObj('mobilePools');
+	var receiverid;
+	var extensionday;
+	
+	function openSelectUserPage(id){
+		poolobj.CurrentAccountId = id;
+		openwin('userlist','../',10,0);
+	}
+	
+	// 将客户分配给某人
+	function addReceiver(userInfo){
+		var userInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+		receiverid = userInfo.id;
+		var mycars=['确定', '取消'];
+		uexWindow.confirm('', '您确定要将客户分配给'+userInfo.user_name+'吗?', mycars);	
+	}; 
+	
+	function LQAccount(id){
+		poolobj.optType = 'lingQu';
+		poolobj.CurrentAccountId = id;
+		receiverid = poolobj.CurrentUserId;
+		var mycars=['确定', '取消'];
+		uexWindow.confirm('', '您确定要领取这个客户吗?', mycars);
+	}
+	
+	function SFAccount(id){
+		poolobj.optType = 'shiFang';
+		poolobj.CurrentAccountId = id;
+		var mycars=['确定', '取消'];
+		uexWindow.confirm('', '您确定要释放这个客户吗?', mycars);
+	}
+	
+	function YQAccount(id){
+		poolobj.CurrentAccountId = id;
+		var mycars=['取消','确定'];
+		var pwd = uexWindow.prompt("延期天数","请输入","",mycars);
+	}
+	
+	function cbConfirm(opId, dataType, data){
+		if (data == 0) {
+			if(poolobj.optType == 'lingQu')poolobj.PoolAccDraw();
+			else poolobj.PoolRelease();
+		}
+	}
+	
+	function cbPrompt(opId, dataType, data){
+		var obj = eval('('+data+')');
+		if(obj.num == 1){
+			if (checkIsNum(obj.value) && obj.value>0) {  
+				extensionday = obj.value;
+				poolobj.PoolExtension();
+			}else{
+				myalert("请输入正确的天数");
+				return;
+			}
+		}
+	}
+	
+	window.uexOnload = function(type){
+		uexWindow.cbConfirm = cbConfirm;
+		uexWindow.cbPrompt = cbPrompt;
+		document.body.style.fontSize = window.getComputedStyle(document.body,null).fontSize;
+		setstorage('theMode','Pool');
+		poolobj.GetListFromServer();//加载客户列表
+	}
+</script>
+</html>

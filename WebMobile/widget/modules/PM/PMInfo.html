@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/pm.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/PopupPM.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	 <div id="loading" style="display: none;"></div>
+	 <div id="content" class="ub-f1 tx-l t-bla">
+		<!--列表开始-->
+		<div class="c-wh " id="details_list">  
+		 
+		</div>
+		<!--列表结束-->
+     </div>
+</body>
+<script>
+	zy_init();
+	var pmobj = new PMObj('mobilePM');
+	window.uexOnload=function(type){
+		if (!type) {	
+			uexWindow.setBounce("1");
+			uexWindow.showBounceView("0","#FFF","0");
+			uexWindow.showBounceView("1","#FFF","0");
+			pmobj.setDetailsInfo();//加载详细信息
+		}
+	}
+	
+</script>
+</html>

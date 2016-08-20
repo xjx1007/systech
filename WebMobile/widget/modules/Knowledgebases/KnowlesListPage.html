@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script src="../../js/zepto_js/zepto.min.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+		<style>
+	input[type="radio"]+div.ip-sta{
+		display:none !important;
+	}
+	input[type="radio"]:checked+div.ip-sta{	
+		display:block !important;
+	}
+	</style>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	公司平台页面	 	-->
+    <div id="KnowlesListPage" class="up ub ub-ver" tabindex="0">
+    	 <!--header开始-->
+		<input class="uhide" type="radio" name="headers" id="ihd1" checked="true">
+		<div id="hd1" class="uh ip-sta">
+			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title" id="ViewRelativePageTitle">文章</div>
+			</div>
+			<!--div class="c-blu3 c-m-fs t-wh">
+				<div class="btn-l-2" ontouchstart="zy_touch('btn-act');" onclick="back()" >       
+		              <div class="ub-img res_backbg" style="width:100%;height:100%">
+					  </div>       
+		        </div>
+				<h1 class="ut ulev1 ut-s tx-c" tabindex="0"id="luntanname1" >文章</h1>
+				<h1 class="uhide" tabindex="0"id="luntanname2" >文章</h1>
+				<h1 class="uhide" tabindex="0"id="luntanname3" >帖子收藏</h1>
+				<h1 class="uhide" tabindex="0"id="luntanname4" >最近浏览</h1>
+			</div-->
+			<!--块容器开始-->
+			<div class="c-wh uinn7" id="view_sel_div">
+				<div class="ub ulev-1" >
+					<input class="uhide" type="radio" name="tabsort" id="sort_1" checked="true">
+					<div class="ub-con1 ubb1 ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="ppobj.ltpage(1)">最新发表</div>
+					<input class="uhide" type="radio" name="tabsort" id="sort_2" >
+					<div class="ub-con1 ubb1 ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="ppobj.ltpage(2)" >最后回复</div>
+				</div>
+			</div>
+			<!--块容器结束-->
+			<!--div class="ub uba b-gra1 c-gra c-m22 t-wh">	
+				<div class="ub-f1 uinn6" ontouchstart="zy_touch('btn-cc');" onclick="ppobj.ltpage(1);">
+					<input class="uhide" type="radio" name="tabSwitch1" id="mu1" checked="true">
+					<div class="btn-nav-active ub ub-pc ub-ac btn b-bla uinn32 uc-a1 t-bla  ulev-19"style="text-align:center !important">&nbsp;&nbsp;版块&nbsp;&nbsp;</div>
+				</div>	 
+				<div class="ub-f1 uinn6" ontouchstart="zy_touch('btn-cc');" onclick="ppobj.ltpage(2);">
+					<input class="uhide" type="radio" name="tabSwitch1" id="mu2">
+					<div class="btn-nav-active ub ub-pc ub-ac btn b-bla uinn32 uc-a1 t-bla  ulev-19">版块收藏</div>
+				</div>	
+				<div class="ub-f1 uinn6" ontouchstart="zy_touch('btn-cc');" onclick="ppobj.ltpage(3);">
+					<input class="uhide" type="radio" name="tabSwitch1" id="mu3">
+					<div class="btn-nav-active ub ub-pc ub-ac btn b-bla uinn32 uc-a1 t-bla  ulev-19">帖子收藏</div>
+				</div>
+				<div class="ub-f1 uinn6" ontouchstart="zy_touch('btn-cc');" onclick="ppobj.ltpage(4);">
+					<input class="uhide" type="radio" name="tabSwitch1" id="mu4">
+					<div class="btn-nav-active ub ub-pc ub-ac btn b-bla uinn32 uc-a1 t-bla  ulev-19">最近浏览</div>
+				</div>
+			</div--->
+		</div>
+		<input class="uhide" type="radio" name="headers" id="ihd2" >
+        <div id="hd2" class="uh ip-sta">
+           <div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title" id="ViewRelativePageTitle">分类</div>
+			</div>
+        </div>
+		<input class="uhide" type="radio" name="headers" id="ihd3">
+		<div id="hd3" class="uh c-head c-m-fs t-wh ip-sta">
+			<div class="c-blu3 c-m-fs t-wh">
+				<div class="btn-l-2" ontouchstart="zy_touch('btn-act');" onclick="back()" >       
+		              <div class="ub-img res_backbg" style="width:100%;height:100%">
+					  </div>       
+		        </div>
+				<h1 class="ut ulev1 ut-s tx-c" tabindex="0" >活动 </h1>
+			</div>
+		</div>
+		<input class="uhide" type="radio" name="headers" id="ihd4">
+		<div id="hd4" class="uh c-head c-m-fs t-wh ip-sta">
+			<div class="c-blu3 c-m-fs t-wh">
+				<div class="btn-l-2" ontouchstart="zy_touch('btn-act');" onclick="back()" >       
+		              <div class="ub-img res_backbg" style="width:100%;height:100%">
+					  </div>       
+		        </div>
+				<h1 class="ut ulev1 ut-s tx-c" tabindex="0" >更多 </h1>
+			</div>
+		</div>
+        
+		<!--content开始-->
+		<input class="uhide" type="radio" name="contents" id="ict1" checked="true">
+        <div id="ct1" class="ub-f1 tx-l t-bla ub-img6 ip-sta "></div>
+		<input class="uhide" type="radio" name="contents" id="ict2">
+		<div id="ct2" class="ub-f1 tx-l c-gra t-bla ub-img6 ip-sta"></div>
+		<input class="uhide" type="radio" name="contents" id="ict3">
+		<div id="ct3" class="ub-f1 tx-l t-bla ub-img6 ip-sta"></div>
+		<input class="uhide" type="radio" name="contents" id="ict4">
+		<div id="ct4" class="ub-f1 tx-l t-bla ub-img6 ip-sta"></div>
+        <!--content结束-->
+        <div id="footer">
+        	<div class="ub tabs tabs-wh tabs-icon-top ubt b-gra">
+	       	  <input class="uhide" type="radio" name="tabSwitch" checked="true">
+			  <div class="tab-item ub-ver active" onclick="ppobj.navSelected(1);">
+			    <!--i class="icon ion-chatbox tab-item-dark"></i-->
+				<div class="res_noteg ub-img" style="height:70%" ></div>
+				<div class="uinn">文章</div>
+			  </div>
+			  <input class="uhide" type="radio" name="tabSwitch">
+			  <div class="tab-item  ub-ver" onclick="ppobj.navSelected(2);">
+			    <div class="res_catg ub-img" style="height:70%"></div>
+				<div class="uinn">分类</div>
+			  </div>
+			</div>
+        </div>
+	</div>
+</body>
+<script>
+zy_init();
+var pages =[];
+var ppurl = ['', 'luntan_content.html', 'luntan_content2.html', 'luntan_content3.html', 'luntan_content4.html'];
+
+function Pages(){
+	this.index = 1;
+	this.iNav = 1;
+	this.curid = 0;
+	this.preid = 0;
+}
+
+Pages.prototype.navSelected = function(i) {
+	//logs('navSelected()-->i='+i+', preid='+this.preid+', curid='+this.curid);
+	if (this.curid == i)  return;
+	$('.tab-item').removeClass('active').eq(i-1).addClass('active');
+	if(!pages[i]) pages[i]={ld:0, x:0};
+	this.preid = this.curid;
+	this.curid = i;
+	var idih = 'ihd'+i;
+	var idic = 'ict'+i;
+	var idft = 'ft' + i;
+	radioSelect(idih);
+	radioSelect(idic);
+	radioSelect(idft);
+	
+	var idc = 'ct'+i;
+	var idh = 'hd'+i;
+	var osH = $$(idh).offsetHeight;
+	
+	if(!pages[i].y){
+		var s = window.getComputedStyle($$(idc),null);
+		pages[i].y = osH;
+		pages[i].width = int(s.width);
+		pages[i].height = int(s.height);
+	}
+	
+	if(!pages[i].ld){
+		pages[i].ld = 1;
+		zy_con(idc, ppurl[i], 0, osH);
+	}else{
+		uexWindow.setPopoverFrame(idc, 0, pages[i].y, pages[i].width, pages[i].height);
+	}
+	if (this.preid > 0) {
+		var pervc = 'ct' + this.preid;
+		//logs('navSelected2-->idc=' + idc + ', y=' + pages[i].y + ', w=' + pages[i].width + ', h=' + pages[i].height + ', pervc=' + pervc);
+		uexWindow.setPopoverFrame(pervc, 0, 0, 0, 0);
+	}
+}
+
+Pages.prototype.ltpage = function(n) {
+	var id = 'sort_'+n;
+	var ch = $$(id);
+	if(id && !ch.checked) ch.checked = true;
+	uexWindow.evaluatePopoverScript('KnowlesListPage','ct1','ltobj.changeList('+n+')');
+	this.changetitie(n);
+	if(n!=this.iNav){
+		if (luntanpage[n] != 1) {
+			luntanpage[n] = 1;
+			uexWindow.evaluatePopoverScript("KnowlesListPage", "ct1", 'ltobj.getList('+n+')');
+		}
+	}
+	this.iNav=n;
+}
+
+Pages.prototype.changetitie = function(a) {
+	//a=int(a);
+	//$$('luntanname2').className='uhide';
+	//$$('luntanname1').className='uhide';
+	//$$('luntanname'+a).className='ut ulev1 ut-s tx-c';
+}
+
+
+if(window.navigator.platform=='Win32') setstorage('simulate', '1');
+var luntanpage = new Array();
+var device = '';
+var ppobj = new Pages();
+window.uexOnload = function(type){	
+    if (!type) {
+		
+		setTimeout(function(){
+			luntanpage[1]=1;
+			ppobj.navSelected(1);
+		}, 200);
+    }
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("content",0,$$("hd1").offsetHeight);		
+	}
+	
+	pushlt();
+	uexWidgetOne.cbGetPlatform =function(opId,dataType,data){
+		data = int(data);
+		if(data==0){
+			uexDevice.cbGetInfo=iphoneuse;
+			uexDevice.getInfo('11');
+		}
+	};
+	uexWidgetOne.getPlatform();
+}
+
+function iphoneuse(opCode,dataType,data){
+	//logs('device-data is '+data);
+	var device = data;
+	devicetoken = device.deviceToken;
+	devicetoken = isDefine(devicetoken)?devicetoken:'';
+	//logs('device-token is '+devicetoken);
+	if(isDefine(devicetoken))
+	setstorage('device',device);
+}
+
+function pushlt(){
+	uexWidget.setPushNotifyCallback("getNpush");
+	uexWidget.cbGetPushInfo = pushInfoCallback;
+	uexWidget.getPushInfo();
+}
+
+function getNpush(){
+	uexWidget.getPushInfo();
+}
+
+function pushInfoCallback(id,dataType,data){
+	var json = JSON.parse(data);
+	switch (parseInt(json.TypeID)) {
+	}
+}
+
+function radioSelect(id){
+	var ret = 0;
+	var e = $$(id);
+	if(e && !e.checked){
+		e.checked = true;
+		ret = 1;
+	}
+	return ret;
+}
+
+</script>
+</html>

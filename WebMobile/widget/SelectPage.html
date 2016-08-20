@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="dist/css/ionic1.css">
+		<link rel="stylesheet" href="css/ui-input.css">
+		<link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/my-color.css">
+		<link rel="stylesheet" href="css/ui-res.css">
+		<link rel="stylesheet" href="css/ui-btn.css">
+		<link rel="stylesheet" href="css/ui-img.css">
+    	<link rel="stylesheet" href="css/ui-list.css">
+		<link rel="stylesheet" href="css/ui-tab.css">
+        <script src="js/zy_control.js"></script>
+        <script src="js/zy_click.js"></script>
+		<script type="text/javascript" src="js/LanguageResources.js"></script>
+		<script type="text/javascript" src="js/Application.js"></script> 
+        <link rel="stylesheet" href="css/style.css" />
+        <title>易客 CRM</title>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+	<div id="ProductsPage" class="up ub ub-ver" tabindex="0">
+		<div id="loading" style="display: none;"></div>
+		
+		<div id="header">
+  			<div id="header_title" class="ub ub-ac bar bar-header bar-wh item-input-inset pos-relative">
+  			<div class=" ub-ac tx-l ub-f1 umar-r ubr b-gra" style="height:100%">
+  				<button class="button button-icon icon ion-chevron-left t-blu4" onclick="back()"></button>	
+			</div>
+ 			<div class="uinn7">
+				<div class="t-bla ub c-wh uinput  uinn4" >	
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="searchListSelPage()">
+				   		<div style="width:1em"></div>
+				   		<div class="res_search1 umw1 ub-img"></div>
+					</div>
+				   <div class="ub-f1 uinn1"><input placeholder="搜索" id="searchtext" type="text" style="background:none;"> </div> 
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="cancelSearch()" >
+				   		<div style="width:1em"></div>
+						<div class="res-clear umw1 ub-img"></div> 
+				   </div>
+				 </div>
+			</div>
+  			<!--div ontouchstart="zy_touch('btn-act');" onclick="back()" class="btn uinn umar-l  t-blu4">返回</div-->	
+			  <!--div class="ub-f1">
+				  <div class="item-input-wrapper ub">
+				  	<div class="ub" ontouchstart="zy_touch('btn-act');" onclick="searchListSelPage()">
+						<div style="width:1em"><i class="icon ion-ios7-search placeholder-icon"></i></div>
+					</div>
+				    <div class="ub-f1"><input type="search" id="searchtext" placeholder="搜索"></div>
+				  </div>
+			  </div-->
+			  
+			 
+			</div>
+		</div>
+  		
+        <div id="content" class="ub-f1 ub">
+        </div>
+		<div id="footer" class="uf c-m2 c-bla t-wh">
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+
+function searchListSelPage(){
+	setstorage('searchtext', $$("searchtext").value);
+	uexWindow.evaluatePopoverScript("SelectPage", "content", "getList()");
+}
+
+function orientationChange(){  // 横竖屏切换时自适应
+	zy_resize('content', 0, $$("header").offsetHeight);
+}
+
+window.uexOnload = function(type){
+	if (!type) {	
+		setstorage('currPage', 1);
+		setstorage('searchtext', '');
+		zy_con('content', 'SelectPage_content.html', 0, $$("header").offsetHeight);
+	}
+	window.onorientationchange=window.onresize=orientationChange;
+}
+</script>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script>
+		<link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+		<style>
+			#main{position:absolute;top:0;left:0;width:100%;min-height:100%;overflow:hidden;}
+			#content{-webkit-box-flex:1;box-flex:1;text-align:left;}
+		</style>
+    </head>
+    <body>
+  	<!--	关于页面	 	-->
+    <body class="um-vp c-gra" ontouchstart>
+    	 <div id="main" class="ub ub-ver">
+            <!--header开始-->
+	  		<div id="header" class="uh">
+	  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+	  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+					<div class="h1 title">考勤签到</div>
+					<div ontouchstart="zy_touch('btn-act');" onclick="openwin('KQListPage','')" id="BackHomeLabel" class="btn uinn btn-r t-wh">历史</div>
+				</div>
+			</div>
+	        <div id="content">
+	        	
+	        </div>
+			<div class="ub ub-ver t-wh tx-c" style="position:absolute;z-index:1;left:0;bottom:0;width:100%;background-color:rgba(0,0,0,0.5)">
+				<div class="ub ub-f1" style="margin:0.5em 0.5em 0 0.5em">
+					<input id="new_lng" type="text" style="display:none">
+					<input id="new_lat" type="text" style="display:none">
+					<div >位置: </div>
+					<div class="ub-f1 ub uinn4 long_hide">
+						<div id="new_address" class="" ></div>
+					</div>
+				</div>
+				<div class="ub ub-f1" style="margin:0.5em 0.5em 0 0.5em">
+					<div>信息: </div>
+					<div id="kqdInfo" class="ub-f1"></div>
+				</div>
+				<div class="ub-f1 ub uinn">
+					<div class="ub-f1">
+						<div ontouchstart="zy_touch('btn-act');" onclick="lbs_to_location();" class="btn uinn c-wh uc-a1 t-wh ufr us" style="color: #1C94C4;"><i class="icon-location-arrow"></i>&nbsp;到我的位置</div>
+					</div>
+					<div class="ub-f1">
+						<div ontouchstart="zy_touch('btn-act');" onclick="markUserKQ();" id='tip_btn' class="btn uinn c-wh uc-a1 t-wh ufr us" style="color: #1C94C4;display:none;"><i class="icon-tag"></i>&nbsp;签到</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../js/my_bdMap.js"></script>
+<script type="text/javascript" src="../../js/bd_convertor.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=123694c09683eb102283b4679c07dfd0"></script>	
+<script type="text/javascript" src="../../js/module_js/WorkMaps.js"></script>
+<script>
+	var map;            // 创建Map实例
+	
+	// 创建控件
+	//var myZoomCtrl = new ZoomControl();
+	// 添加到地图当中
+	//map.addControl(myZoomCtrl);
+	var myMark;
+	var workmap = new WorkMapObj('workMaps');
+	var kqds,currentKqd_id;
+	var kqFlag = false;
+	var markFlag = false;
+	
+	function lbs_to_location_Callback(){  //定位到当前位置后回调
+		workmap.ShowKQD();
+		if(markFlag){           //如果点击的"签到"
+			markFlag = false;
+			if(kqFlag){
+				workmap.markUserKQ();  //保存考勤
+			}else{
+				myalert('位置发生变化,已不在考勤点范围内...');
+			}
+		}
+	}
+	
+	function getAddressBypoint_callBack(){
+		
+	}
+	
+	function markUserKQ(){  //点击"签到"
+		markFlag = true;
+		lbs_to_location();
+	}
+	
+	window.uexOnload = function(type) {
+		if (!type) {
+			initMap();
+			//定位监控相关代码
+			uexLocation.onChange = locationRequestCallBack;
+			workmap.getKQD();
+		}
+	}
+</script>
+</html>

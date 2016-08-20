@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/PopupPM.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body class="um-vp" ontouchstart>
+	<div class="ub t-bla ulab uinn" id="ttl">  
+		<div class="uinn ulim">接收人</div> 
+		<div class="ub-f1 c-wh uba uc-a1 b-gra us-i1 uinput uinn4">  
+			<input placeholder="请选择接收人"  type="text" class="uc-a1" id="recipient">   
+		</div>
+		<div class="ub t-bla " style="left:.2em"> 
+		  <div class="btn c-blu3 uc-a1 ub t-wh ub-ac sel uinn">
+		  <div class="ub-f1 tx-c">无</div>
+		  <div class="umh1 umw1 ub-img res3 uc-a"></div>
+			<select name="userlist" selectedindex="0" id="userlist" onchange="zy_selectmenu(this.id);addReceiver();">
+			</select>
+			</div>
+		</div> 
+	</div>
+	<div class="ub t-bla ulab uinn"> 
+		<div class="uinn ulim">内　容</div>
+		<div class="ub-f1 c-wh uba uc-a1 b-gra uinput uinn4 ub ub-ver">  
+			<textarea placeholder="请输入内容"  name="area1" class="uc-a1 ub-f1" style="min-height:8em;" id="text"></textarea> 
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+var pmobj = new PMObj('mobilePM');
+var receiverArr = [];
+var userArr = [];
+var i = 0;
+
+function addReceiver(){ //添加接收人(实例方法)
+	var recipient = $$("recipient").value;
+	var userlist = $$("userlist").value;
+	if(userlist != "") {
+		receiverArr = recipient.split(",");
+		if(!receiverArr.in_array(userlist)) {
+			if(recipient == ''){
+				$$("recipient").value = recipient + userlist;
+			}else{
+				$$("recipient").value = recipient + "," + userlist;
+			}
+		} 
+		if(!userArr.in_array(userlist)) {
+			userArr[i++] = userlist;
+		} 
+	} 
+}; 
+
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+		pmobj.getReceiveOpts();
+	}
+}
+
+function sendpm(){
+}
+</script>
+</html>

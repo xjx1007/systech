@@ -1,0 +1,40 @@
+﻿
+body { 
+    font: 11px "verdana","Arial";
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;    
+    }
+
+.tScroll {
+    border: 1px #7494BF solid;
+    background-color: #ffffff;
+    overflow: scroll;
+    overflow-x:hidden;
+    height:600px;
+    cursor: default;
+    }
+
+tr.tableHead {
+    position:relative;
+    background-color:#BFCEE7;
+    height: 16px; 
+    text-align: center;
+    }
+
+td {  
+    font: 14px "Verdana", "Arial"; 
+    }
+
+td.asBtn{    
+    border: #7494BF solid;
+    border-width: 0px 1px 1px 0px; 
+    }
+
+table {
+    border:0px;
+    width:100%;
+    }
+    
+.rr{background-color:#FFFFEE}
+.gg{background-color:#dee2f2}

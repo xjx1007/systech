@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--审批单详细信息页面-->
+    <div id="ApprovePage" class="up ub ub-ver" tabindex="0">
+  		<div id="header">
+  			<div id="header_title" class="bar bar-blue pos-relative">
+				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title">审批</div>
+				<button class="button button-icon icon t-wh" onclick="backHome()" id="approve">工作台</button>
+			</div>
+			<!--块容器开始-->
+			<div class="ub c-gra ubb b-gra">
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="setstorage('approveOther', 'flow');openwin('ApproveOtherPage','');" id="save" class="btn uinn5 uc-a1 uba outline-positive">查看审批流程</div>
+				<!--按钮结束-->
+				</div>
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="setstorage('approveOther', 'history');openwin('ApproveOtherPage','');" id="cancle" class="btn uinn5 c-cancle  uc-a1 uba outline-positive">查看审批历史</div>
+				<!--按钮结束-->
+				</div>
+			</div>
+			<!--块容器结束-->
+		</div>
+        <div id="content" class="ub-f1 tx-l c-wh t-bla">
+        	
+        </div>
+		<div data-role="footer" class="uf c-m2 c-bla t-wh">
+		</div>
+	</div>
+</body>
+<script>
+	zy_init();
+	approvepageonload();
+	window.uexOnload = function(type){
+		if (!type) {
+		   zy_con("content", "ApprovePage_content.html", 0, $$("header").offsetHeight);
+		}
+		window.onorientationchange=window.onresize=function(){
+			zy_resize("content",0,$$("header").offsetHeight);
+		}
+	}
+</script>
+</html>

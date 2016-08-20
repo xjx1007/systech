@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/module_js/Warehouses.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp" ontouchstart="zy_touch('')" onclick="closeWhPop();" style="scroll 0 0 #F1F1F1;background-color:rgba(0,0,0,0)">
+	<div id="warehousesList" class="ub ub-ver t-wh tx-c" style="left:70%;width:30%;background-color:rgba(0,0,0,0.7)">
+	</div>
+</body>
+<script>
+	zy_init();
+	var getwarehouse = true;
+	function anim_r2l(){
+		if(getwarehouse){
+			getWareHouse();
+			getwarehouse = false;
+		}
+		uexWindow.beginAnimition();
+		uexWindow.setAnimitionDuration(200);
+		uexWindow.makeTranslation(-int(window.innerWidth),0,0);
+		uexWindow.commitAnimition();
+	}
+	
+	function anim_l2r(){
+		uexWindow.beginAnimition();
+		uexWindow.setAnimitionDuration(200);
+		uexWindow.makeTranslation(int(window.innerWidth),0,0);
+		uexWindow.commitAnimition();
+	}
+
+	function getWareHouse(){
+		var warehousesList = JSON.parse(getstorage("warehousesList"));  //  取
+		var forumObj = '';
+		var intWarehouse = 0;
+		for (intWarehouse = 0; intWarehouse < warehousesList.length; intWarehouse++) {
+			var warehouse = warehousesList[intWarehouse];
+			if (warehouse.id == -1) {
+				forumObj += '<input class="uhide" type="radio" name="waremenus" id="waremenu' + warehouse.id + '" checked="true" value=' + warehouse.id + '>';
+			}else{
+				forumObj += '<input class="uhide" type="radio" name="waremenus" id="waremenu' + warehouse.id + '" value=' + warehouse.id + '>';
+			}
+			forumObj +='<div class="ub-f1 tx-c dis-sta" onclick="waresetDateMenuSelected('+warehouse.id+')" id="warehousename'+warehouse.id+'">'+warehouse.name+'</div>';
+		}
+		setHtml("warehousesList", forumObj);	
+	}
+	
+	function waresetDateMenuSelected(i){
+		waremenus = $$('waremenu'+i).value;
+		if (waremenus != getstorage('warehouseId')) {
+			$$('waremenu'+i).checked = true;
+			setstorage('warehousename',$$('warehousename'+i).innerHTML);
+			setstorage('warehouseId', waremenus);
+			uexWindow.evaluateScript('BalancesListPage', '0', "changeWaremenu()");
+		}
+	}
+	
+	function closeWhPop(){
+		uexWindow.evaluateScript('BalancesListPage', '0', "popWarehouse()");
+	}
+	
+	window.uexOnload = function(type){
+		
+	}
+	
+</script>
+</html>

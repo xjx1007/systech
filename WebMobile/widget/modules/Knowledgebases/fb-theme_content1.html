@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui_post.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script>  
+		<script src="../../js/dy_upload.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body class="um-vp" ontouchstart>
+	<div class="ub t-bla ulab uinn">  
+		<div class="uinn ulim">标题:</div> 
+		<div class="ub-f1 c-wh uc-a1 uba b-gra us-i1 uinput uinn4">  
+			<input placeholder="请输入标题"  type="text" class="uc-a1" id="title">   
+		</div>
+	</div>
+	<div class="ub t-bla ulab uinn">  
+		<div class="uinn ulim">权限设置:</div> 
+		<input type="text" id="permittype" class="uhide"  value="">   
+		<div class="ub ub-f1 c-gra c-m2 ulev-1 uc-a1 uba b-gra uinn6">
+			<input class="uhide" type="radio" checked="true" name="permittype" id="permittype1" value="0">
+			<div class="ub-con1 ub-f1 tx-c dis-sta ut-s" ontouchstart="zy_touch('focuss')" onclick="permitSelected(1)">公开</div>
+			<input class="uhide" type="radio" name="permittype" id="permittype2" value="1">
+			<div class="ub-con1 ub-f1 tx-c dis-sta" ontouchstart="zy_touch('focuss')" onclick="permitSelected(2)">私有</div>
+			<input class="uhide" type="radio" name="permittype" id="permittype3" value="2">
+			<div class="ub-con1 ub-f1 tx-c dis-sta" ontouchstart="zy_touch('focuss')" onclick="permitSelected(3)">共享 </div>
+		</div>
+	</div>
+	<div class="uhide" id="reciver_div">  
+		<div class="uinn ulim">共享给:</div> 
+		<div class="ub-f1 c-wh uba uc-a1 b-gra us-i1 uinput uinn4">  
+			<input placeholder="请选择接收人"  type="text" class="uc-a1" id="reciver_user_name">   
+			<input type="text" id="reciver_user" class="uhide" name="reciver_user" value="">   
+		</div>
+		<div class="uinn ulim uc-a1 t-wh tx_bold" ontouchstart="zy_touch('btn-act')" onclick="openSelectUserPage();"  style="left:.2em;background-color:#666666">＋
+		</div> 
+	</div>
+	
+	<div class="ub t-bla ulab uinn">  
+		<div class="uinn ulim">保密设置:</div>
+		<input type="text" id="isencrypt" class="uhide"  value="">    
+		<div class="ub ub-f1 c-gra c-m2 ulev-1 uc-a1 uba b-gra uinn6">
+			<input class="uhide" type="radio" checked="true" name="isencrypt" id="encrypt1" value="0">
+			<div class="ub-con1 ub-f1 tx-c dis-sta ut-s" ontouchstart="zy_touch('focuss')" onclick="encryptSelected(1)">开放</div>
+			<input class="uhide" type="radio" name="isencrypt" id="encrypt2" value="1">
+			<div class="ub-con1 ub-f1 tx-c dis-sta" ontouchstart="zy_touch('focuss')" onclick="encryptSelected(2)">加密</div>
+		</div>
+	</div>
+	<div class="uhide" id="pwd_div">  
+		<div class="uinn ulim">查看密码:</div> 
+		<div class="ub-f1 c-wh uba uc-a1 b-gra us-i1 uinput uinn4">  
+			<input placeholder="请输入查看密码"  type="text" class="uc-a1" id="bases_pwd" >   
+		</div>
+	</div>
+
+	<div class="ub t-bla ulab uinn1_2"> 
+		<div class="ulim" style="padding-left:0.5em">内容:</div>
+	</div>
+	<div class="ub t-bla ulab uinn" > 
+		<iframe id="text" class="uba uc-al b-gra"></iframe>
+	</div>
+	<div class="ub ub-rev uinn3" >
+		<div class="umh2 btn-l umw25" ontouchstart="zy_touch('')" onclick="getLocation()" style="width:2.2em;height:2.2em;" >    
+			<div class="ub-img7 res-region umh2 umw2" id='region_type'></div>
+		</div>
+		<div class="umh2 btn-l umw25 umar-l" ontouchstart="zy_touch('')" onclick="getpic(0);" style="width:2.2em;height:2.2em;">    
+			<div class="ub-img7 res-camera umh2 umw2"></div>
+		</div>
+		<div class="umh2 btn-l umw25 umar-l" ontouchstart="zy_touch('')" onclick="getpic(1);" style="width:2.2em;height:2.2em;">    
+			<div class="ub-img7 res-img1 umh2 umw2"></div>
+		</div>
+		<div class="ub-f3"></div>
+	</div>  
+	<div ontouchstart="zy_touch('btn-act')" class="uhide" id="region_div">
+		<span>
+			地理位置：
+		</span>
+		<span id="region"></span>
+	</div>
+	<div class="ub uinn3" id="imgs">
+		<div></div>
+	</div>
+</body>
+<script>
+var myEditor = $$("text").contentWindow;
+var text_frame = myEditor.document; // IE、FF都兼容
+text_frame.designMode="on";
+text_frame.contentEditable= true;
+text_frame.open();
+text_frame.close();
+
+function insertText(obj,str) {
+	myalert(obj.selectionStart);
+    if (text_frame.selection) {
+        var sel = text_frame.selection.createRange();
+        sel.text = str;
+    } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+        var startPos = obj.selectionStart,
+            endPos = obj.selectionEnd,
+            cursorPos = startPos,
+            tmpStr = obj.value;
+        obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+        cursorPos += str.length;
+        obj.selectionStart = obj.selectionEnd = cursorPos;
+    } else {
+        obj.value += str;
+    }
+}
+
+function moveEnd(obj){
+    obj.focus();
+    var len = obj.value.length;
+    if (text_frame.selection) {
+        var sel = obj.createTextRange();
+        sel.moveStart('character',len);
+        sel.collapse();
+        sel.select();
+    } else if (typeof obj.selectionStart == 'number' && typeof obj.selectionEnd == 'number') {
+        obj.selectionStart = obj.selectionEnd = len;
+    }
+} 
+
+function charu(val){
+	myEditor.focus();  
+	var img = '<img style="max-width:85%" src="'+val+'" ></img>';
+    text_frame.execCommand("insertImage", false, "Insert_Area_Id"); 
+	text_frame.body.innerHTML  = text_frame.body.innerHTML.replace('<img src="Insert_Area_Id">',img);
+	$$('text').height =  text_frame.documentElement.scrollHeight;
+	myEditor.focus();  
+}
+
+zy_init();
+var myUpload = null;
+var attachnew = [];
+var eimg = $$('imgs');
+//var eee = $$('text');
+var locationType = '';
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+	}
+	//定位监控相关代码
+	uexLocation.onChange = locationRequestCallBack;
+	uexLocation.cbGetAddress = getAddressCallBack;
+}
+
+var old_reciver_user_name = '';
+//权限设置选择
+function permitSelected(i){
+	if(!$$('permittype'+i).checked){
+		$$('permittype').value = $$('permittype'+i).value;
+		radioSelect('permittype'+i);
+		if(i == 3){
+			$$("reciver_user_name").value = old_reciver_user_name;
+			$$('reciver_div').className = "ub t-bla ulab uinn";
+		}else{
+			if ($$('reciver_div').className != "uhide") {
+				old_reciver_user_name = $$("reciver_user_name").value;
+				$$("reciver_user_name").value = '';
+				$$('reciver_div').className = "uhide";
+			}
+		}
+	}
+}
+var old_bases_pwd = '';
+//保密设置选择
+function encryptSelected(i){
+	if(!$$('encrypt'+i).checked){
+		$$('isencrypt').value = $$('encrypt'+i).value;
+		radioSelect('encrypt'+i);
+		if(i == 2){
+			$$("bases_pwd").value = old_bases_pwd;
+			$$('pwd_div').className = "ub t-bla ulab uinn";
+		}else{
+			old_bases_pwd = $$("bases_pwd").value; 
+			$$("bases_pwd").value = '';
+			$$('pwd_div').className = "uhide";
+		}
+	}
+}
+
+/**
+ * 打开地理位置获取API
+ */
+function getLocation(){
+	if(locationType == 'pressed'){
+		//removeRigion();
+		setHtml('region','');
+		$$('region_div').className = "uhide";
+		$$('region_type').className = "ub-img7 res-region umh2 umw2";
+		locationType = '';
+	}else{
+		$$('region_type').className = "ub-img7 res-region-press umh2 umw2";
+		locationType = 'pressed';
+		uexLocation.openLocation();
+	}
+}
+
+/**
+ * 获取经纬度回调函数
+ * @param {Object} opId
+ * @param {Object} dataType
+ * @param {Object} data
+ */
+function getAddressCallBack(opId,dataType,data){
+	if(dataType == 0){
+		setHtml('region',data);
+		$$('region_div').className = "ub uinn3";
+		uexWindow.closeToast();
+		uexWindow.toast("0","5","获取成功…","2000");
+	}else{
+		uexWindow.closeToast();
+		uexWindow.toast("0","5","获取失败…","2000");
+	}
+}
+
+/**
+ * 获取经纬度
+ * @param {Object} inLatitude
+ * @param {Object} inLongitude
+ */
+function locationRequestCallBack(inLatitude,inLongitude){
+	uexWindow.toast("1","5","开始获取您的位置…","0");
+	uexLocation.closeLocation();
+	lat = inLatitude;
+	lon = inLongitude;
+	
+	uexLocation.getAddress(lat,lon);
+}
+
+function openSelectUserPage(){
+	openwin('userlist','',10,0);
+}
+
+function addReceiver(userlist){ //添加接收人(实例方法)
+	var userlist = getstorage('add_user');
+	var recipient = $$("reciver_user_name").value;
+	if(userlist != "") {
+		receiverArr = recipient.split(",");
+		if(!receiverArr.in_array(userlist)) {
+			if(recipient == ''){
+				$$("reciver_user_name").value = recipient + userlist;
+			}else{
+				$$("reciver_user_name").value = recipient + "," + userlist;
+			}
+		} 
+		if(!userArr.in_array(userlist)) {
+			userArr[i++] = userlist;
+		} 
+	} 
+}; 
+
+function getJsonError(){
+	
+}
+function getpic(i){
+	var forum_url = getstorage("CurrentServerAddress")+'/service/upload.php';
+	var uploadHttp = forum_url;
+	if(!myUpload) myUpload = new disUpload(uploadHttp, 'thread', actCb, susCb);
+	myUpload.upMethod(i);
+}
+function actCb(val){
+	//logs('actCb()-->val='+val);
+}
+
+function susCb(val){
+	//logs('susCb()-->val='+val);
+	//attachnew.push(val);
+	//addimgpreview(val);
+	charu(val);
+	//setAtt(val);
+}
+
+function addimgpreview(val){
+	var src = '';
+	var ii = '';
+	src = myUpload.src;
+	ii = val;
+	//logs('addimgpreview()-->ii='+val+', src='+src);
+	var node = document.createElement("span");
+	var imgId = 'i'+ii;
+	node.innerHTML = '<img src="'+src+'" class="uc-a1 edpic"  onclick="imgoperate(\''+imgId+'\');" id="'+imgId+'"/>';
+	eimg.insertBefore(node,eimg.lastElementChild);
+}
+
+var ltobj = new LunTanObj('mobileKnowledges');
+
+//删除、预览照片
+/*
+function operationpic() {
+	if (src) {
+		uexWindow.cbActionSheet = function(opId, dataType, data)
+		{
+			if (data == "0") {
+				src = '';
+				removeNode('pic');
+			} else if (data == "1") {
+				var array = [src];
+				uexImageBrowser.open(array);
+			}
+		}
+		
+		var value = ["删除","预览"];
+		uexWindow.actionSheet('', '取消', value);
+	}
+}
+*/
+function getFace(){
+	var t = 1;
+	if(onFoc[0] || onFoc[1]) t = 800;
+	//logs('getFace()----->t='+t);
+	setTimeout("uexWindow.evaluateScript('fb-theme', '0', 'openFace();');", t);
+}
+
+/*获取论坛表情
+eval(function(p, a, c, k, e, d) {
+	e = function(c) {
+		return (c < a ? '' : e(parseInt(c / a)))
+				+ ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c
+						.toString(36))
+	};
+	if (!''.replace(/^/, String)) {
+		while (c--) {
+			d[e(c)] = k[c] || e(c)
+		}
+		k = [ function(e) {
+			return d[e]
+		} ];
+		e = function() {
+			return '\\w+'
+		};
+		c = 1
+	}
+	;
+	while (c--) {
+		if (k[c]) {
+			p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
+		}
+	}
+	return p
+}
+(
+	'n m(d){p(d){b 1:a\':)\';0;b 2:a\':(\';0;b 3:a\':D\';0;b 4:a\':\\\'(\';0;b 5:a\':@\';0;b 6:a\':o\';0;b 7:a\':c\';0;b 8:a\':$\';0;b 9:a\';c\';0;b q:a\':L\';0;b l:a\':r\';0;b t:a\':k\';0;b f:a\':e:\';0;b g:a\':u:\';0;b i:a\':j:\';0;b h:a\':s:\';0;b y:a\':N:\';0;b K:a\':G:\';0;b H:a\':J:\';0;b O:a\':M:\';0;b I:a\':E:\';0;b x:a\':w:\';0;b v:a\':F\';0;b z:a\':C:\';0;B:A(\'插入表情错误\');0}}',
+	51,
+	51,
+	'break||||||||||return|case|P|id|loveliness|13|14|16|15|curse|lol|11|getdiscuzSmiley|function||switch|10|Q|dizzy|12|funk|23|kiss|22|17|24|showmessage|default|call||time|handshake|sleepy|19|21|hug|18||victory|shutup|20'
+			.split('|'), 0, {}))
+*/
+function getdiscuzSmiley(i){
+	var faceArray = ['',':)',':(','\/:q044:','\/:\'(','\/:@','\/:O','\/:P','\/:$','\/;P','\/:L','\/:Q','\/:D','\/;-D','\/:q031:','\/:q034:','\/:q034:','\/:X','\/:Z','\/:q078:','\/:q082:','\/:q054:','\/:q065:','\/:q081:','\/:q036:']
+	return faceArray[i];
+}
+function insertface(i){
+	//logs('insertface-->i='+i);
+	var ft = getdiscuzSmiley(i);
+	
+	var e = $$('text');
+	if(e){
+		e.value += ft;
+		e.scrollTop=e.scrollHeight;
+	}
+}
+function imgoperate(id){
+	var el = $$(id);
+	uexWindow.cbActionSheet = function(opId, dataType, data)
+	{
+		if (data == "0") {
+			src = '';
+			removeNode(id);
+			
+			var id3 = id.replace('i', '');
+			log('imgoperate-->id3='+id3);
+			id3 = int(id3);
+			for(var k in attachnew){
+				var itm = attachnew[k];
+				log('imgoperate-->itm='+itm);
+				if (itm == id3) {
+					attachnew.splice(k, 1);
+					//removeAtt(itm);
+					break;
+				}
+			}
+		} else if (data == "1") {
+			var array = [];
+			array[0] = el.src;
+			uexImageBrowser.open(array);
+		}
+	}
+	
+	var value = ["删除","预览"];
+	uexWindow.actionSheet('', '取消', value);
+}
+
+var onFoc = [0, 0];
+
+function myOnfocus(i){
+	onFoc[i] = 1;
+}
+
+function myOnblur(i){
+	onFoc[i] = 0;
+}
+
+/*
+function setAtt(val){
+	var e = eee;
+	if(e){
+		e.value += '<img src="'+val+'"></img>';
+		e.scrollTop=e.scrollHeight;
+	}
+}
+
+function removeAtt(val){
+	var e = eee;
+	if(e){
+		var str = '<img src="'+val+'"></img>';
+		var sval = e.value;
+		sval = sval.replace(str, '');
+		e.value = sval;
+		e.scrollTop=e.scrollHeight;
+	}
+}
+*/
+function loadArticleInfo(){
+	var article = JSON.parse(getstorage("theArticle"));
+	myalert(article.permittype);
+	$$('title').value = article.basesname;
+	if(article.isencrypt == 0){
+		encryptSelected(1);
+	}else{
+		old_bases_pwd = article.bases_pwd;
+		encryptSelected(2);
+	}
+	if(article.permittype == 0){
+		permitSelected(1);
+	}else if (article.permittype == 1) {
+		permitSelected(2);
+	}else {
+		old_reciver_user_name = article.reciver_user;
+		permitSelected(3);
+	}
+
+	
+	$$('text').value = article.content;
+	//setHtml('author',article.smownername);
+	//setHtml('text',article.content);
+}
+</script>
+</html>

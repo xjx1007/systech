@@ -1,0 +1,276 @@
+body 
+{
+	font-family:宋体;
+	BACKGROUND-COLOR: #d4e4f6;
+	BORDER-LEFT: #6e592e 1px solid;
+	BORDER-RIGHT: #6e592e 1px solid; 
+	BORDER-BOTTOM: transparent 0px solid;
+	MARGIN: 0px;
+	LINE-HEIGHT: 18px;
+	scrollbar-face-color:#D7E1EA;
+	scrollbar-highlight-color:#D7E1EA;
+	scrollbar-3dlight-color:#EEF2F7;
+	scrollbar-darkshadow-color:#0B2D6D;
+	scrollbar-shadow-color:#2449A5;
+	scrollbar-arrow-color:#FFFFFF;
+	scrollbar-track-color:#EEF2F7;
+}
+
+*
+{
+	font-family:"宋体";
+	font-size:12px;
+}
+
+.border
+{ 
+	border:#6493c8 solid 1px;
+}
+
+img
+{
+	border:0;
+}
+
+a:link { color: #000000; text-decoration: none; font-weight: normal; font-size: 12px}
+a:visited { color: #000000; text-decoration: none; font-weight: normal; font-size: 12px}
+a:active { color: #000000; text-decoration: none; font-size: 12px}
+a:hover { color: #000000; text-decoration: none; font-size: 12px; position: relative; left: 1px; top: 1px}
+
+.TitleBar
+{ 
+	width:98%; 
+	margin:0 auto 0 auto; 
+	background:url(../images/style/tab-strip-bg.gif) repeat-x center center; 
+	height:21px; 
+	color:#2867b1;
+	font-size:13px; 
+	font-weight:bold; 
+	padding:7px 0 0 20px;
+}
+
+/*.titlebar{
+	font: bold 14px/20px;
+	font-family:"Arial";
+	color: #ffffff;
+	background-color: #2951AD;
+	width: 100%;
+	padding-top: 2px;
+	padding-Left: 10px;
+	margin-bottom:5px;
+}*/
+
+.Custom_Td 
+{
+	PADDING-RIGHT: 2px; 
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px;
+	background-color:#d4e4f6; 
+	COLOR: #000000; 
+	LINE-HEIGHT: 24px;
+}
+
+.Custom_Td1
+{
+	PADDING-RIGHT: 2px; 
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px;
+	background-color:#E3EAF2; 
+	COLOR: #000000; 
+	LINE-HEIGHT: 24px;	
+}
+.Custom_Hide
+{
+	filter: alpha(opacity=0); /* IE */
+	moz-opacity: 0; /* Moz + FF */
+	opacity: 0; /* 支持CSS3的浏览器（FF 1.5也支持）*/
+}
+
+.Custom_Input
+{
+	font-family:宋体;
+	BORDER-RIGHT: #a0a0a0 1px solid; 
+	BORDER-TOP: #a0a0a0 1px solid; 
+	FONT-SIZE: 12px; 
+	BORDER-LEFT: #a0a0a0 1px solid; 
+	BORDER-BOTTOM: #a0a0a0 1px solid;
+	height:18px;
+}
+
+.Custom_MulInput
+{
+	font-family:宋体;
+	BORDER-RIGHT: #b2b2b2 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #b2b2b2 1px solid; PADDING-LEFT: 3px; 
+	PADDING-BOTTOM: 3px; MARGIN: 1px; FONT: 12px Verdana, 宋体, Helvetica, sans-serif; BORDER-LEFT: #b2b2b2 1px solid; COLOR: #000; 
+	PADDING-TOP: 3px; BORDER-BOTTOM: #b2b2b2 1px solid
+}
+
+.Custom_Button
+{ 
+	border:#7b9ebd 1px solid; 
+	padding:2px 2px 0 2px; 
+	font-size:12px; 
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#FFFFFF, EndColorStr=#9DBCEA);
+	color:black;
+}
+
+.Custom_Select
+{
+	font-family:宋体;
+	BORDER-RIGHT: #a0a0a0 1px solid; 
+	BORDER-TOP: #a0a0a0 1px solid; 
+	FONT-SIZE: 12px; 
+	BORDER-LEFT: #a0a0a0 1px solid; 
+	BORDER-BOTTOM: #a0a0a0 1px solid;
+	height:20px;
+}
+
+/*begin Asp:DataGrid */
+.Custom_DgMain
+{
+	font-family:宋体;
+	/*background-color:#FFFFFF;*/
+	border:#6493c8 solid 1px;
+}
+.Custom_DgHead
+{
+	font-family:宋体;
+	FONT-SIZE: 12px;
+	text-align:center;
+	COLOR: #000000;
+	LINE-HEIGHT: 20px;
+	/*background-color:#6087BD;*/
+	background-image:url("../images/style/title.gif");
+	word-break:keep-all;
+}
+.Custom_DgItem
+{
+	font-family:宋体;
+	FONT-SIZE: 12px;
+	LINE-HEIGHT: 17px;
+	text-align:center;
+	background-color:#E6EFF8;
+}
+.Custom_DgPage
+{
+	font-family:宋体;
+	font-size:12px;
+	height:20px;
+	text-align:right;
+	background-image:url("../images/style/title.gif");
+	/*background-color:#ACCFFB;*/
+}
+/*end Asp:DataGrid */
+
+.Custom_ListCellRow
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color:#999999;
+	padding:0px 4px 0px 4px;
+	WORD-BREAK:break-all;
+}
+.Custom_Listrow2
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 9pt;
+    BACKGROUND: #EBF1FA;
+}
+
+
+
+.Custom_Title1 
+{
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #403020; LINE-HEIGHT: 20px; FONT-FAMILY:仿宋_GB2312
+}
+
+
+
+.Custom_TdXs
+{
+	PADDING-RIGHT: 2px; 
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px; 
+	COLOR: #000000; 
+	LINE-HEIGHT: 24px; 
+	FONT-FAMILY: "宋体";
+	background-color:#CFD9E5;
+}
+
+.Custom_Td1Xs
+{
+	PADDING-RIGHT: 2px; 
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px; 
+	COLOR: #000000; 
+	LINE-HEIGHT: 24px; 
+	FONT-FAMILY: "宋体";
+	background-color:#E3EAF2;
+}
+
+.Custom_Td2
+{
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 20px; FONT-FAMILY: "宋体"
+}
+
+.Custom_AllotTd 
+{
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px; 
+	FONT-SIZE: 12px; 
+	COLOR: #000000; 
+	LINE-HEIGHT: 20px; 
+	FONT-FAMILY: "宋体";
+}
+
+.Custom_TableFrame
+{
+    background-color: #FFFFFF;
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#7C9CCF;
+    border-collapse:collapse
+}
+
+
+
+
+
+.table1{
+	font-size:9pt;
+	BORDER-TOP: #000000 1px solid;
+	BORDER-LEFT: #000000 1px solid;
+	width :100%;
+}
+.table1 TD{
+	BORDER-RIGHT: #000000 1px solid;
+	BORDER-BOTTOM: #000000 1px solid;
+	text-align: center;
+	HEIGHT: 23px;
+}
+
+.table2{
+	font-size:9pt;
+	BORDER-TOP: #000000 1px solid;
+	BORDER-LEFT: #000000 1px solid;	
+}
+.table2 TD{
+	BORDER-RIGHT: #000000 1px solid;
+	BORDER-BOTTOM: #000000 1px solid;
+	HEIGHT: 23px;
+}
+
+
+
+/*datagrid固定表头*/
+.CornerStyle { BORDER-RIGHT: buttonshadow 1px solid; BORDER-TOP: #ffffff 1px solid; Z-INDEX: 1; BACKGROUND: #33ccff; LEFT: expression(document.getElementById('c').scrollLeft); BORDER-LEFT: #ffffff 1px solid; WIDTH: 100px; LINE-HEIGHT: 22px; BORDER-BOTTOM: buttonshadow 1px solid; POSITION: relative; TOP: expression(document.getElementById('c').scrollTop); TEXT-ALIGN: center }
+.HeaderItemStyle { FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 20px; POSITION: relative; TOP: expression(document.getElementById('c').scrollTop); TEXT-OVERFLOW: ellipsis; BACKGROUND-COLOR: #6087bd; TEXT-ALIGN: center }
+.ContentStyle { BORDER-RIGHT: buttonshadow 1px solid; BORDER-TOP: buttonhighlight 1px solid; LEFT: expression(document.getElementById('c').scrollLeft); BORDER-LEFT: buttonhighlight 1px solid; WIDTH: 30px; CURSOR: default; WORD-BREAK: break-all; BORDER-BOTTOM: buttonshadow 1px solid; WHITE-SPACE: nowrap; POSITION: relative; TEXT-OVERFLOW: ellipsis; BACKGROUND-COLOR: #fffacd; TEXT-ALIGN: center }
+.ItemStyle { FONT-SIZE: 12px; LINE-HEIGHT: 17px; BACKGROUND-COLOR: #cfd9e5; TEXT-ALIGN: center }
+.MainDivStyle { BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #cccccc 1px solid; MARGIN-LEFT: 0px; OVERFLOW: auto; BORDER-LEFT: #cccccc 1px solid; WIDTH: 400px; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 300px }
+.MainDivStyleX { BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #cccccc 1px solid; MARGIN-LEFT: 0px; overflow-x: scroll; BORDER-LEFT: #cccccc 1px solid; WIDTH: 400px; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 100% }
+.MainDivStyleY { BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #cccccc 1px solid; MARGIN-LEFT: 0px; overflow-y: scroll; BORDER-LEFT: #cccccc 1px solid; WIDTH: 100%; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 300px }
+
+.HeaderStyle { FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 20px; POSITION: relative; TOP: expression(this.offsetParent.scrollTop); LEFT:expression(this.parentElement.scrollLeft); TEXT-OVERFLOW: ellipsis; BACKGROUND-COLOR: #6087bd; TEXT-ALIGN: center }
+

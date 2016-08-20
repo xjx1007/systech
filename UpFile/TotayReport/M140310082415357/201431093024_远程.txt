@@ -1,0 +1,6 @@
+远程终端登录
+60.190.248.147      administrator    abcd#1234    
+ 预装所有IIS功能及杀毒软件，数据库不知道你用什么，目前安装了SQL2008
+
+FTP用于你上传文件使用
+ftp://60.190.248.140/ftp    administrator abcd#1234   根目录c:\ftp

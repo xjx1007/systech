@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script src="../../js/LanguageResources.js"></script>
+		<script src="../../js/Application.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style>
+		 .sortable{
+			margin: auto;
+			padding: 0;
+			width: 100%;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.sortable.grid {
+			overflow: hidden;
+		}
+		.sortable li{
+			list-style: none;
+			border: 1px solid #CCC;
+			font-family: "Tahoma";
+			color: #1C94C4;
+			margin: 1em;
+			padding: .5em;
+		}
+		
+		li.highlight {
+			background: #FEE25F;
+		}
+		
+	</style>
+        <title>易客 CRM</title>
+    </head>
+    <body>
+  	<!--	关于页面	 	-->
+    <body class="um-vp c-gra4" ontouchstart>
+  		<div id="header" class="uh c-blu3 c-m2 t-wh">
+  			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title">逍遥行</div>
+			</div>
+		</div>
+        <div id="content" class="uinn ">
+			<ul class="sortable list" id="list">
+				<li class="uc-a1 c-wh" ontouchstart="zy_touch('btn-act');" onclick="openwin('MarkAccount','')"><i class="icon-location-arrow"></i>&nbsp;拜访签到<i class="icon-chevron-sign-right ufr"></i>&nbsp;</li>
+				<li class="uc-a1 c-wh" ontouchstart="zy_touch('btn-act');" onclick="openwin('LocationShooting','')"><i class="icon-camera"></i>&nbsp;实景照片<i class="icon-chevron-sign-right ufr"></i>&nbsp;</li>
+				<li class="uc-a1 c-wh" ontouchstart="zy_touch('btn-act');" onclick="openwin('SearchNear','')"><i class="icon-search"></i>&nbsp;周边搜索<i class="icon-chevron-sign-right ufr"></i>&nbsp;</li>
+				<li class="uc-a1 c-wh" ontouchstart="zy_touch('btn-act');" onclick="openwin('RecordKQ','')"><i class="icon-tag"></i>&nbsp;考勤签到<i class="icon-chevron-sign-right ufr"></i>&nbsp;</li>
+				<li class="uc-a1 c-wh" ontouchstart="zy_touch('btn-act');" onclick="openwin('QingJia','')"><i class="icon-briefcase"></i>&nbsp;请假申请<i class="icon-chevron-sign-right ufr"></i>&nbsp;</li>
+
+			</ul>
+		</div>
+</body>
+<script>
+	zy_init();
+	window.uexOnload = function(type){
+		if (!type) {
+		}
+	}
+</script>
+</html>

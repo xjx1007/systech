@@ -1,0 +1,1940 @@
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr >
+<td colspan="15" class="ListHead"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15" class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="11"   class="ListHead"  align="left">供应商名称:常州同创</td><td colspan="4" class="ListHead" align="right">对账月份:2016-1</td></tr>
+<tr ><td  class="ListHead" colspan=13 align="center">供应商填写</td><td class="ListHead" align="center" colspan=2>士腾采购填写</td></tr><tr >
+<td class="ListHead" rowspan=2>序号</td>
+<td class="ListHead" align=center  rowspan=2>产品版本</td>
+<td class="ListHead" align=center  rowspan=2>收货单位</td>
+<td class="ListHead" rowspan=2>出库日期</td>
+<td class="ListHead" rowspan=2>到货日期</td>
+<td class="ListHead" rowspan=2>发货数量</td>
+<td class="ListHead" rowspan=2>备料</td>
+<td class="ListHead" rowspan=2>物流公司名称(单号/联系电话)</td>
+<td class="ListHead" align=center  colspan=2>单价</td>
+<td class="ListHead" align=center rowspan=2>总额</td>
+<td class="ListHead" align=center  colspan=2>电池</td>
+<td class="ListHead" rowspan=2>士腾确认</td>
+<td class="ListHead" rowspan=2>备注</td>
+</tr>
+<tr><td class="ListHead">材料费</td>
+<td class="ListHead">加工费</td>
+<td class="ListHead">型号</td>
+<td class="ListHead">数量</td>
+</tr>
+ <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/13</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/17</td>
+<td align=right class='ListHeadDetails' noWrap>1010</td>
+<td align=right class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005177/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1468.850</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2020</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/13</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/17</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005177/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4406.550</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>6060</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1807-01(珠江甜果简易）</td>
+<td align=left class='ListHeadDetails' noWrap>杭州士腾科技有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=right class='ListHeadDetails' noWrap>1</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>顺丰快递(210227627505/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>0.500</td>
+<td align=center class='ListHeadDetails' noWrap>0.566</td>
+<td align=center class='ListHeadDetails' noWrap>1.066</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5600A-00（福建省网白）</td>
+<td align=left class='ListHeadDetails' noWrap>杭州士腾科技有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=right class='ListHeadDetails' noWrap>1</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>顺丰快递(210227627505/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1.450</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2204.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>6</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>606</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>881.600</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>1212</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>7</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4406.550</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>6060</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>8</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>1520</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2211.250</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3040</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/3</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>6.850</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>10</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司晋江分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/14</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=right class='ListHeadDetails' noWrap>1500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10125638795/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2175.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>11</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005179/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2204.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>12</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5609A-01（龙岩超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司龙岩分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10102638806/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2900.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>4000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005179/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2202.550</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>14</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005179/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2204.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>4</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005180/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>8.700</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>8</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>16</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>1100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525756/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1595.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>17</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>4242</td>
+<td align=right class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005180/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>6169.750</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>8484</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>18</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>河北广电信息网络股份有限公司衡水分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525701/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>1370.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>19</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>德邦物流(282440134/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2900.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>20</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>河北广电网络集团邯郸有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525723/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>2740.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>21</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>高斯贝尔数码科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=right class='ListHeadDetails' noWrap>2500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525734/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>3425.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>22</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-8834-00（厦门简易版）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司厦门分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525712/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.700</td>
+<td align=center class='ListHeadDetails' noWrap>8500.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>23</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司福鼎分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/22</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525745/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1450.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>24</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/22</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525756/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>2740.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>25</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州士腾科技有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=right class='ListHeadDetails' noWrap>1</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>1.370</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>26</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/24</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>6850.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/29</td>
+<td align=right class='ListHeadDetails' noWrap>8833</td>
+<td align=right class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(0912902/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>12847.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>17666</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>28</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528195/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2902.900</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>29</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>8862</td>
+<td align=right class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(0912903/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>12889.050</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>17724</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>30</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5612A-00（福安超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司福安分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528184/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1450.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>31</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/29</td>
+<td align=right class='ListHeadDetails' noWrap>5030</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7293.500</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10060</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>32</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/28</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(0912901/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7271.750</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>33</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528195/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7252.900</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>34</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525804/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4350.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>35</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5607A-03（漳州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/3</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>德邦物流(282440719/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4350.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>36</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=right class='ListHeadDetails' noWrap>1500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528195/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2175.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>37</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-8834-00（厦门简易版）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司厦门分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(101465255815/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.700</td>
+<td align=center class='ListHeadDetails' noWrap>8500.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>38</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5605A-00（南平超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司建阳分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10107255690/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1450.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>39</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>德邦物流(282440719/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1452.900</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>40</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/6</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7250.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>41</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/6</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>6850.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>42</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/6</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7250.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>43</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>河北邢台零售</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/7</td>
+<td align=right class='ListHeadDetails' noWrap>400</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>中通快递(761729256460/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>548.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>44</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/7</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/8</td>
+<td align=right class='ListHeadDetails' noWrap>100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>145.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>200</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>45</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/11</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/12</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>13700.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>46</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/20</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/22</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>13700.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>47</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/20</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/22</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>13706.850</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap colspan='5'>合计：</td>
+<td align=center class='ListHeadDetails' noWrap>140330</td>
+<td align=center class='ListHeadDetails' noWrap>147</td>
+<td align=center class='ListHeadDetails' noWrap colspan='3'>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>202358.386</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>147654</td>
+<td align=center class='ListHeadDetails' noWrap colspan='2'>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" >&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails">&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails"  colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails"  colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>加工费发票1</b></td>
+</tr> <tr ><td class="ListHeadDetials" align=left colspan="11"><b><font color=red>发票号码：</font></b>___________________</td></tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0101040173</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-1601-01(河北)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">7500</td><td class="ListHeadDetails" align="right">0.370</td><td class="ListHeadDetails" align="right">2775.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>403.21</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0101040258</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5602A-00（泉州超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">11600</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">5220.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>758.46</td></tr><tr ><td class="ListHeadDetails" align="left" >3</td><td class='ListHeadDetails'align=center >0101040260</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5604A-00（三明超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">42328</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">19047.60</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>2767.60</td></tr><tr ><td class="ListHeadDetails" align="left" >4</td><td class='ListHeadDetails'align=center >0101040261</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5605A-00（南平超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">450.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>65.38</td></tr><tr ><td class="ListHeadDetails" align="left" >5</td><td class='ListHeadDetails'align=center >0101040262</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5606A-01（宁德超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">9034</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">4065.30</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>590.68</td></tr><tr ><td class="ListHeadDetails" align="left" >6</td><td class='ListHeadDetails'align=center >0101040264</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5608A-00（福州超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">12602</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">5670.90</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>823.98</td></tr><tr ><td class="ListHeadDetails" align="left" >7</td><td class='ListHeadDetails'align=center >0101040265</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5609A-01（龙岩超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">2000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">900.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>130.77</td></tr><tr ><td class="ListHeadDetails" align="left" >8</td><td class='ListHeadDetails'align=center >0101040266</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5600A-00（福建省网白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">0.45</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>0.07</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;86065</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;38129.25</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;5540.15</td>
+ </tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>加工费发票2</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >9</td><td class='ListHeadDetails'align=center >0101040306</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-8834-00（厦门简易版）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">10000</td><td class="ListHeadDetails" align="right">0.700</td><td class="ListHeadDetails" align="right">7000.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1017.09</td></tr><tr ><td class="ListHeadDetails" align="left" >10</td><td class='ListHeadDetails'align=center >0101040310</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5612A-00（福安超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">450.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>65.38</td></tr><tr ><td class="ListHeadDetails" align="left" >11</td><td class='ListHeadDetails'align=center >0101040336</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5607A-03（漳州超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">3000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">1350.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>196.15</td></tr><tr ><td class="ListHeadDetails" align="left" >12</td><td class='ListHeadDetails'align=center >0101040349</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-1605-00(河北HB)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">40411</td><td class="ListHeadDetails" align="right">0.370</td><td class="ListHeadDetails" align="right">14952.07</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>2172.52</td></tr><tr ><td class="ListHeadDetails" align="left" >13</td><td class='ListHeadDetails'align=center >0101040352</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-1807-01(珠江甜果简易）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1</td><td class="ListHeadDetails" align="right">0.566</td><td class="ListHeadDetails" align="right">0.57</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>0.09</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;54412</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;23752.64</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;3451.23</td>
+ </tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>材料费发票1</b></td>
+</tr> <tr ><td class="ListHeadDetials" align=left colspan="11"><b><font color=red>发票号码：</font></b>___________________</td></tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>品名</td>
+<td class="ListHead" align=center>规格</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">标准用量</td>
+<td class="ListHead">出库数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead">税额</td>
+</tr > <tr >
+<td class='ListHeadDetails'align=center >1</td>
+<td class='ListHeadDetails'align=center >0203180010</td>
+<td class='ListHeadDetails'align=center >包装袋</td>
+<td  class='ListHeadDetails'align=center >包装袋</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.05</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;7023.85</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >1020.56</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >2</td>
+<td class='ListHeadDetails'align=center >0203180009</td>
+<td class='ListHeadDetails'align=center >弹簧</td>
+<td  class='ListHeadDetails'align=center >弹簧</td>
+<td class='ListHeadDetails' align=center >--</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.15</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;21071.55</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >3061.68</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >3</td>
+<td class='ListHeadDetails'align=center >0203180002</td>
+<td class='ListHeadDetails'align=center >电容电解</td>
+<td  class='ListHeadDetails'align=center >47uf/16v</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.10</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;14047.70</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >2041.12</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >4</td>
+<td class='ListHeadDetails'align=center >0203180001</td>
+<td class='ListHeadDetails'align=center >电阻</td>
+<td  class='ListHeadDetails'align=center >电阻</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >5</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;702385</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.00</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;2809.54</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >408.22</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >5</td>
+<td class='ListHeadDetails'align=center >0203180003</td>
+<td class='ListHeadDetails'align=center >发光二极管</td>
+<td  class='ListHeadDetails'align=center >发光二极管</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.16</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;22476.32</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >3265.79</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >6</td>
+<td class='ListHeadDetails'align=center >0203180004</td>
+<td class='ListHeadDetails'align=center >合格证</td>
+<td  class='ListHeadDetails'align=center >合格证</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.05</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;7023.85</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >1020.56</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >7</td>
+<td class='ListHeadDetails'align=center >0203180006</td>
+<td class='ListHeadDetails'align=center >面贴</td>
+<td  class='ListHeadDetails'align=center >面贴</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.10</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;14047.70</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >2041.12</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >8</td>
+<td class='ListHeadDetails'align=center >0203180008</td>
+<td class='ListHeadDetails'align=center >说明书</td>
+<td  class='ListHeadDetails'align=center >说明书</td>
+<td class='ListHeadDetails' align=center >张</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.10</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;14047.70</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >2041.12</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >9</td>
+<td class='ListHeadDetails'align=center >0203180007</td>
+<td class='ListHeadDetails'align=center >纸箱</td>
+<td  class='ListHeadDetails'align=center >纸箱</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.27</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;37928.79</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >5511.02</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='6'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;1826201</td>
+<td class='ListHeadDetails' align=right >&nbsp;1.00</td>
+<td class='ListHeadDetails' align=right  >&nbsp;140477.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;20411.19</td>
+ </tr></table>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr >
+<td colspan="15" class="ListHead"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15" class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="11"   class="ListHead"  align="left">供应商名称:常州同创</td><td colspan="4" class="ListHead" align="right">对账月份:2016-1</td></tr>
+<tr ><td  class="ListHead" colspan=13 align="center">供应商填写</td><td class="ListHead" align="center" colspan=2>士腾采购填写</td></tr><tr >
+<td class="ListHead" rowspan=2>序号</td>
+<td class="ListHead" align=center  rowspan=2>产品版本</td>
+<td class="ListHead" align=center  rowspan=2>收货单位</td>
+<td class="ListHead" rowspan=2>出库日期</td>
+<td class="ListHead" rowspan=2>到货日期</td>
+<td class="ListHead" rowspan=2>发货数量</td>
+<td class="ListHead" rowspan=2>备料</td>
+<td class="ListHead" rowspan=2>物流公司名称(单号/联系电话)</td>
+<td class="ListHead" align=center  colspan=2>单价</td>
+<td class="ListHead" align=center rowspan=2>总额</td>
+<td class="ListHead" align=center  colspan=2>电池</td>
+<td class="ListHead" rowspan=2>士腾确认</td>
+<td class="ListHead" rowspan=2>备注</td>
+</tr>
+<tr><td class="ListHead">材料费</td>
+<td class="ListHead">加工费</td>
+<td class="ListHead">型号</td>
+<td class="ListHead">数量</td>
+</tr>
+ <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/13</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/17</td>
+<td align=right class='ListHeadDetails' noWrap>1010</td>
+<td align=right class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005177/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1468.850</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2020</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/13</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/17</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005177/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4406.550</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>6060</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1807-01(珠江甜果简易）</td>
+<td align=left class='ListHeadDetails' noWrap>杭州士腾科技有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=right class='ListHeadDetails' noWrap>1</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>顺丰快递(210227627505/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>0.500</td>
+<td align=center class='ListHeadDetails' noWrap>0.566</td>
+<td align=center class='ListHeadDetails' noWrap>1.066</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5600A-00（福建省网白）</td>
+<td align=left class='ListHeadDetails' noWrap>杭州士腾科技有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=center class='ListHeadDetails' noWrap>2015/11/30</td>
+<td align=right class='ListHeadDetails' noWrap>1</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>顺丰快递(210227627505/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1.450</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2204.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>6</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>606</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>881.600</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>1212</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>7</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4406.550</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>6060</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>8</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/4</td>
+<td align=right class='ListHeadDetails' noWrap>1520</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005178/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2211.250</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3040</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/3</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>6.850</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>10</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司晋江分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/14</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=right class='ListHeadDetails' noWrap>1500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10125638795/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2175.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>11</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005179/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2204.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>12</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5609A-01（龙岩超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司龙岩分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10102638806/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2900.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>4000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005179/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2202.550</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>14</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/15</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=right class='ListHeadDetails' noWrap>1515</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005179/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2204.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>4</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005180/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>8.700</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>8</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>16</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>1100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525756/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1595.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>17</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>4242</td>
+<td align=right class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(2005180/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>6169.750</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>8484</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>18</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>河北广电信息网络股份有限公司衡水分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525701/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>1370.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>19</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/17</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>德邦物流(282440134/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2900.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>20</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>河北广电网络集团邯郸有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525723/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>2740.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>21</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>高斯贝尔数码科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=right class='ListHeadDetails' noWrap>2500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525734/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>3425.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>22</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-8834-00（厦门简易版）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司厦门分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/18</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/21</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525712/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.700</td>
+<td align=center class='ListHeadDetails' noWrap>8500.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>23</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司福鼎分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/22</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525745/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1450.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>24</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1601-01(河北)</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/22</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525756/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>2740.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>25</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州士腾科技有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=right class='ListHeadDetails' noWrap>1</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>1.370</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>26</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/23</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/24</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>6850.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/29</td>
+<td align=right class='ListHeadDetails' noWrap>8833</td>
+<td align=right class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(0912902/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>12847.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>17666</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>28</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528195/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2902.900</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>29</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>8862</td>
+<td align=right class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(0912903/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>12889.050</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>17724</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>30</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5612A-00（福安超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司福安分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528184/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1450.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>31</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/29</td>
+<td align=right class='ListHeadDetails' noWrap>5030</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7293.500</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10060</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>32</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5604A-00（三明超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>深圳创维数字技术有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/28</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>航燕物流(0912901/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7271.750</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>33</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528195/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7252.900</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>34</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146525804/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4350.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>35</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5607A-03（漳州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/3</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>德邦物流(282440719/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>4350.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>36</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5608A-00（福州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=right class='ListHeadDetails' noWrap>1500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10146528195/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>2175.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>37</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-8834-00（厦门简易版）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司厦门分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(101465255815/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.700</td>
+<td align=center class='ListHeadDetails' noWrap>8500.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>38</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5605A-00（南平超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建广电网络集团股份有限公司建阳分公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>百世物流(10107255690/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1450.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>39</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5606A-01（宁德超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>福建新大陆通信科技股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/1</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>德邦物流(282440719/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>1452.900</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>40</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/6</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7250.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>41</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/6</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>6850.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>42</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/6</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>7250.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>43</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>河北邢台零售</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/4</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/7</td>
+<td align=right class='ListHeadDetails' noWrap>400</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>中通快递(761729256460/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>548.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>44</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-5602A-00（泉州超标清白）</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/7</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/8</td>
+<td align=right class='ListHeadDetails' noWrap>100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.450</td>
+<td align=center class='ListHeadDetails' noWrap>145.000</td>
+<td align=left class='ListHeadDetails' noWrap>双鹿碳性7#</td>
+<td align=right class='ListHeadDetails' noWrap>200</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>45</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/11</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/12</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>13700.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>46</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/20</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/22</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>13700.000</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>47</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-1605-00(河北HB)</td>
+<td align=left class='ListHeadDetails' noWrap>江苏银河电子股份有限公司</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/20</td>
+<td align=center class='ListHeadDetails' noWrap>2016/1/22</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>--请选择--(自送/)&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>1.000</td>
+<td align=center class='ListHeadDetails' noWrap>0.370</td>
+<td align=center class='ListHeadDetails' noWrap>13706.850</td>
+<td align=left class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap colspan='5'>合计：</td>
+<td align=center class='ListHeadDetails' noWrap>140330</td>
+<td align=center class='ListHeadDetails' noWrap>147</td>
+<td align=center class='ListHeadDetails' noWrap colspan='3'>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>202358.386</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>147654</td>
+<td align=center class='ListHeadDetails' noWrap colspan='2'>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" >&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails">&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails"  colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails"  colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>加工费发票1</b></td>
+</tr> <tr ><td class="ListHeadDetials" align=left colspan="11"><b><font color=red>发票号码：</font></b>___________________</td></tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0101040173</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-1601-01(河北)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">7500</td><td class="ListHeadDetails" align="right">0.370</td><td class="ListHeadDetails" align="right">2775.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>403.21</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0101040258</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5602A-00（泉州超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">11600</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">5220.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>758.46</td></tr><tr ><td class="ListHeadDetails" align="left" >3</td><td class='ListHeadDetails'align=center >0101040260</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5604A-00（三明超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">42328</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">19047.60</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>2767.60</td></tr><tr ><td class="ListHeadDetails" align="left" >4</td><td class='ListHeadDetails'align=center >0101040261</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5605A-00（南平超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">450.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>65.38</td></tr><tr ><td class="ListHeadDetails" align="left" >5</td><td class='ListHeadDetails'align=center >0101040262</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5606A-01（宁德超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">9034</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">4065.30</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>590.68</td></tr><tr ><td class="ListHeadDetails" align="left" >6</td><td class='ListHeadDetails'align=center >0101040264</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5608A-00（福州超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">12602</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">5670.90</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>823.98</td></tr><tr ><td class="ListHeadDetails" align="left" >7</td><td class='ListHeadDetails'align=center >0101040265</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5609A-01（龙岩超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">2000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">900.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>130.77</td></tr><tr ><td class="ListHeadDetails" align="left" >8</td><td class='ListHeadDetails'align=center >0101040266</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5600A-00（福建省网白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">0.45</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>0.07</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;86065</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;38129.25</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;5540.15</td>
+ </tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>加工费发票2</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >9</td><td class='ListHeadDetails'align=center >0101040306</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-8834-00（厦门简易版）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">10000</td><td class="ListHeadDetails" align="right">0.700</td><td class="ListHeadDetails" align="right">7000.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1017.09</td></tr><tr ><td class="ListHeadDetails" align="left" >10</td><td class='ListHeadDetails'align=center >0101040310</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5612A-00（福安超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">450.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>65.38</td></tr><tr ><td class="ListHeadDetails" align="left" >11</td><td class='ListHeadDetails'align=center >0101040336</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-5607A-03（漳州超标清白）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">3000</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">1350.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>196.15</td></tr><tr ><td class="ListHeadDetails" align="left" >12</td><td class='ListHeadDetails'align=center >0101040349</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-1605-00(河北HB)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">40411</td><td class="ListHeadDetails" align="right">0.370</td><td class="ListHeadDetails" align="right">14952.07</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>2172.52</td></tr><tr ><td class="ListHeadDetails" align="left" >13</td><td class='ListHeadDetails'align=center >0101040352</td>
+<td class="ListHeadDetails" align="left"> 遥控器加工费</td><td class="ListHeadDetails" align="left">MRC-1807-01(珠江甜果简易）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1</td><td class="ListHeadDetails" align="right">0.566</td><td class="ListHeadDetails" align="right">0.57</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>0.09</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;54412</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;23752.64</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;3451.23</td>
+ </tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>材料费发票1</b></td>
+</tr> <tr ><td class="ListHeadDetials" align=left colspan="11"><b><font color=red>发票号码：</font></b>___________________</td></tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>品名</td>
+<td class="ListHead" align=center>规格</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">标准用量</td>
+<td class="ListHead">出库数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead">税额</td>
+</tr > <tr >
+<td class='ListHeadDetails'align=center >1</td>
+<td class='ListHeadDetails'align=center >0203180010</td>
+<td class='ListHeadDetails'align=center >包装袋</td>
+<td  class='ListHeadDetails'align=center >包装袋</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.05</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;7023.85</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >1020.56</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >2</td>
+<td class='ListHeadDetails'align=center >0203180009</td>
+<td class='ListHeadDetails'align=center >弹簧</td>
+<td  class='ListHeadDetails'align=center >弹簧</td>
+<td class='ListHeadDetails' align=center >--</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.15</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;21071.55</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >3061.68</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >3</td>
+<td class='ListHeadDetails'align=center >0203180002</td>
+<td class='ListHeadDetails'align=center >电容电解</td>
+<td  class='ListHeadDetails'align=center >47uf/16v</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.10</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;14047.70</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >2041.12</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >4</td>
+<td class='ListHeadDetails'align=center >0203180001</td>
+<td class='ListHeadDetails'align=center >电阻</td>
+<td  class='ListHeadDetails'align=center >电阻</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >5</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;702385</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.00</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;2809.54</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >408.22</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >5</td>
+<td class='ListHeadDetails'align=center >0203180003</td>
+<td class='ListHeadDetails'align=center >发光二极管</td>
+<td  class='ListHeadDetails'align=center >发光二极管</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.16</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;22476.32</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >3265.79</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >6</td>
+<td class='ListHeadDetails'align=center >0203180004</td>
+<td class='ListHeadDetails'align=center >合格证</td>
+<td  class='ListHeadDetails'align=center >合格证</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.05</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;7023.85</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >1020.56</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >7</td>
+<td class='ListHeadDetails'align=center >0203180006</td>
+<td class='ListHeadDetails'align=center >面贴</td>
+<td  class='ListHeadDetails'align=center >面贴</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.10</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;14047.70</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >2041.12</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >8</td>
+<td class='ListHeadDetails'align=center >0203180008</td>
+<td class='ListHeadDetails'align=center >说明书</td>
+<td  class='ListHeadDetails'align=center >说明书</td>
+<td class='ListHeadDetails' align=center >张</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.10</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;14047.70</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >2041.12</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center >9</td>
+<td class='ListHeadDetails'align=center >0203180007</td>
+<td class='ListHeadDetails'align=center >纸箱</td>
+<td  class='ListHeadDetails'align=center >纸箱</td>
+<td class='ListHeadDetails' align=center >只</td>
+<td  class='ListHeadDetails' align=right  >1</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;140477</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;0.27</td>
+<td  class='ListHeadDetails' align=right  >&nbsp;37928.79</td>
+<td  class='ListHeadDetails' align=right >&nbsp;17%</td>
+<td  class='ListHeadDetails' align=right >5511.02</td>
+ </tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='6'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;1826201</td>
+<td class='ListHeadDetails' align=right >&nbsp;1.00</td>
+<td class='ListHeadDetails' align=right  >&nbsp;140477.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;20411.19</td>
+ </tr></table>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=123694c09683eb102283b4679c07dfd0"></script>	
+		<script type="text/javascript" src="../../js/module_js/WorkMaps.js"></script>
+		<script type="text/javascript" src="../../js/RelativeModule.js"></script>
+		<link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+		<style>
+			#main{position:absolute;top:0;left:0;width:100%;min-height:100%;overflow:hidden;}
+			#content{-webkit-box-flex:1;box-flex:1;text-align:left;}
+		</style>
+    </head>
+    <body>
+  	<!--	关于页面	 	-->
+    <body class="um-vp c-gra" ontouchstart>
+    	 <div id="main" class="ub ub-ver">
+            <!--header开始-->
+  		<div id="header" >
+  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+				<div class="h1 title">具体位置</div>
+			</div>
+		</div>
+        <div id="content">
+        	
+        </div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../js/my_bdMap.js"></script>
+<script>
+	var map;            // 创建Map实例
+	var myMark;
+	initMap();
+	
+	function markPoints(){
+		var lbsInfo = JSON.parse(getstorage('lbsInfo')); 
+		for (var i = 0; i < lbsInfo.length; i++) {
+			 map_overlay_common(lbsInfo[i].lng,lbsInfo[i].lat,lbsInfo[i].label,lbsInfo[i].address,true);
+			 if(lbsInfo[i].label=='我的位置'){
+			 	var point = new BMap.Point(lbsInfo[i].lng,lbsInfo[i].lat);
+				map.centerAndZoom(point, 18);
+			 }
+			 	//searchAddress(lbsInfo[i].address);
+			 if(lbsInfo[i].type == 'circle'){
+			 	paintCircleByPoint(lbsInfo[i].lng,lbsInfo[i].lat,lbsInfo[i].range);
+			 }
+		}
+	}
+	
+	window.uexOnload = function() {
+		markPoints();
+	}
+</script>
+</html>

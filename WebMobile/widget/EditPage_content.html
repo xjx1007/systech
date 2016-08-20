@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/ui-input.css">
+		<link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/my-color.css">
+		<link rel="stylesheet" href="css/ui-res.css">
+		<link rel="stylesheet" href="css/ui-btn.css">
+		<link rel="stylesheet" href="css/ui-on.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="font-sae/font-sae.css">
+        <script src="js/zy_control.js"></script>
+		<script src="js/zy_anim.js"></script>
+		<script src="js/zy_json.js"></script>
+        <script src="js/zy_click.js"></script>
+		<script type="text/javascript" src="js/LanguageResources.js"></script>
+		<script type="text/javascript" src="js/Application.js"></script>  
+		<script type="text/javascript" src="js/DateOrTime.js"></script>  
+		<script type="text/javascript" src="js/BaseModule.js"></script> 
+		<script type="text/javascript" src="js/module_js/Accounts.js"></script>
+		<script type="text/javascript" src="js/module_js/Contacts.js"></script>
+		<script type="text/javascript" src="js/module_js/Notes.js"></script>
+		<script type="text/javascript" src="js/module_js/Calendars.js"></script>
+		<script type="text/javascript" src="js/module_js/SalesOrder.js"></script>
+		<script type="text/javascript" src="js/module_js/Potentials.js"></script>
+		<script type="text/javascript" src="js/module_js/Expenses.js"></script>
+		<script type="text/javascript" src="js/module_js/Announcements.js"></script>
+		<script type="text/javascript" src="js/module_js/Accountrecordss.js"></script>
+		<script src="js/dy_upload.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+<style type="text/css"> 
+.outline-energized {
+    background: transparent;
+	border-color: #f0b840;
+	color: #f0b840;
+}
+.outline-energized:active {
+    background-color: #f0b840;
+    color: #fff;
+    box-shadow: none; 
+}
+
+.outline-positive {
+    background: transparent;
+	border-color: #4a87ee;
+	color: #4a87ee;
+}
+.outline-positive:active {
+    background-color: #4a87ee;
+    color: #fff;
+    box-shadow: none; 
+}
+</style>
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+    <div id="content" class="ub-f1 tx-l t-bla">
+    	<!--块容器开始-->
+		<div class="ub ub-ver" id="createform">	
+		
+		</div>
+		<!--块容器结束-->
+
+		<!--div id="buttondiv" style="display: none;">
+		
+			<div class="ub">
+				<div class="ub-f1 uinn">
+		
+				<div ontouchstart="zy_touch('btn-act');" onclick="saveButton()" id="save" class="btn uinn5 uc-a1 uba t-wh outline-positive"></div>
+		
+				</div>
+				<div class="ub-f1 uinn">
+	
+				<div ontouchstart="zy_touch('btn-act');" onclick="uexWindow.evaluateScript('EditPage','0','back()')" id="cancle" class="btn uinn5 c-cancle uc-a1 uba t-wh outline-energized"></div>
+	
+				</div>
+			</div>
+
+		</div-->
+		
+    </div>
+</body>
+<script>
+	var mode = 'edit';
+	zy_init();
+	var createobj;
+	var createtype;
+	setHtml("save", '<i class="icon-ok"></i>&nbsp;'+RES_SAVE_BUTTON);
+	setHtml("cancle", '<i class="icon-reply"></i>&nbsp;'+RES_CANCEL_BUTTON);
+	window.uexOnload = function(type){
+		uexControl.cbOpenDatePicker=changeDateMore;
+		uexControl.cbOpenTimePicker=changeTimeMore;
+		createtype = getstorage("CreateNewType");
+		switch(createtype){
+			case 'account':
+				createobj = new ACObj('mobileAccounts');
+				break;
+			case 'contact':
+				createobj = new CONObj('mobileContacts');
+				break;
+			case 'contactrecord':
+				createobj = new NOObj('mobileNotes');
+				break;
+			case 'calendarlist':
+				createobj = new CALObj('mobileCalendars');
+				break;
+			case 'salesorder':
+				createobj = new SOObj('mobileSalesOrder');
+				break;
+			case 'expense':
+				createobj = new ExpenseObj('mobileExpenses');
+				break;
+			case 'potential':
+				createobj = new POObj('mobilePotentials');
+				break;
+			case 'announcement':
+				createobj = new AnnouncementObj('mobileAnnouncements');
+				break;
+			case 'accountrecordss':
+				createobj = new AccountrecordsObj('mobileAccountrecordss');
+				break;
+		}
+		createobj.setEditPageBind();
+	}
+	
+	var myUpload = null;
+	var attachdel = [];
+	var oldsrc = '';
+	
+	function getpic(i){
+		var forum_url = getstorage("CurrentServerAddress")+'/mobile_upload.php';
+		var uploadHttp = forum_url;
+		if(!myUpload) myUpload = new disUpload(uploadHttp, 'thread', actCb, susCb);
+		myUpload.upMethod(i);
+	}
+	
+	function actCb(val){
+		//logs('actCb()-->val='+val);
+	}
+	
+	function susCb(val){
+		if(oldsrc != ''){
+			attachdel.push(oldsrc);
+		}
+		oldsrc = val;
+		var index = myUpload.src.lastIndexOf("/");
+		$$('imagename').value = myUpload.src.substring(index+1,100);
+		$$('thepic').src = myUpload.src;
+	}
+	
+	function viewImg(){
+		var array = [];
+		array[0] = $$('thepic').src;
+		uexImageBrowser.open(array);
+	}
+	
+	function saveButton(){
+		createobj.SaveNew();
+	}
+</script>
+</html>

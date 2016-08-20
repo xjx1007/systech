@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+		<style>
+	input[type="radio"]+div.ip-sta{
+		display:none !important;
+	}
+	input[type="radio"]:checked+div.ip-sta{	
+		display:block !important;
+	}
+	</style>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	短消息页面	 	-->
+    <div id="KnowlesListPage" class="up ub ub-ver" tabindex="0">
+    	 <!--header开始-->
+		<input class="uhide" type="radio" name="headers" id="ihd1" checked="true">
+		<div id="hd1" class="uh ip-sta">
+			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title">短消息</div>
+				<button class="button button-icon icon ion-grid t-wh" onclick="openpop();"></button>
+			</div>			
+			<div class="uinn7">
+				<div class="t-bla ub  c-wh  uinput  uinn4" >	
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="ppobj.searchPM()">
+				   		<div style="width:1em"></div>
+				   		<div class="res_search1 umw1 ub-img"></div>
+					</div>
+				   <div class="ub-f1 uinn1">
+				   	<input placeholder="搜索" id="searchtext" type="text" style="background:none;" oninput="ppobj.searchPM()"> 
+				</div> 
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="cancelSearch()" >
+				   		<div style="width:1em"></div>
+						<div class="res-clear umw1 ub-img"></div> 
+				   </div>
+				 </div>
+			</div>
+		</div>
+        
+		<!--content开始-->
+		<input class="uhide" type="radio" name="contents" id="ict1" checked="true">
+        <div id="ct1" class="ub-f1 tx-l t-bla ub-img6 ip-sta "></div>
+        <!--content结束-->
+        <div id="footer" class="ub c-bot t-wh c-m2">
+			<!--<div class="ub-f1 ubr b-gra" onclick="ppobj.ltpage(1);">
+				<input class="uhide" type="radio" name="tabSwitch1" id="mu1" checked="true">
+				<div class="btn-nav-active2 ub ub-pc ub-ac btn b-bla uinn32 ulev-19"style="text-align:center !important">&nbsp;&nbsp;未读&nbsp;&nbsp;</div>
+			</div>	 
+			<div class="ub-f1 ubr b-gra"onclick="ppobj.ltpage(2);">
+				<input class="uhide" type="radio" name="tabSwitch1" id="mu2">
+				<div class="btn-nav-active2 ub ub-pc ub-ac btn b-bla uinn32 ulev-19">收件箱</div>
+			</div>	
+			<div class="ub-f1"onclick="ppobj.ltpage(3);">
+				<input class="uhide" type="radio" name="tabSwitch1" id="mu3">
+				<div class="btn-nav-active2 ub ub-pc ub-ac btn b-bla uinn32 ulev-19">发件箱</div>
+			</div>-->
+        </div>
+	</div>
+</body>
+<script>
+zy_init();
+var pages =[];
+var ppurl = ['', 'PMListPageContent.html'];
+
+function Pages(){
+	this.index = 1;
+	this.iNav = 1;
+	this.curid = 0;
+	this.preid = 0;
+}
+
+Pages.prototype.navSelected = function(i) {
+	//logs('navSelected()-->i='+i+', preid='+this.preid+', curid='+this.curid);
+	if (this.curid == i)  return;
+	if(!pages[i]) pages[i]={ld:0, x:0};
+	this.preid = this.curid;
+	this.curid = i;
+	var idih = 'ihd'+i;
+	var idic = 'ict'+i;
+	var idft = 'ft' + i;
+	radioSelect(idih);
+	radioSelect(idic);
+	radioSelect(idft);
+	
+	var idc = 'ct'+i;
+	var idh = 'hd'+i;
+	var osH = $$(idh).offsetHeight;
+	
+	if(!pages[i].y){
+		var s = window.getComputedStyle($$(idc),null);
+		pages[i].y = osH;
+		pages[i].width = int(s.width);
+		pages[i].height = int(s.height);
+	}
+	
+	if(!pages[i].ld){
+		pages[i].ld = 1;
+		zy_con(idc, ppurl[i], 0, osH);
+	}else{
+		uexWindow.setPopoverFrame(idc, 0, pages[i].y, pages[i].width, pages[i].height);
+	}
+	if (this.preid > 0) {
+		var pervc = 'ct' + this.preid;
+		//logs('navSelected2-->idc=' + idc + ', y=' + pages[i].y + ', w=' + pages[i].width + ', h=' + pages[i].height + ', pervc=' + pervc);
+		uexWindow.setPopoverFrame(pervc, 0, 0, 0, 0);
+	}
+}
+
+Pages.prototype.ltpage = function(n) {
+	var id = 'mu'+n;
+	var ch = $$(id);
+	if(id && !ch.checked) ch.checked = true;
+	if(n!=this.iNav){
+		setstorage('searchtext', $$("searchtext").value);
+		uexWindow.evaluatePopoverScript('PMListPage','ct1','pmobj.changeList('+n+')');
+		this.iNav=n;
+	}
+}
+
+Pages.prototype.searchPM = function() {
+	setstorage('searchtext', $$("searchtext").value);
+	uexWindow.evaluatePopoverScript('PMListPage','ct1','pmobj.searchList()');
+}
+
+Pages.prototype.sendNewPM = function(){
+	openwin('SendNewPM','');
+}
+
+if(window.navigator.platform=='Win32') setstorage('simulate', '1');
+var luntanpage = new Array();
+var device = '';
+var ppobj = new Pages();
+window.uexOnload = function(type){	
+    if (!type) {
+		setstorage('searchtext', $$("searchtext").value);
+		setTimeout(function(){
+			ppobj.navSelected(1);
+			luntanpage[1] = 1;
+		}, 200);
+    }
+	uexWindow.cbConfirm = function ConfirmSuccess(opId, dataType, data){
+		if (data == 0) {
+			uexWindow.evaluatePopoverScript('PMListPage','ct1','pmobj.DeletePM(2)');
+		}
+	}
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("content",0,$$("header").offsetHeight);		
+	}
+}
+
+function openpop(){
+	var as = new Array(3);
+	as[0]= '发送新信息';
+	as[1]= '删除所选';
+	as[2]= '删除全部';
+	uexWindow.cbActionSheet = actionSheetSuccess;
+	uexWindow.actionSheet('操作',RES_CANCEL_BUTTON,as);
+}
+	
+var actionSheetSuccess = function(opId, dataType, data){
+    var index = parseInt(data);
+    if(index == 0){
+		ppobj.sendNewPM();
+    }
+	if(index == 1){
+		uexWindow.evaluatePopoverScript('PMListPage','ct1','pmobj.DeletePM(1)');
+    }
+	if(index == 2){
+		var mycars=['确定', '取消'];
+		uexWindow.confirm('', '确定要删除所有信息吗?', mycars);		
+    }
+}
+	
+function radioSelect(id){
+	var ret = 0;
+	var e = $$(id);
+	if(e && !e.checked){
+		e.checked = true;
+		ret = 1;
+	}
+	return ret;
+}
+
+function addNewThread(){
+	openwin('fb-theme','');
+}
+</script>
+</html>

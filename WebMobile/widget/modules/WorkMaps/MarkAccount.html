@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script>
+		<link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+		<style>
+			#main{position:absolute;top:0;left:0;width:100%;min-height:100%;overflow:hidden;}
+			#content{-webkit-box-flex:1;box-flex:1;text-align:left;}
+		</style>
+    </head>
+    <body>
+  	<!--	关于页面	 	-->
+    <body class="um-vp c-gra" ontouchstart>
+    	 <div id="main" class="ub ub-ver">
+            <!--header开始-->
+	  		<div id="header" >
+	  			<div id="header_title" class="uh ub bar bar-blue pos-relative" >
+	  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+					<div class="h1 title">拜访签到</div>
+					<div ontouchstart="zy_touch('btn-act');" onclick="openwin('MarkVisitListPage','')" id="BackHomeLabel" class="btn uinn btn-r t-wh">历史</div>
+				</div>
+				<div class="ub ub-f1 uinn c-wh">
+					<input id="accountid" type="hidden"  value="">
+					<div ontouchstart="zy_touch('btn-act');" onclick="openSelectPage('account','../../')" class="btn uinn c-wh ub-f1 uc-a1 t-wh us" style="color: #1C94C4;margin:0 0.5em 0 0">
+					<div class="ufl long_hide" style="max-width:93%"><i class="icon-home"></i>&nbsp;客户:&nbsp;
+						<span id="accountname">请选择...</span>
+					</div>
+					<i class="icon-chevron-sign-right ufr"></i>&nbsp;
+					</div>
+					<!--div onclick="markVisit();" id='visit_btn' class="btn uinn c-wh uc-a1 t-wh ufr us" style="color: #1C94C4;display:none"><i class="icon-tag"></i>&nbsp;签到</div-->
+					<div onclick="markVisit();" id='visit_btn' class="btn uinn c-wh uc-a1 t-wh ufr us" style="color: #1C94C4">
+						<i class="icon-tag"></i>&nbsp;签到
+					</div>
+				</div>
+				
+				<div class="ub c-wh t-bla ulev-1 uinn3">
+					<span id="bill_city" style="display:none"></span>
+					<div >客户地址: </div><div id="address" class="long_hide ub-f1"></div>
+				</div>
+				<!--div class="ub c-wh t-bla ulev-1 uinn3">
+					<input id="lbs_lng" type="text" style="display:none">
+					<input id="lbs_lat" type="text" style="display:none">
+					<div >标记地址: </div><div id="lbs_address" class="long_hide ub-f1"></div>
+				</div-->
+		
+			<div class="uinn7">
+				<div class="t-bla ub  c-wh  uinput  uinn4" >	
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="searchtext_address()">
+				   		<div style="width:1em"></div>
+				   		<div class="res_search1 umw1 ub-img"></div>
+					</div>
+				   <div class="ub-f1 uinn1">
+				   	<input placeholder="搜索" id="searchtext" type="text" style="background:none;" oninput="searchtext_address()">
+					 </div> 
+				   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="">
+				   		<div style="width:1em"></div>
+						<div class="res-clear umw1 ub-img"></div> 
+				   </div>
+				 </div>
+			</div>
+
+			</div>
+	        <div id="content">
+	        	
+	        </div>
+			
+			<div class="ub ub-ver t-wh tx-c" style="position:absolute;z-index:1;left:0;bottom:0;width:100%;background-color:rgba(0,0,0,0.5)">
+				<div class="ub ub-f1" style="margin:0.5em 0.5em 0 0.5em">
+					<input id="new_lng" type="text" style="display:none">
+					<input id="new_lat" type="text" style="display:none">
+					<div >位置: </div>
+					<div class="ub-f1 ub uinn4 long_hide">
+						<div id="new_address" class="" ></div>
+					</div>
+				</div>
+				<div class="ub-f1 ub uinn">
+					<div class="ub-f1">
+						<div ontouchstart="zy_touch('btn-act');" onclick="lbs_to_location();" class="btn uinn c-wh uc-a1 t-wh ufr us" style="color: #1C94C4;"><i class="icon-location-arrow"></i>&nbsp;到我的位置</div>
+					</div>
+					<!--div class="ub-f1">
+						<div ontouchstart="zy_touch('btn-act');" onclick="lbs_to_accountAddress();" class="btn uinn c-wh uc-a1 t-wh ufr us" style="color: #1C94C4;"><i class="icon-location-arrow"></i>&nbsp;到客户地址</div>
+					</div-->
+					<div class="ub-f1">
+						&nbsp;
+					</div>
+					<!--div class="ub-f1">
+						<div ontouchstart="zy_touch('btn-act');" onclick="setTipAccount();" id='tip_btn' class="btn uinn c-wh uc-a1  t-wh ufr us" style="color: #1C94C4;display:none;"><i class="icon-pushpin"></i>&nbsp;标记</div>
+					</div-->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=123694c09683eb102283b4679c07dfd0"></script>
+<script type="text/javascript" src="../../js/module_js/WorkMaps.js"></script>
+<script type="text/javascript" src="../../js/my_bdMap.js"></script>
+<script type="text/javascript" src="../../js/bd_convertor.js"></script>
+<script>
+	var map; 
+	var myMark;
+	var currentAccountid;
+	
+	var maxDistance = 2000;
+	var tt='';
+	
+	function inputtext(){
+		tt='';
+		uexControl.cbInputCompleted=inputcb;
+		uexControl.openInputDialog('0','拜访内容','提交');
+	}
+	
+	function inputcb(opId,dataType,data){
+		tt = data;
+		if(tt == ''){
+			myalert('拜访内容不能为空!');
+			return false;
+		}
+		lbs_to_location();
+		workmap.markVisit();//added by ligangze on 2014-08-20
+	}
+	
+	function addToAccAddress(){
+	  this.defaultAnchor = BMAP_ANCHOR_BOTTOM_RIGHT;
+	  this.defaultOffset = new BMap.Size(10, 50);
+	}
+
+	addToAccAddress.prototype = new BMap.Control();
+	addToAccAddress.prototype.initialize = function(map){
+	  var div = document.createElement("div");
+	  div.appendChild(document.createTextNode("定位到客户地址"));
+	  div.style.cursor = "pointer";
+	  div.style.border = "1px solid gray";
+	  div.style.backgroundColor = "#FF9966";
+	  div.style.color = "#336699";
+	  div.style.padding = "2px";
+	  div.onclick = function(e){
+	  	lbs_to_accountAddress();
+	  }
+	  map.getContainer().appendChild(div);
+	  return div;
+	}
+	
+	//var myZoomCtrl = new ZoomControl();
+	//map.addControl(myZoomCtrl);
+	//var addToAccAddress = new addToAccAddress();
+	//map.addControl(addToAccAddress);
+	
+	var workmap = new WorkMapObj('workMaps');
+	setstorage('theMode','markAccount');
+	
+	function selAccount(accInfo){
+		var accInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+		//alert(accInfo.id);
+		$$('accountid').value = accInfo.id;
+		setHtml('accountname',accInfo.name);
+		setstorage('selInfo','');
+		workmap.getAccountAddressInfo(accInfo.id);
+	}
+	
+	//搜索位置
+	function searchtext_address(){
+		searchAddress($$('searchtext').value);
+	}
+	
+	//定位到客户地址
+	function lbs_to_accountAddress(){
+		$$('searchtext').value = '';
+		if($$('address').innerHTML != ''){
+			searchAddress($$('address').innerHTML);
+		}
+	}
+	
+	function setTipAccount(){
+		if($$('accountid').value == ''){
+			myalert('没有选择客户,不可标记');
+			return false;
+		}
+		if($$('new_address').innerHTML == ''){
+			myalert('请先确定标记位置..');
+			return false;
+		}
+		workmap.markAccount($$('new_lng').value,$$('new_lat').value,$$('new_address').innerHTML,$$('accountid').value);
+		map_overlay_common($$('new_lng').value,$$('new_lat').value,$$('accountname').innerHTML,$$('new_address').innerHTML,true);
+		var point = new BMap.Point(data.lbs_lng,data.lbs_lat);// 创建点坐标
+		map.panTo(point);
+	}
+	
+	function getAddressBypoint_callBack(){
+
+	}
+	
+	//定位到当前位置后回调
+	function lbs_to_location_Callback(){ 
+		if(markFlag){
+			markFlag = false;
+			var mylat = $$('new_lat').value;
+			var mylng = $$('new_lng').value;
+			var acclat = $$('lbs_lat').value;
+			var acclng = $$('lbs_lng').value;
+			var distance = getFlatternDistance(mylat,mylng,acclat,acclng);  //计算距离
+			if(distance > maxDistance){   //给最小值重新赋值
+				myalert('距离超过2000米,不可签到');
+			}else{
+				uexWindow.toast("0","5","在签到范围内可以签到","2000");
+				currentAccountid = $$('accountid').value;
+				workmap.markVisit();  //保存考勤
+			}
+		}
+	}
+	
+	var markFlag = false;
+//	function markVisit(){
+//		if($$('lbs_address').value == ''){
+//			myalert('请先标记客户地址');
+//			return false;
+//		}
+//		markFlag = true;
+//		inputtext();
+//	}
+	
+	function markVisit(){//签到 
+		if($$('accountid').value == ''){
+			myalert('请先选择客户！');
+			return false;
+		}
+		markFlag = true;
+		//lbs_to_location();
+		inputtext();
+	}
+	
+//	function cityChange(){
+//		uexWindow.cbPrompt = function(opId, dataType, data){
+//			var obj = eval('(' + data + ')');
+//			if (obj.num == 1) {
+//				if (obj.value != '') {
+//					search.search(obj.value);
+//					
+//				}
+//			}
+//		}
+//		var mycars = ['取消', '确定'];
+//		var pwd = uexWindow.prompt("","请输入城市", "", mycars);
+//	}
+
+	window.uexOnload = function(type) {
+		if (!type) {
+			initMap();
+			//定位监控相关代码
+			uexLocation.onChange = locationRequestCallBack;
+			var accInfo = getstorage('selInfo');
+			if(accInfo!='')
+			selAccount();
+		}
+		lbs_to_location();
+		//getLocation();
+	}
+</script>
+</html>

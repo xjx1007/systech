@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/BaseModule.js"></script>
+		<script>var jApp = $.noConflict(true); </script>
+		<script type="text/javascript" src="../../js/module_js/SalesFunnel.js"></script>
+		<script type="text/javascript" src="../../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../js/highcharts_js/highcharts.js"></script>
+		<script type="text/javascript" src="../../js/highcharts_js/Funnel.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;" >
+	<div class="ub ub-ver ub-fv">
+		<div id="container1" class="ub-f1 tx-l t-bla uc-a1 uba b-gra umar-a">
+	    </div>
+		<div id="countTotal" class="tx-c" style="height:2em">
+	 	</div>
+	</div>
+	<div class="ub ub-ver ub-fv  umar-b">
+		<div id="container2" class="ub-f1 tx-l t-bla uc-a1 uba b-gra umar-a">
+	    </div>
+		<div id="amountTotal" class="tx-c" style="height:2em">
+	 	</div>
+	 </div> 
+</body>
+<script>
+	zy_init();
+	var sfobj = new SFObj('SalesFunnel');
+	window.uexOnload = function(type){
+		if (!type) {
+			sfobj.GetSalesFunnelFromServer();
+		}
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+	}
+</script>
+</html>

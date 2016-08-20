@@ -1,0 +1,880 @@
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="15"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="9"  class="ListHead" >供应商名称:常州柯羽达塑业有限公司</td><td colspan="6" class="ListHead">对账月份:2016-1</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >发货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center>总额</td>
+<td class="ListHead">备注</td>
+<td class="ListHead" >确认人</td>
+<td class="ListHead" >确认时间</td>
+<td class="ListHead" >确认方法</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150070</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>3960</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2772.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150070</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>2840</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1988.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150069</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>2370</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1659.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150069</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/25</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1400.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150071</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>4000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2800.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>6</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150071</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>4380</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3066.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>7</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150074</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>13070</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>9149.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>8</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150074</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>11922</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>8345.400</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150074</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>-225</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>-157.500</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>10</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150074</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>-391</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>-273.700</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>11</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150074</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>0.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>12</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150074</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>0.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150072</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>2800</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1960.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>14</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150072</td>
+<td align=left class='ListHeadDetails' noWrap>2015/12/31</td>
+<td align=right class='ListHeadDetails' noWrap>2612</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1828.400</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150075</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/11</td>
+<td align=right class='ListHeadDetails' noWrap>5800</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>4060.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>16</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150075</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/11</td>
+<td align=right class='ListHeadDetails' noWrap>3900</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2730.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>17</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150080</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/11</td>
+<td align=right class='ListHeadDetails' noWrap>4153</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2907.100</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>18</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150080</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/11</td>
+<td align=right class='ListHeadDetails' noWrap>4150</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2905.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>19</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150075</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>10220</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>7154.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>20</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150075</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>11420</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>7994.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>21</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150075</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>1250</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>875.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>22</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150075</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>4526</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3168.200</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>23</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150077</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>1880</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1316.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>24</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150077</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>3250</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2275.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>25</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150077</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>7240</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>5068.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>26</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150077</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/13</td>
+<td align=right class='ListHeadDetails' noWrap>2304</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1612.800</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>27</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/15</td>
+<td align=right class='ListHeadDetails' noWrap>8220</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>5754.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>28</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/15</td>
+<td align=right class='ListHeadDetails' noWrap>5550</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3885.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>29</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/15</td>
+<td align=right class='ListHeadDetails' noWrap>710</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>497.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>30</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/15</td>
+<td align=right class='ListHeadDetails' noWrap>5610</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3927.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>31</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/15</td>
+<td align=right class='ListHeadDetails' noWrap>5010</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3507.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>32</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>-96</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>-67.200</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>33</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>-189</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>-132.300</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>34</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>0.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>35</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>0.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>36</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>9170</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>6419.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>37</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>8164</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>5714.800</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>38</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>700.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>39</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>2620</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1834.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>40</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150078</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/18</td>
+<td align=right class='ListHeadDetails' noWrap>4958</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3470.600</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>41</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150088</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/21</td>
+<td align=right class='ListHeadDetails' noWrap>6720</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>4704.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>42</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150088</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/21</td>
+<td align=right class='ListHeadDetails' noWrap>5098</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3568.600</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>43</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>无锡赛特</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD160006</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/21</td>
+<td align=right class='ListHeadDetails' noWrap>5100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3570.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>44</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>无锡赛特</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD160006</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/21</td>
+<td align=right class='ListHeadDetails' noWrap>5078</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3554.600</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>45</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150079</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/25</td>
+<td align=right class='ListHeadDetails' noWrap>6500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>4550.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>46</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150079</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/25</td>
+<td align=right class='ListHeadDetails' noWrap>1410</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>987.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>47</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150079</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/25</td>
+<td align=right class='ListHeadDetails' noWrap>4910</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>3437.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>48</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150079</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/25</td>
+<td align=right class='ListHeadDetails' noWrap>6760</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>4732.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>49</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150089</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/26</td>
+<td align=right class='ListHeadDetails' noWrap>5730</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>4011.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>50</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150089</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/26</td>
+<td align=right class='ListHeadDetails' noWrap>2608</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1825.600</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>51</td>
+<td align=left class='ListHeadDetails' noWrap>下盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆下盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD150089</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/26</td>
+<td align=right class='ListHeadDetails' noWrap>3100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>2170.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>52</td>
+<td align=left class='ListHeadDetails' noWrap>上盖</td>
+<td align=left class='ListHeadDetails' noWrap>BM46B广东模具UV喷漆上盖</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POKYD160003</td>
+<td align=left class='ListHeadDetails' noWrap>2016/1/26</td>
+<td align=right class='ListHeadDetails' noWrap>1850</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.700</td>
+<td align=right class='ListHeadDetails' noWrap>1295.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0203040233</td>
+<td class="ListHeadDetails" align="left">上盖</td><td class="ListHeadDetails" align="left">BM46B广东模具UV喷漆上盖</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">108652</td><td class="ListHeadDetails" align="right">0.700</td><td class="ListHeadDetails" align="right">76056.40</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>11050.93</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0203040234</td>
+<td class="ListHeadDetails" align="left">下盖</td><td class="ListHeadDetails" align="left">BM46B广东模具UV喷漆下盖</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">106370</td><td class="ListHeadDetails" align="right">0.700</td><td class="ListHeadDetails" align="right">74459.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>10818.83</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;215022</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;150515.40</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;21869.76</td>
+ </tr></table>

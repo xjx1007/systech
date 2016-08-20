@@ -1,0 +1,22 @@
+﻿create table Cw_Accounting_Pay
+(
+CAA_ID varchar(50) primary key,
+CAA_DutyPerson varchar(50),
+CAA_CustomerValue varchar(50),
+CAA_Account varchar(50),
+CAA_PayTime DateTime,
+CAA_PayMoney decimal(18,3),
+CAA_Details varchar(500),
+CAA_CTime DateTime,
+CAA_Creator varChar(50),
+CAA_MTime DateTime ,
+CAA_Mender varchar(50)
+)
+create table Cw_Accounting_Pay_Details
+(
+CAY_ID Varchar(50),
+CAY_CAAID varchar(50),
+CAY_CAPID varchar(50),
+CAY_PayMoney decimal(18,3),
+CAY_Order int default 1
+)

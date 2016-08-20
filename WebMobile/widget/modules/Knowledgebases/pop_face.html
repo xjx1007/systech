@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../../css/ui-btn.css">
+    <link rel="stylesheet" href="../../css/ui-res.css">
+    <link rel="stylesheet" href="../../css/ui-base.css">
+    <link rel="stylesheet" href="../../css/ui-box.css">
+	<link rel="stylesheet" href="../../css/ui-tab.css">
+    <script src="../../js/zy_control.js"></script>
+    <script src="../../js/zy_click.js"></script>
+	<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+	<style>
+	.tab2{
+		height:1.75em; padding:0.2em 0.1em
+	}
+	</style>
+  </head>
+<body class="um-vp" >
+	<div class="ub ub-ver ub-fv">
+		<div class="ub-f1" ontouchstart="zy_touch('')" onclick="closepop();"></div>
+		<div id="faces">
+			<div class="ub tab2">
+				<div class="ub-f1 ub ub-ver tab-act">
+					<div class="ub-f1 ub-img5" style="background-image:url('../../images/forum/1.gif');"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+//var params = getStorJson('params');
+//var type = params.type;
+initshowface();
+var sml = getstorage('simulate');
+
+window.uexOnload=function(type)
+{
+	if(!sml) movepop(2);
+}
+function closepop(){
+	if(!sml) movepop();
+	else uexWindow.evaluateScript('fb-theme', '0', 'closeFace();');
+}
+
+/*插入表情*/
+function initshowface() {
+	var i;
+	var str = '';
+	var n = 24;
+	var folder = 'forum';
+
+	var div1 = '<div class="ub tab2">';
+	var div2 = '</div>';
+	for (i = 1; i < (n+1); i++) {
+		var ss = '<div class="ub-f1 ub ub-ver tab-act" ontouchstart="zy_touch();" onclick="insertface('+i+');">'
+					+'<div class="ub-f1 ub-img5" style="background-image:url(../../images/'+ folder + '/' + i + '.gif);"></div>'
+				+'</div>';
+		var res = i % 6;
+		if(res==0) str += ss + div2;
+		else if(res==1) str += div1 +ss;
+		else str += ss;
+	}
+	setHtml('faces', str);
+}
+
+var iface = 1;
+function movepop(i){
+	var dy = '1500';
+	if(iface) dy = '-1500';
+
+	disShowAnim('0', dy);
+	iface = !iface;
+}
+
+function disShowAnim(dx, dy){
+	uexWindow.beginAnimition();
+	uexWindow.setAnimitionDuration('250');
+	uexWindow.setAnimitionRepeatCount('0');
+	uexWindow.setAnimitionAutoReverse('0');
+	uexWindow.makeTranslation(dx,dy,'0');
+	uexWindow.commitAnimition();
+}
+
+function insertface(i){
+	uexWindow.evaluatePopoverScript('fb-theme', 'fbthemec', 'insertface('+i+');')
+}
+</script>
+</html>

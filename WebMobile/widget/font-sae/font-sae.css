@@ -1,0 +1,159 @@
+@font-face {
+	font-family: 'wlige';
+	src:url('fonts/wlige.eot');
+	src:url('fonts/wlige.eot?#iefix') format('embedded-opentype'),
+		url('fonts/wlige.woff') format('woff'),
+		url('fonts/wlige.ttf') format('truetype'),
+		url('fonts/wlige.svg#wlige') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+}
+@font-face {
+	font-family: 'icomoon';
+	src: url(data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAARAAAsAAAAABgwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAABCAAAASgAAAFJECD8l0ZGVE0AAAIwAAAAGgAAABxoK5ZaR0RFRgAAAkwAAAAdAAAAIAAwAARPUy8yAAACbAAAAEsAAABgL9zcQGNtYXAAAAK4AAAAOgAAAVLgEvLNaGVhZAAAAvQAAAAuAAAANv0NNEdoaGVhAAADJAAAAB4AAAAkBBD/5GhtdHgAAANEAAAADAAAAAwEAAAgbWF4cAAAA1AAAAAGAAAABgADUABuYW1lAAADWAAAANsAAAGDdFTJ83Bvc3QAAAQ0AAAADAAAACAAAwAAeJw9jbFLQlEYxb/ru/ku8nimaBQ8bY4KhKQxaMilMbegpRDE0sVaGnIINL71LfrmpgcNDQXRfxBB0Ci1ufQgaNELCqf7oprOjwPndwRJSUIIVT9snbRaTRIJErSlCwldtPSiZMdiRxZTtLSXBfM/ODY3tK/bcx5dpD2ieY8uMx4pT2xnScYORWlaoMJps14plUomdkz8vvydEYmu6JElhOXcj13dljNf+7Y71keTaj7kINpntZqMJmXgoUMhMOoQM3BzVwF6ZxK4PlZA92oGDN9u1dS3Qb2DTeDrdQN4aT8C72vPoO66yyGHAYfGOjw3DMp1KDIzY1QzOcyHwW4S+KzVzLg/AD5iGvUHy9Oq/QMgN67injL9QfEpaCRdzumVPDupb/qOj1h4nGNgYGBkAIIztovOg+iz334ehdEAW3EJfgAAeJxjYGRgYOADYgkGEGBiYARCEMkC5jEAAARgADUAAAB4nGNgZmJgnMDAysDB6MOYxsDA4A6lvzJIMrQwMDAxsDIzwIEAgskQkOaawuDwgOEDA+OD/w8Y9BgfMCg0MDAwwhUoACEjABBCDB8AeJxjYGBgZoBgGQZGBhDwAfIYwXwWBgMgzQGETCCJBwwfGP7/R2YpMAkwQnWBASMbAzJ3RAIAyV4IrgAAeJxjYGRgYADi0OazZvH8Nl8ZuJkYQODst59HEfT/B0wMjA+AXA4GsDQAaLUNWAAAeJxjYGRgYHzw/wGDHhMDA8M/BiAJFEEBzABt5wP2AAACAAAAAAAAAAIAACAAAFAAAAMAAHicdY5BagJBEEXf6GgQQ3AVsmxcZTPD9GQhuBYPkIV7kWYYUBtazVECHsFljpED5Ai5R75jbbKwoehXv3/Vb+CRTzKuJ+OBiXFP/GrcZ8qHcS79YjxgzLfxUPqvnFk+kvLUTV25J34x7rOgMs6ln40HPPNlPJT+Q8uGyE4V2UO7ibsYBe8EGk5sWZPUhua0XQuWne/Y3UmOgKOmVJpjrvq/76Z5CmaqWi7Pm5bE/XEZUxNcXVZu7ixV5ItZUVdennsfWykycdD7LcB34axCOrRa4cvq7uwfXkc5WgB4nGNgZsALAAB9AAQ=) format('woff'),
+		 url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAANAIAAAwBQRkZUTWgrlloAAAWoAAAAHEdERUYAMgAGAAAFiAAAACBPUy8yL7rcHwAAAVgAAABWY21hcOAU89QAAAHEAAABUmdhc3D//wADAAAFgAAAAAhnbHlm7JgRLAAAAyQAAACcaGVhZP0NNEcAAADcAAAANmhoZWEEEP/mAAABFAAAACRobXR4BKoAIAAAAbAAAAAUbG9jYQAOAE4AAAMYAAAADG1heHAASQAuAAABOAAAACBuYW1ldFTJ8wAAA8AAAAGDcG9zdJtVPjcAAAVEAAAAPAABAAAAAQAAu44KSV8PPPUACwIAAAAAAM32+cUAAAAAzfb5xQAA/+ACAAHgAAAACAACAAAAAAAAAAEAAAHg/+AALgIAAAD+AAIAAAEAAAAAAAAAAAAAAAAAAAAFAAEAAAAFACsAAgAAAAAAAgAAAAEAAQAAAEAAAAAAAAAAAQIAAZAABQAIAUwBZgAAAEcBTAFmAAAA9QAZAIQAAAIABQMAAAAAAAAAAAAAEAAAAAAAAAAAAAAAUGZFZABA4ADwAAHg/+AALgHgACCAAAABAAAAAAAAAgAAAAAAAAAAqgAAAAAAAAIAACAAAAADAAAAAwAAABwAAQAAAAAATAADAAEAAAAcAAQAMAAAAAgACAACAAAAAOAA8AD//wAAAADgAPAA//8AACAEEAMAAQAAAAAAAAAAAAABBgAAAQAAAAAAAAABAgAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgBOAAEAAP/gAgAB4AACAAARASECAP4AAeD+AAAAAAACACD/4AHsAeAAHAAqAAAlMhYGIxYOASMUBiMiJicRPgE1Mh4CBgczMhYGJREzFSMiJj0BNDY7ARUB0BEEFg8GARYPJhpHWj9ekgoUEgMYG2AWDBL+gCBADRMTDUDAMDADJCkXGSkHAQAceTsJGihILTAwUP8AEBwUwBQcEAAAAAAADACWAAEAAAAAAAEABwAQAAEAAAAAAAIABwAoAAEAAAAAAAMAIgB2AAEAAAAAAAQABwCpAAEAAAAAAAUACwDJAAEAAAAAAAYABwDlAAMAAQQJAAEADgAAAAMAAQQJAAIADgAYAAMAAQQJAAMARAAwAAMAAQQJAAQADgCZAAMAAQQJAAUAFgCxAAMAAQQJAAYADgDVAGkAYwBvAG0AbwBvAG4AAGljb21vb24AAFIAZQBnAHUAbABhAHIAAFJlZ3VsYXIAAEYAbwBuAHQARgBvAHIAZwBlACAAMgAuADAAIAA6ACAAaQBjAG8AbQBvAG8AbgAgADoAIAAxAC0ANwAtADIAMAAxADMAAEZvbnRGb3JnZSAyLjAgOiBpY29tb29uIDogMS03LTIwMTMAAGkAYwBvAG0AbwBvAG4AAGljb21vb24AAFYAZQByAHMAaQBvAG4AIAAxAC4AMAAAVmVyc2lvbiAxLjAAAGkAYwBvAG0AbwBvAG4AAGljb21vb24AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAABAAIBAgEDB3VuaUYwMDAHdW5pRTAwMAAAAAH//wACAAEAAAAOAAAAGAAAAAAAAgABAAMABAABAAQAAAACAAAAAAABAAAAAMw9os8AAAAAzfb5xQAAAADN9vnF) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'wlige';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-weibo, .icon-douban, .icon-renren, .icon-wechat, .icon-qq, .icon-pengyou, .icon-kaixin, .icon-baidu, .icon-qq-weibo, .icon-qzone {
+	font-family: 'wlige';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-weibo:before {
+	content: "\21";
+}
+.icon-douban:before {
+	content: "\22";
+}
+.icon-renren:before {
+	content: "\23";
+}
+.icon-wechat:before {
+	content: "\24";
+}
+.icon-qq:before {
+	content: "\25";
+}
+.icon-pengyou:before {
+	content: "\26";
+}
+.icon-kaixin:before {
+	content: "\27";
+}
+.icon-baidu:before {
+	content: "\28";
+}
+.icon-qq-weibo:before {
+	content: "\29";
+}
+.icon-qzone:before {
+	content: "\2a";
+}
+
+.icon-thumbs-up {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-thumbs-up:before {
+	content: "\e000";
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.woff') format('woff'),
+		url('fonts/icomoon.ttf') format('truetype'),
+		url('fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-chart, .icon-database, .icon-coin, .icon-notebook, .icon-quill, .icon-layers, .icon-busy, .icon-remove {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-chart:before {
+	content: "\e000";
+}
+.icon-database:before {
+	content: "\e001";
+}
+.icon-coin:before {
+	content: "\e003";
+}
+.icon-notebook:before {
+	content: "\e002";
+}
+.icon-quill:before {
+	content: "\e004";
+}
+.icon-layers:before {
+	content: "\e005";
+}
+.icon-busy:before {
+	content: "\e006";
+}
+.icon-remove:before {
+	content: "\e007";
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/PopupPM.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body class="um-vp c-gra4" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+		<!--header开始-->
+		<div id="header" class="uh">
+			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title">发送短消息</div>
+				<button class="button button-icon icon ion-paper-airplane t-wh" onclick="sendPM();"></button>
+			</div>
+		</div>
+		<!--header结束--><!--content开始-->
+		<div id="content" class="ub-f1 tx-l t-bla ub-img6 c-gra4 umar-t" >
+			<div class="umar-a uc-a1 uba b-gra c-wh">
+			<div class="ub t-bla ulab ubb b-gra uinn">  
+				<div class="uinn ulim t-gra1">接收人</div> 
+				<div class="ub-f1 uinn" id="recevier_name" ></div>
+				<div class="uinn ulim"  ontouchstart="zy_touch('btn-act')" onclick="openSelectUserPage();" ><div class="umw2 ub ub-pc uc-r ub-ac uc-r1"><div class="ub-img umw1 umh1 res8"></div></div></div> 
+			</div>
+			<div class="ub t-bla ulab uinn"> 
+				<div class="uinn ulim t-gra1">内　容</div>
+				<div class="ub-f1 c-wh uba uc-a1 b-gra uinput uinn4 ub ub-ver">  
+					<textarea placeholder="请输入内容"  name="area1" class="uc-a1 ub-f1" style="min-height:8em;" id="text"></textarea> 
+				</div>
+			</div>
+			</div>
+		</div>
+		<!--content结束-->
+    </div>
+</body>
+<script>
+zy_init();
+function sendPM(){
+	pmobj.SendPM();
+}
+
+var pmobj = new PMObj('mobilePM');
+var receiverArr = [];
+var userArr = [];
+var receiverid = [];
+var i = 0;
+
+function openSelectUserPage(){
+	openwin('userlist','../',10,0);
+}
+
+//添加共享人
+function addReceiver(userInfo){
+	var userInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+	if (isDefine(userInfo.id) && !receiverid.in_array(userInfo.id)) {  //如果客户没有在关联列表
+		receiverid.push(userInfo.id);
+		var forumObj = $$('recevier_name').innerHTML;
+		forumObj += '<a onclick="openpop_user(\'' + userInfo.id + '\');return false;" id="user_'+userInfo.id+'" href="">【' + userInfo.user_name + '】</a>';
+		setHtml('recevier_name', forumObj);
+	}
+}; 
+
+//共享人pop
+function openpop_user(id){
+	uexWindow.cbActionSheet = function(opId, dataType, data){
+		if (data == "0") {
+			removeNode('user_'+id);
+			for (var k in receiverid) {
+				if (receiverid[k] == id) {
+					receiverid.splice(k, 1);
+					break;
+				}
+			}
+		}
+	}
+	var value = ["删除"];
+	uexWindow.actionSheet('', '取消', value);
+}
+/*function addReceiver(userlist){ //添加接收人(实例方法)
+	var recipient = $$("recipient").value;
+	//var userlist = $$("userlist").value;
+	if(userlist != "") {
+		receiverArr = recipient.split(",");
+		if(!receiverArr.in_array(userlist)) {
+			if(recipient == ''){
+				$$("recipient").value = recipient + userlist;
+			}else{
+				$$("recipient").value = recipient + "," + userlist;
+			}
+		} 
+		if(!userArr.in_array(userlist)) {
+			userArr[i++] = userlist;
+		} 
+	} 
+}; */
+
+window.uexOnload = function(type){
+	if (!type) {
+		setstorage('theMode','sendNewPM');
+       // zy_con("content", "SendNewPM_content.html", 0, $$("header").offsetHeight);
+    }
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("content",0,$$("header").offsetHeight);				
+	}
+}
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Gathers.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	应收款页面	 	-->
+    <div id="GathersListPage" class="up ub ub-ver" tabindex="0">
+  		<div id="header" class="uh" >
+  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+				<div class="ub-f1 ut ub ub-ver ulev1 ub-ac tx-c tx_bold uinn " style="margin-left:2.2em;">
+					<div class="btn b-gra ub ub-f1 sel" >
+					  <div class="ub-f1 tx-c" id="GathersListPageTitle">30天内及过期应收款</div>
+					  <div class="umh1 umw1" style="left:0.2em;color:#B7B8B8"><i class="icon ion-arrow-down-b t-wh"></i></div>
+						<select name="sel0" selectedindex="0" id="searchtext" onchange="zy_selectmenu(this.id);changeSectionSel();">
+							<option value=1>30天内及过期应收款</option>
+							<option value=2>本月已收应收款</option>
+							<option value=3>上月已收应收款</option>
+						</select>
+					</div>
+				</div> 
+			</div>
+			<div class="c-gra4 t-bla uinn us" id="headers">
+				<div class="c-wh uinn ulev-1 ub uc-a1 uba b-gra">
+					<span id='patotal_label'></span>:    <span id='patotal' class="t-blu"></span>
+				</div>
+			</div>
+		</div>
+		<div id="content" class="ub-fh ub-f1 ub c-gra4">
+            
+    	</div>
+		<div id="footer" class="uf c-m2 c-bla t-wh">
+		</div>
+		 
+	</div>
+</body>
+<script>
+zy_init();
+
+//更新总计值
+function setpatotal(patotal){
+	setHtml("patotal", patotal);
+}
+
+function getPageNewInfo(){
+	uexWindow.evaluatePopoverScript("GathersListPage", "content", "gatobj.GetListFromServer()");
+}
+
+//修改查询条件
+function changeSectionSel(){
+	setHtml("GathersListPageTitle", $$('GathersListPageTitle').innerHTML);
+	searchList();
+} 
+
+gatherslistpageonload();
+window.uexOnload = function(type){
+	if (!type) {
+		setstorage('currPage', 1);
+		setstorage('searchtext', 1);
+		setstorage('theMainWindow', 'GathersListPage');
+		setNavDiv();
+		var s = window.getComputedStyle($$('header'), null);
+		var em = int(s.fontSize);
+		var x = 0;
+		var y = int($$("header").offsetHeight);
+		var w = int(s.width);
+		var h = int(window.innerHeight) - int($$("header").offsetHeight)-int(2.2*em);
+		uexWindow.openPopover('content', "0", 'GathersListPageContent.html', "", x, y, w, h, em, "0");
+	}
+	window.onorientationchange=window.onresize=orientationChange_havNav;
+}
+</script>
+</html>

@@ -1,0 +1,133 @@
+﻿
+Create TRIGGER [dbo].[triKnet_Procure_OrdersListLog]   
+ON  dbo.Knet_Procure_OrdersList 
+AFTER DELETE,UPDATE   
+AS    BEGIN   SET NOCOUNT ON;  --设置增加触发器的表
+
+declare @table varchar(100)  
+set @table='Knet_Procure_OrdersList' --需要设置表名 --如果日志表不存在则生成日志表
+
+if object_id('Logs_'+@table) is null     
+begin    --生成日志表  
+exec ('select * into Logs_'+@table+' from '+@table+' where 1<>1')   --增加日志字段  
+exec ('alter table Logs_'+@table+' add LogId int IDENTITY (1,1) NOT NULL primary key')    
+exec ('alter table Logs_'+@table+' add LogType varchar(50)')    
+exec ('alter table Logs_'+@table+' add LogDate datetime')   
+end --记录日志
+
+select * into #deleted from deleted --修改记录转为为临时表  
+declare @logType varchar(50),
+@columns varchar(4000),@sql varchar(4000) --获取操作类型
+
+set @logType='''delete'''  
+select @logType='''update''' from inserted --组合执行语句
+
+select @columns=isnull(@columns+',','')+name
+from syscolumns where id =object_id(@table)   
+set @sql='insert into dbo.Logs_'+@table+'(LogDate,LogType,'+@columns+') 
+select getdate(),'+@logType+','+@columns+' from #deleted'  
+exec(@sql)   
+SET NOCOUNT OFF;    
+END 
+
+    update Knet_Procure_OrdersList
+    set KPO_Del=1
+    where OrderNo in(
+    select OrderNo from Knet_Procure_OrdersList a
+   join v_OrderRK b on a.OrderNO=b.V_OrderNo 
+    where KPO_RkState='1' and rkState<>'1'
+    and orderDateTime<'2014-01-01 00:00:00.000')
+    
+
+	产品bom表更新
+insert into Xs_Products_Prodocts_Demo
+select dbo.GetID(),b.XPD_ProductsBarCode,a.XPD_SuppNo,a.XPD_Price,a.XPD_Number,
+a.XPD_FaterBarCode,b.XPD_IsOrder,b.XPD_Address,b.XPD_ReplaceProductsBarCode,b.XPD_Order,b.XPD_Only
+ from Xs_Products_Prodocts_Demo a join 
+Xs_Products_Prodocts_Demo b on a.XPD_ProductsBarCode=b.XPD_FaterBarCode
+where a.XPD_ProductsBarCode='D1308011318007178'
+
+alter table Cw_Accounting_Pay add CAP_Type int default 0
+update Cw_Accounting_Pay set CAP_Type=0
+
+
+use KNET_System
+go
+delete from Pb_Basic_Notice
+go
+delete from KNet_Sales_ClientList
+go
+delete from CG_Account_Bill
+go
+delete from CG_Account_Bill_Details
+go
+delete from CG_ApplicationPayment_For
+go
+delete from Cg_Order_Checklist
+go
+delete from Cg_Order_Checklist_Details
+go
+delete from CG_Payment_For
+go
+delete from Cw_Account_Bill
+go
+delete from Cw_Account_Bill_Details
+go
+delete from Cw_Account_Bill_Outimes
+go
+delete from Cw_Accounting_Init
+go
+delete from Cw_Accounting_Init_Details
+go
+delete from Cw_Accounting_Pay
+go
+delete from Cw_Accounting_Pay_Details
+go
+delete from Cw_Accounting_PaymentDetails
+go
+delete from Cw_Bill_Details
+go
+delete from Cw_Bill_DirectOut_PayDetails
+go
+delete from Cw_Material_MoneyChange
+go
+delete from Init_ContractList
+go
+delete from KNet_ContractDate
+
+
+go
+delete from Knet_Procure_OrdersList
+
+go
+delete from Knet_Procure_OrdersList_Details
+
+go
+delete from Knet_Procure_Suppliers
+go
+delete from Knet_Procure_SuppliersPrice
+go
+delete from Knet_Procure_WareHouseList
+go
+delete from Knet_Procure_WareHouseList_Details
+go
+delete from KNet_Sales_ClientList
+go
+delete from KNet_Sales_ContractList_Details
+go
+delete from KNet_Sales_Flow
+
+go
+delete from KNet_Sales_OutWareList
+go
+delete from KNet_Sales_OutWareList_Details
+
+
+go
+delete from KNet_Sales_ReturnList
+go
+delete from KNet_Sales_ReturnList_Details
+go
+delete from KNet_Sys_Products
+go
+delete from KNet_Sys_ProductsDemo

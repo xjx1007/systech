@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="dist/css/ionic1.css">
+		<link rel="stylesheet" href="css/ui-input.css">
+		<link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/my-color.css">
+		<link rel="stylesheet" href="css/ui-res.css">
+		<link rel="stylesheet" href="css/ui-btn.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <script src="js/zy_control.js"></script>
+		<script src="js/zy_anim.js"></script>
+		<script src="js/zy_json.js"></script>
+        <script src="js/zy_click.js"></script>
+		<script type="text/javascript" src="js/LanguageResources.js"></script>
+		<script type="text/javascript" src="js/Application.js"></script>  
+        <link rel="stylesheet" href="css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body>
+  	<!--	关于页面	 	-->
+    <body class="um-vp" ontouchstart>
+    	<div id="page_0" class="up ub ub-ver" tabindex="0">
+    	<div id="header" class="uh bar bar-header bar-blue">
+    		<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    <div class="h1 title" id="ViewAboutApplicationPageTitle">关于</div>
+		</div>
+        <div id="content" class="uinn ub-f1 c-gra4">
+        	<div class="res_logo ub-img" style="height:2.8em"></div>
+			<br>
+        	<!--块容器开始-->
+            <div class="aboutArea uba b-gra">
+            	<!--username-->
+                <div class="b-gra uinn uc-t">
+                    <!--文本开始-->
+                    <div class="ub t-bla ulab ub-ac">
+                        <div class="ub-f1">
+                        	&nbsp;&nbsp;&nbsp;<span id="comp_introduce"></span>
+                        </div>
+                    </div><!--文本结束-->
+                </div>
+        	</div>
+			<br>
+        	<!--块容器开始-->
+            <div class="aboutArea uba b-gra">
+            	<!--username-->
+                <div class="ubb b-gra uinn uc-t">
+                    <!--文本开始-->
+                    <div class="ub t-bla ulab ub-ac">
+                        <div class="inlab t-gra1" >版本</div>
+                        <div class="ub-f1 ilogin uinn4">
+                            <span id="appVersion"></span>
+                        </div>
+                    </div><!--文本结束-->
+                </div>
+				<!--password-->
+                <div class="ubb b-gra uinn uc-t">
+                    <!--文本开始-->
+                    <div class="ub t-bla ulab ub-ac">
+                    	<div class="inlab t-gra1">网址</div>
+                        <div class="ub-f1 ilogin uinn4">
+                            <a id="companyWebsite" class="t-bla" onclick="openwebsite($$('companyWebsite').innerHTML);return false;" href=""></a>
+                        </div>
+                    </div><!--文本结束-->
+                </div>
+				<!--ServerAddress-->
+				<div class="uinn uc-b ">
+                    <!--文本开始-->
+                    <div class="ub t-bla ulab ub-ac">
+                        <div class="inlab t-gra1">电话</div>
+                        <div class="ub-f1 ilogin uinn4">
+                            <a id="companyPhone" class="t-bla" onclick="phonedial($$('companyPhone').innerHTML);return false;" href=""></a>
+                        </div>
+                    </div><!--文本结束-->
+                </div>
+            </div>
+			<!--块容器结束-->
+        </div>
+	</div>
+	</div>
+</body>
+<script>
+	zy_init();
+	aboutpageonload();
+</script>
+</html>

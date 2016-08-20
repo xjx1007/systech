@@ -1,0 +1,108 @@
+﻿use KNET_System
+go
+delete from Pb_Basic_Notice
+go
+delete from KNet_Sales_ClientList
+go
+delete from CG_Account_Bill
+go
+delete from CG_Account_Bill_Details
+go
+delete from CG_ApplicationPayment_For
+go
+delete from Cg_Order_Checklist
+go
+delete from Cg_Order_Checklist_Details
+go
+delete from CG_Payment_For
+go
+delete from Cw_Account_Bill
+go
+delete from Cw_Account_Bill_Details
+go
+delete from Cw_Account_Bill_Outimes
+go
+delete from Cw_Accounting_Init
+go
+delete from Cw_Accounting_Init_Details
+go
+delete from Cw_Accounting_Pay
+go
+delete from Cw_Accounting_Pay_Details
+go
+delete from Cw_Accounting_PaymentDetails
+go
+delete from Cw_Bill_Details
+go
+delete from Cw_Bill_DirectOut_PayDetails
+go
+delete from Cw_Material_MoneyChange
+go
+delete from Init_ContractList
+go
+delete from KNet_ContractDate
+
+
+go
+delete from Knet_Procure_OrdersList
+
+go
+delete from Knet_Procure_OrdersList_Details
+
+go
+delete from Knet_Procure_Suppliers
+go
+delete from Knet_Procure_SuppliersPrice
+go
+delete from Knet_Procure_WareHouseList
+go
+delete from Knet_Procure_WareHouseList_Details
+go
+delete from KNet_Sales_ClientList
+go
+delete from KNet_Sales_ContractList_Details
+go
+delete from KNet_Sales_Flow
+
+go
+delete from KNet_Sales_OutWareList
+go
+delete from KNet_Sales_OutWareList_Details
+
+
+go
+delete from KNet_Sales_ReturnList
+go
+delete from KNet_Sales_ReturnList_Details
+go
+delete from KNet_Sys_Products
+go
+delete from KNet_Sys_ProductsDemo
+go
+delete from XS_Compy_LinkMan
+go
+delete from Xs_Contract_FhDetails
+go
+delete
+from Xs_Contract_Manage
+go
+delete
+from Xs_Contract_Manage_Details
+go 
+delete from Xs_Contract_ViewPerson
+go
+delete from Xs_Customer_Cares
+go
+delete from Xs_Customer_FhInfo
+go
+delete from Xs_Customer_Products
+go
+delete from Xs_Products_Prodocts
+go
+delete from Xs_Products_Prodocts_Demo
+go
+delete from Xs_Sales_Content
+go
+delete from Xs_Sales_Opp
+go
+delete from PB_Basic_Document

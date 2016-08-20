@@ -1,0 +1,294 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="15"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="9"  class="ListHead" >供应商名称:安徽华宇电子科技有限公司</td><td colspan="6" class="ListHead">对账月份:2016-6</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >发货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center>总额</td>
+<td class="ListHead">备注</td>
+<td class="ListHead" >确认人</td>
+<td class="ListHead" >确认时间</td>
+<td class="ListHead" >确认方法</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7806-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160138</td>
+<td align=left class='ListHeadDetails' noWrap>2016/5/26</td>
+<td align=right class='ListHeadDetails' noWrap>20200</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>9090.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160134</td>
+<td align=left class='ListHeadDetails' noWrap>2016/5/30</td>
+<td align=right class='ListHeadDetails' noWrap>5700</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>2565.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160134</td>
+<td align=left class='ListHeadDetails' noWrap>2016/5/30</td>
+<td align=right class='ListHeadDetails' noWrap>300</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>135.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7831-00丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160152</td>
+<td align=left class='ListHeadDetails' noWrap>2016/5/31</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>1363.500</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7829-00丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160146</td>
+<td align=left class='ListHeadDetails' noWrap>2016/5/31</td>
+<td align=right class='ListHeadDetails' noWrap>4042</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>1818.900</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>6</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7820-02丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160154</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/6</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.300</td>
+<td align=right class='ListHeadDetails' noWrap>909.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>7</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7820-02丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160158</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/6</td>
+<td align=right class='ListHeadDetails' noWrap>2020</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.300</td>
+<td align=right class='ListHeadDetails' noWrap>606.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>8</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7807-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>镇江赛其</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160145</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/6</td>
+<td align=right class='ListHeadDetails' noWrap>-851</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.500</td>
+<td align=right class='ListHeadDetails' noWrap>-425.500</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7830-00丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160156</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/12</td>
+<td align=right class='ListHeadDetails' noWrap>2020</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.350</td>
+<td align=right class='ListHeadDetails' noWrap>707.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>10</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160142</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/12</td>
+<td align=right class='ListHeadDetails' noWrap>3520</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>1584.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>11</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160140</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/12</td>
+<td align=right class='ListHeadDetails' noWrap>3030</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>1363.500</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>12</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160132</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/12</td>
+<td align=right class='ListHeadDetails' noWrap>10100</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>4545.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160142</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/14</td>
+<td align=right class='ListHeadDetails' noWrap>6801</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>3060.450</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>14</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7816-00丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>安徽华宇</td>
+<td align=left class='ListHeadDetails' noWrap>POHY150080</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/14</td>
+<td align=right class='ListHeadDetails' noWrap>375</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.550</td>
+<td align=right class='ListHeadDetails' noWrap>206.250</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>塑壳</td>
+<td align=left class='ListHeadDetails' noWrap>MRC-7803-01丝印加工</td>
+<td align=left class='ListHeadDetails' noWrap>镇江赛其</td>
+<td align=left class='ListHeadDetails' noWrap>POHY160164</td>
+<td align=left class='ListHeadDetails' noWrap>2016/6/17</td>
+<td align=right class='ListHeadDetails' noWrap>2150</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.450</td>
+<td align=right class='ListHeadDetails' noWrap>967.500</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0203040196</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7806-01丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">20200</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">9090.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1320.77</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0203040205</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7816-00丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">375</td><td class="ListHeadDetails" align="right">0.550</td><td class="ListHeadDetails" align="right">206.25</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>29.97</td></tr><tr ><td class="ListHeadDetails" align="left" >3</td><td class='ListHeadDetails'align=center >0203040219</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7803-01丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">31601</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">14220.45</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>2066.22</td></tr><tr ><td class="ListHeadDetails" align="left" >4</td><td class='ListHeadDetails'align=center >0203040247</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7807-01丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">-851</td><td class="ListHeadDetails" align="right">0.500</td><td class="ListHeadDetails" align="right">-425.50</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>-61.82</td></tr><tr ><td class="ListHeadDetails" align="left" >5</td><td class='ListHeadDetails'align=center >0203040274</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7829-00丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">4042</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">1818.90</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>264.28</td></tr><tr ><td class="ListHeadDetails" align="left" >6</td><td class='ListHeadDetails'align=center >0203040275</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7820-02丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">5050</td><td class="ListHeadDetails" align="right">0.300</td><td class="ListHeadDetails" align="right">1515.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>220.13</td></tr><tr ><td class="ListHeadDetails" align="left" >7</td><td class='ListHeadDetails'align=center >0203040276</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7830-00丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">2020</td><td class="ListHeadDetails" align="right">0.350</td><td class="ListHeadDetails" align="right">707.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>102.73</td></tr><tr ><td class="ListHeadDetails" align="left" >8</td><td class='ListHeadDetails'align=center >0203040277</td>
+<td class="ListHeadDetails" align="left">塑壳</td><td class="ListHeadDetails" align="left">MRC-7831-00丝印加工</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">3030</td><td class="ListHeadDetails" align="right">0.450</td><td class="ListHeadDetails" align="right">1363.50</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>198.12</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;65467</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;28495.60</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;4140.40</td>
+ </tr></table>

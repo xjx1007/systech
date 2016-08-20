@@ -1,0 +1,320 @@
+.res1{
+	background-image: url(images/icons-18-white_13.png)!important;
+}
+.res2
+{
+	background-image:url('images/t-arrow.png');
+}
+
+.res3
+{
+	background-image:url('images/b-arrow.png');
+}
+.res4
+{
+	background-image:url('images/add-icon.png')!important;
+}
+.res5 {
+	background-image: url(images/del.png);
+}
+.res6{
+	background-image: url(images/icon-search-black.png);
+}
+.res7 {
+	background-image: url(images/refresh.png);
+}
+.res8{
+	background-image: url('images/arrow.png');
+}
+
+.res9
+{
+	background-image: url('images/selected.png');
+}
+
+.res10
+{
+	background-image:url('img/appcan.png')!important;
+}
+.res_search1{
+	background-image:url('images/new-search.png');
+}
+.res-clear{
+	background-image:url('images/new-clear.png');
+}
+
+.res_homebj3
+{
+	background-image: url('images/homebg.png');
+}
+.res_menuhome{
+	background-image:url('images/home.png');
+}
+.res_userpho
+{
+	background-image: url('images/image-2.jpg');
+}
+
+.res_logo
+{
+	background-image: url('images/logonew.png')!important;
+}
+
+.res_ibg{
+	background-image: url(images/bg.jpg)!important;
+}
+
+.res_cata{
+	background-image: url(res-apple/bottom_img.png)!important;
+}
+
+.res_back{
+	background-image: url(res-apple/back.png)!important;
+}
+
+.res_menu{
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE1JREFUeNpi/P//PwOtARMDHQBdLGFBYt+nkR2KjEhxQqvIYaR7cD2glSWMo0mY3DiJo5Edi4ZPEqZ7nMSP5pPRon60qB9NwpQDgAADAMIxHUJvWs/TAAAAAElFTkSuQmCC);
+}
+
+.res_rat{
+	background-image: url(images/rating.png)!important;
+}
+
+.res_rat2{
+	background-image: url(images/rating2.png)!important;
+}
+
+.selectIcon {
+    background-image:url(/images/tick-cross.png');
+    background-repeat: no-repeat;
+    background-position: -2px 0px;
+    height:8px;
+    width:8px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.res_homebj
+{
+	background-image: url('images/beijing.png');
+}
+
+.res_homebj2
+{
+	background-image: url('images/beijing2.png');
+}
+
+
+.res_homebj4
+{
+	background-image: url('images/beijing4.jpg');
+}
+
+.res_backbg
+{
+	background-image: url('images/title_back.png');
+}
+
+.res_newCreate
+{
+	background-image: url('images/more.png');
+}
+
+.res_search
+{
+	background-image: url('images/search.png');
+}
+
+.res_module1
+{
+	background-image: url('module_img/module_1.png');
+}
+
+.res_module2
+{
+	background-image: url('module_img/module_2.png');
+}
+
+.res_module3
+{
+	background-image: url('module_img/module_3.png');
+}
+
+.res_module4
+{
+	background-image: url('module_img/module_4.png');
+}
+
+.res_module5
+{
+	background-image: url('module_img/module_5.png');
+}
+
+.res_module6
+{
+	background-image: url('module_img/module_6.png');
+}
+
+.res_module7
+{
+	background-image: url('module_img/module_7.png');
+}
+
+.res_module8
+{
+	background-image: url('module_img/module_8.png');
+}
+
+.res_module9
+{
+	background-image: url('module_img/module_9.png');
+}
+
+.res_module10
+{
+	background-image: url('module_img/module_10.png');
+}
+
+.res_module11
+{
+	background-image: url('module_img/module_11.png');
+}
+
+.res_module12
+{
+	background-image: url('module_img/module_12.png');
+}
+
+.res_module13
+{
+	background-image: url('module_img/module_13.png');
+}
+
+.res_module14
+{
+	background-image: url('module_img/module_14.png');
+}
+
+.res_module15
+{
+	background-image: url('module_img/module_15.png');
+}
+
+.res_module16
+{
+	background-image: url('module_img/module_16.png');
+}
+
+.res_module17
+{
+	background-image: url('module_img/module_17.png');
+}
+
+.res_module18
+{
+	background-image: url('module_img/module_18.png');
+}
+
+.res_module19
+{
+	background-image: url('module_img/module_19.png');
+}
+
+.res_module20
+{
+	background-image: url('module_img/module_20.png');
+}
+
+.res_module21
+{
+	background-image: url('module_img/module_21.png');
+}
+
+.res_module22
+{
+	background-image: url('module_img/module_22.png');
+}
+
+.res_module23
+{
+	background-image: url('module_img/module_23.png');
+}
+
+.res_edit
+{
+	background-image: url('module_img/edit.png');
+}
+
+.res_left
+{
+	background-image: url('module_img/set.png');
+}
+
+.res_logout
+{
+	background-image: url('module_img/logout.png');
+}
+
+.res_aboutUs
+{
+	background-image: url('module_img/about.png');
+}
+
+.res_clearCache
+{
+	background-image: url('module_img/clear.png');
+}
+
+.res_firstpage
+{
+	background-image: url('images/icons-page1.png'); 30% 30% no-repeat;
+}
+
+.res_lastpage
+{
+	background-image: url('images/icons-page2.png'); 30% 30% no-repeat;
+}
+
+.res_nextpage
+{
+	background-image: url('images/icons-page3.png'); 30% 30% no-repeat;
+}
+
+.res_finalpage
+{
+	background-image: url('images/icons-page4.png'); 30% 30% no-repeat;
+}
+
+.res_add
+{
+	background-image: url('module_img/add.png');
+}
+
+.res12
+{
+	background-image:url('images/s.png')!important;
+	
+}
+.res_pic
+{
+	background-image:url('images/pic.png');
+}
+.res_noteg{
+	background-image:url('images/note_g.png');
+}
+.res_catg{
+	background-image:url('images/cat_g.png');
+}
+.res-homeplus{
+	background-image:url('images/home_plus.png');
+}
+.res-homeadd{
+	background-image:url('module_img/module_add.png');
+}
+.res-myleft{
+	background-image:url('images/myleft.png');
+}
+.res-save{
+	background-image:url('images/save.png');
+}

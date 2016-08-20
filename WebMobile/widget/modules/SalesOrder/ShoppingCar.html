@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>
+		<!--<script src="../../js/jquery.min.js"></script>-->
+        <link rel="stylesheet" href="../../css/style.css" />
+				<style type="text/css"> 
+.outline-energized {
+    background: transparent;
+	border-color: #f0b840;
+	color: #f0b840;
+}
+.outline-energized:active {
+    background-color: #f0b840;
+    color: #fff;
+    box-shadow: none; 
+}
+
+.outline-positive {
+    background: transparent;
+	border-color: #4a87ee;
+	color: #4a87ee;
+}
+.outline-positive:active {
+    background-color: #4a87ee;
+    color: #fff;
+    box-shadow: none; 
+}
+</style>
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp c-gra4" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+		<div id="content" class="ub-f1 tx-l t-bla">
+        	<!--列表开始-->
+			<div id="shopCar_list" class="uc-n " >  
+			</div>
+			<div id="shopCarIsNull" class="uc-n" style="display: none;">
+				<ul class="ub b-gra ub-ac lis">
+			    	<ul class="ub-f1 ub uc-a1 uba b-gra c-wh ub-ver"><li class="li_1 tx-c">购物车空无一物,请从分类中选择产品!!</li>
+					</ul>
+				</ul>
+			</div>
+			<div id='pop-div' style="width: 80%;top:30%" class="pop-box" >
+				<div class="inputArea">
+					<div class="t-wh ubb b-gra c-blu uinn">
+						<div class="ub">设置折扣</div>
+						<div ontouchstart="zy_touch('btn-act')" onclick="hideDiv('pop-div')" class="res5 lis-sw-2 ub-img" style="position: absolute;top:5px;right: 10px;"></div>
+					</div>
+					<input id="discount_type_final" type="hidden" value="">
+					<div class="ubb b-gra uc-t" style="line-height: 2em;">
+						<div class="ub t-bla ulab ub-ac">
+							<input type="radio" name="discount_final" class="uhide" checked="checked" value="zero">
+							<div onclick="zy_for(event)" ontouchstart="zy_touch('btn-act')" class="ub c-m2 ui-rdi uinn5" style="width:100%"> 
+								<div class="rdi-icon ub-img umw1" ></div>          
+   								<div class="ub-f1 ut-s tx-l" >&nbsp;没有折扣</div>  
+							 </div> 
+						</div> 
+					</div> 
+					<div class="ubb b-gra uc-t" style="line-height: 2em;">
+						<div class="ub t-bla ulab ub-ac">
+							<input type="radio" name="discount_final" class="uhide" value="percentage">
+							<div onclick="zy_for(event)" ontouchstart="zy_touch('btn-act')" class="ub c-m2 ui-rdi uinn5"> 
+								<div class="rdi-icon ub-img umw1" ></div>          
+   								<div class="ub-f1 ut-s tx-l" >&nbsp;%价格</div>
+								<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" style="width:18%">
+									<input id="discount_percentage" style="width:100%;" value="0" onchange="" type="text">
+								</div>&nbsp;%
+							 </div> 
+						</div> 
+					</div> 
+					<div class="ubb b-gra uc-t" style="line-height: 2em;">
+						<div class="ub t-bla ulab ub-ac">
+							<input type="radio" name="discount_final" class="uhide" value="amount">
+							<div onclick="zy_for(event)" ontouchstart="zy_touch('btn-act')" class="ub c-m2 ui-rdi uinn5"> 
+								<div class="rdi-icon ub-img umw1" ></div>          
+   								<div class="ub-f1 ut-s tx-l" >&nbsp;直接降价</div> 
+								<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" style="width:30%">
+									<input id="discount_amount" style="width:100%;" value="0" onchange="" type="text">
+								</div>&nbsp;
+							 </div> 
+						</div> 
+					</div> 
+				</div>
+			</div>
+			<div id="buttondiv" style="display: none;">
+				<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">
+					<div class="wd_wh detail_ul_text" style="left:40%;">调整:</div>
+					<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" style="left:40%;">
+						<input id="adjustment" style="width:100%;" onchange="adjustTotal()" type="text">
+					</div>
+				</div>
+				<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">
+					<div class="wd_wh detail_ul_text" style="left:40%;">总计:</div>
+					<div class="wd_wh2" style="left:40%;"><span id="total"></span></div>
+				</div>
+				<div class="ub">
+					<div class="ub-f1 uinn">
+						<div ontouchstart="zy_touch('btn-act');" onclick="editSO()" class="btn uinn5 c-blu3 uc-a1 t-wh" style="display:none;" id="editSO" >&nbsp;确定修改</div>	
+					</div>
+				</div>
+			</div>
+        </div>
+	</body>
+<script>
+zy_init();
+var forumObj = '';
+var arrValue = []; //购物车产品数组
+var total = 0;  //总计
+var adjustment = 0;  //调整值
+
+function editSO(){
+	setstorage('so_total',total);
+	if (getstorage('theMode') == 'edit') {
+		uexWindow.evaluatePopoverScript("EditPage", "content", "createobj.ChangeProducts();");
+	}else{
+		uexWindow.evaluatePopoverScript("CreateNewPage", "content", "createobj.ChangeProducts();");
+	}
+	uexWindow.evaluateScript("EditProductPage", "0", "back();");
+}
+
+//保留2位小数
+function changeTwoDecimal(x){  
+	var f_x = parseFloat(x);  
+	if (isNaN(f_x)){  
+		return false;  
+	}  
+	var f_x = Math.round(x*100)/100;  
+	return f_x;  
+}  
+
+//function popupDiv(div_id) {
+//	var div_obj = $("#"+div_id);
+//	var windowWidth = document.documentElement.clientWidth;
+//	var windowHeight = document.body.scrollHeight;
+//	var popupHeight = div_obj.height();
+//	var popupWidth = div_obj.width();
+//	//添加并显示遮罩层
+//	/*$("<div id='mask'></div>").addClass("mask")
+//		.width(windowWidth * 0.99)
+//		.height(windowHeight * 0.99)
+//		.click(function() {
+//			hideDiv(div_id);
+//		 })
+//		.appendTo("body").fadeIn(200);*/
+//	div_obj.css({"position": "absolute"}).animate({left: windowWidth/2-popupWidth/2,
+//	top: windowHeight/2-popupHeight/2, opacity: "show" }, "slow");
+//}
+//function hideDiv(div_id) {
+//	$("#mask").remove();
+//	$("#" + div_id).animate({left: 0, top: 0, opacity: "hide" }, "slow");
+//}
+
+function adjustTotal(){
+	if(!checkIsNum($$('adjustment').value)){
+		myalert("请输入数字");
+		return;
+	}
+	total += parseFloat($$('adjustment').value)-parseFloat(adjustment);
+	setstorage('so_adjustment',Number($$('adjustment').value));
+	setHtml('total',changeTwoDecimal(total));  //更新总计值
+	adjustment = Number($$('adjustment').value);
+}
+
+//修改产品的数量/价格/备注信息
+function changeProductInfo(obj,id,type){
+	var theId = obj.getAttribute("id");
+	if(type == 'num' || type == 'price'){
+		if(!checkIsNum($$(theId).value)){
+			myalert("请输入数字");
+			return;
+		}
+		if($$(theId).value < 0){
+			myalert("数值不能小于0");
+			return;
+		}
+	}
+	for (j = 0; j < arrValue.length; j++) {
+		if(id == arrValue[j].id){
+			if (type == 'num' && checkIsNum($$(theId).value)) {
+				total -= arrValue[j].num*arrValue[j].price;
+				arrValue[j].num = $$(theId).value;
+				setHtml('subTotal_'+id,arrValue[j].num*arrValue[j].price);   //更新小计值
+				total += arrValue[j].num*arrValue[j].price;
+				setHtml('total',changeTwoDecimal(total));  //更新总计值
+			}else if (type == 'price' && checkIsNum($$(theId).value)) {
+				total -= arrValue[j].num*arrValue[j].price;
+				arrValue[j].price = $$(theId).value;
+				setHtml('subTotal_'+id,arrValue[j].num*arrValue[j].price);   //更新小计值
+				total += arrValue[j].num*arrValue[j].price;
+				setHtml('total',changeTwoDecimal(total));  //更新总计值
+			}else if (type == 'decri') {
+				arrValue[j].decri = $$(theId).value;
+			}
+			setstorage("shopCar",JSON.stringify(arrValue));  //将购物车信息写入缓存
+			return;
+		}
+	}
+}
+
+//删除购物车里的产品
+function delProduct(id){
+	for (j = 0; j < arrValue.length; j++) {
+		if(id == arrValue[j].id){
+			total -= arrValue[j].num*arrValue[j].price;
+			$$("pro_"+id).style.display = "none";   //隐藏该产品
+			setHtml('total',changeTwoDecimal(total));
+			arrValue.splice(j,1); //将产品从数组中删除
+			setstorage("shopCar",JSON.stringify(arrValue)); //将购物车信息写入缓存
+			if(arrValue.length == 0){   //若购物车已空
+				$$("buttondiv").style.display='none';  //隐藏下单按钮及总计信息
+				$$("shopCarIsNull").style.display='block';	//显示提示"购物车空了"
+			}
+			return;
+		}
+	}
+}
+
+//获取购物车列表信息
+function GetShoppingCarList(){
+	arrValue = [];
+	setHtml('shopCar_list','');
+	//从缓存中取出购物车信息
+	if(getstorage("shopCar") != ''){
+		arrValue = JSON.parse(getstorage("shopCar"));
+	}
+	if(getstorage("so_adjustment") != ''){
+		adjustment = Number(getstorage("so_adjustment"));
+	}
+	forumObj = '';
+	//var outNewsObj = $("#shopCar_list");
+	for (j = 0; j < arrValue.length; j++) {
+		forumObj += '<div id="pro_'+arrValue[j].id+'" class="b-gra forumList">';
+		forumObj += '<div class="uinn3 ub">';	
+		forumObj += '<div class="title_ul_text tx-l">'+arrValue[j].name + '</div>';
+		forumObj += '<div ontouchstart="zy_touch(\'btn-act\')" onclick="delProduct('+arrValue[j].id+');" class="res5 lis-sw-2 ub-img" style="position: absolute;top:-0.75em;right:-0.75em"></div>';
+		forumObj += '</div>';
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height:1.5em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text" >编码:</div>';
+		forumObj += '<div class="wd_wh2 ">'+arrValue[j].code;
+		forumObj += '</div>';
+		forumObj += '<div class="wd_wh detail_ul_text" >型号:</div>';
+		forumObj += '<div class="wd_wh2 ">'+arrValue[j].serialno;
+		forumObj += '</div></div>';
+
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text" >数量:</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id="num_' + arrValue[j].id + '" style="width:100%;" value='+arrValue[j].num+' onchange="changeProductInfo(this,'+arrValue[j].id+',\'num\')" type="text">';
+		forumObj += '</div>';
+		forumObj += '<div class="wd_wh detail_ul_text" >价格:</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id=price_' + arrValue[j].id + '" style="width:100%;" value="'+arrValue[j].price+'" onchange="changeProductInfo(this,'+arrValue[j].id+',\'price\')" type="text">';
+		forumObj += '</div></div>';
+
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text" >备注:</div>';
+		forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id="decri_' + arrValue[j].id + '" style="width:85%;" value="'+arrValue[j].decri+'" onchange="changeProductInfo(this,'+arrValue[j].id+',\'decri\')" type="text">';
+		forumObj += '</div></div>';
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 1.5m;">';	
+		forumObj += '<div class="wd_wh detail_ul_text" >小计:</div>';
+		forumObj += '<div class="ub-f1" id="subTotal_'+arrValue[j].id+'">'+arrValue[j].price*arrValue[j].num;
+		forumObj += '</div></div>';;
+		forumObj += '</div>';
+		//outNewsObj.append(forumObj);
+		total += arrValue[j].price*arrValue[j].num;
+	}
+	setHtml('shopCar_list',forumObj);
+	if(arrValue.length == 0){ //若购物车为空
+		$$("buttondiv").style.display='none';  //隐藏下单按钮及总计信息
+		$$("shopCarIsNull").style.display='block';	 //显示提示"购物车为空"
+	}else{
+		$$('adjustment').value = adjustment;
+		total += adjustment;
+		setHtml('total',changeTwoDecimal(total));  // 更新总计值
+		$$("buttondiv").style.display='block';	//显示下单按钮及总计值
+	}
+}
+
+window.uexOnload = function(type){
+	if (!type) {	
+		$$('editSO').style.display = "block";
+	    uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+		GetShoppingCarList(); //获取购物车信息
+	}
+}
+</script>
+</html>

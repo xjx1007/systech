@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui_post.css">
+		<link rel="stylesheet" href="../../css/ui-fold.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script>  
+		<script type="text/javascript" src="../../js/RelativeModule.js"></script>  
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=123694c09683eb102283b4679c07dfd0"></script>
+		<script src="../../js/dy_upload.js"></script>
+		<script type="text/javascript" src="../../js/bd_convertor.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style>
+	input[type="radio"]+div.ip-sta{
+		display:none !important;
+	}
+	input[type="radio"]:checked+div.ip-sta{	
+		display:block !important;
+	}
+	</style>
+</head>
+<body class="um-vp c-gra4" ontouchstart>
+	<div class="ub t-bla ulab uinn">  
+		<div class="ub-f1 c-wh uc-a1 b-gra uinput uinn4">  
+			<input placeholder="标题"  type="text" class="uc-a1" id="title">   
+		</div>
+	</div>
+	<div class="ub t-bla ulab uinn" > 
+		<div class="ub-f1 c-wh uc-a1 b-gra uinput uinn4 ub ub-ver">  
+			<textarea placeholder="内容" class="uc-a1 ub-f1 " style="min-height:10em;" id="text"></textarea> 
+		</div>
+	</div>
+
+	<div class="ub ub-rev uinn3" >
+		<div class="umh2 btn-l umw25" ontouchstart="zy_touch('')" onclick="getLocation()" style="width:2.2em;height:2.2em;" >    
+			<div class="ub-img7 res-region umh2 umw2" id='region_type'></div>
+		</div>
+		<div class="umh2 btn-l umw25 umar-l" ontouchstart="zy_touch('')" onclick="getpic(0);" style="width:2.2em;height:2.2em;">    
+			<div class="ub-img7 res-camera umh2 umw2"></div>
+		</div>
+		<div class="umh2 btn-l umw25 umar-l" ontouchstart="zy_touch('')" onclick="getpic(1);" style="width:2.2em;height:2.2em;">    
+			<div class="ub-img7 res-img1 umh2 umw2"></div>
+		</div>
+		<div class="ub-f3"></div>
+	</div>  
+	<div ontouchstart="zy_touch('btn-act')" class="uhide" id="region_div">
+		<span>
+			地理位置：
+		</span>
+		<span id="region"></span>
+	</div>
+	<div class="ub uinn3" id="imgs">
+		<div></div>
+	</div>
+	<input type="checkbox" class="uhide">
+	<div ontouchstart="zy_touch('col-active')" onmousedown="zy_touch('col-active');" onclick="zy_for(event,zy_fold_sfa)" class="col uc-n t-bla ub b-gra1 uinn58 ub-ac c-m22 c-gra ulev-0 umh4">     
+		<div class="ub-f1 ut-s tx-r"> 更多设置</div>
+		<div class="umh1 umw1 ub-img res8_2"></div>
+ 	</div>    
+	<div class="ubb b-gra col-c">
+		<div class="ub t-bla ulab uinn">  
+			<div class="uinn">权限设置:</div> 
+			<input type="text" id="permittype" class="uhide"  value="">   
+			<div class="ub ub-f1 c-gra c-m2 ulev-1 uc-a1 uba b-gra uinn6">
+				<input class="uhide" type="radio" checked="true" name="permittype" id="permittype1" value="0">
+				<div class="ub-con1 ub-f1 tx-c dis-sta ut-s" ontouchstart="zy_touch('focuss')" onclick="permitSelected(1)">公开</div>
+				<input class="uhide" type="radio" name="permittype" id="permittype2" value="1">
+				<div class="ub-con1 ub-f1 tx-c dis-sta" ontouchstart="zy_touch('focuss')" onclick="permitSelected(2)">私有</div>
+				<input class="uhide" type="radio" name="permittype" id="permittype3" value="2">
+				<div class="ub-con1 ub-f1 tx-c dis-sta" ontouchstart="zy_touch('focuss')" onclick="permitSelected(3)">共享 </div>
+			</div>
+		</div>
+		<div class="uhide" id="reciver_div" style="border-top: 2px dotted #DDD;border-bottom: 2px dotted #DDD;">  
+			<div class="uinn">共享给:</div> 
+			<div class="ub-f1 uinn" id="recevier_name"></div>
+			<!--div class="ub-f1 c-wh uba uc-a1 b-gra us-i1 uinput uinn4">  
+				<input placeholder="请选择接收人"  type="text" class="uc-a1" id="reciver_user_name">   
+				<input type="text" id="reciver_user" class="uhide" name="reciver_user" value="">   
+			</div-->
+			<div class="t-blu3 icon ion-ios7-plus" onclick="openSelectUserPage();"  style="left:.2em;height:100%;line-height:100%;padding:0.2em;font-size: 1.6em;"></button>
+			</div> 
+		</div>
+		<div class="ub t-bla ulab uinn">  
+			<div class="uinn">保密设置:</div>
+			<input type="text" id="isencrypt" class="uhide"  value="">    
+			<div class="ub ub-f1 c-gra c-m2 ulev-1 uc-a1 uba b-gra uinn6">
+				<input class="uhide" type="radio" checked="true" name="isencrypt" id="encrypt1" value="0">
+				<div class="ub-con1 ub-f1 tx-c dis-sta ut-s" ontouchstart="zy_touch('focuss')" onclick="encryptSelected(1)">开放</div>
+				<input class="uhide" type="radio" name="isencrypt" id="encrypt2" value="1">
+				<div class="ub-con1 ub-f1 tx-c dis-sta" ontouchstart="zy_touch('focuss')" onclick="encryptSelected(2)">加密</div>
+			</div>
+		</div>
+		<div class="uhide" id="pwd_div">  
+			<div class="uinn">查看密码:</div> 
+			<div class="ub-f1 c-wh uba uc-a1 b-gra uinput uinn4">  
+				<input placeholder="请输入查看密码"  type="text" class="uc-a1" id="bases_pwd" >   
+			</div>
+		</div>
+		<div class="c-wh ub t-bla uinn"> 
+			<div class="uinn">关联客户:</div>
+			<div class="ub-f1 uinn" id="relativeAcc"></div>
+			<div class="t-blu3 icon ion-ios7-plus" onclick="openSelectPage('account','../../');"  style="left:.2em;height:100%;line-height:100%;padding:0.2em;font-size: 1.6em;"></button>
+			</div> 
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+var myUpload = null;
+var attachnew = [];
+var attachdel = [];
+var accountid = [];
+var receiverid = [];
+var eimg = $$('imgs');
+//var eee = $$('text');
+var locationType = '';
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+		setstorage('theMode','publishArticle');
+	}
+	//定位监控相关代码
+	uexLocation.onChange = locationRequestCallBack;
+	uexLocation.cbGetAddress = getAddressCallBack;
+}
+
+//添加关联客户
+function addAccount(accInfo){
+	var accInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+	if (isDefine(accInfo.id) && !accountid.in_array(accInfo.id)) {  //如果客户没有在关联列表
+		accountid.push(accInfo.id);
+		var forumObj = $$('relativeAcc').innerHTML;
+		forumObj += '<a onclick="openpop_account(\'' + accInfo.id + '\');return false;" id="account_'+accInfo.id+'" href="">【' + accInfo.name + '】</a>';
+		setHtml('relativeAcc', forumObj);
+	}
+}
+
+//关联客户pop
+function openpop_account(id){
+	uexWindow.cbActionSheet = function(opId, dataType, data){
+		if (data == "0") {
+			removeNode('account_'+id);
+			for (var k in accountid) {
+				if (accountid[k] == id) {
+					accountid.splice(k, 1);
+					break;
+				}
+			}
+		}else if (data == "1") {
+			openDetailTab('Accounts',id,'','../');
+		}
+	}
+	var value = ["删除", "查看详细"];
+	uexWindow.actionSheet('', '取消', value);
+}
+
+//权限设置选择
+function permitSelected(i){
+	if(!$$('permittype'+i).checked){
+		$$('permittype').value = $$('permittype'+i).value;
+		radioSelect('permittype'+i);
+		if(i == 3){
+			$$('reciver_div').className = "ub t-bla ulab uinn";
+		}else{
+			$$('reciver_div').className = "uhide";
+		}
+	}
+}
+
+//保密设置选择
+function encryptSelected(i){
+	if(!$$('encrypt'+i).checked){
+		$$('isencrypt').value = $$('encrypt'+i).value;
+		radioSelect('encrypt'+i);
+		if(i == 2){
+			$$('pwd_div').className = "ub t-bla ulab uinn";
+		}else{
+			$$('pwd_div').className = "uhide";
+		}
+	}
+}
+
+//打开地理位置获取API
+function getLocation(){
+	if(locationType == 'pressed'){
+		//removeRigion();
+		setHtml('region','');
+		$$('region_div').className = "uhide";
+		$$('region_type').className = "ub-img7 res-region umh2 umw2";
+		locationType = '';
+	}else{
+		$$('region_type').className = "ub-img7 res-region-press umh2 umw2";
+		locationType = 'pressed';
+		uexLocation.openLocation();
+	}
+}
+
+//获取经纬度回调函数
+function getAddressCallBack(opId,dataType,data){
+	if(dataType == 0){
+		setHtml('region',data);
+		$$('region_div').className = "ub uinn3";
+		uexWindow.closeToast();
+		uexWindow.toast("0","5","获取成功…","2000");
+	}else{
+		uexWindow.closeToast();
+		uexWindow.toast("0","5","获取失败…","2000");
+	}
+}
+
+function translateCallback_2(point){
+   	var gc = new BMap.Geocoder();
+	gc.getLocation(point, function(rs){
+		var addComp = rs.addressComponents;
+		var address = addComp.city + addComp.district + addComp.street + addComp.streetNumber+'('+addComp.province+')';
+		setHtml('region',address);
+		//logs('address->'+address);
+		$$('region_div').className = "ub uinn3";
+		uexWindow.closeToast();
+		uexWindow.toast("0","5","获取成功…","2000");
+	});
+}
+
+//获取经纬度
+function locationRequestCallBack(inLatitude,inLongitude){
+	uexWindow.toast("1","5","开始获取您的位置…","0");
+	uexLocation.closeLocation();
+	lat = inLatitude;
+	lng = inLongitude;
+	//logs('1ng->'+lng);
+	if (getstorage('platform') == 1) {
+		var point = new BMap.Point(lng, lat);// 创建点坐标
+		translateCallback_2(point);
+	}else {
+		BMap.Convertor.translate(new BMap.Point(lng, lat), 0, translateCallback_2);
+	}
+	//uexLocation.getAddress(lat,lon);
+}
+
+//打开选择用户窗口
+function openSelectUserPage(){
+	openwin('userlist','../',10,0);
+}
+
+//添加共享人
+function addReceiver(userInfo){
+	var userInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+	if (isDefine(userInfo.id) && !receiverid.in_array(userInfo.id)) {  //如果客户没有在关联列表
+		receiverid.push(userInfo.id);
+		var forumObj = $$('recevier_name').innerHTML;
+		forumObj += '<a onclick="openpop_user(\'' + userInfo.id + '\');return false;" id="user_'+userInfo.id+'" href="">【' + userInfo.user_name + '】</a>';
+		setHtml('recevier_name', forumObj);
+	}
+}; 
+
+//共享人pop
+function openpop_user(id){
+	uexWindow.cbActionSheet = function(opId, dataType, data){
+		if (data == "0") {
+			removeNode('user_'+id);
+			for (var k in receiverid) {
+				if (receiverid[k] == id) {
+					receiverid.splice(k, 1);
+					break;
+				}
+			}
+		}
+	}
+	var value = ["删除"];
+	uexWindow.actionSheet('', '取消', value);
+}
+
+function getJsonError(){
+	
+}
+
+function getpic(i){
+	var forum_url = getstorage("CurrentServerAddress")+'/mobile_upload.php';
+	var uploadHttp = forum_url;
+	if(!myUpload) myUpload = new disUpload(uploadHttp, 'thread', actCb, susCb);
+	myUpload.upMethod(i);
+}
+
+function actCb(val){
+	//logs('actCb()-->val='+val);
+}
+
+function susCb(val){
+	//logs('susCb()-->val='+val);
+	attachnew.push(val);
+	addimgpreview(val);
+	//setAtt(val);
+}
+
+function addimgpreview(val){
+	var src = '';
+	var ii = '';
+	src = myUpload.src;
+	ii = val;
+	//logs('addimgpreview()-->ii='+val+', src='+src);
+	var node = document.createElement("span");
+	var imgId = 'i'+ii;
+	node.innerHTML = '<img src="'+src+'" class="uc-a1 edpic"  onclick="imgoperate(\''+imgId+'\');" id="'+imgId+'"/>';
+	eimg.insertBefore(node,eimg.lastElementChild);
+}
+
+var ltobj = new LunTanObj('mobileKnowledges');
+
+function getFace(){
+	var t = 1;
+	if(onFoc[0] || onFoc[1]) t = 800;
+	//logs('getFace()----->t='+t);
+	setTimeout("uexWindow.evaluateScript('fb-theme', '0', 'openFace();');", t);
+}
+
+/*获取论坛表情
+eval(function(p, a, c, k, e, d) {
+	e = function(c) {
+		return (c < a ? '' : e(parseInt(c / a)))
+				+ ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c
+						.toString(36))
+	};
+	if (!''.replace(/^/, String)) {
+		while (c--) {
+			d[e(c)] = k[c] || e(c)
+		}
+		k = [ function(e) {
+			return d[e]
+		} ];
+		e = function() {
+			return '\\w+'
+		};
+		c = 1
+	}
+	;
+	while (c--) {
+		if (k[c]) {
+			p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
+		}
+	}
+	return p
+}
+(
+	'n m(d){p(d){b 1:a\':)\';0;b 2:a\':(\';0;b 3:a\':D\';0;b 4:a\':\\\'(\';0;b 5:a\':@\';0;b 6:a\':o\';0;b 7:a\':c\';0;b 8:a\':$\';0;b 9:a\';c\';0;b q:a\':L\';0;b l:a\':r\';0;b t:a\':k\';0;b f:a\':e:\';0;b g:a\':u:\';0;b i:a\':j:\';0;b h:a\':s:\';0;b y:a\':N:\';0;b K:a\':G:\';0;b H:a\':J:\';0;b O:a\':M:\';0;b I:a\':E:\';0;b x:a\':w:\';0;b v:a\':F\';0;b z:a\':C:\';0;B:A(\'插入表情错误\');0}}',
+	51,
+	51,
+	'break||||||||||return|case|P|id|loveliness|13|14|16|15|curse|lol|11|getdiscuzSmiley|function||switch|10|Q|dizzy|12|funk|23|kiss|22|17|24|showmessage|default|call||time|handshake|sleepy|19|21|hug|18||victory|shutup|20'
+			.split('|'), 0, {}))
+
+function getdiscuzSmiley(i){
+	var faceArray = ['',':)',':(','\/:q044:','\/:\'(','\/:@','\/:O','\/:P','\/:$','\/;P','\/:L','\/:Q','\/:D','\/;-D','\/:q031:','\/:q034:','\/:q034:','\/:X','\/:Z','\/:q078:','\/:q082:','\/:q054:','\/:q065:','\/:q081:','\/:q036:']
+	return faceArray[i];
+}
+
+
+function insertface(i){
+	logs('insertface-->i='+i);
+	var ft = getdiscuzSmiley(i);
+	
+	var e = $$('text');
+	if(e){
+		e.value += ft;
+		e.scrollTop=e.scrollHeight;
+	}
+}
+*/
+function imgoperate(id){
+	var el = $$(id);
+	uexWindow.cbActionSheet = function(opId, dataType, data)
+	{
+		if (data == "0") {
+			src = '';
+			removeNode(id);
+			
+			var id3 = id.replace('i', '');
+			log('imgoperate-->id3='+id3);
+			id3 = int(id3);
+			for(var k in attachnew){
+				var itm = attachnew[k];
+				log('imgoperate-->itm='+itm);
+				if (itm == id3) {
+					attachnew.splice(k, 1);
+					attachdel.push(k);
+					//removeAtt(itm);
+					break;
+				}
+			}
+		} else if (data == "1") {
+			var array = [];
+			array[0] = el.src;
+			uexImageBrowser.open(array);
+		}
+	}
+	
+	var value = ["删除","预览"];
+	uexWindow.actionSheet('', '取消', value);
+}
+
+var onFoc = [0, 0];
+
+function myOnfocus(i){
+	onFoc[i] = 1;
+}
+
+function myOnblur(i){
+	onFoc[i] = 0;
+}
+
+/*
+function setAtt(val){
+	var e = eee;
+	if(e){
+		e.value += '<img src="'+val+'"></img>';
+		e.scrollTop=e.scrollHeight;
+	}
+}
+
+function removeAtt(val){
+	var e = eee;
+	if(e){
+		var str = '<img src="'+val+'"></img>';
+		var sval = e.value;
+		sval = sval.replace(str, '');
+		e.value = sval;
+		e.scrollTop=e.scrollHeight;
+	}
+}
+*/
+</script>
+</html>

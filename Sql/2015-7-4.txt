@@ -1,0 +1,18 @@
+﻿
+create table CG_ApplicationPayment_For
+(
+ CAF_ID varchar(50) primary key,
+ CAF_Code varchar(50),
+ CAF_Title varchar(500),
+ CAF_STime DateTime,
+ CAF_DutyPerson varchar(50),
+ CAF_TotalMoney decimal(18,3),
+ CAF_State int default 0,
+ CAF_Remarks varchar(500),
+ CAF_Del int default 0,
+ CAF_Creator varchar(50),
+ CAF_CTime DateTime,
+ CAF_Mender varchar(50),
+ CAF_MTime DateTime
+)
+alter table CG_Payment_For add CPF_MainFID varchar(50)

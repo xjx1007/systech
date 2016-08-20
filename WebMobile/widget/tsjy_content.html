@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/ui-input.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/my-color.css">
+	<link rel="stylesheet" href="css/ui-btn.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+	<script src="js/zy_json.js">
+    </script>
+	<script src="js/zy_slide.js">
+    </script>
+	<script type="text/javascript" src="js/LanguageResources.js"></script>
+	<script type="text/javascript" src="js/Application.js"></script>  
+	<link rel="stylesheet" href="css/style.css" />
+  </head>
+<body class="um-vp" ontouchstart>
+<!--文本开始-->
+<div class="uinn t-bla">请留下您宝贵的反馈及建议:</div>
+<div class="ub t-bla ulab umar-a"> 
+  <div class="ub-f1 c-wh uba uc-a1 b-wh uinput uinn4 ub ub-ver">  
+ 	<textarea placeholder=""  name="area1" class="uc-a1 ub-f1" style="min-height:5em;" id="text"></textarea> 
+ </div>
+</div>
+<!--文本结束-->
+</body>
+
+<script>
+zy_init();
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","#FFF","0");
+		uexWindow.showBounceView("1","#FFF","0");
+	}
+}
+
+function sendts(){
+	$$('text').value = removeHTMLTag($$('text').value);
+	var text = $$('text').value;
+	if ('' == text) {
+		uexWindow.toast('0', '5', "请输入内容", 2000);
+		return false;
+	}
+   	var AjaxUrl = getstorage("CurrentServerAddress");
+	var rest_data = '{"content":"' + encodeURIComponent(text) + '"}';
+    var j =[{"key":"rest_data","type":"0","value":rest_data},
+			{"key":"method","type":"0","value":"sendJY"},
+			{"key":"input_type","type":"0","value":"JSON"},
+			{"key":"response_type","type":"0","value":"JSON"}];
+	var url=AjaxUrl+'/rest.php?callback=?';
+	uexWindow.toast('1','5',"提交中，请稍候...",'0');
+　　 $.getJSON(url,
+		function(data){
+			uexWindow.closeToast();
+			var str = '提交失败';
+			if(data == 'SUCCESS'){
+				 str = '提交成功';
+			}
+			uexWindow.toast('0','5',str,'2000');
+		},"json",//返回类型为json　
+		function(err){//处理提交异
+		   uexWindow.closeToast();
+		　 uexWindow.toast(0, 5, "连接服务器异常,请检查网络...", 3000);//myalert("Failed to connect to server");
+		},"POST",//以POST方式提交, 
+		j);//提交的参数键值对对象 
+}
+</script>
+</html>

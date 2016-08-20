@@ -1,0 +1,391 @@
+BODY
+{
+    FONT-SIZE: 9pt;
+    color:#003399;
+    BEHAVIOR: url(../../htc/body.htc);
+    BACKGROUND-REPEAT: repeat;
+    FONT-FAMILY: 宋体;
+    BACKGROUND-COLOR: white
+}
+.mTable
+{
+
+    FONT-SIZE: 9pt;
+	border:#b9d6f7 1px solid;
+    WIDTH: 100%;
+    FONT-FAMILY: 宋体
+}
+.dTable
+{
+    BORDER-TOP: silver 1px solid;
+    BORDER-BOTTOM: silver 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: silver 1px solid;
+    BORDER-RIGHT: silver 1px solid;
+    WIDTH: 100%;
+    FONT-FAMILY: 宋体  
+}
+.mTable TD
+{
+    
+    PADDING-RIGHT: 2px;
+    PADDING-LEFT: 2px;
+    PADDING-TOP: 1px;
+	border:#b9d6f7 1px solid;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 30px;
+}
+.mTable INPUT
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: blue 1px solid;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.mTable BUTTON
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: blue 1px solid;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.mTable SELECT
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: 宋体
+}
+.mTable TEXTAREA
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    OVERFLOW: auto;
+    BORDER-LEFT: blue 1px solid;
+    WIDTH: 80%;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.DBTable
+{
+
+    FONT-SIZE: 12pt;
+	border:#b9d6f7 1px solid;
+    WIDTH: 100%;
+    FONT-FAMILY: 宋体;
+	COLOR: black;
+}
+.DBTable TD
+{
+    
+    PADDING-RIGHT: 2px;
+    PADDING-LEFT: 2px;
+    PADDING-TOP: 1px;
+    FONT-SIZE: 12pt;
+	border:#b9d6f7 1px solid;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 30px;
+	COLOR: black;
+}
+.lbtable
+{
+	
+    WIDTH: 100%;
+	height:18;
+    FONT-FAMILY: 宋体;
+    color:#003399;
+    TEXT-ALIGN: center
+	border:#6493c8 solid 1px;
+	border-collapse:collapse;
+	border:1;
+	border-color:'#000000';
+	    border-top: 1px solid #000000;   
+        border-left: 1px solid #000000;    
+        border-right: 0px;    
+        border-bottom: 0px;  
+
+}
+.lbtable TD
+{
+	padding:2
+	border-top: 1px solid #D3D8E0;    
+    border-left: 1px solid #D3D8E0;    
+    border-right: 1px solid #000000;    
+    border-bottom: 1px solid #000000;   
+}
+.DBTable INPUT
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: blue 1px solid;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.DBTable BUTTON
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: blue 1px solid;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.DBTable SELECT
+{
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: 宋体
+}
+.DBTable TEXTAREA
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 10pt;
+    OVERFLOW: auto;
+    BORDER-LEFT: blue 1px solid;
+    WIDTH: 80%;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.aTable
+{
+    BORDER-RIGHT: #799ae1 1px solid;
+    BORDER-TOP: #799ae1 1px solid;
+    BORDER-LEFT: #799ae1 1px solid;
+    WIDTH: 100%;
+   				 BORDER-BOTTOM: #799ae1 1px solid;
+    FONT-FAMILY: 宋体
+}
+.aTable .cen
+{
+    PADDING-RIGHT: 5px;
+    PADDING-LEFT: 5px;
+    PADDING-BOTTOM: 5px;
+    PADDING-TOP: 5px;
+    FONT-FAMILY: 宋体
+}
+.aTable .title
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12pt;
+    COLOR: white;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 28px;
+    				BACKGROUND-COLOR: #799ae1;
+    TEXT-ALIGN: center
+}
+.mtitle
+{
+    PADDING-RIGHT: 5px;
+    PADDING-LEFT: 5px;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 20px;
+    BACKGROUND-COLOR: silver
+}
+.date
+{
+    BEHAVIOR: url(../../htc/date.htc);
+    FONT-FAMILY: 宋体
+}
+.number
+{
+    BEHAVIOR: url(../../htc/number.htc);
+    FONT-FAMILY: 宋体
+}
+.newline
+{
+    BEHAVIOR: url(../../htc/newline.htc);
+    FONT-FAMILY: 宋体
+}
+.tbar
+{
+    BORDER-RIGHT: darkgreen 1px solid;
+    BORDER-TOP: darkgreen 1px solid;
+    BORDER-LEFT: darkgreen 1px solid;
+    BORDER-BOTTOM: darkgreen 1px solid;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 18px;
+    BACKGROUND-COLOR: transparent
+}
+.ibar
+{
+    BORDER-RIGHT: medium none;
+    BORDER-TOP: medium none;
+    BEHAVIOR: url(../../htc/number.htc);
+    BORDER-LEFT: medium none;
+    BORDER-BOTTOM: black 1px solid;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 18px;
+    BACKGROUND-COLOR: transparent
+}
+.wbg
+{
+    FONT-FAMILY: 宋体;
+    HEIGHT: 20px;
+    BACKGROUND-COLOR: #ffffff
+}
+.bbg
+{
+    FONT-FAMILY: 宋体;
+    HEIGHT: 20px;
+    BACKGROUND-COLOR: #f6f6f6
+}
+.tTable
+{
+    BORDER-TOP: silver 1px solid;
+    BORDER-LEFT: silver 1px solid;
+    FONT-FAMILY: 宋体
+}
+.tTable TD
+{
+    BORDER-RIGHT: silver 1px solid;
+    PADDING-RIGHT: 2px;
+    PADDING-LEFT: 2px;
+    PADDING-TOP: 1px;
+    BORDER-BOTTOM: silver 1px solid;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 20px
+}
+.tTable INPUT
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: blue 1px solid;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体
+}
+.tTable SELECT
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: 宋体
+}
+.lTable
+{
+    WIDTH: 100%;
+    FONT-FAMILY: 宋体;
+    color:#003399;
+    TEXT-ALIGN: center
+}
+.lTitle
+{
+    PADDING-LEFT: 1px;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 20px;
+    		BACKGROUND-COLOR: #799AE1;
+    TEXT-ALIGN: center
+}
+.fTitle
+{
+    FONT-FAMILY: 宋体;
+    HEIGHT: 20px;
+    BACKGROUND-COLOR: deepskyblue
+}
+LI
+{
+    LINE-HEIGHT: 150%;
+    FONT-FAMILY: 宋体
+}
+.bTable
+{
+    BORDER-RIGHT: black 1px solid;
+    BORDER-TOP: black 1px solid;
+    BORDER-LEFT: black 1px solid;
+    BORDER-BOTTOM: black 1px solid;
+    FONT-FAMILY: 宋体
+}
+.ppTable
+{
+    BORDER-TOP: black 1px solid;
+    BORDER-LEFT: black 1px solid;
+    WIDTH: 2000px;
+    FONT-FAMILY: 宋体;
+    TEXT-ALIGN: center
+}
+.pTable
+{
+    BORDER-TOP: black 1px solid;
+    BORDER-LEFT: black 1px solid;
+    WIDTH: 100%;
+    FONT-FAMILY: 宋体;
+    TEXT-ALIGN: center;
+}
+.pTable TR{
+	//star : expression(
+		//onmouseover=function(){
+			//this.style.backgroundColor="#FFFFCC"
+			//this.style.zoom="1.2"
+			//this.style.fontWeight="bold"
+
+			//this.style.position="relative";
+			//this.style.left="3px";
+
+			//for(var i=0;i<this.cells.length;i++){
+			//	this.cells[i].style.borderBottom='3px red solid';
+			//}
+		//},
+		//onmouseout=function(){
+			//this.style.backgroundColor="#FFFFFF"
+			//this.style.zoom="1"
+			//this.style.fontWeight="normal"
+
+			//this.style.position="relative";
+			//this.style.left="0px";
+
+			//for(var i=0;i<this.cells.length;i++){
+			//	this.cells[i].style.borderBottom='1px black solid';
+			//}
+		//}
+	//)
+}
+.pTable TD
+{
+    BORDER-RIGHT: black 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-BOTTOM: black 1px solid;
+    FONT-FAMILY: 宋体;
+    HEIGHT: 25px
+}
+.impcolor
+{
+    COLOR: #ff0000
+}
+#divFind
+{
+    BORDER-RIGHT: 1px outset;
+    BORDER-TOP: 1px outset;
+    Z-INDEX: 100;
+    VISIBILITY: hidden;
+    BORDER-LEFT: 1px outset;
+    WIDTH: 350px;
+    BORDER-BOTTOM: 1px outset;
+    FONT-FAMILY: 宋体;
+    POSITION: absolute;
+    HEIGHT: 150px;
+    BACKGROUND-COLOR: #fafaf0
+}
+#divFind INPUT
+{
+    BORDER-RIGHT: blue 1px solid;
+    BORDER-TOP: blue 1px solid;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: blue 1px solid;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: 宋体;
+    BACKGROUND-COLOR: transparent
+}
+#divFind SELECT
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: 宋体
+}
+#divFind .fTable
+{
+}
+#divFind .fTable TD
+{
+    PADDING-BOTTOM: 2px
+}

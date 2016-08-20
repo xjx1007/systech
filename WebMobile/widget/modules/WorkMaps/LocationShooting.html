@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+  	<!--	关于页面	 	-->
+    <body class="um-vp c-gra4" ontouchstart>
+    	
+  		<div id="header" class="uh">
+  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+				<div class="h1 title">实景照片</div>
+				<div ontouchstart="zy_touch('btn-act');" onclick="openwin('LocationShootListPage','')"  class="btn uinn btn-r t-wh">历史</div>
+				<!--button class="button button-clear t-wh" onclick="openwin('LocationShootListPage','')">历史</button-->
+			</div>
+		</div>
+        <div id="content1" class="uinn">
+        	<div class="ub-f1 c-wh uba uc-a1 b-gra uinput uinn4 ub ub-ver">  
+			 	<textarea placeholder="为照片描述点什么吧.."  name="area1" class="uc-a1 ub-f1" style="min-height:5em;" id="text"></textarea> 
+			 </div>
+			<div class="ub ub-rev uinn ub-ac" >
+				<div class="ulev3 umar-a" ontouchstart="zy_touch('')" onclick="lbs_to_location();" >    
+					<i class="icon ion-ios7-location assertive"></i>
+				</div>
+				<div class="ulev3 umar-a" ontouchstart="zy_touch('')" onclick="getpic(0)" >    
+					<i class="icon ion-android-camera positive"></i>
+				</div>
+				<!--div class="umh2 btn-l umw25 umar-l" ontouchstart="zy_touch('')" onclick="getpic(1);" style="width:2.2em;height:2.2em;">    
+					<div class="ub-img7 res-img1 umh2 umw2"></div>
+				</div-->
+				<div class="ub-f3"></div>
+			</div> 
+			<div class="ub uinn3" >
+				<img src="../../css/images/default.png" class="uc-a1 edpic2"  onclick="viewImg();" id="thepic"/>
+			</div>
+			<div class="ub ub-f1" style="margin:0.5em 0.5em 0 0.5em">
+				<input id="new_lng" type="text" style="display:none">
+				<input id="new_lat" type="text" style="display:none">
+				<div>地理位置：</div>
+				<div class="ub-f1 ub uinn4 long_hide">
+					<div id="new_address" class="" ></div>
+				</div>
+			</div>
+			<div class="ub ub-f1 uinn">
+				<input id="accountid" type="text" style="display:none">
+				<div ontouchstart="zy_touch('btn-act');" onclick="openSelectPage('account','../../')" class="btn uinn c-wh ub-f1 uc-a1 t-wh us" style="color: #1C94C4;margin:0 0.5em 0 0"><div class="ufl long_hide" style="max-width:93%"><i class="icon-home"></i>&nbsp;客户:&nbsp;<span id="accountname">请选择...</span></div><i class="icon-chevron-sign-right ufr"></i>&nbsp;</div>
+			</div>
+			<div id="content">
+			</div>
+			<div class="ub">
+				<div class="ub-f1 uinn">
+				<!--按钮开始-->
+				<div ontouchstart="zy_touch('btn-act');" onclick="summitToServer();" id="save" class="btn uinn5 uc-a1 uba t-wh tx-c" style="background-color:#5097CD">提交</div>
+				<!--按钮结束-->
+				</div>
+			</div>
+        </div>
+	</div>
+</body>
+<script type="text/javascript" src="../../js/module_js/WorkMaps.js"></script>
+<script src="../../js/dy_upload.js"></script>
+<script type="text/javascript" src="../../js/my_bdMap.js"></script>
+<script type="text/javascript" src="../../js/bd_convertor.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=123694c09683eb102283b4679c07dfd0"></script>
+<script>
+var myUpload = null;
+var attachdel = [];
+var oldsrc = '';
+var map;
+var myMark;
+var workmap = new WorkMapObj('workMaps');
+function getpic(i){
+	var forum_url = getstorage("CurrentServerAddress")+'/mobile_upload.php';
+	var uploadHttp = forum_url;
+	if(!myUpload) myUpload = new disUpload(uploadHttp, 'thread', actCb, susCb);
+	myUpload.upMethod(i);	
+}
+
+function actCb(val){
+	//logs('actCb()-->val='+val);
+}
+
+function susCb(val){
+	if(oldsrc != ''){
+		attachdel.push(oldsrc);
+	}
+	oldsrc = val;
+	$$('thepic').src = myUpload.src;
+}
+
+//定位到当前位置后回调
+function lbs_to_location_Callback(){ 
+
+}
+
+function viewImg(){
+	var array = [];
+	array[0] = $$('thepic').src;
+	uexImageBrowser.open(array);
+}
+
+function summitToServer(){
+	workmap.locationShooting();
+}
+
+setstorage('theMode','locationShooting');
+function selAccount(accInfo){
+	var accInfo = arguments[0] || JSON.parse(getstorage('selInfo')); 
+	$$('accountid').value = accInfo.id;
+	setHtml('accountname',accInfo.name);
+}
+
+zy_init();
+window.uexOnload=function(type)
+{
+	if(!type){
+		initMap();
+		uexLocation.onChange = locationRequestCallBack;
+		//定位监控相关代码
+		lbs_to_location();
+	}
+}
+	
+</script>
+</html>

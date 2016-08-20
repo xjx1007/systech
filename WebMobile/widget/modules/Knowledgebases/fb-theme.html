@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/CustomView.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+		<!--header开始-->
+		<div id="header" class="uh">
+			<div class="c-blu3 c-m-fs t-wh">
+				<div id="header_title" class="bar bar-blue pos-relative">
+					<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+			    	<div class="h1 title" id="luntanname1">发表文章</div>
+					<button class="button button-icon icon ion-checkmark t-wh" onclick="fabu();" ></button>
+				</div>
+			</div>
+		</div>
+		<!--header结束--><!--content开始-->
+		<div id="fbthemec" class="ub-f1 tx-l t-bla ub-img6">
+		
+		</div>
+		<!--content结束-->
+    </div>
+</body>
+<script>
+zy_init();
+var sml = getstorage('simulate');
+var onface = 0;
+function openFace(){
+	//logs('opneFace()-->onface='+onface);
+	if(onface){
+		myalert('here1');
+		if(sml) closeFace();
+		else uexWindow.evaluatePopoverScript('fb-theme', 'pop_face', 'movepop();');
+	}else{
+		onface++;
+		var e = $$('header');
+		var s = window.getComputedStyle(e,null);
+		var em = int(s.fontSize);
+		var w = int(window.innerWidth);
+		var h = int(window.innerHeight);
+		var y = 1500;
+		if(sml) y = 0;
+		myalert('here2');
+		uexWindow.openPopover('pop_face',"0","pop_face.html","",0,y,w,h,em,"0");
+	}
+}
+
+function closeFace(){
+	uexWindow.closePopover('pop_face');
+	onface = 0;
+}
+
+function fabu(){
+	uexWindow.evaluatePopoverScript('fb-theme','fbthemec','ltobj.postfb()');
+}
+
+
+
+window.uexOnload = function(type){
+	if (!type) {
+        zy_con("fbthemec", "fb-theme_content.html", 0, $$("header").offsetHeight);
+    }
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("fbthemec",0,$$("header").offsetHeight);				
+	}
+}
+</script>
+</html>

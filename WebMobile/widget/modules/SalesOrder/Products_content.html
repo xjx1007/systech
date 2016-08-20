@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/scroller.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script src="../../js/zepto_js/zepto.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+		<script type="text/javascript" src="../../js/iscroll.js"></script>
+    <script> 	
+	var jApp = $.noConflict(true);
+	var myScroll,pullUpEl, pullUpOffset,generatedCount = 0;
+	function pullDownAction () {
+			setTimeout(function () {
+			//var cid = localStorage.getItem('cid');
+			/**
+			 * 这个地方就是下拉刷新时操作，比如重新加载数据
+			 * 外部的setTimeout 在正式环境可以去除，此处只是为了显示一个延迟的效果
+			 */
+			//getNewsList(cid);
+			
+			myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+		}, 3000);
+		uexWindow.toast('0','5','刷新成功','2000');
+	}
+	
+	function pullUpAction () {
+		loadNextPage();
+		myScroll.refresh();	
+	}
+	
+	function loaded() {
+		pullUpEl = document.getElementById('pullUp');
+		pullUpOffset = pullUpEl.offsetHeight;
+		
+		myScroll = new iScroll('wrapper', {
+			fixedScrollbar:true,
+			vScrollbar:true,
+			checkDOMChanges:true,
+			useTransition: true,
+			onRefresh: function () {
+				if (pullUpEl.className.match('loading')) {
+					pullUpEl.className = '';
+					
+				} 
+			},
+			onScrollMove: function () {
+				if (parseInt($$("currPage").innerHTML) < parseInt($$("lastPage").innerHTML)) {
+					if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+						pullUpEl.className = 'flip';
+						setHtml("pullUpLabel", '松开加载更多...');
+						this.maxScrollY = this.maxScrollY;
+					}else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+						pullUpEl.className = '';
+						setHtml("pullUpLabel", '上拉加载更多...');
+						this.maxScrollY = pullUpOffset;
+					}
+				}
+			},
+			onScrollEnd: function () {
+				if (pullUpEl.className.match('flip')) {
+					pullUpEl.className = 'loading';
+				    setHtml("pullUpLabel", '正在加载...');			
+					pullUpAction();	// Execute custom function (ajax call?)
+				} 
+			}
+		});
+		
+		setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+	}
+	
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+	
+</script>
+</head>
+<body class="um-vp" ontouchstart>
+	<div id="loading" style="display: none;"></div>
+	<!--块容器开始-->		
+	<div style="overflow: hidden; left: 0px;" id="wrapper">
+		<div style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0px 0px; -moz-transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1); -moz-transform: translate(0px, -51px) scale(1) translateZ(0px); -moz-transition-duration: 0ms;" id="scroller">
+			<div id="content" class="ub-f1 tx-l c-gra4 t-bla">
+	        	<!--列表开始-->
+				<div id="products_list" >
+				</div>
+				<!--列表结束-->
+	        </div>
+			<div class="ub-f1 uinn tx-c" id="pullUp">
+				<h1 id="pullUpLabel" class="ut ulev1 ut-s tx-c"></h1>
+			</div>
+			<span id="currPage" style="display: none;">1</span>
+			<span id="lastPage" style="display: none;">1</span>
+		</div>
+	 </div>
+</body>
+<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+<script type="text/javascript" src="../../js/Application.js"></script>  
+<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+<script type="text/javascript" src="../../js/module_js/Products.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script>
+zy_init();
+var move = -1;   //移动标志
+refreshPageInfo = false;
+
+function showIntr(){
+	$('sop_ll').show();	
+}
+
+function hideIntr(){
+	$('sop_ll').hide();	
+}
+
+//记录当前页数和最大页数
+function setpagenum(){
+	var currpage = getstorage("currPage");
+	var lastpage = getstorage("lastPage");
+	setHtml("currPage", currpage);
+	setHtml("lastPage", lastpage);
+}
+
+//加载下一页
+function loadNextPage(){
+	var offsetPage = 1;
+	if(parseInt($$("currPage").innerHTML) == parseInt($$("lastPage").innerHTML)){
+		return false;
+	}
+	offsetPage = parseInt($$("currPage").innerHTML)+parseInt(1);
+	setHtml("currPage", offsetPage);
+	setstorage("currPage",offsetPage);
+	getPageNewInfo();
+}
+
+//加载下一页
+function getPageNewInfo(){
+	proobj.GetProductsListByCataId();
+}
+
+//勾选复选框
+function zy_for_sop(e) {
+	var ch = e.currentTarget.previousElementSibling;
+	if (ch.nodeName == "INPUT") {
+		if (ch.type == "checkbox")
+			ch.checked = !ch.checked;
+	}
+}
+
+//获取产品列表
+function getProductsList(){   
+	setstorage('currPage', 1);
+	setstorage('warehouseId', -1);
+	setstorage('searchtext', '');
+	setHtml("products_list", '');
+	setHtml("pullUpLabel", '');
+	proobj.GetProductsListByCataId();
+}
+
+//获取产品列表_搜索
+function getProductsList_search(){   
+	setstorage('currPage', 1);
+	setstorage('warehouseId', -1);
+	setHtml("products_list", '');
+	setHtml("pullUpLabel", '');
+	proobj.GetProductsListByCataId();
+}
+
+function getCheckBoxValue(){
+	var arrValue = [];
+	if(getstorage("shopCar") != ''){
+		arrValue = JSON.parse(getstorage("shopCar"));//  取
+	}
+	var arr = document.getElementsByName("so_products");
+	var i = arrValue.length;
+	var checked = 0;
+	for (var n = 0; n < arr.length; n++) {
+		if (arr[n].type == 'checkbox' && arr[n].checked) {
+			checked++;
+			var notInCar = true;
+			var product = JSON.parse(arr[n].value);
+			for (j = 0; j < arrValue.length; j++) {
+				if(arrValue[j].id == product.productid.value){
+					arrValue[j].num++;
+					notInCar = false;
+				}
+			}
+			if (notInCar) {
+				arrValue[i++] = {
+					'id': product.productid.value,
+					'code':product.productcode.value,
+					'serialno':product.serialno.value,
+					'name':product.productname.value,
+					'price':product.unit_price.value,
+					'num': 1,
+					'decri':''
+				};
+			}
+		}
+	}
+	if (checked > 0) {
+		setstorage("shopCar", JSON.stringify(arrValue));//  存
+		uexWindow.evaluateScript('EditProductPage', '0', "showTips()");
+		uexWindow.toast(0, 5, "成功加入购物车", 3000);
+		var theProductWindow = getstorage('theProductWindow');
+		uexWindow.evaluateScript(theProductWindow,'0','showTips()');
+	}else{
+		uexWindow.toast(0, 5, "请至少选择一个产品", 3000);
+	}
+}
+
+var proobj = new PROObj('Products');
+window.uexOnload = function(type){
+	if (!type) {
+		getProductsList();
+	}
+}
+</script>
+</html>

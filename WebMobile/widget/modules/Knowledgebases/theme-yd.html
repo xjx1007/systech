@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+			<style>
+	input[type="radio"]+div.ip-sta{
+		display:none !important;
+	}
+	input[type="radio"]:checked+div.ip-sta{	
+		display:block !important;
+	}
+	</style>
+        <title>易客 CRM</title>
+</head>
+<body class="um-vp c-gra4" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+		<!--header开始-->
+		<input class="uhide" type="radio" name="headers" id="ihd1" checked="true">
+		<div id="hd1" class="uh ip-sta">
+			<div id="header_title" class="bar bar-blue pos-relative">
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+		    	<div class="h1 title" id="ViewRelativePageTitle">文章详细</div>
+				<button class="button button-icon icon ion-ios7-chatboxes t-wh" onclick="inputtext()"></button>
+				
+			</div>
+		</div>
+		<input class="uhide" type="radio" name="headers" id="ihd2">
+		<div id="hd2" class="uh ip-sta">
+			<div class="c-blu3 c-m-fs t-wh">
+				<div class="btn-l-2" ontouchstart="zy_touch('btn-act');" onclick="cancleEdit(1)" >       
+		              <div class="ub-img res_backbg" style="width:100%;height:100%">
+					  </div>       
+		        </div>
+				<h1 class="ut ulev1 ut-s tx-c" tabindex="0"id="luntanname1" >修改文章</h1>
+				<div ontouchstart="zy_touch('btn-act')" onclick="save();" class="btn  b-blu2 btn-r c-blu2 c-m1 uc-a1 t-wh" style="padding: 0.7em;" id="btnr">
+					保存
+				</div>
+			</div>
+		</div>
+		<!--header结束-->
+		<!--content开始-->
+		<input class="uhide" type="radio" name="contents" id="ict1" checked="true">
+        <div id="themecontent1" class="ub-f1 tx-l t-bla ub-img6 ip-sta "></div>
+		<input class="uhide" type="radio" name="contents" id="ict2">
+		<div id="themecontent2" class="ub-f1 tx-l t-bla ub-img6 ip-sta"></div>
+		<!--content结束-->
+		
+		<!--footer开始-->
+		<div id="footer" class="ub c-wh t-wh">
+			<div class="ub-f1 b-gra ubt" id="huifuDiv" style="display:none"> 
+				<!--div class="ub ub-hor ub-pc ub-ac  umar-r"  style="height:3em;">   
+					<div class="ub-f1 "> 
+						<div class="c-wh ubb b-gra uinput uinn4 umar-a">    
+							<input placeholder="评论内容" onclick="inputtext()" type="text" readonly="true" class="uc-a" id="text">   
+						</div> 
+						<div class="res_reply ub-img"></div>
+					</div> 
+				</div--> 
+			</div> 
+		</div>
+		<!--footer结束-->
+    </div>
+</body>
+<script>
+zy_init();
+var tt='';
+var ltobj = new LunTanObj('mobileKnowledges');
+var toSb = '';
+function inputtext(){
+	tt='';
+	toSb = '';
+	uexControl.cbInputCompleted=inputcb;
+	uexControl.openInputDialog('0','','回复');
+}
+
+function replyToSb(sname){
+	toSb = '@'+sname;
+	uexControl.cbInputCompleted=inputcb;
+	uexControl.openInputDialog('0','','回复');
+}
+
+function inputcb(opId,dataType,data){
+	tt = data;
+	ltobj.CommentArticle();
+}
+
+function showHuiFuDiv(){
+	$$('huifuDiv').style.display = 'block';	
+	zy_resize("themecontent1",0,$$("hd1").offsetHeight);				
+}
+
+function openEdit(){
+	$$('huifuDiv').style.display = 'none';
+	radioSelect('ihd2');
+	radioSelect('ithemecontent2');
+	
+	zy_con("themecontent2", "fb-theme_content.html", 0, $$("hd2").offsetHeight);
+	uexWindow.setPopoverFrame('themecontent1', 0, 0, 0, 0);
+}
+
+var pages =[];
+var preid = 0;
+var curid = 0;
+var ppurl = ['', 'theme-yd_content.html', 'fb-theme_content.html'];
+function cancleEdit(i){
+	if (curid == i)  return;
+	if(i==1){
+		//$$('huifuDiv').style.display = 'block';
+	}else{
+		$$('huifuDiv').style.display = 'none';
+	}
+	var idih = 'ihd'+i;
+	var idic = 'ict'+i;
+	radioSelect(idih);
+	radioSelect(idic);
+	if(!pages[i]) pages[i]={ld:0, x:0};
+	preid = curid;
+	curid = i;
+	var idc = 'themecontent'+i;
+	var idh = 'hd'+i;
+	var osH = $$(idh).offsetHeight;
+	
+	if(!pages[i].y){
+		var s = window.getComputedStyle($$(idc),null);
+		pages[i].y = osH;
+		pages[i].width = int(s.width);
+		pages[i].height = int(s.height);
+	}
+	if (preid > 0) {
+		var pervc = 'themecontent' + preid;
+		//logs('navSelected2-->idc=' + idc + ', y=' + pages[i].y + ', w=' + pages[i].width + ', h=' + pages[i].height + ', pervc=' + pervc);
+		uexWindow.setPopoverFrame(pervc, 0, 0, 0, 0);
+	}
+	if(!pages[i].ld){
+		pages[i].ld = 1;
+		zy_con(idc, ppurl[i], 0, osH);
+		if(i==2){
+			setTimeout(function(){
+				uexWindow.evaluatePopoverScript("theme-yd", 'themecontent2', 'loadArticleInfo()');
+			}, 200);
+		}
+	}else{
+		uexWindow.setPopoverFrame(idc, 0, pages[i].y, pages[i].width, pages[i].height);
+	}
+}
+
+function radioSelect(id){
+	var ret = 0;
+	var e = $$(id);
+	if(e && !e.checked){
+		e.checked = true;
+		ret = 1;
+	}
+	return ret;
+}
+window.uexOnload = function(type){
+    if (!type) {
+		cancleEdit(1);
+        //zy_con("themecontent1", "theme-yd_content.html", 0, $$("hd1").offsetHeight);
+    }
+	
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("themecontent1",0,$$("hd1").offsetHeight);				
+	}
+}
+</script>
+</html>

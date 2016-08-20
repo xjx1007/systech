@@ -1,0 +1,40 @@
+﻿alter table Knet_Procure_Suppliers add KPS_Flow int default 0
+alter table Knet_Procure_Suppliers add KPS_State int default 0
+
+alter table Knet_Procure_Suppliers add KPS_SuppCode varchar(50)
+
+update Knet_Procure_Suppliers set KPS_State=0
+
+select * from PB_Basic_Mail
+where PBM_State=0
+
+delete from PB_Basic_Mail
+where PBM_State=0
+
+update PB_Basic_Mail
+set PBM_Minute=0,PBM_ReceiveEmail='xiangzhou@bremax.com'
+where PBM_State=0
+select * from Knet_Procure_OrdersList 
+where ParentOrderNo='POTC150026'
+
+update Knet_Procure_OrdersList
+set OrderCheckYN='0'
+where ParentOrderNo='POTC150026'
+
+
+
+create Table PB_Basic_Sample_ProductsDetails
+(
+	PBSP_ID varchar(50) primary key,
+	PBSP_FID varchar(50),
+	PBSP_ProductsType varchar(50),
+	PBSP_ProductsTypeName varchar(50),
+	PBSP_SuppNo varchar(50),
+	PBSP_SuppName varchar(50),
+	PBSP_ProductsEdition varchar(500),
+	PBSP_Number int default 1,
+	PBSP_Price decimal(18,3),
+	PBSP_Remarks varchar(500),
+	PBSP_ProductsBarCode varchar(50),
+	PBSP_FProductsBarCode varchar(50),
+)

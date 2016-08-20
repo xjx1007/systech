@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script src="../../js/zepto_js/zepto.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+	<div id="ProductsPage" class="up ub ub-ver uof" tabindex="0">
+		<div id="loading" style="display: none;"></div>
+  		<div id="header" class="c-blu3 c-m2 t-wh ub">
+  			<div id="header_title" class="ub bar bar-wh pos-relative" >
+	  			<div class=" ub-ac tx-l ub-f1 umar-r ubr b-gra" style="height:100%">
+	  				<button class="button button-icon icon ion-chevron-left t-blu4" onclick="back()"></button>	
+				</div>
+	 			<div class="uinn7">
+					<div class="t-bla ub c-wh uinput  uinn4" >	
+					   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="searchList()">
+					   		<div style="width:1em"></div>
+					   		<div class="res_search1 umw1 ub-img"></div>
+						</div>
+					   <div class="ub-f1 uinn1">
+					   	<input placeholder="搜索" id="searchtext" type="text" oninput="searchList()"> 
+					  </div> 
+					   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="cancelSearch()" >
+					   		<div style="width:1em"></div>
+							<div class="res-clear umw1 ub-img"></div> 
+					   </div>
+					 </div>
+				</div>
+				
+			</div>
+		</div>
+        <div id="headers" class="ub ubb b-gra">
+			<div class="ub-f1 uinn">
+			<!--按钮开始-->
+			<!--<div ontouchstart="zy_touch('btn-act');" onclick="toggleIntr()" class="btn uinn5 c-wh c-m1 uc-a1 t-bla toggleIntr">隐藏产品详细</div>-->
+			<div ontouchstart="zy_touch('btn-act');" onclick="addToShopCar()" class="btn uinn5 uc-a1 t-wh toggleIntr" style="background-color:#E4572C">加入购物车</div>
+			<!--按钮结束-->
+			</div>
+			<div class="ub-f1 uinn">
+			<!--按钮开始-->
+			<div ontouchstart="zy_touch('btn-act');" onclick="goToShopCar()" class="btn uinn5 uc-a1 t-wh" style="background-color:#5197CE"><div class="ub-f1 ub-img5 tp-shop"><span class="tips" id="tips"></span></div>进入购物车</div>	
+			<!--按钮结束-->
+			</div>
+		</div>
+        <div id="content" class="ub-f1 ub">
+        </div>
+		<div id="footer" class="uf c-m2 c-bla t-wh">
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+var show = false;   //是否显示详细 
+//显示/隐藏产品详细
+function toggleIntr(){
+	if(show){
+		uexWindow.evaluatePopoverScript("SearchProduct","content","showIntr()");
+		$('.toggleIntr').html('隐藏产品详细');
+		show = false;	
+	}else{
+		uexWindow.evaluatePopoverScript("SearchProduct","content","hideIntr()");
+		$('.toggleIntr').html('显示产品详细');
+		show = true;
+	}
+}
+
+//添加到购物车
+function addToShopCar(){
+	uexWindow.evaluatePopoverScript("SearchProduct","content","getCheckBoxValue()");
+	showTips();
+}
+
+//进入购物车
+function goToShopCar(){
+	uexWindow.evaluateScript("EditProductPage","content","openShopCar()");
+	back();
+}
+
+//显示tips
+function showTips(){
+	var arrValue = [];
+	//从缓存中取出购物车信息
+	if (getstorage("shopCar") != '') {
+		arrValue = JSON.parse(getstorage("shopCar"));
+	}
+	setHtml('tips', arrValue.length);
+	if (arrValue.length > 0){
+		$$('tips').style.display = "block";
+	}
+}
+
+function orientationChange(){  // 横竖屏切换时自适应
+	zy_resize('content', 0, $$("header").offsetHeight+$$("headers").offsetHeight);
+}
+
+function getPageNewInfo(){
+	uexWindow.evaluatePopoverScript("SearchProduct", "content", "getProductsList_search()");
+}
+
+window.uexOnload = function(type){
+	if (!type) {	
+		showTips();
+		setstorage('theProductWindow', 'SearchProduct');
+		setstorage("catalogId",'');
+		zy_con('content', 'Products_content.html', 0, $$("header").offsetHeight+$$("headers").offsetHeight);
+	}
+	window.onorientationchange=window.onresize=orientationChange;
+}
+</script>
+</html>

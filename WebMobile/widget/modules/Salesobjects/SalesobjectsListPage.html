@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../font-sae/font-sae.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/DateOrTime.js"></script> 
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Salesobject.js"></script>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	 销售目标页面	 	-->
+    <div class="up ub ub-ver" tabindex="0">
+    	<div id="loading" style="display: none;"></div>
+  		<div id="header">
+  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+				<div class="ub-f1 ut ulev-11 tx-c">
+					<div class="ub b-blu2 ufr t-blu5">
+						<input id="menu1" class="uhide" type="radio" name="typemenu" value="week" value="unassigned">	
+						<div ontouchstart="zy_touch('focuss')" onclick="setDateMenuSelected(1)" class="btn-head ub-f1 uinn4 "><div class="uba b-wh b-object">周</div></div>
+						<input id="menu2" class="uhide" type="radio" name="typemenu" value="month" checked="true">	 
+						<div ontouchstart="zy_touch('focuss')" onclick="setDateMenuSelected(2)" class="btn-head ub-f1 uinn4"><div class="uba b-wh b-object">月</div></div>	
+						<input id="menu3" class="uhide" type="radio" name="typemenu" value="quarter">
+						<div ontouchstart="zy_touch('focuss')" onclick="setDateMenuSelected(3)" class="btn-head ub-f1 uinn4"><div class="uba b-wh b-object">季</div></div>
+					</div>
+				</div>
+			</div>
+			<div class="c-wh uinn7 t-wh" id="view_sel_div">
+				<div class="ub ulev-1 " >
+					<input id="view_1" class="uhide" type="radio" name="viewmenu" value="gather">
+					<div class="ub-con1 ubb1 ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="changeView(1)">回款额</div>
+					<input id="view_2" class="uhide" type="radio" name="viewmenu" value="salesorder" checked="true">
+					<div class="ub-con1 ubb1  ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="changeView(2)">销售额</div>
+					<input id="view_3" class="uhide" type="radio" name="viewmenu" value="account">
+					<div class="ub-con1 ubb1 ub-f1 tx-c tp-view uof" ontouchstart="zy_touch('focuss')" onclick="changeView(3)">客户数</div>
+				</div>
+			</div>
+			<!--下拉列表开始-->
+			<div class="c-wh ub t-bla uinn "  > 
+			  <div class="btn ub ub-ac sel" style="min-width:25%;margin:0 auto">
+			  <div class="ub-f1 tx-c"></div>
+			  <div class="umh1 umw1" style="right:0.2em;">&nbsp;<i class="icon ion-arrow-down-b"></i></div>
+				<select name="fanweisel" selectedindex="0" id="fanweisel" onchange="zy_selectmenu(this.id);changeFanWei();">
+				</select>
+				</div>
+			</div> 
+			<!--下拉列表结束-->
+			<!--下拉列表开始-->
+
+			<!--下拉列表结束-->
+		</div>
+        <div id="content" class="ub-f1 tx-l t-bla c-gra4">
+        </div>
+		<div id="footer" class="uf" >
+			<div class="ub ubt b-gra">
+				<div class="uinn ub-f1 tx-c button-clear" ontouchstart="zy_touch('btn-act');" onclick="getLast()"><div class="ub-f1 tx-c"><i class="icon-chevron-left"></i></div></div>
+				<div class="uinn ub-f3 tx-c button-clear" ><span id="startDate"></span><span id="endDate"></span></div>
+				<div class="uinn ub-f1 tx-c button-clear" ontouchstart="zy_touch('btn-act');" onclick="getNext(0)"><div class="ub-f1 tx-c"><i class="icon-chevron-right"></i></div></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+setstorage('thePage', 'Calendar');
+function updatePageInfo(){
+	$$('startDate').innerHTML = getstorage("startDate");
+	if (datemenus == 'day') {
+		$$('endDate').innerHTML = '';
+	}else {
+		$$('endDate').innerHTML = '--'+getstorage("endDate");
+	}
+	getPageNewInfo();
+}
+
+function changeFanWei(){
+	setstorage('fanweisel', $$("fanweisel").value);
+	getPageNewInfo();
+}
+
+function changeView(n) {
+	var viewId = radioSelect('view_'+n);
+	if (viewId != 'notChange') {
+		setstorage('object_type',viewId);
+		getPageNewInfo();
+	}
+}
+
+function getPageNewInfo(){
+	uexWindow.evaluatePopoverScript("SalesobjectsListPage", "content", "salesobjectobj.GetListFromServer()");
+}
+
+var salesobjectobj = new SalesobjectObj('mobileSalesobjects');
+window.uexOnload = function(type){
+	if (!type) {
+		setstorage('fanweisel', 'all_to_me');
+		setstorage('object_type','salesorder');
+		datemenus = 'month';
+		getTheMonthDate(myDate.getFullYear(),myDate.getMonth());
+		$$('startDate').innerHTML = getstorage("startDate");
+		$$('endDate').innerHTML = '--'+getstorage("endDate");
+		var s = window.getComputedStyle($$('header'), null);
+		var em = int(s.fontSize);
+		var x = 0;
+		var y = int($$("header").offsetHeight);
+		var w = int(s.width);
+		var h = int(window.innerHeight) - int($$("header").offsetHeight)-int($$("footer").offsetHeight);
+		uexWindow.openPopover('content', "0", 'SalesobjectsListPageContent.html', "", x, y, w, h, em, 128);
+		//zy_con("content", "SalesobjectsListPageContent.html", 0, $$("header").offsetHeight);
+		salesobjectobj.GetFanWeiFromServer();
+	}
+	window.onorientationchange=window.onresize=function(){
+		zy_resize("content",0,$$("header").offsetHeight);
+	}
+}
+</script>
+</html>

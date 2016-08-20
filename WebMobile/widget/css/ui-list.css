@@ -1,0 +1,58 @@
+
+.lis , .lis-m div
+{ 
+	padding:0.4em;
+}
+.lis-icon
+{ 
+	width:3em;
+	height:3em;
+	margin-right:0.4em;
+}
+.lis-th{
+	width:4em;
+	margin:0em 0.4em 0em 0px;
+	min-height:4em;
+}
+.lis-sw
+{
+	width:0.6em;
+	height:1em;
+	margin-left:0.4em;
+}	
+
+.lis-sw-1
+{
+	width:1.1em;
+	height:1.3em;
+	margin-left:0.4em;
+}
+
+.lis-sw-2	
+{
+	width:1.5em;
+	height:1.5em;
+	margin-left:0.4em;
+}	
+
+.lis-sw-3
+{
+	width:0.7em;
+	height:0.7em;
+	margin:0.3em;
+}
+
+.lis-sw-4
+{
+	width:0.8em;
+	height:0.8em;
+	margin:0.2em 0em ;
+}
+
+.lis-sw-5
+{
+	width:0.9em;
+	height:0.9em;
+	margin:0 auto;
+	padding:0.15em;
+}

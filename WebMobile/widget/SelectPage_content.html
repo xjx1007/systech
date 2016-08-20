@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="css/ui-input.css">
+		<link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/my-color.css">
+		<link rel="stylesheet" href="css/ui-res.css">
+		<link rel="stylesheet" href="css/ui-btn.css">
+		<link rel="stylesheet" href="css/ui-img.css">
+    	<link rel="stylesheet" href="css/ui-list.css">
+		<link rel="stylesheet" href="css/ui-tab.css">
+		<link rel="stylesheet" href="css/scroller.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="font-sae/font-sae.css">
+        <script src="js/zy_control.js"></script>
+		<script src="js/zy_anim.js"></script>
+		<script src="js/zy_json.js"></script>
+        <script src="js/zy_click.js"></script>
+		<script src="js/zepto_js/zepto.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+        <title>易客 CRM</title>
+		<script type="text/javascript" src="js/iscroll.js"></script>
+    <script> 	
+	var jApp = $.noConflict(true);
+	var myScroll,pullUpEl, pullUpOffset,generatedCount = 0;
+	function pullDownAction () {
+			setTimeout(function () {
+			//var cid = localStorage.getItem('cid');
+			/**
+			 * 这个地方就是下拉刷新时操作，比如重新加载数据
+			 * 外部的setTimeout 在正式环境可以去除，此处只是为了显示一个延迟的效果
+			 */
+			//getNewsList(cid);
+			
+			myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
+		}, 3000);
+		uexWindow.toast('0','5','刷新成功','2000');
+	}
+	
+	function pullUpAction () {
+		loadNextPage();
+		myScroll.refresh();	
+	}
+	
+	function loaded() {
+		pullUpEl = document.getElementById('pullUp');
+		pullUpOffset = pullUpEl.offsetHeight;
+		
+		myScroll = new iScroll('wrapper', {
+			fixedScrollbar:false,
+			vScrollbar:true,
+			checkDOMChanges:true,
+			useTransition: true,
+			onRefresh: function () {
+				if (pullUpEl.className.match('loading')) {
+					pullUpEl.className = '';
+					
+				} 
+			},
+			onScrollMove: function () {
+				if (parseInt($$("currPage").innerHTML) < parseInt($$("lastPage").innerHTML)) {
+					if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+						pullUpEl.className = 'flip';
+						setHtml("pullUpLabel", '松开加载更多...');
+						this.maxScrollY = this.maxScrollY;
+					}else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+						pullUpEl.className = '';
+						setHtml("pullUpLabel", '上拉加载更多...');
+						this.maxScrollY = pullUpOffset;
+					}
+				}
+			},
+			onScrollEnd: function () {
+				if (pullUpEl.className.match('flip')) {
+					pullUpEl.className = 'loading';
+				    setHtml("pullUpLabel", '正在加载...');			
+					pullUpAction();	// Execute custom function (ajax call?)
+				} 
+			}
+		});
+		
+		setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+	}
+	
+	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+	
+</script>
+</head>
+<body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+	<!--块容器开始-->		
+	<div style="overflow: hidden; left: 0px;" id="wrapper" >
+		<div style="-moz-transition-property: -moz-transform; -moz-transform-origin: 0px 0px; -moz-transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1); -moz-transform: translate(0px, -51px) scale(1) translateZ(0px); -moz-transition-duration: 0ms;" id="scroller">
+			<div id="content" class="ub-f1 tx-l c-gra4 t-bla">
+	        	<!--列表开始-->
+				<div id="list" class="us uc-n" >
+				</div>
+				<!--列表结束-->
+	        </div>
+			<div class="ub-f1 uinn tx-c" id="pullUp">
+				<h1 id="pullUpLabel" class="ut ulev1 ut-s tx-c"></h1>
+			</div>
+			<span id="currPage" style="display: none;">1</span>
+			<span id="lastPage" style="display: none;">1</span>
+		</div>
+	 </div>
+</body>
+<script type="text/javascript" src="js/LanguageResources.js"></script>
+<script type="text/javascript" src="js/Application.js"></script>
+<script type="text/javascript" src="js/BaseModule.js"></script>   
+<script src="js/jquery.min.js"></script>
+<script>
+zy_init();
+function SEACObj(name){			//构造函数伪装，把Obj实例伪装成Module实例，来继承Module的属性
+	Module.call(this,name); 
+	for(var attr in Module.prototype){
+	      SEACObj.prototype[attr] = Module.prototype[attr];
+	};
+};
+
+SEACObj.prototype.GetListFromServer=function(){  //获取列表(实例方法)
+	var searchtext = getstorage("searchtext");  //搜索条件
+	if(!searchtext) searchtext = '';
+	var viewsel = '';   //视图id
+	this.method = 'get_entry_list';
+	this.inJQ = true;
+	this.rest_data = '{"session":"' + this.CurrentUserId + '",' +
+        '"module_name":"'+this.name+'",' +
+        '"query":"'+searchtext+'",' +
+        '"offset":' + this.offset + ',' +
+        '"max_results":' + RowsPerPageInListViews + ',' +
+        '"sel":"'+viewsel+'"}';
+	this.RequestServer();
+}; 
+
+SEACObj.prototype.ShowList = function(data){ //显示列表(实例方法)
+	if(selectMode == 'potential'){
+		this.showPotentials(data);
+	}else if(selectMode == 'account'){
+		this.showAccounts(data);
+	}
+}
+
+SEACObj.prototype.ShowResultToClient=function(method,data){  //显示结果(实例方法)
+	switch(method){
+		case 'get_entry_list':
+			this.ShowList(data);
+			break;
+	}
+};  
+
+//获取列表
+function getList(){
+	seacobj.offset = 1;  
+	setHtml("list", '');
+	setHtml("pullUpLabel", '');
+	seacobj.GetListFromServer();
+}
+	
+//记录当前页数和最大页数
+function setpagenum(currpage,lastpage){
+	setHtml("currPage", currpage);
+	setHtml("lastPage", lastpage);
+}
+
+//加载下一页
+function loadNextPage(){
+	var offsetPage = 1;
+	if(parseInt($$("currPage").innerHTML) == parseInt($$("lastPage").innerHTML)){
+		return false;
+	}
+	seacobj.offset = parseInt($$("currPage").innerHTML)+parseInt(1);
+	setHtml("currPage", seacobj.offset);
+	seacobj.GetListFromServer();
+}
+
+SEACObj.prototype.showAccounts=function(data){ //显示列表
+	var outNewsObj = $("#list");
+	var accountsList = data;
+	if ((accountsList !== undefined) && (accountsList.entry_list !== undefined)) {
+		var intAccount = 0;
+		for (intAccount = 0; intAccount < accountsList.entry_list.length; intAccount++) {
+			if (accountsList.entry_list[intAccount] !== undefined) {
+				
+				var whitebg = "c-wh";
+				if(intAccount%2==0)
+					whitebg = ""; 
+				
+				var forumObj = '';
+				var account = accountsList.entry_list[intAccount];
+				var accInfo = {
+					'id': account.id,
+					'name': account.name_value_list.name.value,
+					'contacts': account.name_value_list.contacts.value
+				}
+				forumObj += '<input id="accInfo_' + account.id + '" value=\'' + JSON.stringify(accInfo) + '\' class="uhide b-gra">';
+				forumObj +='<ul ontouchstart="zy_touch(\'btn-act\')" onclick="setAccountField(\'' + account.id + '\');" class="ubb ub b-gra ub-ac lis '+whitebg+'">';
+				forumObj +='<ul class="ub-f1 ub ub-ver"><li class="ub ub-f1"><div class="li_2_2 ub-f1"><i class="icon-home"></i>&nbsp;<span class="li_2_text">'+account.name_value_list.name.value+'</span></div><div class="ufr li_4">'+account.name_value_list.rating.value +'</div></li>';
+				var keyContact = '';
+				if(isDefine(account.name_value_list.keycontact.value)){  //如果设置了首要联系人
+					keyContact += '<i class="icon-user"></i>&nbsp;<span class="li_2_text">'+account.name_value_list.keycontact.value+'</span>:';
+					if(isDefine(account.name_value_list.keycontact.value)){  //首要联系人设置了手机
+						keyContact += '<i class="icon-phone"></i>&nbsp;'+account.name_value_list.keymobile.value;
+					}
+					if(isDefine(account.name_value_list.keyqq.value)){   //首要联系人设置了QQ
+						keyContact += '<i class="icon-qq"></i>&nbsp;'+account.name_value_list.keyqq.value;
+					}
+				}
+				forumObj +='<li class="li_2_2">'+keyContact+'</li>';  
+				if (isDefine(account.name_value_list.latestnote.value)) {
+					forumObj += '<li class="li_2_2"><i class="icon-calendar"></i>&nbsp;' + account.name_value_list.latestnote.value + '</li>';
+				}
+				forumObj +='</ul><li class="res8 lis-sw ub-img"></li></ul>';
+				outNewsObj.append(forumObj);
+			}
+		}
+		if (accountsList.lastpg > 0) {
+			setpagenum(this.offset,accountsList.lastpg);
+			if (parseInt($$("currPage").innerHTML) == parseInt($$("lastPage").innerHTML)) {
+				setHtml("pullUpLabel", '已全部加载完毕');
+			}else {
+				setHtml("pullUpLabel", '显示更多...');
+			}
+		}
+		if (accountsList.entry_list.length == 0) {
+			setHtml("pullUpLabel", '还没有记录哦!!');
+		}
+	}		
+}
+
+function setAccountField(aid){
+	setstorage("selInfo",$$('accInfo_'+aid).value);
+	uexWindow.evaluateScript('SelectPage','0',"back()");
+	var theMode = getstorage('theMode');
+	//alert(theMode);
+	if(theMode == 'publishArticle'){
+		uexWindow.evaluatePopoverScript("fb-theme", "fbthemec", "addAccount()");
+	}else if (theMode == 'markAccount') {
+		uexWindow.evaluateScript('MarkAccount', '0', "selAccount()");
+	}else if (theMode == 'locationShooting') {
+		uexWindow.evaluateScript('LocationShooting', '0', "selAccount()");
+	}else if (theMode == 'edit') {
+		uexWindow.evaluatePopoverScript('EditPage', 'content', "setAccInfo()");
+	}else {
+		uexWindow.evaluatePopoverScript('CreateNewPage', 'content', "setAccInfo()");
+	}
+}
+
+SEACObj.prototype.showPotentials=function(data){
+	var outNewsObj = $("#list");
+	var listObj = data;
+	if ((listObj !== undefined) && (listObj.entry_list !== undefined)) {
+		var i = 0;
+		for (i = 0; i < listObj.entry_list.length; i++) {
+			if (listObj.entry_list[i] !== undefined) {
+				var forumObj = '';
+				var theBill = listObj.entry_list[i];
+				var ordInfo = {
+					'potentialid': theBill.id,
+					'potentialname': theBill.name_value_list.name.value,
+				}
+				var whitebg = "c-wh";
+				if(i%2==0)
+					whitebg = "";
+					
+				var theBillPText = '';
+				forumObj += '<input id="ordInfo_' + theBill.id + '" value=\'' + JSON.stringify(ordInfo) + '\' class="uhide b-gra">';
+				forumObj += '<ul ontouchstart="zy_touch(\'btn-act\')" onclick="setPotentialField(\'' + theBill.id + '\');" class="ubb ub b-gra ub-ac lis '+whitebg+'">';
+				forumObj +='<li class="ub " style="width:25%"><ul class="ub-f1 ub ub-ver tx-c "><li class="ub-f1 ulev2 t-gre tx-c tx_bold"><div>'+
+				theBill.name_value_list.probability.value +'%</div></li><li class="ub-f1 ulev2 t-gre tx-c tx_bold"><div>'+
+				theBill.name_value_list.potentstatus.value +'</div></li><li class="ub-f1 ulev-1 t-gra1 tx-c"><div>'+
+				theBill.name_value_list.closingdate.value+'</div></li></ul></li>';
+				
+				forumObj +='<ul class="ub-f1 ub ub-ver"><li class="ub li_1_1">';
+				forumObj +='<div class="ub-f2 li_2_text">'+theBill.name_value_list.name.value+'</div>'; 
+				forumObj +='</li>';
+				    
+				forumObj +='<li class="ub li_3">';
+				forumObj +='<div class="ub-f1"><span class="li_3_2 t-org1 ulev1 tx_bold">￥'+theBill.name_value_list.probableamount.value +'</span></div>';  
+				if(theBill.name_value_list.contactname.value)
+					forumObj +='<li class="ub li_3 t-gra1">'+theBill.name_value_list.accountname.value +'(<div class="li_3" style="text-indent:0">'+theBill.name_value_list.contactname.value+'</div>)</li>';       //客户名称
+				else
+					forumObj +='<li class="ub li_3 t-gra2">'+theBill.name_value_list.accountname.value +'</li>'; //客户名称          
+				forumObj +='</ul><li class="res8 lis-sw ub-img"></li></ul>';
+				
+				outNewsObj.append(forumObj);
+			}
+		}
+		if (listObj.lastpg > 0) {
+			setpagenum(this.offset,listObj.lastpg);
+			if (parseInt($$("currPage").innerHTML) == parseInt($$("lastPage").innerHTML)) {
+				setHtml("pullUpLabel", '已全部加载完毕');
+			}else {
+				setHtml("pullUpLabel", '显示更多...');
+			}
+		}
+		if (listObj.entry_list.length == 0) {
+			setHtml("pullUpLabel", '还没有记录哦!!');
+		}
+	}		
+}
+
+function setPotentialField(id){
+	setstorage("selInfo",$$('ordInfo_'+id).value);
+	uexWindow.evaluateScript('SelectPage','0',"back()");
+	var theMode = getstorage('theMode');
+	if (theMode == 'edit') {
+		uexWindow.evaluatePopoverScript('EditPage', 'content', "setPotInfo()");
+	}else {
+		uexWindow.evaluatePopoverScript('CreateNewPage', 'content', "setPotInfo()");
+	}
+}
+
+var seacobj;
+var selectMode;
+
+window.uexOnload = function(type){
+	if (!type) {
+		selectMode = getstorage('selectMode');
+		if(selectMode == 'potential'){
+			seacobj = new SEACObj('mobilePotentials');
+		}else if(selectMode == 'account'){
+			seacobj = new SEACObj('mobileAccounts');
+		}
+		getList();
+	}
+}
+</script>
+</html>

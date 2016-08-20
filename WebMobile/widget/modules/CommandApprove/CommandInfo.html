@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../font-sae/font-sae.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+		<style type="text/css">
+		img{max-width:100%;}
+		</style> 
+		<style type="text/css"> 
+.arrow_box {
+	position: relative;
+	background: #EEEEEE;
+	border: 1px solid #CCCCCC;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(238, 238, 238, 0);
+	border-bottom-color: #EEEEEE;
+	border-width: 9px;
+	left: 6%;
+	margin-left: 1px;
+}
+.arrow_box:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #CCCCCC;
+	border-width: 10px;
+	left: 6%;
+	margin-left: 0px;
+}
+
+.arrow_box2 {
+	position: relative;
+	background: #ffffff;
+}
+.arrow_box2:after, .arrow_box2:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box2:after {
+	border-color: rgba(238, 238, 238, 0);
+	border-bottom-color: #ffffff;
+	border-width: 9px;
+	margin-left: 1px;
+}
+
+.arrow_box2:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #4a87ee;
+	border-width: 10px;
+	margin-left: 0px;
+}
+
+.arrow_box_15,.arrow_box_25,.arrow_box_85{
+	border: 1px solid #4a87ee;
+}
+
+.arrow_box_15:before,.arrow_box_25:before,.arrow_box_85:before{
+	border-bottom-color: #4a87ee;
+}
+
+.arrow_box_50,.arrow_box_75{
+	border: 1px solid #f0b840;
+}
+
+.arrow_box_50:before,.arrow_box_75:before{
+	border-bottom-color: #f0b840;
+}
+
+.arrow_box_15:after,.arrow_box_15:before{
+	left: 15%;
+}
+.arrow_box_25:after,.arrow_box_25:before{
+	left: 25%;
+}
+.arrow_box_50:after,.arrow_box_50:before{
+	left: 50%;
+}
+.arrow_box_75:after,.arrow_box_75:before{
+	left: 75%;
+}
+.arrow_box_85:after,.arrow_box_85:before{
+	left: 85%;
+}
+</style> 
+        <title>易客 CRM</title>
+</head>
+<body class="um-vp" ontouchstart>
+	<div class="ub t-bla umh4 lis3" id="titlelist">	 
+		<div class="ub ub-rev ub-ac">
+			<div class="avatar">
+				<img src="../../css/images/avatar_default1299eb.png"  id="avatar_pic"/>
+			</div>
+		</div>
+		<div class="ub-f1 ub ub-ver lis3">	
+			<div class="ub ub-hor"> 
+				<div class="ub-f1 ub-hor ufl ulev-1 tx_bold"> 
+					<div class="umar-l">
+						<span id="author">&nbsp;&nbsp;</span>
+					</div> 
+				</div>  		
+				<div class="ub ub-hor ufr ulev-2"> 
+					<div class="umar-l">
+						<span class="t-gra" id="item_type">指令</span>&nbsp;-&nbsp;
+						<span class="t-gra" id="item_status">执行中</span>
+					</div>
+				</div>    
+			</div>	 
+			<div class="ub ub-ac t-gra ulev-1 umar-t"> 
+				<div class="ub ub-hor ufl"> 
+					<div class="umar-l" id="pitem"></div>
+				</div> 
+			</div>	 
+		</div>      
+	</div>
+	<div class="ub ub-ver">
+		<!--<div class="con-img umar-a"><img src="css/images/sds.jpg" class="img-con"/></div>-->	
+		<div class="umar-a linh2 ulev0 umh8" >
+			<div class="arrow_box uc-a1 uinn" id="tztext"> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			<div id="imglist_div"> 
+			</div>
+			<div id="cc_user_div"> 
+			</div>
+			<div id="address_div"> 
+			</div>
+			<div class="ub ub-ver ulev-1 uinn t-gra" style="border-bottom: 1px dashed #DDD;margin-top:1em;" id="createtime_div"> 
+			</div>
+			<div id="keycomlist_div" style="margin-top:1em;"> 
+			</div>
+			<div id="handlediv" style="margin-top:1em;background-color:#EEEEEE;display:none;">
+				<div class="uinn ulev-1" style="border-bottom: 1px dashed #DDD;">您可以执行以下操作:</div>
+				<div id="buttondiv1">
+					<div class="ub">
+						<div class="ub-f1 ub-con uinn">
+						<!--按钮开始-->
+						<div ontouchstart="zy_touch('btn-act');" onclick="commentItem(0);" class="btn uinn5 uc-a1 uba t-wh tx-c outline-positive">继续执行</div>
+						<!--按钮结束-->
+						</div>
+						<div class="ub-f1 ub-con uinn">
+						<!--按钮开始-->
+						<div ontouchstart="zy_touch('btn-act');" onclick="commentItem(1);" class="btn uinn5 c-cancle uc-a1 uba t-wh outline-energized">取消指令</div>	
+						<!--按钮结束-->
+						</div>
+						<div class="ub-f1 ub-con uinn">
+						<!--按钮开始-->
+						<div ontouchstart="zy_touch('btn-act');" onclick="commentItem(2);" class="btn uinn5 uc-a1 uba t-wh tx-c outline-positive">已经完成</div>	
+						<!--按钮结束-->
+						</div>
+					</div>
+				</div>
+				<div id="buttondiv2" style="display:none">
+					<div class="ub">
+						<div class="ub-f1 ub-con uinn">
+						<!--按钮开始-->
+						<div ontouchstart="zy_touch('btn-act');" onclick="commentItem(3);" class="btn uinn5 uc-a1 uba t-wh tx-c outline-positive">不同意</div>	
+						<!--按钮结束-->
+						</div>
+						<div class="ub-f1 ub-con uinn">
+						<!--按钮开始-->
+						<div ontouchstart="zy_touch('btn-act');" onclick="commentItem(4);" class="btn uinn5 c-cancle uc-a1 uba t-wh outline-energized">同意</div>	
+						<!--按钮结束-->
+						</div>
+					</div>
+				</div>
+				
+				<div class="arrow_box2 uc-a1 uinn4 umar-a arrow_box_15" id="arrow_box2">
+					<div class="ub-f1 c-wh uc-a1 b-wh uinput ub ub-ver">  
+						<input class="uhide" value=""  id="description">
+					 	<textarea placeholder="请输入内容"  class="uc-a1 ub-f1" style="min-height:5em;" id="opt_description"></textarea> 
+					 </div>
+				</div>
+				<div class="ub">
+					<div class="ub-f1 ub-con uinn">
+						
+					</div>
+					<div class="ub-f1 ub-con uinn">
+						
+					</div>
+					<div class="ub-f1 ub-con uinn">
+					<!--按钮开始-->
+					<div ontouchstart="zy_touch('btn-act');" onclick="optComment(1);" class="btn uinn5 uc-a1 uba t-wh tx-c outline-positive">确认发布</div>	
+					<!--按钮结束-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="comlist">
+	</div>
+</body>
+<script type="text/javascript" src="../../js/module_js/CommandApprove.js"></script>
+<script>
+zy_init();
+var cmobj = new CMObj('commandApprove');
+var ii = 0;
+var imglists = [];
+var picshow=[];
+var showpic=[];
+function gotop(){
+	window.scroll(0,0);
+}
+var old_idx = 0;
+var curr_status = -1;
+function commentItem(idx){
+	if(idx == old_idx){
+		return ;
+	}
+	switch(idx){
+		case 0:
+			curr_status = 0;
+			$$('arrow_box2').className = "arrow_box2 uc-a1 umar-a uinn4 arrow_box_15";
+			break;
+		case 1:
+			curr_status = 2;
+			$$('arrow_box2').className = "arrow_box2 uc-a1 umar-a uinn4 arrow_box_50";
+			break;
+		case 2:
+			curr_status = 1;
+			$$('arrow_box2').className = "arrow_box2 uc-a1 umar-a uinn4 arrow_box_85";
+			break;
+		case 3:
+			curr_status = 3;
+			$$('arrow_box2').className = "arrow_box2 uc-a1 umar-a uinn4 arrow_box_25";
+			break;
+		case 4:
+			curr_status = 1;
+			$$('arrow_box2').className = "arrow_box2 uc-a1 umar-a uinn4 arrow_box_75";
+			break;
+	}
+	old_idx = idx;
+}
+
+function showImg(imglist){
+	var array = imglist.split('[img]');
+	array.shift();
+	for(var i=0;i<array.length;i++){
+		array[i]=cmobj.AjaxUrl+'/'+array[i];
+	}
+	uexImageBrowser.open(array);
+}
+
+function replyTo(sname){
+	uexWindow.evaluateScript('CommandDetailsPage','0','replyToSb("'+sname+'")');
+}
+
+function optComment(){
+	$$("description").value = $$("opt_description").value;
+	$$("opt_description").value = "";
+	cmobj.SendComment(1);
+}
+
+function goToComment(tt){
+	$$("description").value = tt;
+	cmobj.SendComment(0);
+}
+
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0","rgba(170,170,170,0)","1");
+		uexWindow.showBounceView("1","rgba(170,170,170,0)","0");
+		//cmobj.articleid = getstorage('CurrentArticleId');
+		cmobj.itemid = getstorage('CurrentCommandId');
+		cmobj.setCommandDetails(); //获取指令详细
+	}
+	
+	uexWindow.onBounceStateChange = function (type,status){
+		uexWindow.resetBounceView('0');
+		if (status == 1) {
+			cmobj.setCommandDetails(); //获取指令详细
+		}
+	}
+	uexWindow.notifyBounceEvent("0","1");
+}
+</script>
+</html>

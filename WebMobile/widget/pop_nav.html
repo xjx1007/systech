@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="dist/css/ionic1.css">
+		<link rel="stylesheet" href="css/ui-input.css">
+		<link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+		<link rel="stylesheet" href="css/ui-res.css">
+		<link rel="stylesheet" href="css/ui-btn.css">
+		<link rel="stylesheet" href="css/ui-img.css">
+    	<link rel="stylesheet" href="css/ui-list.css">
+		<link rel="stylesheet" href="css/ui-tab.css">
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <script src="js/zy_control.js"></script>
+		<script src="js/zy_anim.js"></script>
+		<script src="js/zy_json.js"></script>
+        <script src="js/zy_click.js"></script>
+		<script type="text/javascript" src="js/LanguageResources.js"></script>
+		<script type="text/javascript" src="js/Application.js"></script>  
+		<script type="text/javascript" src="js/Pagination.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body>
+    <body class="um-vp">
+	<div class="ub tab2 ubt b-gra c-wh">	
+		<div class="uinn ub-f2 ub tx-c" onclick="turnpage(0)">
+			<div class="ub-f1 tx-c button-clear "><i class="icon-double-angle-left tx_bold "></i></div> 
+		</div>
+		<div class="uinn ub-f2 ub tx-c" onclick="turnpage(-1)">
+			<div class="ub-f1 tx-c button-clear "><i class="icon-angle-left tx_bold "></i></div>
+		</div>
+		<div class="uinn ub-f3 tx-c button-clear" id="pageSel" style="font-size:1.1em; font-weight:bold;"><span class="">1/1</span></div>
+		<div class="uinn ub-f2 ub tx-c" onclick="turnpage(1)">
+			<div class="ub-f1 tx-c button-clear "><i class="icon-angle-right tx_bold "></i></div>
+		</div>
+		<div class="uinn ub-f2 ub tx-c" onclick="turnpage(2)">
+			<div class="ub-f1 tx-c button-clear "><i class="icon-double-angle-right tx_bold "></i></div>
+		</div>
+		<div class="uhide"><span id="currPage">1</span>/<span id="lastPage">1</span></div>
+	</div>
+</body>
+<script>
+	zy_init();
+	window.uexOnload = function(type){
+	}
+</script>
+</html>

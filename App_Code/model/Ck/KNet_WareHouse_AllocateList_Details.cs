@@ -1,0 +1,145 @@
+﻿using System;
+namespace KNet.Model
+{
+    /// <summary>
+    /// 实体类KNet_WareHouse_AllocateList_Details 
+    /// </summary>
+    [Serializable]
+    public class KNet_WareHouse_AllocateList_Details
+    {
+        public KNet_WareHouse_AllocateList_Details()
+        { }
+        #region Model
+        private string _id;
+        private string _allocateno;
+        private string _productsname;
+        private string _productsbarcode;
+        private string _productspattern;
+        private string _productsunits;
+        private int? _allocateamount;
+        private decimal? _allocateunitprice;
+        private decimal? _allocatediscount;
+        private decimal? _allocatetotalnet;
+        private string _allocateremarks;
+
+        private string _OwnallPID;
+        private decimal? _Allocate_WwPrice;
+        private decimal? _Allocate_WwMoney;
+
+        /// <summary>
+        /// 总仓库产品ID
+        /// </summary>
+        public string OwnallPID
+        {
+            set { _OwnallPID = value; }
+            get { return _OwnallPID; }
+        }
+        /// <summary>
+        /// 自动ID值
+        /// </summary>
+        public string ID
+        {
+            set { _id = value; }
+            get { return _id; }
+        }
+        /// <summary>
+        /// 调拨 单号（唯一性）
+        /// </summary>
+        public string AllocateNo
+        {
+            set { _allocateno = value; }
+            get { return _allocateno; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ProductsName
+        {
+            set { _productsname = value; }
+            get { return _productsname; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ProductsBarCode
+        {
+            set { _productsbarcode = value; }
+            get { return _productsbarcode; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ProductsPattern
+        {
+            set { _productspattern = value; }
+            get { return _productspattern; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ProductsUnits
+        {
+            set { _productsunits = value; }
+            get { return _productsunits; }
+        }
+        /// <summary>
+        /// 调拨 数量
+        /// </summary>
+        public int? AllocateAmount
+        {
+            set { _allocateamount = value; }
+            get { return _allocateamount; }
+        }
+        /// <summary>
+        /// 调拨 单价格
+        /// </summary>
+        public decimal? AllocateUnitPrice
+        {
+            set { _allocateunitprice = value; }
+            get { return _allocateunitprice; }
+        }
+        /// <summary>
+        /// 调拨 计调价格
+        /// </summary>
+        public decimal? AllocateDiscount
+        {
+            set { _allocatediscount = value; }
+            get { return _allocatediscount; }
+        }
+        /// <summary>
+        /// 调拨 净值金额
+        /// </summary>
+        public decimal? AllocateTotalNet
+        {
+            set { _allocatetotalnet = value; }
+            get { return _allocatetotalnet; }
+        }
+        /// <summary>
+        /// 调拨 备注
+        /// </summary>
+        public string AllocateRemarks
+        {
+            set { _allocateremarks = value; }
+            get { return _allocateremarks; }
+        }
+        /// <summary>
+        /// 调拨 单价格
+        /// </summary>
+        public decimal? Allocate_WwPrice
+        {
+            set { _Allocate_WwPrice = value; }
+            get { return _Allocate_WwPrice; }
+        }
+        /// <summary>
+        /// 调拨 单价格
+        /// </summary>
+        public decimal? Allocate_WwMoney
+        {
+            set { _Allocate_WwMoney = value; }
+            get { return _Allocate_WwMoney; }
+        }
+        #endregion Model
+
+    }
+}
+

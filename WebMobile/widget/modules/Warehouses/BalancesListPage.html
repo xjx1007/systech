@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script> 
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Warehouses.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+  	<!--	库存余额页面	 	-->
+    <div id="BalancesListPage" class="up ub ub-ver uof" tabindex="0">
+  		<div id="header" class="uh" >
+  			<div id="header_title" class="ub bar bar-blue pos-relative" >
+  				<button class="button button-icon icon ion-chevron-left t-wh" onclick="back()"></button>
+				<div class="h1 title">库存余额</div>
+				<div onclick="popWarehouse()" class="btn btn-r ub t-wh uinn ub-ac">
+					<div class="ub-f1 ut-s" id="warehousename">全部仓库</div>
+					<div class="umh1 umw1 ub-img res3 uc-a"></div>
+				</div>
+			</div>	
+				<div class="ub c-wh" id="headers">
+					<div class="uinn ub ub-ac ubr b-gra" style="width:38%;" id="catalogSel"></div>
+					<div class="ub-f1 uinn">
+						<div class="t-bla ub  c-wh  uinput  uinn4" >	
+						   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="searchList()">
+						   		<div style="width:1em"></div>
+						   		<div class="res_search1 umw1 ub-img"></div>
+							</div>
+						   <div class="ub-f1 uinn1">
+						   	<input placeholder="搜索" id="searchtext" type="text" style="background:none;" oninput="searchList()"> 
+						  </div> 
+						   <div class="ub" ontouchstart="zy_touch('btn-act');" onclick="cancelSearch()" >
+						   		<div style="width:1em"></div>
+								<div class="res-clear umw1 ub-img"></div> 
+						   </div>
+						 </div>
+					</div>	
+				</div>
+		</div>
+        <div id="content" class="ub-f1 ub c-gra4">
+        	<div id="warehouseSel" class="ub-fh" style="height:8.4em;">
+        		
+        	</div>
+			<div id="content1" class="ub-fh">
+                
+        	</div>
+        </div>
+		<div id="footer" class="uf c-m2 c-bla">
+		</div>
+	</div>
+</body>
+<script>
+zy_init();
+var openwarehouse = true;
+var s = window.getComputedStyle($$('content'), null);
+function getPageNewInfo(){
+	uexWindow.evaluatePopoverScript("BalancesListPage", "content1", "waobj.GetListFromServer();");
+}
+
+function popWarehouse(){
+	if (openwarehouse) {
+		uexWindow.evaluatePopoverScript("BalancesListPage","warehouseSel","anim_r2l()");
+		openwarehouse = false;
+	}else {
+		uexWindow.evaluatePopoverScript("BalancesListPage","warehouseSel","anim_l2r()");
+		openwarehouse = true;
+	}
+}
+
+function changeWaremenu(){
+	$$('warehousename').innerHTML = getstorage('warehousename');
+	searchList();
+}
+
+function orientationChange(){  //横竖屏切换时自适应
+	var s = window.getComputedStyle($$('header'), null);	
+	var em = int(s.fontSize);
+	var x = 0;
+	var y = int($$("header").offsetHeight);
+	var w = int(s.width);
+	var h = int(window.innerHeight) - int($$("header").offsetHeight)-int(2.2*em);
+	uexWindow.setPopoverFrame("content1",x, y, w, h);
+	var x = 0;
+	var y = int(window.innerHeight) - int(2.2 * em);
+	var w = int(s.width);
+	var h = int(2.2 * em);
+	uexWindow.setPopoverFrame('pop_nav', x, y, w, h, em);
+	
+	if (openwarehouse) {
+		zy_resize("warehouseSel",int(s.width), $$("header").offsetHeight-$$("headers").offsetHeight);
+	}else{
+		zy_resize("warehouseSel",0, $$("header").offsetHeight-$$("headers").offsetHeight);
+	}
+}
+
+var waobj = new WAObj('Warehouses');
+warehousebalanceslistpageonload();
+window.uexOnload = function(type){
+	if (!type) {
+		setstorage('currPage', 1);
+		setstorage('warehouseId', -1);
+		setstorage('catalogId', 'H1');
+		setstorage('searchtext', $$("searchtext").value);
+		setstorage('theMainWindow', 'BalancesListPage');
+		setNavDiv();
+		var s = window.getComputedStyle($$('header'), null);
+		var em = int(s.fontSize);
+		var x = 0;
+		var y = int($$("header").offsetHeight);
+		var w = int(s.width);
+		var h = int(window.innerHeight) - int($$("header").offsetHeight)-int(2.2*em);
+		uexWindow.openPopover('content1', "0", 'BalancesListPageContent.html', "", x, y, w, h, em, "0");
+		zy_con("warehouseSel", "WarehouseSel.html",int(s.width), $$("header").offsetHeight - $$("headers").offsetHeight);
+		waobj.GetProductClasses();//加载种类列表
+	}
+	window.onorientationchange=window.onresize=orientationChange;
+}
+
+</script>
+</html>

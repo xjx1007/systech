@@ -1,0 +1,23 @@
+截止到2011年11月4号下载系统建议使用的浏览器：
+1.IE6,IE7,IE8
+
+2. 支持360浏览器
+
+3. 支持qq浏览器
+
+4. 遨游浏览器3需要切换成兼容IE的流量模式
+
+5. 世界之窗最新的极速版需要切换成IE兼容模式
+
+6. 支持搜狐浏览器
+
+7.firfox 不支持，要支持需下载 IE Tab Plus插件
+https://addons.mozilla.org/zh-CN/firefox/addon/ie-tab-plus-ff-36/
+在 IE Tab Plus 选项 ->切换规则 加入 http://www.web-mote.com/ 按添加
+
+不支持的浏览器：
+
+Google 浏览器
+
+
+河北省邢台市桥东区新兴东大街186号

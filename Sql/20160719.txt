@@ -1,0 +1,55 @@
+﻿Select b.ProductsType,a.XPD_ProductsBarCode,c.*,(select top 1 FollowText from KNet_Sales_OutWareList_FlowList where ReTime is not null and OutWareNO=v_OrderNo  order by FollowDateTime desc),(select top 1 ReTime from KNet_Sales_OutWareList_FlowList where ReTime is not null and OutWareNO=v_OrderNo  order by FollowDateTime desc) from Xs_Products_Prodocts_Demo a  join KNet_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode left join v_OrderRkDetails c on c.V_ProductsBarCode=a.XPD_ProductsBarCode and c.v_ParentOrderNo='POST160022'  where b.KSP_Del=0   and XPD_FaterBarCode In (select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo='POST160022')  
+
+select * from 
+
+select * from Knet_Procure_OrdersList
+ where ParentOrderNo='POTC160114'
+ update Knet_Procure_OrdersList set OrderCheckYN='0'
+ where OrderNo='POTC160114'
+ delete from Knet_Procure_OrdersList
+ where ParentOrderNo='POTC160114'
+ 
+ select * from KNET_Pr
+ 
+ delete from Knet_Procure_OrdersList_Details
+ where OrderNo Not in(select orderNo from Knet_Procure_OrdersList)
+delete  from  PB_Basic_Mail where PBM_SendEmail='xiangzhou@bremax.com'
+
+update Knet_Procure_OrdersList set ReceiveSuppNo=b.SuppNo
+from Knet_Procure_OrdersList,Knet_Procure_OrdersList b
+
+where Knet_Procure_OrdersList.ReceiveSuppNo=''
+ and Knet_Procure_OrdersList.ParentOrderNo=b.OrderNo
+
+
+ 
+update Knet_Procure_OrdersList set ReceiveSuppNo=b.SuppNo
+from Knet_Procure_OrdersList,Knet_Procure_OrdersList b
+where Knet_Procure_OrdersList.ParentOrderNo=b.OrderNo
+ and Knet_Procure_OrdersList.ReceiveSuppNo is null
+
+
+ UNION ALL
+SELECT  distinct    b.ContractNos, a.OrderNo, b.ParentOrderNo, a.ProductsBarCode, '', CASE WHEN WrkNumber < 0 THEN 0 ELSE WrkNumber END, 0 Type, '原材料采购', b.OrderDateTime, b.SuppNo, 
+                      CASE WHEN WrkNumber < 0 THEN 0 ELSE WrkNumber END, b.ContractAddress, b.KPO_CTime, b.ReceiveSuppNo
+FROM         Knet_Procure_OrdersList_Details a JOIN
+                      Knet_Procure_OrdersList b ON a.OrderNo = b.OrderNo JOIN
+                      v_OrderRkDetailsQR c ON a.OrderNO = c.V_OrderNo AND WrkNumber > 0
+WHERE     b.ParentOrderNo = '' AND KPO_Del = 0
+
+
+//
+
+ update KNet_WareHouse_DirectOutList
+ set DirectOutRemarks+=' 用于 '+bb.PBC_Name
+ from KNet_WareHouse_DirectOutList a,
+ (
+ select * from 
+ ( 
+ select cast(SUBSTRING(DirectOutNo,8,10)*rand() as int)%2 randID,DirectOutNo
+ from KNet_WareHouse_DirectOutList a 
+where DirectOutStaffNo='130383662314944625' and DirectOutCheckYN in ('0','1')
+and KWD_CWOutTime>'2016-07-01') aa
+ join  PB_Basic_Code b on aa.randID=b.PBC_Code and PBC_ID='772'
+) bb
+where a.DirectOutNo=bb.DirectOutNo

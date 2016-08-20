@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+        <link rel="stylesheet" href="../../css/style.css" />
+    </head>
+    <body class="um-vp c-wh" ontouchstart>
+       <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+			<div id="header" class="uh">
+				<div class="c-blu3 c-m-fs t-wh">
+					<div class="btn-l-2" ontouchstart="zy_touch('btn-act');" onclick="back()" >       
+			              <div class="ub-img res_backbg" style="width:100%;height:100%">
+						  </div>       
+			        </div>
+					<h1 class="ut ulev1 ut-s tx-c" tabindex="0"id="titlename">
+						附件详细
+					</h1>
+				</div>
+            </div>
+            <!--header结束-->
+			<!--content开始-->
+            <div id="content" class="ub-f1 tx-l t-bla ub-img6">
+                
+            </div>
+            
+             <!--content结束-->
+	        <div id="footer">
+	        </div>
+    	</div>
+	</body>
+<script>
+zy_init();
+
+window.uexOnload = function(type){
+    if (!type) {
+		var attachid = getstorage('attachid');
+        zy_con("content", "http://192.168.1.112/crm/crm1130/downloadfile.php?attachid="+attachid, 0, $$("header").offsetHeight);
+    }
+	window.onorientationchange=window.onresize=function()
+	{
+		zy_resize("sczmcontent",0,$$("header").offsetHeight);				
+	}
+
+}
+   </script>
+</html>

@@ -1,0 +1,122 @@
+.tab
+{
+	height:2.6em;padding:0.2em 0em;
+}
+
+input[type="radio"]:checked + div.tab-act
+{
+	/*background-color:rgba(255,255,255,0.2) !important;
+	border-radius:0.3em;*/
+	color:#5197CE;
+	border: 0px;
+	background-image: none;
+}
+
+input[type="radio"] + div>div.tp-info{
+	background: url(res-apple/info.png) 50% 50% no-repeat;
+}
+
+input[type="radio"]:checked + div>div.tp-info{
+	background: url(res-apple/info-act.png) 50% 50% no-repeat;
+}
+
+input[type="radio"] + div>div.tp-menu{
+	background: url(res-apple/menu.png) 50% 50% no-repeat;
+}
+
+input[type="radio"]:checked + div>div.tp-menu{
+	background: url(res-apple/menu-act.png) 50% 50% no-repeat;
+}
+
+input[type="radio"] + div>div.tp-home{
+	background: url(res-apple/home.png) 50% 50% no-repeat;
+}
+
+input[type="radio"]:checked + div>div.tp-home{
+	background: url(res-apple/home-act.png) 50% 50% no-repeat;
+}
+
+input[type="radio"] + div>div.tp-set{
+	background: url(res-apple/set.png) 50% 50% no-repeat;
+}
+
+input[type="radio"]:checked + div>div.tp-set{
+	background: url(res-apple/set-act.png) 50% 50% no-repeat;
+}
+
+input[type="radio"] + div>div.tp-shop{
+	background: url(res-apple/shop.png) 50% 50% no-repeat;
+}
+
+input[type="radio"]:checked + div>div.tp-shop{
+	background: url(res-apple/shop-act.png) 50% 50% no-repeat;
+}
+
+input[type="radio"] + div>div.tp-talk{
+	background: url(res-apple/talk.png) 50% 50% no-repeat;
+}
+
+input[type="radio"]:checked + div>div.tp-talk{
+	background: url(res-apple/talk-act.png) 50% 50% no-repeat;
+}
+
+input[type="radio"] + div>div.tp-menuhome{
+	background-image:url(images/menuhome.png);
+}
+
+input[type="radio"]:checked + div>div.tp-menuhome{
+	background-image: url(images/menuhome-act.png);
+}
+
+input[type="radio"] + div>div.tp-menumore{
+	background-image:url(images/menumore.png);
+}
+
+input[type="radio"]:checked + div>div.tp-menumore{
+	background-image: url(images/menumore-act.png);
+}
+
+input[type="radio"] + div>div.tp-menunews{
+	background-image:url(images/menunews.png);
+}
+
+input[type="radio"]:checked + div>div.tp-menunews{
+	background-image: url(images/menunews-act.png);
+}
+
+input[type="radio"] + div>div.tp-menumy{
+	background-image:url(images/menumy.png);
+}
+
+input[type="radio"]:checked + div>div.tp-menumy{
+	background-image: url(images/menumy-act.png);
+}
+
+input[type="radio"] + div>div.tp-menuplus{
+	background-image:url(images/menuplus.png);
+}
+
+
+input[type="radio"]+div.dis-sta{
+	padding:.4em .2em;	
+}
+
+input[type="radio"]:checked+div.dis-sta{
+	background:-webkit-gradient(linear,0 0,0 100%,from(#0099d5),to(#0099d5));
+	box-shadow: inset 0px 2px 3px rgba(0, 0, 0, .4);
+	padding:.4em .2em;
+	color:#fff;
+}
+
+input[type="radio"]+div.tp-view{
+	color:#bbc3c9;
+	padding:.4em .2em;	
+}
+
+input[type="radio"]:checked+div.tp-view{
+	/*background:#285CB2;
+	color:#FDFEFC;*/
+	color:#5197ce;
+	padding:.4em .2em;
+	border-color:#5197ce;
+}

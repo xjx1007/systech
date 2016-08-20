@@ -1,0 +1,96 @@
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="15"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="9"  class="ListHead" >供应商名称:嘉兴市万事通电池有限公司</td><td colspan="6" class="ListHead">对账月份:2016-3</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >发货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center>总额</td>
+<td class="ListHead">备注</td>
+<td class="ListHead" >确认人</td>
+<td class="ListHead" >确认时间</td>
+<td class="ListHead" >确认方法</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>电池</td>
+<td align=left class='ListHeadDetails' noWrap>万事通碳性7#</td>
+<td align=left class='ListHeadDetails' noWrap>镇江赛其</td>
+<td align=left class='ListHeadDetails' noWrap>POWST160001</td>
+<td align=left class='ListHeadDetails' noWrap>2016/2/23</td>
+<td align=right class='ListHeadDetails' noWrap>30000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.185</td>
+<td align=right class='ListHeadDetails' noWrap>5550.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>电池</td>
+<td align=left class='ListHeadDetails' noWrap>万事通碳性7#</td>
+<td align=left class='ListHeadDetails' noWrap>无锡赛特</td>
+<td align=left class='ListHeadDetails' noWrap>POWST160003</td>
+<td align=left class='ListHeadDetails' noWrap>2016/2/29</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.185</td>
+<td align=right class='ListHeadDetails' noWrap>1850.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>电池</td>
+<td align=left class='ListHeadDetails' noWrap>万事通碳性5#</td>
+<td align=left class='ListHeadDetails' noWrap>镇江赛其</td>
+<td align=left class='ListHeadDetails' noWrap>POWST160002</td>
+<td align=left class='ListHeadDetails' noWrap>2016/2/29</td>
+<td align=right class='ListHeadDetails' noWrap>2000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.220</td>
+<td align=right class='ListHeadDetails' noWrap>440.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0203160002</td>
+<td class="ListHeadDetails" align="left">电池</td><td class="ListHeadDetails" align="left">万事通碳性7#</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">40000</td><td class="ListHeadDetails" align="right">0.185</td><td class="ListHeadDetails" align="right">7400.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1075.21</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0203160001</td>
+<td class="ListHeadDetails" align="left">电池</td><td class="ListHeadDetails" align="left">万事通碳性5#</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">2000</td><td class="ListHeadDetails" align="right">0.220</td><td class="ListHeadDetails" align="right">440.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>63.93</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;42000</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;7840.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;1139.14</td>
+ </tr></table>

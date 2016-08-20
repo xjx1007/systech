@@ -1,0 +1,548 @@
+﻿
+insert into PB_Basic_Code 
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID=''
+--客户模块
+--客户
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增客户信息',102001001,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改客户信息',102001002,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制客户信息',102001003,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除客户信息',102001004,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('客户信息列表',102001005,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('客户查看',102001006,1020)
+--联系人
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增联系人信息',102002001,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改联系人信息',102002002,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制联系人信息',102002003,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除联系人信息',102002004,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('联系人信息列表',102002005,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看联系人信息',102002006,1020)
+--客户关怀
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增客户关怀',102003001,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改客户关怀',102003002,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制客户关怀',102003003,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除客户关怀',102003004,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('客户关怀列表',102003005,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看客户关怀',102003006,1020)
+--联系记录
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增联系记录',102004001,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改联系记录',102004002,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制联系记录',102004003,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除联系记录',102004004,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('联系记录列表',102004005,1020)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看联系记录',102004006,1020)
+--产品
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='030'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup)
+declare @faterID varchar(10)
+set @faterID='030'
+select '新增'+PBM_Name,PBM_ID+'01','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+union
+select '修改'+PBM_Name,PBM_ID+'02','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '复制'+PBM_Name,PBM_ID+'03','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '删除'+PBM_Name,PBM_ID+'04','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select PBM_Name+'列表',PBM_ID+'05','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '查看'+PBM_Name,PBM_ID+'06','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+
+
+delete from KNet_Sys_AuthorityTable where AuthorityGroup='1040'
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='040'
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+
+--销售
+declare @faterID varchar(10)
+set @faterID='040'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup)
+
+select '新增'+PBM_Name,PBM_ID+'01','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID='040' 
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+union
+select '修改'+PBM_Name,PBM_ID+'02','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+union
+select '复制'+PBM_Name,PBM_ID+'03','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+union
+select '删除'+PBM_Name,PBM_ID+'04','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+union
+select PBM_Name+'列表',PBM_ID+'05','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+union
+select '查看'+PBM_Name,PBM_ID+'06','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+and PBM_ID  in ('040020','040030','040050','040060','040061','040070')
+
+delete from KNet_Sys_AuthorityTable where AuthorityGroup='1030'
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='030'
+--产品
+declare @faterID varchar(10)
+set @faterID='030'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup)
+
+select '新增'+PBM_Name,PBM_ID+'01','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '修改'+PBM_Name,PBM_ID+'02','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '复制'+PBM_Name,PBM_ID+'03','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '删除'+PBM_Name,PBM_ID+'04','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select PBM_Name+'列表',PBM_ID+'05','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '查看'+PBM_Name,PBM_ID+'06','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+
+
+delete from KNet_Sys_AuthorityTable where AuthorityGroup='1050'
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='050'
+--采购
+declare @faterID varchar(10)
+set @faterID='050'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup)
+
+select '新增'+PBM_Name,PBM_ID+'01','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '修改'+PBM_Name,PBM_ID+'02','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '复制'+PBM_Name,PBM_ID+'03','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '删除'+PBM_Name,PBM_ID+'04','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select PBM_Name+'列表',PBM_ID+'05','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '查看'+PBM_Name,PBM_ID+'06','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+
+delete from KNet_Sys_AuthorityTable where AuthorityGroup='1055'
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='055'
+--供应商
+declare @faterID varchar(10)
+set @faterID='055'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup)
+
+select '新增'+PBM_Name,PBM_ID+'01','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '修改'+PBM_Name,PBM_ID+'02','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '复制'+PBM_Name,PBM_ID+'03','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '删除'+PBM_Name,PBM_ID+'04','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select PBM_Name+'列表',PBM_ID+'05','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+union
+select '查看'+PBM_Name,PBM_ID+'06','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+
+
+
+delete from KNet_Sys_AuthorityTable where AuthorityGroup='1057'
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='057'
+and PBM_ID<>'057011'
+--生产计划
+declare @faterID varchar(10)
+set @faterID='057'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup)
+
+select '新增'+PBM_Name,PBM_ID+'01','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID<>'057011'
+union
+select '修改'+PBM_Name,PBM_ID+'02','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID<>'057011'
+union
+select '复制'+PBM_Name,PBM_ID+'03','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID<>'057011'
+union
+select '删除'+PBM_Name,PBM_ID+'04','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID<>'057011'
+union
+select PBM_Name+'列表',PBM_ID+'05','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID 
+and PBM_ID<>'057011'
+union
+select '查看'+PBM_Name,PBM_ID+'06','1'+PBM_FatherID 
+from PB_Basic_Menu where PBM_FatherID=@faterID
+and PBM_ID<>'057011'
+
+
+--单据
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='058'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('成品入库单列表',105802905,1058)
+
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除成品入库单',105802904,1058)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看单据报表',105805006,1058)
+
+
+--仓库
+
+delete from KNet_Sys_AuthorityTable where AuthorityGroup='1070'
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='070'
+--直接入库
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增直接入库',107001001,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改直接入库',107001002,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制直接入库',107001003,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除直接入库',107001004,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('直接入库列表',107001005,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看直接入库',107001006,1070)
+
+
+--直接入库
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增直接出库',107002001,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改直接出库',107002002,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制直接出库',107002003,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除直接出库',107002004,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('直接出库列表',107002005,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看直接出库',107002006,1070)
+--盘点
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增盘点',107003001,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改盘点',107003002,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制盘点',107003003,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除盘点',107003004,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('盘点列表',107003005,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看盘点',107003006,1070)
+
+--库间调拨
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增库间调拨',107006001,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改库间调拨',107006002,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制库间调拨',107006003,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除库间调拨',107006004,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('库间调拨列表',107006005,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看库间调拨',107006006,1070)
+
+select 152,'1'+PBM_ID,PBM_Name,0,0,'','' from PB_Basic_Menu where PBM_FatherID='070'
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看库存流水账',107007006,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看库存总账台',107008006,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看库存报表',107009006,1070)
+
+
+--仓库设置
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增仓库设置',107010001,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改仓库设置',107010002,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制仓库设置',107010003,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除仓库设置',107010004,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('仓库设置列表',107010005,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看仓库设置',107010006,1070)
+
+--仓库授权分配
+select * from KNet_Sys_AuthorityTable
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('仓库受权分配列表',107011005,1070)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('仓库受权分配',107011007,1070)
+
+
+
+
+                        <div id="stuff_OrderOther1" class="portlet" runat="server" style="overflow-y: auto; overflow-x: hidden;
+                            height=280px; width: 32%; float: left; position: relative;">
+                            <table width="100%" cellpadding="0" cellspacing="0" class="small portlet_topper"
+                                style="padding-right: 0px; padding-left: 0px; padding-top: 0px;">
+                                <tr id="headerrow_OrderOther1">
+                                    <td align="left" style="height: 20px;" nowrap width="60%">
+                                        <b>&nbsp;年客户销售排名</b>
+                                    </td>
+                                    <td align="right" style="height: 20px;" width="5%">
+                                        <span id="refresh_OrderOther1" style="position: relative;">&nbsp;&nbsp;</span>
+                                    </td>
+                                    <td align="right" style="height: 20px;" width="35%" nowrap>
+                                        <input type="hidden" id="portlet_stuffid_OrderOther1" value="1" />
+                                        <input type="hidden" id="portlet_stufftype_OrderOther1" value="OrderOther" />
+                                        <input type="hidden" id="portlet_stufftype_value" value="OrderOther1" class="portlet_stufftype_value" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="100%" cellpadding="0" cellspacing="0" class="small portlet_content"
+                                style="padding-right: 0px; padding-left: 0px; padding-top: 0px;">
+                                <tr id="maincont_row_OrderOther1">
+                                    <td>
+                                        <div id="stuffcont_OrderOther1" style="overflow-y: auto; overflow-x: hidden;
+                                            width: 100%; height: 100%; cursor: auto;">
+                                            <cc1:Chartlet ID="Chartlet1" runat="server" AppearanceStyle="Bar_3D_Breeze_NoCrystal_NoGlow_NoBorder"
+                                                ChartType="Histogram" Colorful="False" Dimension="Chart2D" GroupSize="2" AutoBarWidth="True"
+                                                Width="500px" Alpha3D="170" Height="500px"></cc1:Chartlet>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+
+						
+select Count(*) as 天数,StaffName
+from
+(select distinct b.StaffName,convert(nvarchar(10),logtime,120) as logtime   from KNet_Static_logs  a  
+join KNet_Resource_Staff b on a.staffNo=b.StaffCard
+where logContent='登陆系统成功....'
+and logtime>='2013-07-01' 
+and logtime<='2013-08-31') aa
+group by StaffName
+order by Count(*)
+
+
+
+select * from Cw_Account_Bill_Details
+
+--客户抱怨
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增客户抱怨',106003001,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改客户抱怨',106003002,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制客户抱怨',106003003,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除客户抱怨',106003004,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('客户抱怨列表',106003005,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看客户抱怨',106003006,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看8D报告',106003007,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看售后库存总账',106004001,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看售后流水帐',106004002,1060)
+
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增售后入库',106004001,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改售后入库',106004002,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制售后入库',106004003,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除售后入库',106004004,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('售后入库列表',106004005,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看售后入库',106004006,1060)
+
+
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增售后调拨',106005001,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改售后调拨',106005002,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制售后调拨',106005003,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除售后调拨',106005004,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('售后调拨列表',106005005,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看售后调拨',106005006,1060)
+
+
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('新增售后出库',106006001,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('修改售后出库',106006002,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('复制售后出库',106006003,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('删除售后出库',106006004,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('售后出库列表',106006005,1060)
+insert into KNet_Sys_AuthorityTable(AuthorityName,Authorityvalue,AuthorityGroup) 
+values('查看售后出库',106006006,1060)
+
+update PB_Basic_Code set PBC_Name='质量'
+where PBC_Code='1060' and PBC_ID='152'
+update PB_Basic_Code set PBC_Name='市场'
+where PBC_Code='1020' and PBC_ID='152'
+
+
+//                document.all('Ddl_DutyPerson').value = ss[1];
+//                document.all('Tbx_CustomerValue').value = ss[2];
+//                document.all('Tbx_CustomerName').value = ss[3];
+//                document.all('OutWareOursContact').value = ss[4];
+//                document.all('Tbx_ContentPerson').value = ss[5];
+//                document.all('ContractToAddress').value = ss[6];
+//                document.all('Tbx_Remarks').value = ss[7];
+//                document.all('Tbx_Phone').value = ss[8];
+//                document.all('ContractDeliveMethods').value = ss[9];
+
+//                var response = Knet_Web_Sales_Knet_Sales_Ship_Manage_Add.GetDetails(ss[0])
+//                var ss1, s_Value, i_row, s_ID, i_num2;
+
+//                s_ID = document.all("Xs_ProductsCode").value;
+//                i_row = myTable.rows.length;
+//                ss1 = response.value.split('|');
+//                document.all('i_Num').value = parseInt(document.all('i_Num').value) + ss1.length - 1;
+//                for (var i = 0; i < ss1.length - 1; i++) {
+//                    s_Value = ss1[i].split(',');
+//                    var objRow = myTable.insertRow(i_row);
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="../../themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
+//                    objCel.className = "dvtCellInfo";
+//                    i_num2 = i;
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + i_num2 + '\" value=' + s_Value[1] + '>' + s_Value[1];
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + i_num2 + '\" value=' + s_Value[0] + '>' + s_Value[0];
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + i_num2 + '\" value=' + s_Value[2] + '>' + s_Value[2];
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num2 + '\" value=' + s_Value[3] + '>';
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"text\"  class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'"detailedViewTextBox\'\" style="width:100px;"  Name=\"Price_' + i_num2 + '\" value=' + s_Value[4] + '>';
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" readonly  Name=\"Money_' + i_num2 + '\" value=' + s_Value[5] + ' >';
+//                    objCel.className = "dvtCellInfo";
+
+//                    var v_Html;
+//                    var objCel = objRow.insertCell();
+//                    v_Html = '<select   Name=\"Battery_' + i_num2 + '\" >';
+//                    v_Html += '<option value="">不配电池</option>';
+
+//                    var v_Battery = Knet_Web_Sales_Knet_Sales_Ship_Manage_Add.GetBattery(s_Value[6]);
+
+//                    var v_Battery1 = v_Battery.value.split("|");
+//                    for (var j = 0; j < v_Battery1.length - 1; j++) {
+//                        var v_Battery2 = v_Battery1[j].split(",");
+
+//                        v_Html += '<option value=' + v_Battery2[0] + '  ' + v_Battery2[2] + ' >' + v_Battery2[1] + '</option>';
+//                    }
+//                    v_Html += '</select>';
+//                    objCel.innerHTML = v_Html;
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    v_Html = '<select   Name=\"Manual_' + i_num2 + '\" >';
+
+//                    var v_Manual = Knet_Web_Sales_Knet_Sales_Ship_Manage_Add.GetManual(s_Value[7]);
+//                    var v_Manual1 = v_Manual.value.split("|");
+//                    for (var j = 0; j < v_Manual1.length - 1; j++) {
+//                        var v_Manual2 = v_Manual1[j].split(",");
+//                        v_Html += '<option value=' + v_Manual2[0] + ' ' + v_Manual2[2] + ' >' + v_Manual2[1] + '</option>';
+//                    }
+//                    v_Html += '</select>';
+//                    objCel.innerHTML = v_Html;
+//                    objCel.className = "dvtCellInfo";
+
+//                    var objCel = objRow.insertCell();
+//                    objCel.innerHTML = '<input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num2 + '\" value=' + s_Value[6] + ' >';
+//                    objCel.className = "dvtCellInfo";
+//                    i_row = i_row + 1;
+//                    s_ID = s_ID + s_Value[i] + ",";
+
+
+//                for (var i = 0; i < i_num1; i++) {
+//                    myTable.deleteRow(i);
+//                }
+              ///  document.all("Xs_ProductsCode").value = "";
+//                for (var i = 0; i < i_num1; i++) {
+//                    myTable.deleteRow(i);
+//                }
+//                document.all('ContractNo').value = "";
+//                document.all('Ddl_DutyPerson').value = "";
+//                document.all('Tbx_CustomerValue').value = "";
+//                document.all('Tbx_CustomerName').value = "";
+//                document.all('OutWareOursContact').value = "";
+//                document.all('Tbx_ContentPerson').value = "";
+//                document.all('ContractToAddress').value = "";
+//                document.all('Tbx_Remarks').value = "";
+//                document.all('Tbx_Phone').value = "";
+//                document.all('ContractDeliveMethods').value = "";
+//                document.all('i_Num').value = 0;

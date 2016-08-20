@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../../css/ui-input.css">
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+        <script src="../../js/zy_control.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>
+		<script type="text/javascript" src="../../js/DateOrTime.js"></script> 
+		<!--<script src="../../js/jquery.min.js"></script>-->
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+    </head>
+	<body class="um-vp" ontouchstart style="scroll 0 0 #F1F1F1;">
+	<div id="loading" style="display: none;"></div>
+		<div id="content" class="ub-f1 tx-l t-bla c-gra4">
+        	<!--列表开始-->
+			<div id="shopCar_list" class="uc-n " ><div></div>  
+			</div>
+			<div id="shopCarIsNull" class="uc-n" style="display: none;">
+				<ul class="ub b-gra ub-ac lis">
+			    	<ul class="ub-f1 ub ub-ver uba b-gra c-wh uc-a1"><li class="li_1 tx-c">产品明细为空,添加一个吧!!</li>
+					</ul>
+				</ul>
+			</div>
+			
+			<div id="buttondiv">
+				<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">
+					<div class="wd_wh detail_ul_text" style="left:40%;">金额总计:</div>
+					<div class="wd_wh2" style="left:40%;"><span id="total"></span></div>
+				</div>
+				<div class="ub uinn">
+					<div class="ub-f1 uinn">
+						<div ontouchstart="zy_touch('btn-act');" onclick="editSO()" class="btn uinn5 c-blu3 uc-a1 t-wh" id="editSO" ><i class="icon-ok"></i>&nbsp;确定修改</div>	
+					</div>
+					<div class="ub-f1 uinn">
+						<div ontouchstart="zy_touch('btn-act');" onclick="addBill()" class="btn uinn5 c-org1 uc-a1 t-wh" id="addBill" ><i class="icon-plus"></i>&nbsp;添加明细</div>	
+					</div>
+				</div>
+			</div>
+        </div>
+	</body>
+<script>
+zy_init();
+var forumObj = '';
+var arrValue = []; //购物车产品数组
+var total = 0;  //总计
+var adjustment = 0;  //调整值
+var currEdit =  0;
+var mxopts = JSON.parse(getstorage("mxopts"));
+var startDate = new Date(myDate.getFullYear(),myDate.getMonth(), 1);
+var monthEndDate = new Date(startDate);
+monthEndDate.setMonth(startDate.getMonth()+1);
+monthEndDate.setDate(0);
+var currDate = formatDate(startDate);
+var currTime = "00:01";
+var endDate = formatDate(monthEndDate);
+var endTime = "23:59";
+
+var delArr = [];
+function editSO(){
+	arrValue = []; 
+	for (j = 1; j < count; j++) {
+		if(!delArr.in_array(j)){
+			if($$('expenselistname_'+j).value == ''){
+				myalert("费用用途不能为空!!");
+				return;
+			}
+			var mxobj = {
+				expenselistname:$$('expenselistname_'+j).value,
+				expensecategory:$$('expensecategory_'+j).value,
+				expensetotal:$$('expensetotal_'+j).value,
+				starttime:$$('startdate_'+j).value+' '+$$('starttime_'+j).value,
+				lasttime:$$('enddate_'+j).value+' '+$$('endtime_'+j).value,
+				expensebill:$$('expensebill_'+j).value,
+				expensesite:$$('expensesite_'+j).value,
+				descri:$$('descri_'+j).value,
+			}
+			arrValue.push(mxobj);
+		}
+	}
+	setstorage("shopCar",JSON.stringify(arrValue));  //
+	setstorage('so_total',total);
+	if (getstorage('theMode') == 'edit') {
+		uexWindow.evaluatePopoverScript("EditPage", "content", "createobj.ChangeProducts();");
+	}else{
+		uexWindow.evaluatePopoverScript("CreateNewPage", "content", "createobj.ChangeProducts();");
+	}
+	uexWindow.evaluateScript("EditProductPage", "0", "back();");
+}
+
+function checkTime(){//检查开始时间/结束时间
+	var date_start = $$('startdate_'+currEdit).value;
+	var time_start = $$('starttime_'+currEdit).value;
+	var due_date = $$('enddate_'+currEdit).value;
+	var time_end = $$('endtime_'+currEdit).value;
+	var arrStartDate = date_start.split("-");   
+    var arrStartTime = time_start.split(":");   
+	var arrDueDate = due_date.split("-");   
+    var arrEndTime = time_end.split(":");   
+	var allStartDate = new Date(arrStartDate[0],arrStartDate[1]-1,arrStartDate[2],arrStartTime[0],arrStartTime[1]); 
+	var allEndDate = new Date(arrDueDate[0],arrDueDate[1]-1,arrDueDate[2],arrEndTime[0],arrEndTime[1]); 
+	if(allStartDate.getTime()>allEndDate.getTime()){   
+         return false;   
+    }
+	return true;   
+}
+
+function setNewDate(id){// 设置新的日期/时间
+	if (id == 'startdate_'+currEdit || id == 'starttime_'+currEdit) {
+		var date_start = $$('startdate_'+currEdit).value;
+		var time_start = $$('starttime_'+currEdit).value;
+		var endDateObj = getNextHours(date_start, time_start);
+		var endDate = formatDate(endDateObj);
+		var endTime = getFullFormat(endDateObj.getHours()) + ':' + getFullFormat(endDateObj.getMinutes());
+		$$('enddate_'+currEdit).value = endDate;
+		$$('endtime_'+currEdit).value = endTime;
+	}else{
+		var due_date = $$('enddate_'+currEdit).value;
+		var time_end = $$('endtime_'+currEdit).value;
+		var startDateObj = getLastHours(due_date, time_end);
+		var startDate = formatDate(startDateObj);
+		var startTime = getFullFormat(startDateObj.getHours()) + ':' + getFullFormat(startDateObj.getMinutes());
+		$$('startdate_'+currEdit).value = startDate;
+		$$('starttime_'+currEdit).value = startTime;
+	}
+}
+
+function changeDate(field,num){
+	currEdit = num;
+	setDateMore(field+'_'+num);
+}
+
+function changeTime(field,num){
+	currEdit = num;
+	setTimeMore(field+'_'+num);
+}
+
+var count = 1;
+var delect = 0;
+function addBill(){
+	var forumObj = '';
+	forumObj += '<div id="pro_'+count+'" class="b-gra forumList">';
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >费用类别</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar sel ub">';
+	forumObj += '<div class="ub-f1 ut-s ulev-1 tx-l">'+mxopts['expensecategory'][0]+'</div>';
+	forumObj += '<div class="umw2 ub ub-pc uc-r ub-ac uc-r1">';  
+		forumObj += '<div class="ub-img umw1 umh1 res8"></div>'; 
+	forumObj += '</div>';
+	forumObj += '<select id="expensecategory_' + count + '" selectedindex="0" onchange="zy_selectmenu(this.id)">';
+	for(var k=0;k<mxopts['expensecategory'].length;k++){
+		forumObj += '<option value="'+mxopts['expensecategory'][k]+'">'+mxopts['expensecategory'][k]+'</option>';
+	}
+	forumObj += '</select>';
+	forumObj += '</div>';
+	forumObj += '<div ontouchstart="zy_touch(\'btn-act\')" onclick="delProduct('+count+');" class="res5 lis-sw-2 ub-img" style="position: absolute;right: 10px;"></div>';
+	forumObj += '</div>';
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >费用金额</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar">';
+	forumObj += '<input id="expensetotal_' + count + '" onchange="changeProductInfo(this,'+count+',\'expensetotal\')" style="width:100%;" value="0" type="numble">';
+	forumObj += '</div>';
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >凭证</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar sel ub">';
+	forumObj += '<div class="ub-f1 ut-s ulev-1 tx-l">'+mxopts['expensebill'][0]+'</div>';
+	forumObj += '<div class="umw2 ub ub-pc uc-r ub-ac uc-r1">';  
+		forumObj += '<div class="ub-img umw1 umh1 res8"></div>'; 
+	forumObj += '</div>';
+	forumObj += '<select id="expensebill_' + count + '" selectedindex="0" onchange="zy_selectmenu(this.id)">';
+	for(var k=0;k<mxopts['expensebill'].length;k++){
+		forumObj += '<option value="'+mxopts['expensebill'][k]+'">'+mxopts['expensebill'][k]+'</option>';
+	}
+	forumObj += '</select>';
+	forumObj += '</div></div>';
+	
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >开始日期</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeDate(\'startdate\',' + count + ')" >';
+	forumObj += '<input id="startdate_' + count + '" readonly value="' + currDate + '" style="width:100%;" type="text">';
+	forumObj += '</div>';
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >开始时间</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeTime(\'starttime\',' + count + ')" >';
+	forumObj += '<input id="starttime_' + count + '" readonly value="' + currTime + '" style="width:100%;" type="text">';
+	forumObj += '</div></div>';
+	
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >结束日期</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeDate(\'enddate\','+ count + ')" >';
+	forumObj += '<input id="enddate_' + count + '" readonly value="' + endDate + '" style="width:100%;" type="text">';
+	forumObj += '</div>';
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >结束时间</div>';
+	forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeTime(\'endtime\',' + count + ')" >';
+	forumObj += '<input id="endtime_' + count + '" readonly value="' + endTime + '" style="width:100%;" type="text">';
+	forumObj += '</div></div>';
+	
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >费用用途</div>';
+	forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+	forumObj += '<input id="expenselistname_' + count + '" onchange="changeProductInfo(this,'+count+',\'expenselistname\')" style="width:100%;" type="text">';
+	forumObj += '</div></div>';
+	
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >地点</div>';
+	forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+	forumObj += '<input id="expensesite_' + count + '" style="width:100%;" type="text">';
+	forumObj += '</div></div>';
+
+	forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+	forumObj += '<div class="wd_wh detail_ul_text t-gra1" >备注</div>';
+	forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+	forumObj += '<input id="descri_' + count + '" style="width:85%;" type="text">';
+	forumObj += '</div><div id="xh_'+count+'" style="position: absolute;right: 10px;">'+(count-delect)+'</div></div>';
+	forumObj += '</div>';
+	$$("shopCarIsNull").style.display='none';	
+	var cContent = $$('shopCar_list');
+	var node = document.createElement("div");
+	node.innerHTML = forumObj;
+	cContent.insertBefore(node,cContent.lastElementChild);
+	count++;
+}
+
+
+//保留2位小数
+function changeTwoDecimal(x){  
+	var f_x = parseFloat(x);  
+	if (isNaN(f_x)){  
+		return false;  
+	}  
+	var f_x = Math.round(x*100)/100;  
+	return f_x;  
+}  
+
+//修改明细的数量/价格/备注信息
+function changeProductInfo(obj,id,type){
+	var theId = obj.getAttribute("id");
+	if(type == 'expenselistname' && $$(theId).value == ''){
+		myalert("费用用途不能为空!!");
+		return;
+	}
+	if(type == 'expensetotal'){
+		if(!checkIsNum($$(theId).value)){
+			myalert("请输入数字");
+			$$(theId).value = 0;
+			return;
+		}
+		if($$(theId).value < 0){
+			myalert("数值不能小于0");
+			$$(theId).value = 0;
+			return;
+		}
+		total = 0;
+		for (j = 1; j < count; j++) {
+			if(!delArr.in_array(j)){
+				total += Number($$('expensetotal_'+j).value);
+			}
+		}
+		setHtml('total',changeTwoDecimal(total));  // 更新总计值
+	}
+}
+
+//删除购物车里的产品
+function delProduct(num){
+	$$('pro_'+num).style.display = 'none';
+	if(num<count){
+		for(var i=num;i<count;i++){
+			$$('xh_'+i).innerHTML = Number($$('xh_'+i).innerHTML)-1;
+		}
+	}
+	total -= Number($$('expensetotal_'+num).value);
+	setHtml('total',changeTwoDecimal(total));  // 更新总计值
+	delArr.push(num);
+	delect++;
+}
+
+//获取购物车列表信息
+function GetShoppingCarList(){
+	arrValue = [];
+	setHtml('shopCar_list','');
+	//从缓存中取出购物车信息
+	if(getstorage("shopCar") != ''){
+		arrValue = JSON.parse(getstorage("shopCar"));
+	}
+	forumObj = '';
+	for (j = 0; j < arrValue.length; j++) {
+		forumObj += '<div id="pro_'+count+'" class="b-gra forumList">';
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >费用类别</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar sel ub">';
+		forumObj += '<div class="ub-f1 ut-s ulev-1 tx-l">'+arrValue[j].expensecategory+'</div>';
+		forumObj += '<div class="umw2 ub ub-pc uc-r ub-ac uc-r1">';  
+			forumObj += '<div class="ub-img umw1 umh1 res8"></div>'; 
+		forumObj += '</div>';
+		forumObj += '<select id="expensecategory_' + count + '" selectedindex="0" onchange="zy_selectmenu(this.id)">';
+		for(var k=0;k<mxopts['expensecategory'].length;k++){
+			if (mxopts['expensecategory'][k] == arrValue[j].expensecategory) {
+				forumObj += '<option value="' + mxopts['expensecategory'][k] + '" selected>' + mxopts['expensecategory'][k] + '</option>';
+			}else {
+				forumObj += '<option value="' + mxopts['expensecategory'][k] + '">' + mxopts['expensecategory'][k] + '</option>';
+			}
+		}
+		forumObj += '</select>';
+		forumObj += '</div>';
+		forumObj += '<div ontouchstart="zy_touch(\'btn-act\')" onclick="delProduct('+count+');" class="res5 lis-sw-2 ub-img" style="position: absolute;right: 10px;"></div>';
+		forumObj += '</div>';
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >费用金额</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id="expensetotal_' + count + '" value="'+arrValue[j].expensetotal+'" onchange="changeProductInfo(this,'+count+',\'expensetotal\')" style="width:100%;" value="0" type="numble">';
+		forumObj += '</div>';
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >凭证</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar sel ub">';
+		forumObj += '<div class="ub-f1 ut-s ulev-1 tx-l">'+arrValue[j].expensebill+'</div>';
+		forumObj += '<div class="umw2 ub ub-pc uc-r ub-ac uc-r1">';  
+			forumObj += '<div class="ub-img umw1 umh1 res8"></div>'; 
+		forumObj += '</div>';
+		forumObj += '<select id="expensebill_' + count + '" selectedindex="0" onchange="zy_selectmenu(this.id)">';
+		for(var k=0;k<mxopts['expensebill'].length;k++){
+			if (mxopts['expensebill'][k] == arrValue[j].expensebill) {
+				forumObj += '<option value="'+mxopts['expensebill'][k]+'" selected>'+mxopts['expensebill'][k]+'</option>';
+			}else {
+				forumObj += '<option value="'+mxopts['expensebill'][k]+'">'+mxopts['expensebill'][k]+'</option>';
+			}
+		}
+		forumObj += '</select>';
+		forumObj += '</div></div>';
+		var starttimeArr = arrValue[j].starttime.split(" ");
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >开始日期</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeDate(\'startdate\',' + count + ')" >';
+		forumObj += '<input id="startdate_' + count + '" readonly value="' + starttimeArr[0] + '" style="width:100%;" type="text">';
+		forumObj += '</div>';
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >开始时间</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeTime(\'starttime\',' + count + ')" >';
+		forumObj += '<input id="starttime_' + count + '" readonly value="' + starttimeArr[1] + '" style="width:100%;" type="text">';
+		forumObj += '</div></div>';
+		var endtimeArr = arrValue[j].lasttime.split(" ");
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >结束日期</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeDate(\'enddate\','+ count + ')" >';
+		forumObj += '<input id="enddate_' + count + '" readonly value="' + endtimeArr[0] + '" style="width:100%;" type="text">';
+		forumObj += '</div>';
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >结束时间</div>';
+		forumObj += '<div class="wd_wh2 c-wh uba uc-a1 b-gra ishopCar" ontouchstart="zy_touch(\'btn-act\');" onmousedown="zy_touch(\'btn-act\');" onclick="changeTime(\'endtime\',' + count + ')" >';
+		forumObj += '<input id="endtime_' + count + '" readonly value="' + endtimeArr[1] + '" style="width:100%;" type="text">';
+		forumObj += '</div></div>';
+		
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >费用用途</div>';
+		forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id="expenselistname_' + count + '" value="'+arrValue[j].expenselistname+'" onchange="changeProductInfo(this,'+count+',\'expenselistname\')" style="width:100%;" type="text">';
+		forumObj += '</div></div>';
+		
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >地点</div>';
+		forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id="expensesite_' + count + '" value="'+arrValue[j].expensesite+'" style="width:100%;" type="text">';
+		forumObj += '</div></div>';
+	
+		forumObj += '<div class="ub t-bla ulab ub-ac" style="line-height: 2em;">';	
+		forumObj += '<div class="wd_wh detail_ul_text t-gra1" >备注</div>';
+		forumObj += '<div class="c-wh uba uc-a1 b-gra ishopCar">';
+		forumObj += '<input id="descri_' + count + '" value="'+arrValue[j].descri+'" style="width:85%;" type="text">';
+		forumObj += '</div><div id="xh_'+count+'" style="position: absolute;right: 10px;">'+(count-delect)+'</div></div>';
+		forumObj += '</div>';
+		$$("shopCarIsNull").style.display='none';	
+		total += Number(arrValue[j].expensetotal);
+		count++;
+	}
+	forumObj += '<div></div>';
+	setHtml('shopCar_list',forumObj);
+	if(arrValue.length == 0){ //若购物车为空
+		setHtml('total',changeTwoDecimal(total));  // 更新总计值
+		$$("shopCarIsNull").style.display='block';	 //显示提示"购物车为空"
+	}else{
+		setHtml('total',changeTwoDecimal(total));  // 更新总计值
+	}
+}
+
+window.uexOnload = function(type){
+	uexControl.cbOpenDatePicker=changeDateMore;
+	uexControl.cbOpenTimePicker=changeTimeMore;
+    uexWindow.setBounce("1");
+	uexWindow.showBounceView("0","#FFF","0");
+	uexWindow.showBounceView("1","#FFF","0");
+	GetShoppingCarList(); //获取购物车信息
+}
+</script>
+</html>

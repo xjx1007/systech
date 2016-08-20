@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+      <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	  	<link rel="stylesheet" href="../../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../../css/ui-input.css">	
+		<link rel="stylesheet" href="../../css/ui-base.css">
+        <link rel="stylesheet" href="../../css/ui-box.css">
+        <link rel="stylesheet" href="../../css/my-color.css">
+		<link rel="stylesheet" href="../../css/ui-res.css">
+		<link rel="stylesheet" href="../../css/ui-btn.css">
+		<link rel="stylesheet" href="../../css/ui-img.css">
+    	<link rel="stylesheet" href="../../css/ui-list.css">
+		<link rel="stylesheet" href="../../css/ui-tab.css">
+		<link rel="stylesheet" href="../../css/ui-fold.css">
+        <script src="../../js/zy_control.js"></script>
+		<script src="../../js/zy_anim.js"></script>
+		<script src="../../js/zy_json.js"></script>
+        <script src="../../js/zy_click.js"></script>
+		<script type="text/javascript" src="../../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../../js/Application.js"></script>  
+		<script type="text/javascript" src="../../js/BaseModule.js"></script> 
+		<script type="text/javascript" src="../../js/module_js/Luntan.js"></script> 
+        <link rel="stylesheet" href="../../css/style.css" />
+        <title>易客 CRM</title>
+</head>
+	<body class="um-vp" ontouchstart>
+		<div class="c-wh" id="list">  
+	 	</div>
+		<div class="c-gra4 uhide" id="more">   
+		 	<div ontouchstart="zy_touch('btn-act')" onclick="ltobj.getBKArticleList();" class=" ub ubb b-gra c-m2 t-bla ub-ac ub-pc umh4 lis">     
+				 加载更多...    
+		 	</div>     
+	 	 </div>
+	</body>
+<script>
+zy_init();
+var ltobj = new LunTanObj('mobileKnowledges');
+
+function refreshList(){
+	ltobj.offset = 0;
+	ltobj.getBKArticleList();
+}
+
+
+window.uexOnload=function(type){
+	if (!type) {
+		uexWindow.setBounce("1");
+		uexWindow.showBounceView("0", "rgba(255,255,255,0)", "1");
+		uexWindow.showBounceView("1", "rgba(255,255,255,0)", "0");
+		ltobj.bkid = getstorage('bkid');
+		ltobj.getBKArticleList();
+	}
+	uexWindow.onBounceStateChange = function(type, status){
+		uexWindow.resetBounceView('0');
+		if (status == 1) {
+			refreshList();
+		}
+	}
+	uexWindow.notifyBounceEvent("0", "1");
+}
+
+
+</script>
+</html>

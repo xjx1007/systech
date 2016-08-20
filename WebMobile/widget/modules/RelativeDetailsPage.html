@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="../dist/css/ionic1.css">
+		<link rel="stylesheet" href="../css/ui-input.css">
+		<link rel="stylesheet" href="../css/ui-base.css">
+        <link rel="stylesheet" href="../css/ui-box.css">
+        <link rel="stylesheet" href="../css/ui-color.css">
+		<link rel="stylesheet" href="../css/ui-res.css">
+		<link rel="stylesheet" href="../css/ui-btn.css">
+		<link rel="stylesheet" href="../css/ui-img.css">
+    	<link rel="stylesheet" href="../css/ui-list.css">
+		<link rel="stylesheet" href="../css/ui-tab.css">
+        <script src="../js/zy_control.js"></script>
+		<script src="../js/zy_anim.js"></script>
+		<script src="../js/zy_json.js"></script>
+        <script src="../js/zy_click.js"></script>
+		<script type="text/javascript" src="../js/LanguageResources.js"></script>
+		<script type="text/javascript" src="../js/Application.js"></script>
+        <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="um-vp c-wh" ontouchstart>
+    <div id="page_0" class="up ub ub-ver" tabindex="0">
+		<!--header开始-->
+		<div id="header" class="uh">
+			<div id="header_title" class="bar bar-dark pos-relative">
+  				<button class="button button-icon icon ion-chevron-left" onclick="back()"></button>
+		    	<div id="ViewRelativeDetailsPageTitle" class="h1 title">相关信息</div>
+			</div>
+		</div>
+        <div id="content" class="ub-f1 tx-l c-wh t-bla">
+   
+        </div>
+		<div id="footer">
+		</div>
+	</div>
+</body>
+<script>
+	zy_init();
+	setHtml("BackLabel", RES_BACKBUTTON_LABEL);
+	setHtml("ViewRelativeDetailsPageTitle", getstorage('RelativeTitle'));
+	window.uexOnload = function(type){
+		if (!type) {
+			zy_con("content", "RelativeDetailsPageContent.html", 0, $$("header").offsetHeight);
+		}
+		window.onorientationchange=window.onresize=function(){
+			zy_resize("content",0,$$("header").offsetHeight);
+		}
+	}
+</script>
+</html>
