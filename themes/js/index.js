@@ -157,7 +157,7 @@ function initSmsbox() {
 
     //分组按钮
     jQuery('#group_by_name,#group_by_type').click(function () {
-        if (jQuery(this).attr('class').indexOf('active') >= 0)
+        if (jQuery(this).hasClass('active'))
             return;
 
         jQuery('#group_by_name').toggleClass('active');
@@ -200,14 +200,15 @@ function initSmsbox() {
     listBlocks.on('mouseleave', '', function () { jQuery(this).removeClass('list-block-hover'); });
 
     //列表click事件
-    listBlocks.on('click', '', function () {
-        if (jQuery(this).attr('class').indexOf('list-block-active') > 0) return;
+    jQuery(' div.list-block').on('click', '#smsbox_list_container ', function () {
+    //$(document).on('click', jQuery('#smsbox_list_container > div.list-block'), function(){
+        if (jQuery(this).hasClass('list-block-active')) return;
         jQuery('#smsbox_list_container > div.list-block').removeClass('list-block-active');
         jQuery(this).addClass('list-block-active');
         jQuery('table', this).removeClass('unread');
 
         var bGroupByName = jQuery('#group_by_name').attr('class').indexOf('active') >= 0;
-        var id = jQuery(this).attr('group_id');
+        var id = jQuery(this).prop('group_id');
         var html = '';
         selectedRecvSmsIdStr = selectedSendSmsIdStr = '';
         for (var i = 0; i < newSmsArray.length; i++) {
