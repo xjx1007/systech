@@ -1,12 +1,13 @@
-<html>
+﻿<html>
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
 <title>eWebEditor</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
 body,td,input,textarea {font-size:9pt}
 </style>
 
-<script language=javascript>
+<script type="text/javascript">
 var URLParams = new Object() ;
 var aParams = document.location.search.substr(1).split('&') ;
 for (i=0 ; i < aParams.length ; i++) {
@@ -14,41 +15,38 @@ for (i=0 ; i < aParams.length ; i++) {
 	URLParams[aParam[0]] = aParam[1] ;
 }
 
-URLParams["style"] = (URLParams["style"]) ? URLParams["style"].toLowerCase() : "popup";
+var sStyle = (URLParams["style"]) ? URLParams["style"] : "popup";
+var sLinkID = URLParams["link"];
 
-var objField=eval("opener.document."+URLParams["form"] + "." + URLParams["field"]);
+var oLink = opener.document.getElementById(sLinkID);
+if (!oLink){
+	oLink = opener.document.getElementsByName(sLinkID)[0];
+}
 
 function doSave(){
-	objField.value = eWebEditor1.getHTML();
+	oLink.value = document.getElementById("eWebEditor1").contentWindow.getHTML();
 	self.close();
 }
 
-function setValue(){
-	try{
-		if (eWebEditor1.bInitialized){
-			eWebEditor1.setHTML(objField.value);
-		}else{
-			setTimeout("setValue();",1000);
-		}
-	}
-	catch(e){
-		setTimeout("setValue();",1000);
-	}
+function HTMLEncode(s_Html){
+	if (s_Html==null){return "";}
+	s_Html = s_Html.replace(/&/gi, "&amp;");
+	s_Html = s_Html.replace(/\"/gi, "&quot;");
+	s_Html = s_Html.replace(/</gi, "&lt;");
+	s_Html = s_Html.replace(/>/gi, "&gt;");
+	return s_Html;
 }
+
 </script>
 
 </head>
 <body>
 
-<script language=javascript>
-
-document.write ("<FORM method='POST' name='myform'>");
-document.write ("<INPUT type='hidden' name='content1' value=''>");
-document.write ("<IFRAME ID='eWebEditor1' src='ewebeditor.htm?id=content1&style=" + URLParams["style"] + "' frameborder='0' scrolling='no' width='100%' height='100%'></IFRAME>");
-document.write ("</FORM>");
-
-setTimeout("setValue();",1000);
-
+<script type="text/javascript">
+document.write ("<form method='post' name='myform'>");
+document.write ("<input type='hidden' name='content1' value=\""+HTMLEncode(oLink.value)+"\">");
+document.write ("<iframe id='eWebEditor1' src='ewebeditor.htm?id=content1&style=" + sStyle + "' frameborder='0' scrolling='no' width='100%' height='100%'></iframe>");
+document.write ("</form>");
 </script>
 
 </body>
