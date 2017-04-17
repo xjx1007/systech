@@ -71,7 +71,7 @@
                 <h5>
                     1.业务类型</h5>
                 <p class="gray">
-                    对您公司客户的业务类型进行设置，如遥控器、代理、物联网等。</p>
+                    对您公司客户的业务类型进行设置，如成品、代理、物联网等。</p>
             </div>
         </td><td style="width:45%;">
             <div onclick="location.href='Xs_Sales_BasisSetting_Class.aspx?id=1'" style="cursor: pointer">

@@ -56,7 +56,7 @@ public partial class Sc_Plan_QLMaterial : BasePage
         Sb_DivStylea.Append("<td align=\"center\"  class=\"ListHead\">合同单号</td>\n");
         Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">类型</td>\n");
         Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">日期</td>\n");
-        Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">遥控器</td>\n");
+        Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">成品</td>\n");
         if (this.Tbx_ProductsBarCode.Text == "")
         {
             Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">产品</td>\n");

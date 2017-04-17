@@ -15,7 +15,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer(tempd) {
             if (tempd != undefined) {
                 var ss;
                 ss = tempd.split("#");
@@ -33,7 +36,10 @@
             var v_Receive = document.all('Tbx_ReceiveID').value;
             var v_ReceiveName = document.all('Tbx_ReceiveName').value;
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("/Web/Common/SelectDeptPerson.aspx?ID=" + v_Receive + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=600px;dialogHeight=500px");
+            //var temp = window.showModalDialog("/Web/Common/SelectDeptPerson.aspx?ID=" + v_Receive + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=600px;dialogHeight=500px");
+            var temp = window.open("/Web/Common/SelectDeptPerson.aspx?ID=" + intSeconds + "", "选择人员", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_DeptPerson(tempd) {
             if (temp == undefined) {
                 temp = window.returnValue;
             }

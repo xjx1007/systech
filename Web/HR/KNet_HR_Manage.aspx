@@ -16,7 +16,7 @@
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
-    <title></title>
+    <title>人员管理</title>
 </head>
 
 <body topmargin="0" leftmargin="0" rightmargin="0">
@@ -269,7 +269,6 @@
                                         <asp:TemplateField HeaderText="员工姓名" SortExpression="Position" HeaderStyle-Font-Size="12px" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                <a href="#" onclick="javascript:window.open('KNet_HR_Manage_Details.aspx?StaffNo=<%# DataBinder.Eval(Container.DataItem, "StaffNo")%>','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=750,height=450');">
-
                                                     <%# DataBinder.Eval(Container.DataItem, "StaffName").ToString()%>
                                                </a>
                                             </ItemTemplate>
@@ -309,7 +308,19 @@
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
-
+                                        
+                                    <asp:TemplateField HeaderText="负责分类" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
+                                        HeaderStyle-HorizontalAlign="Left">
+                                        <ItemTemplate>
+                                            <%# base.Base_GetProductsType(DataBinder.Eval(Container.DataItem, "ProductsType").ToString())%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="状态" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
+                                        HeaderStyle-HorizontalAlign="Left">
+                                        <ItemTemplate>
+                                            <%# GetState(DataBinder.Eval(Container.DataItem, "StaffNo").ToString(), DataBinder.Eval(Container.DataItem, "StaffYN").ToString())%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                         <asp:BoundField HeaderText="入职日期" DataField="StaffAddTime" SortExpression="StaffAddTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px"  />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />

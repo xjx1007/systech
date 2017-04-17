@@ -20,22 +20,6 @@ using KNet.Common;
 /// </summary>
 public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects : System.Web.UI.Page
 {
-    protected void Page_PreInit(object sender, EventArgs e)
-    {
-        AdminloginMess AMLanguage = new AdminloginMess();
-        if (AMLanguage.KNet_Soft_StaffLanguage == 2)
-        {
-            // 1、默认为简体转繁体，编码为utf-8
-            Response.Filter = new LU.Web.ChineseConvertor(Response.Filter);
-        }
-        else if (AMLanguage.KNet_Soft_StaffLanguage == 1)
-        {
-            // 2、繁体简体转，编码为utf-8
-            Response.Filter = new LU.Web.ChineseConvertor(Response.Filter, LU.Web.ChineseConvertor.CCDirection.T2S);
-        }
-        else
-        { }
-    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -67,7 +51,6 @@ public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects :
         if (GridView1.Rows.Count == 0) //如果没有记录
         {
             this.Button2.Enabled = false;
-            this.Button3.Enabled = false;
         }
     }
     /// <summary>
@@ -80,7 +63,7 @@ public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects :
         //string LogtimeB = null;
         string KSeachKey = null;
 
-        string SqlWhere = " BaoPriceCheckYN=1 ";
+        string SqlWhere = " 1=1 ";
 
         //if (Request["LogtimeA"] != null && Request["LogtimeB"] != null && Request["LogtimeA"] != "" && Request["LogtimeB"] != "")
         //{
@@ -97,91 +80,23 @@ public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects :
 
         //    SqlWhere = SqlWhere + " and ( BaoPriceDateTime >= '" + LogtimeA + "' and  BaoPriceDateTime<='" + LogtimeB + "'   ) ";
         //}
-        if (Request["SeachKey"] != null && Request["SeachKey"] != "")
+        if (this.SeachKey.Text != "")
         {
-            KSeachKey = Request.QueryString["SeachKey"].ToString().Trim();
-            this.SeachKey.Text = KSeachKey;
-
-            SqlWhere = SqlWhere + " and ( BaoPriceTopic like '%" + KSeachKey + "%' or BaoPriceNo  like '%" + KSeachKey + "%' or BaoPriceWarranty like '%" + KSeachKey + "%' )";
+            SqlWhere = SqlWhere + " and ( BaoPriceTopic like '%" + this.SeachKey.Text + "%' or BaoPriceNo  like '%" + this.SeachKey.Text + "%' or BaoPriceWarranty like '%" + this.SeachKey.Text + "%' )";
         }
 
-        if (Request["KK"] != null && Request["KK"] != "")
+        if (this.DropDownList1.SelectedValue != "")
         {
-            int K =int.Parse(Request.QueryString["KK"].ToString().Trim());
-            this.DropDownList1.SelectedValue = K.ToString();
-            SqlWhere = SqlWhere + " and  BaoPriceCheckYN = " + K + " ";
+            SqlWhere = SqlWhere + " and  BaoPriceCheckYN = " + this.DropDownList1.SelectedValue + " ";
         }
         SqlWhere = SqlWhere + " order by BaoPriceDateTime desc";
 
-
-        using (DataSet ds = bll.GetList(SqlWhere))
-        {
-            //正反排序------
-            DataView dv = ds.Tables[0].DefaultView;
-            string sort = (string)ViewState["SortOrder"] + " " + (string)ViewState["OrderDire"];
-            dv.Sort = sort;
-            //--分页-------
-            PagedDataSource pds = new PagedDataSource();
-            AspNetPager1.RecordCount = dv.Count;
-            pds.DataSource = dv;
-            pds.AllowPaging = true;
-            pds.CurrentPageIndex = AspNetPager1.CurrentPageIndex - 1;
-            pds.PageSize = AspNetPager1.PageSize;
-            //--End分页-----
-            GridView1.DataSource = pds;
+        DataSet ds = bll.GetList(SqlWhere);
+            GridView1.DataSource = ds;
             GridView1.DataKeyNames = new string[] { "BaoPriceNo" };
             GridView1.DataBind();
 
-        }
     }
-    /// <summary>
-    /// 正反排序
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
-    {
-        string sPage = e.SortExpression;
-        if (ViewState["SortOrder"].ToString() == sPage)
-        {
-            if (ViewState["OrderDire"].ToString() == "Desc")
-                ViewState["OrderDire"] = "ASC";
-            else
-                ViewState["OrderDire"] = "Desc";
-        }
-        else
-        {
-            ViewState["SortOrder"] = e.SortExpression;
-        }
-        this.DataShows();
-        this.RowOverYN();
-    }
-
-    /// <summary>
-    /// 执行分页
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void AspNetPager1_PageChanged(object src, EventArgs e)
-    {
-        this.DataShows();
-        this.RowOverYN();
-    }
-
-    /// <summary>
-    /// 添加提示
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void GridView1_DataRowBinding(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowIndex != -1)
-        { //自动ID号
-            int id = (this.AspNetPager1.CurrentPageIndex - 1) * this.AspNetPager1.PageSize + e.Row.RowIndex + 1;
-            e.Row.Cells[0].Text = id.ToString();
-        }
-    }
-
     /// <summary>
     /// 确定选择
     /// </summary>
@@ -222,9 +137,18 @@ public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects :
             }
             else
             {
+                string s_Return = SuppNoVale + "|" + GetBaoPriceTopic(SuppNoVale);
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
-                s.Append("window.returnValue='" + SuppNoVale + "|" + GetBaoPriceTopic(SuppNoVale) + "';" + "\n");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                s.Append("    window.opener.SetReturnValueInOpenner_BaoPrice('" + s_Return + "');\n");
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
                 s.Append("window.close();" + "\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();
@@ -265,10 +189,7 @@ public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects :
     /// <param name="e"></param>
     protected void Button4_Click(object sender, EventArgs e)
     {
-        string SeachKeyContent = KNetPage.KHtmlEncode(SeachKey.Text.ToString());
-
-        Response.Redirect("SelectBaoPriceList.aspx?SeachKey=" + SeachKeyContent + "&Css1=Div22");
-        Response.End();
+        this.DataShows();
     }
 
 
@@ -411,8 +332,6 @@ public partial class Knet_Common_SelectBaoPriceListSelectBaoPriceListtoselects :
     /// <param name="e"></param>
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string K = this.DropDownList1.SelectedValue;
-        Response.Redirect("SelectBaoPriceList.aspx?KK=" + K + "");
-        Response.End();
+        this.DataShows();
     }
 }

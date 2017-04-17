@@ -295,7 +295,7 @@ namespace KNet.BLL
                     }
                     if (dt.Rows[n]["PBP_Order"] != null && dt.Rows[n]["PBP_Order"].ToString() != "")
                     {
-                        model.PBP_Order = dt.Rows[n]["PBP_Order"].ToString();
+                        model.PBP_Order = int.Parse(dt.Rows[n]["PBP_Order"].ToString());
                     }
                     if (dt.Rows[n]["PBP_Creator"] != null && dt.Rows[n]["PBP_Creator"].ToString() != "")
                     {

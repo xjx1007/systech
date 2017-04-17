@@ -82,7 +82,7 @@ public partial class Web_Sales_Knet_Procure_SuppliersRC_Price_View : BasePage
         KNet.BLL.Knet_Procure_SuppliersPrice Bll_Details = new KNet.BLL.Knet_Procure_SuppliersPrice();
         string s_Sql = " KPP_CgID='" + s_ID + "'  ";
         s_Sql += " and ProductsBarCode in (Select ProductsBarCode from KNET_Sys_Products where KSP_COde like '01%')";
-        DataSet Dts_Table = Bll_Details.GetList(s_Sql);//遥控器
+        DataSet Dts_Table = Bll_Details.GetList(s_Sql);//成品
         if (Dts_Table.Tables[0].Rows.Count > 0)
         {
             for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
@@ -123,7 +123,7 @@ public partial class Web_Sales_Knet_Procure_SuppliersRC_Price_View : BasePage
          s_Sql = " KPP_CgID='" + s_ID + "'  ";
         s_Sql += " and ProductsBarCode in (Select ProductsBarCode from KNET_Sys_Products where KSP_COde like '02%')";
         KNet.BLL.Knet_Procure_SuppliersPrice Bll_Details1 = new KNet.BLL.Knet_Procure_SuppliersPrice();
-        DataSet Dts_Table1 = Bll_Details1.GetList(s_Sql);//不是遥控器的报价
+        DataSet Dts_Table1 = Bll_Details1.GetList(s_Sql);//不是成品的报价
         if (Dts_Table1.Tables[0].Rows.Count > 0)
         {
             for (int i = 0; i < Dts_Table1.Tables[0].Rows.Count; i++)

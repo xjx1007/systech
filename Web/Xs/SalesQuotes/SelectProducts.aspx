@@ -71,16 +71,46 @@ if(http_request.readyState==4){
     <br />
 
 <!--底部功能栏-->
-<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" style="border-top:1px solid #A3B2CC;">
+<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="small" style="border-top:1px solid #A3B2CC;">
   <tr>
-    <td height="25" width="35%"><asp:Button ID="Button2" runat="server"  CssClass="crmbutton small save" Text="确定选择" OnClick="Button1_Click" style="width: 55px;height: 33px;"  />
+    <td height="25" width="35%"><asp:Button ID="Button2" runat="server"  CssClass="crmbutton small save" Text="确定选择" OnClick="Button1_Click" style="width: 70px;height: 33px;"  />
+                                <input name="button2" type="button"  value="关闭窗口" class="crmbutton small cancel"  style="height:33px"  onclick="closeWindow();">
+
     </td>
+      <td>
    关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="100px"></asp:TextBox>&nbsp;<asp:Button  ID="Button1" runat="server" Text="产品筛选"  CssClass="crmbutton small create" OnClick="Button1_Click1" /></td>
   </tr>
 </table>
-<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="tablecss">
-  <tr>
-    <td>
+<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="small">
+  <tr>        <td width="14%" valign="top">
+                <table border="0" cellspacing="0" cellpadding="3" width="100%" class="small">
+                    <tr>
+                        <td class="dvtTabCache" style="width: 10px" nowrap>
+                            &nbsp;
+                        </td>
+                        <td id="catalog_tab" class="dvtSelectedCell" align="center" nowrap>
+                            <a href="javascript:showProductCatalog()">产品分类</a>
+                        </td>
+                        <td class="dvtTabCache" style="width: 100%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <asp:TreeView ID="TreeView1" runat="server" ImageSet="XPFileExplorer" 
+                                NodeIndent="15" onselectednodechanged="TreeView1_SelectedNodeChanged">
+                                <HoverNodeStyle Font-Underline="True" ForeColor="#6666AA" />
+                                <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" 
+                                    HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
+                                <ParentNodeStyle Font-Bold="False" />
+                                <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" 
+                                    HorizontalPadding="0px" VerticalPadding="0px" />
+                            </asp:TreeView>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+    <td width="85%" align="left" valign="top" style="border-left: 2px dashed #cccccc;">
 <!--GridView-->
         <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true"  AllowSorting="True"  EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"  GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"  ShowHeader="true"  HeaderStyle-Height="25px"
          >
@@ -91,15 +121,13 @@ if(http_request.readyState==4){
                     <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server"/>
                  </HeaderTemplate>
                  <ItemTemplate>
-                     <asp:CheckBox ID="Chbk" runat="server"  /><a href="#"  onclick="javascript:window.open('../System/KnetProductsSetting_Details.aspx?BarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode")%>','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500');"><asp:Image ID="Image1" runat="server"  ImageUrl="/images/Deitail.gif"  ToolTip="查看产品详细信息" /></a>
+                     <asp:CheckBox ID="Chbk" runat="server"  />
                  </ItemTemplate>
         </asp:TemplateField>
-        
         <asp:BoundField  DataField="ProductsBarCode"  HeaderText="编码"  SortExpression="ProductsName">
             <ItemStyle HorizontalAlign="Left"   Font-Size="12px" />
             <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
         </asp:BoundField>
-        
         <asp:BoundField  DataField="ProductsName"  HeaderText="产品名称"  SortExpression="ProductsName">
             <ItemStyle HorizontalAlign="Left"   Font-Size="12px" />
             <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
@@ -114,15 +142,7 @@ if(http_request.readyState==4){
             <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
         </asp:BoundField>
         
-         <asp:TemplateField HeaderText="单位"  SortExpression="ProductsUnits"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-            <asp:Label ID="Lbl_Unit" runat="server"  Width="70px" Text=<%# Base_GetUnitsName(DataBinder.Eval(Container.DataItem, "ProductsUnits"))%> ></asp:Label>
-            <asp:TextBox ID="Tbx_UnitValue" runat="server"  CssClass="detailedViewTextBox"    Text=<%# DataBinder.Eval(Container.DataItem, "ProductsUnits")%>  style="display:none"></asp:TextBox>
-            <asp:TextBox ID="ProductsCostPrice" runat="server"  CssClass="detailedViewTextBox"   Text=<%# DataBinder.Eval(Container.DataItem, "ProductsCostPrice")%>  style="display:none"></asp:TextBox>
-          </ItemTemplate>
-        </asp:TemplateField>
-        
-         <asp:BoundField  DataField="Contract_SalesUnitPrice" ItemStyle-Font-Size="12px" ItemStyle-ForeColor="blue"  HeaderText="历史售价" ItemStyle-Width="70px"   HeaderStyle-Font-Size="12px"   SortExpression="Contract_SalesUnitPrice" DataFormatString="{0:c}" HtmlEncode="false">
+         <asp:BoundField  DataField="Contract_SalesUnitPrice" ItemStyle-Font-Size="12px" ItemStyle-ForeColor="blue"  HeaderText="历史售价" ItemStyle-Width="70px"   HeaderStyle-Font-Size="12px"   SortExpression="Contract_SalesUnitPrice" HtmlEncode="false">
             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
             <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
         </asp:BoundField> 

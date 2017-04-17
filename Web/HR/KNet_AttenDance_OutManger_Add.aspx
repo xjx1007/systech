@@ -19,9 +19,6 @@
             intSeconds = today.getSeconds();
             var tempd = window.showModalDialog("SelectSuppliers.aspx?sID=" + document.all("Xs_ClientID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=900px;dialogHeight=550px");
 
-
-
-
             if (tempd != undefined) {
 
                 var ss, s_Value, s_Name, i_row;

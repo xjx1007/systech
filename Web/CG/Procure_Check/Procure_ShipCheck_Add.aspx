@@ -20,8 +20,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -37,7 +39,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "&State=1", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var temp = window.showModalDialog("../../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "&State=1", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var temp = window.open("../../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "&State=1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SalesShip(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");

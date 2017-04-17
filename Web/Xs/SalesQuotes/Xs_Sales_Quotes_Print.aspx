@@ -4,74 +4,70 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Êä•‰ª∑Âçï</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="../../themes/images/style_cn.css">
     <style type="text/css">
+        TABLE.print {
+            vertical-align: middle;
+            BORDER-RIGHT: #000000 1px solid;
+            BORDER-TOP: #000000 1px solid;
+            BORDER-LEFT: #000000 1px solid;
+            BORDER-BOTTOM: #000000 1px solid;
+            BORDER-COLLAPSE: collapse;
+        }
 
-TABLE.print {vertical-align: middle;BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; BORDER-COLLAPSE: collapse
+            TABLE.print TD {
+                BORDER-RIGHT: #000000 1px solid;
+                PADDING-RIGHT: 5px;
+                BORDER-TOP: #000000 1px solid;
+                PADDING-LEFT: 5px;
+                FONT-SIZE: 12px;
+                BORDER-LEFT: #000000 1px solid;
+                LINE-HEIGHT: 20px;
+                BORDER-BOTTOM: #000000 1px solid;
+            }
 
-}
+            TABLE.print .right {
+                TEXT-ALIGN: right;
+            }
 
-TABLE.print TD {
+        .init_font {
+            FONT-SIZE: 12px;
+        }
 
-	BORDER-RIGHT: #000000 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #000000 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 12px; BORDER-LEFT: #000000 1px solid; LINE-HEIGHT: 20px; BORDER-BOTTOM: #000000 1px solid;
+        .table_1 {
+            BORDER-RIGHT: #000000 0px solid;
+            PADDING-RIGHT: 0px;
+            BORDER-TOP: #000000 0px solid;
+            PADDING-LEFT: 0px;
+            FONT-SIZE: 12px;
+            BORDER-LEFT: #000000 0px solid;
+            LINE-HEIGHT: 20px;
+            BORDER-BOTTOM: #000000 0px solid;
+            padding-bottom: 0px;
+        }
 
-}
-
-TABLE.print .right {
-
-	TEXT-ALIGN: right
-
-}
-
-.init_font {
-
-	FONT-SIZE: 12px
-
-}
-
-.table_1 {
-
-	BORDER-RIGHT: #000000 0px solid;
-
-	PADDING-RIGHT: 0px;
-
-	BORDER-TOP: #000000 0px solid;
-
-	PADDING-LEFT: 0px;
-
-	FONT-SIZE: 12px;
-
-	BORDER-LEFT: #000000 0px solid;
-
-	LINE-HEIGHT: 20px;
-
-	BORDER-BOTTOM: #000000 0px solid;
-
-	padding-bottom: 0px;
-
-}.STYLE1 {
-
-	font-family: "∫⁄ÃÂ";
-
-	line-height: 30px;
-
-	font-size: 20px;
-
-}</style>
+        .STYLE1 {
+            font-family: "Èªë‰Ωì";
+            line-height: 30px;
+            font-size: 20px;
+        }
+    </style>
     <meta name="GENERATOR" content="MSHTML 6.00.6000.16735">
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <br />
             <table class="ke-zeroborder" border="0" cellspacing="0" cellpadding="0" width="100%"
                 align="center">
                 <tbody>
                     <tr>
                         <td width="96%">
                             <div align="center">
-                                <span class="STYLE1"><strong>±® º€ ¥´ ’Ê £®FAX QUOTATION£©</strong></span></div>
+                                <span class="STYLE1"><strong>Êù≠Â∑ûÂ£´ËÖæÁßëÊäÄÊúâÈôêÂÖ¨Âè∏<br />
+                                    Êä•   ‰ª∑   Âçï</strong></span>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -90,89 +86,90 @@ TABLE.print .right {
                     width="100%" align="center">
                     <tbody>
                         <tr>
-                            <td width="10%" align="left">
-                                ±®º€µ•±‡∫≈:</td>
+                            <td width="10%" align="left">Êä•‰ª∑ÂçïÁºñÂè∑:</td>
                             <td width="30%" align="left">
-                               <asp:Label ID="Lbl_Code" runat="server"></asp:Label></td>
-                            <td width="10%" align="left">
-                                &nbsp;</td>
-                            <td width="30%" align="left">
-                                &nbsp;</td>
+                                <asp:Label ID="Lbl_Code" runat="server"></asp:Label></td>
+                            <td width="10%" align="left">&nbsp;</td>
+                            <td width="30%" align="left">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td width="163">
-                                TO:</td>
+                            <td width="163">TO:</td>
                             <td width="284">
                                 <%=s_CustomerName%>&nbsp;&nbsp;<%=s_LinkMan%></td>
-                            <td width="163">
-                                FROM:</td>
+                            <td width="163">FROM:</td>
                             <td width="365">
                                 <%=s_Company%>&nbsp;&nbsp;<%=s_DutypersonName%></td>
                         </tr>
+
                         <tr>
-                            <td width="163">
-                                FAX:</td>
+                            <td width="163">ATTN:</td>
                             <td width="284">
-                            <asp:Label ID="Lbl_LinkManFax" runat="server"></asp:Label></td>
-                            <td width="163">
-                                FAX:</td>
+                                <asp:Label ID="Lbl_ToATTN" runat="server"></asp:Label></td>
+                            <td width="163">ATTN:</td>
                             <td width="365">
-                               <asp:Label ID="Lbl_DutyPersonFax" runat="server"></asp:Label></td>
+                                <asp:Label ID="Lbl_FromATTN" runat="server"></asp:Label></td>
                         </tr>
                         <tr>
-                            <td width="163">
-                                TEL:</td>
+                            <td width="163">FAX:</td>
+                            <td width="284">
+                                <asp:Label ID="Lbl_LinkManFax" runat="server"></asp:Label></td>
+                            <td width="163">FAX:</td>
+                            <td width="365">
+                                <asp:Label ID="Lbl_DutyPersonFax" runat="server"></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td width="163">TEL:</td>
                             <td width="284">
                                 <asp:Label ID="Lbl_LinkManTel" runat="server"></asp:Label></td>
-                            <td width="163">
-                                TEL:</td>
+                            <td width="163">TEL:</td>
                             <td width="365">
-                            <asp:Label ID="Lbl_DutyPersonTel" runat="server"></asp:Label>
+                                <asp:Label ID="Lbl_DutyPersonTel" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <tr>
-                            <td width="163">
-                                E-MAIL:</td>
+                            <td width="163">E-MAIL:</td>
                             <td width="284">
                                 <asp:Label ID="Lbl_LinkManEmail" runat="server"></asp:Label></td>
-                            <td width="163">
-                                E-MAIL:</td>
+                            <td width="163">E-MAIL:</td>
                             <td width="365">
                                 <asp:Label ID="Lbl_DutyPersonEmail" runat="server"></asp:Label></td>
                         </tr>
                     </tbody>
                 </table>
                 <p>
-                    &nbsp; ◊æ¥µƒ<span style="line-height: normal; font-family: Arial, Helvetica, sans-serif;"><%=s_LinkMan%></span>£∫ƒ˙∫√£°∏––ªƒ˙∂‘<%=s_Company%>µƒ–≈»Œ∫Õ÷ß≥÷£¨Œ“√«∏˘æ›ƒ˙À˘Ã·π©µƒ≤Œ ˝Œ™ƒ˙◊ˆ“‘œ¬±®º€£∫</p>
+                    &nbsp; Â∞äÊï¨ÁöÑ<span style="line-height: normal; font-family: Arial, Helvetica, sans-serif;"><%=s_LinkMan%></span>ÔºöÊÇ®Â•ΩÔºÅÊÑüË∞¢ÊÇ®ÂØπ<%=s_Company%>ÁöÑ‰ø°‰ªªÂíåÊîØÊåÅÔºåÊàë‰ª¨Ê†πÊçÆÊÇ®ÊâÄÊèê‰æõÁöÑÂèÇÊï∞‰∏∫ÊÇ®ÂÅö‰ª•‰∏ãÊä•‰ª∑Ôºö
+                </p>
                 <table id="table_2" class="print ke-zeroborder" border="0" cellspacing="0" cellpadding="0"
                     width="100%" align="center">
                     <tbody>
                         <tr>
-                            <td width="8%" align="center">
-                                –Ú∫≈</td>
-                            <td width="22%" align="center">
-                                ≤˙∆∑√˚≥∆</td>
-                            <td width="25%" align="center">
-                                πÊ∏Ò–Õ∫≈</td>
-                            <td width="10%" align="center">
-                                 ˝¡øµ•Œª</td>
-                            <td width="10%" align="center">
-                                µ•º€</td>
-                            <td width="10%" align="center">
-                                Ω∂Ó</td>
-                            <td width="15%" align="center">
-                                ±∏◊¢</td>
+                            <td width="8%" align="center">Â∫èÂè∑</td>
+                            <td width="22%" align="center">‰∫ßÂìÅÂêçÁß∞</td>
+                            <td width="25%" align="center">ËßÑÊ†ºÂûãÂè∑</td>
+                            <td width="10%" align="center">Êï∞ÈáèÂçï‰Ωç</td>
+                            <td width="10%" align="center">Âçï‰ª∑</td>
+                            <td width="10%" align="center">ÈáëÈ¢ù</td>
+                            <td width="15%" align="center">Â§áÊ≥®</td>
                         </tr>
-                        <%=s_Table %>
+                        <%=s_MyTable_Detail %>
                     </tbody>
                 </table>
                 <br />
-                <table id="table_3" class="table_1 ke-zeroborder" border="0" cellspacing="0" cellpadding="0"
+                <table id="table1" class="table_1 ke-zeroborder" border="0" cellspacing="0" cellpadding="0"
                     width="100%" align="center">
                     <tbody>
                         <tr>
                             <td>
-                                ±∏◊¢£∫<br />
+                                <asp:Label ID="lbl_PayMent" runat="server"></asp:Label></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <table id="table_3" class="table_1 ke-zeroborder" border="0" cellspacing="0" cellpadding="0"
+                    width="100%" align="center">
+                    <tbody>
+                        <tr>
+                            <td>Â§áÊ≥®Ôºö<br />
                             </td>
                         </tr>
                     </tbody>

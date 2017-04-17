@@ -55,6 +55,7 @@ namespace KNet.Model
         private int _KPO_IsStopProduce;
         private int _KPO_PriceState;
         private int _KPO_IsChange;
+        private string _KPO_PreHouseNo;
         
         /// <summary>
         /// 自动ID值
@@ -372,7 +373,13 @@ namespace KNet.Model
             get { return _KPO_ScDetails; }
         }
 
+        public string KPO_PreHouseNo
+        {
+            set { _KPO_PreHouseNo = value; }
+            get { return _KPO_PreHouseNo; }
+        }
 
+        
         public int KPO_PriceState
         {
             set { _KPO_PriceState = value; }

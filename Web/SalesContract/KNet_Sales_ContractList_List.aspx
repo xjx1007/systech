@@ -278,7 +278,7 @@
                                                         <%# base.Base_GetContractProductsPatten(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:BoundField HeaderText="遥控器" DataField="v_ContractNotBatteryAmount" SortExpression="v_ContractNotBatteryAmount"
+                                                <asp:BoundField HeaderText="成品" DataField="v_ContractNotBatteryAmount" SortExpression="v_ContractNotBatteryAmount"
                                                     HtmlEncode="false">
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />

@@ -102,7 +102,6 @@ public partial class Knet_Common_SelectKNet_WareCheck_Ownall : BasePage
         if (GridView1.Rows.Count == 0) //如果没有记录
         {
             this.Button2.Enabled = false;
-            this.Button3.Enabled = false;
         }
     }
     /// <summary>
@@ -110,7 +109,7 @@ public partial class Knet_Common_SelectKNet_WareCheck_Ownall : BasePage
     /// </summary>
     protected void DataShows()
     {
-        string s_Sql = "Select HouseNo,ProductsBarCode,Sum(directinamount) as WareHouseAmount,Sum(DirectInTotalNet) as Money from v_Store  where ";
+        string s_Sql = "Select HouseNo,ProductsBarCode,Sum(directinamount) as WareHouseAmount,Sum(DirectInTotalNet) as Money,KSP_Code from v_Store  where ";
 
         if (Request["HouseNo"] != null && Request["HouseNo"] != "" && Request["HouseNo"] != "0")
         {
@@ -140,7 +139,7 @@ public partial class Knet_Common_SelectKNet_WareCheck_Ownall : BasePage
             s_SonID = s_SonID.Replace(",", "','");
             s_Sql += " and ProductsType in ('" + s_SonID + "') ";
         }
-        s_Sql += " group by HouseNo,ProductsBarCode";
+        s_Sql += " group by HouseNo,ProductsBarCode,KSP_Code";
         this.BeginQuery(s_Sql);
         this.QueryForDataSet();
         DataSet Dts_Tabel = Dts_Result;
@@ -163,7 +162,7 @@ public partial class Knet_Common_SelectKNet_WareCheck_Ownall : BasePage
             CheckBox Chk = (CheckBox)this.GridView1.Rows[i].Cells[0].FindControl("Chbk");
             if (Chk.Checked)
             {
-                string s_ProductsBarCode = GridView1.Rows[i].Cells[2].Text;
+                string s_ProductsBarCode = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode")).Text;
                 string s_ProductsName = base.Base_GetProdutsName(s_ProductsBarCode);
                 string s_ProductsEdition = base.Base_GetProductsEdition(s_ProductsBarCode);
                 string s_Number = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text;
@@ -180,7 +179,16 @@ public partial class Knet_Common_SelectKNet_WareCheck_Ownall : BasePage
         }
         StringBuilder s = new StringBuilder();
         s.Append("<script language=javascript>" + "\n");
-        s.Append("if(window.opener != undefined) {window.opener.returnValue='" + s_Return + "';} else{window.returnValue='" + s_Return + "';}" + "\n");
+        //s.Append("if(window.opener != undefined) {window.opener.returnValue='" + s_Return + "';} else{window.returnValue='" + s_Return + "';}" + "\n");
+        s.Append("if (window.opener != undefined)\n");
+        s.Append("{\n");
+        s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+        s.Append("    window.opener.SetReturnValueInOpenner_WareCheck_Ownall('" + s_Return + "');\n");
+        s.Append("}\n");
+        s.Append("else\n");
+        s.Append("{\n");
+        s.Append("    window.returnValue = '" + s_Return + "';\n");
+        s.Append("}\n");
         s.Append("window.close();" + "\n");
         s.Append("</script>");
         Type cstype = this.GetType();

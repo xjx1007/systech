@@ -352,13 +352,24 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Manage : BasePa
     public string GetDirectOutProductsPatten(string s_Order)
     {
         string s_Return = "";
-        this.BeginQuery("Select distinct ProductsBarCode from KNet_WareHouse_DirectOutList_Details Where DirectOutNo='" + s_Order + "'");
+        this.BeginQuery("Select  distinct ProductsBarCode from KNet_WareHouse_DirectOutList_Details Where DirectOutNo='" + s_Order + "'");
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
         {
-            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            if (Dtb_Result.Rows.Count < 5)
             {
-                s_Return += base.Base_GetProductsEdition_Link(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
+                for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+                {
+                    s_Return += base.Base_GetProductsEdition_Link(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    s_Return += base.Base_GetProductsEdition_Link(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
+                }
+                s_Return += "<font color=gray>更多...</font>"+"<br>";
             }
             s_Return = s_Return.Substring(0, s_Return.Length - 1);
         }

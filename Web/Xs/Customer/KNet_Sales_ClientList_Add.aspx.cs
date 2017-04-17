@@ -238,6 +238,10 @@ public partial class Knet_Web_Sales_KNet_Sales_ClientList_Add : BasePage
                     i_CustomerValue = int.Parse(Dtb_TableCustomer.Rows[0][0].ToString() == "" ? "0" : Dtb_TableCustomer.Rows[0][0].ToString()) + 1;
                 }
             }
+            s_CustomerTypes = "01";
+            s_CustomerClass = "01";
+            /*
+             * 
             //客户类型
             if (CustomerTypes != "")
             { 
@@ -246,7 +250,6 @@ public partial class Knet_Web_Sales_KNet_Sales_ClientList_Add : BasePage
                 KNet.Model.KNet_Sales_ClientAppseting Model = bll_ClientAppseting.GetModel(CustomerTypes);
                 s_CustomerTypes = Model.Client_Code;
             }
-
             //渠道
             if (CustomerClass != "")
             {
@@ -257,6 +260,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ClientList_Add : BasePage
                     s_CustomerClass = ds.Tables[0].Rows[0]["Client_Code"].ToString();
                 }
             }
+             * */
             //区域和省
             if (sheng != "")
             {
@@ -274,8 +278,15 @@ public partial class Knet_Web_Sales_KNet_Sales_ClientList_Add : BasePage
             this.QueryForDataTable();
             if (this.Dtb_Result.Rows.Count > 0)
             {
-                s_Number = Convert.ToString((int.Parse(Dtb_Result.Rows[0][0].ToString()) + 1)) + "1";
-                s_ID = s_Number.Substring(1, s_Number.Length - 1) + s_ID;
+                if (Dtb_Result.Rows[0][0].ToString() == "")
+                {
+                    s_ID += "10001";
+                }
+                else
+                {
+                    s_Number = Convert.ToString((int.Parse(Dtb_Result.Rows[0][0].ToString()) + 1)) + "1";
+                    s_ID = s_Number.Substring(1, s_Number.Length - 1) + s_ID;
+                }
             }
             else
             {

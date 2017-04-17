@@ -35,7 +35,29 @@ public partial class Knet_Web_HR_KNet_HR_Manage : BasePage
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
             }
+            string s_Del = Request.QueryString["Model"] == null ? "" : Request.QueryString["Model"].ToString();
+            string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+            if (s_Del != "")
+            {
+                string sql = "";
+                if (s_Del == "True")
+                {
+                    sql = "update KNet_Resource_Staff set StaffYN='0' where StaffNo ='" + s_ID + "' ";
+                    DbHelperSQL.ExecuteSql(sql);
+                    AdminloginMess LogAM = new AdminloginMess();
+                    LogAM.Add_Logs("停用用户 操作成功！");
+                    Alert("操作成功！");
+                }
+                else if (s_Del == "False")
+                {
+                    sql = "update KNet_Resource_Staff set StaffYN='1' where StaffNo ='" + s_ID + "' ";
+                    DbHelperSQL.ExecuteSql(sql);
+                    AdminloginMess LogAM = new AdminloginMess();
+                    LogAM.Add_Logs("启用用户 操作成功！");
+                    Alert("操作成功！");
+                }
 
+            }
             //企业人事查看
             //if (AM.YNAuthority(NQ.Str5003) == false)
             //{
@@ -50,9 +72,35 @@ public partial class Knet_Web_HR_KNet_HR_Manage : BasePage
 
             this.DataShows();
 
+            base.Base_DropBindSearch(this.bas_searchfield, "KNet_Resource_Staff");
+            base.Base_DropBindSearch(this.Fields, "KNet_Resource_Staff");
         }
 
     }
+
+    public string GetState(string s_D, string s_Del)
+    {
+        string s_Return = "";
+        try
+        {
+
+            if (s_Del == "True")
+            {
+                string JSD = "KNet_HR_Manage.aspx?ID=" + s_D + "&Model=" + s_Del + "";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  ><font color=red>停用</font></a>";
+            }
+            else
+            {
+                string JSD = "KNet_HR_Manage.aspx?ID=" + s_D + "&Model=" + s_Del + "";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\" >启用</a>";
+            }
+        }
+        catch
+        { }
+        return s_Return;
+    }
+
+
     /// <summary>
     /// 绑定数据源
     /// </summary>
@@ -90,7 +138,7 @@ public partial class Knet_Web_HR_KNet_HR_Manage : BasePage
             SqlWhere += base.Base_GetAdvWhere(s_Fields, s_Condition, s_Text, s_Type);
         }
         SqlWhere += " order by StaffAddTime desc ";
-        DataSet ds = bll.GetList(SqlWhere);
+        DataSet ds = bll.GetList1(SqlWhere);
 
         MyGridView1.DataSource = ds;
         MyGridView1.DataKeyNames = new string[] { "ID" };

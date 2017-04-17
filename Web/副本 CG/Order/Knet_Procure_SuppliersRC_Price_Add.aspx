@@ -148,7 +148,7 @@
                                             <table width="100%" height="261" border="0" align="center" cellpadding="0" cellspacing="0">
                                              <tr>
                                                     <td width="17%" height="25" align="right" class="dvtCellLabel">
-                                                        选择遥控器:
+                                                        选择成品:
                                                     </td>
                                                     <td align="left" class="dvtCellInfo">
                                                             <asp:TextBox  CssClass="Custom_Hidden" runat="server" ID="Tbx_RcProductsBarCode"
@@ -188,7 +188,7 @@
                                                 
                                                 <tr>
                                                     <td align="left" class="dvtCellInfo" colspan="4">
-                                                    遥控器：
+                                                    成品：
                                                         <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="true" PageSize="10" AllowSorting="True"
                                                             EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"
                                                             GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"

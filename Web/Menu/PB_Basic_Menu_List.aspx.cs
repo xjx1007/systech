@@ -140,5 +140,28 @@ public partial class PB_Basic_Menu_List : BasePage
     {
         this.DataShows();
     }
+
+    protected string GetParentMenuName(object objParentID)
+    {
+        string s_ParentMenuName = "";
+        try
+        {
+            string s_ID = "";
+            if (objParentID != DBNull.Value)
+            {
+                s_ID = objParentID.ToString();
+                KNet.BLL.PB_Basic_Menu bll = new KNet.BLL.PB_Basic_Menu();
+                KNet.Model.PB_Basic_Menu model = bll.GetModel(s_ID);
+                if (model != null)
+                {
+                    s_ParentMenuName = model.PBM_Name + " - ";
+                }
+            }
+        }
+        catch
+        { 
+        }
+        return s_ParentMenuName;
+    }
     
 }

@@ -3,18 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>产品明细</title>
-<style type="text/css">
+ <style type="text/css" id="style1">
 body {
  background: #FFF;
  color: #000;
- font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+ font: normal normal 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
  margin: 10px;
  padding: 0;
  overflow-y:hidden;
 }
 table, td, a {
  color: #000;
- font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif
+ font: normal normal 14px Verdana, Geneva, Arial, Helvetica, sans-serif
 }
 .td
   {
@@ -72,7 +72,39 @@ head:first-child+body thead[class].fixedHeader tr {
  padding: 4px 3px;
  text-align: center
 }
-
+.thstyleleft
+{
+ background: #FFFFFF;
+ border-left: 0px solid #EB8;
+ border-right: 0px solid #B74;
+ border-top: 0px solid #EB8;
+ font-weight: normal;
+ padding: 4px 3px;
+ text-align:left;
+}
+.thstyleRight
+{
+ background: #FFFFFF;
+ border-left: 0px solid #EB8;
+ border-right: 0px solid #B74;
+ border-top: 0px solid #EB8;
+ font-weight: normal;
+ padding: 4px 3px;
+ text-align:right;
+}
+.thstyleLeftDetails
+{
+ BORDER-BOTTOM:#000000 0px solid;
+ BORDER-LEFT: #000000 0px solid;
+ BORDER-TOP: #000000 1px solid;
+ BORDER-RIGHT: #000000 1px solid;
+}
+.scrollTable
+{
+ BORDER-BOTTOM:#000000 1px solid;
+ 
+	
+}
 .thsTitle{
  background: #FFFFFF;
  border-left: 0px solid #EB8;
@@ -141,6 +173,24 @@ head:first-child+body tbody[class].scrollContent td + td + td {
       
 .rr{background-color:#FFFFEE}
 .gg{background-color:#dee2f2}
+  .MaterTitle
+	    {
+	    font-family:方正姚体;
+	    white-space:nowrap;
+	    color:windowtext;
+	    font-weight:700;
+	    font-style:normal;
+	    text-decoration:none;
+	    text-align:center;
+	    vertical-align:middle;
+        background: #FFFFFF;
+	    border:none;}
+	    
+	
+.Custom_Hidden
+{
+	display:none;	
+}
 </style>
     <script language="javascript" type="text/javascript">   
         var LODOP; //声明为全局变量 

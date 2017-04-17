@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections;
 using System.Web;
@@ -9,6 +8,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
+using System.IO;
+using System.Text;
+using System.Data.SqlClient;
+
 using KNet.DBUtility;
 using KNet.Common;
 
@@ -36,16 +40,16 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         try
         {
             AdminloginMess AM = new AdminloginMess();
-            int i_number=0;
+            int i_number = 0;
 
-           i_number=int.Parse(this.Tbx_BomNumber.Text);
-            for(int i=0;i<i_number;i++)
+            i_number = int.Parse(this.Tbx_BomNumber.Text);
+            for (int i = 0; i < i_number; i++)
             {
 
                 string s_ID = Request["XPDID_" + i.ToString() + ""] == null ? "" : Request["XPDID_" + i.ToString() + ""].ToString();
                 string s_Chcek = Request["Chk_IsMail_" + i.ToString() + ""] == null ? "" : Request["Chk_IsMail_" + i.ToString() + ""].ToString();
                 string s_Sql = "";
-                if (s_ID!= "")
+                if (s_ID != "")
                 {
                     if (s_Chcek == "")
                     {
@@ -64,9 +68,9 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         }
         catch
         { }
-        
+
     }
-    
+
     protected void Button1_Click(object sender, EventArgs e)
     {
         AdminloginMess AM = new AdminloginMess();
@@ -76,25 +80,43 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         //停用
         if (s_ID != "")
         {
-            if (AM.YNAuthority("停用产品") == true)
+            if ((AM.KNet_Position == "103") || (AM.KNet_StaffName == "李文立") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "毛刚挺"))
             {
-                KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
-                Model.ProductsBarCode = s_ID;
-                int i_Del = Math.Abs(Model.KSP_Del - 1);
+                if (AM.YNAuthority("停用产品") == true)
+                {
+                    KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
+                    KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
+                    Model.ProductsBarCode = s_ID;
+                    int i_Del = Math.Abs(Model.KSP_Del - 1);
 
-                Model.KSP_DelRemarks = this.Tbx_DelRemarks.Text;
-                Model.KSP_Del = i_Del;
-                Bll.UpdateDel(Model);
-                AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
-                AlertAndRedirect("操作成功！", "KnetProductsSetting.aspx?ProductsBarCode=" + s_ID + "");
-            }
-            else
-            {
-                AM.NoAuthority("停用产品");
+                    Model.KSP_DelRemarks = this.Tbx_DelRemarks.Text;
+                    Model.KSP_Del = i_Del;
+                    Bll.UpdateDel(Model);
+                    AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
+                    AlertAndRedirect("操作成功！", "KnetProductsSetting.aspx?ProductsBarCode=" + s_ID + "");
+                }
+                else
+                {
+                    AM.NoAuthority("停用产品");
+                }
             }
         }
 
+    }
+
+
+    protected void Button22_Click(object sender, EventArgs e)
+    {
+        string s_Sql = "";
+        s_Sql = "Select * from KNET_Sys_Products where KSP_Code='' ";
+        this.BeginQuery(s_Sql);
+        DataTable Dtb_Table = this.QueryForDataTable();
+        for (int i = 0; i < Dtb_Table.Rows.Count; i++)
+        {
+            string s_NewCode = base.Base_GetNewProductsCode(Dtb_Table.Rows[i]["ProductsType"].ToString());
+            string s_DoSql = "Update KNET_Sys_Products Set KSP_Code='" + s_NewCode + "' where ProductsBarCode='" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "'";
+            DbHelperSQL.ExecuteSql(s_DoSql);
+        }
     }
     /// <summary>
     /// 获取记录数据
@@ -132,6 +154,11 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     this.Tbx_DelRemarks.Visible = false;
                     this.Lbl_DelRemarks.Visible = true;
                 }
+
+                if (model.KSP_isModiy == 1)
+                { this.Btn_Sh.Text = "审批"; }
+                else
+                { this.Btn_Sh.Text = "已审批"; }
                 //if ((AM.KNet_StaffDepart == "129652783965723459") && (AM.KNet_Position == "102"))//如果是研发部经理
 
                 if (AM.KNet_StaffDepart == "129652783965723459") //如果是研发部经理
@@ -154,28 +181,30 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 this.ProductsSellingPrice.Text = model.ProductsSellingPrice.ToString();
                 this.ProductsCostPrice.Text = model.ProductsCostPrice.ToString();
                 this.ProductsDescription.Text = KNetPage.KHtmlDiscode(model.ProductsDescription.ToString());
+                this.ProductsDetailDescription.Text = KNetPage.KHtmlDiscode(model.ProductsDetailDescription.ToString());
                 this.Lbl_ProductsEdition.Text = model.ProductsEdition;
                 this.Lbl_GProductsEdition.Text = base.Base_GetProductsEdition_Link(model.KSP_GProductsBarCode);
                 this.Lbl_KSPCode.Text = model.KSP_Code;
                 KNet.BLL.PB_Basic_ProductsClass Bll_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
                 this.Lbl_ProductsType.Text = Bll_ProductsClass.GetProductsName(model.ProductsType);
 
-                string SqlWhere = "select * from KNet_sys_Products where ProductsBarCode='" + s_RC_ProductsBarCode + "' ";
-                KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-                string s_SonID = Bll_ProductsDetails.GetSonIDs("01");
-                s_SonID = s_SonID.Replace(",", "','");
-                SqlWhere += " and ProductsType in ('" + s_SonID + "') ";
-                this.BeginQuery(SqlWhere);
-                DataTable Dtb_Products1 = (DataTable)this.QueryForDataTable();
-                if (Dtb_Products1.Rows.Count > 0)
+
+                if ((model.KSP_Code.IndexOf("01") == 0) || (model.KSP_Code.IndexOf("03") == 0))
                 {
-                    this.Lbl_Create.Text = "<a href=\"../CG/Order/Knet_Procure_SuppliersRC_Price_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建报价单</a>";
+                    Pan_Bom.Visible = true;
                 }
                 else
                 {
-                    this.Lbl_Create.Text = "<a href=\"../CG/Order/Knet_Procure_Suppliers_Price_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建报价单</a>";
+                    Pan_Bom.Visible = false;
                 }
+                this.Tbx_CustomerProductsName.Text = model.KSP_CustomerProductsName;
+                this.Tbx_CustomerProductsEdition.Text = model.KSP_CustomerProductsEdition;
+                this.Tbx_CustomerProductsCode.Text = model.KSP_CustomerProductsCode;
 
+                this.Lbl_Create.Text = "<a href=\"../CG/Order/Knet_Procure_Suppliers_Price_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建报价单</a>";
+                this.Lbl_Create1.Text = "<a href=\"/Web/WareHouseOut/KNet_WareHouse_DirectOut_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建产品领用单</a>";
+                Lbl_Bom.Text = "<a href=\"/Web/Products/BOM.aspx?BarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\" target=\"_blank\">BOM表</a>";
+                Lbl_BomWithPrice.Text = "<a href=\"/Web/Products/BOMWithPrice.aspx?BarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\" target=\"_blank\">BOM报价表</a>";
                 Lbl_Createsmpale.Text = "<a href=\"/Web/ProductsSample/Pb_Products_Sample_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "&isModify=1\" class=\"webMnu\">创建设计修改</a>";
                 this.Lbl_ScProblem.Text = "<a href=\"../Problem/Zl_Produce_Problem_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建生产问题</a>";
                 this.Lbl_Zy.Text = "<a href=\"../Instruction/ZL_Task_Instruction_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建作业指导书</a>";
@@ -194,6 +223,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     this.Image1.Visible = false;
                     this.HyperLink1.Visible = false;
                 }
+
                 KNet.BLL.Pb_Products_Sample_Images Bll_Images = new KNet.BLL.Pb_Products_Sample_Images();
                 DataSet Dts_Table = Bll_Images.GetList(" PPI_SmapleID='" + model.ProductsBarCode + "' and PBI_Type='2' ");
                 if (Dts_Table != null)
@@ -224,266 +254,15 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     }
 
                 }
-                decimal d_totalPrice = 0;
-                KNet.BLL.Xs_Products_Prodocts BLL_Products_Products = new KNet.BLL.Xs_Products_Prodocts();
-                KNet.BLL.PB_Basic_ProductsClass BLL_Basic_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
-                DataSet Dts_Products = BLL_Products_Products.GetListWithType(" and XPP_FaterBarCode='" + model.ProductsBarCode + "' ");
-                DataTable Dtb_Products = Dts_Products.Tables[0];
 
-                if (Dtb_Products.Rows.Count > 0)
+                if (Pan_Bom.Visible == true)
                 {
-                    if (AM.YNAuthority("采购报价列表"))
-                    {
-                        s_ProductsTable_BomDetail += "<tr height=\"31px\">";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\" colspan=2><font color=red>遥控器报价</font></td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + model.ProductsName + "</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\" >" + model.ProductsEdition + "</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\" >" + model.KSP_Code + "</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\" colspan=3 >&nbsp;</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\" >" + base.Base_GetHouseAndNumber(model.ProductsBarCode) + "</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"  >&nbsp;</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.GetNearPriceAndHandPrice(model.ProductsBarCode) + "</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"  >&nbsp;</td>";
-                        s_ProductsTable_BomDetail += "</tr>";
-
-
-                        s_ProductsTable_BomDetail1 += "<tr height=\"31px\">";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\" colspan=2><font color=red>遥控器报价</font></td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + model.ProductsName + "</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\" >" + model.ProductsEdition + "</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\" >" + model.KSP_Code + "</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\" colspan=2 >&nbsp;</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\" >" + base.Base_GetHouseAndNumber(model.ProductsBarCode) + "</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\"  >&nbsp;</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + base.GetNearPriceAndHandPrice(model.ProductsBarCode) + "</td>";
-                        string[] s_LowDetails = base.GetLowPriceAndHandPrice(model.ProductsBarCode).Split('$');
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + s_LowDetails[0] + "</td>";
-                        s_ProductsTable_BomDetail1 += "</tr>";
-                        try
-                        {
-                            d_totalPrice += decimal.Parse(s_LowDetails[1]) + decimal.Parse(s_LowDetails[2]);
-                        }
-                        catch
-                        { }
-
-                    }
-                    for (int i = 0; i < Dtb_Products.Rows.Count; i++)
-                    {
-
-                        s_ProductsTable_Detail += "<tr>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">" + (i + 1).ToString() + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">" + BLL_Basic_ProductsClass.GetProductsName(Dtb_Products.Rows[i]["PBP_ID"].ToString()) + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dtb_Products.Rows[i]["XPP_ProductsBarCode"].ToString()) + "</td>";
-                        if (Dtb_Products.Rows[i]["XPP_ProductsBarCode"].ToString() != "")
-                        {
-                            KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                            KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(Dtb_Products.Rows[i]["XPP_ProductsBarCode"].ToString());
-                            s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">" + Model.KSP_Code + "</td>";
-                        }
-                        else
-                        {
-                            s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-                        }
-
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsPattern(Dtb_Products.Rows[i]["XPP_ProductsBarCode"].ToString()) + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_Products.Rows[i]["XPP_ProductsBarCode"].ToString()) + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"SuppNo\" value='" + Dtb_Products.Rows[i]["XPP_SuppNo"].ToString() + "'>" + base.Base_GetSupplierName(Dtb_Products.Rows[i]["XPP_SuppNo"].ToString()) + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"Price\" value='" + Dtb_Products.Rows[i]["XPP_Price"].ToString() + "'>" + Dtb_Products.Rows[i]["XPP_Price"].ToString() + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"Number\" value='" + Dtb_Products.Rows[i]["XPP_Number"].ToString() + "'>" + Dtb_Products.Rows[i]["XPP_Number"].ToString() + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"IsOrder\" value='" + Dtb_Products.Rows[i]["XPP_IsOrder"].ToString() + "'>" + Dtb_Products.Rows[i]["XPP_IsOrder"].ToString() + "</td>";
-                        s_ProductsTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"Address\" value='" + Dtb_Products.Rows[i]["XPP_Address"].ToString() + "'>" + base.Base_GetBasicCodeName("125", Dtb_Products.Rows[i]["XPP_Address"].ToString()) + "</td>";
-                        s_ProductsTable_Detail += "</tr>";
-                    }
+                    GetBomDetails(model);
                 }
 
-                string s_DemoProductsID = "";
-                KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
-                string s_Where1 = " and XPD_FaterBarCode='" + model.ProductsBarCode + "' ";
-                if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffName == "项洲"))//如果是
-                {
-                    s_Where1 += " and  b.KSP_Del=0 ";
-                }
-                DataSet Dts_DemoProducts = BLL_DemoProducts_Products.GetListWithType(s_Where1);
-                DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
-                if (Dtb_DemoProducts.Rows.Count > 0)
-                {
-
-                    for (int i = 0; i < Dtb_DemoProducts.Rows.Count; i++)
-                    {
-                        s_DemoProductsID += Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() + ",";
-                        s_ProductsTable_BomDetail += "<tr>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + (i + 1).ToString() + "</td>";
-
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + BLL_Basic_ProductsClass.GetProductsName(Dtb_DemoProducts.Rows[i]["PBP_ID"].ToString()) + "</td>";
-
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                        KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                        KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString());
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                        string s_ProductsCode = "";
-                        if (Model != null)
-                        {
-                            s_ProductsCode = Model.KSP_Code;
-                            s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + Model.KSP_Code + "</td>";
-                        }
-                        else
-                        {
-                            s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-                        }
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"DemoNumber\" value='" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "'>" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "</td>";
-                        // s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString()) + "</td>";
-
-                        string s_Only = Dtb_DemoProducts.Rows[i]["XPD_Only"] == null ? "0" : Dtb_DemoProducts.Rows[i]["XPD_Only"].ToString();
-                        string s_Check = "";
-                        if (s_Only == "1")
-                        {
-                            s_Check = "是";
-                        }
-                        else
-                        {
-                            s_Check = "否";
-                        }
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + s_Check + "</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">符合RoHS要求</td>";
-                        s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.Base_GetHouseAndNumber(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                        string s_Del = Dtb_DemoProducts.Rows[i]["KSP_Del"].ToString();
-                        if (s_Del == "1")
-                        {
-                            s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"><font color=red>已停用</font></td>";
-                        }
-                        else
-                        {
-                            s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"><font color=green>启用</font></td>";
-                        }
-                        if (AM.YNAuthority("采购报价列表"))
-                        {
-                            if (s_ProductsCode.IndexOf("01") == 0)
-                            {
-                                s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.GetNearPriceAndHandPrice(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-
-                            }
-                            else
-                            {
-                                s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">" + base.GetNearPrice(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                            }
-                            //
-                            if (s_ProductsCode.IndexOf("01") == 0)
-                            {
-                                s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-
-                            }
-                            else
-                            {
-                                string s_Check1="";
-                                if(Dtb_DemoProducts.Rows[i]["XPD_IsMail"].ToString() == "0")
-                                {
-                                    s_Check1 = "Checked";
-                                }
-                                if (Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() != "")
-                                {
-                                    s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"XPDID_"+i.ToString()+"\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ID"].ToString() + "'><input type=\"checkbox\" name=\"Chk_IsMail_"+i.ToString()+"\" " + s_Check1 + "></td>";
-                                }
-                                else
-                                {
-                                    s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-                                }
-                            }
-
-                        }
-                        else
-                        {
-                            s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">-</td>";
-                            s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-                        }
-                        s_ProductsTable_BomDetail += "</tr>";
-                    }
-                }
-                Tbx_BomNumber.Text = Dtb_DemoProducts.Rows.Count.ToString();
-                Dts_DemoProducts = BLL_DemoProducts_Products.GetListWithType1(" and XPD_FaterBarCode='" + model.ProductsBarCode + "' ");
-                Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
-                if (Dtb_DemoProducts.Rows.Count > 0)
-                {
-
-                    for (int i = 0; i < Dtb_DemoProducts.Rows.Count; i++)
-                    {
-                        s_DemoProductsID += Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() + ",";
-                        s_ProductsTable_BomDetail1 += "<tr>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + (i + 1).ToString() + "</td>";
-
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + BLL_Basic_ProductsClass.GetProductsName(Dtb_DemoProducts.Rows[i]["PBP_ID"].ToString()) + "</td>";
-
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                        KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                        KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString());
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                        string s_ProductsCode = "";
-                        if (Model != null)
-                        {
-                            s_ProductsCode = Model.KSP_Code;
-                            s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + Model.KSP_Code + "</td>";
-                        }
-                        else
-                        {
-                            s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-                        }
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"DemoNumber\" value='" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "'>" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "</td>";
-                        string s_Only = Dtb_DemoProducts.Rows[i]["XPD_Only"] == null ? "0" : Dtb_DemoProducts.Rows[i]["XPD_Only"].ToString();
-                        string s_Check = "";
-                        if (s_Only == "1")
-                        {
-                            s_Check = "是";
-                        }
-                        else
-                        {
-                            s_Check = "否";
-                        }
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + s_Check + "</td>";
-                        s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetHouseAndNumber(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                        string s_Del = Dtb_DemoProducts.Rows[i]["KSP_Del"].ToString();
-                        if (s_Del == "1")
-                        {
-                            s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\"><font color=red>已停用</font></td>";
-                        }
-                        else
-                        {
-                            s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\"><font color=green>启用</font></td>";
-                        }
-                        if (AM.YNAuthority("采购报价列表"))
-                        {
-                            if (s_ProductsCode.IndexOf("01") == 0)
-                            {
-                                s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + base.GetNearPriceAndHandPrice(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-
-                            }
-                            else
-                            {
-                                s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + base.GetNearPrice(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>";
-                                string[] s_LowDetails = base.GetLowNearPrice(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()).Split('$');
-                                s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">" + s_LowDetails[0] + "</td>";
-                                try
-                                {
-                                    d_totalPrice += decimal.Parse(s_LowDetails[1]);
-                                }
-                                catch
-                                { }
-                            }
-                        }
-                        else
-                        {
-                            s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\">-</td>";
-                        }
-                        s_ProductsTable_BomDetail1 += "</tr>";
-                    }
-
-                    s_ProductsTable_BomDetail1 += "<tr>";
-                    s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\" colspan=10>合计：</td>";
-                    s_ProductsTable_BomDetail1 += "<td class=\"ListHeadDetails\"><font color=red><p>" + d_totalPrice.ToString() + "</p></font></td>";
-                    s_ProductsTable_BomDetail1 += "</tr>";
-                }
-
-                //适用遥控器1
+                //适用成品1
                 KNet.BLL.Xs_Products_Prodocts_Demo BLL_RCProducts = new KNet.BLL.Xs_Products_Prodocts_Demo();
-                DataSet Dts_RCProducts = BLL_RCProducts.GetList(" XPD_ProductsBarCode='" + model.ProductsBarCode + "' ");
+                DataSet Dts_RCProducts = BLL_RCProducts.GetList(" XPD_ProductsBarCode='" + model.ProductsBarCode + "' and b.ksp_Del=0 ");
                 DataTable Dtb_RCProducts = Dts_RCProducts.Tables[0];
                 if (Dtb_RCProducts.Rows.Count > 0)
                 {
@@ -530,17 +309,19 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 this.Tbx_Volume.Text = model.KSP_Volume.ToString();
                 this.Tbx_Weight.Text = model.KSP_Weight.ToString();
 
+                this.Lbl_BzNumber.Text = model.KSP_BZNumber.ToString();
+
                 this.ProductsAddMan.Text = base.Base_GetUserName(model.KSP_Creator);
                 this.KSP_Mender.Text = base.Base_GetUserName(model.KSP_Mender);
                 //this.ProductsStockAlert.Text = model.ProductsStockAlert.ToString();
                 if (model.KSP_CgType == 0)
                 {
 
-                    this.CgType.Text = "<font color=green>定制</font>";
+                    this.CgType.Text = "<font color=red>定制</font>";
                 }
                 else
                 {
-                    this.CgType.Text = "<font color=red>分批</font>";
+                    this.CgType.Text = "<font color=green>分批</font>";
                 }
                 this.Lbl_Mould.Text = base.Base_GetProdutsName_Link(model.KSP_Mould);
                 try
@@ -563,7 +344,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 MyGridView1.DataBind();
 
                 KNet.BLL.Knet_Procure_SuppliersPrice bll_SuppliersPrice = new KNet.BLL.Knet_Procure_SuppliersPrice();
-                SqlWhere = " ProductsBarCode='" + model.ProductsBarCode + "' and KPP_Del='0' ";
+                string SqlWhere = " ProductsBarCode='" + model.ProductsBarCode + "' and KPP_Del='0' ";
                 SqlWhere += "  order by ProcureUpdateDateTime desc ";
                 DataSet ds_SuppliersPrice = bll_SuppliersPrice.GetList(SqlWhere);
                 MyGridView4.DataSource = ds_SuppliersPrice;
@@ -628,6 +409,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                         s_AlternativeDetail += "</tr>";
                     }
                 }
+                /*
                 string s_Dosql = "Select top 1 * from Pb_Products_Sample_Confim a left join Pb_Products_Sample_Images b on a.PBC_ID=b.PPI_SmapleId and PBI_Type='1' ";
                 s_Dosql += " left join KNET_Sys_Products c on c.KSP_SampleID=a.PBC_SampleID";
                 s_Dosql += " where PPI_Name='丝印' and c.ProductsBarCode='" + model.ProductsBarCode + "' order by PPI_CTime Desc";
@@ -650,7 +432,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     Lbl_Sy.Text += "</a></td></tr>";
                     this.Lbl_Sy.Text += "</table>";
                 }
-
+                 * */
+                /*
 
                 KNet.BLL.Xs_Products_Spce bll_Spce = new KNet.BLL.Xs_Products_Spce();
                 DataSet ds_Spce = bll_Spce.GetList(" XPS_ProductsBarCode='" + model.ProductsBarCode + "'");
@@ -688,6 +471,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     MyGridView2.DataBind();
 
                 }
+                 * */
                 KNet.BLL.Knet_Procure_OrdersList bll_order = new KNet.BLL.Knet_Procure_OrdersList();
 
                 SqlWhere = " OrderNo in (Select OrderNo from Knet_Procure_OrdersList_Details where ProductsBarCode='" + model.ProductsBarCode + "') ";
@@ -711,7 +495,177 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             Response.End();
         }
     }
+    private void GetBomDetails(KNet.Model.KNet_Sys_Products model)
+    {
+        decimal d_totalPrice = 0;
 
+        AdminloginMess AM = new AdminloginMess();
+
+        //导入BOM信息 lbl_BomDetails
+        StringBuilder Sb_Details = new StringBuilder();
+        string s_Sql1 = "Select * from BOM a  where FaterBarCode='" + model.ProductsBarCode + "' order by  物料名称";
+        this.BeginQuery(s_Sql1);
+        DataTable DtB_Bom = (DataTable)this.QueryForDataTable();
+        if (DtB_Bom.Rows.Count > 0)
+        {
+            for (int i = 0; i < DtB_Bom.Rows.Count; i++)
+            {
+                Sb_Details.Append("<tr>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + (i + 1).ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + DtB_Bom.Rows[i]["物料名称"].ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + DtB_Bom.Rows[i]["物料型号"].ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + DtB_Bom.Rows[i]["封装"].ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + DtB_Bom.Rows[i]["数量"].ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + DtB_Bom.Rows[i]["备注"].ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><a href=\"#\" onclick=\"return btnGetBomProducts_onclick('','" + i.ToString() + "','" + DtB_Bom.Rows[i]["物料型号"].ToString() + "')\" >添加</a><input type=\"hidden\" ID=\"ProdoctsBarCode_" + i.ToString() + "\"  Name=\"ProdoctsBarCode_" + i.ToString() + "\" value='" + DtB_Bom.Rows[i]["BarCode"].ToString() + "'><input type=\"input\"  readonly=\"true\"  ID=\"ProductsName_" + i.ToString() + "\" Name=\"ProductsName_" + i.ToString() + "\" value='" + base.Base_GetProdutsName(DtB_Bom.Rows[i]["BarCode"].ToString()) + "'></td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"input\"  readonly=\"true\" ID=\"ProductsEdition_" + i.ToString() + "\"  Name=\"ProductsEdition_" + i.ToString() + "\" value='" + base.Base_GetProductsEdition(DtB_Bom.Rows[i]["BarCode"].ToString()) + "'></td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ID_" + i.ToString() + "\" value='" + DtB_Bom.Rows[i]["ID"].ToString() + "'></td>");
+                Sb_Details.Append("</tr>");
+            }
+        }
+        this.Tbx_ImportNum.Text = DtB_Bom.Rows.Count.ToString();
+        this.lbl_BomDetails.Text = Sb_Details.ToString();
+        KNet.BLL.Xs_Products_Prodocts BLL_Products_Products = new KNet.BLL.Xs_Products_Prodocts();
+        KNet.BLL.PB_Basic_ProductsClass BLL_Basic_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
+        string s_DemoProductsID = "";
+        KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
+        string s_Where1 = " and XPD_FaterBarCode='" + model.ProductsBarCode + "' ";
+        if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffName == "项洲"))//如果是
+        {
+            s_Where1 += " and  b.KSP_Del=0 ";
+        }
+        string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 ";
+        this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
+        DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+        StringBuilder Sb_BomDetails = new StringBuilder();
+        if (Dtb_DemoProducts.Rows.Count > 0)
+        {
+
+            for (int i = 0; i < Dtb_DemoProducts.Rows.Count; i++)
+            {
+                s_DemoProductsID += Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() + ",";
+                Sb_BomDetails.Append("<tr>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + (i + 1).ToString() + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + Dtb_DemoProducts.Rows[i]["PBP_Name"].ToString() + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + Dtb_DemoProducts.Rows[i]["ProductsName"].ToString() + "</td>");
+
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>");
+                string s_ProductsCode = "";
+
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + Dtb_DemoProducts.Rows[i]["KSP_Code"].ToString() + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"DemoNumber\" value='" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "'>" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\" style=\"max-width:100px;word-break: break-all;word-wrap:break-word;\">" + Dtb_DemoProducts.Rows[i]["XPD_Place"].ToString() + "</td>");
+
+                // Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString()) + "</td>");
+
+                string s_Only = Dtb_DemoProducts.Rows[i]["XPD_Only"] == null ? "0" : Dtb_DemoProducts.Rows[i]["XPD_Only"].ToString();
+                string s_Check = "";
+                if (s_Only == "1")
+                {
+                    s_Check = "是";
+                }
+                else
+                {
+                    s_Check = "否";
+                }
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + s_Check + "</td>");
+                string s_Del = Dtb_DemoProducts.Rows[i]["KSP_Del"].ToString();
+                if (s_Del == "1")
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=red>已停用</font></td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=green>启用</font></td>");
+                }
+
+                string s_Del1 = Dtb_DemoProducts.Rows[i]["XPD_Del"].ToString();
+                if (s_Del1 == "1")
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=red>已停用</font></td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=green>启用</font></td>");
+                }
+                string s_IsModify = Dtb_DemoProducts.Rows[i]["KSP_isModiy"].ToString();
+                if (s_IsModify == "1")
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=red>待审</font></td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=green>已审</font></td>");
+                }
+
+                string s_CgType = Dtb_DemoProducts.Rows[i]["KSP_CgType"].ToString();
+                if (s_CgType == "0")
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=red>定制</font></td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=green>分批</font></td>");
+                }
+
+
+                Sb_BomDetails.Append("</tr>");
+            }
+        }
+        Lbl_BomDetails1.Text = Sb_BomDetails.ToString();
+        Tbx_BomNumber.Text = Dtb_DemoProducts.Rows.Count.ToString();
+    }
+
+    protected void Btn_Stop_Click(object sender, EventArgs e)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        string s_ID = this.Tbx_ID.Text;
+        KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
+        KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
+
+        if ((AM.KNet_Position == "103") || (AM.KNet_StaffName == "李文立") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "毛刚挺"))
+        {
+            if (AM.YNAuthority("停用产品") == true)
+            {
+                Model.ProductsBarCode = s_ID;
+                int i_Del = Math.Abs(Model.KSP_Del - 1);
+                Model.KSP_Del = i_Del;
+                Bll.UpdateDel(Model);
+                AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
+            }
+            else
+            {
+                AM.NoAuthority("停用产品");
+            }
+        }
+    }
+    protected void Btn_Sh_Click(object sender, EventArgs e)
+    {
+
+        AdminloginMess AM = new AdminloginMess();
+        string s_ID = this.Tbx_ID.Text;
+
+        KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
+        KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
+
+        if ((AM.KNet_Position == "103") || (AM.KNet_StaffName == "李文立") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "毛刚挺"))
+        {
+            if (AM.YNAuthority("停用产品") == true)
+            {
+                Model.ProductsBarCode = s_ID;
+                int i_Del = Math.Abs(Model.KSP_isModiy - 1);
+                Model.KSP_isModiy = i_Del;
+                Bll.UpdateisModiy(Model);
+                AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！确认产品编码：" + s_ID);
+            }
+            else
+            {
+                AM.NoAuthority("停用产品");
+            }
+        }
+    }
     public string GetContract(string s_ContractNos, string s_ContractNo1)
     {
         string s_Return = "";
@@ -844,6 +798,31 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 return false;
             }
         }
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        try
+        {
+
+            if (this.Tbx_ImportNum.Text != "0")
+            {
+                for (int i = 0; i < int.Parse(this.Tbx_ImportNum.Text) + 1; i++)
+                {
+                    string s_ID = Request.Form["ID_" + i.ToString() + ""] == null ? "" : Request.Form["ID_" + i.ToString() + ""].ToString();
+
+                    string s_ProdoctsBarCode = Request.Form["ProdoctsBarCode_" + i.ToString() + ""] == null ? "" : Request.Form["ProdoctsBarCode_" + i.ToString() + ""].ToString();
+
+                    if ((s_ID != "") && (s_ProdoctsBarCode != ""))
+                    {
+                        string s_DoSql = "Update Bom Set BarCode='" + s_ProdoctsBarCode + "' where ID='" + s_ID + "'";
+                        DbHelperSQL.ExecuteSql(s_DoSql);
+
+                    }
+                }
+                AlertAndRedirect("更新成功!", "KnetProductsSetting_Details.aspx?BarCode=" + this.Tbx_ID.Text);
+            }
+        }
+        catch { }
     }
 
 }

@@ -1,0 +1,5 @@
+﻿insert into PB_Basic_Attachment
+select dbo.GetID(),ProductsBarCode,fileName,'Products',FileURL,'129785817148286979',GETDATE(),'',FileTypeValue,1
+from fileinit
+a   join KNet_Sys_Products b
+ on a.fileProductsPattern=b.ProductsPattern and b.KSP_COde like '01%'

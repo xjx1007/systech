@@ -272,26 +272,13 @@
                                                         <%# base.Base_GetKClaaName(DataBinder.Eval(Container.DataItem, "ContractClass").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="付款方式" HeaderStyle-Font-Size="12px" ItemStyle-Width="130px" SortExpression="Payment" 
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetBasicCodeName("104",DataBinder.Eval(Container.DataItem, "Payment").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="开票方式" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" SortExpression="KSC_KpType" 
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetBasicCodeName("768",DataBinder.Eval(Container.DataItem, "KSC_KpType").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                                <asp:TemplateField HeaderText="产品类型" HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" ItemStyle-Width="190px"
+                                                <asp:TemplateField HeaderText="产品类型" HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" ItemStyle-Width="300px"
                                                     HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <%# base.Base_GetContractProductsPatten(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="产品类型" HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" 
+                                                <asp:TemplateField HeaderText="产品数量" HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" 
                                                     HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <%# base.Base_GetContractProductsPattenNumber(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
@@ -314,34 +301,27 @@
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                 </asp:BoundField>
-                                                <asp:BoundField HeaderText="核销数量" DataField="v_KxNumber" SortExpression="v_KxNumber"
-                                                    HtmlEncode="false">
-                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                </asp:BoundField>
                                                 <asp:BoundField HeaderText="操作日期" DataField="SystemDateTimes" SortExpression="SystemDateTimes" 
                                                     HtmlEncode="false">
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                 </asp:BoundField>
-                                                <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px" ItemStyle-Width="28px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <a href="#" onclick="javascript:window.open('KNet_Sales_ContractList_Manage_PrinterListSettingPrinterPage.aspx?ContractNo=<%# DataBinder.Eval(Container.DataItem, "ContractNo")%>&PrinterModel=128898695453437500','查看详细','top=80,left=150,menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=1000px,height=700px');">
-                                                            <asp:Image ID="Image2" runat="server" ImageUrl="/images/View.gif" border="0"
-                                                                ToolTip="查看合同详细信息" /></a>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="审核" SortExpression="ContractCheckYN" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
                                                         <%# GetBaoPriceCheckYN(DataBinder.Eval(Container.DataItem, "ContractNo"))%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="采购状态" SortExpression="ContractCheckYN" HeaderStyle-Font-Size="12px"
+                                                    ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                    <ItemTemplate>
+                                                        <%# base.GetContractCgState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="状态" SortExpression="ContractCheckYN" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
+                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString(),DataBinder.Eval(Container.DataItem, "DirectOutState").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -373,7 +353,7 @@
                                         </td>
                                     </tr>
                                     <tr bgcolor="white">
-                                        <td style="line-height: 26px;" valign="top">●<a style="color: rgb(153, 102, 51);" href="javascript:;" onclick="PageGo('../Report_Xs/OrderList/Report_OrderList.aspx')">订单执行情况表</a>
+                                        <td style="line-height: 26px;" valign="top">●<a style="color: rgb(153, 102, 51);" href="javascript:;" onclick="PageGo('/web/Report_Xs/OrderList/Report_OrderList.aspx')">订单执行情况表</a>
                                         </td>
                                     </tr>
                                 </tbody>

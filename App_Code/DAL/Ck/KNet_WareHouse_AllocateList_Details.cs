@@ -47,9 +47,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_AllocateList_Details(");
-            strSql.Append("AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID)");
+            strSql.Append("AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID,KWAD_FaterBarCode,KWAD_CPBZNumber,KWAD_BZNumber)");
             strSql.Append(" values (");
-            strSql.Append("@AllocateNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@AllocateAmount,@AllocateUnitPrice,@AllocateDiscount,@AllocateTotalNet,@AllocateRemarks,@OwnallPID)");
+            strSql.Append("@AllocateNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@AllocateAmount,@AllocateUnitPrice,@AllocateDiscount,@AllocateTotalNet,@AllocateRemarks,@OwnallPID,@KWAD_FaterBarCode,@KWAD_CPBZNumber,@KWAD_BZNumber)");
             SqlParameter[] parameters = {
 					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -61,7 +61,11 @@ namespace KNet.DAL
 					new SqlParameter("@AllocateDiscount", SqlDbType.Decimal,9),
 					new SqlParameter("@AllocateTotalNet", SqlDbType.Decimal,9),
 					new SqlParameter("@AllocateRemarks", SqlDbType.NVarChar,300),
-					new SqlParameter("@OwnallPID", SqlDbType.NVarChar,50)};
+					new SqlParameter("@OwnallPID", SqlDbType.NVarChar,50),
+					new SqlParameter("@KWAD_FaterBarCode", SqlDbType.NVarChar,50),
+					new SqlParameter("@KWAD_CPBZNumber", SqlDbType.Int,4),
+					new SqlParameter("@KWAD_BZNumber", SqlDbType.Int,4)
+                                        };
             parameters[0].Value = model.AllocateNo;
             parameters[1].Value = model.ProductsName;
             parameters[2].Value = model.ProductsBarCode;
@@ -73,7 +77,10 @@ namespace KNet.DAL
             parameters[8].Value = model.AllocateTotalNet;
             parameters[9].Value = model.AllocateRemarks;
             parameters[10].Value = model.OwnallPID;
-
+            parameters[11].Value = model.KWAD_FaterBarCode;
+            parameters[12].Value = model.KWAD_CPBZNumber;
+            parameters[13].Value = model.KWAD_BZNumber;
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -88,19 +95,24 @@ namespace KNet.DAL
             strSql.Append("ProductsBarCode=@ProductsBarCode,");
             strSql.Append("AllocateAmount=@AllocateAmount,");
             strSql.Append("AllocateUnitPrice=@AllocateUnitPrice,");
-            strSql.Append("AllocateTotalNet=@AllocateTotalNet");
+            strSql.Append("AllocateTotalNet=@AllocateTotalNet,");
+            strSql.Append("KWAD_FaterBarCode=@KWAD_FaterBarCode");
+            
             strSql.Append(" where AllocateNo=@AllocateNo ");
             SqlParameter[] parameters = {
 					new SqlParameter("@ProductsBarCode", SqlDbType.NVarChar,50),
 					new SqlParameter("@AllocateAmount", SqlDbType.Int,4),
 					new SqlParameter("@AllocateUnitPrice", SqlDbType.Decimal,9),
 					new SqlParameter("@AllocateTotalNet", SqlDbType.Decimal,9),
-					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50)};
+					new SqlParameter("@KWAD_FaterBarCode", SqlDbType.NVarChar,50),
+					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50)
+                                        };
             parameters[0].Value = model.ProductsBarCode;
             parameters[1].Value = model.AllocateAmount;
             parameters[2].Value = model.AllocateUnitPrice;
             parameters[3].Value = model.AllocateTotalNet;
-            parameters[4].Value = model.AllocateNo;
+            parameters[4].Value = model.KWAD_FaterBarCode;
+            parameters[5].Value = model.AllocateNo;
 
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -296,8 +308,8 @@ namespace KNet.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ID,AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID ");
-            strSql.Append(" FROM KNet_WareHouse_AllocateList_Details ");
+            strSql.Append("select * ");
+            strSql.Append(" FROM KNet_WareHouse_AllocateList_Details  a  join KNet_WareHouse_AllocateList b on a.AllocateNo=b.AllocateNo  left join v_Order_ProductsDemo_Details e on e.XPD_ProductsBarCode=a.ProductsBarCode  and e.FaterBarCode=a.KWAD_FaterBarCode  and KWA_OrderNo=OrderNo ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

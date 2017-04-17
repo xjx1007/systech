@@ -35,6 +35,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                 string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
                 string s_FaterID = Request.QueryString["FaterID"] == null ? "" : Request.QueryString["FaterID"].ToString();
                 string s_CustomerValue = Request.QueryString["CustomerValue"] == null ? "" : Request.QueryString["CustomerValue"].ToString();
+                string s_Hx = Request.QueryString["Hx"] == null ? "" : Request.QueryString["Hx"].ToString();
+                this.Tbx_Hx.Text = s_Hx;
                 if (s_CustomerValue != "")
                 {
                     this.CustomerValue.Value = s_CustomerValue;
@@ -111,6 +113,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                         Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>产品编码</b></td>";
                         Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>型号</b></td>";
 
+                        Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>剩余备货</b></td>";
+                        Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>核销</b></td>";
                         Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>订单数量</b></td>";
                         Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>备品数量</b></td>";
                         Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>价格</b></td>";
@@ -211,6 +215,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                     Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>产品编码</b></td>";
                     Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>型号</b></td>";
 
+                    Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>剩余备货</b></td>";
+                    Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>核销</b></td>";
                     Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>订单数量</b></td>";
                     Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>备品数量</b></td>";
                     Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>价格</b></td>";
@@ -266,6 +272,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                     Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>产品编码</b></td>";
                     Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>型号</b></td>";
 
+                    Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>剩余备货</b></td>";
+                    Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>核销</b></td>";
                     Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>订单数量</b></td>";
                     Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>备品数量</b></td>";
                     Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>价格</b></td>";
@@ -364,8 +372,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
         this.Tbx_FaterID.Value = Model.KSC_FaterId;
         this.Tbx_ContractState.Text = Model.ContractState.ToString();
 
-        this.Ddl_KpType.SelectedValue=Model.KSC_KpType;
-        
+        this.Ddl_KpType.SelectedValue = Model.KSC_KpType;
+
         if (this.Tbx_Type.Text == "1")
         {
             this.Tbx_ContractCheckYN.Text = "0";
@@ -428,6 +436,13 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
             this.Tbx_OrderNo.Text = "PO" + KNetOddNumbers1();
         }
         string s_OrdeURL = Model.KSC_OrderURL == null ? "" : Model.KSC_OrderURL;
+
+        if (this.Tbx_Hx.Text == "1")//如果是核销
+        {
+            //如果是核销
+            this.ContractClass.SelectedValue = "129687502761283812";
+            this.ContractDateTime.Text = DateTime.Now.ToShortDateString();
+        }
         if (s_OrdeURL != "")
         {
             this.Lbl_Details.Text = "<input Name=\"KSC_OrderURL\"  type=\"hidden\"  value=" + Model.KSC_OrderURL + "><input Name=\"KSC_OrderName\"  type=\"hidden\"  value=" + Model.KSC_OrderName + "><a href=\"" + Model.KSC_OrderURL + "\" >" + Model.KSC_OrderName + "</a>";
@@ -443,6 +458,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
             Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>产品编码</b></td>";
             Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>型号</b></td>";
 
+            Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>剩余备货</b></td>";
+            Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>核销</b></td>";
             Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>订单数量</b></td>";
             Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>备品数量</b></td>";
             Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>价格</b></td>";
@@ -471,9 +488,37 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                 Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode_" + i.ToString() + "\" value='" + Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "'>" + Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
                 Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
 
-                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"Number_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["ContractAmount"].ToString() + "></td>";
-                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"BNumber_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KSC_BNumber"].ToString() + " ></td>";
-                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\"  class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className='\"detailedViewTextBox'\" style=\"width:50px;\"  Name=\"Price_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["Contract_SalesUnitPrice"].ToString() + "></td>";
+                string s_TotalNumber = Dts_Table.Tables[0].Rows[i]["totalNumber"].ToString();
+                if (this.Tbx_Type.Text == "")
+                {
+                    try
+                    {
+                        s_TotalNumber = Convert.ToString(int.Parse(s_TotalNumber) + int.Parse(Dts_Table.Tables[0].Rows[i]["ContractAmount"].ToString()) + int.Parse(Dts_Table.Tables[0].Rows[i]["KSC_BNumber"].ToString()));
+                    }
+                    catch
+                    { }
+                }
+                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"LeftTotalBhNumber_" + i.ToString() + "\" value=" + s_TotalNumber + "></td>";
+                if (this.Tbx_Hx.Text == "1")
+                {
+                    string s_HxState = Dts_Table.Tables[0].Rows[i]["KSD_HxState"].ToString();
+                    string s_HxNumber = Dts_Table.Tables[0].Rows[i]["KSD_HxNumber"].ToString();
+                    if (s_HxNumber == "0")
+                    {
+                        s_HxState = "1";
+                        s_HxNumber = Convert.ToString(decimal.Parse(Dts_Table.Tables[0].Rows[i]["ContractAmount"].ToString()) + decimal.Parse(Dts_Table.Tables[0].Rows[i]["KSC_BNumber"].ToString()));
+                    }
+                    Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"HxState_" + i.ToString() + "\" value=" + s_HxState + "><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"HxNumber_" + i.ToString() + "\" value=" + s_HxNumber + "></td>";
+
+                }
+                else
+                {
+                    Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"HxState_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KSD_HxState"].ToString() + "><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"HxNumber_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KSD_HxNumber"].ToString() + "></td>";
+                }
+
+                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();\" style=\"width:50px;\" Name=\"Number_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["ContractAmount"].ToString() + "></td>";
+                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();\" style=\"width:50px;\" Name=\"BNumber_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KSC_BNumber"].ToString() + " ></td>";
+                Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\"  class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();\" style=\"width:50px;\"  Name=\"Price_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["Contract_SalesUnitPrice"].ToString() + "></td>";
                 Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" readonly  Name=\"Money_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["Contract_SalesTotalNet"].ToString() + " ></td>";
                 Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"PlanNumber_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KSD_PlanNumber"].ToString() + " ></td>";
                 Lbl_ContractDetails.Text += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"OrderNumber_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KSD_OrderNumber"].ToString() + " ></td>";
@@ -498,6 +543,8 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
             Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>产品编码</b></td>";
             Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>型号</b></td>";
 
+            Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>剩余备货</b></td>";
+            Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>核销</b></td>";
             Lbl_ContractDetails.Text += "<td class=\"ListHead\"  nowrap><b>订单数量</b></td>";
             Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>备品数量</b></td>";
             Lbl_ContractDetails.Text += "<td  class=\"ListHead\"  nowrap><b>价格</b></td>";
@@ -526,7 +573,7 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
             Lbl_FhDetails.Text = "<Table id=\"myFhTable\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"5\" cellspacing=\"0\" class=\"ListDetails\">";
 
             Lbl_FhDetails.Text += "<tr valign=\"middle\">";
-            Lbl_FhDetails.Text += "<td class=\"ListHead\"  nowrap> <b>选择</b></td>";
+            Lbl_FhDetails.Text += "<td class=\"ListHead\"  nowrap><b>选择</b></td>";
             Lbl_FhDetails.Text += "<td class=\"ListHead\"  nowrap><b>名称</b></td>";
             Lbl_FhDetails.Text += "<td class=\"ListHead\"  nowrap><b>详细</b></td></tr>";
             Lbl_FhDetails.Text += "</tr>";
@@ -887,6 +934,7 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
             ArrayList Arr_Details = new ArrayList();
 
             int i_num = int.Parse(this.i_Num.Text);
+            bool b_True = false;
             for (int i = 0; i < i_num; i++)
             {
                 KNet.Model.KNet_Sales_ContractList_Details ModelDetails = new KNet.Model.KNet_Sales_ContractList_Details();
@@ -906,6 +954,11 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                     string s_IsFollow = Request["IsFollow_" + i] == null ? "" : Request["IsFollow_" + i].ToString();
                     string s_PlanNumber = Request["PlanNumber_" + i] == null ? "" : Request["PlanNumber_" + i].ToString();
                     string s_MaterPattern = Request["MaterPattern_" + i] == null ? "" : Request["MaterPattern_" + i].ToString();
+
+                    string s_HxNumber = Request["HxNumber_" + i] == "" ? "0" : Request["HxNumber_" + i].ToString();
+
+                    string s_HxState = Request["HxState_" + i] == "" ? "0" : Request["HxState_" + i].ToString();
+
                     ModelDetails.ProductsBarCode = s_ProductsBarCode;
                     ModelDetails.ContractAmount = int.Parse(s_Number);
                     ModelDetails.Contract_SalesUnitPrice = decimal.Parse(s_Price);
@@ -918,7 +971,21 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                     ModelDetails.KSD_MaterPattern = s_MaterPattern;
                     ModelDetails.KSD_PlanNumber = s_PlanNumber;
                     ModelDetails.KSD_XCMDID = s_XCMD_ID;
-
+                    try
+                    {
+                        int i_LeftNumber = int.Parse(s_Number) + int.Parse(s_BNumber) - int.Parse(s_HxNumber);
+                        if (i_LeftNumber != 0)
+                        {
+                            b_True = true;
+                        }
+                        ModelDetails.KSD_HxState = int.Parse(s_HxState);
+                        ModelDetails.KSD_HxNumber = int.Parse(s_HxNumber);
+                    }
+                    catch
+                    {
+                        ModelDetails.KSD_HxState = 0;
+                        ModelDetails.KSD_HxNumber = 0;
+                    }
                     if (this.Tbx_Type.Text == "1")
                     {
                         ModelDetails.ID = base.GetMainID(i);
@@ -931,6 +998,12 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                     ModelDetails.KSC_OrderBNumber = int.Parse(s_OrderBNumber);
                     Arr_Details.Add(ModelDetails);
                 }
+            }
+            if (b_True == false)
+            {
+                molel.ContractCheckYN = true;
+                molel.ContractState = 1;
+                molel.isOrder = 1;
             }
 
             molel.arr_Details = Arr_Details;
@@ -992,18 +1065,28 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                 if (BLL.Exists(this.ContractNo.Text) == false)
                 {
                     BLL.Add(Model);
-                    AdminloginMess LogAM = new AdminloginMess();
-                    LogAM.Add_Logs("销售管理--->添加销售订单 操作成功！订单编号：" + this.ContractNo.Text);
                     string s_Text = "";
                     string s_Alert = "";
-                    if (Is_Mail.Checked)
+                    if (Model.isOrder == 1)
                     {
-                        s_Text = "订单编号为：" + this.ContractNo.Text + " 需要您审批,请及时登录系统审批。";
-                        KNet.BLL.KNet_Resource_Staff BLL_Resource_Staff = new KNet.BLL.KNet_Resource_Staff();
-                        KNet.Model.KNet_Resource_Staff Model_Resource_Staff = BLL_Resource_Staff.GetModelC(this.Ddl_DutyPerson.SelectedValue);
-                        s_Alert = base.Base_SendEmail(Model_Resource_Staff.StaffEmail, s_Text, "订单评审审核！");
-                        base.Base_SendMessage(this.Ddl_DutyPerson.SelectedValue, KNetPage.KHtmlEncode("有 订单评审 <a href='Web/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + this.ContractNo.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + this.ContractNo.Text + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
+                        string s_Sql = "Update KNet_Sales_ContractList set  isOrder=2  where ContractNo='" + this.ContractNo.Text + "'  ";
+                        DbHelperSQL.ExecuteSql(s_Sql);
                     }
+                    else
+                    {
+                        if (Is_Mail.Checked)
+                        {
+                            s_Text = "订单编号为：" + this.ContractNo.Text + " 需要您审批,请及时登录系统审批。";
+                            KNet.BLL.KNet_Resource_Staff BLL_Resource_Staff = new KNet.BLL.KNet_Resource_Staff();
+                            KNet.Model.KNet_Resource_Staff Model_Resource_Staff = BLL_Resource_Staff.GetModelC(this.Ddl_DutyPerson.SelectedValue);
+                            s_Alert = base.Base_SendEmail(Model_Resource_Staff.StaffEmail, s_Text, "订单评审审核！");
+                            base.Base_SendMessage(this.Ddl_DutyPerson.SelectedValue, KNetPage.KHtmlEncode("有 订单评审 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + this.ContractNo.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + this.ContractNo.Text + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
+                        }
+                    }
+                    AdminloginMess LogAM = new AdminloginMess();
+                    LogAM.Add_Logs("销售管理--->添加销售订单 操作成功！订单编号：" + this.ContractNo.Text);
+
+
                     Response.Write("<script>alert('添加销售订单  操作成功," + s_Alert + "！ ！');location.href='KNet_Sales_ContractList_List.aspx';</script>");
                     Response.End();
                 }

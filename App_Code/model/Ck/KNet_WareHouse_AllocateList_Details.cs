@@ -25,6 +25,14 @@ namespace KNet.Model
         private string _OwnallPID;
         private decimal? _Allocate_WwPrice;
         private decimal? _Allocate_WwMoney;
+        private string _KWAD_FaterBarCode;
+
+        private int _KWAD_CPBZNumber;
+        private int _KWAD_BZNumber;
+
+        private int _KWAD_BadNumber;
+        private string _KWAD_Reason;
+        private int _KWAD_AddBadNumber;
 
         /// <summary>
         /// 总仓库产品ID
@@ -137,6 +145,45 @@ namespace KNet.Model
         {
             set { _Allocate_WwMoney = value; }
             get { return _Allocate_WwMoney; }
+        }
+        
+        /// <summary>
+        /// 调拨 单价格
+        /// </summary>
+        public string KWAD_FaterBarCode
+        {
+            set { _KWAD_FaterBarCode = value; }
+            get { return _KWAD_FaterBarCode; }
+        }
+
+
+        public int KWAD_CPBZNumber
+        {
+            set { _KWAD_CPBZNumber = value; }
+            get { return _KWAD_CPBZNumber; }
+        }
+        
+        public int KWAD_BZNumber
+        {
+            set { _KWAD_BZNumber = value; }
+            get { return _KWAD_BZNumber; }
+        }
+
+        public int KWAD_BadNumber
+        {
+            set { _KWAD_BadNumber = value; }
+            get { return _KWAD_BadNumber; }
+        }
+
+        public int KWAD_AddBadNumber
+        {
+            set { _KWAD_AddBadNumber = value; }
+            get { return _KWAD_AddBadNumber; }
+        }
+        public string KWAD_Reason
+        {
+            set { _KWAD_Reason = value; }
+            get { return _KWAD_Reason; }
         }
         #endregion Model
 

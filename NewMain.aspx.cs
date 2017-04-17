@@ -174,7 +174,7 @@ public partial class Knetwork_Admin_NewMain : BasePage
 
                         s_DropMenu += s_FourDorpMenu;
                     }
-                    if (s_Name == "综合报表")
+                    if (s_Name == "系统")
                     {
                         s_FirstMenu += "</tr>\n";
                     }

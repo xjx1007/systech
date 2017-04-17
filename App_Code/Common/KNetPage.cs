@@ -120,7 +120,7 @@ namespace KNet.Common
             theString = theString.Replace("\"", "&quot;");
             theString = theString.Replace("\'", "&#39;");
             theString = theString.Replace("\n", "<br/> ");
-            theString = theString.Replace("\r", "<br/> ");
+            theString = theString.Replace("\r\n", "<br/>");
             return theString;
         }
         /// <summary>

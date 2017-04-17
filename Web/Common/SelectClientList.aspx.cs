@@ -138,9 +138,19 @@ public partial class Knet_Common_SelectClientList : BasePage
             }
             else
             {
+                string s_Return = SuppNoVale.Substring(0, SuppNoVale.Length - 1) + "|" + base.Base_GetCustomerNames(SuppNoVale.Substring(0, SuppNoVale.Length - 1)) ;
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
-                s.Append("window.returnValue='" + SuppNoVale.Substring(0, SuppNoVale.Length - 1) + "|" + base.Base_GetCustomerNames(SuppNoVale.Substring(0, SuppNoVale.Length - 1)) + "';" + "\n");
+                //s.Append("window.returnValue='" + SuppNoVale.Substring(0, SuppNoVale.Length - 1) + "|" + base.Base_GetCustomerNames(SuppNoVale.Substring(0, SuppNoVale.Length - 1)) + "';" + "\n");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                s.Append("    window.opener.SetReturnValueInOpenner_Client('" + s_Return + "');\n");
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
                 s.Append("window.close();" + "\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();

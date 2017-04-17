@@ -51,9 +51,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into PB_Basic_ProductsClass(");
-            strSql.Append("PBP_ID,PBP_Code,PBP_Name,PBP_FaterID,PBP_Order,PBP_Creator,PBP_CTime,PBP_MTime,PBP_Mender,PBP_Days,PBP_OrderDays)");
+            strSql.Append("PBP_ID,PBP_Code,PBP_Name,PBP_FaterID,PBP_Order,PBP_Creator,PBP_CTime,PBP_MTime,PBP_Mender,PBP_Days,PBP_OrderDays,PBP_Type)");
             strSql.Append(" values (");
-            strSql.Append("@PBP_ID,@PBP_Code,@PBP_Name,@PBP_FaterID,@PBP_Order,@PBP_Creator,@PBP_CTime,@PBP_MTime,@PBP_Mender,@PBP_Days,@PBP_OrderDays)");
+            strSql.Append("@PBP_ID,@PBP_Code,@PBP_Name,@PBP_FaterID,@PBP_Order,@PBP_Creator,@PBP_CTime,@PBP_MTime,@PBP_Mender,@PBP_Days,@PBP_OrderDays,@PBP_Type)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBP_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@PBP_Code", SqlDbType.VarChar,50),
@@ -65,7 +65,9 @@ namespace KNet.DAL
 					new SqlParameter("@PBP_MTime", SqlDbType.DateTime),
 					new SqlParameter("@PBP_Mender", SqlDbType.VarChar,50),
 					new SqlParameter("@PBP_Days", SqlDbType.Int,4),
-					new SqlParameter("@PBP_OrderDays", SqlDbType.Int,4)};
+					new SqlParameter("@PBP_OrderDays", SqlDbType.Int,4),
+					new SqlParameter("@PBP_Type", SqlDbType.Int,4)
+                                        };
             parameters[0].Value = model.PBP_ID;
             parameters[1].Value = model.PBP_Code;
             parameters[2].Value = model.PBP_Name;
@@ -77,7 +79,8 @@ namespace KNet.DAL
             parameters[8].Value = model.PBP_Mender;
             parameters[9].Value = model.PBP_Days;
             parameters[10].Value = model.PBP_OrderDays;
-
+            parameters[11].Value = model.PBP_Type;
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -94,7 +97,9 @@ namespace KNet.DAL
             strSql.Append("PBP_MTime=@PBP_MTime,");
             strSql.Append("PBP_Mender=@PBP_Mender,");
             strSql.Append("PBP_Days=@PBP_Days,");
-            strSql.Append("PBP_OrderDays=@PBP_OrderDays");
+            strSql.Append("PBP_OrderDays=@PBP_OrderDays,");
+            strSql.Append("PBP_Type=@PBP_Type");
+            
             strSql.Append(" where PBP_ID=@PBP_ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBP_Code", SqlDbType.VarChar,50),
@@ -105,6 +110,8 @@ namespace KNet.DAL
 					new SqlParameter("@PBP_Mender", SqlDbType.VarChar,50),
 					new SqlParameter("@PBP_Days", SqlDbType.Int,50),
 					new SqlParameter("@PBP_OrderDays", SqlDbType.Int,50),
+					new SqlParameter("@PBP_Type", SqlDbType.Int,4),
+                    
 					new SqlParameter("@PBP_ID", SqlDbType.VarChar,50)};
             parameters[0].Value = model.PBP_Code;
             parameters[1].Value = model.PBP_Name;
@@ -114,7 +121,9 @@ namespace KNet.DAL
             parameters[5].Value = model.PBP_Mender;
             parameters[6].Value = model.PBP_Days;
             parameters[7].Value = model.PBP_OrderDays;
-            parameters[8].Value = model.PBP_ID;
+            parameters[8].Value = model.PBP_Type;
+            
+            parameters[9].Value = model.PBP_ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -205,7 +214,7 @@ namespace KNet.DAL
                 }
                 if (ds.Tables[0].Rows[0]["PBP_Order"] != null && ds.Tables[0].Rows[0]["PBP_Order"].ToString() != "")
                 {
-                    model.PBP_Order = ds.Tables[0].Rows[0]["PBP_Order"].ToString();
+                    model.PBP_Order = int.Parse(ds.Tables[0].Rows[0]["PBP_Order"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["PBP_Creator"] != null && ds.Tables[0].Rows[0]["PBP_Creator"].ToString() != "")
                 {
@@ -230,6 +239,11 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["PBP_OrderDays"] != null && ds.Tables[0].Rows[0]["PBP_OrderDays"].ToString() != "")
                 {
                     model.PBP_OrderDays = int.Parse(ds.Tables[0].Rows[0]["PBP_OrderDays"].ToString());
+                }
+
+                if (ds.Tables[0].Rows[0]["PBP_Type"] != null && ds.Tables[0].Rows[0]["PBP_Type"].ToString() != "")
+                {
+                    model.PBP_Type = int.Parse(ds.Tables[0].Rows[0]["PBP_Type"].ToString());
                 }
                 
                 return model;

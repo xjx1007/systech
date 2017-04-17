@@ -1,75 +1,85 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  EnableEventValidation="false"  CodeFile="KNet_WareHouse_AllocateList_Manage.aspx.cs" Inherits="Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="KNet_WareHouse_AllocateList_Manage.aspx.cs" Inherits="Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage" %>
+
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
-<link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
-<script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
-<script language="javascript" type="text/javascript" src="../../Web/DatePicker/WdatePicker.js"></script>
-<script language="javascript" type="text/javascript" src="../js/Global.js"></script>
-<script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-<script type="text/javascript" src="../KDialog/lhgdialog.js"></script>
-    <script type="text/javascript" >
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
+    <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript" src="../../Web/DatePicker/WdatePicker.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
+    <script type="text/javascript" src="../KDialog/lhgdialog.js"></script>
+    <script type="text/javascript">
         function GPrint(ID) {
             //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
             var temp = window.showModalDialog("Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
             // window.location.reload(); 
         }
-</script>
-<title>库间调拨</title>
+    </script>
+    <title>库间调拨</title>
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form2" runat="server">
 
-<table border="0" cellspacing=0 cellpadding=0 width=100% class=small>
-<tr><td style="height:2px"></td></tr>
-<tr>
-	<td style="padding-left:10px;padding-right:50px" class="moduleName" nowrap>库间调拨 >
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>仓库 >
 	<a class="hdrLink" href="KNet_WareHouse_AllocateList_Manage.aspx">库间调拨</a>
-        </td>
-	<td width=100% nowrap>
-    <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden" ></asp:TextBox>
-		<table border="0" cellspacing="0" cellpadding="0" >
-		<tr>
-		<td class="sep1" style="width:1px;"></td>
-		<td class="small" >
-			<!-- Add and Search -->
-			<table border=0 cellspacing=0 cellpadding=0>
-			<tr>
-			<td>
-				<table border=0 cellspacing=0 cellpadding=5>
-				<tr>
-				<td style="padding-right:0px;padding-left:10px;"><a href="javascript:;"  onclick="PageGo('KNet_WareHouse_AllocateList_Add.aspx?Type=<%= Request.QueryString["Type"]==null?"":Request.QueryString["Type"].ToString() %>')"><img src="../../themes/softed/images/btnL3Add.gif" alt="创建 库间调拨..." title="创建 库间调拨..." border=0></a></td>
-				<td style="padding-right:0px;"><asp:ImageButton ImageUrl="../../themes/softed/images/btnL3Delete.gif" runat="server" ID="Btn_Del" OnClick="Btn_Del_Click" /></td>
-				<td style="padding-right:10px"><a href="javascript:;" onClick="ShowDiv()" ><img src="../../themes/softed/images/btnL3Search.gif" alt="查找 库间调拨..." title="查找 库间调拨..." border=0></a></td>
-				<td style="padding-right:0px;padding-left:10px;"><img src="../../themes/softed/images/tbarImport.gif" alt="*导入 库间调拨" title="*导入 库间调拨" border="0"></td>	
-				<td style="padding-right:10px"><img src="../../themes/softed/images/tbarExport.gif" alt="*导出 库间调拨" title="*导出 库间调拨" border="0"></td>
-				</tr>
-				</table>
-			</td>
-			</tr>
-			</table>
-		</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr><td style="height:2px"></td></tr>
-</table>
+                </td>
+                <td width="100%" nowrap>
+                    <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="sep1" style="width: 1px;"></td>
+                            <td class="small">
+                                <!-- Add and Search -->
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" cellspacing="0" cellpadding="5">
+                                                <tr>
+                                                    <td style="padding-right: 0px; padding-left: 10px;"><a href="javascript:;" onclick="PageGo('KNet_WareHouse_AllocateList_Add.aspx?Type=<%= Request.QueryString["Type"]==null?"":Request.QueryString["Type"].ToString() %>')">
+                                                        <img src="../../themes/softed/images/btnL3Add.gif" alt="创建 库间调拨..." title="创建 库间调拨..." border="0"></a></td>
+                                                    <td style="padding-right: 0px;">
+                                                        <asp:ImageButton ImageUrl="../../themes/softed/images/btnL3Delete.gif" runat="server" ID="Btn_Del" OnClick="Btn_Del_Click" /></td>
+                                                    <td style="padding-right: 10px"><a href="javascript:;" onclick="ShowDiv()">
+                                                        <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 库间调拨..." title="查找 库间调拨..." border="0"></a></td>
+                                                    <td style="padding-right: 0px; padding-left: 10px;">
+                                                        <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 库间调拨" title="*导入 库间调拨" border="0"></td>
+                                                    <td style="padding-right: 10px">
+                                                        <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 库间调拨" title="*导出 库间调拨" border="0"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+        </table>
 
 
-<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="tablecss">
-<tr>
- <td>
-    <%=base.Base_BindView("KNet_WareHouse_AllocateList", "KNet_WareHouse_AllocateList_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
-</td>
-</tr>
+        <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
+            <tr>
+                <td>
+                    <%=base.Base_BindView("KNet_WareHouse_AllocateList", "KNet_WareHouse_AllocateList_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
+                </td>
+            </tr>
 
             <tr>
                 <td>
@@ -97,8 +107,7 @@
                                     <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
                                         value=" 取消查找 ">&nbsp;
                                 </td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">[x]</td>
                             </tr>
                         </table>
                     </div>
@@ -115,16 +124,15 @@
                                 <td nowrap width="60%" class="small">
                                     <b>
                                         <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b></td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]</td>
                             </tr>
                         </table>
                         <table cellpadding="2" cellspacing="0" width="80%" align="center" class="searchUIAdv2 small"
                             border="0">
                             <tr>
                                 <td align="center" class="small" width="90%">
-                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px;
-                                        overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff" class="small">
+                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px; overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff"
+                                        class="small">
                                         <table border="0" width="95%">
                                             <tr>
                                                 <td align="left">
@@ -164,7 +172,7 @@
                             align="center">
                             <tr>
                                 <td align="left" width="40%">
-                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Knet_Procure_WareHouseList")%>','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
+                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Knet_Procure_WareHouseList")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
                                         class="crmbuttom small edit">
                                     <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit">
                                 </td>
@@ -178,109 +186,127 @@
                     </div>
                 </td>
             </tr>
-  <tr>
-    <td>
-        
-<table border=0 cellspacing=0 cellpadding=2 width=100% class="small">
- <tr>
-				<!-- Buttons -->
-				<td style="padding-right:20px" align="left" nowrap>				
-				查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged"></asp:DropDownList>
-				<a id="moreoperate" href="" target="main" onmouseover="BatchfnDropDown(this,'selectoperate');" onmouseout="fnHideDrop('selectoperate');" onclick="return false;">批量操作</a> <img border="0" src="../../themes/images/collapse.gif">
-				<div id="selectoperate" class="drop_mnu" onMouseOut="fnHideDrop('selectoperate')" onMouseOver="fnShowDrop('selectoperate')" >
-				<table width="100%" border="0" cellpadding="0" cellspacing="0">
-							<tr><td>
-							<a href="#" class="drop_down">修改负责人</a>
-							</td></tr>
-							<tr><td>
-							<a href="#" class="drop_down">共享</a>
-							</td></tr>
-									</table>
-				</div>
-				</td>
-				</tr>
-  <tr>
-    <td >
-            <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true"  AllowSorting="True"  EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>"  GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"  ShowHeader="true"  HeaderStyle-Height="25px"
-        OnRowDataBound="GridView1_DataRowBinding" >
-        <Columns>
-        <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <HeaderTemplate>
-                    <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server"/>
-                     </HeaderTemplate>
-                 <ItemTemplate>
-                     <asp:CheckBox ID="Chbk" runat="server"  />
-                 </ItemTemplate>
-        </asp:TemplateField>
-        
-        
-         <asp:TemplateField HeaderText="调拨单号"  SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
-               </ItemTemplate>
-        </asp:TemplateField>
-        
-         <asp:BoundField   HeaderText="调拨日期"  DataField="AllocateDateTime" SortExpression="AllocateDateTime"  DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
-            <ItemStyle HorizontalAlign="Left" Font-Size="12px"  />
-            <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
-        </asp:BoundField>
-        <asp:TemplateField HeaderText="调出仓库"  SortExpression="HouseNo" HeaderStyle-Font-Size="12px"    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField HeaderText="调出入库"  SortExpression="HouseNo_int" HeaderStyle-Font-Size="12px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo_int").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        
-        <asp:TemplateField HeaderText="调拨型号"   HeaderStyle-Font-Size="12px"  ItemStyle-Width="200px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# GetDirectInProductsPatten(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField HeaderText="数量"   HeaderStyle-Font-Size="12px"  ItemStyle-Width="60px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# GetDirectInNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        
-      <asp:TemplateField HeaderText="经手人"  SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center" HeaderStyle-Width="30px">
-            <ItemTemplate>
-            <a href="KNet_WareHouse_AllocateList_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo")%>&Type=2"><asp:Image ID="Image1" runat="server"  ImageUrl="../../images/Edit.gif" border=0  ToolTip="修改" /></a>
-           </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField HeaderText="打印" SortExpression="DirectOutCheckYN" HeaderStyle-Font-Size="12px"
-                ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <itemtemplate>   
-            <a href="#"  onclick="GPrint('<%# DataBinder.Eval(Container.DataItem, "AllocateNo")%>')"><asp:Image ID="Image4" runat="server"  ImageUrl="../../images/Print1.gif" border=0  ToolTip="查看发货详细信息" /></a>(<%# DataBinder.Eval(Container.DataItem, "KWA_PrintsNums")%>)
-            </itemtemplate>
-        </asp:TemplateField>
-      <asp:TemplateField HeaderText="审核"  SortExpression="AllocateCheckYN" HeaderStyle-Font-Size="12px"  ItemStyle-Width="70px"   ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <%# GetOrderCheckYN(DataBinder.Eval(Container.DataItem, "AllocateNo"))%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        </Columns>
-                <HeaderStyle CssClass='colHeader' />
-                <RowStyle CssClass='listTableRow' />
-                <AlternatingRowStyle BackColor="#E3EAF2" />
-                <PagerStyle CssClass='Custom_DgPage' />
-        </cc1:MyGridView>
+            <tr>
+                <td>
 
-    </td>
-</tr>
-</table>
+                    <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
+                        <tr>
+                            <!-- Buttons -->
+                            <td style="padding-right: 20px" align="left" nowrap>查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged"></asp:DropDownList>
+                                <a id="moreoperate" href="" target="main" onmouseover="BatchfnDropDown(this,'selectoperate');" onmouseout="fnHideDrop('selectoperate');" onclick="return false;">批量操作</a>
+                                <img border="0" src="../../themes/images/collapse.gif">
+                                <div id="selectoperate" class="drop_mnu" onmouseout="fnHideDrop('selectoperate')" onmouseover="fnShowDrop('selectoperate')">
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="drop_down">修改负责人</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="drop_down">共享</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="5" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
+                                    OnRowDataBound="GridView1_DataRowBinding">
+                                    <Columns>
+                                        <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server" />
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="Chbk" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-    </td>
-  </tr>
-</table>
+
+                                        <asp:TemplateField HeaderText="调拨单号" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                            HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <a href="/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %>" target="_blank">
+                                                    <%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="调拨日期" DataField="AllocateDateTime" SortExpression="AllocateDateTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="调出仓库" SortExpression="HouseNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="调出入库" SortExpression="HouseNo_int" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo_int").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="调拨产品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDirectInProductsPatten(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="调拨总数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDirectInNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="经手人" SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center" HeaderStyle-Width="30px">
+                                            <ItemTemplate>
+                                                <a href="KNet_WareHouse_AllocateList_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo")%>&Type=2">
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl="../../images/Edit.gif" border="0" ToolTip="修改" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="打印" SortExpression="DirectOutCheckYN" HeaderStyle-Font-Size="12px"
+                                            ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="#" onclick="GPrint('<%# DataBinder.Eval(Container.DataItem, "AllocateNo")%>')">
+                                                    <asp:Image ID="Image4" runat="server" ImageUrl="../../images/Print1.gif" border="0" ToolTip="查看发货详细信息" /></a>(<%# DataBinder.Eval(Container.DataItem, "KWA_PrintsNums")%>)
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="仓库确认" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+
+                                                <%# GetCheck(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="审核" SortExpression="AllocateCheckYN" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%# GetOrderCheckYN(DataBinder.Eval(Container.DataItem, "AllocateNo"))%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <HeaderStyle CssClass='colHeader' />
+                                    <RowStyle CssClass='listTableRow' />
+                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                    <PagerStyle CssClass='Custom_DgPage' />
+                                </cc1:MyGridView>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
     </form>
 </body>
 </html>

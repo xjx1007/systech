@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="plugins/jquery-ui/jquery.ui.1.10.2.ie.css"/><![endif]-->
+
     <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
@@ -15,14 +15,11 @@
     <link rel="stylesheet" href="themes/softed/style.css" type="text/css" />
     <link rel="stylesheet" href="themes/softed/index.css" type="text/css" />
     <link rel="stylesheet" href="assets/css/fontawesome/font-awesome.min.css">
-    <!--[if IE 7]><link rel="stylesheet" href="assets/css/fontawesome/font-awesome-ie7.min.css"><![endif]-->
-    <!--[if IE 8]><link href="assets/css/ie8.css" rel="stylesheet" type="text/css"/><![endif]-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/libs/lodash.compat.min.js"></script>
-    <!--[if lt IE 9]><script src="assets/js/libs/html5shiv.js"></script><![endif]-->
     <script type="text/javascript" src="plugins/touchpunch/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="plugins/event.swipe/jquery.event.move.js"></script>
     <script type="text/javascript" src="plugins/event.swipe/jquery.event.swipe.js"></script>
@@ -42,6 +39,9 @@
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/plugins.js"></script>
     <script type="text/javascript" src="assets/js/plugins.form-components.js"></script>
+    
+    <script type="text/javascript" src="themes/js/tree.js" ></script>
+    <script type="text/javascript" src="themes/js/treeview.js" ></script>
     <script>$(document).ready(function () { App.init(); Plugins.init(); FormComponents.init() });</script>
     
     <title>杭州士腾科技有限公司</title>
@@ -123,8 +123,6 @@
     <script type="text/javascript" src="themes/js/jquery/jquery.ui.autocomplete.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery.effects.bounce.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery.plugins.js"></script>
-    <script type="text/javascript" src="themes/js/tree.js" ></script>
-    <script type="text/javascript" src="themes/js/treeview.js" ></script>
     <script type="text/javascript" src="themes/js/index.js"></script>
     <script>
         //var bTabStyle = true;

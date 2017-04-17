@@ -75,8 +75,8 @@ public partial class Procure_ShipCheck_View_Deails : BasePage
             s_Head += "<td class=\"thstyle\" align=center  rowspan=2>规格</td>\n";
             s_Head += "<td class=\"thstyle\" align=center rowspan=2>单位</td>\n";
             s_Head += "<td class=\"thstyle\" align=center rowspan=2>数量</td>\n";
-            s_Head += "<td class=\"thstyle\" align=center rowspan=2>遥控器</td>\n";
-            s_Head += "<td class=\"thstyle\" align=center rowspan=2>遥控器发货日期</td>\n";
+            s_Head += "<td class=\"thstyle\" align=center rowspan=2>成品</td>\n";
+            s_Head += "<td class=\"thstyle\" align=center rowspan=2>成品发货日期</td>\n";
             s_Head += "<td class=\"thstyle\" align=center rowspan=2>损耗率</td>\n";
             s_Head += "<td class=\"thstyle\" align=center>备注</td>\n</tr>\n";
             s_Head += "</thead><tbody class=\"scrollContent\">";

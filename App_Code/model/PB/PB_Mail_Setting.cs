@@ -25,9 +25,18 @@ private string _PMS_Creator;
 private DateTime _PMS_CTime;
 private string _PMS_Mender;
 private DateTime _PMS_MTime;
+private int _PBS_SSL = 0;
 #endregion
 #region 属性设计器
 
+/// <summary>
+/// 
+/// </summary>
+public int PBS_SSL
+{
+    set { _PBS_SSL = value; }
+    get { return _PBS_SSL; }
+}
  /// <summary>
  /// 
  /// </summary>

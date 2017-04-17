@@ -27,7 +27,7 @@ public partial class Web_Report_Xs_Report_CkDetails : BasePage
             this.Tbx_CustomerName.Text = "广州市候华网络维护有限公司";
             this.Tbx_CustomerValue.Text = "104521";
             this.Tbx_ProductsTypeNo.Text = "01";
-            this.Tbx_ProductsTypeName.Text = "遥控器 (0101)";
+            this.Tbx_ProductsTypeName.Text = "成品 (0101)";
         }
     }
 }

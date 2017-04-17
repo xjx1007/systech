@@ -97,7 +97,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
             s_SqlWhere += base.Base_GetAdvWhere(s_Fields, s_Condition, s_Text, s_Type);
         }
         s_SqlWhere = s_SqlWhere + " order by SystemDateTimes desc";
-         DataSet ds = bll.GetList(s_SqlWhere);
+        DataSet ds = bll.GetList(s_SqlWhere);
         GridView1.DataSource = ds;
         GridView1.DataKeyNames = new string[] { "ContractNo" };
         GridView1.DataBind();
@@ -342,7 +342,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                 string s_DutyPerson = dr["DutyPerson"].ToString();
                 if (dr["ContractCheckYN"].ToString() == "True")
                 {
-                    string JSD = "ContractListCheckDetail.aspx?ContractNo=" + aa.ToString() + "";
+                    string JSD = "KNet_Sales_ContractList_View.aspx?ID=" + aa.ToString() + "";
                     string StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><img src=\"../../images/gou.gif\"  border=\"0\" />"; ;
                     return StrPop;
                 }
@@ -356,15 +356,21 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                     {
                         return "<font color=red>需消耗</font>";
                     }
-                    string s_DeptID = Base_GetNextDept(aa.ToString(), "101");
-                    this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'   and KSF_ContractNo='" + aa.ToString() + "' and StaffDepart='" + s_DeptID + "' and KSF_Del='0'");
+                    string s_DeptID = Base_GetNextDept(aa.ToString(), "101",AM.KNet_StaffDepart);
+                    string s_Sql1 = "select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'   and KSF_Del='0'";
+                    if (s_DeptID != "")
+                    {
+                        s_Sql1 += "and KSF_ContractNo='" + aa.ToString() + "'";
+                    }
+                    this.BeginQuery(s_Sql1);
                     this.QueryForDataTable();
                     string JSD = "ContractListCheckYN.aspx?ContractNo=" + aa.ToString() + "";
                     string StrPop = "";
                     if (this.Dtb_Result.Rows.Count > 0)
                     {
-                        JSD = "ContractListCheckDetail.aspx?ContractNo=" + aa.ToString() + "";
-                        StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/> " + base.Base_GeDept(s_DeptID) + " <font color=Blue>不通过</font>";
+                        JSD = "KNet_Sales_ContractList_View.aspx?ID=" + aa.ToString() + "";
+                        string s_Detail = base.Base_GetUserName(Dtb_Result.Rows[0]["KSF_ShPerson"].ToString());
+                        StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/> " + s_Detail + " <font color=Blue>不通过</font>";
                         return StrPop;
 
                     }
@@ -382,7 +388,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                         }
                         else if ((this.Dtb_Result.Rows.Count <= 0) && (AM.KNet_StaffNo != s_DutyPerson))
                         {
-                            JSD = "ContractListCheckDetail.aspx?ContractNo=" + aa.ToString() + "";
+                            JSD = "KNet_Sales_ContractList_View.aspx?ID=" + aa.ToString() + "";
                             return "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/>等待 " + base.Base_GetUserName(s_DutyPerson) + " 审核";
 
                         }
@@ -398,8 +404,15 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                     }
                     else
                     {
-                        JSD = "ContractListCheckDetail.aspx?ContractNo=" + aa.ToString() + "";
-                        return "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/>等待 " + base.Base_GeDept(s_DeptID) + " 审核";
+                        JSD = "KNet_Sales_ContractList_View.aspx?ID=" + aa.ToString() + "";
+                        if (s_DeptID == "其他部门")
+                        {
+                            return "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/>等待 <font color=red>其他部门</font> 审核";
+                        }
+                        else
+                        {
+                            return "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/>等待 " + base.Base_GeDept(s_DeptID) + " 审核";
+                        }
                     }
                 }
             }

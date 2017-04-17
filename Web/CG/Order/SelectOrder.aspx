@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>选择生产订单</title>
     <base target="_self" />
 </head>
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
@@ -26,12 +26,12 @@
     }
 
     function GetReturn(Value1) {
-
+        var returnValue = Value1;
         if (window.opener != undefined) {
-            window.opener.returnValue = Value1 ;
-        }
-        else {
-            window.returnValue = Value1 ;
+            window.opener.returnValue = returnValue;
+            window.opener.SetReturnValueInOpenner_Order(returnValue);
+        } else {
+            window.returnValue = returnValue;
         }
         closeWindow();
     }
@@ -46,7 +46,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                采购订单 > <a class="hdrLink" href="Knet_Procure_OpenBilling_Manage.aspx"><asp:Label runat="server" ID="Lbl_Title"></asp:Label></a>
+                生产 > <a class="hdrLink" href="SelectOrder.aspx"><asp:Label runat="server" ID="Lbl_Title"></asp:Label></a>
             </td>
             <td width="100%" nowrap>
                 <table border="0" cellspacing="0" cellpadding="0">
@@ -101,7 +101,7 @@
     <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td>
-                <%=base.Base_BindView("Knet_Procure_OrdersList", "Knet_Procure_OpenBilling_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
+                <%=base.Base_BindView("Knet_Procure_OrdersList", "SelectOrder.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
             </td>
         </tr>
         <tr>

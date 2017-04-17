@@ -65,16 +65,16 @@
                                                 <table id="_ctl0_WorkForm_dlList" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                                                     <tr>
                                                         <td style="width: 45%;">
-                                                            <div onclick="location.href='Xs_Sales_BasisSetting_Class.aspx?id=2'" style="cursor: pointer">
+                                                            <div onclick="location.href='/Web/Cg/Order/Xs_Sales_BasisSetting_Class.aspx?id=2'" style="cursor: pointer">
                                                                 <h5>1.采购类型</h5>
                                                                 <p class="gray">
-                                                                    对您公司客户的采购类型进行设置，如遥控器采购、塑壳、其他等。
+                                                                    对您公司客户的采购类型进行设置，如成品采购、塑壳、其他等。
                                                                 </p>
                                                             </div>
                                                         </td>
                                                         <td style="width: 45%;">
 
-                                                            <div onclick="location.href='../BasicCode/PB_Basic_Code_List.aspx?id=250'" style="cursor: pointer">
+                                                            <div onclick="location.href='/Web/BasicCode/PB_Basic_Code_List.aspx?id=250'" style="cursor: pointer">
                                                                 <h5>2.未达成原因设置</h5>
                                                                 <p class="gray">
                                                                     对未达成原因设置设置，如品种多，单个数量小，换模具时间长。

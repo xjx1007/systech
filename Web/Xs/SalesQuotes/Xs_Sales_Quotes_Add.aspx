@@ -22,149 +22,142 @@
        var today,seconds;
        today = new Date();
        intSeconds = today.getSeconds();
-       var tempd= window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID="+intSeconds+"","","dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-       
-       if(tempd ==undefined)
-       {
-            tempd = window.returnValue;  
-       }
-            var sel=document.getElementById("Ddl_LinkMan");
-            var length = sel.length; 
-            for(var i=length-1;i>=0;i--)
-            { 
-                sel.remove(i); 
-            } 
-            var opt =new Option("","");
-            sel.options.add(opt);
-            if(tempd!=undefined)   
-       {   
-          	 var ss;
-	         ss=tempd.split("#");
-             document.all('Tbx_CustomerValue').value =ss[0];
-             document.all('Tbx_CustomerName').value =ss[1];
-             var st,sw;
-            st=ss[3].split("|");
-            if(st.length >0)
-            {
-                for(var i=0;i<st.length-1;i++)
-                {
-                    sw=st[i].split(",");
-                    var opt =new Option(sw[1],sw[0]);
-                    sel.options.add(opt);
-                }
-    	        
+       //var tempd= window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID="+intSeconds+"","","dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+       var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+     function SetReturnValueInOpenner_Customer(tempd) {
+         if (tempd == undefined) {
+             tempd = window.returnValue;
+         }
+         var sel = document.getElementById("Ddl_LinkMan");
+         var length = sel.length;
+         for (var i = length - 1; i >= 0; i--) {
+             sel.remove(i);
+         }
+         var opt = new Option("", "");
+         sel.options.add(opt);
+         if (tempd != undefined) {
+             var ss;
+             ss = tempd.split("#");
+             document.all('Tbx_CustomerValue').value = ss[0];
+             document.all('Tbx_CustomerName').value = ss[1];
+             var st, sw;
+             st = ss[3].split("|");
+             if (st.length > 0) {
+                 for (var i = 0; i < st.length - 1; i++) {
+                     sw = st[i].split(",");
+                     var opt = new Option(sw[1], sw[0]);
+                     sel.options.add(opt);
+                 }
+
              }
-             
-        }   
-       else
-        {
-                    document.all('Tbx_CustomerValue').value = ""; 
-                    document.all('Tbx_CustomerName').value = ""; 
-                    var length = sel.length; 
-                    for(var i=length-1;i>=0;i--){ 
-                    sel.remove(i); 
-                    } 
-        }
-    }
+
+         }
+         else {
+             document.all('Tbx_CustomerValue').value = "";
+             document.all('Tbx_CustomerName').value = "";
+             var length = sel.length;
+             for (var i = length - 1; i >= 0; i--) {
+                 sel.remove(i);
+             }
+         }
+     }
       
-     function btnGetReturnValue_onclick1()  
-    {   
-       /*选择客户*/
-       var today,seconds;
-       today = new Date();
-       intSeconds = today.getSeconds();
-       var tempd= window.showModalDialog("/Web/CustomerContent/SelectSalesOpp.aspx?sID="+intSeconds+"","","dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-       
-       if(tempd ==undefined)
-       {
-            tempd = window.returnValue;  
-       }
-           
-            if(tempd!=undefined)   
-       {   
-          	 var ss;
-	         ss=tempd.split("#");
-             document.all('Tbx_SalesChanceValue').value =ss[0];
-             document.all('Tbx_SalesChanceName').value =ss[1];
-          
-             
-        }   
-       else
-        {
-            document.all('Tbx_SalesChanceValue').value = ""; 
-            document.all('Tbx_SalesChanceName').value = ""; 
-        }
-    }
+     function btnGetReturnValue_onclick1() {
+         /*选择客户*/
+         var today, seconds;
+         today = new Date();
+         intSeconds = today.getSeconds();
+         //var tempd= window.showModalDialog("/Web/CustomerContent/SelectSalesOpp.aspx?sID="+intSeconds+"","","dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=800px;dialogHeight=600px");
+         var tempd = window.open("/Web/CustomerContent/SelectSalesOpp.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+     }
+     function SetReturnValueInOpenner_SalesOpp(tempd) {
+         if (tempd == undefined) {
+             tempd = window.returnValue;
+         }
+
+         if (tempd != undefined) {
+             var ss;
+             ss = tempd.split("#");
+             document.all('Tbx_SalesChanceValue').value = ss[0];
+             document.all('Tbx_SalesChanceName').value = ss[1];
+
+
+         }
+         else {
+             document.all('Tbx_SalesChanceValue').value = "";
+             document.all('Tbx_SalesChanceName').value = "";
+         }
+     }
     
     
-    function btnGetProducts_onclick()  
-    {   
-       /*选择客户*/
-       var today,seconds;
-       today = new Date();
-       intSeconds = today.getSeconds();
-       
-       var tempd= window.showModalDialog("SelectProducts.aspx?sID="+document.all("Xs_ProductsCode").value+"&CustomerValue="+document.all("Tbx_CustomerValue").value+"","","dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-    
-       if(tempd!=undefined)   
-       {   
-      
-          	 var ss,s_Value,i_row;
-          	 
-	         ss=tempd.split("|");  
-	         i_row = myTable.rows.length;
-	         s_ID=document.all("Xs_ProductsCode").value;
-	         
-	         for(var i=0; i< ss.length-1;i++)
-	         {
-	            s_Value=ss[i].split(",");
-	            
-	            var objRow = myTable.insertRow(i_row);
-	            
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName\" value='+s_Value[0]+'>'+s_Value[0]; 
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode\" value='+s_Value[1]+'>'+s_Value[1]; 
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern\" value='+s_Value[2]+'>'+s_Value[2]; 
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;" Name=\"Number\" value='+s_Value[3]+'>'; 
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Price\" value='+s_Value[4]+'>'; 
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style="width:70px;" Name=\"Precent\" value=100 >'; 
-                objCel.className="dvtCellInfo";
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style="width:70px;" Name=\"PrecentMoney\" value='+s_Value[6]+'>'; 
-                objCel.className="dvtCellInfo";
-                
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Remarks\" value='+s_Value[5]+' >'; 
-                objCel.className="dvtCellInfo";
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Money\" value='+s_Value[6]+' >'; 
-                objCel.className="dvtCellInfo";
-                i_row=i_row+1;
-                s_ID =s_ID + s_Value[1]+",";
-	         }
-	         
-	         document.all("Xs_ProductsCode").value = s_ID;
-        }   
-    }
+     function btnGetProducts_onclick() {
+         /*选择客户*/
+         var today, seconds;
+         today = new Date();
+         intSeconds = today.getSeconds();
+
+         //var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1200px;dialogHeight=500px");
+         var tempd = window.open("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "", "选择产品", "width=1200px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+     }
+     function SetReturnValueInOpenner_Products(tempd) {
+         if (tempd != undefined) {
+
+             var ss, s_Value, i_row;
+
+             ss = tempd.split("|");
+             i_row = myTable.rows.length;
+             s_ID = document.all("Xs_ProductsCode").value;
+
+             for (var i = 0; i < ss.length - 1; i++) {
+                 s_Value = ss[i].split(",");
+
+                 var objRow = myTable.insertRow(i_row);
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName\" value=' + s_Value[0] + '>' + s_Value[0];
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode\" value=' + s_Value[1] + '>' + s_Value[1];
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern\" value=' + s_Value[2] + '>' + s_Value[2];
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;" Name=\"Number\" value=' + s_Value[3] + '>';
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Price\" value=' + s_Value[4] + '>';
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style="width:70px;" Name=\"Precent\" value=0 >';
+                 objCel.className = "dvtCellInfo";
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style="width:70px;" Name=\"PrecentMoney\" value=' + s_Value[6] + '>';
+                 objCel.className = "dvtCellInfo";
+
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Remarks\" value=' + s_Value[5] + ' >';
+                 objCel.className = "dvtCellInfo";
+                 var objCel = objRow.insertCell();
+                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Money\" value=' + s_Value[6] + ' >';
+                 objCel.className = "dvtCellInfo";
+                 i_row = i_row + 1;
+                 s_ID = s_ID + s_Value[1] + ",";
+             }
+
+             document.all("Xs_ProductsCode").value = s_ID;
+         }
+     }
         
 function deleteRow(obj){
    myTable.deleteRow(obj.parentElement.parentElement.rowIndex);
@@ -176,7 +169,7 @@ function deleteRow(obj){
     document.all("Xs_ProductsCode").value=bm_num;
     }
     
-    </SCRIPT>
+</SCRIPT>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
 
@@ -340,8 +333,8 @@ function deleteRow(obj){
 <tr>
   <td colspan="4" align="center" >&nbsp;
   <br />
-   <asp:Button ID="Btn_Save" runat="server" Text="保 存" accessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Btn_SaveOnClick"  />
-   <input title="取消 [Alt+X]" accessKey="X" class="crmbutton small cancel" onclick="window.history.back()" type="button" name="button" value="取 消" style="width: 55px;height: 33px;" style="width:70px">
+   <asp:Button ID="Btn_Save" runat="server" Text="保 存" accessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Btn_SaveOnClick"   style="width: 55px;height: 33px;" />
+   <input title="取消 [Alt+X]" accessKey="X" class="crmbutton small cancel" onclick="window.history.back()" type="button" name="button" value="取 消" style="width: 55px;height: 33px;" >
    </td>
 
 </tr>

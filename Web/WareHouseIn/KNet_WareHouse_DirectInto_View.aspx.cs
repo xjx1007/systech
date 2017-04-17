@@ -101,8 +101,10 @@ public partial class Web_KNet_WareHouse_DirectInto_View : BasePage
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                 {
                     s_MyTable_Detail += "<tr>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +Convert.ToString(i+1)+ "</td>";
+
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectInAmount"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectInunitPrice"].ToString() + "</td>";

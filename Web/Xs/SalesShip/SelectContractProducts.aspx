@@ -43,7 +43,8 @@
         function set_return_value(ID) {
             var response = SelectContractProducts.GetProductsInfo(ID);
             if (window.opener != undefined) {
-                window.opener.returnValue =  response.value + "|" + ID;
+                window.opener.returnValue = response.value + "|" + ID;
+                window.opener.SetReturnValueInOpenner_Product(response.value + "|" + ID);
             }
             else {
                 window.returnValue =  response.value + "|" + ID;

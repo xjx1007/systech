@@ -167,7 +167,7 @@ public partial class CG_Account_Bill_Add : BasePage
             }
             else
             {
-                //遥控器对账
+                //成品对账
                 KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
                 KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll_WareHouse.GetModel(Model.COC_HouseNo);
                 s_SuppNo = Model_WareHouse.SuppNo;
@@ -306,7 +306,7 @@ public partial class CG_Account_Bill_Add : BasePage
 
                     this.Lbl_Detail.Text += " <tr>";
 
-                    if (Model.COC_Type == "0")//遥控器对账
+                    if (Model.COC_Type == "0")//成品对账
                     {
                         KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll_DirectOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
                         KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DirectOutDetails = Bll_DirectOutDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());
@@ -507,7 +507,7 @@ public partial class CG_Account_Bill_Add : BasePage
             }
             else
             {
-                //遥控器对账
+                //成品对账
                 KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
                 KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll_WareHouse.GetModel(Model.COC_HouseNo);
                 s_SuppNo = Model_WareHouse.SuppNo;
@@ -537,7 +537,7 @@ public partial class CG_Account_Bill_Add : BasePage
         {
             if (s_InSuppNo != "")
             {
-                //原材料和遥控器对账单
+                //原材料和成品对账单
                 s_Sql1 += "  and COD_CheckNO in (Select COC_Code from Cg_Order_Checklist where COC_SuppNo ='" + s_InSuppNo + "' union all Select COC_Code from Cg_Order_Checklist a join KNet_Sys_WareHouse b on a.Coc_HouseNo=b.HouseNO where b.SuppNo='" + s_InSuppNo + "')";
 
             }
@@ -1128,7 +1128,7 @@ public partial class CG_Account_Bill_Add : BasePage
 
         s_Return += "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"ListDetails\" >\n \n";
         s_Return += "<tr><td class=\"ListHeadLeft\" colspan=11>需开发票</td></tr>";
-        if (Model.COC_Type == "0")//遥控器对账
+        if (Model.COC_Type == "0")//成品对账
         {
             s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"11\"><b>加工费发票1</b></td>\n</tr>";
             s_Return += " <tr ><td class=\"ListHeadDetials\" align=left colspan=\"11\" height=\"30px\"><b><font color=red>发票号码1：</font></b><input id=\"Tbx_FpHandCode_1\" name=\"Tbx_FpHandCode_1\" onblur=\"Change1(1)\" width=\"300px\"  type=\"text\"  class=\"detailedViewTextBox\"/></td></tr>";
@@ -1167,7 +1167,7 @@ public partial class CG_Account_Bill_Add : BasePage
                 decimal d_HandPrice = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_HandPrice"].ToString());
                 decimal d_Number = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString());
                 decimal d_BNumber = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString());
-                if (Model.COC_Type == "0")//遥控器对账
+                if (Model.COC_Type == "0")//成品对账
                 {
                     KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll_DirectOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
                     KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DirectOutDetails = Bll_DirectOutDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());
@@ -1280,7 +1280,7 @@ public partial class CG_Account_Bill_Add : BasePage
                         {
                             i_FPNum = i_FPNum + 1;
 
-                            if (Model.COC_Type == "0")//遥控器对账
+                            if (Model.COC_Type == "0")//成品对账
                             {
 
                                 s_Return += " <tr >\n";

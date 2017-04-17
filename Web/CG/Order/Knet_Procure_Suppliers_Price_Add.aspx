@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" EnableEventValidation="false"
     CodeFile="Knet_Procure_Suppliers_Price_Add.aspx.cs" Inherits="Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add" %>
+
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,20 +17,23 @@
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/js/ListView.js"></script>
     <script language="JAVASCRIPT">
-        function btnGetReturnValue_onclick() {
+        function btnGetReturnValue_onclick(i_Num) {
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
-                document.all('KNetSelectValue').value = ss[0];
-                document.all('KNetSelectName').value = ss[1];
+                document.all('GridView1$ctl02$Tbx_SuppNo').value = ss[0];
+                document.all('GridView1$ctl02$Tbx_SuppName').value = ss[1];
             }
             else {
-                document.all('KNetSelectValue').value = "";
-                document.all('KNetSelectName').value = "";
+                document.all('GridView1$ctl02$Tbx_SuppNo').value = "";
+                document.all('GridView1$ctl02$Tbx_SuppName').value = "";
             }
         }
     </script>
@@ -63,8 +67,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("../../ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("../../ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ProductsClass(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split(",");
@@ -159,7 +165,7 @@
                                                             <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
                                                         </td>
 
-                                                        <td colspan="2" align="center" style="height: 30px;">
+                                                        <td align="left" class="dvtCellInfo" colspan="2">停用:<asp:CheckBox runat="server" ID="Chk_IsStop" Checked="true" />
                                                             <asp:Button
                                                                 ID="Button4" runat="server" Text="产品筛选" class="crmbutton small save" OnClick="Button4_Click"
                                                                 CausesValidation="false" />
@@ -167,10 +173,10 @@
                                                     </tr>
                                                     <tr>
                                                         <td align="left" class="dvtCellInfo" colspan="4">
-                                                            <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="15" AllowSorting="True"
+                                                            <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="5" AllowSorting="True"
                                                                 EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"
                                                                 GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"
-                                                                ShowHeader="true" HeaderStyle-Height="25px">
+                                                                ShowHeader="true" HeaderStyle-Height="25px" OnRowDataBound="GridView1_DataRowBinding">
                                                                 <Columns>
                                                                     <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left"
                                                                         HeaderStyle-HorizontalAlign="left">
@@ -211,63 +217,70 @@
                                                                             <%# base.Base_GetUnitsName(DataBinder.Eval(Container.DataItem, "ProductsUnits"))%>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="最少采购量" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
+
+                                                                    <asp:TemplateField HeaderText="采购单价" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
                                                                         ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="70px">
                                                                         <ItemTemplate>
-                                                                            <asp:TextBox ID="ProcureMinShu" runat="server" CssClass="Boxx" Width="50px" Text="0"
-                                                                                MaxLength="6"></asp:TextBox><br />
-                                                                            <asp:RegularExpressionValidator ID="JoinNumberbb" runat="server" ErrorMessage="非负整数!"
-                                                                                ControlToValidate="ProcureMinShu" ValidationExpression="^\d+$" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="ProcureMinShuDDsss4444" runat="server" ErrorMessage="非空值"
-                                                                                ControlToValidate="ProcureMinShu" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                                        </ItemTemplate>
-                                                                    </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="厂家建议售价" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
-                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="80px">
-                                                                        <ItemTemplate>
-                                                                            <asp:TextBox ID="Salesprice" runat="server" CssClass="Boxx" Width="60px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),2)%>'
+                                                                            <asp:TextBox ID="ProcureUnitPrice" runat="server" CssClass="detailedViewTextBox" Width="80px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),0)%>'
+                                                                                MaxLength="9"></asp:TextBox>
+                                                                            <asp:RegularExpressionValidator ID="JoinNumberb33b" runat="server" ErrorMessage="正货币形式!"
+                                                                                ControlToValidate="ProcureUnitPrice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
+                                                                                Display="Dynamic"></asp:RegularExpressionValidator>
+                                                                            
+                                                                            <asp:TextBox ID="Salesprice" runat="server" CssClass="Custom_Hidden" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),2)%>'
                                                                                 MaxLength="9"></asp:TextBox><br />
                                                                             <asp:RegularExpressionValidator ID="JoinNumberb33sdgsdb" runat="server" ErrorMessage="正货币形式!"
                                                                                 ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
                                                                                 Display="Dynamic"></asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="ProcureUnitPricedddssss33" runat="server" ErrorMessage="非空值"
-                                                                                ControlToValidate="Salesprice" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                                        </ItemTemplate>
-                                                                    </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="采购单价" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
-                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="70px">
-                                                                        <ItemTemplate>
-                                                                            <asp:TextBox ID="ProcureUnitPrice" runat="server" CssClass="Boxx" Width="60px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),0)%>'
-                                                                                MaxLength="9"></asp:TextBox><br />
-                                                                            <asp:RegularExpressionValidator ID="JoinNumberb33b" runat="server" ErrorMessage="正货币形式!"
-                                                                                ControlToValidate="ProcureUnitPrice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
-                                                                                Display="Dynamic"></asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="ProcureUnitPricessss33" runat="server" ErrorMessage="非空值"
-                                                                                ControlToValidate="ProcureUnitPrice" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:TemplateField HeaderText="加工费" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
                                                                         ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="80px">
                                                                         <ItemTemplate>
-                                                                            <asp:TextBox ID="HandPrice" runat="server" CssClass="Boxx" Width="60px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),1)%>'
+                                                                            <asp:TextBox ID="HandPrice" runat="server" CssClass="detailedViewTextBox" Width="80px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),1)%>'
                                                                                 MaxLength="9"></asp:TextBox><br />
                                                                             <asp:RegularExpressionValidator ID="HandPrice33db" runat="server" ErrorMessage="正货币形式!"
                                                                                 ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
                                                                                 Display="Dynamic"></asp:RegularExpressionValidator>
                                                                             <asp:RequiredFieldValidator ID="HandPrice33" runat="server" ErrorMessage="非空值" ControlToValidate="HandPrice"
                                                                                 Display="Dynamic"></asp:RequiredFieldValidator>
+
+                                                                            <asp:TextBox ID="ProductsBarCode" runat="server" CssClass="Custom_Hidden" Text=<%#DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>></asp:TextBox>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
-                                                                    <asp:TemplateField HeaderText="调配件价" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
-                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="80px">
+                                                                    
+                                                                    <asp:TemplateField HeaderText="品牌"  HeaderStyle-Font-Size="12px"
+                                                                        ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>
-                                                                            <asp:CheckBox runat="server" ID="Chk_IsChangAll" Checked="true" />
+                                                                            <asp:DropDownList runat="server" ID="Ddl_Brand"></asp:DropDownList>
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
+
+                                                                    <asp:TemplateField HeaderText="供应商" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px"
+                                                                        ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="Left">
+                                                                        <ItemTemplate>
+                                                                            <asp:TextBox ID="Tbx_SuppNo" runat="server" CssClass="Custom_Hidden" Text=''></asp:TextBox>
+
+                                                                            <asp:TextBox ID="Tbx_SuppName" runat="server"  CssClass="Boxx" Width="150px" Text=''></asp:TextBox>
+                                                                            <font color=red>*</font>
+                                                                            <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:TemplateField HeaderText="备注" HeaderStyle-ForeColor="blue" HeaderStyle-Font-Size="12px"
-                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="80px">
+                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" >
                                                                         <ItemTemplate>
-                                                                            <asp:TextBox ID="Tbx_Remarks" runat="server" CssClass="Boxx" Width="100px" Text=''></asp:TextBox><br />
+                                                                            <asp:TextBox ID="Tbx_Remarks" runat="server" CssClass="detailedViewTextBox" Width="100px" Text=''></asp:TextBox>
+                                                                            
+                                                                            <asp:RequiredFieldValidator ID="ProcureUnitPricedddssss33" runat="server" ErrorMessage="非空值"
+                                                                                ControlToValidate="Salesprice" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                            <asp:TextBox ID="ProcureMinShu" runat="server" CssClass="Custom_Hidden" Text="0"
+                                                                                MaxLength="6"></asp:TextBox>
+                                                                            <asp:RegularExpressionValidator ID="JoinNumberbb" runat="server" ErrorMessage="非负整数!"
+                                                                                ControlToValidate="ProcureMinShu" ValidationExpression="^\d+$" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                                            <asp:RequiredFieldValidator ID="ProcureMinShuDDsss4444" runat="server" ErrorMessage="非空值"
+                                                                                ControlToValidate="ProcureMinShu" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                            <asp:RequiredFieldValidator ID="ProcureUnitPricessss33" runat="server" ErrorMessage="非空值"
+                                                                                ControlToValidate="ProcureUnitPrice" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                 </Columns>
@@ -278,31 +291,16 @@
                                                             </cc1:MyGridView>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td colspan="4" class="detailedViewHeader">
-                                                            <b>设置信息</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                        <td align="right" class="dvtCellLabel">价格明细：
                                                         </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width="17%" height="25" align="right" class="dvtCellLabel">供应商:
-                                                        </td>
-                                                        <td align="left" class="dvtCellInfo">
-                                                            <input type="hidden" name="KNetSelectValue" id="KNetSelectValue" runat="server" />
-                                                            <asp:TextBox ID="KNetSelectName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48"></asp:TextBox>
-                                                            <img tabindex="8" src="../../../themes/softed/images/select.gif" alt="选择" title="选择"
-                                                                onclick="return btnGetReturnValue_onclick()" />(<font color="red">*</font>)<asp:RequiredFieldValidator
-                                                                    ID="RequiredFieldValidator5" runat="server" ErrorMessage="供应商不能为空" ControlToValidate="KNetSelectName"
-                                                                    Display="Dynamic"></asp:RequiredFieldValidator>
-                                                        </td>
-
-                                                        <td width="17%" height="25" align="right" class="dvtCellLabel">是否停用该供应商相同产品价格:
-                                                        </td>
-                                                        <td align="left" class="dvtCellInfo">
-                                                            <asp:CheckBox runat="server" ID="Chk_IsStop" Checked="true" />
-                                                        </td>
-
-                                                    </tr>
+                                            <td colspan="3" align="center" style="height: 30px">
+                                                
+                                                                <asp:TextBox ID="Tbx_DetailsRemarks" runat="server" Style="display: none;"></asp:TextBox>
+                                                                <iframe src='/Web/eWebEditor/ewebeditor.htm?id=Tbx_DetailsRemarks&style=gray'
+                                                                    frameborder='0' scrolling='no' width='750' height='350'></iframe>  
                                             </td>
                                         </tr>
                                         <tr>

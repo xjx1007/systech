@@ -17,7 +17,6 @@ using KNet.Common;
 using MSExcel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 
-
 public partial class PB_Basic_Mail_Add : BasePage
 {
     public string s_PassWord = "";
@@ -143,7 +142,9 @@ public partial class PB_Basic_Mail_Add : BasePage
 
                 string s_url1 = "../CG/Order/Excel/" + Model_Supp.SuppName + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".xls";
                 string s_URL = Server.MapPath(s_url1);
-                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + s_URL + "'><a href=\"" + s_url1 + "\">" + Model_Supp.SuppName + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".xls</a></td>";
+                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\">跟踪单附件</td>";
+
+                this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + s_URL + "'><a href=\"" + s_url1 + "\">" + Model_Supp.SuppName + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + ".xls</a></td>";
                 this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
                 this.Tbx_FileUrl.Text = s_URL;
                 this.Tbx_Title.Text = "士腾采购跟踪单确认： 请尽快回复确认；详细见明细Excel";
@@ -223,7 +224,9 @@ public partial class PB_Basic_Mail_Add : BasePage
                 string s_URL = Server.MapPath(s_url1);
                 excel.CreateExcelByXml(null, Dts_Details.Tables[0], "供应商确认表", s_URL, false);
                 // excel.DataTabletoExcel(Dts_Details.Tables[0], null, "供应商确认表", null);1
-                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + s_URL + "'><a href=\"" + s_url1 + "\">" + s_HouseName + "_" + Dtm_Date.ToLongDateString() + ".xls</a></td>";
+                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\">发货单附件</td>";
+
+                this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + s_URL + "'><a href=\"" + s_url1 + "\">" + s_HouseName + "_" + Dtm_Date.ToLongDateString() + ".xls</a></td>";
                 this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
                 this.Tbx_FileUrl.Text = s_URL;
                 this.Tbx_Title.Text = "士腾发货确认： 请尽快回复确认；详细见明细Excel";
@@ -286,7 +289,9 @@ public partial class PB_Basic_Mail_Add : BasePage
                     string s_URL = Server.MapPath(s_url1);
                     excel.CreateExcelByXml(null, Dts_Details.Tables[0], "供应商确认表", s_URL, false);
                     // excel.DataTabletoExcel(Dts_Details.Tables[0], null, "供应商确认表", null);1
-                    this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + s_URL + "'><a href=\"" + s_url1 + "\">" + s_HouseName + "_" + Dtm_Date.ToLongDateString() + ".xls</a></td>";
+                    this.Tbx_File.Text = "<tr>发货确认附件</td>";
+
+                    this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + s_URL + "'><a href=\"" + s_url1 + "\">" + s_HouseName + "_" + Dtm_Date.ToLongDateString() + ".xls</a></td>";
                     this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
                     this.Tbx_FileUrl.Text = s_URL;
                     this.Tbx_Title.Text = "士腾发货确认： 请尽快回复确认；详细见明细Excel";
@@ -329,8 +334,9 @@ public partial class PB_Basic_Mail_Add : BasePage
             catch
             { }
             string s_Name = Model.SPP_ID + "(" + base.DateToString(Model.SPP_STime.ToString()).Replace("/", ".") + ")";
+            this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\">生产计划附件</td>";
 
-            this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../Sc/PDF/" + s_Name + ".PDF") + "'><a href=\"../Sc/PDF/" + s_Name + ".PDF\">" + s_Name + ".PDF</a></td>";
+            this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../Sc/PDF/" + s_Name + ".PDF") + "'><a href=\"../Sc/PDF/" + s_Name + ".PDF\">" + s_Name + ".PDF</a></td>";
             this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
 
             this.Tbx_FileUrl.Text = Server.MapPath("../Sc/PDF/" + s_Name + ".PDF");
@@ -373,9 +379,25 @@ public partial class PB_Basic_Mail_Add : BasePage
                 }
                 catch
                 { }
-                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../CG/Order/PDF/" + Model.OrderNo + ".PDF") + "'><a href=\"../CG/Order/PDF/" + Model.OrderNo + ".PDF\">" + Model.OrderNo + ".PDF</a></td>";
+                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\">采购订单附件</td>";
+
+                this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../CG/Order/PDF/" + Model.OrderNo + ".PDF") + "'><a href=\"../CG/Order/PDF/" + Model.OrderNo + ".PDF\">" + Model.OrderNo + ".PDF</a></td>";
                 this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
                 this.Tbx_FileUrl.Text = Server.MapPath("../CG/Order/PDF/" + Model.OrderNo + ".PDF");
+
+
+                //
+
+                string s_DoSql = "Select PBA_Name,PBA_ProductsType,PBA_Remarks,PBA_Creator,max(PBA_Ctime) PBA_Ctime,PBA_URL from PB_Basic_Attachment";
+                s_DoSql += " where  PBA_FID in (Select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo='" + s_OrderNo + "') ";
+                //发送生产部门自己上传的文件
+               // s_DoSql += " and PBA_Creator in (select StaffNo  from  KNet_Resource_Staff  where StaffDepart='131161769392290242') ";
+                s_DoSql += " AND PBA_Type='Products' and PBA_FID<>'0' Group by PBA_Name,PBA_ProductsType,PBA_Remarks,PBA_Creator,PBA_URL order by max(PBA_Ctime)";
+                this.BeginQuery(s_DoSql);
+                DataSet ds_Comment = (DataSet)this.QueryForDataSet();
+                GridView_Comment.DataSource = ds_Comment.Tables[0];
+                GridView_Comment.DataBind();
+
                 if (Model.KPO_Del == 1)
                 {
                     this.Tbx_Title.Text = "采购订单号：" + Model.OrderNo + " 的订单取消";
@@ -404,13 +426,17 @@ public partial class PB_Basic_Mail_Add : BasePage
                     this.Tbx_Text.Text += "任何特殊情况请提前告知！谢谢合作！</font><br/><p></p><p></p><hr>";
 
                 }
-                this.Tbx_Text.Text += "方华英<br/>";
+                //
+                KNet.BLL.KNet_Resource_Staff Bll_Staff = new KNet.BLL.KNet_Resource_Staff();
+                KNet.Model.KNet_Resource_Staff Model_Staff = Bll_Staff.GetModelC(AM.KNet_StaffNo);
+
+                this.Tbx_Text.Text += "" + AM.KNet_StaffName + "<br/>";
                 this.Tbx_Text.Text += "采购部<br/>";
                 this.Tbx_Text.Text += "杭州士腾科技有限公司<br/>";
-                this.Tbx_Text.Text += "手机：159 6718 4387<br/>";
-                this.Tbx_Text.Text += "电话：0571 8821 0011 -8041<br/>";
-                this.Tbx_Text.Text += "E-mail: fanghy@bremax.com<br/>";
-                this.Tbx_Text.Text += "地址：杭州市西湖区黄姑山路4号1号楼<br/>";
+                this.Tbx_Text.Text += "手机：" + Model_Staff.StaffTel + "<br/>";
+                this.Tbx_Text.Text += "电话：0571 8899 9497-8821<br/>";
+                this.Tbx_Text.Text += "E-mail: " + Model_Staff.StaffEmail + "<br/>";
+                this.Tbx_Text.Text += "地址：杭州西湖科技园西园九路7号综合楼四楼 <br/>";
             }
         }
         catch { }
@@ -447,7 +473,8 @@ public partial class PB_Basic_Mail_Add : BasePage
                         this.Tbx_Cc.Text = Dtb_Mail.Rows[0]["PBM_Cc"].ToString();
                         this.Tbx_Ms.Text = Dtb_Mail.Rows[0]["PBM_Ms"].ToString();
                     }
-                    this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../Xs/SalesOut/PDF/" + Model.DirectOutNo + ".PDF") + "'><a href=\"../Xs/SalesOut/PDF/" + Model.DirectOutNo + ".PDF\">" + Model.DirectOutNo + ".PDF</a></td>";
+                    this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\">发货单附件：</td>";
+                    this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../Xs/SalesOut/PDF/" + Model.DirectOutNo + ".PDF") + "'><a href=\"../Xs/SalesOut/PDF/" + Model.DirectOutNo + ".PDF\">" + Model.DirectOutNo + ".PDF</a></td>";
                     this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
                     this.Tbx_FileUrl.Text = Server.MapPath("../Xs/SalesOut/PDF/" + Model.DirectOutNo + ".PDF");
 
@@ -526,7 +553,9 @@ public partial class PB_Basic_Mail_Add : BasePage
                 }
                 catch
                 { }
-                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../CG/Procure_Check/Excel/" + Model.COC_Code + ".xls") + "'><a href=\"../CG/Procure_Check/Excel/" + Model.COC_Code + ".xls\">" + Model.COC_Code + ".xls</a></td>";
+                this.Tbx_File.Text = "<tr><TD class=\"ListHeadDetails\">对账单附件：</td>";
+
+                this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath("../CG/Procure_Check/Excel/" + Model.COC_Code + ".xls") + "'><a href=\"../CG/Procure_Check/Excel/" + Model.COC_Code + ".xls\">" + Model.COC_Code + ".xls</a></td>";
                 this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
                 this.Tbx_FileUrl.Text = Server.MapPath("../CG/Procure_Check/Excel/" + Model.COC_Code + ".xls");
                 this.Tbx_Title.Text = "士腾采购对账单：" + Model.COC_Code + " 请尽快确认；详细见明细";
@@ -615,6 +644,24 @@ public partial class PB_Basic_Mail_Add : BasePage
             if (this.Tbx_FileUrl.Text != "")
             {
                 model.PBM_File = KNetPage.KHtmlEncode(this.Tbx_FileUrl.Text.ToString());
+                string s_URl = this.Tbx_FileUrl.Text.ToString();
+                if (this.Tbx_MailType.Text == "1")
+                {
+                    //如果是订单
+                    for (int i = 0; i < GridView_Comment.Rows.Count; i++)
+                    {
+                        TextBox Tbx_Urls = (TextBox)GridView_Comment.Rows[i].FindControl("Tbx_UrlDetails");
+                        if (i == GridView_Comment.Rows.Count - 1)
+                        {
+                            s_URl += Tbx_Urls.Text ;
+                        }
+                        else
+                        {
+                            s_URl += Tbx_Urls.Text + ",";
+                        }
+                    }
+                    model.PBM_File = KNetPage.KHtmlEncode(s_URl);
+                }
 
             }
             else
@@ -724,7 +771,6 @@ public partial class PB_Basic_Mail_Add : BasePage
                     }
                     else if ((model.PBM_State == 2) && (model.PBM_Type == 1))
                     {
-
                         //订单发送
                         KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
                         KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(model.PBM_FID);
@@ -764,7 +810,6 @@ public partial class PB_Basic_Mail_Add : BasePage
                     }
                     else if ((model.PBM_State == 2) && (model.PBM_Type == 4))
                     {
-
                         //对账单未发送
                         string sql = "Update Cg_Order_Checklist set COC_IsSend='0' where COC_Code='" + model.PBM_FID + "' ";
                         DbHelperSQL.ExecuteSql(sql);
@@ -808,7 +853,8 @@ public partial class PB_Basic_Mail_Add : BasePage
         string FileType = uploadFile.PostedFile.ContentType.ToString(); //文件类型
         string FileName = Path.GetFileName(uploadFile.PostedFile.FileName);
         string filePath = UploadPath + AutoPath + "_" + FileName; //文件名
-        this.Tbx_File.Text += "<tr><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath(filePath) + "'><a href=\"" + UploadPath + "\">" + FileName + "</a></td>";
+
+        this.Tbx_File.Text += "<tr><TD class=\"ListHeadDetails\">&nbsp;</TD><TD class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"DetailsFile\" ID=\"DetailsFile\" value='" + Server.MapPath(filePath) + "'><a href=\"" + UploadPath + "\">" + FileName + "</a></td>";
         this.Tbx_File.Text += "<TD class=\"ListHeadDetails\"> <A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" border=0></a></TD></tr>";
         if (this.Tbx_FileUrl.Text != "")
         {

@@ -51,13 +51,12 @@ if(http_request.readyState==4){
 }
 
 function set_return_Opp(Return_id, Return_name) {
-
-        if(window.opener != undefined)
-        {
-            window.opener.returnValue=Return_id+"#"+Return_name;
+        if (window.opener != undefined) {
+            window.opener.returnValue = Return_id + "#" + Return_name;
+            window.opener.SetReturnValueInOpenner_SalesOpp(Return_id+"#"+Return_name);
         }
-        else{
-            window.returnValue=Return_id+"#"+Return_name;
+        else {
+            window.returnValue = Return_id+"#"+Return_name;
         }
        
 }

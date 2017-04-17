@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Text;
+using System.IO;
 using System.Data.SqlClient;
 using KNet.DBUtility;
 using KNet.Common;
@@ -59,6 +60,7 @@ public partial class Procure_MaterialIN_List : BasePage
             }
 
             this.Btn_Del.Attributes.Add("onclick", "return confirm('你确信要删除所选记录吗?！')");
+            this.ImgB.Attributes.Add("onclick", "return confirm('你确定要导出所包含的数据么？')");
 
             base.Base_DropBindSearch(this.bas_searchfield, "Procure_MaterialIn");
             base.Base_DropBindSearch(this.Fields, "Procure_MaterialIn");
@@ -163,6 +165,29 @@ public partial class Procure_MaterialIN_List : BasePage
         return s_Return;
  
     }
+    public string GetStatestring(string s_ID)
+    {
+        string s_Return = "";
+        try
+        {
+            string s_Sql = "select * from Cg_Order_Checklist_Details where COD_DirectOutID='" + s_ID + "'";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            if (Dtb_Result.Rows.Count > 0)
+            {
+                s_Return = "正常";
+            }
+            else
+            {
+                s_Return = "暂估";
+            }
+        }
+        catch
+        {
+        }
+        return s_Return;
+
+    }
     private void DataBind()
     {
 
@@ -211,6 +236,8 @@ public partial class Procure_MaterialIN_List : BasePage
         SqlWhere += "  ";
         KNet.BLL.Knet_Procure_WareHouseList BLL = new KNet.BLL.Knet_Procure_WareHouseList();
         DataSet ds = BLL.GetListByDetails(SqlWhere + "  Order by systemDateTimes desc");
+
+        Session["Dts_RTable"] = ds;
         this.MyGridView1.DataSource = ds;
         this.MyGridView1.DataKeyNames = new string[] { "DetailsID" };
         this.MyGridView1.DataBind();
@@ -464,4 +491,82 @@ public partial class Procure_MaterialIN_List : BasePage
     {
         DataBind();
     }
+
+
+    protected void ImgB_Click(object sender, ImageClickEventArgs e)
+    {
+        Excel export = new Excel();
+        string s_FileName = "原材料领料单.xls";
+        if (this.Tbx_WhereID.Text != "")
+        {
+            this.BeginQuery("Select PBW_Name from PB_Basic_Where where PBW_ID='" + this.Tbx_WhereID.Text + "'");
+            s_FileName = this.QueryForReturn() + s_FileName;
+        }
+        if (this.Tbx_WhereID1.Text != "")
+        {
+            this.BeginQuery("Select PBW_Name from PB_Basic_Where where PBW_ID='" + this.Tbx_WhereID1.Text + "'");
+            s_FileName = this.QueryForReturn() + s_FileName;
+        }
+        //if (MyGridView1.AllowPaging == true)
+        //{
+        //    MyGridView1.AllowPaging = false;
+        //    this.DataBind();
+        //}
+        DataSet Dts_RTable = (DataSet)Session["Dts_RTable"];
+        export.ExcelExport(GetStringWriter(Dts_RTable.Tables[0]), s_FileName);
+        //MyGridView1.AllowPaging = true;
+        //this.DataBind();
+    }
+    public StringWriter GetStringWriter(DataTable dt)
+    {
+        StringWriter sw = new StringWriter();
+
+        //先写列的表头，这样保证如果没有数据也能输出列表头 
+        sw.Write("编号  " + "\t ");
+        sw.Write("编码 " + "\t ");
+        sw.Write("入库日期 " + "\t ");
+        sw.Write("供应商 " + "\t ");
+        sw.Write("仓库 " + "\t ");
+        sw.Write("产品名称 " + "\t ");
+        sw.Write("产品版本号 " + "\t ");
+        sw.Write("入库数量 " + "\t ");
+        sw.Write("单价 " + "\t ");
+        sw.Write("金额 " + "\t ");
+        sw.Write("修改次数 " + "\t ");
+        sw.Write("不含税金额 " + "\t ");
+        sw.Write("类型 " + "\t ");
+        sw.Write("操作人 " + "\t ");
+        sw.Write(sw.NewLine);
+
+        //如果包含数据 
+        if (dt != null)
+        {
+            //写数据 
+            int i = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                sw.Write(Convert.ToString(i+1) + "\t");
+
+                sw.Write("" + dr["WareHouseNo"].ToString() + "\t ");
+                sw.Write(base.DateToString(dr["WareHouseDateTime"].ToString()) + "\t ");
+                sw.Write(base.Base_GetSupplierName(dr["SuppNo"].ToString()) + "\t ");
+                sw.Write(base.Base_GetHouseName(dr["HouseNo"].ToString()) + "\t ");
+                sw.Write(base.Base_GetProdutsName(dr["productsBarCode"].ToString()) + "\t ");
+                sw.Write(base.Base_GetProductsEdition(dr["productsBarCode"].ToString()) + "\t ");
+                sw.Write(base.FormatNumber1(dr["WareHouseAmount"].ToString(), 0) + "\t ");
+                sw.Write(base.FormatNumber1(dr["WareHouseunitPrice"].ToString(), 6) + "\t ");
+                sw.Write(dr["WareHouseTotalNet"].ToString() + "\t ");
+                sw.Write(dr["KWP_NoTaxLag"].ToString() + "\t ");
+                sw.Write(dr["KWP_NoTaxMoney"].ToString() + "\t ");
+                sw.Write(GetStatestring(dr["DetailsID"].ToString()) + "\t ");
+                sw.Write(base.Base_GetUserName(dr["KPW_Creator"].ToString()) + "\t ");
+                
+                //换行 
+                sw.Write(sw.NewLine);
+                i++;
+            }
+        }
+        sw.Close();
+        return sw;
+    } 
 }

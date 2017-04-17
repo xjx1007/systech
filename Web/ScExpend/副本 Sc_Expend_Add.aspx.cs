@@ -132,7 +132,7 @@ public partial class Sc_Expend_Add : BasePage
             model.SEM_Mendor = AM.KNet_StaffNo;
             model.SEM_MTime = DateTime.Now;
 
-            ///遥控器消耗
+            ///成品消耗
             ArrayList arr_RcDetails = new ArrayList();
             int i_Num = 0;
             for (int i = 0; i < this.GridView1.Rows.Count; i++)
@@ -166,7 +166,7 @@ public partial class Sc_Expend_Add : BasePage
             model.arr_Details = arr_RcDetails;
             if (i_Num > 1)
             {
-                Alert("请指定一个遥控器生产！");
+                Alert("请指定一个成品生产！");
                 return false;
             }
 

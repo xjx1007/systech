@@ -93,7 +93,7 @@ public partial class Web_Sales_Knet_Procure_Suppliers_List : BasePage
             }
             s_SqlWhere += base.Base_GetAdvWhere(s_Fields, s_Condition, s_Text, s_Type);
         }
-        s_SqlWhere += " Order by KPS_MTime Desc";
+        s_SqlWhere += " Order by isnull(KPS_MTime,KPS_CTime) Desc";
         KNet.BLL.Knet_Procure_Suppliers bll = new KNet.BLL.Knet_Procure_Suppliers();
         DataSet ds = bll.GetList(s_SqlWhere);
         this.GridView1.DataSource = ds;
@@ -119,7 +119,7 @@ public partial class Web_Sales_Knet_Procure_Suppliers_List : BasePage
                 if (Ckb.Checked)
                 {
                     string s_ID = GridView1.DataKeys[i].Value.ToString();
-                    s_Sql.Append(" Update Knet_Procure_Suppliers set KPS_Del='1' Where XSQ_ID='" + s_ID + "' ");
+                    s_Sql.Append(" delete from  Knet_Procure_Suppliers Where SuppNo='" + s_ID + "' ");
 
                 }
             }
@@ -127,7 +127,7 @@ public partial class Web_Sales_Knet_Procure_Suppliers_List : BasePage
             {
                 this.DataShows();
                 AdminloginMess AM = new AdminloginMess();
-                AM.Add_Logs("Xs_Sales_Quotes 删除 编号：" + s_Log + "");
+                AM.Add_Logs("供应商删除 编号：" + s_Log + "");
                 Alert("删除成功！");
             }
         }

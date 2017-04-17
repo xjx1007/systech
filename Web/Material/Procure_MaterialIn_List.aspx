@@ -40,7 +40,7 @@
                                                 <tr>
                                                     <td style="padding-right: 0px; padding-left: 10px;">
                                                         <a href="javascript:;" onclick="PageGo('../WareHouseIn/KNet_WareHouse_DirectInto_Add.aspx?&Type=5')">
-                                                            <img src="/themes/softed/images/btnL3Add.gif" alt="创建 采购对账单..." title="创建 采购对账单..."
+                                                            <img src="/themes/softed/images/btnL3Add.gif" alt="创建 原材料入库单..." title="创建 原材料入库单..."
                                                                 border="0"></a>
                                                     </td>
                                                     <td style="padding-right: 0px;">
@@ -49,10 +49,14 @@
                                                     </td>
                                                     <td style="padding-right: 10px">
                                                         <a href="javascript:;" onclick="ShowDiv();">
-                                                            <img src="/themes/softed/images/btnL3Search.gif" alt="查找 采购对账单..." title="查找 采购对账单..."
+                                                            <img src="/themes/softed/images/btnL3Search.gif" alt="查找 原材料入库单..." title="查找 原材料入库单..."
                                                                 border="0"></a>
                                                     </td>
                                                     
+                                                <td style="padding-right: 10px">
+                                                    <asp:ImageButton ImageUrl="../../themes/softed/images/tbarExport.gif"  runat="server" ID="ImgB" OnClick="ImgB_Click" />
+                                     
+                                                </td>
                                                 <td style="padding-right: 10px">
                                                     <asp:Button ID="Btn_Show" runat="server" Text="显示全部" title="显示全部"
                                                             class="crmbutton small save" OnClick="Btn_Show_Click"/>

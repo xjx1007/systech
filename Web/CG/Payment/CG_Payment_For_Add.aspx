@@ -21,14 +21,15 @@
         var today, seconds;
         today = new Date();
         intSeconds = today.getSeconds();
-        var temp = window.showModalDialog("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+        //var temp = window.showModalDialog("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+        var temp = window.open("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+    function SetReturnValueInOpenner_ProductsClass(temp) {
         if (temp != undefined) {
             var ss;
             ss = temp.split(",");
             document.all('Tbx_ProductsTypeNo').value = ss[0];
             document.all('Tbx_ProductsTypeName').value = ss[1];
-            GetProductsPattern();
         }
         else {
             document.all('Tbx_ProductsTypeNo').value = "";
@@ -39,7 +40,10 @@
         var today, seconds;
         today = new Date();
         intSeconds = today.getSeconds();
-        var tempd = window.showModalDialog("SelectSuppliers.aspx?sID=" + intSeconds + "", window);
+        //var tempd = window.showModalDialog("SelectSuppliers.aspx?sID=" + intSeconds + "", window);
+        var tempd = window.open("SelectSuppliers.aspx?sID=" + intSeconds + "", "选择收款人", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+    function SetReturnValueInOpenner_Suppliers(tempd) {
         if (tempd != undefined) {
             var ss;
             ss = tempd.split("|");
@@ -215,8 +219,8 @@
                                                                         MaxLength="48" Width="200px"></asp:TextBox>
                                                                     <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                                                     <img src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
-                                                                    (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator8"
-                                                                        runat="server" ErrorMessage="产品分类非空" ControlToValidate="Tbx_ProductsTypeNo" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                   <!-- (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator8"
+                                                                        runat="server" ErrorMessage="产品分类非空" ControlToValidate="Tbx_ProductsTypeNo" Display="Dynamic"></asp:RequiredFieldValidator>-->
                                                     </td>
                                                 </tr>
 
@@ -410,6 +414,54 @@
                                                     </tr>
                                                     <%=s_MyTable_Detail %>
                                                 </table>
+                                            </td>
+                                        </tr>
+                                    </asp:Panel>
+
+                                    
+                                    <asp:Panel runat="server" ID="Pan_OrderDetails">
+
+                                        <tr>
+                                            <td class="dvtCellInfo" colspan="4">
+                                                
+                                                                        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0"
+                                                                            class="ListDetails">
+
+                                                                            <tr valign="top">
+                                                                                
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>序号</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>BOM序号</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>产品名称</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>料号</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>版本号</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>包装数</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>包数</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>数量</b></td>
+                                                                                <td class="ListHead" colspan="2" nowrap>
+                                                                                    <b>单价</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>金额</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>未入库数量</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>备注</b></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="ListHead" nowrap>
+                                                                                    <b>材料</b></td>
+                                                                                <td class="ListHead" nowrap>
+                                                                                    <b>加工费</b></td>
+                                                                            </tr>
+                                                                            <%=s_MyTable_Detail1 %>
+                                                                        </table>
                                             </td>
                                         </tr>
                                     </asp:Panel>

@@ -68,7 +68,7 @@
                                                             <div onclick="location.href='Xs_Sales_BasisSetting_Class.aspx?id=2'" style="cursor: pointer">
                                                                 <h5>1.采购类型</h5>
                                                                 <p class="gray">
-                                                                    对您公司客户的采购类型进行设置，如遥控器采购、塑壳、其他等。
+                                                                    对您公司客户的采购类型进行设置，如成品采购、塑壳、其他等。
                                                                 </p>
                                                             </div>
                                                         </td>

@@ -31,7 +31,14 @@ namespace KNet.Model
         private string _KPP_Address;
         private int _KPP_Number;
         private int _KPP_State;
+        private int _KPP_Del;
 
+        private string _KPP_Code;
+        private string _KPP_ShPerson;
+        private DateTime _KPP_ShTime;
+        private string _KPP_Creator;
+        private string _KPP_AllRemarks;
+        private string _KPP_Brand;
 
         /// <summary>
         /// 建议销售价格
@@ -168,12 +175,54 @@ namespace KNet.Model
             set { _KPP_Number = value; }
             get { return _KPP_Number; }
         }
+        public int KPP_Del
+        {
+            set { _KPP_Del = value; }
+            get { return _KPP_Del; }
+        }
 
         public int KPP_State
         {
             set { _KPP_State = value; }
             get { return _KPP_State; }
         }
+
+        public string KPP_Code
+        {
+            set { _KPP_Code = value; }
+            get { return _KPP_Code; }
+        }
+
+        public DateTime KPP_ShTime
+        {
+            set { _KPP_ShTime = value; }
+            get { return _KPP_ShTime; }
+        }
+
+        public string KPP_ShPerson
+        {
+            set { _KPP_ShPerson = value; }
+            get { return _KPP_ShPerson; }
+        }
+
+        public string KPP_Creator
+        {
+            set { _KPP_Creator = value; }
+            get { return _KPP_Creator; }
+        }
+
+        public string KPP_AllRemarks
+        {
+            set { _KPP_AllRemarks = value; }
+            get { return _KPP_AllRemarks; }
+        }
+
+        public string KPP_Brand
+        {
+            set { _KPP_Brand = value; }
+            get { return _KPP_Brand; }
+        }
+        
         #endregion Model
 
     }

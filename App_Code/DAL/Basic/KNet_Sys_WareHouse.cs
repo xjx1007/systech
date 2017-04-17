@@ -217,7 +217,7 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 * from KNet_Sys_WareHouse ");
-            strSql.Append(" where SuppNo=@SuppNo order by KSW_Type,HouseName ");
+            strSql.Append(" where SuppNo=@SuppNo and KSW_Type=0 order by KSW_Type,HouseName ");
             SqlParameter[] parameters = {
 					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
             parameters[0].Value = SuppNo;

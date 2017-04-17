@@ -44,7 +44,16 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
 
             string s_IsChange = Request.QueryString["IsChange"] == null ? "" : Request.QueryString["IsChange"].ToString();
 
-
+            base.Base_DropWareHouseBind(this.Ddl_HouseNo, "  KSW_Type=0 ");
+            if (AM.KNet_StaffDepart == "131161769392290242")//如果是生产部
+            {
+                this.OrderType.SelectedValue = "128860698200781250";
+                this.OrderType.Enabled = false;
+                this.Tbx_SuppNo.Value = "131187205665612658";
+                this.Tbx_SuppName.Text = "杭州士腾科技有限公司";
+                this.Ddl_HouseNo.SelectedValue = "131187187069993664";
+                this.OrderAddress.Text = base.Base_GetSuppNoAddress(this.Tbx_SuppNo.Value).Replace("$", "\n");
+            }
             this.Tbx_Change.Text = s_IsChange;
             this.Tbx_Type.Text = s_Type;
             if (s_ID != "")
@@ -58,6 +67,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 else
                 {
                     this.Lbl_Title.Text = "修改采购订单";
+                    this.Img_SelectSuppNo.Visible = false;
                     this.Tbx_ID.Text = s_ID;
                 }
                 this.Btn_Save.Text = "保存";
@@ -76,7 +86,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                     }
                     this.SalesOrderNoSelectValue.Value = s_ContractNo;
                     this.SalesOrderNo.Text = s_ContractNo;
-                    this.OrderAddress.Text = GetCustomerAddress(s_ContractNo);
+                    //this.OrderAddress.Text = GetCustomerAddress(s_ContractNo);
                     KNet.BLL.KNet_Sales_ContractList Bll_Contract = new KNet.BLL.KNet_Sales_ContractList();
                     KNet.Model.KNet_Sales_ContractList Model_Contract = Bll_Contract.GetModelB(s_ContractNo);
                     OrderRemarks.Text = Model_Contract.ContractRemarks;
@@ -150,6 +160,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
             this.OrderRemarks.Text = Model.OrderRemarks;
             this.OrderFaterNo.Text = Model.ParentOrderNo;
             this.Tbx_ScDetails.Text = Model.KPO_ScDetails;
+            this.Ddl_HouseNo.SelectedValue = Model.KPO_PreHouseNo;
             if (Model.KPO_PriceState == 1)
             {
                 this.Chk_PriceState.Checked = true;
@@ -177,6 +188,48 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
             {
                 for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
                 {
+                    string s_ProductsCPBZNumber= Dts_Table.Tables[0].Rows[i]["KSP_BZNumber"].ToString();
+                    string s_OrderAmount = Dts_Table.Tables[0].Rows[i]["OrderAmount"].ToString();
+                    string s_CPBZNumber = Dts_Table.Tables[0].Rows[i]["KPOD_CPBZNumber"].ToString();
+                    string s_BZNumber = Dts_Table.Tables[0].Rows[i]["KPOD_BZNumber"].ToString();
+                    string s_OrderPrice = Dts_Table.Tables[0].Rows[i]["OrderUnitPrice"].ToString();
+                    string s_OrderTotalNet = Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString();
+
+                   string s_HandPrice =  FormatNumber(Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString(), 3) ;
+                   string s_HandTotal = FormatNumber(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString(), 3);
+                    string s_OrderCPBZNumber = "0", s_OrderBZNumber = "0";
+                    try
+                    {
+                        if (s_CPBZNumber == "0")
+                        {
+                            if (s_ProductsCPBZNumber != "0")
+                            {
+
+                                s_OrderCPBZNumber = s_ProductsCPBZNumber;
+                                int i_NumOder= int.Parse(s_OrderAmount) / int.Parse(s_OrderCPBZNumber);
+                                if (int.Parse(s_OrderAmount) > (int.Parse(s_OrderCPBZNumber) * i_NumOder))
+                                {
+                                    s_OrderBZNumber = Convert.ToString(int.Parse(s_OrderAmount) / int.Parse(s_OrderCPBZNumber) + 1);
+                                }
+                                else
+                                {
+                                    s_OrderBZNumber = Convert.ToString(int.Parse(s_OrderAmount) / int.Parse(s_OrderCPBZNumber));
+                                }
+
+                                s_OrderAmount = Convert.ToString(int.Parse(s_OrderBZNumber) * int.Parse(s_OrderCPBZNumber));
+                                s_OrderTotalNet = FormatNumber1(Convert.ToString(decimal.Parse(s_OrderAmount) * decimal.Parse(s_OrderPrice)),2);
+                            }
+                        }
+                        else
+                        {
+                            s_OrderCPBZNumber = s_CPBZNumber;
+                            s_OrderBZNumber = s_BZNumber;
+
+                        }
+                    }
+                    catch
+                    { }
+
                     this.Xs_ProductsCode.Text += Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ",";
                     decimal d_Amount = Decimal.Parse(Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString()) + Decimal.Parse(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString());
                     d_All_OrderTotal += Decimal.Parse(Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString());
@@ -193,12 +246,18 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode_" + i.ToString() + "\" value='" + Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "'>" + Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsPattern_" + i.ToString() + "\" value='" + base.Base_GetProductsPattern(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "'>" + base.Base_GetProductsPattern(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsEdition_" + i.ToString() + "\" value='" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "'>" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"   Name=\"Number_" + i.ToString() + "\" value='" + Dts_Table.Tables[0].Rows[i]["OrderAmount"].ToString() + "'></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"   Name=\"Price_" + i.ToString() + "\" value='" + Dts_Table.Tables[0].Rows[i]["OrderUnitPrice"].ToString() + "'></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  Name=\"Money_" + i.ToString() + "\" value='" + Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString() + "'></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"HandPrice_" + i.ToString() + "\" value='" + FormatNumber(Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString(), 3) + "'></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  Name=\"HandMoney_" + i.ToString() + "\" value='" + FormatNumber(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString(), 3) + "'></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\"  Name=\"Remarks_" + i.ToString() + "\"  value=''></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"BrandName_" + i.ToString() + "\" value='" + Dts_Table.Tables[0].Rows[i]["KPOD_BrandName"].ToString() + "'>" + Dts_Table.Tables[0].Rows[i]["KPOD_BrandName"].ToString() + "</td>";
+
+                    
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"   Name=\"CPBZNumber_" + i.ToString() + "\" value='" + s_OrderCPBZNumber + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"   Name=\"BZNumber_" + i.ToString() + "\" value='" + s_OrderBZNumber + "'></td>";
+
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"   Name=\"Number_" + i.ToString() + "\" value='" + s_OrderAmount + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"    Name=\"Price_" + i.ToString() + "\" value='" + s_OrderPrice + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"Money_" + i.ToString() + "\" value='" + s_OrderTotalNet + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"HandPrice_" + i.ToString() + "\" value='" +s_HandPrice + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"HandMoney_" + i.ToString() + "\" value='" +s_HandTotal+ "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"Remarks_" + i.ToString() + "\"  value=''></td>";
                     s_MyTable_Detail += "</tr>";
                 }
                 this.Tbx_Num.Text = Dts_Table.Tables[0].Rows.Count.ToString();
@@ -385,7 +444,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
     {
         AdminloginMess AM = new AdminloginMess();
         string OrderTopic1 = KNetPage.KHtmlEncode("");
-        string OrderNo1 = KNetPage.KHtmlEncode(this.OrderNo.Text.Trim());
+         string OrderNo1 = KNetPage.KHtmlEncode(this.OrderNo.Text.Trim());
 
         DateTime OrderDateTime1 = DateTime.Now;
         try
@@ -464,6 +523,8 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
         model.KPO_MTime = DateTime.Now;
         model.ArrivalDate = OrderPreToDate1;
         model.KPO_ScDetails = this.Tbx_ScDetails.Text;
+
+        model.KPO_PreHouseNo = this.Ddl_HouseNo.SelectedValue;
         if (this.Chk_PriceState.Checked)
         {
             model.KPO_PriceState = 1;
@@ -488,6 +549,9 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 string s_HandPrice = Request.Form["HandPrice_" + i];
                 string s_HandMoney = Request.Form["HandMoney_" + i];
                 string s_Remarks = Request.Form["Remarks_" + i];
+                string s_CPBZNumber = Request.Form["CPBZNumber_" + i];
+                string s_BZNumber = Request.Form["BZNumber_" + i];
+                string s_BrandName = Request.Form["BrandName_" + i];
                 string s_DID = Request.Form["ID_" + i] == null ? GetMainID(i) : Request.Form["ID_" + i];
                 KNet.Model.Knet_Procure_OrdersList_Details Model_Details = new KNet.Model.Knet_Procure_OrdersList_Details();
                 Model_Details.ProductsBarCode = s_ProductsBarCode;
@@ -495,6 +559,10 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 Model_Details.ProductsPattern = s_ProductsPattern;
                 Model_Details.OrderAmount = int.Parse(s_Number);
                 Model_Details.OrderUnitPrice = decimal.Parse(s_Price);
+                Model_Details.KPOD_CPBZNumber = int.Parse(s_CPBZNumber);
+                Model_Details.KPOD_BZNumber = int.Parse(s_BZNumber);
+
+                Model_Details.KPOD_BrandName = s_BrandName;
                 Model_Details.ID = s_DID;
                 try
                 {
@@ -558,10 +626,10 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
             if (s_ID == "")//新增
             {
 
-                //如果是自己下单 不是遥控器采购必须选收货供应商。
+                //如果是自己下单 不是成品采购必须选收货供应商。
                 if ((model.OrderType != "128860698200781250") && (model.ReceiveSuppNo == ""))
                 {
-                    Alert("不是遥控器采购请选择收货供应商！");
+                    Alert("不是成品采购请选择收货供应商！");
                 }
                 else
                 {
@@ -669,7 +737,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                                 model_Mail.PBM_Type = 1;
                                 model_Mail.PBM_SendType = 1;
                                 model_Mail.PBM_Minute = 10 * 60;//10分钟后
-                               
+
                                 Bll_Mail.Add(model_Mail);
                             }
                         }
@@ -682,8 +750,16 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                         //发给研发中心经理
                         // base.Base_SendMessage(Base_GetDeptPerson("研发中心", 1), KNetPage.KHtmlEncode("有 采购订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + OrderNo1 + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNo1 + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
                         //base.Base_SendMessage(Base_GetDeptPerson("供应链平台", 1), KNetPage.KHtmlEncode("有 采购订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + OrderNo1 + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNo1 + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
+                        if ((AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffName == "项洲"))//如果是生产部
+                        {
+                            AlertAndRedirect("采购开单 添加  操作成功", "Knet_Procure_OpenBilling_Manage_ForSc.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
 
-                        AlertAndRedirect("采购开单 添加  操作成功", "Knet_Procure_OpenBilling_Manage.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
+                        }
+                        else
+                        {
+                            AlertAndRedirect("采购开单 添加  操作成功", "Knet_Procure_OpenBilling_Manage.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
+
+                        }
                     }
                     else
                     {
@@ -700,7 +776,17 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 base.HtmlToPdf1(JSD, Server.MapPath("PDF"), OrderNo1);
                 AdminloginMess LogAM = new AdminloginMess();
                 LogAM.Add_Logs("采购入库--->采购开单--->开单 修改 操作成功！采购单号：" + OrderNo1);
-                AlertAndRedirect("采购开单 修改  操作成功", "Knet_Procure_OpenBilling_Manage.aspx");
+
+                if ((AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffName == "项洲"))//如果是生产部
+                {
+                    AlertAndRedirect("采购开单 修改  操作成功", "Knet_Procure_OpenBilling_Manage_ForSc.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
+
+                }
+                else
+                {
+                    AlertAndRedirect("采购开单 修改  操作成功", "Knet_Procure_OpenBilling_Manage.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
+
+                }
             }
 
         }

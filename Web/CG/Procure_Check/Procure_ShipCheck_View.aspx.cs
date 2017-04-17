@@ -29,7 +29,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             KNet.BLL.Cg_Order_Checklist Bll = new KNet.BLL.Cg_Order_Checklist();
             KNet.Model.Cg_Order_Checklist Model = Bll.GetModel(s_ID);
-            if (Model.COC_Type == "0")//遥控器采购
+            if (Model.COC_Type == "0")//成品采购
             {
                 string s_Sql = "Select b.COD_ProductsBarCode,isnull(e.CustomerValue,d.KWD_Custmoer),d.DirectOutDateTime,isnull(e.KSO_PlanOutWareDateTime,d.DirectOutDateTime),b.COD_Dznumber,b.COD_wuliu,b.COd_Price,b.COD_HandPrice, ";
                 s_Sql += "b.COD_Money,b.COD_IC,B.COD_ICNumber,a.COC_Stime,a.COC_HouseNo,b.COD_BNumber,COD_DirectOutID  from Cg_Order_Checklist a join Cg_Order_Checklist_Details b on a.COC_Code=b.COD_CheckNo join KNet_WareHouse_DirectOutList_Details c on c.ID=b.COD_DirectOutID join KNet_WareHouse_DirectOutList d on d.DirectOutNo=c.DirectOutNo left join KNet_Sales_OutWareList e on e.OutWareNo=d.KWD_ShipNo  Where 1=1 and a.COC_Code='" + s_ID + "' Order by d.DirectOutDateTime";
@@ -492,7 +492,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
         int i_FPNum = 1;
 
 
-        if (Model.COC_Type == "0")//遥控器对账
+        if (Model.COC_Type == "0")//成品对账
         {
             s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"11\"><b>加工费发票1</b></td>\n</tr>";
             s_Return += " <tr ><td class=\"ListHeadDetials\" align=left colspan=\"11\"><b><font color=red>发票号码：</font></b>___________________</td></tr>";
@@ -530,7 +530,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 decimal d_HandPrice = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_HandPrice"].ToString());
                 decimal d_Number = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString());
                 decimal d_BNumber = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString());
-                if (Model.COC_Type == "0")//遥控器对账
+                if (Model.COC_Type == "0")//成品对账
                 {
                     KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll_DirectOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
                     KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DirectOutDetails = Bll_DirectOutDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());
@@ -620,9 +620,9 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                         s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
                         s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
 
-                        if (Model.COC_Type == "0")//遥控器对账
+                        if (Model.COC_Type == "0")//成品对账
                         {
-                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 遥控器加工费</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
                         }
                         else
                         {
@@ -652,7 +652,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                         if ((i_Row % i_MaxRow == 0) || (ddd_Total1 % d_MaxMoney == 0))
                         {
                             i_FPNum = i_FPNum + 1;
-                            if (Model.COC_Type == "0")//遥控器对账
+                            if (Model.COC_Type == "0")//成品对账
                             {
 
                                 s_Return += " <tr >\n";
@@ -716,9 +716,9 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                     s_Return += "<tr >";
                     s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
                     s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
-                    if (Model.COC_Type == "0")//遥控器对账
+                    if (Model.COC_Type == "0")//成品对账
                     {
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 遥控器加工费</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
                     }
                     else
                     {

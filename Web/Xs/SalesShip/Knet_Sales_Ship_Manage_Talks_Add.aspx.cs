@@ -337,10 +337,10 @@ public partial class Knet_Sales_Ship_Manage_Talks_Add : BasePage
                    KNet.Model.KNet_WareHouse_DirectOutList model = Bll_DirectOut.GetModelB(s_DirectOutNo);
                    DateTime D_OutTime = DateTime.Parse(model.DirectOutDateTime.ToString());
                    s_message += "尊敬的" + this.Tbx_CustomerName.Text + "-" + this.Tbx_ReceiveName.Text + ",";
-                   s_message += "贵司订购的型号为" + base.Base_GetProductsPattern(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "的遥控器";
+                   s_message += "贵司订购的型号为" + base.Base_GetProductsPattern(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "的成品";
                    s_message += "已于" + D_OutTime.Year.ToString() + "年" + D_OutTime.Month.ToString() + "月" + D_OutTime.Day.ToString() + "日通过" + GetDirectOutListfollowup(s_DirectOutNo, "0") + "发送,单号为" + GetDirectOutListfollowup(s_DirectOutNo, "1") + ",请注意查收"+"|";
                    s_message1 += "尊敬的CustomerName-ReceiveName,";
-                   s_message1 += "贵司订购的型号为" + base.Base_GetProductsPattern(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "的遥控器";
+                   s_message1 += "贵司订购的型号为" + base.Base_GetProductsPattern(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "的成品";
                    s_message1 += "已于" + D_OutTime.Year.ToString() + "年" + D_OutTime.Month.ToString() + "月" + D_OutTime.Day.ToString() + "日通过" + GetDirectOutListfollowup(s_DirectOutNo, "0") + "发送,单号为" + GetDirectOutListfollowup(s_DirectOutNo, "1") + ",请注意查收"+"|";
                   
                    s_DirectNo += s_DirectOutNo + "|";

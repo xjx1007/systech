@@ -2075,11 +2075,11 @@ function fnDropDown1(obj,Lay){
     var getVal = eval(leftSide) + eval(widthM);
     if(getVal  > document.body.clientWidth ){
         leftSide = eval(leftSide) - eval(widthM);
-        tagName.style.left = leftSide + 34 + 'px';
+        tagName.style.left = leftSide + 33 + 'px';
     }
     else
         tagName.style.left= leftSide + 'px';
-    tagName.style.top= topSide + 22 +'px';
+    tagName.style.top= topSide + 21 +'px';
     tagName.style.display = 'block';
  }
 

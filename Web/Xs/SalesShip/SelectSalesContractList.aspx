@@ -18,6 +18,7 @@
             var response = Knet_Common_SelectSalesContractList.GetContractInfo(ContractNo);
             if (window.opener != undefined) {
                 window.opener.returnValue = ContractNo + "|" + response.value;
+                window.opener.SetReturnValueInOpenner_SalesContract(ContractNo + "|" + response.value);
             }
             else {
                 window.returnValue = ContractNo + "|" + response.value;

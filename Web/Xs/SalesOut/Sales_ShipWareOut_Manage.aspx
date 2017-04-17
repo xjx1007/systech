@@ -413,14 +413,6 @@
                                                         <%# CheckView(DataBinder.Eval(Container.DataItem, "KWD_ShipNo").ToString(), DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="电池" SortExpression="DirectOutCheckYN" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                                    <ItemTemplate>
-                                                        <a href="#" onclick="GPrint('<%# DataBinder.Eval(Container.DataItem, "DirectOutNo")%>')">
-                                                            <asp:Image ID="Image4" runat="server" ImageUrl="/images/Print1.gif" border="0" ToolTip="查看发货详细信息" /></a>(<%# DataBinder.Eval(Container.DataItem, "KWD_PintBatteryNums")%>)
-               <%# GetPrint(DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
 
                                                 <asp:TemplateField HeaderText="其他" SortExpression="DirectOutCheckYN" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">

@@ -51,7 +51,17 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price : BasePage
             this.TreeView1.Nodes[0].Select();
             this.DataShows();
             this.RowOverYN();
-           
+            //供应链平台经理 项洲 总经理
+            if (((AM.KNet_StaffDepart == "129652784259578018") && (AM.KNet_Position == "102")) || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffDepart == "129652783693249229")||(AM.YNAuthority("采购价格审批")==true))
+            {
+                Btn_Sp.Visible = true;
+                Btn_Sp1.Visible = true;
+            }
+            else
+            {
+                Btn_Sp.Visible = false;
+                Btn_Sp1.Visible = false;
+            }
            
         }
 
@@ -216,11 +226,44 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price : BasePage
                     KNet.Model.Knet_Procure_SuppliersPrice Model = new KNet.Model.Knet_Procure_SuppliersPrice();
                     Model.ID = s_ID;
                     Model.KPP_State = 1;
+                    Model.KPP_ShPerson = AM.KNet_StaffNo;
+                    Model.KPP_ShTime = DateTime.Now;
                     Bll.UpdateState(Model);
                     s_Logs = s_ID + ",";
                 }
                 AM.Add_Logs("批量审批价格：" + s_Logs + "");
-                AlertAndRedirect("审批成功！", "Knet_Procure_Suppliers_Price.aspx");
+                AlertAndRedirect("审批成功！", "Knet_Procure_Suppliers_Price.aspx?WhereID=M160707014101612");
+            }
+        }
+        catch { }
+    }
+
+
+    protected void Btn_SpSave1(object sender, EventArgs e)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        //批量审批
+        KNet.BLL.Knet_Procure_SuppliersPrice Bll = new KNet.BLL.Knet_Procure_SuppliersPrice();
+        try
+        {
+            string s_Logs = "";
+            for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
+
+                CheckBox Ckb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (Ckb.Checked)
+                {
+                    string s_ID = GridView1.DataKeys[i].Value.ToString();
+                    KNet.Model.Knet_Procure_SuppliersPrice Model = new KNet.Model.Knet_Procure_SuppliersPrice();
+                    Model.ID = s_ID;
+                    Model.KPP_State = 2;
+                    Model.KPP_ShPerson = AM.KNet_StaffNo;
+                    Model.KPP_ShTime = DateTime.Now;
+                    Bll.UpdateState(Model);
+                    s_Logs = s_ID + ",";
+                }
+                AM.Add_Logs("批量审批价格：" + s_Logs + "");
+                AlertAndRedirect("审批成功！", "Knet_Procure_Suppliers_Price.aspx?WhereID=M160707014101612");
             }
         }
         catch { }
@@ -293,6 +336,10 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price : BasePage
         if(s_Return=="未审核")
         {
             s_Return="<font color=red>未审核</font>";
+        }
+        else if (s_Return == "不通过")
+        {
+            s_Return = "<font color=bule>不通过</font>";
         }
         else
         {

@@ -1,0 +1,28 @@
+﻿select * from Xs_Products_Prodocts_Demo
+alter table Xs_Products_Prodocts_Demo add XPD_Del int default 0
+update Xs_Products_Prodocts_Demo  set XPD_Del=0
+alter table Xs_Products_Prodocts_Demo add XPD_IsReplace int default 0
+update Xs_Products_Prodocts_Demo  set XPD_IsReplace=0
+alter table Xs_Products_Prodocts_Demo add XPD_IsModiy int default 0
+update Xs_Products_Prodocts_Demo  set XPD_IsModiy=0
+alter table Xs_Products_Prodocts_Demo add XPD_Del int default 0
+update Xs_Products_Prodocts_Demo  set XPD_Del=0
+
+
+insert into KNet_Sys_Products
+select dbo.GetID(),FileProJect,dbo.GetDID(),FileProJect,aa.ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProductsSellingPrice,ProductsCostPrice,
+ProductsStockAlert,ProductsPic,ProductsBigPicture,ProductsSmallPicture,ProductsDescription,ProductsDescription,
+ProductsAddTime,ProductsAddMan,ProductsType,HandPrice,ProductsEdition,KSP_SampleId,0,KSP_Mould,KSP_Creator,KSP_Mender,KSP_CTime,KSP_MTime,KSP_COde,KSP_isModiy,'',0,0,0,0,0,'',0,0,'','','','329785817148286979','',0,0,'',''
+ from
+(select *,1 aname from KNet_Sys_Products where ID='BFE874FD-0387-4912-8A29-5C95CD3E4C38') aa
+join 
+(
+select distinct FileProJect,1 aname from FileInit where FileProJect not in  (
+select ProductsPattern from KNet_Sys_Products 
+where KSP_COde like '03%'
+)) bb on aa.aname=bb.aname	
+
+ insert into Xs_Products_Prodocts_Demo
+select dbo.GetID(),ProductsBarCode,'123',0,1,faterCode,0,'','',0,1,0,0,'',0,0,0 from (
+select distinct FileProductsPattern,FileProJect,b.ProductsBarCode ,c.ProductsBarCode faterCode from FileInit a join KNet_Sys_Products b on a.FileProductsPattern=b.ProductsPattern
+join KNet_Sys_Products c on a.FileProJect=c.ProductsPattern) aa

@@ -21,8 +21,8 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
     {
         if(!IsPostBack)
         {
-            string s_Sql = "Select *";
-            s_Sql += "  from Knet_Sys_Products Where 1=1  ";
+            string s_Sql = "Select ProductsName,KSP_Code,ProductsPattern,ProductsEdition,PBP_Name,UnitsName,KSP_BZNumber,ProductsAddTime,ProductsAddMan,ProductsDescription ";
+            s_Sql += "  from Knet_Sys_Products a join PB_Basic_ProductsClass b on a.ProductsType=b.PBP_ID join KNet_Sys_Units c on c.UnitsNo=a.ProductsUnits Where 1=1  ";
             string s_ProductsName = Request.QueryString["ProductsName"] == null ? "" : Request.QueryString["ProductsName"].ToString();
             string s_ProductsPattern = Request.QueryString["ProductsPattern"] == null ? "" : Request.QueryString["ProductsPattern"].ToString();
             string s_ProductsEdition = Request.QueryString["ProductsEdition"] == null ? "" : Request.QueryString["ProductsEdition"].ToString();
@@ -66,19 +66,19 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
                         s_Style="class='rr'";
                     }
                     s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
-                    s_Details += "<td align=left noWrap>" + (i+1).ToString()+ "</td>\n";
-                    s_Details += "<td align=left noWrap>" + Dtb_Table.Rows[i]["ProductsName"].ToString() + "</td>\n";
-                    s_Details += "<td align=left noWrap>" + Dtb_Table.Rows[i]["ProductsPattern"].ToString() + "</td>\n";
-                    s_Details += "<td align=left noWrap>" + Dtb_Table.Rows[i]["ProductsEdition"].ToString() + "</td>\n";
-                    s_Details += "<td align=left noWrap>" + base.Base_GetBigCateNane(Dtb_Table.Rows[i]["ProductsMainCategory"].ToString()) + "</td>\n";
-                    s_Details += "<td align=left noWrap>" + base.Base_GetBasicCodeName(Dtb_Table.Rows[i]["ProductsType"].ToString(),"101") + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + (i + 1).ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["ProductsName"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["ProductsPattern"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["ProductsEdition"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["PBP_Name"].ToString() + "</td>\n";
+                    
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["UnitsName"].ToString()  + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["KSP_BZNumber"].ToString() + "</td>\n";
 
-                    s_Details += "<td align=left noWrap>" + base.Base_GetUnitsName(Dtb_Table.Rows[i]["ProductsUnits"].ToString()) + "</td>\n";
-                    s_Details += "<td align=left noWrap>" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "</td>\n";
-
-                    s_Details += "<td align=left noWrap>" + base.Base_GetUserName(Dtb_Table.Rows[i]["ProductsAddMan"].ToString()) + "</td>\n";
-                    s_Details += "<td align=left noWrap>" + DateTime.Parse(Dtb_Table.Rows[i]["ProductsAddTime"].ToString()).ToShortDateString() + "</td>\n";
-                    s_Details += "<td align=left >" + Dtb_Table.Rows[i]["ProductsDescription"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + base.Base_GetUserName(Dtb_Table.Rows[i]["ProductsAddMan"].ToString()) + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + DateTime.Parse(Dtb_Table.Rows[i]["ProductsAddTime"].ToString()).ToShortDateString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails'  >&nbsp;" + Dtb_Table.Rows[i]["ProductsDescription"].ToString() + "</td>\n";
                     
 
 
@@ -106,12 +106,12 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
             
             s_Head += "<tr>\n<th class=\"thstyle\">序号</th>\n";
             s_Head += "<th class=\"thstyle\">产品名称</th>\n";
+            s_Head += "<th class=\"thstyle\">料号</th>\n";
             s_Head += "<th class=\"thstyle\">型号</th>\n";
             s_Head += "<th class=\"thstyle\">版本号</th>\n";
-            s_Head += "<th class=\"thstyle\">大类</th>\n";
             s_Head += "<th class=\"thstyle\">产品分类</th>\n";
             s_Head += "<th class=\"thstyle\">单位</th>\n";
-            s_Head += "<th class=\"thstyle\">产品编码</th>\n";
+            s_Head += "<th class=\"thstyle\">最小包装</th>\n";
             s_Head += "<th class=\"thstyle\">添加人员</th>\n";
             s_Head += "<th class=\"thstyle\">时间</th>\n";
             s_Head += "<th class=\"thstyle\">参数描述</th>\n";

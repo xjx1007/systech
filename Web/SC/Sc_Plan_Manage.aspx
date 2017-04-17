@@ -323,7 +323,12 @@
                                             <itemstyle horizontalalign="Left" font-size="12px" />
                                             <headerstyle horizontalalign="Left" font-size="12px" />
                                         </asp:BoundField>
-                                        
+                                        <asp:TemplateField HeaderText="发送" SortExpression="SPP_IsSend" HeaderStyle-Font-Size="12px"
+                                            ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetPrint(DataBinder.Eval(Container.DataItem, "SPP_ID").ToString(), int.Parse(DataBinder.Eval(Container.DataItem, "SPP_IsSend").ToString()))%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="发送" SortExpression="SPP_IsSend" HeaderStyle-Font-Size="12px"
                                             ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>

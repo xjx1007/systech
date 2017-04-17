@@ -1,0 +1,61 @@
+﻿insert into  KNet_Sys_Products
+select  dbo.GetID(),物料分类,dbo.GetDID(),产品型号,'','','129658085672660283',0,0,0,0,'../images/Nopic.jpg','../images/Nopic.jpg','[品牌/厂家]:'+[品牌/厂家],'',GETDATE(),'129652784259578018'
+,PBP_ID,0,产品版本号+'('+封装+')','',0,'','129652784259578018','129652784259578018',GETDATE(),GETDATE(),
+
+PBP_Code+''+substring(cast(10000+ROW_NUMBER() OVER(PARTITION BY 物料分类 ORDER BY 物料分类) as varchar(5)),2,5),0,'',0,0,0,0,0,0,0,0
+from Wuliao a
+join PB_Basic_ProductsClass b on a.物料分类=b.PBP_Name
+
+
+insert into  KNet_Sys_Products
+select  dbo.GetID(),f2,dbo.GetDID(),f6,'','','129658085672660283',0,0,0,0,'../images/Nopic.jpg','../images/Nopic.jpg','','',GETDATE(),'129652784259578018'
+,PBP_ID,0,f5,'',0,'','129652784259578018','129652784259578018',GETDATE(),GETDATE(),
+
+PBP_Code+''+substring(cast(10000+ROW_NUMBER() OVER(PARTITION BY f4 ORDER BY f4) as varchar(5)),2,5),0,'',0,0,0,0,0,0,0,0
+from Wuliao2 a
+join PB_Basic_ProductsClass b on a.f4=b.PBP_Name
+
+---成品导入
+
+insert into  KNet_Sys_Products
+select  dbo.GetID(),成品名,dbo.GetDID(),成品编号,'','','129658085672660283',0,0,0,0,'../images/Nopic.jpg','../images/Nopic.jpg','','',GETDATE(),'129652784259578018'
+,PBP_ID,0,成品名+'('+成品编号+')','',0,'','129652784259578018','129652784259578018',GETDATE(),GETDATE(),
+
+PBP_Code+''+substring(cast(10000+ROW_NUMBER() OVER(PARTITION BY 类别 ORDER BY 类别) as varchar(5)),2,5),0,'',0,0,0,0,0,0,0,0,客户物料名称,客户物料代码,客户规格型号
+from  成品$ a
+join PB_Basic_ProductsClass b on a.类别=b.PBP_Name
+
+--半成品导入
+
+
+insert into  KNet_Sys_Products
+select  dbo.GetID(),版本号,dbo.GetDID(),半成品编号,'','','129658085672660283',0,0,0,0,'../images/Nopic.jpg','../images/Nopic.jpg','','',GETDATE(),'129652784259578018'
+,PBP_ID,0,版本号+'('+半成品编号+')','',0,'','129652784259578018','129652784259578018',GETDATE(),GETDATE(),
+
+PBP_Code+''+substring(cast(10000+ROW_NUMBER() OVER(PARTITION BY 类别 ORDER BY 类别) as varchar(5)),2,5),0,'',0,0,0,0,0,0,0,0,客户物料名称,客户物料代码,客户规格型号
+from  半成品$ a
+join PB_Basic_ProductsClass b on a.类别=b.PBP_Name
+e
+
+
+
+UPDATE BOM
+set FaterBarCode=b.ProductsBarCode
+from BOM a,KNet_Sys_Products b
+where  a.半成品编号=b.ProductsPattern
+
+导入BOM
+insert  Xs_Products_Prodocts_Demo 
+select dbo.GetID(),BarCode,'xz',0,数量,FaterBarCode,0,0,'',0,1,0,0,''
+from Bom
+where BarCode<>''
+
+
+insert into KNet_Sys_Products
+select dbo.GetID(),料号,dbo.GetDID(),描述,'','','129658085672660283','0','0','0','0','../images/Nopic.jpg','../images/Nopic.jpg',[品牌/厂家]
+,'',GETDATE(),'129785817148286979',b.PBP_ID,0,描述+'('+封装+')','',0,'','129785817148286979','129785817148286979',GETDATE(),GETDATE(),PBP_Code+''+substring(cast(10000+ROW_NUMBER() OVER(PARTITION BY 料号 ORDER BY 料号) as varchar(5)),2,5)
+,0,'',0,0,0,0,0,0,0,0,'','','','','',5,结存数
+ from 新版$ a
+ join PB_Basic_ProductsClass b on a.料号=b.PBP_Name
+where 料号 is not null and flag=2 
+order by 料号,描述,结存数

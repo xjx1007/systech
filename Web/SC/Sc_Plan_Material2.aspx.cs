@@ -58,6 +58,10 @@ public partial class Sc_Plan_Material2 : BasePage
             {
                 this.Lbl_Details.Text = this.DataShowsBySupp(s_SuppNo);
             }
+            if (s_OrderNo != "")
+            {
+                this.Lbl_Details.Text = this.DataShowsBySupp1(s_OrderNo);
+            }
         }
     }
 
@@ -72,7 +76,7 @@ public partial class Sc_Plan_Material2 : BasePage
         string s_Text = Request["Srch_value"] == null ? "" : Request["Srch_value"].ToString();
         string s_FromOrderNo = Request["OrderNo"] == null ? "" : Request["OrderNo"].ToString();
         string s_Type = "";
-        
+
         StringBuilder Sb_DivStylea = new StringBuilder();
         if (s_WhereID != "")
         {
@@ -89,7 +93,8 @@ public partial class Sc_Plan_Material2 : BasePage
         {
             SqlWhere = SqlWhere + " and OrderNo='" + s_FromOrderNo + "' ";
         }
-        
+        /*
+        //OEM
         if (s_suppNo != "")
         {
 
@@ -101,6 +106,20 @@ public partial class Sc_Plan_Material2 : BasePage
 
             SqlWhere = SqlWhere + " and SuppNo='" + s_SuppNo1 + "' ";
         }
+         * */
+        //收货供应商
+
+        if (s_suppNo != "")
+        {
+
+            SqlWhere = SqlWhere + " and ReceiveSuppNo='" + s_suppNo + "' ";
+        }
+        string s_SuppNo1 = Request.QueryString["SuppNo"] == null ? "" : Request.QueryString["SuppNo"].ToString();
+        if (s_SuppNo1 != "")
+        {
+
+            SqlWhere = SqlWhere + " and ReceiveSuppNo='" + s_SuppNo1 + "' ";
+        }
         if (this.Tbx_HouseNo.Value != "")
         {
             SqlWhere = SqlWhere + " and SuppNo='" + this.Tbx_HouseNo.Value + "' ";
@@ -109,7 +128,7 @@ public partial class Sc_Plan_Material2 : BasePage
         SqlWhere = SqlWhere + " Order by SuppNo,OrderDateTime ";
 
         //更新产品库存
-       // GetNewStore();
+         //GetNewStore();
         //先查找供应商
 
         DataSet ds = bll.GetList(SqlWhere);
@@ -144,7 +163,12 @@ public partial class Sc_Plan_Material2 : BasePage
                 s_ContractNos = ds.Tables[0].Rows[i]["ContractNos"].ToString();
 
                 string s_Date = "", s_PreDate = "";
+                /*
+                //OEM
                 string s_SuppNo = ds.Tables[0].Rows[i]["SuppNo"].ToString();
+                 * */
+                string s_SuppNo = ds.Tables[0].Rows[i]["ReceiveSuppNo"].ToString();
+
                 try
                 {
                     s_Date = DateTime.Parse(ds.Tables[0].Rows[i]["OrderDateTime"].ToString()).ToShortDateString();
@@ -154,14 +178,14 @@ public partial class Sc_Plan_Material2 : BasePage
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_Date + "</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_PreDate + "</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetSupplierName(ds.Tables[0].Rows[i]["SuppNo"].ToString()) + "</td>\n");
-                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">遥控器</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">成品</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetOrderDetailProductsPatten(s_OrderNo) + "</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + ds.Tables[0].Rows[i]["OrderAmount"].ToString() + "</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + ds.Tables[0].Rows[i]["wrkNumber"].ToString() + "</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
-                    
+
                 KNet.BLL.KNet_Sys_WareHouse Bll = new KNet.BLL.KNet_Sys_WareHouse();
                 KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll.GetModelBySuppNo(s_SuppNo);
                 string s_HouseNo = Model_WareHouse.HouseNo == null ? "" : Model_WareHouse.HouseNo.ToString();
@@ -191,8 +215,8 @@ public partial class Sc_Plan_Material2 : BasePage
                 s_Sql += "(select top 1 ReTime from KNet_Sales_OutWareList_FlowList where ReTime is not null and OutWareNO=v_OrderNo  order by FollowDateTime desc) ReTime from Xs_Products_Prodocts_Demo a ";
                 s_Sql += " join KNet_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
                 s_Sql += " left join v_OrderRkDetails c on c.V_ProductsBarCode=a.XPD_ProductsBarCode and c.v_ParentOrderNo='" + s_OrderNo + "'";
-                s_Sql += " left join KNET_NeedStore d on d.ProductsBarCode=a.XPD_ProductsBarCode and d.HouseNo='" + s_HouseNo + "'  ";
-                s_Sql += " left join( select Sum(NeedNumber) totalNumber,ProductsBarCode from KNET_NeedStore group by ProductsBarCode) aa on aa.ProductsBarCode=a.XPD_ProductsBarCode  ";
+                s_Sql += " left join v_NeedNumberStore d on d.ProductsBarCode=a.XPD_ProductsBarCode and d.HouseNo='" + s_HouseNo + "'  ";
+                s_Sql += " left join( select Sum(NeedNumber) totalNumber,ProductsBarCode from v_NeedNumberStore group by ProductsBarCode) aa on aa.ProductsBarCode=a.XPD_ProductsBarCode  ";
                 s_Sql += "  where b.KSP_Del=0  and a.XPD_IsMail=0  and XPD_FaterBarCode In (select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo='" + s_OrderNo + "')  ";
                 if (this.Tbx_ProductsBarCode.Value != "")
                 {
@@ -243,7 +267,7 @@ public partial class Sc_Plan_Material2 : BasePage
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_PreDate + "</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetSupplierName(Model_OrdersList.SuppNo) + "</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["ProductsName"].ToString() + "</td>\n");
-                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["ProductsEdition"].ToString()+ "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["ProductsEdition"].ToString() + "</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["v_OrderAmount"].ToString() + "</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["wrkNumber"].ToString() + "</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_FollowText + "</td>\n");//快递
@@ -265,7 +289,7 @@ public partial class Sc_Plan_Material2 : BasePage
                             {
 
                                 string s_ProductsBarCode = Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString();
-                                Sb_DivStylea.Append("<td align=\"center\" class=\"ListHeadDetails\" colspan=\"3\"><font color=red>未找到订单</font></td>\n");
+                                Sb_DivStylea.Append("<td align=\"center\" class=\"ListHeadDetails\" colspan=\"3\">&nbsp;</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + base.Base_GetProdutsName(Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"] == null ? "" : Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString()) + "</td>\n");
                                 Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" colspan=\"4\">" + base.Base_GetProductsEdition(Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"] == null ? "" : Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString()) + "</td>\n");
                                 string s_NeedNumber = "-";
@@ -285,56 +309,207 @@ public partial class Sc_Plan_Material2 : BasePage
                     Sb_DivStylea.Append("<tr>\n");
 
 
-                    //查找其他原材料和电池订单和库存
-                    string s_DetailsSql = "Select e.ProductsBarCode,v_LeftDirectOutNumber Number,aa.totalNumber from KNet_Sales_ContractList a join KNet_Sales_ContractList_Details b on a.ContractNo=b.ContractNo ";
-                    s_DetailsSql += " join KNet_Sys_Products e on e.ProductsBarCode=b.ProductsBarCode   join v_Contract_OutWare_DirectOut_Total on v_ContractNo=a.ContractNo and v_ProductsBarCode=b.ProductsBarCode ";
-                    s_DetailsSql += " left join( select Sum(NeedNumber) totalNumber,ProductsBarCode from KNET_NeedStore group by ProductsBarCode) aa on aa.ProductsBarCode=b.ProductsBarCode  ";
-                    s_DetailsSql += " where a.ContractNo in('" + s_ContractNos.Replace(",", "','") + "') and ProductsType in ('M130704050932527') and v_LeftDirectOutNumber>0   ";
-                    this.BeginQuery(s_DetailsSql);
-                    DataTable Dtb_DcDetails = (DataTable)this.QueryForDataTable();
-                    if (Dtb_DcDetails.Rows.Count > 0)
+
+                    Sb_DivStylea.Append("</tr>\n");
+                }
+            }
+
+        }
+        Sb_DivStylea.Append("</table>\n");
+        Sb_DivStylea.Append("</div>\n");
+        return Sb_DivStylea.ToString();
+    }
+
+    protected string DataShowsBySupp1(string s_OrderNo1)
+    {
+
+        KNet.BLL.Knet_Procure_OrdersList bll = new KNet.BLL.Knet_Procure_OrdersList();
+        StringBuilder Sb_DivStylea = new StringBuilder();
+        string s_Sql = "";
+        s_Sql = "select cc.ID,cc.ProductsBarCode,d.ProductsName,d.ProductsPattern,ReceiveSuppNo,OrderDateTime,OrderPREToDate,b.OrderAmount,SuppNo,ContractNos,wrkNumber,a.OrderNo,a.ParentOrderNo,case when RKState<>1 then cast (DATEDIFF(day,getdate(),OrderpretoDate) as varchar(100)) else '' end as DiffDay  ";
+        s_Sql += " FROM Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo  ";
+        s_Sql += " join Knet_Procure_OrdersList_Details cc on a.OrderNo=cc.OrderNo  ";
+        s_Sql += " join KNet_Sys_ProcureType c on a.OrderType=c.ProcureTypeValue  ";
+
+        s_Sql += " join KNET_Sys_Products d on d.ProductsBarCode=cc.ProductsBarCode  ";
+        s_Sql += " where a.OrderNo='" + s_OrderNo1 + "' ";
+        s_Sql += " and KPO_Del=0  and rkState<>'1' and KPO_RkState='0' and orderType='128860698200781250' ";
+        s_Sql += " Order by SuppNo,OrderDateTime ";
+        //更新产品库存
+        // GetNewStore();
+        //先查找供应商
+        this.BeginQuery(s_Sql);
+        DataSet ds = (DataSet)this.QueryForDataSet();
+        s_DivStyle = "";
+        if (ds.Tables[0].Rows.Count > 0)
+        {
+            Sb_DivStylea.Append("<table class=\"ListDetails\" cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-color: #4974C2; width: 100%; border-collapse: collapse;\">\n");
+
+            Sb_DivStylea.Append(" <tr>\n");
+            Sb_DivStylea.Append(" <td align=\"center\" colspan=\"13\">\n");
+            Sb_DivStylea.Append("<h3>杭州士腾科技有限公司<br/>\n");
+            Sb_DivStylea.Append("订单号：" + s_OrderNo1 + " 物料配料明细</h3>\n");
+            Sb_DivStylea.Append("</td>\n");
+            Sb_DivStylea.Append("</tr>\n");
+
+            Sb_DivStylea.Append(" <tr class=\"colHeader\" style=\"Height:30px\">\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">序号</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">采购单号</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">采购日期</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">到货日期</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">供应商</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">产品名称</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">产品类型</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">采购数量</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">未入库数量</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\" width=\"180px\">说明</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">缺料</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">总缺料</td>\n");
+            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHead\">库存</td>\n");
+
+            Sb_DivStylea.Append("</tr>\n");
+            string s_ContractNos = "";
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                Sb_DivStylea.Append("<tr style=\"font-weight:bolder;Height:30px\">\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><font color=red>" + Convert.ToString(i + 1) + "</font>.<a onclick=\"fnVisible('layer_H" + i.ToString() + "')\"  href=\"#\"></a>OEM</td>\n");
+                string s_OrderNo = ds.Tables[0].Rows[i]["OrderNo"].ToString();
+                string s_ID = ds.Tables[0].Rows[i]["ID"].ToString();
+                string s_ProductsBarCode1 = ds.Tables[0].Rows[i]["ProductsBarCode"].ToString();
+
+
+                KNet.Model.Knet_Procure_OrdersList Model = bll.GetModelB(s_OrderNo);
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"../Cg/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + s_OrderNo + "\" target=\"_blank\">" + s_OrderNo + "</td>\n");
+                s_ContractNos = ds.Tables[0].Rows[i]["ContractNos"].ToString();
+
+                string s_Date = "", s_PreDate = "";
+
+                string s_SuppNo = ds.Tables[0].Rows[i]["suppno"].ToString();
+
+                try
+                {
+                    s_Date = DateTime.Parse(ds.Tables[0].Rows[i]["OrderDateTime"].ToString()).ToShortDateString();
+                    s_PreDate = DateTime.Parse(ds.Tables[0].Rows[i]["OrderPREToDate"].ToString()).ToShortDateString();
+                }
+                catch { }
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_Date + "</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_PreDate + "</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetSupplierName(ds.Tables[0].Rows[i]["SuppNo"].ToString()) + "</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">成品</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(s_ProductsBarCode1) + "</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + ds.Tables[0].Rows[i]["OrderAmount"].ToString() + "</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + ds.Tables[0].Rows[i]["wrkNumber"].ToString() + "</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
+
+                KNet.BLL.KNet_Sys_WareHouse Bll = new KNet.BLL.KNet_Sys_WareHouse();
+                KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll.GetModelBySuppNo(s_SuppNo);
+                string s_HouseNo = Model_WareHouse.HouseNo == null ? "" : Model_WareHouse.HouseNo.ToString();
+                this.Tbx_HouseNo.Value = s_HouseNo;
+
+                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >&nbsp;</td>\n");
+                Sb_DivStylea.Append("</tr >\n");
+
+                s_Sql = "Select b.ProductsType,d.NeedNumber,a.XPD_ProductsBarCode,c.*,b.*,aa.totalNumber,";
+                s_Sql += "(select top 1 FollowText from KNet_Sales_OutWareList_FlowList where ReTime is not null and OutWareNO=v_OrderNo  order by FollowDateTime desc) FollowText,";
+                s_Sql += "(select top 1 ReTime from KNet_Sales_OutWareList_FlowList where ReTime is not null and OutWareNO=v_OrderNo  order by FollowDateTime desc) ReTime from Xs_Products_Prodocts_Demo a ";
+                s_Sql += " join KNet_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
+                s_Sql += " left join v_OrderRkDetails c on c.V_ProductsBarCode=a.XPD_ProductsBarCode   and c.KPO_ID='" + s_ID + "'";
+                s_Sql += " left join v_NeedNumberStore d on d.ProductsBarCode=a.XPD_ProductsBarCode and d.HouseNo='" + s_HouseNo + "'  ";
+                s_Sql += " left join( select Sum(NeedNumber) totalNumber,ProductsBarCode from v_NeedNumberStore group by ProductsBarCode) aa on aa.ProductsBarCode=a.XPD_ProductsBarCode  ";
+                s_Sql += "  where b.KSP_Del=0  and a.XPD_IsMail=0  and XPD_FaterBarCode In (select ProductsBarCode from Knet_Procure_OrdersList_Details where ID='" + s_ID + "')  ";
+                if (this.Tbx_ProductsBarCode.Value != "")
+                {
+                    s_Sql = s_Sql + " and XPD_ProductsBarCode='" + this.Tbx_ProductsBarCode.Value + "' ";
+                }
+                s_Sql += "  order by b.ProductsName ";
+
+                this.BeginQuery(s_Sql);
+                this.QueryForDataTable();
+                DataTable Dtb_ProductsTable = Dtb_Result;
+                if (Dtb_ProductsTable != null)
+                {
+                    Sb_DivStylea.Append("<div id=\"layer_H" + i.ToString() + "\" class=\"drag_Element\">\n");
+                    if (Dtb_ProductsTable.Rows.Count > 0)
                     {
-                        for (int k = 0; k < Dtb_DcDetails.Rows.Count; k++)
+                        for (int j = 0; j < Dtb_ProductsTable.Rows.Count; j++)
                         {
-                            string s_ProductsBarCode = Dtb_DcDetails.Rows[k]["ProductsBarCode"].ToString();
-                            string s_Number = Dtb_DcDetails.Rows[k]["Number"].ToString();
-                            string s_totalNumber = "-";
-                            s_totalNumber = Dtb_DcDetails.Rows[k]["totalNumber"] == "" ? "-" : Dtb_DcDetails.Rows[k]["totalNumber"].ToString();
-                                 
-                            if (s_ContractNos != "")
+                            Sb_DivStylea.Append("<tr class=\"ListHeadDetails\"  >");
+                            Sb_DivStylea.Append("<td align=\"right\"  class=\"ListHeadDetails\">" + Convert.ToString(j + 1) + "</td>\n");
+                            string s_DetailsOrderNo = Dtb_ProductsTable.Rows[j]["v_OrderNo"] == null ? "" : Dtb_ProductsTable.Rows[j]["v_OrderNo"].ToString();
+                            string s_DetailsID = Dtb_ProductsTable.Rows[j]["KPO_ID"] == null ? "" : Dtb_ProductsTable.Rows[j]["KPO_ID"].ToString();
+                            Sb_DivStylea.Append("<td align=\"left\"  class=\"ListHeadDetails\"><a href=\"../CG/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + s_DetailsOrderNo + "\" target=\"_blank\">" + s_DetailsOrderNo + "</td>\n");
+
+                            if (s_DetailsOrderNo != "")
                             {
-                                string s_CgSql = "Select a.OrderNo,Sum(OrderAmount) from Knet_Procure_OrdersList a join Knet_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo ";
-                                s_CgSql += " where a.ContractNos='" + s_ContractNos + "' and ProductsBarCode='" + s_ProductsBarCode + "' group by  a.OrderNo ";
-                                this.BeginQuery(s_CgSql);
-                                DataTable Dtb_CgTable = this.QueryForDataTable();
-                                if (Dtb_CgTable.Rows.Count > 0)
+                                KNet.Model.Knet_Procure_OrdersList Model_OrdersList = bll.GetModelB(s_DetailsOrderNo);
+                                try
                                 {
-                                    string s_CgOrderNo = Dtb_CgTable.Rows[0]["OrderNo"].ToString();
-                                    string s_OrderAmount = Dtb_CgTable.Rows[0][1].ToString();
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"../Cg/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + s_CgOrderNo + "\" target=\"_blank\">" + s_CgOrderNo + "</td>\n");
-
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + base.Base_GetProdutsName(s_ProductsBarCode) + "</td>\n");
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + base.Base_GetProductsEdition(s_ProductsBarCode) + "</td>\n");
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + s_OrderAmount + "</td>\n");
+                                    s_Date = DateTime.Parse(Model_OrdersList.OrderDateTime.ToString()).ToShortDateString();
                                 }
-                                else
+                                catch
                                 {
-                                    Sb_DivStylea.Append("<td align=\"center\" class=\"ListHeadDetails\" colspan=\"2\" >&nbsp;</td>\n");
-
-
-                                    Sb_DivStylea.Append("<td align=\"center\" class=\"ListHeadDetails\" colspan=\"3\"><font color=red>未找到订单</font></td>\n");
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + base.Base_GetProdutsName(s_ProductsBarCode) + "</td>\n");
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + base.Base_GetProductsEdition(s_ProductsBarCode) + "</td>\n");
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_Number + "</td>\n");
-                                    Sb_DivStylea.Append("<td align=\"center\" class=\"ListHeadDetails\" colspan=\"3\" >&nbsp;</td>\n");
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + s_ProductsBarCode + "\" target=\"_blank\">" + base.GetColorNumber(s_totalNumber) + "</a></td>\n");//需求数量
-
-                                    Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetHouseAndNumber1(s_ProductsBarCode, this.Tbx_HouseNo.Value) + "</td>\n");
+                                    s_Date = "";
                                 }
+                                string s_FollowText = "";
+                                try
+                                {
+
+                                    s_FollowText = Dtb_ProductsTable.Rows[j]["FollowText"].ToString();
+                                    s_PreDate = DateTime.Parse(Dtb_ProductsTable.Rows[j]["ReTime"].ToString()).ToShortDateString();
+                                }
+                                catch
+                                {
+                                    s_PreDate = "";
+                                    s_FollowText = "";
+                                }
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_Date + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_PreDate + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetSupplierName(Model_OrdersList.SuppNo) + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["ProductsName"].ToString() + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["ProductsEdition"].ToString() + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["v_OrderAmount"].ToString() + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + Dtb_ProductsTable.Rows[j]["wrkNumber"].ToString() + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + s_FollowText + "</td>\n");//快递
+
+                                string s_ProductsBarCode = Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString();
+
+                                string s_NeedNumber = "-";
+                                s_NeedNumber = Dtb_ProductsTable.Rows[j]["NeedNumber"].ToString() == "" ? "-" : Dtb_ProductsTable.Rows[j]["NeedNumber"].ToString();
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + s_ProductsBarCode + "&HouseNo=" + s_HouseNo + "\" target=\"_blank\">" + base.GetColorNumber(s_NeedNumber) + "</a></td>\n");//需求数量
+
+                                string s_totalNumber = "-";
+                                s_totalNumber = Dtb_ProductsTable.Rows[j]["totalNumber"].ToString() == "" ? "-" : Dtb_ProductsTable.Rows[j]["totalNumber"].ToString();
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + s_ProductsBarCode + "\" target=\"_blank\">" + base.GetColorNumber(s_totalNumber) + "</a></td>\n");//需求数量
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetHouseAndNumber1(s_ProductsBarCode, this.Tbx_HouseNo.Value) + "</td>\n");
+
+
                             }
+                            else
+                            {
 
+                                string s_ProductsBarCode = Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString();
+                                Sb_DivStylea.Append("<td align=\"center\" class=\"ListHeadDetails\" colspan=\"3\">&nbsp;</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" >" + base.Base_GetProdutsName(Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"] == null ? "" : Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString()) + "</td>\n");
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\" colspan=\"4\">" + base.Base_GetProductsEdition(Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"] == null ? "" : Dtb_ProductsTable.Rows[j]["XPD_ProductsBarCode"].ToString()) + "</td>\n");
+                                string s_NeedNumber = "-";
+                                s_NeedNumber = Dtb_ProductsTable.Rows[j]["NeedNumber"].ToString() == "" ? "-" : Dtb_ProductsTable.Rows[j]["NeedNumber"].ToString();
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + s_ProductsBarCode + "&HouseNo=" + s_HouseNo + "\" target=\"_blank\">" + base.GetColorNumber(s_NeedNumber) + "</a></td>\n");//需求数量
+
+                                string s_totalNumber = "-";
+                                s_totalNumber = Dtb_ProductsTable.Rows[j]["totalNumber"].ToString() == "" ? "-" : Dtb_ProductsTable.Rows[j]["totalNumber"].ToString();
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\"><a href=\"Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + s_ProductsBarCode + "\" target=\"_blank\">" + base.GetColorNumber(s_totalNumber) + "</a></td>\n");//需求数量
+                                Sb_DivStylea.Append("<td align=\"left\" class=\"ListHeadDetails\">" + base.Base_GetHouseAndNumber1(s_ProductsBarCode, this.Tbx_HouseNo.Value) + "</td>\n");
+
+                            }
+                            Sb_DivStylea.Append("</tr >\n");
                         }
                     }
+
+                    Sb_DivStylea.Append("<tr>\n");
+
+
 
                     Sb_DivStylea.Append("</tr>\n");
                 }
@@ -365,7 +540,7 @@ public partial class Sc_Plan_Material2 : BasePage
             if (s_ContractNos != "")
             {
 
-               // string s_FhNumber = GetDirectOutDetails(s_ContractNos);
+                // string s_FhNumber = GetDirectOutDetails(s_ContractNos);
                 //查找订单需求数量
                 string s_DetailsSql = "Select Sum(v_LeftDirectOutNumber) Number  from v_Contract_OutWare_DirectOut_Total  a ";
                 s_DetailsSql += " where a.v_ContractNo in('" + s_ContractNos.Replace(",", "','") + "') ";
@@ -386,6 +561,7 @@ public partial class Sc_Plan_Material2 : BasePage
         { }
         return s_Return;
     }
+
     public string GetContract(string s_ContractNos)
     {
         string s_Return = "";

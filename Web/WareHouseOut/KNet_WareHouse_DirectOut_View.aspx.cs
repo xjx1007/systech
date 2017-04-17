@@ -34,14 +34,14 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
                 ShowInfo(s_ID);
             }
         }
-       
+
     }
 
     private void ShowInfo(string s_ID)
     {
         try
         {
-            AdminloginMess AM=new AdminloginMess();
+            AdminloginMess AM = new AdminloginMess();
             KNet.BLL.KNet_WareHouse_DirectOutList bll = new KNet.BLL.KNet_WareHouse_DirectOutList();
             KNet.Model.KNet_WareHouse_DirectOutList model = bll.GetModelB(s_ID);
             this.Tbx_ID.Text = s_ID;
@@ -51,6 +51,10 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
             this.Lbl_Customer.Text = base.Base_GetCustomerName_Link(model.KWD_Custmoer);
             this.Lbl_ContentPerson.Text = base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Name") + "（电话：" + base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Phone") + "地址：" + base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Address") + "）";
             this.Lbl_Remarks.Text = model.DirectOutRemarks;
+
+            this.Lbl_MailProducts.Text = base.Base_GetProductsEdition(model.KWD_MainProductsBarCode);
+            this.Lbl_MailProductsNumber.Text = model.KWD_MainProductsNumber.ToString();
+
             if (model.DirectOutCheckYN == 3)
             {
 
@@ -72,18 +76,49 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
                         this.btn_Chcek.Text = "财务审批";
                     }
                 }
- 
+
             }
-            KNet.BLL.KNet_WareHouse_DirectOutList_Details BLL_Details = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
-            DataSet Dts_Details = BLL_Details.GetList(" DirectOutNo='" + model.DirectOutNo + "'");
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select *,DirectOutAmount+Isnull(KWD_BNumber,0) as TotalNumber ");
+
+            if (model.KWD_MainProductsBarCode != "")
+            {
+                strSql.Append(" ,isnull(b.BomOrder,'') BomOrder  ");
+            }
+            strSql.Append(" FROM KNet_WareHouse_DirectOutList_Details a ");
+
+            if (model.KWD_MainProductsBarCode != "")
+            {
+                strSql.Append(" left join v_ProductsDemo_Details b on a.ProductsBarCode=b.XPD_ProductsBarCode and b.FaterBarCode in(select '" + model.KWD_MainProductsBarCode + "' union Select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo where XPD_FaterBarCode='" + model.KWD_MainProductsBarCode + "')  ");
+            }
+            strSql.Append(" where DirectOutNo='" + model.DirectOutNo + "' ");
+
+            if (model.KWD_MainProductsBarCode != "")
+            {
+                strSql.Append(" order by  isnull(BomOrderDesc,0) ");
+            }
+
+            this.BeginQuery(strSql.ToString());
+            DataSet Dts_Details = (DataSet)this.QueryForDataSet();
             if (Dts_Details.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                 {
                     s_MyTable_Detail += "<tr>";
                     this.Xs_ProductsCode.Text += Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ",";
+
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Convert.ToString(i + 1) + "</td>";
+
+                    if (model.KWD_MainProductsBarCode != "")
+                    {
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["BomOrder"].ToString() + "</td>";
+                    }
+                    else
+                    {
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
+                    }
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString() + "</td>";
@@ -92,10 +127,11 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
 
                     s_MyTable_Detail += "</tr>";
                 }
+                this.Lbl_Details.Text = s_MyTable_Detail;
             }
         }
         catch
-        {}
+        { }
     }
 
     protected void btn_Chcek_Click(object sender, EventArgs e)
@@ -103,7 +139,7 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
         AdminloginMess AM = new AdminloginMess();
         if (btn_Chcek.Text == "财务审批")
         {
-            string DoSql = "update KNet_WareHouse_DirectOutList  set DirectOutCheckYN=3,DirectOutCheckStaffNo='"+AM.KNet_StaffNo+"'  where  DirectOutNo='" + this.Tbx_ID.Text + "' ";
+            string DoSql = "update KNet_WareHouse_DirectOutList  set DirectOutCheckYN=3,DirectOutCheckStaffNo='" + AM.KNet_StaffNo + "'  where  DirectOutNo='" + this.Tbx_ID.Text + "' ";
             DbHelperSQL.ExecuteSql(DoSql);
             btn_Chcek.Text = "反财务审批";
             AM.Add_Logs("审批领料单号：" + this.Tbx_ID.Text);

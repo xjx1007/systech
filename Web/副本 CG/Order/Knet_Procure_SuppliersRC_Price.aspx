@@ -223,7 +223,7 @@
                                                 </asp:TemplateField>
 
 
-                                                <asp:TemplateField HeaderText="遥控器名称" SortExpression="CSP_ProductsBarCode" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <asp:TemplateField HeaderText="成品名称" SortExpression="CSP_ProductsBarCode" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <%# base.Base_GetProductsEdition_Link(DataBinder.Eval(Container.DataItem, "CSP_ProductsBarCode").ToString())%>
                                                     </ItemTemplate>

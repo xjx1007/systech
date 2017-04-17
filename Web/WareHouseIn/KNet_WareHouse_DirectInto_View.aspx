@@ -229,15 +229,18 @@
                                                     <td class="dvtCellInfo" colspan="3">
                                                         <asp:Label ID="ReturnRemarks" runat="server"></asp:Label>&nbsp;
                                                     </td>
-                                                </tr>
-                                            </table>
-                                            <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
-                                                <tr>
-                                                    <td colspan="7" class="detailedViewHeader">
+                                                </tr>       <tr>
+                                                    <td colspan="4" class="detailedViewHeader">
                                                         <b>产品详细信息</b>
                                                     </td>
                                                 </tr>
+                                            </table>
+                                            <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+                                         
                                     <tr valign="top">
+                                        <td class="ListHead" nowrap>
+                                            <b>序号</b>
+                                        </td>
                                         <td class="ListHead" nowrap>
                                             <b>产品名称</b>
                                         </td>

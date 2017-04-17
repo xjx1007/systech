@@ -29,6 +29,8 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
         {
             this.Lbl_Title.Text = "产品列表";
             AdminloginMess AM = new AdminloginMess();
+            Tbx_Productstype.Text = AM.ProductsType;
+            Lbl_Type.Text = base.Base_GetProductsType(Tbx_Productstype.Text);
             if (AM.CheckLogin(this.Lbl_Title.Text) == false)
             {
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
@@ -48,41 +50,50 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             KNet.BLL.PB_Basic_ProductsClass BLL_Class = new KNet.BLL.PB_Basic_ProductsClass();
             if ((s_ID != "") && (s_Model == "IsDel"))
             {
-                if (AM.YNAuthority("停用产品") == true)
+
+                if ((AM.KNet_Position == "103") || (AM.KNet_StaffName == "李文立") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "毛刚挺"))
                 {
-                    KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                    KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
-                    Model.ProductsBarCode = s_ID;
-                    int i_Del = Math.Abs(Model.KSP_Del - 1);
-                    Model.KSP_Del = i_Del;
-                    Bll.UpdateDel(Model);
-                    AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
-                }
-                else
-                {
-                    AM.NoAuthority("停用产品");
+                    if (AM.YNAuthority("停用产品") == true)
+                    {
+                        KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
+                        KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
+                        Model.ProductsBarCode = s_ID;
+                        int i_Del = Math.Abs(Model.KSP_Del - 1);
+                        Model.KSP_Del = i_Del;
+                        Bll.UpdateDel(Model);
+                        AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
+                    }
+                    else
+                    {
+                        AM.NoAuthority("停用产品");
+                    }
                 }
             }
             if ((s_ID != "") && (s_Model == "IsQr"))
             {
-                if (AM.YNAuthority("停用产品") == true)
+                if ((AM.KNet_Position == "103") || (AM.KNet_StaffName == "李文立") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "毛刚挺"))
                 {
-                    KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                    KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
-                    Model.ProductsBarCode = s_ID;
-                    int i_Del = Math.Abs(Model.KSP_isModiy - 1);
-                    Model.KSP_isModiy = i_Del;
-                    Bll.UpdateisModiy(Model);
-                    AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！确认产品编码：" + s_ID);
-                }
-                else
-                {
-                    AM.NoAuthority("停用产品");
+                    if (AM.YNAuthority("停用产品") == true)
+                    {
+                        KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
+                        KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
+                        Model.ProductsBarCode = s_ID;
+                        int i_Del = Math.Abs(Model.KSP_isModiy - 1);
+                        Model.KSP_isModiy = i_Del;
+                        Bll.UpdateisModiy(Model);
+                        AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！确认产品编码：" + s_ID);
+                    }
+                    else
+                    {
+                        AM.NoAuthority("停用产品");
+                    }
                 }
             }
             this.Btn_Del.Attributes.Add("onclick", "return confirm('你确信要删除所选记录吗?！')");
             base.Base_DropBindSearch(this.bas_searchfield, "KNet_Sys_Products");
             base.Base_DropBindSearch(this.Fields, "KNet_Sys_Products");
+
+            base.Base_DropBatchBindBySql(this.Ddl_Batch, "KNet_Sys_Products", "KSP_RDPerson", " and straffDepart='129652783965723459'");
             this.DataShows();
         }
 
@@ -101,7 +112,6 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
         string s_ID = Request["ID"] == null ? "" : Request["ID"].ToString();
 
         string s_Type = "";
-
         string SqlWhere = " 1=1 ";
         AdminloginMess AM = new AdminloginMess();
 
@@ -133,6 +143,12 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             s_SonID = s_SonID.Replace(",", "','");
             SqlWhere += " and ProductsType in ('" + s_SonID + "') ";
         }
+
+
+        if (this.Ddl_Batch.SelectedValue != "")
+        {
+            SqlWhere += Base_GetBasicWhere(this.Ddl_Batch.SelectedValue);
+        }
         if (s_ProductsBarCode != "")
         {
             SqlWhere += " and ProductsBarCode in ('" + s_ProductsBarCode + "') ";
@@ -151,6 +167,7 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
 
     protected void Btn_Del_Click(object sender, EventArgs e)
     {
+       
 
         string sql = "delete from KNet_Sys_Products where";
         string cal = "";
@@ -161,7 +178,8 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             if (cb.Checked == true)
             {
                 cal += " ID='" + GridView1.DataKeys[i].Value.ToString() + "' or";
-                s_BarCode += GridView1.Rows[i].Cells[2].Text+",";
+               TextBox Tbx_BarCode= (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode");
+               s_BarCode += Tbx_BarCode.Text + ",";
             }
         }
         if (cal != "")
@@ -175,15 +193,25 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
             Response.End();
         }
-        sql += " delete from Xs_Products_Prodocts where XPP_FaterBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
-        sql += " delete from PB_Products_CgDays where PPC_ProductsBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
-        sql += " delete from Xs_Customer_Products where XCP_ProductsID in ('" + s_BarCode.Replace(",", "','") + "') ";
-        DbHelperSQL.ExecuteSql(sql);
+        string s_Sql = "Select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo where  XPD_ProductsBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
+       this.BeginQuery(s_Sql);
+       DataTable Dtb_Res = (DataTable)this.QueryForDataTable();
+       if (Dtb_Res.Rows.Count > 0)
+       {
+           Alert("该产品有BOM使用不能删除！");
+       }
+       else
+       {
+           sql += " delete from Xs_Products_Prodocts_Demo where XPD_FaterBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
+           sql += " delete from Xs_Products_Prodocts_Demo where XPD_ProductsBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
+           sql += " delete from PB_Products_CgDays where PPC_ProductsBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
+           sql += " delete from Xs_Customer_Products where XCP_ProductsID in ('" + s_BarCode.Replace(",", "','") + "') ";
+           DbHelperSQL.ExecuteSql(sql);
+           AdminloginMess LogAM = new AdminloginMess();
+           LogAM.Add_Logs("系统设置--->产品字典--->产品字典删除 操作成功！");
 
-        AdminloginMess LogAM = new AdminloginMess();
-        LogAM.Add_Logs("系统设置--->产品字典--->产品字典删除 操作成功！");
-
-        this.DataShows();
+           this.DataShows();
+       }
     }
     public void btnBasicSearch_Click(object sender, EventArgs e)
     {
@@ -218,12 +246,12 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             if (s_Del == 1)
             {
                 string JSD = "KnetProductsSetting_Details.aspx?BarCode=" + s_ProductsBarCode + "&Model=IsDel";
-                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  ><font color=red>停用</font></a>";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  target=\"_blank\" ><font color=red>停用</font></a>";
             }
             else
             {
                 string JSD = "KnetProductsSetting_Details.aspx?BarCode=" + s_ProductsBarCode + "&Model=IsDel";
-                s_Return = "<a href=\"" + JSD + "\" onclick=\"\" >启用</a>";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  target=\"_blank\" >启用</a>";
             }
         }
         catch
@@ -242,12 +270,12 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             if (s_Del == 1)
             {
                 string JSD = "KnetProductsSetting.aspx?ID=" + s_ProductsBarCode + "&Model=IsQr";
-                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  ><font color=red>否</font></a>";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\" target=\"_blank\"  ><font color=red>未审</font></a>";
             }
             else
             {
                 string JSD = "KnetProductsSetting.aspx?ID=" + s_ProductsBarCode + "&Model=IsQr";
-                s_Return = "<a href=\"" + JSD + "\" onclick=\"\" >是</a>";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  target=\"_blank\" >已审</a>";
             }
         }
         catch
@@ -288,7 +316,35 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
                 treeMainNode = tree;
             }
 
-            DataSet Dts_Table = bll.GetList(" PBP_FaterID='" + s_ID + "'");
+
+            DataSet Dts_Table = null;
+            if (s_ID == "M160818111423567")//如果是采购类产品
+            {
+                Dts_Table = bll.GetList(" PBP_FaterID='" + s_ID + "'   order by PBP_Order");
+            }
+            else if (s_ID == "M160818111359632")//如果是销售类产品
+            {
+                KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
+                string s_SonID = Bll_ProductsDetails.GetSonIDs(Tbx_Productstype.Text);
+                s_SonID = s_SonID.Replace(",", "','");
+                string s_Sql = "";
+                if (Tbx_Productstype.Text != "")
+                {
+                    s_Sql = " PBP_FaterID='" + s_ID + "' and PBP_ID in ('" + Tbx_Productstype.Text + "','" + s_SonID + "')  order by PBP_Order";
+                }
+                else
+                {
+                    s_Sql = " PBP_FaterID='" + s_ID + "' order by PBP_Order";
+                }
+                
+                Dts_Table = bll.GetList(s_Sql);
+            }
+            else
+            {
+
+                Dts_Table = bll.GetList(" PBP_FaterID='" + s_ID + "'  order by PBP_Order");
+            }
+
 
 
             if (Dts_Table.Tables[0].Rows.Count > 0)
@@ -311,6 +367,10 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
         this.DataShows();
     }
 
+    protected void Ddl_Batch_TextChanged(object sender, EventArgs e)
+    {
+        this.DataShows();
+    }
     protected void Lbl_Spce_Click(object sender, EventArgs e)
     {
         string UploadPath = "../../UpFile/Products/产品型号命名规则.doc";  //上传文件

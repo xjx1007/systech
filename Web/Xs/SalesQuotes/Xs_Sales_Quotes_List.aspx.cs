@@ -149,4 +149,18 @@ public partial class Web_Sales_Xs_Sales_Quotes_List : BasePage
         s_AdvShow = Base_GetAdvShowHtml(arr_Fields, arr_Condition, arr_Text);
         this.DataShows();
     }
+
+    protected string CheckView(string s_ID)
+    {
+        string s_Return = "", JSD = "";
+        KNet.BLL.Xs_Sales_Quotes BLl = new KNet.BLL.Xs_Sales_Quotes();
+        KNet.Model.Xs_Sales_Quotes Model = BLl.GetModel(s_ID);
+
+        JSD = "Xs_Sales_Quotes_Print.aspx?ID=" + s_ID + "";
+        s_Return = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=120,left=150,toolbar=yes, menubar=yes,scrollbars=yes, resizable=yes, location=yes, status=yes, width=780,height=500');\"  title=\"点击查看\"><img src=\"../../images/View.gif\"  border=\"0\" /></a>";
+        s_Return += "  <a href=\"PDF/" + Model.XSQ_Code + ".PDF\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/pdf.gif\"  border=\"0\" /></a> ";
+
+        return s_Return;
+
+    }
 }

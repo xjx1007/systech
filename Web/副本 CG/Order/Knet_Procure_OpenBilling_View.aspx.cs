@@ -57,7 +57,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
             Pan_Order.Visible = true;
             Table_Btn.Visible = true;
         }
-        if (this.Lbl_OrderType.Text != "遥控器采购")
+        if (this.Lbl_OrderType.Text != "成品采购")
         {
             KNet.Model.Knet_Procure_OrdersList Model = bll.GetModelB(s_ID);
             string s_FID = Model.ParentOrderNo;
@@ -316,7 +316,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
             string s_Sql1 = "Delete from Knet_Procure_OrdersList where ParentOrderNo='" + this.Tbx_ID.Text + "'";
             DbHelperSQL.ExecuteSql(s_Sql);
             DbHelperSQL.ExecuteSql(s_Sql1);
-            AM.Add_Logs("删除子订单：遥控器订单号：" + this.Tbx_ID.Text + "");
+            AM.Add_Logs("删除子订单：成品订单号：" + this.Tbx_ID.Text + "");
             string s_OrderCode = CreateOrderDetails(this.Tbx_ID.Text);
             if (s_OrderCode != "")
             {
@@ -334,7 +334,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                     }
                 }
             }
-            base.Base_SendMessage(Base_GetDeptPerson("研发中心", 1), KNetPage.KHtmlEncode("有 遥控器订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + this.Tbx_ID.Text + "'  onclick=\"RemoveSms('" + base.GetNewID("System_Message_Manage", 0) + "', '', 0);\"> " + this.Tbx_ID.Text + "</a> 生成的相关订单需要您审批，敬请关注！"));
+            base.Base_SendMessage(Base_GetDeptPerson("研发中心", 1), KNetPage.KHtmlEncode("有 成品订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + this.Tbx_ID.Text + "'  onclick=\"RemoveSms('" + base.GetNewID("System_Message_Manage", 0) + "', '', 0);\"> " + this.Tbx_ID.Text + "</a> 生成的相关订单需要您审批，敬请关注！"));
 
             AlertAndRedirect("生成成功！", "Knet_Procure_OpenBilling_View.aspx?ID=" + this.Tbx_ID.Text + "");
         }

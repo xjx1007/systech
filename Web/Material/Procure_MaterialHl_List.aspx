@@ -56,10 +56,6 @@
                                                 </td>
                                                 
                                                 <td style="padding-right: 10px">
-                                                    <asp:Button ID="BtnSave" runat="server" Text="计算单价" title="计算单价"
-                                                            class="crmbutton small save" OnClick="BtnSave_Click" />
-                                                </td>
-                                                <td style="padding-right: 10px">
                                                     <asp:Button ID="Btn_Show" runat="server" Text="显示全部" title="显示全部"
                                                             class="crmbutton small save" OnClick="Btn_Show_Click"/>
                                                 </td>

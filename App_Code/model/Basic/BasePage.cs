@@ -30,7 +30,7 @@ using System.Web.Script.Serialization;
 /// </summary>
 public class BasePage : System.Web.UI.Page
 {
-    
+
     public string isModiy = System.Configuration.ConfigurationManager.AppSettings["ModifyWhere"].ToString();
 
     /// 弹出JavaScript小窗口
@@ -811,6 +811,27 @@ public class BasePage : System.Web.UI.Page
             }
         }
     }
+
+    public string Base_GetProductsBZNumber(string s_ID)
+    {
+        string s_Return = "";
+        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        {
+            conn.Open();
+            string Dostr = "select  KSP_BZNumber from KNet_Sys_Products where ProductsBarCode='" + s_ID + "'";
+            SqlCommand cmd = new SqlCommand(Dostr, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                s_Return = dr["KSP_BZNumber"].ToString();
+                return s_Return;
+            }
+            else
+            {
+                return "--";
+            }
+        }
+    }
     protected string Base_GetProductsEdition_Link(object aa)
     {
         string s_Return = "", s_Details = "";
@@ -1193,7 +1214,7 @@ public class BasePage : System.Web.UI.Page
         try
         {
             KNet.BLL.KNet_Resource_Staff Bll = new KNet.BLL.KNet_Resource_Staff();
-            DataSet Dts_Table = Bll.GetList(" StaffNo<>'admin'  " + s_Sql + " Order By StaffDepart ");
+            DataSet Dts_Table = Bll.GetList(" StaffNo<>'admin'  " + s_Sql + " Order By StaffDepart,StaffName ");
             DDL.DataSource = Dts_Table;
             DDL.DataTextField = "StaffName";
             DDL.DataValueField = "StaffNo";
@@ -1368,7 +1389,6 @@ public class BasePage : System.Web.UI.Page
     {
         KNet.BLL.KNet_Sys_WareHouse bll = new KNet.BLL.KNet_Sys_WareHouse();
         DataSet ds = bll.GetList(" HouseYN=1 and (" + HouseNoSql + ") ");
-
         DropHouse.DataSource = ds;
         DropHouse.DataTextField = "HouseName";
         DropHouse.DataValueField = "HouseNo";
@@ -1486,15 +1506,23 @@ public class BasePage : System.Web.UI.Page
     /// <param name="ClientKings"></param>
     public string Base_GetLinkManValue(string s_ID, string s_Value)
     {
-        KNet.BLL.XS_Compy_LinkMan bll = new KNet.BLL.XS_Compy_LinkMan();
-        DataSet ds = bll.GetList(" XOL_ID ='" + s_ID + "' ");
-        if ((ds.Tables[0].Rows.Count > 0) && (s_ID != ""))
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.YNAuthority("能查看联系人"))
         {
-            return ds.Tables[0].Rows[0][s_Value].ToString();
+            KNet.BLL.XS_Compy_LinkMan bll = new KNet.BLL.XS_Compy_LinkMan();
+            DataSet ds = bll.GetList(" XOL_ID ='" + s_ID + "' ");
+            if ((ds.Tables[0].Rows.Count > 0) && (s_ID != ""))
+            {
+                return ds.Tables[0].Rows[0][s_Value].ToString();
+            }
+            else
+            {
+                return s_ID;
+            }
         }
         else
         {
-            return s_ID;
+            return "";
         }
     }
     /// <summary>
@@ -1547,20 +1575,28 @@ public class BasePage : System.Web.UI.Page
     /// <returns></returns>
     protected string Base_GetCustomerName(string s_Value)
     {
-        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.YNAuthority("能查看客户"))
         {
-            conn.Open();
-            string Dostr = "select ID,CustomerValue,CustomerName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
-            SqlCommand cmd = new SqlCommand(Dostr, conn);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
             {
-                return dr["CustomerName"].ToString().Trim();
+                conn.Open();
+                string Dostr = "select ID,CustomerValue,CustomerName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
+                SqlCommand cmd = new SqlCommand(Dostr, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return dr["CustomerName"].ToString().Trim();
+                }
+                else
+                {
+                    return "--";
+                }
             }
-            else
-            {
-                return "--";
-            }
+        }
+        else
+        {
+            return "****";
         }
     }
 
@@ -1571,32 +1607,40 @@ public class BasePage : System.Web.UI.Page
     /// <returns></returns>
     protected string Base_GetShortCustomerName(string s_Value)
     {
-        string s_Return = "";
-        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.YNAuthority("能查看客户"))
         {
-            conn.Open();
-            string Dostr = "select ID,CustomerValue,CustomerName,KSC_SampleName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
-            SqlCommand cmd = new SqlCommand(Dostr, conn);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            string s_Return = "";
+            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
             {
-                string s_Name = dr["CustomerName"].ToString();
-                string s_SName = dr["KSC_SampleName"].ToString();
-                string s_CustomerValue = dr["CustomerValue"].ToString();
-                if (s_SName != "")
+                conn.Open();
+                string Dostr = "select ID,CustomerValue,CustomerName,KSC_SampleName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
+                SqlCommand cmd = new SqlCommand(Dostr, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
-                    s_Name = s_SName;
-                }
-                else
-                {
-                    if (dr["CustomerName"].ToString().Length > 5)
+                    string s_Name = dr["CustomerName"].ToString();
+                    string s_SName = dr["KSC_SampleName"].ToString();
+                    string s_CustomerValue = dr["CustomerValue"].ToString();
+                    if (s_SName != "")
                     {
-                        s_Name = dr["CustomerName"].ToString().Substring(0, 5);
+                        s_Name = s_SName;
                     }
+                    else
+                    {
+                        if (dr["CustomerName"].ToString().Length > 5)
+                        {
+                            s_Name = dr["CustomerName"].ToString().Substring(0, 5);
+                        }
+                    }
+                    s_Return = s_Name;
                 }
-                s_Return = s_Name;
+                return s_Return;
             }
-            return s_Return;
+        }
+        else
+        {
+            return "****";
         }
     }
 
@@ -1631,42 +1675,52 @@ public class BasePage : System.Web.UI.Page
     /// <returns></returns>
     protected string Base_GetCustomerName_Link(string s_Value)
     {
-        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.YNAuthority("能查看客户"))
         {
-            conn.Open();
-            string Dostr = "select ID,CustomerValue,CustomerName,KSC_SampleName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
-            SqlCommand cmd = new SqlCommand(Dostr, conn);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
             {
-                string s_Name = dr["CustomerName"].ToString();
-                string s_SName = dr["KSC_SampleName"].ToString();
-                string s_CustomerValue = dr["CustomerValue"].ToString();
-                if (s_SName != "")
+                conn.Open();
+                string Dostr = "select ID,CustomerValue,CustomerName,KSC_SampleName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
+                SqlCommand cmd = new SqlCommand(Dostr, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
-                    s_Name = s_SName;
+                    string s_Name = dr["CustomerName"].ToString();
+                    string s_SName = dr["KSC_SampleName"].ToString();
+                    string s_CustomerValue = dr["CustomerValue"].ToString();
+                    if (s_SName != "")
+                    {
+                        s_Name = s_SName;
+                    }
+                    else
+                    {
+                        if (dr["CustomerName"].ToString().Length > 5)
+                        {
+                            s_Name = dr["CustomerName"].ToString().Substring(0, 5);
+                        }
+                    }
+                    string s_Return = "<a href=\"/Web/Xs/Customer/KNet_Sales_ClientList_View.aspx?CustomerValue=" + s_CustomerValue + "\"  target=\"_self\" onMouseOver=\"fnDropDown1(this,'" + s_CustomerValue + "_sub');\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub');\" >" + s_Name + "</a>";
+                    s_Return += "<div class=\"Drop_Customer\" id=\"" + s_CustomerValue + "_sub\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub')\" onMouseOver=\"fnShowDrop('" + s_CustomerValue + "_sub')\">\n";
+                    s_Return += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
+
+                    s_Return += "<tr><td >客户：" + dr["CustomerName"].ToString();
+                    s_Return += "</td></tr>\n";
+                    s_Return += "</table>\n</div>\n";
+                    return s_Return;
+
                 }
                 else
                 {
-                    if (dr["CustomerName"].ToString().Length > 5)
-                    {
-                        s_Name = dr["CustomerName"].ToString().Substring(0, 5);
-                    }
+                    return "--";
                 }
-                string s_Return = "<a href=\"/Web/Xs/Customer/KNet_Sales_ClientList_View.aspx?CustomerValue=" + s_CustomerValue + "\"  target=\"_self\" onMouseOver=\"fnDropDown1(this,'" + s_CustomerValue + "_sub');\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub');\" >" + s_Name + "</a>";
-                s_Return += "<div class=\"Drop_Customer\" id=\"" + s_CustomerValue + "_sub\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub')\" onMouseOver=\"fnShowDrop('" + s_CustomerValue + "_sub')\">\n";
-                s_Return += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
-
-                s_Return += "<tr><td >客户：" + dr["CustomerName"].ToString();
-                s_Return += "</td></tr>\n";
-                s_Return += "</table>\n</div>\n";
-                return s_Return;
-
             }
-            else
-            {
-                return "--";
-            }
+
+        }
+        else
+        {
+            return "****";
         }
     }
     /// <summary>
@@ -1676,6 +1730,9 @@ public class BasePage : System.Web.UI.Page
     /// <returns></returns>
     protected string Base_GetCustomerName_Link(string s_Value, bool b_IsShort)
     {
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.YNAuthority("能查看客户"))
+        {
         using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
         {
             conn.Open();
@@ -1717,6 +1774,12 @@ public class BasePage : System.Web.UI.Page
             {
                 return "--";
             }
+        }
+        
+        }
+        else
+        {
+            return "****";
         }
     }
     /// <summary>
@@ -1914,7 +1977,7 @@ public class BasePage : System.Web.UI.Page
     {
         try
         {
-            string s_Sql = "Select Sum(DirectInAmount) from v_Store Where HouseNo='" + s_HouseNo + "' and ProductsBarCode='" + s_ProductsBarCode + "' ";
+            string s_Sql = "Select isnull(Sum(DirectInAmount),0) from v_Store Where HouseNo='" + s_HouseNo + "' and ProductsBarCode='" + s_ProductsBarCode + "' ";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table = this.Dtb_Result;
@@ -1969,7 +2032,7 @@ public class BasePage : System.Web.UI.Page
         string s_Return = "";
         try
         {
-            string s_Sql = "select* from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by b.SuppNo ";
+            string s_Sql = "select* from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and KPP_State=1 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by b.SuppNo ";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table = this.Dtb_Result;
@@ -1998,7 +2061,7 @@ public class BasePage : System.Web.UI.Page
         string s_Return = "";
         try
         {
-            string s_Sql = "select top 1 * from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by ProcureUnitPrice,b.SuppNo ";
+            string s_Sql = "select top 1 * from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and KPP_State=1 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by ProcureUnitPrice,b.SuppNo ";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table = this.Dtb_Result;
@@ -2027,7 +2090,7 @@ public class BasePage : System.Web.UI.Page
         string s_Return = "";
         try
         {
-            string s_Sql = "select* from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and a.ProductsBarCode='" + s_ProductsBarCode + "' ";
+            string s_Sql = "select  KPS_SName,ProcureUnitPrice,HandPrice from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and KPP_State=1 and a.ProductsBarCode='" + s_ProductsBarCode + "' ";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table = this.Dtb_Result;
@@ -2051,13 +2114,43 @@ public class BasePage : System.Web.UI.Page
         return s_Return;
     }
 
+    public string GetNewPriceAndHandPrice(string s_ProductsBarCode)
+    {
+        string s_Return = "";
+        try
+        {
+            string s_Sql = "select top 1 KPS_SName,isnull(ProcureUnitPrice,0) ProcureUnitPrice,isnull(HandPrice,0) HandPrice from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and KPP_State=1 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by ProcureUpdateDateTime desc ";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            DataTable Dtb_Table = this.Dtb_Result;
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                for (int i = 0; i < Dtb_Table.Rows.Count; i++)
+                {
+
+                    s_Return += decimal.Parse(Dtb_Table.Rows[i]["ProcureUnitPrice"].ToString()) + decimal.Parse(Dtb_Table.Rows[i]["HandPrice"].ToString());
+                    // Dtb_Table.Rows[i]["KPS_SName"].ToString() + "(" + Dtb_Table.Rows[i]["ProcureUnitPrice"].ToString() + "|" + Dtb_Table.Rows[i]["HandPrice"].ToString() + ")<br/>";
+                }
+            }
+            else
+            {
+                s_Return = "0";
+            }
+        }
+        catch (Exception ex)
+        {
+            s_Return = "0";
+            throw;
+        }
+        return s_Return;
+    }
 
     public string GetLowPriceAndHandPrice(string s_ProductsBarCode)
     {
         string s_Return = "";
         try
         {
-            string s_Sql = "select top 1 * from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by isnull(ProcureUnitPrice,0)+isnull(HandPrice,0) ";
+            string s_Sql = "select top 1 * from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and KPP_State=1 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by isnull(ProcureUnitPrice,0)+isnull(HandPrice,0) ";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table = this.Dtb_Result;
@@ -2538,6 +2631,46 @@ public class BasePage : System.Web.UI.Page
             return "错误";
         }
     }
+
+
+
+    public string Base_GetNextDept(string s_ContractNo, string s_Type, string s_Dept)
+    {
+        string s_DeptID = "";
+        try
+        {
+            //审批流程
+            string s_Sql = "Select * from PB_Flow_Detail Where PFD_MainID='" + s_Type + "' and PFD_DeptID='" + s_Dept + "'  Order by PFD_ID ";
+            //同时审批
+            this.BeginQuery(s_Sql);
+            s_DeptID = "其他部门";
+            this.QueryForDataTable();
+            DataTable Dtb_FlowDetails = this.Dtb_Result;
+            for (int i = 0; i < Dtb_FlowDetails.Rows.Count; i++)
+            {
+                if (Dtb_FlowDetails.Rows[i]["PFD_DeptID"].ToString() != "")//查找该部门是否已经通过审核
+                {
+                    if (Base_GetContractShState(Dtb_FlowDetails.Rows[i]["PFD_DeptID"].ToString(), s_ContractNo) == false)
+                    {
+                        s_DeptID = Dtb_FlowDetails.Rows[i]["PFD_DeptID"].ToString();
+                        break;
+                    }
+                    else
+                    {
+                        s_DeptID = "其他部门";
+
+                    }
+                }
+            }
+            return s_DeptID;
+
+        }
+        catch (Exception ex)
+        {
+            return "错误";
+        }
+    }
+
     public string Base_GetNextState(string s_ContractNo, string s_Type)
     {
         string s_DeptID = "";
@@ -2600,21 +2733,21 @@ public class BasePage : System.Web.UI.Page
     {
 
         SmtpClient client = new SmtpClient();
-        client.Credentials = new System.Net.NetworkCredential("bremax", "bremax2012");
+        client.Credentials = new System.Net.NetworkCredential("System2017", "System2016");
         client.Host = "smtp.126.com";
         client.Port = 25;
         client.EnableSsl = false;
         client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
         MailMessage newMessage = new MailMessage();
-        newMessage.From = new MailAddress("bremax@126.com");
+        newMessage.From = new MailAddress("System2017@126.com");
         newMessage.Subject = s_Title;
         string[] s_ReceiveID = s_Receive.Split(',');
         for (int i = 0; i < s_ReceiveID.Length; i++)
         {
             newMessage.To.Add(s_ReceiveID[i]);
         }
-        s_Text += "   内网地址：http://192.0.13.9:88/login.aspx  外网地址:http://115.238.88.226:88/login.aspx";
+        s_Text += " 局域网访问：  地址：http://192.168.0.193/signin.aspx";
         newMessage.Body = s_Text;
         try
         {
@@ -2637,17 +2770,16 @@ public class BasePage : System.Web.UI.Page
         client.Credentials = new System.Net.NetworkCredential(Model_Seting.PMS_SendPerson, Model_Seting.PMS_Password);
         client.Host = Model_Seting.PMS_Sever;
         client.Port = int.Parse(Model_Seting.PMS_Port);
-        client.EnableSsl = false;
+        client.EnableSsl = true;
         client.DeliveryMethod = SmtpDeliveryMethod.Network;
         MailMessage newMessage = new MailMessage();
         newMessage.From = new MailAddress(Model_Seting.PMS_SendEmail);
         newMessage.Subject = s_Title;
+
         newMessage.BodyEncoding = System.Text.Encoding.UTF8;//正文编码            
         newMessage.IsBodyHtml = true;//设置为HTML格式            
         newMessage.Priority = MailPriority.High;//优先级
         ///先检查这封邮件是否已经发送过。
-
-
 
         if (s_File != "")
         {
@@ -2811,7 +2943,7 @@ public class BasePage : System.Web.UI.Page
     {
         string s_Return = "";
         string s_Sql = "Select * from Knet_Procure_OrdersList_Details a ";
-        s_Sql += " join Knet_Procure_OrdersList b  on a.OrderNo =b.OrderNo Where  a.OrderNo='" + s_Order + "'";
+        s_Sql += " join Knet_Procure_OrdersList b  on a.OrderNo =b.OrderNo Where  a.OrderNo='" + s_Order + "' order by a.ID";
         this.BeginQuery(s_Sql);
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
@@ -2835,7 +2967,7 @@ public class BasePage : System.Web.UI.Page
     {
         string s_Return = "";
         string s_Sql = "Select * from Knet_Procure_OrdersList_Details a ";
-        s_Sql += " join Knet_Procure_OrdersList b  on a.OrderNo =b.OrderNo Where  a.OrderNo='" + s_Order + "'";
+        s_Sql += " join Knet_Procure_OrdersList b  on a.OrderNo =b.OrderNo Where  a.OrderNo='" + s_Order + "'  order by a.ID";
         this.BeginQuery(s_Sql);
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
@@ -3456,25 +3588,24 @@ public class BasePage : System.Web.UI.Page
         }
         return s_Return;
     }
+
     public string GetContractState(string s_ContractNo)
     {
-        this.BeginQuery("select * from v_Contract_OutWare_DirectOut_State where v_ContractNo='" + s_ContractNo + "'");
-        DataSet DtsTable = (DataSet)this.QueryForDataSet();
-        if (DtsTable.Tables[0].Rows.Count > 0)
-        {
-            string s_State = DtsTable.Tables[0].Rows[0]["DirectOutState"].ToString();
-            if (s_State == "2")
-            {
+        return GetContractState(s_ContractNo, "");
+    }
 
-                return "<font Color=\"red\">已出库</font>";
-            }
-        }
-        //不管审核状态
+
+    public string GetContractCgState(string s_ContractNo)
+    {
         string s_Return = "";
         string s_Sql = "";
         KNet.BLL.KNet_Sales_ContractList bll = new KNet.BLL.KNet_Sales_ContractList();
         KNet.Model.KNet_Sales_ContractList Model = bll.GetModelB(s_ContractNo);
         if (Model.ContractClass == "129687502761283822")
+        {
+            s_Return = "<font Color=\"red\">无需采购</font>";
+        }
+        else if (Model.isOrder == 2)
         {
             s_Return = "<font Color=\"red\">无需采购</font>";
         }
@@ -3487,8 +3618,8 @@ public class BasePage : System.Web.UI.Page
         {
             try
             {
-                s_Sql = "select Count(*) from KNet_Sales_ContractList_Details";
-                s_Sql += " where ContractNo like '%" + s_ContractNo + "%' and ProductsBarCode not in (";
+                s_Sql = "select Count(*) from KNet_Sales_ContractList_Details a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode";
+                s_Sql += " where ContractNo like '%" + s_ContractNo + "%' and   b.ProductsType<>'M130704050932527' and a.ProductsBarCode not in (";
                 s_Sql += " Select ProductsBarCode from Knet_Procure_OrdersList a join ";
                 s_Sql += " Knet_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo";
                 s_Sql += " where ContractNos like '%" + s_ContractNo + "%')";
@@ -3497,8 +3628,8 @@ public class BasePage : System.Web.UI.Page
                 if (this.Dtb_Result.Rows.Count > 0)
                 {
                     string s_NCount = Dtb_Result.Rows[0][0].ToString();
-                    s_Sql = "select isnull(Count(*),0) from KNet_Sales_ContractList_Details";
-                    s_Sql += " where ContractNo like '%" + s_ContractNo + "%' ";
+                    s_Sql = "select isnull(Count(*),0) from KNet_Sales_ContractList_Details a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
+                    s_Sql += " where ContractNo like '%" + s_ContractNo + "%' and b.ProductsType<>'M130704050932527' ";
                     this.BeginQuery(s_Sql);
                     string s_Count = this.QueryForReturn();
                     if (int.Parse(s_NCount) == int.Parse(s_Count))
@@ -3523,59 +3654,137 @@ public class BasePage : System.Web.UI.Page
             catch
             { }
         }
+        return s_Return;
+    }
+    public string GetContractState(string s_ContractNo, string s_State)
+    {
+        string s_Return = "";
 
-        s_Sql = "Select b.ProductsBarCode,Sum(b.OutWareAmount) as OutWareAmount  from  KNet_Sales_OutWareList a join KNet_Sales_OutWareList_Details b on a.OutWareNo=b.OutWareNo where ContractNo='" + s_ContractNo + "' Group by b.ProductsBarCode";
-        this.BeginQuery(s_Sql);
-        DataTable Dtb_Details = (DataTable)this.QueryForDataTable();
-        if (Dtb_Details.Rows.Count > 0)
+        if (s_State == "2")
         {
-            int i_Num = 0;
-            for (int i = 0; i < Dtb_Details.Rows.Count; i++)
-            {
-                string s_ProductsBarCode = Dtb_Details.Rows[i]["ProductsBarCode"].ToString();
-                int i_OutWareNumber = int.Parse(Dtb_Details.Rows[i]["OutWareAmount"].ToString());
-                int i_ContractNumber = GetContractNumber(s_ContractNo, s_ProductsBarCode);
-                int i_LeftNumber = i_ContractNumber - i_OutWareNumber;
-                if (i_LeftNumber > 0)
-                {
-                    i_Num += 1;
-                }
-            }
-            if (i_Num > 0)//部分发货
-            {
-                s_Return = "<font Color=\"green\">部分发货通知</font>";
-            }
-            if (i_Num == 0)
-            {
-                s_Return = "<font Color=\"red\">已发货通知</font>";
-            }
+            s_Return = "<font Color=\"red\">已出库</font>";
         }
-        s_Sql = "Select b.ProductsBarCode,Sum(b.DirectOutAmount) as DirectOutAmount from KNet_WareHouse_DirectOutList a";
-        s_Sql += " join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo";
-        s_Sql += " where KWD_ShipNo in (select OutWareNo from KNet_Sales_OutWareList where ContractNo='" + s_ContractNo + "') Group by b.ProductsBarCode";
-        this.BeginQuery(s_Sql);
-        DataTable Dtb_Details1 = (DataTable)this.QueryForDataTable();
-        if (Dtb_Details1.Rows.Count > 0)
+        else
         {
-            int i_Num = 0;
-            for (int i = 0; i < Dtb_Details1.Rows.Count; i++)
+            //不管审核状态
+            string s_Sql = "";
+
+            s_Sql = "Select b.ProductsBarCode,Sum(b.DirectOutAmount) as DirectOutAmount from KNet_WareHouse_DirectOutList a";
+            s_Sql += " join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo";
+            s_Sql += " where KWD_ShipNo in (select OutWareNo from KNet_Sales_OutWareList where ContractNo='" + s_ContractNo + "') Group by b.ProductsBarCode";
+            this.BeginQuery(s_Sql);
+            DataTable Dtb_Details1 = (DataTable)this.QueryForDataTable();
+            if (Dtb_Details1.Rows.Count > 0)
             {
-                string s_ProductsBarCode = Dtb_Details1.Rows[i]["ProductsBarCode"].ToString();
-                int i_DirectOutNoNumber = int.Parse(Dtb_Details1.Rows[i]["DirectOutAmount"].ToString());
-                int i_ContractNumber = GetContractNumber(s_ContractNo, s_ProductsBarCode);
-                int i_LeftNumber = i_ContractNumber - i_DirectOutNoNumber;
-                if (i_LeftNumber > 0)
+                int i_Num = 0;
+                for (int i = 0; i < Dtb_Details1.Rows.Count; i++)
                 {
-                    i_Num += 1;
+                    string s_ProductsBarCode = Dtb_Details1.Rows[i]["ProductsBarCode"].ToString();
+                    int i_DirectOutNoNumber = int.Parse(Dtb_Details1.Rows[i]["DirectOutAmount"].ToString());
+                    int i_ContractNumber = GetContractNumber(s_ContractNo, s_ProductsBarCode);
+                    int i_LeftNumber = i_ContractNumber - i_DirectOutNoNumber;
+                    if (i_LeftNumber > 0)
+                    {
+                        i_Num += 1;
+                    }
+                }
+                if (i_Num > 0)//部分发货
+                {
+                    s_Return = "<font Color=\"green\">部分出库</font>";
+                }
+                if (i_Num == 0)
+                {
+                    s_Return = "<font Color=\"red\">已出库</font>";
                 }
             }
-            if (i_Num > 0)//部分发货
+            else
             {
-                s_Return = "<font Color=\"green\">部分出库</font>";
-            }
-            if (i_Num == 0)
-            {
-                s_Return = "<font Color=\"red\">已出库</font>";
+
+                s_Sql = "Select b.ProductsBarCode,Sum(b.OutWareAmount) as OutWareAmount  from  KNet_Sales_OutWareList a join KNet_Sales_OutWareList_Details b on a.OutWareNo=b.OutWareNo where ContractNo='" + s_ContractNo + "' Group by b.ProductsBarCode";
+                this.BeginQuery(s_Sql);
+                DataTable Dtb_Details = (DataTable)this.QueryForDataTable();
+                if (Dtb_Details.Rows.Count > 0)
+                {
+                    int i_Num = 0;
+                    for (int i = 0; i < Dtb_Details.Rows.Count; i++)
+                    {
+                        string s_ProductsBarCode = Dtb_Details.Rows[i]["ProductsBarCode"].ToString();
+                        int i_OutWareNumber = int.Parse(Dtb_Details.Rows[i]["OutWareAmount"].ToString());
+                        int i_ContractNumber = GetContractNumber(s_ContractNo, s_ProductsBarCode);
+                        int i_LeftNumber = i_ContractNumber - i_OutWareNumber;
+                        if (i_LeftNumber > 0)
+                        {
+                            i_Num += 1;
+                        }
+                    }
+                    if (i_Num > 0)//部分发货
+                    {
+                        s_Return = "<font Color=\"green\">部分发货通知</font>";
+                    }
+                    if (i_Num == 0)
+                    {
+                        s_Return = "<font Color=\"red\">已发货通知</font>";
+                    }
+                }
+                else
+                {
+
+                    KNet.BLL.KNet_Sales_ContractList bll = new KNet.BLL.KNet_Sales_ContractList();
+                    KNet.Model.KNet_Sales_ContractList Model = bll.GetModelB(s_ContractNo);
+                    if (Model.ContractClass == "129687502761283822")
+                    {
+                        s_Return = "<font Color=\"red\">无需采购</font>";
+                    }
+                    else if (Model.isOrder == 2)
+                    {
+                        s_Return = "<font Color=\"red\">无需采购</font>";
+                    }
+                    else if ((Model.isOrder == 1) && (Model.ContractDateTime <= DateTime.Parse("2015-8-1")))
+                    {
+                        s_Return = "<a href=\"/Web/SalesShip/Knet_Sales_Ship_Manage_Add.aspx?ContractNo=" + s_ContractNo + "\" ><font Color=\"red\">已采购</font></a>";
+
+                    }
+                    else
+                    {
+                        try
+                        {
+                            s_Sql = "select Count(*) from KNet_Sales_ContractList_Details a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode";
+                            s_Sql += " where ContractNo like '%" + s_ContractNo + "%' and   b.ProductsType<>'M130704050932527' and a.ProductsBarCode not in (";
+                            s_Sql += " Select ProductsBarCode from Knet_Procure_OrdersList a join ";
+                            s_Sql += " Knet_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo";
+                            s_Sql += " where ContractNos like '%" + s_ContractNo + "%')";
+                            this.BeginQuery(s_Sql);
+                            this.QueryForDataTable();
+                            if (this.Dtb_Result.Rows.Count > 0)
+                            {
+                                string s_NCount = Dtb_Result.Rows[0][0].ToString();
+                                s_Sql = "select isnull(Count(*),0) from KNet_Sales_ContractList_Details a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
+                                s_Sql += " where ContractNo like '%" + s_ContractNo + "%' and b.ProductsType<>'M130704050932527' ";
+                                this.BeginQuery(s_Sql);
+                                string s_Count = this.QueryForReturn();
+                                if (int.Parse(s_NCount) == int.Parse(s_Count))
+                                {
+                                    s_Return = "<font Color=\"blue\">未采购</font>";
+                                    if (Model.isOrder == 1)
+                                    {
+                                        s_Return = "<a href=\"/Web/SalesShip/Knet_Sales_Ship_Manage_Add.aspx?ContractNo=" + s_ContractNo + "\" ><font Color=\"red\">已采购</font></a>";
+                                    }
+                                }
+                                else if (int.Parse(s_NCount) == 0)
+                                {
+                                    s_Return = "<a href=\"/Web/SalesShip/Knet_Sales_Ship_Manage_Add.aspx?ContractNo=" + s_ContractNo + "\" ><font Color=\"red\">已采购</font></a>";
+                                }
+                                else
+                                {
+                                    s_Return = "<font Color=\"green\">部分采购</font>";
+                                }
+                            }
+                        }
+                        catch
+                        { }
+                    }
+
+                }
             }
         }
         return s_Return;
@@ -3662,27 +3871,27 @@ public class BasePage : System.Web.UI.Page
     public string Base_GetSuppNoAddress(string SuppNoVale)
     {
         StringBuilder Sb_Return = new StringBuilder();
-      /*  this.BeginQuery("Select * from Knet_Procure_OrdersList Where receiveSuppNo='" + SuppNoVale + "' Order by OrderDateTime desc");
+        /*  this.BeginQuery("Select * from Knet_Procure_OrdersList Where receiveSuppNo='" + SuppNoVale + "' Order by OrderDateTime desc");
+          this.QueryForDataTable();
+          if (this.Dtb_Result.Rows.Count > 0)
+          {
+              Sb_Return.Append(this.Dtb_Result.Rows[0]["ContractAddress"].ToString()).Replace("\r\n", "$");
+          }
+          else
+          {*/
+        this.BeginQuery("Select SuppAddress,SuppName,SuppPeople,SuppMobiTel,SuppPhone From Knet_Procure_Suppliers Where SuppNo='" + SuppNoVale + "'");
         this.QueryForDataTable();
-        if (this.Dtb_Result.Rows.Count > 0)
+        Sb_Return.Append("地址: " + this.Dtb_Result.Rows[0][0].ToString() + "$");
+        Sb_Return.Append(this.Dtb_Result.Rows[0][1].ToString() + "$");
+        Sb_Return.Append("收货人: " + this.Dtb_Result.Rows[0][2].ToString() + "$");
+        if (this.Dtb_Result.Rows[0][3].ToString() != "")
         {
-            Sb_Return.Append(this.Dtb_Result.Rows[0]["ContractAddress"].ToString()).Replace("\r\n", "$");
+            Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][3].ToString() + "$");
         }
         else
-        {*/
-            this.BeginQuery("Select SuppAddress,SuppName,SuppPeople,SuppMobiTel,SuppPhone From Knet_Procure_Suppliers Where SuppNo='" + SuppNoVale + "'");
-            this.QueryForDataTable();
-            Sb_Return.Append("地址: " + this.Dtb_Result.Rows[0][0].ToString() + "$");
-            Sb_Return.Append(this.Dtb_Result.Rows[0][1].ToString() + "$");
-            Sb_Return.Append("收货人: " + this.Dtb_Result.Rows[0][2].ToString() + "$");
-            if (this.Dtb_Result.Rows[0][3].ToString() != "")
-            {
-                Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][3].ToString() + "$");
-            }
-            else
-            {
-                Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
-            }
+        {
+            Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
+        }
         /*
         }*/
         return Sb_Return.ToString();
@@ -4058,7 +4267,7 @@ public class BasePage : System.Web.UI.Page
         StringBuilder Sb_Return = new StringBuilder();
         try
         {
-            this.BeginQuery("Select * from PB_Basic_Where where PBW_Del=0 and PBW_Type='103' and PBW_Table='" + s_Table + "'");
+            this.BeginQuery("Select * from PB_Basic_Where where PBW_Del=0 and PBW_Type='103' and PBW_Table='" + s_Table + "' order by PBW_Order ");
             this.QueryForDataTable();
             DataTable Dtb_Where = Dtb_Result;
             if (Dtb_Where.Rows.Count > 0)
@@ -4144,7 +4353,7 @@ public class BasePage : System.Web.UI.Page
         string s_Selected = "";
         try
         {
-            this.BeginQuery("Select * from PB_Basic_Where where PBW_Del=0 and PBW_Type='103' and PBW_Table='" + s_Table + "'");
+            this.BeginQuery("Select * from PB_Basic_Where where PBW_Del=0 and PBW_Type='103' and PBW_Table='" + s_Table + "'  order by PBW_Order ");
             this.QueryForDataTable();
             DataTable Dtb_Where = Dtb_Result;
             if (Dtb_Where.Rows.Count > 0)
@@ -4181,7 +4390,7 @@ public class BasePage : System.Web.UI.Page
             }
             else
             {
-                this.BeginQuery("Select * from PB_Basic_Where where PBW_ID='" + s_ID + "'");
+                this.BeginQuery("Select * from PB_Basic_Where where PBW_ID='" + s_ID + "'  order by PBW_Order ");
                 this.QueryForDataTable();
                 DataTable Dtb_Where = Dtb_Result;
                 if (Dtb_Where.Rows.Count > 0)
@@ -4204,7 +4413,7 @@ public class BasePage : System.Web.UI.Page
         StringBuilder Sb_Return = new StringBuilder();
         try
         {
-            this.BeginQuery("Select * from PB_Basic_Where where PBW_ID='" + s_ID + "'");
+            this.BeginQuery("Select * from PB_Basic_Where where PBW_ID='" + s_ID + "'  order by PBW_Order ");
             this.QueryForDataTable();
             DataTable Dtb_Where = Dtb_Result;
             if (Dtb_Where.Rows.Count > 0)
@@ -4252,7 +4461,7 @@ public class BasePage : System.Web.UI.Page
 
             for (int i = 0; i < arr_Fields.Length; i++)
             {
-                this.BeginQuery("Select * from PB_Basic_Where where PBW_ID='" + arr_Fields[i] + "'");
+                this.BeginQuery("Select * from PB_Basic_Where where PBW_ID='" + arr_Fields[i] + "'  order by PBW_Order  ");
                 this.QueryForDataTable();
                 DataTable Dtb_Where = Dtb_Result;
                 if (Dtb_Where.Rows.Count > 0)
@@ -5572,13 +5781,14 @@ public class BasePage : System.Web.UI.Page
                 return false;
             p.StartInfo.FileName = str;
             p.StartInfo.Arguments = " \"" + s_url + "" + url + "\" " + s_Path;
-            //AM.Add_Logs("测试 URL" + p.StartInfo.Arguments + " PATH;" + s_Path + " Str;" + str);
+            // AM.Add_Logs("wkhtmltopdf " + p.StartInfo.Arguments + " " + s_Path + " Str;" + str);
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
+
             string output = p.StandardOutput.ReadToEnd();
             if (!string.IsNullOrEmpty(output))
             {

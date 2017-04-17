@@ -23,6 +23,7 @@
         function set_return(ContractNo) {
             if (window.opener != undefined) {
                 window.opener.returnValue = ContractNo;
+                window.opener.SetReturnValueInOpenner_ContentPerson(ContractNo);
             }
             else {
                 window.returnValue = ContractNo;

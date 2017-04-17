@@ -18,7 +18,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds, "选择客户", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer(tempd) {
             if (tempd != undefined) {
                 var ss, fh;
                 ss = tempd.split("#");
@@ -74,7 +77,10 @@
                 alert("请选择客户！")
                 return;
             }
-            var temp = window.showModalDialog("SelectProducts_Sales.aspx?CustomerValue=" + s_Customer + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no;dialogwidth=1000px;dialogHeight=600px");
+            //var temp = window.showModalDialog("SelectProducts_Sales.aspx?CustomerValue=" + s_Customer + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no;dialogwidth=1000px;dialogHeight=600px");
+            var temp = window.open("SelectProducts_Sales.aspx?CustomerValue=" + s_Customer + "", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Product(temp) {
             if (temp != undefined) {
                 document.all("Xs_ProductsCode").value = "";
                 var ss;

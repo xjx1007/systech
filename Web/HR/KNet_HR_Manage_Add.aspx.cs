@@ -186,6 +186,8 @@ public partial class Knet_Web_HR_KNet_HR_Manage_Add : BasePage
         model.Position = this.Drop_Position.SelectedValue;
         model.KRS_DepartPerson = this.Ddl_Person.SelectedValue;
         model.KRS_MailPassWord = this.Tbx_MailPassWord.Text;
+        model.TelPhone = this.Tbx_TelPhone.Text;
+        model.ProductsType = this.Tbx_ProductsTypeNo.Text;
         try
         {
             model.isSale = int.Parse(Ddl_IsSale.SelectedValue);
@@ -305,5 +307,8 @@ public partial class Knet_Web_HR_KNet_HR_Manage_Add : BasePage
         this.Tbx_MailPassWord.Text = model.KRS_MailPassWord;
         this.Ddl_IsSale.SelectedValue = model.isSale.ToString();
         this.Ddl_IsWeb.SelectedValue = model.KRS_IsWeb.ToString();
+        this.Tbx_TelPhone.Text = model.TelPhone;
+        Tbx_ProductsTypeNo.Text = model.ProductsType;
+        this.Tbx_ProductsTypeName.Text = base.Base_GetProductsType(model.ProductsType);
     }
 }

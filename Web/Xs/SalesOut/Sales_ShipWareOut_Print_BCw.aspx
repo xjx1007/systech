@@ -380,23 +380,21 @@
                         <td colspan="2">
                         </td>
                         <td align="left" rowspan="2" valign="top">
-                            <img alt="logo中1-2" height="29" src="/images/士兰微芯片订单_22424_image003.png" v:shapes="Picture_x0020_5" />
-                        </td>
+                            &nbsp;</td>
                     </tr>
                     <tr>
                         <td height="20">
                         </td>
                         <td align="left" valign="top">
-                            <img alt="logo英1-2" height="20" src="/images/士兰微芯片订单_22424_image004.png" v:shapes="Picture_x0020_3" />
-                        </td>
+                            &nbsp;</td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr height="25">
             <td class="style2" colspan="9" height="32" style="mso-ignore: colspan">
-                地址：杭州市黄姑山路4号 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-88210386<span
-                    style="mso-spacerun: yes"> </span>传真：0571-88216187<span style="mso-spacerun: yes">
+                地址：杭州西湖科技园西园九路7号综合楼四楼 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-88210386<span
+                    style="mso-spacerun: yes"> </span>传真：0571-87672166<span style="mso-spacerun: yes">
                 </span>领料人：<asp:Label ID="Lbl_FPerson" runat="server"></asp:Label>
                 &nbsp;电话：88210386<span style="mso-spacerun: yes"> </span>
             </td>

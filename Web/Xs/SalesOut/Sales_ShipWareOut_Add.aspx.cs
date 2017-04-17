@@ -261,7 +261,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             s_CustomerProvinces = base.Base_GetCityName(Dtb_Table.Rows[0][0].ToString());
             s_CustomerCity = base.Base_GetShiName(Dtb_Table.Rows[0][1].ToString());
             string s_Name =Dtb_Table.Rows[0][2].ToString();
-            if (s_CustomerCity != "")
+           /* if (s_CustomerCity != "")
             {
                 s_CustomerCity = s_CustomerCity.Replace("市", "");
             }
@@ -278,6 +278,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 s_CustomerProvinces = s_CustomerProvinces.Replace("省", "");
                 s_CustomerProvinces = s_CustomerProvinces.Replace("市", "");
             }
+            * */
             s_Sql = "Select top 10 * from Wl_Customer_Price a join Wl_Customer_Price_Details b on a.WCP_ID=WCPD_FID where ";
             s_Sql += " WCPD_Provice like '%" + s_CustomerProvinces + "%' and WCPD_City like '%" + s_CustomerCity + "%'";
             s_Sql += " and WCP_SuppNo in (Select SuppNo from KNET_Sys_WareHouse where HouseNo='" + this.Ddl_HouseNo.SelectedValue + "')";
@@ -344,7 +345,8 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             this.OutWareOursContact.Text = AM.KNet_StaffName;
             this.Tbx_TelPhone.Text = model.KWD_Telphone;
             this.Ddl_RkHouseNo.SelectedValue = model.KWD_RkHouseNo;
-            this.Ddl_HouseNo.SelectedValue = model.HouseNo;
+            //this.Ddl_HouseNo.SelectedValue = model.HouseNo;
+            this.Ddl_HouseNo.SelectedValue = "131187187069993664";
             this.Ddl_ShipType.SelectedValue = model.KWD_ShipType;
 
 
@@ -442,7 +444,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             }
             catch
             { }
-            ShowWuliu();
+            //ShowWuliu();
 
             this.Ddl_KpType.SelectedValue = model.KWD_KpType;
             this.Drop_Payment.SelectedValue = model.KWD_PayMent;

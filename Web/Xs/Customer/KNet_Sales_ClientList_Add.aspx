@@ -19,7 +19,11 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectClientProductsList.aspx?sID=", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectClientProductsList.aspx?sID=" + intSeconds + "", "选择客户", "width=850, height=500,top=100,left=120,toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no,alwaysRaised=yes,depended=yes");
+
+        }
+
+        function SetReturnValueInOpenner_Product(tempd) {
             if (tempd != undefined) {
 
                 var ss, s_Value, s_Name, i_row, sd;
@@ -50,7 +54,6 @@
                 document.all("Xs_MaterID").value = s_ID;
             }
         }
-
 
         function deleteRow(obj) {
             myTable.deleteRow(obj.parentElement.parentElement.rowIndex);
@@ -107,7 +110,12 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "选择客户", "width=850, height=500,top=100,left=120,toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no,alwaysRaised=yes,depended=yes");
+
+        }
+        function SetReturnValueInOpenner_Customer(tempd) {
             if (tempd != undefined) {
                 var ss;
                 ss = tempd.split("#");
@@ -119,12 +127,13 @@
                 document.all('FaterCodeName').value = "";
             }
         }
+
         function GetCustomerID() {
             var ID = document.all('Tbx_ID').value;
             var Type = document.all('Tbx_Type').value;
            var faterCode= document.all('FaterCode').value ;
-          var CustomerTypes= document.all('CustomerTypes').value ;
-          var CustomerClass= document.all('CustomerClass').value ;
+           var CustomerTypes = "01";
+          var CustomerClass= "01" ;
           var sheng = document.all('sheng').value;
           var response = Knet_Web_Sales_KNet_Sales_ClientList_Add.GetCustomer(faterCode, CustomerTypes, CustomerClass, sheng)
           document.all('CustomerValue').value = response.value;
@@ -244,6 +253,7 @@
                                                         
                                                     </td>
                                                 </tr>
+                                                <asp:Panel runat="server" Visible="false">
                                                 <tr>
                                                     <td width="16%" height="25" align="right" class="dvtCellLabel">
                                                         渠道信息:
@@ -251,8 +261,6 @@
                                                     <td width="35%" align="left" class="dvtCellInfo">
                                                         <asp:DropDownList ID="CustomerClass" runat="server" Width="150px"  OnChange="GetCustomerID()" >
                                                         </asp:DropDownList>
-                                                        (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                                                            runat="server" ErrorMessage="请选择分类" ControlToValidate="CustomerClass" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </td>
                                                     <td width="17%" align="right" class="dvtCellLabel">
                                                         业务类型:
@@ -260,10 +268,8 @@
                                                     <td width="32%" align="left" class="dvtCellInfo">
                                                         <asp:DropDownList ID="CustomerTypes" runat="server" Width="150px" OnChange="GetCustomerID()" >
                                                         </asp:DropDownList>
-                                                        (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-                                                            runat="server" ErrorMessage="请选择类型" ControlToValidate="CustomerTypes" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </td>
-                                                </tr>
+                                                </tr></asp:Panel>
                                                 <tr>
                                                     <td width="16%" height="25" align="right" class="dvtCellLabel">
                                                         客户行业:

@@ -90,7 +90,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Manage : BasePage
             { }
             //string[] s_mater = Model.KSO_MaterNumber.Split(',');
             //string[] s_OrderNo = Model.KSO_OrderNo.Split(',');
-            //if (s_MainCategory == "129678733470295462")//遥控器
+            //if (s_MainCategory == "129678733470295462")//成品
             //{
             //    this.Lbl_MaterNumber.Text = s_mater[0];
             //    this.Lbl_OrderNo.Text = s_OrderNo[0];

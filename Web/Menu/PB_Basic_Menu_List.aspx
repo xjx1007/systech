@@ -225,10 +225,11 @@
                                                 <%# DataBinder.Eval(Container.DataItem, "PBM_ID")%></a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="上级ID" SortExpression="PBM_FatherID" ItemStyle-HorizontalAlign="Left"
+                                    <asp:TemplateField HeaderText="上级菜单" SortExpression="PBM_FatherID" ItemStyle-HorizontalAlign="Left"
                                         HeaderStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
-                                        <%# DataBinder.Eval(Container.DataItem, "PBM_FatherID").ToString() %>
+                                        <%# GetParentMenuName(Eval("PBM_FatherID")) %>
+                                        <%# DataBinder.Eval(Container.DataItem, "PBM_FatherID").ToString() %>                                            
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="菜单名称" DataField="PBM_Name" SortExpression="PBM_Name" HtmlEncode="false">

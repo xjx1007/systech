@@ -7,7 +7,7 @@
 <head  runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-    <title></title>
+    <title>选择产品分类</title>
 </head>
 <base target="_self" />
 <script type="text/javascript" src="../js/ajax_func.js"></script>

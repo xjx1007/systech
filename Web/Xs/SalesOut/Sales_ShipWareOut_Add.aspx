@@ -18,7 +18,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("SelectSalesShipList.aspx?ID=" + intSeconds + "&State=1", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var temp = window.showModalDialog("SelectSalesShipList.aspx?ID=" + intSeconds + "&State=1", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var temp = window.open("SelectSalesShipList.aspx?ID=" + intSeconds + "&State=1", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SalesShip(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -35,7 +38,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "&callBack=SetReturnValueInOpenner_Customer2", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer2(tempd) {
             if (tempd != undefined) {
                 var ss;
                 ss = tempd.split("#");
@@ -67,78 +73,81 @@
                 }
             }
         }
-            function btnGetReturnValue_onclick2() {
-                var today, seconds;
-                today = new Date();
-                intSeconds = today.getSeconds();
-                var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-                if (tempd != undefined) {
-                    var ss;
-                    ss = tempd.split("#");
-                    $('Tbx_SCustomerValue').value = ss[0];
-                    $('Tbx_SCustomerName').value = ss[1];
-                    var response = Web_Sales_Sales_ShipWareOut_Add.GetLastOutWare($('Tbx_SCustomerValue').value);
+        function btnGetReturnValue_onclick2() {
+            var today, seconds;
+            today = new Date();
+            intSeconds = today.getSeconds();
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "&callBack=SetReturnValueInOpenner_Customer1", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer1(tempd) {
+            if (tempd != undefined) {
+                var ss;
+                ss = tempd.split("#");
+                $('Tbx_SCustomerValue').value = ss[0];
+                $('Tbx_SCustomerName').value = ss[1];
+                var response = Web_Sales_Sales_ShipWareOut_Add.GetLastOutWare($('Tbx_SCustomerValue').value);
+                if (response.value != "") {
+                    var TS = response.value.split(",");
+                    $('Tbx_ContentPersonID').value = TS[0];
+                    $('Tbx_ContentPerson').value = TS[1];
+                    $('Tbx_Phone').value = TS[2];
+                    $('ContractToAddress').value = TS[3];
+                    $('Tbx_ShipType').value = TS[6];
+                    $('Tbx_MaterNumber').value = TS[7];
+                    $('Tbx_OrderNo').value = TS[8];
+                    $('Tbx_PlanNo').value = TS[9];
+
+                    objSelect_DutyPerson = document.getElementById("Ddl_DutyPerson")
+                    for (var i = 0; i < objSelect_DutyPerson.options.length; i++) {
+                        if (objSelect_DutyPerson.options[i].value == TS[4]) {
+                            objSelect_DutyPerson.options[i].selected = true;
+                        }
+                    }
+                    objSelect = document.getElementById("ContractDeliveMethods")
+                    for (var i = 0; i < objSelect.options.length; i++) {
+                        if (objSelect.options[i].value == TS[5]) {
+                            objSelect.options[i].selected = true;
+                        }
+                    }
+                }
+                else {
+                    var Gs = ss[3].split(",");
+                    var response = Web_Sales_Sales_ShipWareOut_Add.GetLinkMan(Gs[0]);
                     if (response.value != "") {
                         var TS = response.value.split(",");
                         $('Tbx_ContentPersonID').value = TS[0];
                         $('Tbx_ContentPerson').value = TS[1];
                         $('Tbx_Phone').value = TS[2];
                         $('ContractToAddress').value = TS[3];
-                        $('Tbx_ShipType').value = TS[6];
-                        $('Tbx_MaterNumber').value = TS[7];
-                        $('Tbx_OrderNo').value = TS[8];
-                        $('Tbx_PlanNo').value = TS[9];
-
                         objSelect_DutyPerson = document.getElementById("Ddl_DutyPerson")
                         for (var i = 0; i < objSelect_DutyPerson.options.length; i++) {
                             if (objSelect_DutyPerson.options[i].value == TS[4]) {
                                 objSelect_DutyPerson.options[i].selected = true;
                             }
                         }
-                        objSelect = document.getElementById("ContractDeliveMethods")
-                        for (var i = 0; i < objSelect.options.length; i++) {
-                            if (objSelect.options[i].value == TS[5]) {
-                                objSelect.options[i].selected = true;
-                            }
-                        }
-                    }
-                    else {
-                        var Gs = ss[3].split(",");
-                        var response = Web_Sales_Sales_ShipWareOut_Add.GetLinkMan(Gs[0]);
-                        if (response.value != "") {
-                            var TS = response.value.split(",");
-                            $('Tbx_ContentPersonID').value = TS[0];
-                            $('Tbx_ContentPerson').value = TS[1];
-                            $('Tbx_Phone').value = TS[2];
-                            $('ContractToAddress').value = TS[3];
-                            objSelect_DutyPerson = document.getElementById("Ddl_DutyPerson")
-                            for (var i = 0; i < objSelect_DutyPerson.options.length; i++) {
-                                if (objSelect_DutyPerson.options[i].value == TS[4]) {
-                                    objSelect_DutyPerson.options[i].selected = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                else {
-                    $('Tbx_SCustomerValue').value = "";
-                    $('Tbx_SCustomerName').value = "";
-                    $('Tbx_Phone').value = "";
-                    $('ContractToAddress').value = "";
-                    objSelect_DutyPerson = document.getElementById("Ddl_DutyPerson")
-                    for (var i = 0; i < objSelect_DutyPerson.options.length; i++) {
-                        if (objSelect_DutyPerson.options[i].value == "") {
-                            objSelect_DutyPerson.options[i].selected = true;
-                        }
-                    }
-                    objSelect = document.getElementById("ContractDeliveMethods")
-                    for (var i = 0; i < objSelect.options.length; i++) {
-                        if (objSelect.options[i].value == "") {
-                            objSelect.options[i].selected = true;
-                        }
                     }
                 }
             }
+            else {
+                $('Tbx_SCustomerValue').value = "";
+                $('Tbx_SCustomerName').value = "";
+                $('Tbx_Phone').value = "";
+                $('ContractToAddress').value = "";
+                objSelect_DutyPerson = document.getElementById("Ddl_DutyPerson")
+                for (var i = 0; i < objSelect_DutyPerson.options.length; i++) {
+                    if (objSelect_DutyPerson.options[i].value == "") {
+                        objSelect_DutyPerson.options[i].selected = true;
+                    }
+                }
+                objSelect = document.getElementById("ContractDeliveMethods")
+                for (var i = 0; i < objSelect.options.length; i++) {
+                    if (objSelect.options[i].value == "") {
+                        objSelect.options[i].selected = true;
+                    }
+                }
+            }
+        }
             function btnGetBackValue_onclick() {
                 $('ContractNoSelectValue').value = "";
                 $('ContractNoName').value = "";
@@ -147,8 +156,10 @@
                 var today, seconds;
                 today = new Date();
                 intSeconds = today.getSeconds();
-                var tempd = window.showModalDialog("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=yes; menubar=yes;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-
+                //var tempd = window.showModalDialog("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=yes; menubar=yes;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+                var tempd = window.open("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
+            function SetReturnValueInOpenner_WareHouse_Ownall(tempd) {
                 if (tempd != undefined) {
                     var ss, s_Value, i_row;
                     ss = tempd.split("|");
@@ -235,8 +246,10 @@
             function btnGetContentPerson_onclick() {
                 var s_Customer = "";
                 s_Customer = $('Tbx_CustomerValue').value;
-                var temaap = window.showModalDialog("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-
+                //var temaap = window.showModalDialog("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+                var temaap = window.open("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "选择联系人", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
+            function SetReturnValueInOpenner_ContentPerson(temaap) {
                 if (temaap != undefined) {
                     var sws;
                     sws = temaap.split(",");
@@ -934,7 +947,7 @@
                                         </tr>
                                             </asp:Panel>
                                             </asp:Panel>
-                                            <asp:Panel runat="server" ID="Pan_Wuliu">
+                                            <asp:Panel runat="server" ID="Pan_Wuliu" Visible="false">
                                         <tr>
                                             <td colspan="4" class="detailedViewHeader">
                                                 <b>运费物流信息</b>

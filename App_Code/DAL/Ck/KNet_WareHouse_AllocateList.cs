@@ -42,9 +42,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_AllocateList(");
-            strSql.Append("AllocateNo,AllocateTopic,AllocateCause,AllocateDateTime,HouseNo,HouseNo_int,AllocateStaffBranch,AllocateStaffDepart,AllocateStaffNo,AllocateRemarks,AllocateCheckYN)");
+            strSql.Append("AllocateNo,AllocateTopic,AllocateCause,AllocateDateTime,HouseNo,HouseNo_int,AllocateStaffBranch,AllocateStaffDepart,AllocateStaffNo,AllocateRemarks,AllocateCheckYN,KWA_OrderNo,KWA_Type,KWA_DBType)");
             strSql.Append(" values (");
-            strSql.Append("@AllocateNo,@AllocateTopic,@AllocateCause,@AllocateDateTime,@HouseNo,@HouseNo_int,@AllocateStaffBranch,@AllocateStaffDepart,@AllocateStaffNo,@AllocateRemarks,@AllocateCheckYN)");
+            strSql.Append("@AllocateNo,@AllocateTopic,@AllocateCause,@AllocateDateTime,@HouseNo,@HouseNo_int,@AllocateStaffBranch,@AllocateStaffDepart,@AllocateStaffNo,@AllocateRemarks,@AllocateCheckYN,@KWA_OrderNo,@KWA_Type,@KWA_DBType)");
             SqlParameter[] parameters = {
 					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@AllocateTopic", SqlDbType.NVarChar,50),
@@ -56,7 +56,12 @@ namespace KNet.DAL
 					new SqlParameter("@AllocateStaffDepart", SqlDbType.NVarChar,50),
 					new SqlParameter("@AllocateStaffNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@AllocateRemarks", SqlDbType.NVarChar,1000),
-					new SqlParameter("@AllocateCheckYN", SqlDbType.Bit,1)};
+					new SqlParameter("@AllocateCheckYN", SqlDbType.Bit,1),
+					new SqlParameter("@KWA_OrderNo", SqlDbType.NVarChar,50),
+					new SqlParameter("@KWA_Type", SqlDbType.NVarChar,50),
+					new SqlParameter("@KWA_DBType", SqlDbType.Int,4)
+                    
+                                        };
             parameters[0].Value = model.AllocateNo;
             parameters[1].Value = model.AllocateTopic;
             parameters[2].Value = model.AllocateCause;
@@ -68,7 +73,11 @@ namespace KNet.DAL
             parameters[8].Value = model.AllocateStaffNo;
             parameters[9].Value = model.AllocateRemarks;
             parameters[10].Value = model.AllocateCheckYN;
-
+            parameters[11].Value = model.KWA_OrderNo;
+            parameters[12].Value = model.KWA_Type;
+            parameters[13].Value = model.KWA_DBType;
+            
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -84,7 +93,12 @@ namespace KNet.DAL
             strSql.Append("AllocateDateTime=@AllocateDateTime,");
             strSql.Append("HouseNo=@HouseNo,");
             strSql.Append("HouseNo_int=@HouseNo_int,");
-            strSql.Append("AllocateRemarks=@AllocateRemarks");
+            strSql.Append("AllocateRemarks=@AllocateRemarks,");
+            strSql.Append("KWA_OrderNo=@KWA_OrderNo, ");
+            strSql.Append("KWA_Type=@KWA_Type, ");
+            strSql.Append("KWA_DBType=@KWA_DBType ");
+            
+            
             strSql.Append(" where AllocateNo=@AllocateNo ");
             SqlParameter[] parameters = {
 					new SqlParameter("@AllocateTopic", SqlDbType.NVarChar,50),
@@ -93,6 +107,11 @@ namespace KNet.DAL
 					new SqlParameter("@HouseNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@HouseNo_int", SqlDbType.NVarChar,50),
 					new SqlParameter("@AllocateRemarks", SqlDbType.NVarChar,1000),
+					new SqlParameter("@KWA_OrderNo", SqlDbType.NVarChar,50),
+					new SqlParameter("@KWA_Type", SqlDbType.NVarChar,50),
+					new SqlParameter("@KWA_DBType", SqlDbType.Int,4),
+                    
+                    
 					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.AllocateTopic;
             parameters[1].Value = model.AllocateCause;
@@ -100,7 +119,11 @@ namespace KNet.DAL
             parameters[3].Value = model.HouseNo;
             parameters[4].Value = model.HouseNo_int;
             parameters[5].Value = model.AllocateRemarks;
-            parameters[6].Value = model.AllocateNo;
+            parameters[6].Value = model.KWA_OrderNo;
+            parameters[7].Value = model.KWA_Type;
+            parameters[8].Value = model.KWA_DBType;
+            
+            parameters[9].Value = model.AllocateNo;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -186,6 +209,17 @@ namespace KNet.DAL
                 {
                     model.AllocateCheckYN = int.Parse(ds.Tables[0].Rows[0]["AllocateCheckYN"].ToString());
                 }
+
+                if (ds.Tables[0].Rows[0]["KWA_OrderNo"] != null && ds.Tables[0].Rows[0]["KWA_OrderNo"].ToString() != "")
+                {
+                    model.KWA_OrderNo = ds.Tables[0].Rows[0]["KWA_OrderNo"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KWA_Type"] != null && ds.Tables[0].Rows[0]["KWA_Type"].ToString() != "")
+                {
+                    model.KWA_Type = ds.Tables[0].Rows[0]["KWA_Type"].ToString();
+                }
+                
                 return model;
             }
             else
@@ -258,6 +292,22 @@ namespace KNet.DAL
                 {
                     model.AllocateCheckYN = int.Parse(ds.Tables[0].Rows[0]["AllocateCheckYN"].ToString());
                 }
+
+                if (ds.Tables[0].Rows[0]["KWA_OrderNo"] != null && ds.Tables[0].Rows[0]["KWA_OrderNo"].ToString() != "")
+                {
+                    model.KWA_OrderNo = ds.Tables[0].Rows[0]["KWA_OrderNo"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KWA_Type"] != null && ds.Tables[0].Rows[0]["KWA_Type"].ToString() != "")
+                {
+                    model.KWA_Type = ds.Tables[0].Rows[0]["KWA_Type"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KWA_DBType"] != null && ds.Tables[0].Rows[0]["KWA_DBType"].ToString() != "")
+                {
+                    model.KWA_DBType = int.Parse(ds.Tables[0].Rows[0]["KWA_DBType"].ToString());
+                }
+                
                 return model;
             }
             else

@@ -331,7 +331,7 @@ public partial class Web_List_Details : BasePage
             model.SEM_Mendor = AM.KNet_StaffNo;
             model.SEM_MTime = DateTime.Now;
 
-            ///遥控器消耗
+            ///成品消耗
             ArrayList arr_RcDetails = new ArrayList();
             int i_Num = 0;
             KNet.Model.Sc_Expend_Manage_RCDetails Mode_RkDetails = new KNet.Model.Sc_Expend_Manage_RCDetails();

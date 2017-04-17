@@ -384,12 +384,6 @@
                                                         <%# base.Base_GetBasicCodeName("113", DataBinder.Eval(Container.DataItem, "KSC_State").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="渠道信息" SortExpression="CustomerClass" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# GetClient_Name(DataBinder.Eval(Container.DataItem, "CustomerClass"))%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="客户类型" SortExpression="CustomerTypes" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
@@ -432,31 +426,13 @@
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="70px" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                 </asp:BoundField>
-                                                <asp:TemplateField HeaderText="销售1" SortExpression="KSC_DutyPerson" HeaderStyle-Font-Size="12px"
+                                                <asp:TemplateField HeaderText="业务员" SortExpression="KSC_DutyPerson" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "KSC_DutyPerson").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 
-                                                <asp:TemplateField HeaderText="销售2" SortExpression="KSC_DutyPerson1" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "KSC_DutyPerson1").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="市场1" SortExpression="KSC_Auxiliary" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "KSC_Auxiliary").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="市场2" SortExpression="KSC_Auxiliary1" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "KSC_Auxiliary1").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="操作" HeaderStyle-HorizontalAlign="center" HeaderStyle-Width="30px">
                                                     <ItemTemplate>
                                                         <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="/images/Edit.gif" border="0"

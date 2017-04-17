@@ -18,7 +18,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("/Web/Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            //var temp = window.showModalDialog("/Web/Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("/Web/Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -36,56 +39,60 @@
             intSeconds = today.getSeconds();
             var ReturnNo = document.all("ReturnNo").value;
             if (ReturnNo != "") {
-                tempd = window.showModalDialog("SelectReturnDetails.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ReturnNo=" + document.all("ReturnNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+                //tempd = window.showModalDialog("SelectReturnDetails.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ReturnNo=" + document.all("ReturnNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+                tempd = window.open("SelectReturnDetails.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ReturnNo=" + document.all("ReturnNo").value + "", "选择产品", "width=1000px, height=600,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
             else {
-                tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ProductsMainCategroy=129678733470295462", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+                //tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ProductsMainCategroy=129678733470295462", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+                tempd = window.open("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ProductsMainCategroy=129678733470295462", "选择产品", "width=1000px, height=600,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
+        }
+        function SetReturnValueInOpenner_Products(tempd) {
             if (tempd != undefined) {
                 var i_num1 = parseInt(document.all('Tbx_Num').value);
                 document.all('Tbx_Num').value = i_num1;
                 var ss, s_Value, i_row;
                 ss1 = tempd.split("|");
-                for (var i = 0; i < ss1.length; i++) {
-                    ss = tempd.split(",");
+                for (var i = 0; i < parseInt(ss1.length) - 1; i++) {
+                    ss = ss1[i].split(",");
                     i_row = myTable.rows.length;
                     s_ID = document.all("Xs_ProductsCode").value;
                     var objRow = myTable.insertRow(i_row);
-
+                    i_num1 = parseInt(i_num1) + 1;
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + i_num1 + '\" value=' + ss[1] + '>' + ss[1];
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + i_num1 + '\" value=' + ss[0] + '>' + ss[0];
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + i_num1 + '\" value=' + ss[2] + '>' + ss[2];
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\"  class=\"detailedViewTextBox\"  OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[3] + ' >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\"  class=\"detailedViewTextBox\"  OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Price_' + i_num1 + '\" value=0 >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\"  class=\"detailedViewTextBox\"  OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Money_' + i_num1 + '\" value=0 >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num1 + '\"  >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
                     i_row = i_row + 1;
-                    document.all('Tbx_Num').value = parseInt(document.all('Tbx_Num').value) + 1;
                     s_ID = s_ID + ss[0] + ",";
                 }
+                document.all('Tbx_Num').value = parseInt(document.all('Tbx_Num').value) + parseInt(ss1.length) ;
                 document.all("Xs_ProductsCode").value = s_ID;
             }
         }
@@ -107,7 +114,10 @@
                 alert("请选择供应商！");
                 return;
             }
-            var temaap = window.showModalDialog("SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var temaap = window.showModalDialog("SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var temaap = window.open("SelectContentPerson.aspx?ID=" + s_Customer, "选择联系人", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ContentPerson(temaap) {
             if (temaap != undefined) {
                 var sws;
                 sws = temaap.split(",");
