@@ -310,6 +310,8 @@ namespace KNet.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * ");
             strSql.Append(" FROM KNet_WareHouse_AllocateList_Details  a  join KNet_WareHouse_AllocateList b on a.AllocateNo=b.AllocateNo  left join v_Order_ProductsDemo_Details e on e.XPD_ProductsBarCode=a.ProductsBarCode  and e.FaterBarCode=a.KWAD_FaterBarCode  and KWA_OrderNo=OrderNo ");
+            strSql.Append(" join knet_sys_products c on a.productsBarCode=c.productsBarCode ");
+
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

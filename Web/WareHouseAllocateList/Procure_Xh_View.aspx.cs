@@ -59,7 +59,7 @@ public partial class Web_Procure_Xh_View : BasePage
             {
                 s_Sql += " ,KWAD_FaterBarCode";
             }
-            s_Sql += "  order by c.ProductsName ";
+            s_Sql += "  order by c.ksp_Code,c.ProductsName ";
 
 
             this.BeginQuery(s_Sql);

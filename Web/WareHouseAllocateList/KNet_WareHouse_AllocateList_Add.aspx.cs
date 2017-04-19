@@ -380,7 +380,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
                 }
             }
              * */
-            s_DSql += " order by XPD_FaterBarCode,ProductsType ";
+            s_DSql += " order by KSP_Code ";
 
             this.BeginQuery(s_DSql);
             this.QueryForDataSet();

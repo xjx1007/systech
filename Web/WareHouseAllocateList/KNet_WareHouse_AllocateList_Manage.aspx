@@ -228,7 +228,7 @@
 
                                         <asp:TemplateField HeaderText="调拨单号" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                             <ItemTemplate>
-                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
+                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
 

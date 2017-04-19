@@ -378,7 +378,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
                         string DosqlP = "update KNet_WareHouse_AllocateList set AllocateCheckYN=0 where AllocateNo='" + GridView1.DataKeys[i].Value.ToString() + "' ";
                         DbHelperSQL.ExecuteSql(DosqlP);
                         AM.Add_Logs("调拨删除：" + GridView1.DataKeys[i].Value.ToString());
-                        AlertAndRedirect("删除成功！", "KNet_WareHouse_AllocateList_Manage.aspx");
+                        AlertAndRedirect("删除成功！", "KNet_WareHouse_AllocateList_Manage_ForSc.aspx");
                     }
                     catch
                     { }

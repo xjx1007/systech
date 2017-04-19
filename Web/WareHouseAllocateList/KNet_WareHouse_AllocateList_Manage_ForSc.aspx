@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>生产 >
-	<a class="hdrLink" href="KNet_WareHouse_AllocateList_Manage.aspx">库间调拨</a>
+	<a class="hdrLink" href="KNet_WareHouse_AllocateList_Manage_ForSc.aspx">库间调拨</a>
                 </td>
                 <td width="100%" nowrap>
                     <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
@@ -77,7 +77,7 @@
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
             <tr>
                 <td>
-                    <%=base.Base_BindView("KNet_WareHouse_AllocateList", "KNet_WareHouse_AllocateList_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
+                    <%=base.Base_BindView("KNet_WareHouse_AllocateList", "KNet_WareHouse_AllocateList_Manage_ForSc.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
                 </td>
             </tr>
 
@@ -228,7 +228,7 @@
 
                                         <asp:TemplateField HeaderText="调拨单号" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                             <ItemTemplate>
-                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
+                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"  target="_blank"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"

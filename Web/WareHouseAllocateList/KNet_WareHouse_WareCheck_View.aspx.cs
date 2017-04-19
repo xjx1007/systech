@@ -443,7 +443,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             if (this.Lbl_OrderNo.Text != "")
             {
                 s_SqlWhere += " and KWA_OrderNo='" + this.Lbl_OrderNo.Text + "' ";
-                s_SqlWhere += " order by ProductsType,ProductsEdition,isnull(e.BomOrderDesc,0)";
+                s_SqlWhere += " order by c.ksp_Code,c.ProductsName";
             }
 
             DataSet Dts_Details = BLL_Details.GetList(s_SqlWhere);

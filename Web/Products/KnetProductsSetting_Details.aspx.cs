@@ -257,7 +257,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
 
                 if (Pan_Bom.Visible == true)
                 {
-                    GetBomDetails(model);
+                   // GetBomDetails(model);
                 }
 
                 //适用成品1
@@ -494,6 +494,25 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             Response.Write("<script language=javascript>alert('非法参数！');window.close();</script>");
             Response.End();
         }
+    }
+
+    public string GetShState(string s_State)
+    {
+        string s_Return = "";
+        s_Return = base.Base_GetBasicCodeName("132", s_State);
+        if (s_Return == "未审核")
+        {
+            s_Return = "<font color=red>未审核</font>";
+        }
+        else if (s_Return == "不通过")
+        {
+            s_Return = "<font color=bule>不通过</font>";
+        }
+        else
+        {
+            s_Return = "<font color=green>已审核 </font>";
+        }
+        return s_Return;
     }
     private void GetBomDetails(KNet.Model.KNet_Sys_Products model)
     {
