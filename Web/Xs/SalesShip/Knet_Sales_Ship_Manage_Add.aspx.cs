@@ -197,9 +197,10 @@ public partial class Knet_Web_Sales_Knet_Sales_Ship_Manage_Add : BasePage
                     }
                 }
             }
+            /*
             if (b_IsShip == true)
             {
-
+            */
                 KNet.BLL.KNet_Sales_ContractList Bll_Contract = new KNet.BLL.KNet_Sales_ContractList();
                 KNet.Model.KNet_Sales_ContractList Model_Contract = Bll_Contract.GetModelB(s_ContractNo);
 
@@ -266,13 +267,14 @@ public partial class Knet_Web_Sales_Knet_Sales_Ship_Manage_Add : BasePage
                         this.i_Num.Text = Dts_Table.Tables[0].Rows.Count.ToString();
                     }
                 }
+                /*
             }
             else
             {
                 //先查询是否有库存
                 Response.Write("<script language=javascript>alert('您所选择的合同编号出错，未满足发货条件！');history.back(-1);</script>");
                 Response.End();
-            }
+            }*/
         }
     }
     /// <summary>

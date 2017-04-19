@@ -7,6 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="stylesheet" href="../../assets/css/fontawesome/css/font-awesome.min.css" type="text/css">
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -82,9 +83,8 @@
                                             <table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
                                                 <tr>
                                                     <td width="16%" height="25" align="right" class="dvtCellLabel">
-                                                        菜单编号：
-                                                    </td>
-                                                    <td class="dvtCellInfo" align="left" colspan="3">
+                                                        菜单编号：</td>
+                                                    <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_Code" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                             OnBlur="this.className='detailedViewTextBox'" Width="400px" ValidType="String"></pc:PTextBox><font
                                                                 color="red">*</font>
@@ -94,15 +94,15 @@
                                                     <td width="16%" height="25" align="right" class="dvtCellLabel">
                                                         上级菜单：
                                                     </td>
-                                                    <td class="dvtCellInfo" align="left" colspan="3">
+                                                    <td class="dvtCellInfo" align="left">
                                                     <asp:DropDownList runat="server" ID="DDl_FatherID"></asp:DropDownList>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="16%" align="right" class="dvtCellLabel">
-                                                        英文名称:
+                                                        英文名称：
                                                     </td>
-                                                    <td class="dvtCellInfo" align="left" colspan="3">
+                                                    <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_Module" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                             OnBlur="this.className='detailedViewTextBox'" Width="400px" ValidType="String"></pc:PTextBox>
 
@@ -110,9 +110,8 @@
                                                 </tr> 
                                                 <tr>
                                                     <td width="16%" align="right" class="dvtCellLabel">
-                                                        模块名称:
-                                                    </td>
-                                                    <td class="dvtCellInfo" align="left" colspan="3">
+                                                        模块名称：</td>
+                                                    <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_ParentTab" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                             OnBlur="this.className='detailedViewTextBox'" Width="400px" ValidType="String"></pc:PTextBox>
 
@@ -120,9 +119,58 @@
                                                 </tr> 
                                                 <tr>
                                                     <td width="16%" align="right" class="dvtCellLabel">
-                                                        URL:
+                                                        Rowspan：</td>
+                                                    <td class="dvtCellInfo" align="left">
+                                                        <pc:PTextBox ID="Tbx_RowSpan" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String"></pc:PTextBox>
+
                                                     </td>
-                                                    <td class="dvtCellInfo" align="left" colspan="3">
+                                                </tr> 
+                                                <tr>
+                                                    <td width="16%" align="right" class="dvtCellLabel">
+                                                        Colspan：</td>
+                                                    <td class="dvtCellInfo" align="left">
+                                                        <pc:PTextBox ID="Tbx_ColSpan" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String"></pc:PTextBox>
+
+                                                    </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td width="16%" align="right" class="dvtCellLabel">
+                                                        层级：</td>
+                                                    <td class="dvtCellInfo" align="left">
+                                                    <asp:DropDownList runat="server" ID="DDl_Level">
+                                                        <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                                        <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                                        <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                                    </asp:DropDownList>
+
+                                                    </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td width="16%" align="right" class="dvtCellLabel">
+                                                        序号：</td>
+                                                    <td class="dvtCellInfo" align="left">
+                                                        <pc:PTextBox ID="Tbx_Order" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String"></pc:PTextBox>
+
+                                                    </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td width="16%" align="right" class="dvtCellLabel">
+                                                        图标：</td>
+                                                    <td class="dvtCellInfo" align="left">
+                                                        <pc:PTextBox ID="Tbx_Icon" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="200px" ValidType="String"></pc:PTextBox>
+                                                        <i class="fa fa-plane"></i>: fa-plane <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a>
+                                                    </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td width="16%" align="right" class="dvtCellLabel">
+                                                        URL：</td>
+                                                    <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_URL" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                             OnBlur="this.className='detailedViewTextBox'" Width="400px" ValidType="String"></pc:PTextBox>
 

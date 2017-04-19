@@ -14,7 +14,7 @@
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
-    <title></title>
+    <title>通讯录</title>
 </head>
 
 <body topmargin="0" leftmargin="0" rightmargin="0">

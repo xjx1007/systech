@@ -37,6 +37,9 @@ namespace KNet.Model
         private string _KSD_MaterPattern;
         private string _KSD_XCMDID;
 
+        private int _KSD_HxNumber;
+        private int _KSD_HxState;
+
         /// <summary>
         /// 总仓库产品唯一值
         /// </summary>
@@ -217,7 +220,18 @@ namespace KNet.Model
             set { _KSD_XCMDID = value; }
             get { return _KSD_XCMDID; }
         }
-        
+
+        public int KSD_HxNumber
+        {
+            set { _KSD_HxNumber = value; }
+            get { return _KSD_HxNumber; }
+        }
+
+        public int KSD_HxState
+        {
+            set { _KSD_HxState = value; }
+            get { return _KSD_HxState; }
+        }
 
         #endregion Model
 

@@ -36,6 +36,23 @@ namespace KNet.BLL
         {
             return dal.Update(model);
         }
+        
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateByState(KNet.Model.PB_Basic_Attachment model)
+        {
+            return dal.UpdateByState(model);
+        }
+        
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateByDel(KNet.Model.PB_Basic_Attachment model)
+        {
+            return dal.UpdateByDel(model);
+        }
+
 
         /// <summary>
         /// 删除一条数据

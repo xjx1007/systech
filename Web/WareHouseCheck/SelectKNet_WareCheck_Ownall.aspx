@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                产品选择 > <a class="hdrLink" href="SelectProduct.aspx">选择仓库产品</a>
+                仓库 > <a class="hdrLink" href="SelectProduct.aspx">选择仓库产品</a>
             </td>
             <td width="100%" nowrap>
                 <table border="0" cellspacing="0" cellpadding="0">
@@ -109,14 +109,14 @@
           </ItemTemplate>
         </asp:TemplateField>
         
-        <asp:BoundField  DataField="ProductsBarCode"   HeaderText="编号(条码)"  SortExpression="ProductsBarCode">
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="110px"/>
+        <asp:BoundField  DataField="KSP_Code"   HeaderText="料号"  SortExpression="KSP_Code">
+            <ItemStyle HorizontalAlign="Left"  Font-Size="12px" />
             <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
         </asp:BoundField>
         
-         <asp:TemplateField HeaderText="产品型号"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+         <asp:TemplateField HeaderText="产品名称"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
-               <%# base.Base_GetProductsPattern(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+               <%# base.Base_GetProdutsName(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
           </ItemTemplate>
         </asp:TemplateField>
          <asp:TemplateField HeaderText="版本号"    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
@@ -155,6 +155,8 @@
       <asp:TemplateField HeaderText="备注" HeaderStyle-Font-Size="12px" HeaderStyle-ForeColor="blue"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
                 <asp:TextBox ID="Tbx_Remark" runat="server" MaxLength="9" CssClass="Boxx"  Width="40px"></asp:TextBox>
+                <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" CssClass="Custom_Hidden"  Text=<%#DataBinder.Eval(Container.DataItem, "Money").ToString() %>></asp:TextBox>
+
                </ItemTemplate>
       </asp:TemplateField>
         </Columns>
@@ -169,8 +171,7 @@
 
 <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" style="border-top:1px solid #A3B2CC;">
   <tr>
-    <td height="25" width="40%"><asp:Button ID="Button2" runat="server"  CssClass="Btt" Text="确定选择" OnClick="Button2_Click" />
-    <asp:Button  ID="Button3" runat="server" Text="取消选择" CssClass="Btt" OnClick="Button3_Click"/>&nbsp;<input   name="button2"   type="button"   value="关闭窗口"  class="Btt"  onclick="closeWindow();"></td>
+    <td height="25" width="40%"><asp:Button ID="Button2" runat="server"  CssClass="Btt" Text="确定选择" OnClick="Button2_Click" /><input   name="button2"   type="button"   value="关闭窗口"  class="Btt"  onclick="closeWindow();"></td>
       <td width="60%" align="right" ><B>库存产品搜索</B>&nbsp;&nbsp;关健词:<asp:TextBox ID="KNetSeachKey" runat="server" Width="150px" CssClass="Boxx"></asp:TextBox>&nbsp;&nbsp;<asp:Button  ID="Button1" runat="server" Text="确定搜索" CssClass="Btt" OnClick="Button1_Click" style="width: 55px;height: 33px;"  /></td></tr>
 </table>
 <!--底部功能栏-->

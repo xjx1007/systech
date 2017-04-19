@@ -32,7 +32,14 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
             }
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
-
+            if (AM.YNAuthority("能查看联系人"))
+            {
+                Pan_LinkMan.Visible = true;
+            }
+            else
+            {
+                Pan_LinkMan.Visible = false;
+            }
             if (s_Type == "1")
             {
                 s_OrderStyle = "class=\"dvtUnSelectedCell\"";
@@ -49,6 +56,17 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 Pan_Order.Visible = true;
                 Pan_Detail.Visible = false;
                 Table_Btn.Visible = true;
+            }
+
+            if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffName == "项洲"))
+            {
+                this.Button2.Visible = true;
+                this.Button3.Visible = true;
+            }
+            else
+            {
+                this.Button2.Visible = false;
+                this.Button3.Visible = false;
             }
             if (s_ID != "")
             {
@@ -74,7 +92,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
 
                 GridView_Ship.DataSource = ds_Ship.Tables[0];
                 GridView_Ship.DataBind();
-                GetScTime();
+                //GetScTime();
                 try
                 {
                     string s_Sql = "Select * from Knet_Procure_OrdersList where OrderType='128860698200781250' and ContractNos like '%" + s_ID + "%'";
@@ -177,14 +195,19 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
             KNet.BLL.KNet_ContractDate BLL_Date = new KNet.BLL.KNet_ContractDate();
             this.Tbx_OrderNo.Text = Model.KSC_OrderNO;
             ;
-                if (Model.isOrder == 1)
-                {
-                    this.Lbl_CgState.Text = "<a href=\"/Web/SalesShip/Knet_Sales_Ship_Manage_Add.aspx?ContractNo=" + Model.ContractNo + "\" ><font Color=\"red\">已采购</font></a>";
-                }
-                else
-                {
-                    this.Lbl_CgState.Text = "<a href=\"/Web/CG/Order/Knet_Procure_OpenBilling.aspx?ContractNo=" + Model.ContractNo + "\" ><font Color=\"red\">" + base.GetContractState(Model.ContractNo) + "</font></a>";
-                }
+            if (Model.isOrder == 1)
+            {
+                this.Lbl_CgState.Text = "<a href=\"/Web/SalesShip/Knet_Sales_Ship_Manage_Add.aspx?ContractNo=" + Model.ContractNo + "\" ><font Color=\"red\">已采购</font></a>";
+            }
+            else
+            {
+                this.Lbl_CgState.Text = "<a href=\"/Web/CG/Order/Knet_Procure_OpenBilling.aspx?ContractNo=" + Model.ContractNo + "\" ><font Color=\"red\">" + base.GetContractState(Model.ContractNo) + "</font></a>";
+            }
+
+            if (Model.ContractClass == "129687502876636011")
+            {
+                this.Lbl_Link.Text = "<a href=\"/Web/Xs/SalesContract/KNet_Sales_ContractList_Add.aspx?ID=" + Model.ContractNo + "&Type=1&Hx=1\" class=\"webMnu\" >转正式订单</a>";
+            }
             string s_OrdeURL = Model.KSC_OrderURL == null ? "" : Model.KSC_OrderURL;
             if (s_OrdeURL != "")
             {
@@ -219,7 +242,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
             this.Lbl_ContractShip.Text = Model.ContractShip;
             this.Lbl_Creator.Text = base.Base_GetUserName(Model.ContractStaffNo);
             this.Lbl_CTime.Text = Model.SystemDatetimes.ToString();
-            if (Model.ContractCheckYN==true)
+            if (Model.ContractCheckYN == true)
             {
             }
             if (Model.ContractState.ToString() == "-1")
@@ -273,13 +296,13 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 this.HyperLink1.Visible = false;
             }
             this.ContractRemarks.Text = Model.ContractRemarks;
-        KNet.BLL.Xs_Contract_Manage BLL_ContractManage=new KNet.BLL.Xs_Contract_Manage();
-        KNet.Model.Xs_Contract_Manage Model_ContractManage = BLL_ContractManage.GetModel(Model.KSC_FaterId);
-        if (Model_ContractManage != null)
-        {
-            this.Lbl_FaterCode.Text = "<a href=\"/Web/Xs/Contract/Xs_Contract_Manage_View.aspx?ID=" + Model.KSC_FaterId + "\">" + Model_ContractManage.XCM_Code + "</a>";
-            this.Lbl_Type.Text = base.Base_GetBasicCodeName("216",Model_ContractManage.XCM_Type);
-        }
+            KNet.BLL.Xs_Contract_Manage BLL_ContractManage = new KNet.BLL.Xs_Contract_Manage();
+            KNet.Model.Xs_Contract_Manage Model_ContractManage = BLL_ContractManage.GetModel(Model.KSC_FaterId);
+            if (Model_ContractManage != null)
+            {
+                this.Lbl_FaterCode.Text = "<a href=\"/Web/Xs/Contract/Xs_Contract_Manage_View.aspx?ID=" + Model.KSC_FaterId + "\">" + Model_ContractManage.XCM_Code + "</a>";
+                this.Lbl_Type.Text = base.Base_GetBasicCodeName("216", Model_ContractManage.XCM_Type);
+            }
             KNet.BLL.KNet_Sales_ContractList_Details BLL_Details = new KNet.BLL.KNet_Sales_ContractList_Details();
             DataSet Dts_Details = BLL_Details.GetList(" ContractNo='" + Model.ContractNo + "'");
             if (Dts_Details.Tables[0].Rows.Count > 0)
@@ -294,6 +317,8 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>产品名称</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>产品编码</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>型号</b></td>\n";
+                s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>剩余备货</b></td>\n";
+                s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>核销</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>数量</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>备货数量</b></td>\n";
                 if (i_Num == 8)
@@ -316,11 +341,16 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+
+                    string s_TotalNumber = Dts_Details.Tables[0].Rows[i]["totalNumber"].ToString();
+
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + s_TotalNumber + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"HxState_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["KSD_HxState"].ToString() + ">" + Dts_Details.Tables[0].Rows[i]["KSD_HxNumber"].ToString() + "</td>";
+
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ContractAmount"].ToString() + "</td>";
                     if (Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() == "0")
                     {
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-
                     }
                     else
                     {
@@ -360,7 +390,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 }
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
 
         }
@@ -689,5 +719,74 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
         }
         catch
         { }
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        string s_ContractNo = this.ContractNo.Text 
+;
+        string s_Sql = "Update Knet_Sales_flow Set KSF_Del='1' Where KSF_ContractNo='" + s_ContractNo + "' ";
+        DbHelperSQL.ExecuteSql(s_Sql);
+        AddFlow(s_ContractNo, 4);
+        Alert("提交成功！");
+        AdminloginMess LogAM = new AdminloginMess();
+        LogAM.Add_Logs("销售管理---> 订单审批--->重新提交 操作成功！");
+
+    }
+
+    private void AddFlow(string s_ContractNo, int i_State)
+    {
+
+        AdminloginMess AM = new AdminloginMess();
+        //插入审核
+        KNet.Model.KNet_Sales_Flow Model = new KNet.Model.KNet_Sales_Flow();
+        KNet.BLL.KNet_Sales_Flow Bll = new KNet.BLL.KNet_Sales_Flow();
+        Model.KFS_Type = 0;
+        Model.KSF_ContractNo = s_ContractNo;
+        Model.KSF_Date = DateTime.Now;
+        Model.KSF_Detail = "";
+        Model.KSF_ShPerson = AM.KNet_StaffNo;
+        Model.KSF_State = i_State;
+        try
+        {
+            Bll.Add(Model);
+        }
+        catch
+        { throw; }
+    }
+
+    protected void Button1_Click1(object sender, EventArgs e)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+            string s_Sql = "Update KNet_Sales_ContractList set IsOrder='1' where ContractNo='" + this.ContractNo.Text + "'  ";
+
+            DbHelperSQL.ExecuteSql(s_Sql);
+            AM.Add_Logs("更改采购状态为已采购：" + this.ContractNo.Text);
+            Alert("更改成功！");
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+    protected void Button3_Click1(object sender, EventArgs e)
+    {
+        try
+        {
+            string s_Sql = "Update KNet_Sales_ContractList set IsOrder='0' where ContractNo='" + this.ContractNo.Text + "'  ";
+
+
+            DbHelperSQL.ExecuteSql(s_Sql);
+            AdminloginMess AM = new AdminloginMess();
+            AM.Add_Logs("更改采购状态为未采购：" + this.ContractNo.Text);
+            Alert("更改成功！");
+        }
+        catch (Exception ex)
+        {
+
+        }
+
     }
 }

@@ -19,7 +19,7 @@ public partial class Web_Procure_Xh_View : BasePage
 {
     public string s_Time = "";
     public string s_HouseName = "";
-    public string s_Details = "";
+    public string s_Details = "", s_view="";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -32,7 +32,9 @@ public partial class Web_Procure_Xh_View : BasePage
                 Response.End();
             }
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+             s_view = Request.QueryString["view"] == null ? "" : Request.QueryString["view"].ToString();
 
+             this.Tbx_View.Text = s_view;
             string s_Style = "", s_ProductsBasicCode = "";
             decimal d_TotalNumber = 0, d_TotalNet = 0;
             string s_Head = "";
@@ -41,9 +43,24 @@ public partial class Web_Procure_Xh_View : BasePage
             //明细
             KNet.BLL.KNet_WareHouse_AllocateList BLL = new KNet.BLL.KNet_WareHouse_AllocateList();
             KNet.Model.KNet_WareHouse_AllocateList Model = BLL.GetModelB(s_ID);
-            s_Sql = "Select *";
+            s_Sql = "Select b.ProductsBarCode,";
+            if (this.Tbx_View.Text != "1")
+            {
+                s_Sql += "KWAD_FaterBarCode,";
+            }
+            s_Sql += "sum(AllocateAmount) AllocateAmount,AllocateUnitPrice,a.AllocateRemarks ";
+
             s_Sql += " from KNet_WareHouse_AllocateList  a  join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo ";
+            s_Sql += " join KNET_Sys_Products  c on c.ProductsBarCode=b.ProductsBarCode  ";
+            s_Sql += " join PB_Basic_ProductsClass  d on c.ProductsType=d.PBP_ID  ";
             s_Sql += "  Where a.AllocateNo='" + s_ID + "' ";
+            s_Sql += "  group by  b.ProductsBarCode,c.ProductsName,AllocateUnitPrice,a.AllocateRemarks ";
+            if (this.Tbx_View.Text != "1")
+            {
+                s_Sql += " ,KWAD_FaterBarCode";
+            }
+            s_Sql += "  order by c.ksp_Code,c.ProductsName ";
+
 
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
@@ -75,6 +92,14 @@ public partial class Web_Procure_Xh_View : BasePage
                     {
                         s_Details += "<td  class='thstyleLeftDetails'align=center >" + base.Base_GetProductsEdition(Dtb_Table.Rows[i]["ProductsBarCode"].ToString()) + "</td>\n";
                     }
+                    try{
+                        if (this.Tbx_View.Text != "1")
+                        {
+                            s_Details += "<td  class='thstyleLeftDetails'align=center >" + base.Base_GetProductsEdition(Dtb_Table.Rows[i]["KWAD_FaterBarCode"].ToString()) + "</td>\n";
+                        }
+                    }
+                    catch{}
+                    
                     s_Details += "<td class='thstyleLeftDetails' align=center >" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dtb_Table.Rows[i]["ProductsBarCode"].ToString())) + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=right  >&nbsp;" + base.FormatNumber1(Dtb_Table.Rows[i]["AllocateAmount"].ToString(), 0) + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=right  >&nbsp;" + base.FormatNumber1(Dtb_Table.Rows[i]["AllocateUnitPrice"].ToString(), 2) + "</td>\n";
@@ -137,6 +162,10 @@ public partial class Web_Procure_Xh_View : BasePage
             s_Head += "<th class=\"thstyle\" align=center>品名</th>\n";
             s_Head += "<th class=\"thstyle\" align=center>料号</th>\n";
             s_Head += "<th class=\"thstyle\" align=center>型号</th>\n";
+            if (this.Tbx_View.Text != "1")
+            {
+                s_Head += "<th class=\"thstyle\" align=center>上级名称</th>\n";
+            }
             s_Head += "<th class=\"thstyle\">单位</th>\n";
             s_Head += "<th class=\"thstyle\">数量</th>\n";
             s_Head += "<th class=\"thstyle\">单价</th>\n";
@@ -146,8 +175,11 @@ public partial class Web_Procure_Xh_View : BasePage
             s_Details += "</div>";
 
             this.Lbl_Details.Text = s_Head + s_Details;
-            string s_Sql1 = "Update KNet_WareHouse_AllocateList set KWA_PrintsNums=KWA_PrintsNums+1 where AllocateNo='" + s_ID + "' ";
-            DbHelperSQL.ExecuteSql(s_Sql1);
+            if (this.Tbx_View.Text== "")
+            {
+                string s_Sql1 = "Update KNet_WareHouse_AllocateList set KWA_PrintsNums=KWA_PrintsNums+1 where AllocateNo='" + s_ID + "' ";
+                DbHelperSQL.ExecuteSql(s_Sql1);
+            }
         }
 
         

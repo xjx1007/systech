@@ -42,11 +42,12 @@ namespace KNet.DAL
         /// </summary>
         public void Add(KNet.Model.Knet_Procure_SuppliersPrice model)
         {
+
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Knet_Procure_SuppliersPrice(");
-            strSql.Append("SuppNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProcureMinShu,ProcureUnitPrice,ProcureState,ProcureUpdateDateTime,Salesprice,HandPrice,KPP_Remarks,KPP_CgID,KPP_IsOrder,KPP_Address,KPP_Number)");
+            strSql.Append("SuppNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProcureMinShu,ProcureUnitPrice,ProcureState,ProcureUpdateDateTime,Salesprice,HandPrice,KPP_Remarks,KPP_CgID,KPP_IsOrder,KPP_Address,KPP_Number,KPP_Creator,KPP_Code,KPP_ShPerson,KPP_ShTime,KPP_AllRemarks,KPP_Brand)");
             strSql.Append(" values (");
-            strSql.Append("@SuppNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsMainCategory,@ProductsSmallCategory,@ProductsUnits,@ProcureMinShu,@ProcureUnitPrice,@ProcureState,@ProcureUpdateDateTime,@Salesprice,@HandPrice,@KPP_Remarks,@KPP_CgID,@KPP_IsOrder,@KPP_Address,@KPP_Number)");
+            strSql.Append("@SuppNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsMainCategory,@ProductsSmallCategory,@ProductsUnits,@ProcureMinShu,@ProcureUnitPrice,@ProcureState,@ProcureUpdateDateTime,@Salesprice,@HandPrice,@KPP_Remarks,@KPP_CgID,@KPP_IsOrder,@KPP_Address,@KPP_Number,@KPP_Creator,@KPP_Code,@KPP_ShPerson,@KPP_ShTime,@KPP_AllRemarks,@KPP_Brand)");
             SqlParameter[] parameters = {
 					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -65,7 +66,15 @@ namespace KNet.DAL
 					new SqlParameter("@KPP_CgID", SqlDbType.NVarChar,50),
 					new SqlParameter("@KPP_IsOrder", SqlDbType.NVarChar,50),
 					new SqlParameter("@KPP_Address", SqlDbType.NVarChar,50),
-					new SqlParameter("@KPP_Number", SqlDbType.Int,4)};
+					new SqlParameter("@KPP_Number", SqlDbType.Int,4),
+					new SqlParameter("@KPP_Creator", SqlDbType.NVarChar,50),
+					new SqlParameter("@KPP_Code", SqlDbType.NVarChar,50),
+					new SqlParameter("@KPP_ShPerson", SqlDbType.NVarChar,50),
+					new SqlParameter("@KPP_ShTime", SqlDbType.DateTime),
+					new SqlParameter("@KPP_AllRemarks", SqlDbType.Text),
+					new SqlParameter("@KPP_Brand", SqlDbType.NVarChar,50)
+                    
+                                        };
             parameters[0].Value = model.SuppNo;
             parameters[1].Value = model.ProductsName;
             parameters[2].Value = model.ProductsBarCode;
@@ -84,7 +93,15 @@ namespace KNet.DAL
             parameters[15].Value = model.KPP_IsOrder;
             parameters[16].Value = model.KPP_Address;
             parameters[17].Value = model.KPP_Number;
+            
 
+            parameters[18].Value = model.KPP_Creator;
+            parameters[19].Value = model.KPP_Code;
+            parameters[20].Value = model.KPP_ShPerson;
+            parameters[21].Value = model.KPP_ShTime;
+            parameters[22].Value = model.KPP_AllRemarks;
+            parameters[23].Value = model.KPP_Brand;
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -120,13 +137,19 @@ namespace KNet.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("Update Knet_Procure_SuppliersPrice Set KPP_State=@KPP_State  ");
+            strSql.Append("Update Knet_Procure_SuppliersPrice Set KPP_State=@KPP_State,  ");
+            strSql.Append(" KPP_ShTime=@KPP_ShTime,  ");
+            strSql.Append(" KPP_ShPerson=@KPP_ShPerson  ");
             strSql.Append(" where ID=@ID");
             SqlParameter[] parameters = {
 					new SqlParameter("@KPP_State", SqlDbType.Int),
+					new SqlParameter("@KPP_ShTime", SqlDbType.DateTime),
+					new SqlParameter("@KPP_ShPerson", SqlDbType.NVarChar,50),
 					new SqlParameter("@ID", SqlDbType.NVarChar,50)			};
             parameters[0].Value = model.KPP_State;
-            parameters[1].Value = model.ID;
+            parameters[1].Value = model.KPP_ShTime;
+            parameters[2].Value = model.KPP_ShPerson;
+            parameters[3].Value = model.ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -152,12 +175,15 @@ namespace KNet.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("Update Knet_Procure_SuppliersPrice Set KPP_Del='1'  ");
-            strSql.Append(" where SuppNo=@SuppNo  and ProductsBarCode=@ProductsBarCode and KPP_Del='0' ");
+            strSql.Append(" where SuppNo=@SuppNo  and ProductsBarCode=@ProductsBarCode and KPP_Brand=@KPP_Brand and KPP_Del='0' ");
             SqlParameter[] parameters = {
 					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50),
-					new SqlParameter("@ProductsBarCode", SqlDbType.NVarChar,50)			};
+					new SqlParameter("@ProductsBarCode", SqlDbType.NVarChar,50),
+					new SqlParameter("@KPP_Brand", SqlDbType.NVarChar,50)
+                                        };
             parameters[0].Value = model.SuppNo;
             parameters[1].Value = model.ProductsBarCode;
+            parameters[2].Value = model.KPP_Brand;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -254,6 +280,45 @@ namespace KNet.DAL
                 {
                     model.KPP_State = 0;
                 }
+
+                if (ds.Tables[0].Rows[0]["KPP_Creator"] != null && ds.Tables[0].Rows[0]["KPP_Creator"].ToString() != "")
+                {
+                    model.KPP_Creator = ds.Tables[0].Rows[0]["KPP_Creator"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KPP_Code"] != null && ds.Tables[0].Rows[0]["KPP_Code"].ToString() != "")
+                {
+                    model.KPP_Code = ds.Tables[0].Rows[0]["KPP_Code"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KPP_ShPerson"] != null && ds.Tables[0].Rows[0]["KPP_ShPerson"].ToString() != "")
+                {
+                    model.KPP_ShPerson = ds.Tables[0].Rows[0]["KPP_ShPerson"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPP_ShTime"] != null && ds.Tables[0].Rows[0]["KPP_ShTime"].ToString() != "")
+                {
+                    model.KPP_ShTime = DateTime.Parse(ds.Tables[0].Rows[0]["KPP_ShTime"].ToString());
+                }
+
+                if (ds.Tables[0].Rows[0]["KPP_Del"] != null && ds.Tables[0].Rows[0]["KPP_Del"].ToString() != "")
+                {
+                    model.KPP_Del = int.Parse(ds.Tables[0].Rows[0]["KPP_Del"].ToString());
+                }
+                else
+                {
+                    model.KPP_Del = 0;
+                }
+
+
+                if (ds.Tables[0].Rows[0]["KPP_AllRemarks"] != null && ds.Tables[0].Rows[0]["KPP_AllRemarks"].ToString() != "")
+                {
+                    model.KPP_AllRemarks = ds.Tables[0].Rows[0]["KPP_AllRemarks"].ToString();
+                }
+                else
+                {
+                    model.KPP_AllRemarks = "";
+                }
+                
                 return model;
             }
             else
@@ -348,6 +413,26 @@ namespace KNet.DAL
                 {
                     model.HandPrice = 0;
                 }
+
+                if (ds.Tables[0].Rows[0]["KPP_Creator"] != null && ds.Tables[0].Rows[0]["KPP_Creator"].ToString() != "")
+                {
+                    model.KPP_Creator = ds.Tables[0].Rows[0]["KPP_Creator"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KPP_Code"] != null && ds.Tables[0].Rows[0]["KPP_Code"].ToString() != "")
+                {
+                    model.KPP_Code = ds.Tables[0].Rows[0]["KPP_Code"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KPP_ShPerson"] != null && ds.Tables[0].Rows[0]["KPP_ShPerson"].ToString() != "")
+                {
+                    model.KPP_ShPerson = ds.Tables[0].Rows[0]["KPP_ShPerson"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPP_ShTime"] != null && ds.Tables[0].Rows[0]["KPP_ShTime"].ToString() != "")
+                {
+                    model.KPP_ShTime = DateTime.Parse(ds.Tables[0].Rows[0]["KPP_ShTime"].ToString());
+                }
+
                 return model;
             }
             else
@@ -412,8 +497,8 @@ namespace KNet.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select isnull(KPP_Number,1) as KPP_Number, * ");
-            strSql.Append(" FROM Knet_Procure_SuppliersPrice a join v_ProductsList b on a.ProductsBarCode=b.v_ProductsBarCode ");
+            strSql.Append("select isnull(KPP_Number,1) as KPP_Number, *,isnull(PPB_BrandName,'') as BrandName ");
+            strSql.Append(" FROM Knet_Procure_SuppliersPrice a join v_ProductsList b on a.ProductsBarCode=b.v_ProductsBarCode left  join PB_Products_Brand c on c.PPB_ID=a.KPP_Brand ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

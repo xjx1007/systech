@@ -356,11 +356,11 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectInto_Add : BasePage
             KNet.Model.KNet_WareHouse_DirectInto_Details ModelDetails = new KNet.Model.KNet_WareHouse_DirectInto_Details();
             if (Request["ProductsBarCode_" + i] != null)
             {
-                string s_ProductsBarCode = Request["ProductsBarCode_" + i].ToString();
-                string s_Number = Request["Number_" + i].ToString();
-                string s_Price = Request["Price_" + i].ToString();
-                string s_Money = Request["Money_" + i].ToString();
-                string s_Remarks = Request["Remarks_" + i].ToString();
+                string s_ProductsBarCode = Request["ProductsBarCode_" + i]==null?"":Request["ProductsBarCode_" + i].ToString();
+                string s_Number = Request["Number_" + i] == null ? "0" : Request["Number_" + i].ToString();
+                string s_Price = Request["Price_" + i] == null ? "0" : Request["Price_" + i].ToString();
+                string s_Money = Request["Money_" + i] == null ? "0" : Request["Money_" + i].ToString();
+                string s_Remarks = Request["Remarks_" + i] == null ? "" : Request["Remarks_" + i].ToString();
                 ModelDetails.ProductsBarCode = s_ProductsBarCode;
                 ModelDetails.DirectInAmount = int.Parse(s_Number);
                 try

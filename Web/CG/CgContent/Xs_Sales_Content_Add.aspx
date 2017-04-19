@@ -20,8 +20,10 @@
         var today, seconds;
         today = new Date();
         intSeconds = today.getSeconds();
-        var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-
+        //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+        var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+    function SetReturnValueInOpenner_Customer(tempd) {
         if (tempd == undefined) {
             tempd = window.returnValue;
         }
@@ -64,8 +66,10 @@
         var today, seconds;
         today = new Date();
         intSeconds = today.getSeconds();
-        var tempd = window.showModalDialog("SelectSalesOpp.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-
+        //var tempd = window.showModalDialog("SelectSalesOpp.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+        var tempd = window.open("SelectSalesOpp.aspx?sID=" + intSeconds + "", "选择供应商", "width=750px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+    function SetReturnValueInOpenner_SalesOpp(tempd){
         if (tempd == undefined) {
             tempd = window.returnValue;
         }

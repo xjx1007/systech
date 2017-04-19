@@ -405,7 +405,7 @@ public partial class Web_Sales_ShipWareOut_View : BasePage
             model.SEM_DirectOutNO = this.Tbx_ID.Text;
             //单号
             model.SEM_RCRKCode = GetIDByMonth(0, "4");
-            ///遥控器消耗
+            ///成品消耗
             ArrayList arr_RcDetails = new ArrayList();
             int i_Num = 0;
             for (int i = 0; i < this.MyGridView1.Rows.Count; i++)

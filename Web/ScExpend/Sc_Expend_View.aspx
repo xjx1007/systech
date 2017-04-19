@@ -171,7 +171,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="4" class="detailedViewHeader">
-                                                    <b>遥控器生产信息</b>
+                                                    <b>成品生产信息</b>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -78,8 +78,8 @@ public partial class Knet_Sales_Ship_Manage_Print : BasePage
         this.Lbl_PreTime.Text =  DateTime.Parse(Model.KSO_PlanOutWareDateTime.ToString()).ToShortDateString() ;
         this.Lbl_Remarks.Text = Model.OutWareRemarks;
         LBl_ShipType.Text = Model.KSO_ShipType;
-        //this.Lbl_MatialNo.Text = Model.KSO_MaterNumber == null ? "" : "遥控器：" + Model.KSO_MaterNumber.Replace(",", "电池：");
-        //this.Lbl_OrderNo.Text = Model.KSO_OrderNo == null?"":"遥控器：" + Model.KSO_OrderNo.Replace(",", "电池：");
+        //this.Lbl_MatialNo.Text = Model.KSO_MaterNumber == null ? "" : "成品：" + Model.KSO_MaterNumber.Replace(",", "电池：");
+        //this.Lbl_OrderNo.Text = Model.KSO_OrderNo == null?"":"成品：" + Model.KSO_OrderNo.Replace(",", "电池：");
         this.Lbl_Plan.Text = Model.KSO_PlanNo;
         this.Lbl_FhDetails.Text = Model.KSO_FhDetails;
         KNet.BLL.KNet_Sales_OutWareList_Details Bll_Details = new KNet.BLL.KNet_Sales_OutWareList_Details();

@@ -185,6 +185,7 @@ public partial class Knet_Common_SelectSalesContractList : BasePage
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
                 s.Append("window.returnValue='" + ContractNo + "|" + ContractNo1.Substring(0, ContractNo1.Length-1) + "|" + GetCustomerAddress(ContractNo) + "|" + s_Remarks + "';\n");
+                s.Append("window.opener.SetReturnValueInOpenner_ContractList('"+ ContractNo + "|" + ContractNo1.Substring(0, ContractNo1.Length-1) + "|" + GetCustomerAddress(ContractNo) + "|" + s_Remarks +"');\n");
                 s.Append("window.close();" + "\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();

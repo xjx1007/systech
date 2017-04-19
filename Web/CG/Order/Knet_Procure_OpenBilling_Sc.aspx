@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Knet_Procure_OpenBilling_Sc.aspx.cs" Inherits="Web_Sales_Knet_Procure_OpenBilling_View" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  validateRequest="false" CodeFile="Knet_Procure_OpenBilling_Sc.aspx.cs" Inherits="Web_Sales_Knet_Procure_OpenBilling_View" %>
 
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -22,9 +22,21 @@
     <script type="text/javascript" charset="utf-8">
         $(function () {
             if (top.location.href.toLowerCase() == self.location.href.toLowerCase()) $('#docLink').show();
-            $("#tabNav ul").idTabs("tab1");
+            $("#tabNav ul").idTabs("tab2");
         });
         $("Btn_Save").click(function(){    $(this).attr("disabled","disabled");    });
+
+        
+        function ChangPrice() {
+            var num = document.all('Tbx_Num').value;
+            for (var i = 0; i < num; i++) {
+                var CPBZNumber = document.all("Tbx_CPBZNumber_" + i).value;
+                var BZNumber = document.all("Tbx_BZNumber_" + i).value
+                if ((CPBZNumber != 0) && (BZNumber != 0)) {
+                    document.all("Tbx_Number_" + i).value = CPBZNumber * BZNumber;
+                }
+            }
+        }
     </script>
     <style type="text/css">
         .auto-style1 {
@@ -75,37 +87,38 @@
                                 <table border="0" cellspacing="3" cellpadding="3" width="100%" class="dvtContentSpace">
 
                                     <tr>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <asp:Panel ID="Pan_Order" runat="server">
 
                                                 <div class="demoWrapper">
 
+
+                                                    <div id="tabNav">
+                                                        <ul>
+                                                            <li><a href="#tab1">基本信息</a></li>
+                                                            <li><a href="#tab2">生成信息</a></li>
+                                                        </ul>
+                                                        <div class="clr"></div>
+                                                    </div>
+                                                    <!--基本信息-->
                                                     <div id="tabs">
-                                                        <!--基本信息-->
+
+                                                        <div id="tab1" class="tab">
                                                             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
 
                                                                 <tr>
                                                                     <td valign="top" align="left" colspan="4">
                                                                         <table border="0" cellspacing="0" cellpadding="0" width="100%" id="Table_Btn" runat="server">
                                                                             <tr>
-                                                                                <td colspan="3">
+                                                                                <td>
                                                                                     <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit" onclick="PageGo('Knet_Procure_OpenBilling.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    ')" name="Edit" value="&nbsp;编辑&nbsp;" style="height: 26px; width: 60px">
-                                                                                    <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share" value="&nbsp;共享&nbsp;" style="height: 26px; width: 60px">
                                                                                     <input title="" class="crmbutton small edit" onclick="PageGo('Knet_Procure_OpenBilling_Manage.aspx')" type="button" name="ListView" value="&nbsp;返回列表&nbsp;" style="height: 26px; width: 80px">
-                                                                                    <asp:Button ID="Button1" runat="server" class="crmbutton small edit" Text="生成" OnClick="Button1_Click" Style="height: 26px; width: 60px" />
-                                                                                    &nbsp;<asp:Button ID="Button3" runat="server" class="crmbutton small edit" Text="订单关闭" OnClick="Button3_Click" Style="height: 26px; width: 80px" />
                                                                                     &nbsp;
-                                                    <asp:Button ID="Button4" runat="server" class="crmbutton small edit" Text="重新生成PDF" OnClick="Button4_Click" Style="height: 26px; width: 100px" />&nbsp;
 
                                                         &nbsp;<asp:Button ID="btn_Chcek" runat="server" class="crmbutton small edit" Text="审批" OnClick="btn_Chcek_Click" Style="height: 26px; width: 60px" />
 
                                                                                 </td>
-                                                                                <td align="right">
-                                                                                    <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create" onclick="PageGo('Knet_Procure_OpenBilling.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    &Type=1')" name="Duplicate" value="复制" style="height: 26px; width: 60px">&nbsp;
-                                    <input title="刪除 [Alt+D]" type="button" accesskey="D" class="crmbutton small delete" onclick=" return confirm('确定要删除这个记录吗?')" name="Delete" value="删除" style="height: 26px; width: 60px">&nbsp;
-                                                                                </td>
+                                                                                <td align="right"></td>
                                                                             </tr>
                                                                         </table>
                                                                     </td>
@@ -229,97 +242,111 @@
                                                                                 <td class="ListHead" nowrap>
                                                                                     <b>加工费</b></td>
                                                                             </tr>
-                                                                            <%=s_MyTable_Detail %>
+                                                                            <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
+
                                                                         </table>
                                                                     </td>
                                                                 </tr>
                                                             </table>
+                                                        </div>
 
-                                                            <table>
+                                                        <div id="tab2" class="tab">
+
+                                                            <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+
 
                                                                 <tr>
-                                                                    <td align="center" style="height: 30px"></td>
+                                                                    <td class="dvInnerHeader">
+                                                                        <asp:CheckBoxList runat="server" ID="Ddl_Moudle"  CssClass="detailedViewTextBox" Width="100%" RepeatColumns="3"></asp:CheckBoxList>
+                                                                        <asp:Button ID="Button3" runat="server" class="crmbutton small edit" Text="审批所有订单" OnClick="Button3_Click" Style="height: 33px; width: 100px" />
+                                                                        <asp:Button ID="Button4" runat="server" class="crmbutton small edit" Text="反审批所有订单" OnClick="Button6_Click" Style="height: 33px; width: 100px" />
+
+                                                                        <asp:Button ID="Button1" runat="server" class="crmbutton small edit" Text="生成" OnClick="Button1_Click" Style="height: 33px; width: 70px" />
+
+                                                                    </td>
                                                                 </tr>
                                                             </table>
+                                                            <asp:Panel ID="Pan_Sc" runat="server" Visible="false">
+
+                                                                <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+
+
+                                                                    <tr>
+                                                                        <td colspan="2" class="dvInnerHeader">
+                                                                            <b>产品详细信息</b>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="16%" height="25" align="right" class="dvtCellLabel">发件人：
+                                                                        </td>
+                                                                        <td class="dvtCellInfo" align="left">
+                                                                            <asp:DropDownList runat="server" ID="Ddl_SendEmail" CssClass="detailedViewTextBox" Width="400px"></asp:DropDownList>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+
+                                                                            <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0"
+                                                                                class="ListDetails">
+
+                                                                                <tr valign="top">
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>序号</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>类别</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>供应商</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>BOM序号</b></td>
+                                                                                    <td class="ListHead" nowrap width="250px">
+                                                                                        <b>版本号</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>包装数</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>小包数</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>数量</b></td>
+                                                                                    <td class="ListHead" nowrap  width="30px">
+                                                                                        <b>单价</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>要求日期</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>预入仓库</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>采购方式</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>库存</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>OEM缺料</b></td>
+                                                                                    <td class="ListHead" nowrap  width="50px">
+                                                                                        <b>操作</b></td>
+                                                                                </tr>
+                                                                                <asp:Label runat="server" ID="Lbl_SDetail"></asp:Label>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td align="center" style="height: 30px" colspan="2">
+                                                                            <asp:Button ID="Btn_Save" runat="server" Text="执行" AccessKey="S" title="执行 [Alt+S]"
+                                                                                class="crmbutton small save" OnClick="Btn_Click"  Style="width: 55px; height: 30px;" />
+                                                                            <asp:Button ID="Button2" runat="server" Text="取消" AccessKey="S" title="取消 [Alt+S]"
+                                                                                class="crmbutton small save" OnClick="Button2_Click" Style="width: 55px; height: 30px;" />
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </asp:Panel>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </asp:Panel>
 
                                         </td>
                                     </tr>
                                 </table>
 
-                                <asp:Panel ID="Pan_Sc" runat="server" Visible="false">
-
-                                    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
-
-
-                                        <tr>
-                                            <td colspan="2" class="dvInnerHeader">
-                                                <b>产品详细信息</b>
-                                            </td>
-                                        </tr>
-                        <tr>
-                            <td width="16%" height="25" align="right" class="dvtCellLabel">发件人：
-                            </td>
-                            <td class="dvtCellInfo" align="left">
-                                <asp:DropDownList runat="server" ID="Ddl_SendEmail" CssClass="detailedViewTextBox" Width="400px"></asp:DropDownList>
                             </td>
                         </tr>
-                        <tr>
-                            <td width="16%" height="25" align="right" class="dvtCellLabel">收货地点：
-                            </td>
-                            <td class="dvtCellInfo" align="left">
-                                <asp:TextBox ID="Tbx_Address" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                    OnBlur="this.className='detailedViewTextBox'" Height="50px" TextMode="MultiLine"
-                                    Width="400px"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-
-                                <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0"
-                                    class="ListDetails">
-
-                                    <tr valign="top">
-                                        <td class="ListHead" nowrap>
-                                            <b>类别</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>供应商</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>料号</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>版本号</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>数量</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>单价</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>要求日期</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>总缺料</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>OEM缺料</b></td>
-                                        <td class="ListHead" nowrap>
-                                            <b>操作</b></td>
-                                    </tr>
-                                    <asp:Label runat="server" ID="Lbl_SDetail"></asp:Label>
-                                </table>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td align="center" style="height: 30px" colspan="2">
-                                <asp:Button ID="Btn_Save" runat="server" Text="执行" AccessKey="S" title="执行 [Alt+S]"
-                                    class="crmbutton small save" OnClick="Btn_Click" Style="width: 55px; height: 30px;" />
-                                <asp:Button ID="Button2" runat="server" Text="取消" AccessKey="S" title="取消 [Alt+S]"
-                                    class="crmbutton small save" OnClick="Button2_Click" Style="width: 55px; height: 30px;" />
-                            </td>
-                        </tr>
-                    </table>
-                    </asp:Panel>
-                </td>
-                </tr>
                     </table>
 
                 </td>

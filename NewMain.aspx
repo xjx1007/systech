@@ -2,12 +2,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>杭州博脉科技</title>
+    <title>杭州士腾科技有限公司</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="themes/softed/style.css" type="text/css" />
     <link rel="stylesheet" href="themes/softed/index.css" type="text/css" />
-    <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+    <script type="text/javascript" src="themes/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="themes/js/jquery/jquery-ui.custom.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery.ui.autocomplete.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery.effects.bounce.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery.plugins.js"></script>
@@ -26,7 +26,7 @@
         var monInterval = 1;
         var show_ip = 1;
         var loginUser = <%=loginUser %>;
-        var unit_name = '博脉科技';
+        var unit_name = '士腾科技';
         var newSmsHtml = "<div onclick='show_sms();' title='点击查看短信'><img src='/images/sms1.gif'A border='0' height='12'> 新短信</div>";
         var onlineTree = null;
         var statusTextScroll = 60;
@@ -40,10 +40,9 @@
         <div>
             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="hdrNameBg">
                 <tr>
-                    <td valign="top">
-                        <a href="http://www.bremax.com" target="_blank">
-                            <img src="images/logo.gif" width="90" height="30" alt="CRMone" title="CRMone"
-                                border="0"></a>
+                    <td valign="top"  height="30">
+                        <a href="http://www.systech.com.cn/" target="_blank">
+                          </a>
                     </td>
                     <td width="100%" align="center"></td>
                     <td class="small" nowrap>
@@ -118,7 +117,7 @@
                     </td>
                     <td class="center">
                         <div id="status_text">
-                            博采众长 脉动天下<br>
+                            <br>
                         </div>
                     </td>
                     <script language="javascript">

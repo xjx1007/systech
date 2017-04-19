@@ -13,7 +13,31 @@
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
+    <script language="javascript">
 
+        function btnGetProductsTypeValue_onclick() {
+            var today, seconds;
+            today = new Date();
+            intSeconds = today.getSeconds();
+            //var temp = window.showModalDialog("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ProductsClass(temp) {
+            if (temp != undefined) {
+                var ss;
+                ss = temp.split(",");
+                document.all('Tbx_ProductsTypeNo').value = ss[0];
+                document.all('Tbx_ProductsTypeName').value = ss[1];
+                document.all('Tbx_Code').value = ss[2];
+                GetProductsPattern();
+            }
+            else {
+                document.all('Tbx_ProductsTypeNo').value = "";
+                document.all('Tbx_ProductsTypeName').value = "";
+                document.all('Tbx_Code').value = "";
+            }
+        }
+    </script>
 </head>
 
 <body topmargin="0" leftmargin="0" rightmargin="0">
@@ -134,6 +158,11 @@
                                                     </tr>
 
                                                     <tr>
+                                                        <td height="25" class="dvtCellLabel" align="left">固定电话:</td>
+                                                        <td align="left" class="dvtCellInfo">&nbsp;
+          <asp:TextBox ID="Tbx_TelPhone" runat="server" MaxLength="20" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:TextBox></td>
+                                                    </tr>
+                                                    <tr>
                                                         <td height="25" class="dvtCellLabel" align="left">身份证号:</td>
                                                         <td align="left" class="dvtCellInfo">&nbsp;
           <asp:TextBox ID="StaffIDCard1" MaxLength="30" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:TextBox><asp:RegularExpressionValidator
@@ -168,6 +197,19 @@
                                                             <asp:ListItem Value="0" Text="否"></asp:ListItem>
                                                             <asp:ListItem Value="1" Text="是"></asp:ListItem>
                                                         </asp:DropDownList></td>
+
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td align="right" class="dvtCellLabel">负责分类:</td>
+                                                        <td align="left" class="dvtCellInfo" colspan="3">
+                                                            <asp:TextBox ID="Tbx_ProductsTypeName" runat="server" CssClass="detailedViewTextBox"
+                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                                MaxLength="48" Width="200px"></asp:TextBox>
+                                                            <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                            <img src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
+
+                                                        </td>
 
                                                     </tr>
 

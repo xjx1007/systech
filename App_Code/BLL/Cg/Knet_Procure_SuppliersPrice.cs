@@ -61,7 +61,7 @@ namespace KNet.BLL
 
             dal.DeleteBYModel(model);
         }
-                /// <summary>
+        /// <summary>
         /// 得到一个对象实体
         /// </summary>
         public KNet.Model.Knet_Procure_SuppliersPrice GetModel(string ID)
@@ -83,7 +83,7 @@ namespace KNet.BLL
 
             return dal.GetModelB(SuppNo, ProductsBarCode);
         }
-        
+
         /// <summary>
         /// 获得数据列表
         /// </summary>

@@ -65,7 +65,7 @@ public partial class Knet_Common_SelectProducts : BasePage
         string s_ProductsID = Request.QueryString["sID"] == null ? "" : Request.QueryString["sID"].ToString();
         string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
         KNet.BLL.KNet_Sys_Products bll = new KNet.BLL.KNet_Sys_Products();
-        string s_Sql = "Select a.Number,a.TotalNet,case when a.Number<>0 then a.TotalNet/a.Number else 0 end as Price,b.* from v_ProdutsStore a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode Where a.Number<>0 and HouseNo='" + s_HouseNo + "' ";
+        string s_Sql = "Select a.Number,a.TotalNet,case when a.Number<>0 then isnull(a.TotalNet,0)/a.Number else 0 end as Price,b.* from v_ProdutsStore a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode Where a.Number<>0 and HouseNo='" + s_HouseNo + "' ";
         
         if (this.SeachKey.Text != "")
         {
@@ -112,7 +112,16 @@ public partial class Knet_Common_SelectProducts : BasePage
         }
         StringBuilder s = new StringBuilder();
         s.Append("<script language=javascript>" + "\n"); 
-        s.Append("if(window.opener != undefined) {window.opener.returnValue='"+s_Return+"';} else{window.returnValue='"+s_Return+"';}" + "\n");
+        //s.Append("if(window.opener != undefined) {window.opener.returnValue='"+s_Return+"';} else{window.returnValue='"+s_Return+"';}" + "\n");
+        s.Append("if (window.opener != undefined)\n");
+        s.Append("{\n");
+        s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+        s.Append("    window.opener.SetReturnValueInOpenner_Products('" + s_Return + "');\n");
+        s.Append("}\n");
+        s.Append("else\n");
+        s.Append("{\n");
+        s.Append("    window.returnValue = '" + s_Return + "';\n");
+        s.Append("}\n");
         s.Append("window.close();" + "\n");
         s.Append("</script>");
         Type cstype = this.GetType();

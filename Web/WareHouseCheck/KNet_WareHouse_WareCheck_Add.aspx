@@ -20,8 +20,10 @@
         var today, seconds;
         today = new Date();
         intSeconds = today.getSeconds();
-        var tempd = window.showModalDialog("SelectKNet_WareCheck_Ownall.aspx?sID=&HouseNo=" + document.all("HouseNo").value + "&sTime=" + document.all("ReceivDateTime").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
-    
+        //var tempd = window.showModalDialog("SelectKNet_WareCheck_Ownall.aspx?sID=&HouseNo=" + document.all("HouseNo").value + "&sTime=" + document.all("ReceivDateTime").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+        var tempd = window.open("SelectKNet_WareCheck_Ownall.aspx?sID=&HouseNo=" + document.all("HouseNo").value + "&sTime=" + document.all("ReceivDateTime").value + "", "选择产品", "width=1200px, height=500,top=150px,left=100px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+    function SetReturnValueInOpenner_WareCheck_Ownall(tempd) {
         if (tempd != undefined) {
 
             var ss, s_Value, i_row;

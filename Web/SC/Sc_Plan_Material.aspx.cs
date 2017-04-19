@@ -413,7 +413,8 @@ public partial class Sc_Plan_Material : BasePage
 
         //先查找供应商
         StringBuilder strSql = new StringBuilder();
-        strSql.Append("select  distinct suppNo  ");
+        //strSql.Append("select  distinct suppNo  ");//OEM
+        strSql.Append("select  distinct ReceivesuppNo  ");//收货供应商
         strSql.Append(" FROM Knet_Procure_OrdersList a  join v_OrderRK b on a.OrderNO=b.V_OrderNo  ");
         strSql.Append(" join KNet_Sys_ProcureType c on a.OrderType=c.ProcureTypeValue where  ");
         strSql.Append(SqlWhere);

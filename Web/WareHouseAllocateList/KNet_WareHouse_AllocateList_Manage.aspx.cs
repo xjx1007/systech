@@ -134,16 +134,6 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         {
             SqlWhere += " and AllocateTopic='102'";
         }
-        if (AM.YNAuthority("单据财务审批"))
-        {
-            //显示原材料的调拨
-                SqlWhere += " and AllocateNo in (Select AllocateNo from KNet_WareHouse_AllocateList_Details a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
-                KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-                string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703044937286");
-                s_SonID = s_SonID.Replace(",", "','");
-                SqlWhere += " where ProductsType in ('" + s_SonID + "')) ";
- 
-        }
         SqlWhere = SqlWhere + " order by systemDateTimes desc";
         DataSet ds = bll.GetList(SqlWhere);
         GridView1.DataSource = ds;
@@ -163,9 +153,20 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
         {
-            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            if (Dtb_Result.Rows.Count < 5)
             {
-                s_Return += base.Base_GetProductsEdition_Link(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
+                for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+                {
+                    s_Return += base.Base_GetProductsEdition_Link(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    s_Return += base.Base_GetProductsEdition_Link(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
+                }
+                s_Return += "<font color=gray>更多...</font>" + "<br>";
             }
             s_Return = s_Return.Substring(0, s_Return.Length - 1);
         }
@@ -347,19 +348,21 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         AdminloginMess AM = new AdminloginMess();
         string sql = "delete from KNet_WareHouse_AllocateList where"; //删除采购单
         string sql2 = "delete from KNet_WareHouse_AllocateList_Details where"; //调拨单明细
+        string sql3 = "delete from KNet_WareHouse_AllocateList_CPDetails where"; //调拨单明细
+        
 
-        string cal = "";
+        string cal = "",cal1 = "";
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
             CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
             if (cb.Checked == true)
             {
                 cal += " AllocateNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
-
+                cal1 += " KWAC_AllocateNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
 
 
                 KNet.BLL.KNet_WareHouse_AllocateList_Details BLL = new KNet.BLL.KNet_WareHouse_AllocateList_Details();
-                DataSet ds = BLL.GetList(" AllocateNo='" + GridView1.DataKeys[i].Value.ToString() + "' ");
+                DataSet ds = BLL.GetList(" a.AllocateNo='" + GridView1.DataKeys[i].Value.ToString() + "' ");
 
                 for (int j = 0; j <= ds.Tables[0].Rows.Count - 1; j++)
                 {
@@ -376,8 +379,8 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
 
                         string DosqlP = "update KNet_WareHouse_AllocateList set AllocateCheckYN=0 where AllocateNo='" + GridView1.DataKeys[i].Value.ToString() + "' ";
                         DbHelperSQL.ExecuteSql(DosqlP);
-                        Alert("删除成功！");
                         AM.Add_Logs("调拨删除：" + GridView1.DataKeys[i].Value.ToString());
+                        AlertAndRedirect("删除成功！", "KNet_WareHouse_AllocateList_Manage.aspx");
                     }
                     catch
                     { }
@@ -389,17 +392,22 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         {
             sql += cal.Substring(0, cal.Length - 3);
             sql2 += cal.Substring(0, cal.Length - 3);
+            sql3 += cal1.Substring(0, cal1.Length - 3);
+
+            
         }
         else
         {
             sql = "";       //不删除
             sql2 = "";       //不删除
+            sql3 = "";       //不删除
             Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
             Response.End();
         }
 
         DbHelperSQL.ExecuteSql(sql);
         DbHelperSQL.ExecuteSql(sql2);
+        DbHelperSQL.ExecuteSql(sql3);
 
         AdminloginMess LogAM = new AdminloginMess();
         LogAM.Add_Logs("库存管理--->库间调拨单批量 删除 操作成功！");
@@ -413,6 +421,30 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         this.DataShows();
     }
 
+    public string GetCheck(string s_AllocateNo)
+    {
+        string s_Return="";
+        try
+        {}
+        catch
+        {}
+        KNet.BLL.KNet_WareHouse_AllocateList Bll = new KNet.BLL.KNet_WareHouse_AllocateList();
+        KNet.Model.KNet_WareHouse_AllocateList model=Bll.GetModelB(s_AllocateNo);
+        if(model!=null)
+        {
+            if (model.AllocateCheckYN == 0)
+            {
+                s_Return = "<a href=\"KNet_WareHouse_WareCheck_View.aspx?ID=" + s_AllocateNo + "&HouseQR=1\"><font color=\"red\">确认</font></a>";
+            }
+            else
+            {
+                s_Return = "<font color=blue>已确认</font>";
+            }
+
+        }
+        return s_Return;
+
+    }
     public void btnAdvancedSearch_Click(object sender, EventArgs e)
     {
         this.Search_basic.Style["display"] = "none";

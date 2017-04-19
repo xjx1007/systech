@@ -93,6 +93,17 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
     <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <!-- Buttons -->
+                                    <td style="padding-right: 20px" align="left" nowrap>查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged"></asp:DropDownList>
+                                  
+                                    </td>
+                                    
+                                    <td style="padding-right: 20px" align="left" nowrap>负责分类：<asp:Label runat="server" ID="Lbl_Type"></asp:Label>
+                                  
+                                    </td>
+                                </tr>
+
         <tr>
             <td colspan="2">
                 <%=base.Base_BindView("KNet_Sys_Products", "KnetProductsSetting.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
@@ -287,8 +298,9 @@
                                     </tr>
                                 </table>
                             </div>
+                            
                             <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" AllowSorting="True"
-                                PageSize="10" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"
+                                PageSize="20" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"
                                 GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"
                                 ShowHeader="true" HeaderStyle-Height="25px">
                                 <Columns>
@@ -303,8 +315,9 @@
                                     <asp:TemplateField HeaderText="产品名称" SortExpression="ProductsName" ItemStyle-HorizontalAlign="Left"
                                         HeaderStyle-HorizontalAlign="center">
                                         <ItemTemplate>
-                                            <a href="KnetProductsSetting_Details.aspx?BarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode") %>">
+                                            <a href="KnetProductsSetting_Details.aspx?BarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode") %>" target="_blank">
                                                 <%# DataBinder.Eval(Container.DataItem, "ProductsName").ToString()%></a>
+                                            <asp:TextBox runat="server" ID="Tbx_ProductsBarCode" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>'></asp:TextBox>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="KSP_COde" HeaderText="料号" SortExpression="KSP_COde">
@@ -312,10 +325,6 @@
                                         <HeaderStyle HorizontalAlign="center" Font-Size="12px" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="ProductsPattern" HeaderText="产品型号" SortExpression="ProductsPattern">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="center" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="ProductsEdition" HeaderText="版本号" SortExpression="ProductsEdition">
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="center" Font-Size="12px" />
                                     </asp:BoundField>
@@ -331,10 +340,10 @@
                                             <%# base.Base_GetUnitsName(DataBinder.Eval(Container.DataItem, "ProductsUnits").ToString())%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="样品确认" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                        HeaderStyle-HorizontalAlign="Left">
+                                    <asp:TemplateField HeaderText="研发" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
+                                        HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="70px">
                                         <ItemTemplate>
-                                            <%#base.base_GetProductsDemoState(DataBinder.Eval(Container.DataItem, "KSP_SampleID").ToString())%>
+                                            <%#base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "KSP_RDPerson").ToString())%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="添加时间" DataField="ProductsAddTime" SortExpression="ProductsAddTime"
@@ -348,7 +357,7 @@
                                             <%# GetState(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(), int.Parse(DataBinder.Eval(Container.DataItem, "KSP_Del").ToString()))%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="产品确认" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
+                                    <asp:TemplateField HeaderText="审批" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                         HeaderStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
                                             <%# GetQr(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(), int.Parse(DataBinder.Eval(Container.DataItem, "KSP_isModiy").ToString()))%>
@@ -377,7 +386,6 @@
                                 <PagerStyle CssClass='Custom_DgPage' />
                             </cc1:MyGridView>
                             <hr />
-                            <asp:LinkButton ID="Lbl_Spce" runat="server" Text="附件1：产品型号命名规则.doc" OnClick="Lbl_Spce_Click" ></asp:LinkButton>
                         </td>
                     </tr>
                 </table>
@@ -386,6 +394,8 @@
     </table>
                 </ContentTemplate>
             </asp:UpdatePanel>
+        
+                    <asp:TextBox runat="server" ID="Tbx_Productstype" CssClass="Custom_Hidden"></asp:TextBox>
     </form>
 </body>
 </html>

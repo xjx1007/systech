@@ -50,6 +50,9 @@ namespace KNet.Model
         private string _KWD_ShipType;
         private string _KWD_PayMent;
         private string _KWD_KpType;
+
+        private string _KWD_MainProductsBarCode;
+        private int _KWD_MainProductsNumber=0;
         
         /// <summary>
         /// 自动ID值
@@ -340,6 +343,17 @@ namespace KNet.Model
             get { return _KWD_KpType; }
         }
 
+        public string KWD_MainProductsBarCode
+        {
+            set { _KWD_MainProductsBarCode = value; }
+            get { return _KWD_MainProductsBarCode; }
+        }
+        public int KWD_MainProductsNumber
+        {
+            set { _KWD_MainProductsNumber = value; }
+            get { return _KWD_MainProductsNumber; }
+        }
+        
         
         #endregion Model
 

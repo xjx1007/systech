@@ -18,7 +18,7 @@ using KNet.Common;
 
 public partial class Web_Sales_CG_Payment_For_Add : BasePage
 {
-    public string s_MyTable_Detail = "";
+    public string s_MyTable_Detail = "",s_MyTable_Detail1="";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -34,6 +34,7 @@ public partial class Web_Sales_CG_Payment_For_Add : BasePage
                 string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
                 string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
                 string s_FID = Request.QueryString["FID"] == null ? "" : Request.QueryString["FID"].ToString();
+                string s_OrderNo = Request.QueryString["OrderNo"] == null ? "" : Request.QueryString["OrderNo"].ToString();
                 string s_WuliuID = Request.QueryString["WuliuID"] == null ? "" : Request.QueryString["WuliuID"].ToString();
                 if (s_WuliuID != "")
                 {
@@ -73,6 +74,14 @@ public partial class Web_Sales_CG_Payment_For_Add : BasePage
                 {
                     this.Pan_Wuliu.Visible = false;
                 }
+                if(s_OrderNo!="")
+                {
+                    GetOrderDetails(s_OrderNo);
+                }
+                else
+                {
+                    this.Pan_OrderDetails.Visible = false;
+                }
                 this.Tbx_MainFID.Text = s_FID;
 
                 this.Tbx_STime.Text = DateTime.Now.ToShortDateString();
@@ -107,7 +116,85 @@ public partial class Web_Sales_CG_Payment_For_Add : BasePage
         }
     }
 
+    private void GetOrderDetails(string s_ID)
+    {
 
+        this.BeginQuery("Select * from CG_Payment_For a where a.CPF_FID='" + s_ID + "' ");
+        string s_wuliuID = this.QueryForReturn();
+        if (s_wuliuID != "")
+        {
+            AlertAndClose("该订单已申请不要重复申请！");
+            return;
+        }
+        KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
+        KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(s_ID);
+
+         KNet.BLL.Knet_Procure_OrdersList_Details Bll_Details = new KNet.BLL.Knet_Procure_OrdersList_Details();
+        DataSet Dts_Table = Bll_Details.GetList(" a.OrderNo='" + s_ID + "' order by isnull(e.XPD_Order,0)");
+
+        decimal d_All_OrderTotal = 0, d_All_HandTotal = 0, d_All_Total = 0, d_All_TotalNeNum = 0, d_All_WrkTotalNeNum = 0;
+        bool b_boll = false;
+        if (Dts_Table.Tables[0].Rows.Count > 0)
+        {
+            for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
+            {
+                decimal d_Amount = Decimal.Parse(Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString()) + Decimal.Parse(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString());
+                d_All_OrderTotal += Decimal.Parse(Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString());
+                d_All_HandTotal += Decimal.Parse(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString());
+                d_All_Total += d_Amount;
+                s_MyTable_Detail1 += " <tr>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + Convert.ToString(i + 1) + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["XPD_Order"].ToString() + "</td>";
+
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProdutsName_Link(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                s_MyTable_Detail1 += "<td  class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                s_MyTable_Detail1 += "<td  class=\"ListHeadDetails\" nowrap align=\"center\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["KPOD_CPBZNumber"].ToString(), 0) + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["KPOD_BZNumber"].ToString(), 0) + "</td>";
+
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["OrderAmount"].ToString(), 0) + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["OrderUnitPrice"].ToString(), 4) + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString(), 4) + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_Amount.ToString(), 3) + "</td>";
+                string s_WrkNumber= FormatNumber1(Dts_Table.Tables[0].Rows[i]["wrkNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["wrkNumber"].ToString(), 0) ;
+                d_All_WrkTotalNeNum += int.Parse(s_WrkNumber);
+                d_All_TotalNeNum += int.Parse(Dts_Table.Tables[0].Rows[i]["OrderAmount"].ToString());
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + s_WrkNumber + "</td>";
+                s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["OrderRemarks"].ToString() + "</td>";
+            
+                s_MyTable_Detail1 += " </tr>";
+
+            }
+
+            s_MyTable_Detail1 += " <tr>";
+            s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\" colspan=7>合计：</td>";
+            s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_All_TotalNeNum.ToString(), 0) + "</td>";
+
+            s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\" colspan=2>&nbsp;</td>";
+            s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_All_Total.ToString(), 2) + "</td>";
+            s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_All_WrkTotalNeNum.ToString(), 0) + "</td>";
+
+            s_MyTable_Detail1 += "<td class=\"ListHeadDetails\" align=\"center\">&nbsp;</td>";
+            
+            s_MyTable_Detail1 += " </tr>";
+        }
+        this.Tbx_Money.Text = d_All_Total.ToString();
+        this.Tbx_Used.Text = "材料款";
+
+        this.Tbx_ChineseMoney.Text = ConvertMoney(decimal.Parse(this.Tbx_Money.Text));
+        this.Tbx_PayeeValue.Value = Model.SuppNo;
+        KNet.BLL.Knet_Procure_Suppliers bll_Suppliers = new KNet.BLL.Knet_Procure_Suppliers();
+        KNet.Model.Knet_Procure_Suppliers Model_Suppliers = bll_Suppliers.GetModelB(Model.SuppNo);
+        this.Tbx_PayeeName.Text = Model_Suppliers.SuppName;
+        this.Tbx_BankAccount.Text = Model_Suppliers.SuppBankAccount;
+        this.Tbx_BankName.Text = Model_Suppliers.SuppBankName;
+        this.Tbx_Shen.Text = GetSuppProvinceName(Model_Suppliers.SuppProvince);
+        this.Tbx_Shi.Text = GetSuppCityName(Model_Suppliers.SuppCity);
+        this.Tbx_Used.Text = base.Base_GetShortSupplierName(Model_Suppliers.SuppNo) + "材料款";
+        this.Tbx_Details.Text = "订单号：" + s_ID;
+        this.Tbx_FID.Text = s_ID;
+
+    }
     /// <summary>
     /// 返回省份名称
     /// </summary>

@@ -90,7 +90,7 @@ public partial class Procure_ShipCheck_Excel : BasePage
                     }
                     if (myT.Rows[1][0].ToString().Trim() == "1.发货对账单")
                     {
-                        this.Tbx_CheckType.Text = "遥控器对账";
+                        this.Tbx_CheckType.Text = "成品对账";
                     }
                     else
                     {

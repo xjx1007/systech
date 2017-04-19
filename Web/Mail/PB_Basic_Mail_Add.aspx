@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeFile="PB_Basic_Mail_Add.aspx.cs"
     Inherits="PB_Basic_Mail_Add" %>
 
+<%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,7 +10,8 @@
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="/Web/js/Global.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
@@ -126,7 +128,7 @@
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">发件人：
                                                         </td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:DropDownList runat="server" ID="Ddl_SendEmail" CssClass="detailedViewTextBox" Width="400px"></asp:DropDownList>
                                                             <pc:PTextBox ID="Tbx_SendEmail" runat="server" CssClass="Custom_Hidden"></pc:PTextBox><font
                                                                 color="red">*</font>
@@ -138,7 +140,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">收件人：</td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:TextBox runat="server" ID="Tbx_ReceiveEmail" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="400px" Height="50px"></asp:TextBox>
                                                             <img tabindex="8" src="../../themes/softed/images/select.gif" alt="选择" title="选择"
                                                                 onclick="return btnGetContentPerson_onclick()" />
@@ -147,10 +149,10 @@
                                                             ControlToValidate="Tbx_ReceiveEmail" Display="Dynamic"></asp:RequiredFieldValidator>
                                                         </td>
                                                     </tr>
-                                                    
+
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">抄送人：</td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:TextBox runat="server" ID="Tbx_Cc" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="400px" Height="50px"></asp:TextBox>
                                                             <img tabindex="8" src="../../themes/softed/images/select.gif" alt="选择" title="选择"
                                                                 onclick="return btnGetContentPerson_onclick1()" />
@@ -158,7 +160,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">密送人：</td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:TextBox runat="server" ID="Tbx_Ms" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="400px" Height="50px"></asp:TextBox>
                                                             <img tabindex="8" src="../../themes/softed/images/select.gif" alt="选择" title="选择"
                                                                 onclick="return btnGetContentPerson_onclick2()" />
@@ -166,10 +168,13 @@
                                                     </tr>
                                                     <tr>
                                                         <td width="16%" align="right" class="dvtCellLabel">附件： </td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <table id="myTable" width="50%" border="0" align="left" cellpadding="5" cellspacing="0"
                                                                 class="ListDetails" style="height: 28px">
                                                                 <tr>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>类型</b>
+                                                                    </td>
                                                                     <td class="ListHead" nowrap>
                                                                         <b>附件</b>
                                                                     </td>
@@ -182,10 +187,69 @@
 
                                                         </td>
                                                     </tr>
+                                                    <tr runat="server" id="Tr_Order">
+                                                        <td width="16%" align="right" class="dvtCellLabel">产品附件：</td>
+                                                        <td class="dvtCellInfo" align="left">
+                                                            <cc1:MyGridView ID="GridView_Comment" runat="server" AllowPaging="True" AllowSorting="True" PageSize="100"
+                                                                IsShowEmptyTemplate="true" AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%">
+                                                                <Columns>
+                                                                    <asp:TemplateField HeaderText="选择" HeaderStyle-Font-Size="12px" ItemStyle-Width="10px">
+
+                                                                        <HeaderTemplate>
+                                                                            <input type="CheckBox" onclick="selectAll(this)" />
+                                                                        </HeaderTemplate>
+                                                                        <ItemTemplate>
+                                                                            <asp:CheckBox ID="Chbk" runat="server" Checked />
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
+                                                                    <asp:BoundField HeaderText="名称" DataField="PBA_Name" SortExpression="PBA_Name"
+                                                                        HtmlEncode="false">
+                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    </asp:BoundField>
+                                                                    <asp:TemplateField HeaderText="类别" SortExpression="PBA_ProductsType" HeaderStyle-Font-Size="12px"
+                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                        <ItemTemplate>
+                                                                            <%# base.Base_GetBasicCodeName("778", DataBinder.Eval(Container.DataItem, "PBA_ProductsType").ToString())%>
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
+                                                                    <asp:TemplateField HeaderText="附件" SortExpression="PBA_URL" HeaderStyle-Font-Size="12px"
+                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                        <ItemTemplate>
+                                                                            <a target="_blank" href="<%#DataBinder.Eval(Container.DataItem, "PBA_URL").ToString()%>"><%# DataBinder.Eval(Container.DataItem, "PBA_Name").ToString()%></a>
+                                                                            <asp:TextBox ID="Tbx_UrlDetails" CssClass="Custom_Hidden" runat="server" Text=<%#DataBinder.Eval(Container.DataItem, "PBA_URL").ToString()%>></asp:TextBox>
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
+
+                                                                    <asp:BoundField HeaderText="描述" DataField="PBA_Remarks" SortExpression="PBA_Remarks"
+                                                                        HtmlEncode="false">
+                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="100px" />
+                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    </asp:BoundField>
+                                                                    <asp:TemplateField HeaderText="创建人" SortExpression="PBA_Creator" HeaderStyle-Font-Size="12px"
+                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                        <ItemTemplate>
+                                                                            <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "PBA_Creator").ToString())%>
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
+                                                                    <asp:BoundField HeaderText="上传时间" DataField="PBA_Ctime" SortExpression="PBA_Ctime"
+                                                                        HtmlEncode="false">
+                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    </asp:BoundField>
+                                                                </Columns>
+                                                                <HeaderStyle CssClass='colHeader' />
+                                                                <RowStyle CssClass='listTableRow' />
+                                                                <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                <PagerStyle CssClass='Custom_DgPage' />
+                                                            </cc1:MyGridView>
+
+                                                        </td>
+                                                    </tr>
                                                     <tr>
 
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">上传：</td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <input id="uploadFile" type="file" runat="server" class="Boxx" size="30" />
                                                             <asp:Button
                                                                 ID="save" runat="server" Text="上传" CssClass="crmbutton small save"
@@ -195,13 +259,13 @@
 
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">标题：</td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
                                                             <pc:PTextBox ID="Tbx_Title" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="400px" ValidType="String"></pc:PTextBox><font color="red">*</font>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">内容：</td>
-                                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                                        <td class="dvtCellInfo" align="left">
 
                                                             <asp:TextBox ID="Tbx_Text" runat="server" Style="display: none;"></asp:TextBox>
                                                             <iframe src='../eWebEditor/ewebeditor.htm?id=Tbx_Text&style=gray'

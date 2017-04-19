@@ -81,7 +81,16 @@ public partial class Pb_Basic_ProductsClass_Show : BasePage
         string s_Return = TreeView1.SelectedNode.Value + "," + TreeView1.SelectedNode.Text + "," + s_NewCode;
         StringBuilder s = new StringBuilder();
         s.Append("<script language=javascript>\n");
-        s.Append("window.returnValue='" + s_Return + "';");
+        //s.Append("window.returnValue='" + s_Return + "';");
+        s.Append("if (window.opener != undefined)\n");
+        s.Append("{\n");
+        s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+        s.Append("    window.opener.SetReturnValueInOpenner_ProductsClass('" + s_Return + "');\n");
+        s.Append("}\n");
+        s.Append("else\n");
+        s.Append("{\n");
+        s.Append("    window.returnValue = '" + s_Return + "';\n");
+        s.Append("}\n");
         s.Append("window.close();\n");
         s.Append("</script>");
         Type cstype = this.GetType();

@@ -64,8 +64,8 @@
             <td colspan="2" align="center">
                 <asp:Button
                     ID="save" runat="server" Text="上传" cssClass="crmbutton small save" 
-                    onclick="save_Click" Height="26px"/>&nbsp;&nbsp;
-                <input type="button" name="cancel" value="关闭" class="crmbutton small cancel" onclick="self.close();" />
+                    onclick="save_Click" Width="55px" Height="33px"/>&nbsp;&nbsp;
+                <input type="button" name="cancel" value="关闭" class="crmbutton small cancel" onclick="self.close();" style="Width:55px;Height:33px" />
             </td>
         </tr>
     </table>

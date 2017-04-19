@@ -48,9 +48,9 @@ namespace KNet.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_Sales_ContractList_Details(");
-            strSql.Append("ContractNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,ContractAmount,ContractUnitPrice,ContractDiscount,ContractTotalNet,Contract_SalesUnitPrice,Contract_SalesDiscount,Contract_SalesTotalNet,ContractRemarks,OwnallPID,KSD_OrderNumber,KSD_MaterNumber,KSC_BNumber,KSC_OrderBNumber,KSD_IsFollow,KSD_PlanNumber,KSD_MaterPattern,ID,KSD_XCMDID)");
+            strSql.Append("ContractNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,ContractAmount,ContractUnitPrice,ContractDiscount,ContractTotalNet,Contract_SalesUnitPrice,Contract_SalesDiscount,Contract_SalesTotalNet,ContractRemarks,OwnallPID,KSD_OrderNumber,KSD_MaterNumber,KSC_BNumber,KSC_OrderBNumber,KSD_IsFollow,KSD_PlanNumber,KSD_MaterPattern,ID,KSD_XCMDID,KSD_HxNumber,KSD_HxState)");
             strSql.Append(" values (");
-            strSql.Append("@ContractNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@ContractAmount,@ContractUnitPrice,@ContractDiscount,@ContractTotalNet,@Contract_SalesUnitPrice,@Contract_SalesDiscount,@Contract_SalesTotalNet,@ContractRemarks,@OwnallPID,@KSD_OrderNumber,@KSD_MaterNumber,@KSC_BNumber,@KSC_OrderBNumber,@KSD_IsFollow,@KSD_PlanNumber,@KSD_MaterPattern,@ID,@KSD_XCMDID)");
+            strSql.Append("@ContractNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@ContractAmount,@ContractUnitPrice,@ContractDiscount,@ContractTotalNet,@Contract_SalesUnitPrice,@Contract_SalesDiscount,@Contract_SalesTotalNet,@ContractRemarks,@OwnallPID,@KSD_OrderNumber,@KSD_MaterNumber,@KSC_BNumber,@KSC_OrderBNumber,@KSD_IsFollow,@KSD_PlanNumber,@KSD_MaterPattern,@ID,@KSD_XCMDID,@KSD_HxNumber,@KSD_HxState)");
             SqlParameter[] parameters = {
 					new SqlParameter("@ContractNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -74,7 +74,9 @@ namespace KNet.DAL
 					new SqlParameter("@KSD_PlanNumber", SqlDbType.NVarChar,500),
 					new SqlParameter("@KSD_MaterPattern", SqlDbType.NVarChar,500),
 					new SqlParameter("@ID", SqlDbType.NVarChar,50),
-					new SqlParameter("@KSD_XCMDID", SqlDbType.NVarChar,50)
+					new SqlParameter("@KSD_XCMDID", SqlDbType.NVarChar,50),
+					new SqlParameter("@KSD_HxNumber", SqlDbType.Int,4),
+					new SqlParameter("@KSD_HxState", SqlDbType.Int,4)
                                         };
             parameters[0].Value = model.ContractNo;
             parameters[1].Value = model.ProductsName;
@@ -99,7 +101,8 @@ namespace KNet.DAL
             parameters[20].Value = model.KSD_MaterPattern;
             parameters[21].Value = model.ID;
             parameters[22].Value = model.KSD_XCMDID;
-            
+            parameters[23].Value = model.KSD_HxNumber;
+            parameters[24].Value = model.KSD_HxState;
             
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 
@@ -360,8 +363,8 @@ namespace KNet.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select *,(ContractAmount-ContractReceiving) as thisNowAmount,(Select isnull(Sum(WareHouseAmount),0) from Knet_Procure_WareHouseList_Details a join Knet_Procure_WareHouseList b on a.WareHouseNo=b.WareHouseNo join Knet_Procure_OrdersList c on c.OrderNo=b.OrderNo where c.ContractNo=KNet_Sales_ContractList_Details.ContractNo and a.ProductsBarCode=KNet_Sales_ContractList_Details.ProductsBarCode) as WareHouseAmount,KSC_OrderBNumber ");
-            strSql.Append(" FROM KNet_Sales_ContractList_Details  ");
+            strSql.Append("select a.*,isnull(totalNumber,0) totalNumber,(ContractAmount-ContractReceiving) as thisNowAmount,(Select isnull(Sum(WareHouseAmount),0) from Knet_Procure_WareHouseList_Details a join Knet_Procure_WareHouseList b on a.WareHouseNo=b.WareHouseNo join Knet_Procure_OrdersList c on c.OrderNo=b.OrderNo where c.ContractNo=ContractNo and a.ProductsBarCode=ProductsBarCode) as WareHouseAmount,KSC_OrderBNumber ");
+            strSql.Append(" FROM KNet_Sales_ContractList_Details a  left join v_Contract_BhDetails_Total b on a.ProductsBarCode=b.ProductsBarCode  ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

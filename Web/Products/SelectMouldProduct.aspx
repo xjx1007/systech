@@ -43,6 +43,7 @@ if(http_request.readyState==4){
 function set_return(ID, Name,Code) {
     if (window.opener != undefined) {
         window.opener.returnValue = ID + "," + Name + "," + Code;
+        window.opener.SetReturnValueInOpenner_MouldProduct(ID + "," + Name + "," + Code);
     }
     else {
         window.returnValue = ID + "," + Name + "," + Code;

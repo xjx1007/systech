@@ -19,7 +19,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var temp = window.showModalDialog("../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var temp = window.open("../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SalesShip(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -31,6 +34,16 @@
                 document.all('OutWareNoName').value = "";
             }
         }
+        function GetNumber() {
+            var v_Num = document.all('Tbx_Num').value;
+            var v_TotalNumber = document.all('Tbx_MainNumber').value;
+            for (var i = 0; i < parseInt(v_Num) ; i++)
+            {
+                var v_NeedNumber = document.all('BomNumber_' + i + '').value
+                document.all('Number_' + i + '').value = v_NeedNumber * v_TotalNumber;
+            }
+
+        }
     </script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JAVASCRIPT">
@@ -38,7 +51,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            var tempd = window.open("SelectProducts.aspx?HouseNo=" + document.all("HouseNo").value + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Products(tempd) {
             if (tempd != undefined) {
                 var i_num1 = parseInt(document.all('Tbx_Num').value);
                 var ss, ss1, s_Value, i_row;
@@ -73,7 +89,7 @@
                     objCel.className = "dvtCellInfo";
 
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num1 + '\"   value=' + i_num1 + ' >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num1 + '\"    >';
                     objCel.className = "dvtCellInfo";
                     i_row = i_row + 1;
                     s_ID = s_ID + ss[0] + ",";
@@ -96,8 +112,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("../Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-
+            //var tempd = window.showModalDialog("../Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("../Common/SelectCustomer.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer(tempd) {
             if (tempd == undefined) {
                 tempd = window.returnValue;
             }
@@ -149,6 +167,9 @@
             <td width="100%" nowrap>
                 <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
                 <asp:TextBox ID="Tbx_Type" runat="server" Style="display: none"></asp:TextBox>
+                <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" Style="display: none"></asp:TextBox>
+                
+                <asp:TextBox ID="Tbx_FaterBarCode" runat="server" Style="display: none"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -222,8 +243,31 @@
                                         <td class="dvtCellLabel">
                                             &nbsp;出库仓库:
                                         </td>
-                                        <td class="dvtCellInfo"  colspan="3"><asp:DropDownList ID="HouseNo" runat="server" Width="150px"></asp:DropDownList>(<font color="red">*</font>)<br />
+                                        <td class="dvtCellInfo"><asp:DropDownList ID="HouseNo" runat="server" Width="150px"></asp:DropDownList>(<font color="red">*</font>)<br />
         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="仓库不能为空" ControlToValidate="HouseNo" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        </td>
+                                        <td class="dvtCellLabel">
+                                            &nbsp;用于项目:
+                                        </td>
+                                        <td class="dvtCellInfo"><asp:DropDownList ID="Ddl_Project" runat="server" Width="150px"></asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dvtCellLabel">
+                                            &nbsp;主产品:
+                                        </td>
+                                        <td class="dvtCellInfo">
+                                             <asp:TextBox ID="Tbx_MainProducts" MaxLength="40" runat="server" CssClass="detailedViewTextBox"
+                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                Width="337px" Enabled="false"></asp:TextBox>
+                                        </td>
+                                        <td class="dvtCellLabel">
+                                            &nbsp;数量:
+                                        </td>
+                                        <td class="dvtCellInfo">
+                                             <asp:TextBox ID="Tbx_MainNumber" MaxLength="40" runat="server" CssClass="detailedViewTextBox"
+                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox';GetNumber()"
+                                                Width="150px" Text="1" ></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
@@ -242,7 +286,7 @@
                                             联系人:
                                         </td>
                                         <td class="dvtCellInfo">
-                                            <asp:DropDownList runat="server" ID="Ddl_DutyPerson">
+                                            <asp:DropDownList runat="server" ID="Ddl_DutyPerson" Width="200px">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
@@ -265,34 +309,11 @@
                                 <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
                                     class="crmTable" style="height: 28px">
                                     <tr>
-                                        <td colspan="8" class="dvInnerHeader">
+                                        <td colspan="10" class="dvInnerHeader">
                                             <b>产品详细信息</b>
                                         </td>
                                     </tr>
-                                    <tr valign="top">
-                                        <td valign="top" class="ListHead" align="right" nowrap>
-                                            <b>工具</b>
-                                        </td>
-                                        <td class="ListHead" nowrap>
-                                            <b>产品名称</b>
-                                        </td>
-                                        <td class="ListHead" nowrap>
-                                            <b>产品编码</b>
-                                        </td>
-                                        <td class="ListHead" nowrap>
-                                            <b>版本号</b>
-                                        </td>
-                                        <td class="ListHead" nowrap>
-                                            <b>数量</b>
-                                        </td>
-                                        <td class="ListHead" nowrap>
-                                            <b>单价</b>
-                                        </td>
-                                        <td class="ListHead" nowrap>
-                                            <b>备注</b>
-                                        </td>
-                                    </tr>
-                                    <%=s_MyTable_Detail %>
+                                    <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
                                 </table>
                                 <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" class="crmTable">
                                     <!-- Add Product Button -->

@@ -97,7 +97,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
         {
             KNet.BLL.Knet_Procure_OrdersList bll = new KNet.BLL.Knet_Procure_OrdersList();
             KNet.Model.Knet_Procure_OrdersList model = bll.GetModelB(s_OrderNo);
-            if ((s_Details == "遥控器采购")&&(model.OrderCheckYN==false))
+            if ((s_Details == "成品采购")&&(model.OrderCheckYN==false))
             {
                 s_Return = "<a href=\"Knet_Procure_OpenBilling_Sc.aspx?ID=" + s_OrderNo + "\" target=\"_blank\"><font color=red>" + s_Details + "</font></a>";
             }
@@ -184,7 +184,6 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
         //        DbHelperSQL.ExecuteSql(DoSqlOrder);
         //    }
         //}
-
     }
 
     protected string GetOutWareListfollowup(object OutWareNo, string s_Title, string s_Type)
@@ -193,7 +192,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
         {
             StringBuilder Sb_Return = new StringBuilder();
             StringBuilder Sb_Str = new StringBuilder();
-            if (s_Type == "遥控器采购")
+            if (s_Type == "成品采购")
             {
                 Sb_Str.Append("发货日期：");
                 string s_Sql = "select top 1 SPD_EndTime from Sc_Produce_Plan_Details a ";
@@ -384,6 +383,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
     /// <returns></returns>
     protected string GetOrderCheckYN(object aa)
     {
+        string s_Return = "";
         using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
         {
 
@@ -392,7 +392,6 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
             DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
             if (Dtb_Table.Rows.Count > 0)
             {
-                string s_Return = "";
                 for (int i = 0; i < Dtb_Table.Rows.Count; i++)
                 {
                     string s_ProblemType = base.Base_GetBasicCodeName("261", Dtb_Table.Rows[i]["ZPP_Type"].ToString()) + " 问题|";
@@ -403,15 +402,16 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
                     s_Return += "</br>";
 
                 }
-                return s_Return;
             }
+            /*【
             AdminloginMess AM = new AdminloginMess();
             if (((AM.KNet_StaffDepart != "129652783965723459") || (AM.KNet_Position != "102")) && (AM.KNet_StaffDepart != "129652784259578018"))//如果是研发中心经理显示
             {
                 return "<font color=red>无权审核</font>";
             }
             conn.Open();
-
+            */
+                /*
             string Dostr = "select ID,OrderNo,OrderState,OrderCheckYN from Knet_Procure_OrdersList where OrderNo='" + aa + "' and  OrderState!=2";
             SqlCommand cmd = new SqlCommand(Dostr, conn);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -449,7 +449,10 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
             {
                 return "--";
             }
+                 * */
         }
+
+        return s_Return;
     }
     private bool GetYFsp( string s_OrderNo)
     {
@@ -519,7 +522,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
         string s_Return = "";
         try
         {
-            if (s_OrderType == "128860698200781250")//遥控器
+            if (s_OrderType == "128860698200781250")//成品
             {
                 s_Return = "<a href=\"/Web/Sc/Sc_Plan_Material.aspx?OrderNo=" + s_OrderNo + "\" target=\"_blank\">物料</a>";
             }
@@ -678,7 +681,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
     }
     public string GetRk(string s_RKSTtate, string s_OrderNo, string s_Type)
     {
-        if (s_Type != "遥控器采购")
+        if (s_Type != "成品采购")
         {
 
                 if (s_RKSTtate == "0")
@@ -728,7 +731,18 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
         this.Search_basic.Style["display"] = "block";
         this.DataShows();
     }
-
+    public string GetPayMent(string s_SuppNo)
+    {
+        string s_Return="";
+        if(s_SuppNo!="")
+        {
+            KNet.BLL.Knet_Procure_Suppliers Bll=new KNet.BLL.Knet_Procure_Suppliers();
+            KNet.Model.Knet_Procure_Suppliers Model=Bll.GetModelB(s_SuppNo);
+            s_Return=base.Base_GetBasicCodeName("300", Model.KPS_Days.ToString());
+        }
+        return s_Return;
+        
+    }
     public void btnAdvancedSearch_Click(object sender, EventArgs e)
     {
         this.Search_basic.Style["display"] = "none";

@@ -180,7 +180,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td width="17%" class="dvtCellLabel">遥控器订单:</td>
+                                                                    <td width="17%" class="dvtCellLabel">成品订单:</td>
                                                                     <td class="dvtCellInfo">
                                                                         <asp:Label ID="Lbl_ParentOrderNo" runat="server" Width="178px" ReadOnly="true"></asp:Label>&nbsp;
                                                                     </td>
@@ -191,10 +191,10 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="dvtCellLabel">选择收货供应商:</td>
+                                                                    <td class="dvtCellLabel">价格需确认:</td>
                                                                     <td class="dvtCellInfo">
-                                                                        <asp:Label ID="Lbl_SelectSupp" runat="server" Width="150px"></asp:Label>&nbsp;
-                                                                    </td>
+                                                                        <asp:Label ID="Lbl_PriceState" runat="server"></asp:Label>&nbsp;</td>
+                                                                    
                                                                     <td class="dvtCellLabel">采购部门:</td>
                                                                     <td class="dvtCellInfo">
                                                                         <asp:Label ID="Lbl_Depart" runat="server" Width="150px"></asp:Label>&nbsp;
@@ -213,9 +213,14 @@
                                                                 </tr>
                                                                 
                                                                 <tr>
-                                                                    <td class="dvtCellLabel">价格需确认:</td>
-                                                                    <td class="dvtCellInfo" colspan="3">
-                                                                        <asp:Label ID="Lbl_PriceState" runat="server"></asp:Label>&nbsp;</td>
+                                                                    
+                                                                    <td class="dvtCellLabel">选择收货供应商:</td>
+                                                                    <td class="dvtCellInfo">
+                                                                        <asp:Label ID="Lbl_SelectSupp" runat="server" Width="150px"></asp:Label>&nbsp;
+                                                                    </td>
+                                                                    <td class="dvtCellLabel">收货仓库:</td>
+                                                                    <td class="dvtCellInfo">
+                                                                        <asp:Label ID="Lbl_HouseNo" runat="server"></asp:Label>&nbsp;</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="dvtCellLabel">送货地址:</td>
@@ -251,12 +256,21 @@
                                                                             class="ListDetails">
 
                                                                             <tr valign="top">
+                                                                                
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>序号</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>BOM序号</b></td>
                                                                                 <td class="ListHead" rowspan="2" nowrap>
                                                                                     <b>产品名称</b></td>
                                                                                 <td class="ListHead" rowspan="2" nowrap>
                                                                                     <b>料号</b></td>
                                                                                 <td class="ListHead" rowspan="2" nowrap>
                                                                                     <b>版本号</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>包装数</b></td>
+                                                                                <td class="ListHead" rowspan="2" nowrap>
+                                                                                    <b>包数</b></td>
                                                                                 <td class="ListHead" rowspan="2" nowrap>
                                                                                     <b>数量</b></td>
                                                                                 <td class="ListHead" colspan="2" nowrap>
@@ -309,7 +323,7 @@
                                                                     <asp:TemplateField HeaderText="状态" SortExpression="PBM_State" ItemStyle-HorizontalAlign="Left"
                                                                         HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>
-                                                                            <%# GetState(DataBinder.Eval(Container.DataItem, "PBM_State").ToString()) %>
+                                                                            <%# GetState(DataBinder.Eval(Container.DataItem, "PBM_State").ToString(),DataBinder.Eval(Container.DataItem, "PBM_Del").ToString()) %>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:BoundField HeaderText="操作时间" DataField="PBM_CTime" SortExpression="PBM_CTime" HtmlEncode="false">

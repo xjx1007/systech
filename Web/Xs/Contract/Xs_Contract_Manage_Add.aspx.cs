@@ -36,7 +36,7 @@ public partial class Xs_Contract_Manage_Add : BasePage
             this.Tbx_ID.Text = s_ID;
             this.Lbl_Title.Text = "新增合同档案";
             this.Tbx_STime.Text = DateTime.Now.ToShortDateString();
-            base.Base_DropDutyPerson(this.Ddl_DutyPerson);
+            base.Base_DropDutyPerson(this.Ddl_DutyPerson," and IsSale=1 ");
             base.Base_DropBasicCodeBind(this.DDl_Type,"216");
             base.Base_DropBindFlow(this.Ddl_Flow, "103");
             this.Ddl_Flow.SelectedValue = "104";

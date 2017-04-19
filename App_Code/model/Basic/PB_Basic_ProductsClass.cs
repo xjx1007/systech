@@ -14,13 +14,14 @@ namespace KNet.Model
         private string _pbp_code;
         private string _pbp_name;
         private string _pbp_faterid;
-        private string _pbp_order;
+        private int _pbp_order;
         private string _pbp_creator;
         private DateTime? _pbp_ctime;
         private DateTime? _pbp_mtime;
         private string _pbp_mender;
         private int _pbp_days;
         private int _pbp_orderdays;
+        private int _PBP_Type;
         /// <summary>
         /// 
         /// </summary>
@@ -56,7 +57,7 @@ namespace KNet.Model
         /// <summary>
         /// 
         /// </summary>
-        public string PBP_Order
+        public int PBP_Order
         {
             set { _pbp_order = value; }
             get { return _pbp_order; }
@@ -109,6 +110,15 @@ namespace KNet.Model
             set { _pbp_orderdays = value; }
             get { return _pbp_orderdays; }
         }
+
+
+        public int PBP_Type
+        {
+            set { _PBP_Type = value; }
+            get { return _PBP_Type; }
+        }
+
+        
         #endregion Model
 
     }

@@ -263,20 +263,25 @@ public partial class Knet_Common_SelectSalesClientList : BasePage
             s_Code = "QUT" + s_CustomerValue.Substring(1, s_CustomerValue.Length - 1) + KNetOddNumbers();
             s_Code1 = "CP" + s_CustomerValue.Substring(1, s_CustomerValue.Length - 1) + KNetOddNumbers1(s_CustomerValue);
 
-            string s_PayMentType = "", s_DutyPerson = "";
+            string s_PayMentType = "", s_DutyPerson = "",s_KPType="";
             this.BeginQuery("Select top 1 * from KNET_Sales_ContractList where CustomerValue='" + s_CustomerValue + "' order by ContractDateTime Desc");
             this.QueryForDataTable();
             if (this.Dtb_Result.Rows.Count > 0)
             {
                 s_PayMentType = Dtb_Result.Rows[0]["Payment"].ToString();
                 s_DutyPerson = Dtb_Result.Rows[0]["DutyPerson"].ToString();
+                s_KPType = Dtb_Result.Rows[0]["KSC_KPType"].ToString();
             }
             else
             {
-                s_DutyPerson = base.Base_GetCustomerDutyPerson(s_CustomerValue);
+                KNet.BLL.KNet_Sales_ClientList Bll_ClientList=new KNet.BLL.KNet_Sales_ClientList();
+                KNet.Model.KNet_Sales_ClientList Model_Contrat = Bll_ClientList.GetModelB(s_CustomerValue);
+                s_DutyPerson = Model_Contrat.KSC_DutyPerson;
+                s_KPType = Model_Contrat.KSC_KPType;
+                s_PayMentType = Model_Contrat.KSC_PayMent;
             }
             //s_Code = "QUT" + SuppNoVale.Substring(1, SuppNoVale.Length - 1) + KNetOddNumbers();
-            s_Return += "<a href=\"javascript:window.close();\" onclick='set_return_Customer(\"" + s_CustomerValue + "|" + base.Base_GetCustomerName(s_CustomerValue) + "|" + GetCustomerNameAdress(s_CustomerValue) + "|" + s_Code + "|" + s_Code1 + "|" + s_PayMentType + "|" + s_DutyPerson + "\");'>" + base.Base_GetCustomerName(s_CustomerValue) + "</a>";
+            s_Return += "<a href=\"javascript:window.close();\" onclick='set_return_Customer(\"" + s_CustomerValue + "|" + base.Base_GetCustomerName(s_CustomerValue) + "|" + GetCustomerNameAdress(s_CustomerValue) + "|" + s_Code + "|" + s_Code1 + "|" + s_PayMentType + "|" + s_DutyPerson + "|" + s_KPType + "\");'>" + base.Base_GetCustomerName(s_CustomerValue) + "</a>";
 
         }
         catch

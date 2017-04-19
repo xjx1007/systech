@@ -23,6 +23,7 @@
         function set_return_Customer(Customer_id) {
             if (window.opener != undefined) {
                 window.opener.returnValue = Customer_id;
+                window.opener.SetReturnValueInOpenner_SalesClient(Customer_id);
             }
             else {
                 window.returnValue = Customer_id;

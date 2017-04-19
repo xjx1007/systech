@@ -229,10 +229,19 @@ public partial class Knet_Common_SelectSalesClientList : BasePage
                     s_DutyPerson = base.Base_GetCustomerDutyPerson(SuppNoVale);
                 }
 
+                string s_Return =  SuppNoVale + "|" + base.Base_GetCustomerName(SuppNoVale) + "|" + GetCustomerNameAdress(SuppNoVale) + "|" + s_Code + "|" + s_Code1 + "|" + s_PayMentType + "|" + s_DutyPerson ;
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
-                s.Append("window.returnValue='" + SuppNoVale + "|" + base.Base_GetCustomerName(SuppNoVale) + "|" + GetCustomerNameAdress(SuppNoVale) + "|" + s_Code + "|" + s_Code1 + "|" + s_PayMentType + "|" + s_DutyPerson + "';" + "\n");
-                s.Append("window.close();" + "\n");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                s.Append("    window.opener.SetReturnValueInOpenner_ClientList('" + s_Return + "');\n");
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
+                s.Append("window.close();" + "\n");               
                 s.Append("</script>");
                 Type cstype = this.GetType();
                 ClientScriptManager cs = Page.ClientScript;

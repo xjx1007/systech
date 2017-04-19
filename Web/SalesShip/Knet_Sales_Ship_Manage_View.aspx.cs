@@ -106,8 +106,8 @@ public partial class Web_Knet_Sales_Ship_Manage_View : BasePage
             this.Lbl_SCutomer.Text = base.Base_GetCustomerName_Link(Model.KSO_SCustomerValue);
             this.Lbl_ShipType.Text = Model.KSO_ShipType;
             this.Lbl_Creator.Text = base.Base_GetUserName(Model.OutWareStaffNo);
-            //this.Lbl_MaterNumber.Text = "遥控器：" + Model.KSO_MaterNumber.Replace(",", "电池：");
-            //this.Lbl_OrderNo.Text = "遥控器：" + Model.KSO_OrderNo.Replace(",", "电池：");
+            //this.Lbl_MaterNumber.Text = "成品：" + Model.KSO_MaterNumber.Replace(",", "电池：");
+            //this.Lbl_OrderNo.Text = "成品：" + Model.KSO_OrderNo.Replace(",", "电池：");
             this.Lbl_PlanNo.Text = Model.KSO_PlanNo;
             this.Lbl_Type.Text = base.Base_GetBasicCodeName("145", Model.KSO_Type);
             this.Lbl_FhDetails.Text = Model.KSO_FhDetails;

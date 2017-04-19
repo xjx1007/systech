@@ -19,8 +19,12 @@
     <script type="text/javascript" >
         function GPrint(ID) {
             //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
-            var temp = window.showModalDialog("CG_ApplicationPayment_For_Print.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var temp = window.showModalDialog("CG_ApplicationPayment_For_Print.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
             // window.location.reload(); 
+            var tempd = window.open("CG_ApplicationPayment_For_Print.aspx?ID=" + ID + "", "选择客户", "width=850, height=500,top=100,left=120,toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no,alwaysRaised=yes,depended=yes");
+
+        }
+        function SetReturnValueInOpenner_Print(tempd) {
         }
 </script>
 <body topmargin="0" leftmargin="0" rightmargin="0">

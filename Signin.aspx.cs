@@ -50,7 +50,7 @@ using System.Data;
             {
                 Add_Logs("登陆系统成功....", AdminUserName);
 
-                Response.Write("<script language='javascript' type='text/javascript'>this.window.location.href='index.aspx';</script>");
+                Response.Write("<script language='javascript' type='text/javascript'>this.window.location.href='NewMain.aspx';</script>");
                 Response.End();
             }
             else

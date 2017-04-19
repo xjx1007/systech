@@ -610,7 +610,7 @@
                                                 <asp:TemplateField HeaderText="状态" SortExpression="ContractCheckYN" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
+                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString(),DataBinder.Eval(Container.DataItem, "DirectOutState").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

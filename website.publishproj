@@ -18,7 +18,7 @@ website.publishproj
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{26253a63-d223-4b26-866c-8a1c9f083a21}</ProjectGuid>
     <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
-    <SourceWebVirtualPath>/Web_Mis</SourceWebVirtualPath>
+    <SourceWebVirtualPath>/System_Mis</SourceWebVirtualPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SourceWebProject>
     </SourceWebProject>
@@ -42,12 +42,6 @@ website.publishproj
     <AssemblyAttributes Include="AssemblyVersion">
       <Value>$(AssemblyVersion)</Value>
     </AssemblyAttributes>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Contain\Container.csproj">
-      <Project>{3E2E5809-8807-449F-ACD7-958B1D2BB7B1}</Project>
-      <Name>Container</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
 </Project>

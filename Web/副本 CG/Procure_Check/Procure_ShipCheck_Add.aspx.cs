@@ -386,7 +386,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     this.SuppNo.Text = base.Base_GetSupplierName(s_SuppNo);
                 }
             }
-            else if (s_Type == "遥控器")
+            else if (s_Type == "成品")
             {
                 this.Ddl_Type.SelectedValue = "0";
                 string s_Sql1 = "select HouseNo from Knet_Procure_Suppliers a join KNet_Sys_WareHouse b on a.SuppNo=b.SuppNo where KSW_Type='0' and suppName like '%" + s_SuppName1.Trim() + "%' ";
@@ -505,7 +505,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
     }
     public void DataShows()
     {
-        //遥控器对账
+        //成品对账
         if (this.Tr_HouseNo.Visible == true)
         {
             string s_Sql = "select b.DirectOutNo,b.KWD_Custmoer,b.KWD_CwOutTime DirectOutDateTime,b.KWD_ContentPerson,b.HouseNo,a.DirectOutAmount+Isnull(a.KWD_BNumber,0) as DirectOutAmount,a.ProductsBarCode,";
@@ -548,7 +548,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             MyGridView1.DataSource = Dtb_Table2;
             MyGridView1.DataKeyNames = new string[] { "ID" };
             MyGridView1.DataBind();
-            //不在明细的遥控器对账单
+            //不在明细的成品对账单
 
             //查未找到的采购单号和入库明细
             string s_Sql2 = "";
@@ -935,7 +935,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
     private void ShowTr()
     {
 
-        if (this.Ddl_Type.SelectedValue == "0")//遥控器采购
+        if (this.Ddl_Type.SelectedValue == "0")//成品采购
         {
             Tr_HouseNo.Visible = true;
             Tr_SuppNo.Visible = false;

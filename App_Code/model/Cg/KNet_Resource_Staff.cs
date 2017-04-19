@@ -38,8 +38,15 @@ namespace KNet.Model
         private string _KRS_DepartPerson;
         private string _KRS_MailPassWord;
         private int _KRS_IsWeb;
+        private string _TelPhone;
+        private string _ProductsType;
 
 
+        public string ProductsType
+        {
+            set { _ProductsType = value; }
+            get { return _ProductsType; }
+        }
 
         /// <summary>
         /// 用户默认打开莱单栏
@@ -90,6 +97,17 @@ namespace KNet.Model
             set { _staffno = value; }
             get { return _staffno; }
         }
+
+        
+        /// <summary>
+        /// 人员维一号
+        /// </summary>
+        public string TelPhone
+        {
+            set { _TelPhone = value; }
+            get { return _TelPhone; }
+        }
+        
         /// <summary>
         /// 分公司值
         /// </summary>

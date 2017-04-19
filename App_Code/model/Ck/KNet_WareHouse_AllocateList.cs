@@ -25,6 +25,12 @@ namespace KNet.Model
         private string _allocateremarks;
         private int _allocatecheckyn;
         private ArrayList _Arr_List;
+        private ArrayList _Arr_List1;
+        private string _KWA_OrderNo;
+        
+        private string _KWA_Type;
+        private int _KWA_DBType;
+        
         /// <summary>
         /// 自动ID值
         /// </summary>
@@ -135,6 +141,35 @@ namespace KNet.Model
             set { _Arr_List = value; }
             get { return _Arr_List; }
         }
+
+        public ArrayList Arr_List1
+        {
+            set { _Arr_List1 = value; }
+            get { return _Arr_List1; }
+        }
+
+
+
+        public string KWA_OrderNo
+        {
+            set { _KWA_OrderNo = value; }
+            get { return _KWA_OrderNo; }
+        }
+
+
+        public string KWA_Type
+        {
+            set { _KWA_Type = value; }
+            get { return _KWA_Type; }
+        }
+
+        public int KWA_DBType
+        {
+            set { _KWA_DBType = value; }
+            get { return _KWA_DBType; }
+        }
+        
+
         #endregion Model
 
     }

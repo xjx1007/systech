@@ -124,9 +124,19 @@ public partial class Knet_Common_SelectSalesShipList : BasePage
         }
         else
         {
+            string s_Return = "";
+            s_Return = s_ID.Substring(0, s_ID.Length - 1);
             StringBuilder s = new StringBuilder();
             s.Append("<script language=javascript>" + "\n");
-            s.Append("window.returnValue='" + s_ID.Substring(0, s_ID.Length-1) + "'\n");
+            s.Append("if (window.opener != undefined)\n");
+            s.Append("{\n");
+            s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+            s.Append("    window.opener.SetReturnValueInOpenner_SalesShip('" + s_Return + "');\n");
+            s.Append("}\n");
+            s.Append("else\n");
+            s.Append("{\n");
+            s.Append("    window.returnValue = '" + s_Return + "';\n");
+            s.Append("}\n");
             s.Append("window.close();" + "\n");
             s.Append("</script>");
             Type cstype = this.GetType();

@@ -686,7 +686,7 @@ public partial class NewDesk : BasePage
         string s_Date = DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + "1";
         s_Sql = "select Sum(DirectInAmount),Sum(case when DirectInDateTime <'" + s_Date + "' then  DirectInAmount else 0 end) from V_Store ";
         s_Sql += " a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
-        s_Sql += " where  HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0 ) and KSP_Code like '01%'";
+        s_Sql += " where  HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0 ) and a.KSP_Code like '01%'";
         this.BeginQuery(s_Sql);
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
@@ -737,7 +737,7 @@ public partial class NewDesk : BasePage
         string[] s_ClKC = new string[10];
         s_Sql = "select Sum(DirectInAmount),Sum(case when DirectInDateTime <'" + s_Date + "' then  DirectInAmount else 0 end) from V_Store ";
         s_Sql += " a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
-        s_Sql += " where   HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0 ) and KSP_Code not like '01%'";
+        s_Sql += " where   HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0 ) and a.KSP_Code not like '01%'";
         this.BeginQuery(s_Sql);
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)

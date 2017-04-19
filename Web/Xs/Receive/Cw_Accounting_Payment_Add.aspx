@@ -20,8 +20,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "&callback=SetReturnValueInOpenner_Customer1", "选择客户", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer1(tempd) {
             if (tempd == undefined) {
                 tempd = window.returnValue;
             }
@@ -42,8 +44,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "&callback=SetReturnValueInOpenner_Customer2", "选择客户", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer2(tempd) {
             if (tempd == undefined) {
                 tempd = window.returnValue;
             }
@@ -63,7 +67,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("SelectSalesShipList.aspx?CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ID=" + document.all("Tbx_IDs").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("SelectSalesShipList.aspx?CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ID=" + document.all("Tbx_IDs").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var temp = window.open("SelectSalesShipList.aspx?CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ID=" + document.all("Tbx_IDs").value + "", "选择出库单", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SalesShip(temp) {
             if (tempd != undefined) {
                 var ss, s_Name, i_row, s_ID = "", TotalNet = 0;
                 i_row = myTable.rows.length;

@@ -88,6 +88,12 @@
                                     <tr>
                                         <td align="left" style="padding-left: 10px;">
                                             <img src="/themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                            <asp:Label runat="server" ID="Lbl_Link"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="padding-left: 10px;">
+                                            <img src="/themes/softed/images/pointer.gif" hspace="5" align="middle" />
                                             <a href="/Web/CG/Order/Knet_Procure_OpenBilling.aspx?ContractNo=<%=Request.QueryString["ID"].ToString()%>" class="webMnu">创建采购订单</a>
                                         </td>
                                     </tr>
@@ -142,6 +148,7 @@
                                         <asp:Button Text="审核" CssClass="crmbutton small edit" ID="Btn_Sh" runat="server" OnClick="Btn_Sh_Click"></asp:Button>
                                         <asp:Button Text="需消耗" CssClass="crmbutton small edit" ID="Btn_Sh1" runat="server" OnClick="Btn_Sh_Click1"></asp:Button>
                                         <asp:Button Text="订单取消" CssClass="crmbutton small edit" ID="Btn_Sh2" runat="server" OnClick="Btn_Sh_Click2"></asp:Button>
+                                            <asp:Button ID="Button2" runat="server" CssClass="crmbutton small save" Text="更改为已采购" OnClick="Button1_Click1" Style="width: 100px; height: 33px;" /><asp:Button ID="Button3" runat="server" CssClass="crmbutton small create" Text="更改为未采购" OnClick="Button3_Click1" Style="width: 100px; height: 33px;" />
                                         </td>
                                         <td align="right">
                                             <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create"
@@ -184,6 +191,7 @@
                                                             <asp:Label ID="CustomerName" runat="server"></asp:Label>&nbsp;
                                                         </td>
                                                     </tr>
+                                                    <asp:panel runat="server" Visible="false" ID="Pan_LinkMan">
                                                     <tr>
                                                         <td class="dvtCellLabel">联系人:
                                                         </td>
@@ -203,6 +211,7 @@
                                                             <asp:Label ID="ContractToAddress" runat="server"></asp:Label>&nbsp;
                                                         </td>
                                                     </tr>
+                                                        </asp:panel>
                                                     <tr>
                                                         <td class="dvtCellLabel">交货日期:
                                                         </td>
@@ -442,7 +451,7 @@
                                                 <asp:TemplateField HeaderText="状态" SortExpression="ContractCheckYN" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
+                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString(),DataBinder.Eval(Container.DataItem, "DirectOutState").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -524,7 +533,7 @@
                                                 <asp:TemplateField HeaderText="状态" SortExpression="ContractCheckYN" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
+                                                        <%# base.GetContractState(DataBinder.Eval(Container.DataItem, "ContractNo").ToString(),DataBinder.Eval(Container.DataItem, "DirectOutState").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -538,6 +547,7 @@
                                                 </table>
                                                 <br />
                                                 评审记录：
+                                                <asp:Button ID="Button1" runat="server" Text="重新提交"  CssClass="crmbutton small save" OnClick="Button1_Click" style="width: 55px;height: 33px;"  />
                                             <asp:GridView ID="GridView1" Width="99%" runat="server" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"
                                                 GridLines="None" HorizontalAlign="center" AutoGenerateColumns="false" HeaderStyle-Height="25px">
                                                 <Columns>

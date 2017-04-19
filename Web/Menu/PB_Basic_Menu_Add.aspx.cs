@@ -27,6 +27,7 @@ public partial class PB_Basic_Menu_Add : BasePage
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
             }
+            DropParentMenu(this.DDl_FatherID);
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             this.Tbx_ID.Text = s_ID;
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
@@ -59,6 +60,7 @@ public partial class PB_Basic_Menu_Add : BasePage
         KNet.BLL.PB_Basic_Menu bll = new KNet.BLL.PB_Basic_Menu();
         KNet.Model.PB_Basic_Menu model = bll.GetModel(s_ID);
         this.Tbx_Code.Text = model.PBM_ID;
+
     }
 
     private bool SetValue(KNet.Model.PB_Basic_Menu model)
@@ -123,6 +125,59 @@ public partial class PB_Basic_Menu_Add : BasePage
                 AlertAndRedirect("新增成功！", "PB_Basic_Menu_List.aspx");
             }
             catch { }
+        }
+    }
+
+    public void DropParentMenu(DropDownList DDL)
+    {
+        try
+        {
+            DDL.Items.Clear();
+            KNet.BLL.PB_Basic_Menu bll = new KNet.BLL.PB_Basic_Menu();
+            DataSet Dts_Table = bll.GetList(" PBM_Del<>'1' Order By PBM_Level asc, PBM_Order asc ");
+            foreach (DataRow dr in Dts_Table.Tables[0].Rows)
+            {
+                if (dr["PBM_FatherID"] == "")
+                {
+                    string s_ddlTxt = dr["PBM_Name"].ToString() + " (" + dr["PBM_ID"].ToString() + ")";
+                    if (dr["PBM_Level"] != DBNull.Value)
+                    {
+                        int i_level = Convert.ToInt32(dr["PBM_Level"]);
+                        for (int i = 0; i < i_level + 1; i++)
+                        {
+                            s_ddlTxt = "- " + s_ddlTxt;
+                        }
+                    }
+                    DDL.Items.Add(new ListItem(s_ddlTxt, dr["PBM_ID"].ToString()));
+                    PopulateDDLParentMenu(DDL, Dts_Table, dr["PBM_ID"].ToString());
+                }
+            }
+            ListItem item = new ListItem("请选择上级菜单", ""); //默认值
+            DDL.Items.Insert(0, item);
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    private void PopulateDDLParentMenu(DropDownList DDL, DataSet Dts_Table, string s_ParentMenuID)
+    {
+        foreach (DataRow dr in Dts_Table.Tables[0].Rows)
+        {
+            if (dr["PBM_FatherID"].ToString() == s_ParentMenuID)
+            {
+                string s_ddlTxt = dr["PBM_Name"].ToString() + " (" + dr["PBM_ID"].ToString() + ")";
+                if (dr["PBM_Level"] != DBNull.Value)
+                {
+                    int i_level = Convert.ToInt32(dr["PBM_Level"]);
+                    for (int i = 0; i < i_level+1; i++)
+                    {
+                        s_ddlTxt = "- " + s_ddlTxt;
+                    }
+                }
+                DDL.Items.Add(new ListItem(s_ddlTxt, dr["PBM_ID"].ToString()));
+                PopulateDDLParentMenu(DDL, Dts_Table, dr["PBM_ID"].ToString());
+            }
         }
     }
 }

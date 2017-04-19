@@ -1,8 +1,8 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="List_KCList.aspx.cs" Inherits="Web_Report_Xs_List_KCList" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head runat="server">
-    <title>ø‚¥Ê±®±Ì</title>
-    
+    <title>Â∫ìÂ≠òÊä•Ë°®</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <style type="text/css" id="style1">
 body {
  background: #FFF;
@@ -174,7 +174,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 .gg{background-color:#dee2f2}
   .MaterTitle
 	    {
-	    font-family:∑Ω’˝“¶ÃÂ;
+	    font-family:ÊñπÊ≠£Âßö‰Ωì;
 	    white-space:nowrap;
 	    color:windowtext;
 	    font-weight:700;
@@ -192,7 +192,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 }
 </style>
     <script language="javascript" type="text/javascript">   
-        var LODOP; //…˘√˜Œ™»´æ÷±‰¡ø 
+        var LODOP; //Â£∞Êòé‰∏∫ÂÖ®Â±ÄÂèòÈáè 
 	function prn1_preview() {	
 		CreateOneFormPage();	
 		LODOP.PREVIEW();	
@@ -207,7 +207,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	};	
 	function CreateOneFormPage(){
 		LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
-		LODOP.PRINT_INIT("ø‚¥Ê±®±Ì");
+		LODOP.PRINT_INIT("Â∫ìÂ≠òÊä•Ë°®");
 		LODOP.SET_PRINT_STYLE("FontSize",18);
 		LODOP.SET_PRINT_STYLE("Bold",1);
         var strBodyStyle = "<style>" + document.getElementById("style1").innerHTML + "</style>";
@@ -228,11 +228,11 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 		strFormHtml = strFormHtml.replace("</THEAD> ", "");
 		LODOP.ADD_PRINT_HTM(0, 0, "100%", "100%", strFormHtml);
 		LODOP.SET_SAVE_MODE("PAGE_TYPE",1);
-		LODOP.SET_SAVE_MODE("centerHeader","“≥√º");
-		LODOP.SET_SAVE_MODE("centerFooter","µ⁄&P“≥");
-		LODOP.SET_SAVE_MODE("Caption", "ø‚¥Ê±®±Ì");					
+		LODOP.SET_SAVE_MODE("centerHeader","È°µÁúâ");
+		LODOP.SET_SAVE_MODE("centerFooter","Á¨¨&PÈ°µ");
+		LODOP.SET_SAVE_MODE("Caption", "Â∫ìÂ≠òÊä•Ë°®");					
 		LODOP.SET_SAVE_MODE("RETURN_FILE_NAME",1);
-		LODOP.SAVE_TO_FILE("ø‚¥Ê±®±Ì.xls");		
+		LODOP.SAVE_TO_FILE("Â∫ìÂ≠òÊä•Ë°®.xls");		
 	};	       
 </script> 
 <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
@@ -245,11 +245,11 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 <body>
     <form id="form1" runat="server">
     <div >
-    <input type="button" value="¥Ú”°‘§¿¿" onclick="javascript:prn1_preview()" id="Button1" />
-    <input type="button" value="µº≥ˆExcel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
+    <input type="button" value="ÊâìÂç∞È¢ÑËßà" onclick="javascript:prn1_preview()" id="Button1" />
+    <input type="button" value="ÂØºÂá∫Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
     <table  width=100% cellspacing=0 cellpadding=0 ID=tMater class=pTable>
     	<tr>
-    		<td align="center"><font size="6"><b>ø‚¥Ê±®±Ì</b></font></td>
+    		<td align="center"><font size="6"><b>Â∫ìÂ≠òÊä•Ë°®</b></font></td>
     	</tr>
     	<tr><td>
     	<table border="0" cellspacing="0" cellpadding="0" width="100%" >

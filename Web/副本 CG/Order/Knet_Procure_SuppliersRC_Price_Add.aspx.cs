@@ -289,7 +289,7 @@ public partial class Knet_Web_Procure_Knet_Procure_SuppliersRC_Price_Add : BaseP
             }
             if (this.Tbx_RcProductsBarCode.Text == "")
             {
-                Alert("请选择遥控器！");
+                Alert("请选择成品！");
             }
             Model_Cg.CSP_ProductsBarCode = this.Tbx_RcProductsBarCode.Text;
             Model_Cg.CSP_ProductsMainType=this.BigClass.Value;
@@ -298,7 +298,7 @@ public partial class Knet_Web_Procure_Knet_Procure_SuppliersRC_Price_Add : BaseP
             Model_Cg.CSP_CTime = DateTime.Now;
             Model_Cg.CSP_Mender = AM.KNet_StaffNo;
             Model_Cg.CSP_MTime = DateTime.Now;
-            //遥控器
+            //成品
             for (int i = 0; i < this.MyGridView1.Rows.Count; i++)
             {
                 CheckBox cb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");

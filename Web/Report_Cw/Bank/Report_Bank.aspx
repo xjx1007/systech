@@ -61,7 +61,7 @@
             var Account = document.all('Ddl_Account').value;
             var Ddl_Type = document.all('Ddl_Type').value;
             var Ddl_Type1 = document.all('Ddl_Type1').value;
-            
+
             var s_URL = 'List_Bank.aspx?StartDate=' + StartDate + '&EndDate=' + EndDate + '';
             s_URL += '&CustomerName=' + CustomerName + '';
             s_URL += '&Account=' + Account + '';
@@ -111,20 +111,19 @@
                                                     ID="EndDate" runat="server" CssClass="Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'StartDate\')}'})"></asp:TextBox>
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
-                                                            <td class="dvtCellLabel">
-                                                                帐号:
-                                                            </td>
-                                                            <td class="dvtCellInfo">
-                                                                <asp:DropDownList runat="server" ID="Ddl_Account">
-                                                                </asp:DropDownList>
-                                                            </td>
+                                            <td class="dvtCellLabel">帐号:
+                                            </td>
+                                            <td class="dvtCellInfo">
+                                                <asp:DropDownList runat="server" ID="Ddl_Account">
+                                                </asp:DropDownList>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td width="16%" align="right" class="dvtCellLabel">客户:
                                             </td>
-                                            <td class="dvtCellInfo" align="left" >
+                                            <td class="dvtCellInfo" align="left">
                                                 <asp:TextBox ID="Tbx_CustomerName" CssClass="detailedViewTextBox" Width="200px"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                     runat="server"></asp:TextBox>
@@ -133,17 +132,17 @@
                                         <tr>
                                             <td width="16%" align="right" class="dvtCellLabel">付款类型:
                                             </td>
-                                            <td class="dvtCellInfo" align="left" >
-                                                                <asp:DropDownList runat="server" ID="Ddl_Type">
-                                                                </asp:DropDownList>
+                                            <td class="dvtCellInfo" align="left">
+                                                <asp:DropDownList runat="server" ID="Ddl_Type">
+                                                </asp:DropDownList>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td width="16%" align="right" class="dvtCellLabel">收款类型:
                                             </td>
-                                            <td class="dvtCellInfo" align="left" >
-                                                                <asp:DropDownList runat="server" ID="Ddl_Type1">
-                                                                </asp:DropDownList>
+                                            <td class="dvtCellInfo" align="left">
+                                                <asp:DropDownList runat="server" ID="Ddl_Type1">
+                                                </asp:DropDownList>
                                             </td>
                                         </tr>
                                         <tr>

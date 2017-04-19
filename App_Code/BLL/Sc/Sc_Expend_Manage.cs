@@ -27,7 +27,7 @@ namespace KNet.BLL
         public void Add(KNet.Model.Sc_Expend_Manage model)
         {
             dal.Add(model);
-            //遥控器生产
+            //成品生产
             if (model.arr_Details != null)
             {
                 KNet.BLL.Sc_Expend_Manage_RCDetails Bll_RC = new Sc_Expend_Manage_RCDetails();

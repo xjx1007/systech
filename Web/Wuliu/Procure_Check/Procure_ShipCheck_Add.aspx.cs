@@ -251,10 +251,10 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
        GridView1.DataSource = Dtb_Table;
        GridView1.DataKeyNames = new string[] { "XSF_ID" };
        GridView1.DataBind();
-        //遥控器对账
+        //成品对账
         if (this.Tr_HouseNo.Visible == true)
         {
-            //不在明细的遥控器对账单
+            //不在明细的成品对账单
 
             //查未找到的采购单号和入库明细
             string s_Sql2 = "";

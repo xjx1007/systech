@@ -56,7 +56,28 @@ namespace KNet.Model
 
         private int _KSP_CgType;
         private string _KSP_DelRemarks;
+        private string _KSP_RDPerson;
 
+
+
+        private string _KSP_CustomerProductsName;
+        private string _KSP_CustomerProductsCode;
+        private string _KSP_CustomerProductsEdition;
+        private string _KSP_ShPerson;
+        private int _KSP_BZNumber;
+        private int _Type;
+        private string[] _s_BomIDs;
+
+        public string[] s_BomIDs
+        {
+            set { _s_BomIDs = value; }
+            get { return _s_BomIDs; }
+        }
+        public int Type
+        {
+            set { _Type = value; }
+            get { return _Type; }
+        }
         /// <summary>
         /// 自动ID值
         /// </summary>
@@ -137,6 +158,13 @@ namespace KNet.Model
             set { _productsstockalert = value; }
             get { return _productsstockalert; }
         }
+
+        public int KSP_BZNumber
+        {
+            set { _KSP_BZNumber = value; }
+            get { return _KSP_BZNumber; }
+        }
+
         /// <summary>
         /// 是否有图片
         /// </summary>
@@ -229,6 +257,12 @@ namespace KNet.Model
         {
             set { _arr_Alternative = value; }
             get { return _arr_Alternative; }
+        }
+        private ArrayList _arr_RCDetails;
+        public ArrayList arr_RCDetails
+        {
+            set { _arr_RCDetails = value; }
+            get { return _arr_RCDetails; }
         }
         /// <summary>
         /// 
@@ -353,6 +387,35 @@ namespace KNet.Model
             get { return _KSP_DelRemarks; }
         }
 
+
+        public string KSP_CustomerProductsName
+        {
+            set { _KSP_CustomerProductsName = value; }
+            get { return _KSP_CustomerProductsName; }
+        }
+        public string KSP_CustomerProductsCode
+        {
+            set { _KSP_CustomerProductsCode = value; }
+            get { return _KSP_CustomerProductsCode; }
+        }
+        public string KSP_CustomerProductsEdition
+        {
+            set { _KSP_CustomerProductsEdition = value; }
+            get { return _KSP_CustomerProductsEdition; }
+        }
+
+        public string KSP_RDPerson
+        {
+            set { _KSP_RDPerson = value; }
+            get { return _KSP_RDPerson; }
+        }
+
+        public string KSP_ShPerson
+        {
+            set { _KSP_ShPerson = value; }
+            get { return _KSP_ShPerson; }
+        }
+        
         #endregion Model
 
     }

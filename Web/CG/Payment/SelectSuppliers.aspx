@@ -33,6 +33,7 @@
             var response = Knet_Common_SelectSuppliers.LinMan_Bind(Value1);
             if (window.opener != undefined) {
                 window.opener.returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5 + "|" + Value6 + response.value;
+                window.opener.SetReturnValueInOpenner_Suppliers(Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5 + "|" + Value6 + response.value);
             }
             else {
                 window.returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5 + "|" + Value6 + response.value;

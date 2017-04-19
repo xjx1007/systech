@@ -56,7 +56,7 @@ public partial class Knet_Common_SelectProduct : BasePage
     protected void DataShows()
     {
         KNet.BLL.KNet_Sys_Products bll = new KNet.BLL.KNet_Sys_Products();
-        string SqlWhere = " 1=1 ";
+        string SqlWhere = " 1=1 and ksp_del=0 ";
 
         if (this.SeachKey.Text != "")
         {
@@ -189,7 +189,16 @@ public partial class Knet_Common_SelectProduct : BasePage
                 }
 
                 AM.Add_Logs("关联成功成功：样品编号：" + this.Tbx_KSP_SampleId.Text + "产品编号：" + s_TProductsBarCode);
-                s.Append("window.returnValue='" + s_Return + "';" + "\n");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                s.Append("    window.opener.SetReturnValueInOpenner_Product('" + s_Return + "');\n");
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
+                //s.Append("window.returnValue='" + s_Return + "';" + "\n");
                 s.Append("window.close();" + "\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();

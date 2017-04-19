@@ -147,15 +147,13 @@ TABLE.print1 .right {
                                 <td >
                                 </td>
                                 <td align="right" rowspan="2" valign="top">
-                                    <img alt="logo中1-2" height="29" src="/images/士兰微芯片订单_22424_image003.png" v:shapes="Picture_x0020_5"
-                                       /></td>
+                                    </td>
                             </tr>
                             <tr>
                                 <td height="23">
                                 </td>
                                 <td align="left" valign="top">
-                                    <img alt="logo英1-2" height="20" src="/images/士兰微芯片订单_22424_image004.png" v:shapes="Picture_x0020_3"
-                                        /></td>
+                                    </td>
                             </tr>
                         </table>
                         </td>
@@ -163,8 +161,8 @@ TABLE.print1 .right {
         <tr height="32">
             <td  colspan="7" height="32" style="mso-ignore: colspan">
                 <b>
-                地址：杭州市黄姑山路4号 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-81061085<span 
-                    style="mso-spacerun: yes"> </span>传真：0571-88216187<span 
+                地址：杭州西湖科技园西园九路7号综合楼四楼 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-88999497-8823 <span 
+                    style="mso-spacerun: yes"> </span>传真：0571-87672166<span 
                     style="mso-spacerun: yes"> </span>发货人：<asp:Label ID="Lbl_FPerson" 
                     runat="server"></asp:Label>
                 &nbsp;电话：81061085</b></td>
@@ -317,7 +315,7 @@ TABLE.print1 .right {
         <tr >
             <td  colspan="7" height="19" style="mso-ignore: colspan">
                 <b>
-                当您收到上述货物时，请及时回传此发货单给我司（传真号：0571-88216187），谢谢合作！</b></td>
+                当您收到上述货物时，请及时回传此发货单给我司（传真号：0571-87672166），谢谢合作！</b></td>
         </tr>
     </table>
     </b>

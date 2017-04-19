@@ -125,13 +125,16 @@ public partial class Knet_Common_SelectProducts :BasePage
             if (cb.Checked)
             {
                 TextBox Tbx_ProductsBarCode = (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode");
+                TextBox Tbx_ProductsCode = (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsCode");
+
                 TextBox Tbx_Number = (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number");
                 string s_ProductsBarCode = Tbx_ProductsBarCode.Text;
                 string s_ProductsEdition = base.Base_GetProductsEdition(s_ProductsBarCode);
                 string s_ProductsName = base.Base_GetProdutsName(s_ProductsBarCode);
                 string s_ProductsPattern = GridView1.Rows[i].Cells[3].Text;
                 string s_Code = "SP" + s_ProductsPattern + "V1" + "001";
-                s_Return = s_ProductsBarCode + "," + s_ProductsName + "," + s_ProductsEdition + "," + Tbx_Number.Text + "," + s_Code;
+                string s_ProductsCode = Tbx_ProductsCode.Text;
+                s_Return += s_ProductsBarCode + "," + s_ProductsName + "," + s_ProductsEdition + "," + Tbx_Number.Text + "," + s_Code + "," + s_ProductsCode + "|";
                 i_Num++;
             }
 
@@ -142,15 +145,18 @@ public partial class Knet_Common_SelectProducts :BasePage
         }
         else
         {
-            if (i_Num > 1)
-            {
-                Alert("只能选择一条记录！");
-            }
-            else
-            {
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
-                s.Append("window.returnValue='" + s_Return + "';" + "\n");
+                //s.Append("window.returnValue='" + s_Return + "';" + "\n");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                s.Append("    window.opener.SetReturnValueInOpenner_Products('" + s_Return + "');\n");
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
                 s.Append("window.close();" + "\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();
@@ -158,7 +164,6 @@ public partial class Knet_Common_SelectProducts :BasePage
                 string csname = "ltype";
                 if (!cs.IsStartupScriptRegistered(cstype, csname))
                     cs.RegisterStartupScript(cstype, csname, s.ToString());
-            }
         }
     }
 

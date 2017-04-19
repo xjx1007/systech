@@ -31,7 +31,7 @@ public partial class System_Message_Manage : BasePage
             string s_AuthorityName = Request.QueryString["AuthorityName"] == null ? "" : Request.QueryString["AuthorityName"].ToString();
             if (s_AuthorityName != "")
             {
-                s_To_ID = "129750601593032855";
+                s_To_ID = "129785817148286992";
                 this.Tbx_Title.Text = base.Base_GeDept(AM.KNet_StaffDepart)+"-"+AM.KNet_StaffName + " 申请 <" + s_AuthorityName + ">权限";
                 this.Tbx_Remark.Text = this.Tbx_Title.Text + "   <br><hr><a target=\"_blank\" href=\"Web/Message/System_Message_Sh.aspx?StaffNo=" + AM.KNet_StaffNo + "&PageName=" + Server.UrlEncode(s_AuthorityName) + "&Type=0\">同意</a>   <a target=\"_blank\" href=\"Web/Message/System_Message_Sh.aspx?StaffNo=" + AM.KNet_StaffNo + "&PageName=" + s_AuthorityName + "&Type=1\">不同意</a>";
             }

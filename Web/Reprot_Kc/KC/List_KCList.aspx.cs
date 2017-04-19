@@ -160,7 +160,7 @@ public partial class Web_Report_Xs_List_KCList : BasePage
             s_Head += "<th class=\"thstyle\">参考金额</th>\n";
             s_Head += "<th class=\"thstyle\">最后入库时间</th>\n";
             s_Head += "<th class=\"thstyle\">最后消耗时间</th>\n";
-            s_Head += "<th class=\"thstyle\">适用遥控器</th>\n</tr></thead><tbody class=\"scrollContent\">";
+            s_Head += "<th class=\"thstyle\">适用成品</th>\n</tr></thead><tbody class=\"scrollContent\">";
 
             s_Details = s_Head + s_Details;
 

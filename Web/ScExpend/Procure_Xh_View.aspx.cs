@@ -107,7 +107,7 @@ public partial class Web_Procure_Xh_View : BasePage
 
             s_Details += "</tbody></table></td></tr>";
             string s_HouseName = "领料仓库：" + base.Base_GetHouseName(Model.SEM_SuppNo);
-            string s_WareHouseNo = "遥控器单号："+Model.SEM_ID;
+            string s_WareHouseNo = "成品单号："+Model.SEM_ID;
             string s_OrderNo = "采购单号：" +GetOrderNo(s_ID);
             string s_WareHouseDateTime = "领料日期：" + DateTime.Parse(Model.SEM_Stime.ToString()).ToShortDateString();
 

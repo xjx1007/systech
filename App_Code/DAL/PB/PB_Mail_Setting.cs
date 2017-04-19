@@ -239,6 +239,16 @@ if (row != null)
 {
  model.PMS_Sever = "";
 }
+
+ if (row["PBS_SSL"] != null)
+{
+    model.PBS_SSL = int.Parse(row["PBS_SSL"].ToString());
+}
+ else
+{
+    model.PBS_SSL = 0;
+}
+    
  if (row["PMS_Port"] != null)
 {
  model.PMS_Port = row["PMS_Port"].ToString();

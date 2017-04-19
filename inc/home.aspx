@@ -241,7 +241,7 @@
         
         <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px"  ItemStyle-Width="28px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
-             <a href="#"  onclick="javascript:window.open('../Web/Sales/Xs_ContractList_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ContractNo")%>&Type=1','查看详细','top=120,left=150,menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');"><asp:Image ID="Image2" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看合同详细信息" /></a>
+             <a href="#"  onclick="javascript:window.open('../Web/Sales/Xs_ContractList_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ContractNo")%>&Type=1','查看详细','top=120,left=150,menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');"><asp:Image ID="Image3" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看合同详细信息" /></a>
           </ItemTemplate>
         </asp:TemplateField>
         
@@ -309,7 +309,7 @@
         
         <asp:TemplateField HeaderText="查看"  HeaderStyle-Font-Size="12px"  ItemStyle-Width="28px"   ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
           <ItemTemplate>
-             <a href="#"  onclick="javascript:window.open('../Web/Sales/Knet_Sales_Ship_Manage_PrinterListSettingPrinterPage.aspx?OutWareNo=<%# DataBinder.Eval(Container.DataItem, "OutWareNo")%>&PrinterModel=128900331899375001','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500');"><asp:Image ID="Image3" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看发货详细信息" /></a>
+             <a href="#"  onclick="javascript:window.open('../Web/Sales/Knet_Sales_Ship_Manage_PrinterListSettingPrinterPage.aspx?OutWareNo=<%# DataBinder.Eval(Container.DataItem, "OutWareNo")%>&PrinterModel=128900331899375001','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500');"><asp:Image ID="Image13" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看发货详细信息" /></a>
           </ItemTemplate>
         </asp:TemplateField>
         
@@ -399,7 +399,7 @@
         
         <asp:TemplateField HeaderText="查看"  SortExpression="CustomerValue" HeaderStyle-Font-Size="12px"  ItemStyle-Width="28px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
-             <a href="#"  onclick="javascript:window.open('../Web/Order/Knet_Procure_OpenBilling_Print.aspx?OrderNo=<%# DataBinder.Eval(Container.DataItem, "OrderNo")%>&PrinterModel=128917825766562500','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500');"><asp:Image ID="Image2" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看合同详细信息" /></a>
+             <a href="#"  onclick="javascript:window.open('../Web/Order/Knet_Procure_OpenBilling_Print.aspx?OrderNo=<%# DataBinder.Eval(Container.DataItem, "OrderNo")%>&PrinterModel=128917825766562500','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500');"><asp:Image ID="Image6" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看合同详细信息" /></a>
           </ItemTemplate>
         </asp:TemplateField>
       <asp:TemplateField HeaderText="审核"  SortExpression="OrderCheckYN" HeaderStyle-Font-Size="12px"     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
@@ -467,7 +467,7 @@
 
         <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px"  ItemStyle-Width="28px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
-             <a href="#"  onclick="javascript:window.open('../Web/Sales/KNet_Sales_Retrun_Manage_PrinterListSettingPrinterPage.aspx?ReturnNo=<%# DataBinder.Eval(Container.DataItem, "ReturnNo")%>&PrinterModel=128902069841406250','查看详细','top=120,left=150,menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');"><asp:Image ID="Image2" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看合同详细信息" /></a>
+             <a href="#"  onclick="javascript:window.open('../Web/Sales/KNet_Sales_Retrun_Manage_PrinterListSettingPrinterPage.aspx?ReturnNo=<%# DataBinder.Eval(Container.DataItem, "ReturnNo")%>&PrinterModel=128902069841406250','查看详细','top=120,left=150,menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');"><asp:Image ID="Image5" runat="server"  ImageUrl="../images/View.gif"  ToolTip="查看合同详细信息" /></a>
           </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField HeaderText="审核"  SortExpression="ReturnCheckYN" HeaderStyle-Font-Size="12px"     ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">

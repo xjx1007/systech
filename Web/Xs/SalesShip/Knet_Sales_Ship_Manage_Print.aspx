@@ -102,8 +102,7 @@ TABLE.print1 .right {
                                 <td colspan="2">
                                 </td>
                                 <td align="left" rowspan="2" valign="top">
-                                    <img alt="logo中1-2" height="29" src="/images/士兰微芯片订单_22424_image003.png" v:shapes="Picture_x0020_5"
-                                        width="232" /></td>
+                                    </td>
                             </tr>
                             <tr>
                                 <td height="20">

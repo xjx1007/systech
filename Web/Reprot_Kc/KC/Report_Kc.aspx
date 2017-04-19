@@ -1,8 +1,9 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Report_Kc.aspx.cs" Inherits="Web_Report_Xs_Report_Kc" %>
+Ôªø<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Report_Kc.aspx.cs" Inherits="Web_Report_Xs_Report_Kc" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="../../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
@@ -32,7 +33,7 @@
             s_URL += '&Number=' + Number + '';
             s_URL += '&HouseNo=' + HouseNo + '';
             
-            window.open(s_URL, '≤Èø¥œÍœ∏', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
+            window.open(s_URL, 'Â∫ìÂ≠òÊä•Ë°®', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
         }
 
 
@@ -40,8 +41,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("../../ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("../../ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "ÈÄâÊã©‰æõÂ∫îÂïÜ", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ProductsClass(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split(",");
@@ -54,7 +57,7 @@
             }
         }
     </script>
-    <title>ø‚¥Ê±®±Ì</title>
+    <title>Â∫ìÂ≠òÊä•Ë°®</title>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -64,7 +67,7 @@
                 <td style="height: 2px"></td>
             </tr>
             <tr>
-                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>ø‚¥Ê±®±Ì > <a class="hdrLink" href="Report_Kc.aspx">ø‚¥Ê±®±Ì</a>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>‰ªìÂ∫ì> <a class="hdrLink" href="Report_Kc.aspx">Â∫ìÂ≠òÊä•Ë°®</a>
                 </td>
                 <td width="100%" nowrap></td>
             </tr>
@@ -89,27 +92,27 @@
                                 <td align="right" valign="top">
                                     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td width="16%" align="right" class="dvtCellLabel">»’∆⁄£∫
+                                            <td width="16%" align="right" class="dvtCellLabel">Êó∂Èó¥
                                             </td>
                                             <td class="dvtCellInfo" align="left" colspan="3">
-                                                <asp:TextBox ID="StartDate" runat="server" CssClass="Wdate" onFocus="var EndDate=$dp.$('EndDate');WdatePicker({onpicked:function(){EndDate.focus();},maxDate:'#F{$dp.$D(\'EndDate\')}'})"></asp:TextBox>&nbsp;µΩ<asp:TextBox ID="EndDate" runat="server" CssClass="Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'StartDate\')}'})"></asp:TextBox>
+                                                <asp:TextBox ID="StartDate" runat="server" CssClass="Wdate" onFocus="var EndDate=$dp.$('EndDate');WdatePicker({onpicked:function(){EndDate.focus();},maxDate:'#F{$dp.$D(\'EndDate\')}'})"></asp:TextBox>&nbsp;Âà∞<asp:TextBox ID="EndDate" runat="server" CssClass="Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'StartDate\')}'})"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="16%" align="right" class="dvtCellLabel">≤÷ø‚:
+                                            <td width="16%" align="right" class="dvtCellLabel">‰ªìÂ∫ì:
                                             </td>
                                             <td class="dvtCellInfo"  align="left" colspan="3">
                                                 <asp:Label runat="server" ID="HouseNo"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="16%" align="right" class="dvtCellLabel">≤˙∆∑∞Ê±æ:
+                                            <td width="16%" align="right" class="dvtCellLabel">‰∫ßÂìÅÁâàÊú¨Âè∑:
                                             </td>
                                             <td class="dvtCellInfo" align="left" >
                                                 <asp:TextBox ID="Tbx_ProductsEdition" CssClass="detailedViewTextBox" Width="200px"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" runat="server"></asp:TextBox>
                                             </td>
-                                            <td width="16%" align="right" class="dvtCellLabel">≤˙∆∑–Õ∫≈:
+                                            <td width="16%" align="right" class="dvtCellLabel">‰∫ßÂìÅ:
                                             </td>
                                             <td class="dvtCellInfo" align="left">
                                                 <asp:TextBox ID="Tbx_Type" CssClass="detailedViewTextBox" Width="200px"
@@ -118,32 +121,32 @@
                                         </tr>
                                         
                                         <tr>
-                                            <td align="right" class="dvtCellLabel">≤˙∆∑∑÷¿‡£∫
+                                            <td align="right" class="dvtCellLabel">‰∫ßÂìÅÂàÜÁ±ªÔºö
                                             </td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:TextBox ID="Tbx_ProductsTypeName" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                    MaxLength="48" Width="200px"></asp:TextBox>
+                                                    MaxLength="48" Width="164px"></asp:TextBox>
                                                 <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" alt="—°‘Ò" title="—°‘Ò" onclick="return btnGetProductsTypeValue_onclick()" />
+                                                <img src="../../../themes/softed/images/select.gif" alt="—°ÔøΩÔøΩ" title="—°ÔøΩÔøΩ" onclick="return btnGetProductsTypeValue_onclick()" />
                                             </td>
-                                            <td align="right" class="dvtCellLabel">ø‚¥ÊºÏÀ˜£∫
+                                            <td align="right" class="dvtCellLabel">Â∫ìÂ≠òÁä∂ÊÄÅ
                                             </td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:DropDownList runat="server" ID="Ddl_Number">
 
-                                                    <asp:ListItem Value="">À˘”–</asp:ListItem>
-                                                    <asp:ListItem Value="-1">–°”⁄0</asp:ListItem>
-                                                    <asp:ListItem Value="1">¥Û”⁄0</asp:ListItem>
+                                                    <asp:ListItem Value="">ÂÖ®ÈÉ®</asp:ListItem>
+                                                    <asp:ListItem Value="-1">Â∫ìÂ≠òÂ∞è‰∫é0</asp:ListItem>
+                                                    <asp:ListItem Value="1">Â∫ìÂ≠òÂ§ß‰∫é0</asp:ListItem>
                                                 </asp:DropDownList>
                                                     </td>
                                         </tr>
                                         <tr>
 
                                             <td colspan="4" align="center" style="height: 30px">
-                                                <input id="Button2" type="button" runat="server" value="»∑∂®" class="crmbutton small save"
+                                                <input id="Button2" type="button" runat="server" value="Á°ÆÂÆö" class="crmbutton small save"
                                                     onclick="OnClick()" style="width: 55px; height: 30px" />&nbsp;&nbsp;
-                                <input type="button" class="crmbutton small cancel" value="∑µªÿ" style="width: 55px; height: 30px"
+                                <input type="button" class="crmbutton small cancel" value="ÂèñÊ∂à" style="width: 55px; height: 30px"
                                     onclick="window.history.back()">
                                             </td>
                                         </tr>

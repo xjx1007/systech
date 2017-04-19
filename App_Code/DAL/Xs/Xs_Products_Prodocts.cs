@@ -284,8 +284,9 @@ namespace KNet.DAL
             strSql.Append(" FROM PB_Basic_ProductsClass c  left join (Select * from KNet_Sys_Products b join  Xs_Products_Prodocts a on a.XPP_ProductsBarCode=b.ProductsBarCode  " + strWhere + ") bb on bb.ProductsType=c.PBP_ID  ");
 
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-            string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703044937286");
-            s_SonID = s_SonID.Replace("M130703044937286,", "");
+            string s_SonID = Bll_ProductsDetails.GetSonIDs("M160818111423567");
+            
+            //s_SonID = s_SonID.Replace("M160818111423567,", "");
             s_SonID = s_SonID.Replace(",", "','");
             string s_sql = "  PBP_ID in ('" + s_SonID + "') ";
             strSql.Append(" where " + s_sql + "  Order by cast(PBP_Order as int)");

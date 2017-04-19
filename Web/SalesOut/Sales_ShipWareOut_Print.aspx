@@ -163,8 +163,8 @@ TABLE.print1 .right {
         <tr height="32">
             <td  colspan="7" height="32" style="mso-ignore: colspan">
                 <b>
-                地址：杭州市黄姑山路4号 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-81061085<span 
-                    style="mso-spacerun: yes"> </span>传真：0571-88216187<span 
+                地址：杭州西湖科技园西园九路7号综合楼四楼 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-88999497-8823 <span 
+                    style="mso-spacerun: yes"> </span>传真：0571-87672166<span 
                     style="mso-spacerun: yes"> </span>发货人：<asp:Label ID="Lbl_FPerson" 
                     runat="server"></asp:Label>
                 &nbsp;电话：81061085</b></td>
@@ -317,7 +317,7 @@ TABLE.print1 .right {
         <tr >
             <td  colspan="7" height="19" style="mso-ignore: colspan">
                 <b>
-                当您收到上述货物时，请及时回传此发货单给我司（传真号：0571-88216187），谢谢合作！</b></td>
+                当您收到上述货物时，请及时回传此发货单给我司（传真号：0571-87672166），谢谢合作！</b></td>
         </tr>
     </table>
     </b>

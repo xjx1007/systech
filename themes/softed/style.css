@@ -403,7 +403,6 @@ a {
     color: #000000;
     border: 1px solid #bababa;
     padding-left: 5px;
-    width: 90%;
     background-color: #ffffff;
 }
 
@@ -1934,8 +1933,7 @@ ul {
     color: #fff;
     font-weight: bold;
     background-image: url('images/buttongreen.png');
-    height: 26px;
-}
+    }
 
 .save {
     background-color: green;
