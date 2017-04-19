@@ -535,7 +535,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             s_Where1 += " and  b.KSP_Del=0 ";
         }
         string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
-        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 ";
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 and b.ksp_del=0 ";
         this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];

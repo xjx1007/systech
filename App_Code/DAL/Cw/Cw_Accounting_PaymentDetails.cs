@@ -257,7 +257,7 @@ namespace KNet.DAL
             {
                 strSql.Append(" where " + strWhere);
             }
-            strSql.Append("and CAPD_Details in ('调整','') order by CAPD_Details desc");
+            strSql.Append("and CAPD_Details not in ('冲红字') order by CAPD_Details desc");
             
             return DbHelperSQL.Query(strSql.ToString());
         }
