@@ -244,7 +244,7 @@ public partial class KNet_Products_Enclosure_List : BasePage
             }
             DbHelperSQL.ExecuteSql(sql);
             AdminloginMess LogAM = new AdminloginMess();
-            LogAM.Add_Logs("系统设置--->产品附件删除 操作成功！" + sql);
+            LogAM.Add_Logs("系统设置--->产品附件删除 操作成功！" + cal);
             Alert("删除成功！");
             this.DataShows();
             this.RowOverYN();

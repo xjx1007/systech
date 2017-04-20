@@ -108,6 +108,7 @@ namespace KNet.BLL
                         KNet.Model.Pb_Products_Sample_Images Model_details = (KNet.Model.Pb_Products_Sample_Images)model.arr_Details[i];
                         Bll_Details.Add(Model_details);
                     }
+
                 }
                 //可替代物料
                 if (model.arr_Alternative != null)
@@ -126,7 +127,18 @@ namespace KNet.BLL
                     #region 新产品升级
                     try
                     {
-                        //
+                        //产品附件
+                        try
+                        {
+                            string s_DoSql = "insert into PB_Basic_Attachment select dbo.GetID(),'" + model.ProductsBarCode + "',PBA_Name,PBA_Type,PBA_URL ,PBA_Creator,PBA_CTime,PBA_Remarks,PBA_ProductsType,PBA_State,PBA_Del,PBA_FileType,PBA_Edition,PBA_UpdateFID";
+                            s_DoSql += " from PB_Basic_Attachment";
+                            s_DoSql += " where PBA_Del=0 ";
+                            s_DoSql += " and PBA_FID='" + model.KSP_GProductsBarCode.Trim() + "' ";
+                            DbHelperSQL.ExecuteSql(s_DoSql);
+                        }
+                        catch
+                        { }
+
                         if (model.arr_RCDetails != null)
                         {
                             KNet.BLL.Xs_Products_Prodocts_Demo Bll_Demo = new KNet.BLL.Xs_Products_Prodocts_Demo();

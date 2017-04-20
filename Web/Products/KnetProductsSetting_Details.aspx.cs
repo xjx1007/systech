@@ -257,7 +257,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
 
                 if (Pan_Bom.Visible == true)
                 {
-                   // GetBomDetails(model);
+                    GetBomDetails(model);
                 }
 
                 //适用成品1

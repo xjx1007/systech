@@ -731,7 +731,7 @@
                     <img align="absmiddle" id="Div1_IMG" src="/themes/softed/images/arrow-list-down.gif" border="0">
                 </span>
 
-                    &nbsp;&nbsp;&nbsp;</td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="4">

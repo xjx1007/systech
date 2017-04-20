@@ -28,6 +28,7 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
 
             KNet.BLL.PB_Basic_ProductsClass bll = new KNet.BLL.PB_Basic_ProductsClass();
             base.Base_DropBasicCodeBind(this.Ddl_Type, "801");
+            AdminloginMess AM = new AdminloginMess();
             if (s_ID != "")
             {
                 KNet.Model.PB_Basic_ProductsClass Model = bll.GetModel(s_ID);
@@ -38,6 +39,12 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
                     this.Tbx_Code.Text = bll.GetMaxCode(s_ID);
                     this.Tbx_Order.Text = bll.GetMaxOrder(s_ID);
                     this.Ddl_Type.SelectedValue = "0";
+                }
+                else if (s_Type != "D")
+                {
+                    bll.Delete(s_ID);
+                    AM.Add_Logs("删除分类" + s_ID + Model.PBP_Name);
+                    AlertAndClose("删除成功！");
                 }
                 else
                 {

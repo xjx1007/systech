@@ -40,7 +40,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
             this.Btn_Del.Attributes.Add("onclick", "return confirm('你确信要删除所选记录吗?！\\n\\n注意：该删除会同时删除合同单产品明细记录.')");
             this.Btn_All.Attributes.Add("onclick", "return confirm('你确信要合并所选记录吗?！')");
 
-            
+
             base.Base_DropBatchBind(this.Ddl_Batch, "KNet_Sales_ContractList", "DutyPerson");
             base.Base_DropBindSearch(this.bas_searchfield, "KNet_Sales_ContractList");
             base.Base_DropBindSearch(this.Fields, "KNet_Sales_ContractList");
@@ -356,6 +356,28 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                     {
                         return "<font color=red>需消耗</font>";
                     }
+                    else
+                    {
+                        //等待总经理审批
+                        this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where (KSF_State='1' or KSF_State='3')   and KSF_ContractNo='" + aa.ToString() + "'  and b.StaffDepart='129652783693249229' and KSF_Del='0'");
+                        this.QueryForDataTable();
+                        if ((this.Dtb_Result.Rows.Count <= 0) && (AM.KNet_StaffDepart == "129652783693249229"))
+                        {
+                            string JSD = "ContractListCheckYN.aspx?ContractNo=" + aa.ToString() + "";
+                            string StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">审核</a><br/>等待 <font color=red>" + base.Base_GetUserName(s_DutyPerson) + "</font> 审核";
+
+                            return StrPop;
+                        }
+                        else
+                        {
+
+                            string JSD = "KNet_Sales_ContractList_View.aspx?ID=" + aa.ToString() + "";
+                            return "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/>等待 <font color=red>总经理</font> 审核";
+
+                        }
+                    }
+
+                    /*
                     string s_DeptID = Base_GetNextDept(aa.ToString(), "101",AM.KNet_StaffDepart);
                     string s_Sql1 = "select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'   and KSF_Del='0'";
                     if (s_DeptID != "")
@@ -414,6 +436,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                             return "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">查看</a><br/>等待 " + base.Base_GeDept(s_DeptID) + " 审核";
                         }
                     }
+                     * */
                 }
             }
             else

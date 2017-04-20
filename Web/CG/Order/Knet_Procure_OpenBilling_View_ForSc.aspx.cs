@@ -168,7 +168,8 @@ public partial class Knet_Procure_OpenBilling_View_ForSc : BasePage
             this.Lbl_OrderType.Text = base.base_GetProcureTypeNane(Model.OrderType);
             this.Lbl_Address.Text = KNetPage.KHtmlDiscode(Model.ContractAddress.Replace("\n", "<br/>"));
             this.Lbl_Remarks.Text = Model.OrderRemarks;
-
+            this.Lbl_Creator.Text = base.Base_GetUserName(Model.KPO_Mender);
+            this.Lbl_CTime.Text =Model.KPO_MTime.ToString();
             if (Model.KPO_PriceState == 1)
             {
                 this.Lbl_PriceState.Text = "<font color=red>是</font>";

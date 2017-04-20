@@ -283,6 +283,16 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
+                                                                    <td class="dvtCellLabel">操作人:</td>
+                                                                    <td class="dvtCellInfo" >
+                                                                        <asp:Label ID="Lbl_Creator" runat="server"></asp:Label>&nbsp;
+                                                                    </td>
+                                                                    <td class="dvtCellLabel">操作时间:</td>
+                                                                    <td class="dvtCellInfo" >
+                                                                        <asp:Label ID="Lbl_CTime" runat="server" Width="150px"></asp:Label>&nbsp;
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
                                                                     <td colspan="4" class="dvInnerHeader">
                                                                         <b>产品详细信息</b>
                                                                     </td>

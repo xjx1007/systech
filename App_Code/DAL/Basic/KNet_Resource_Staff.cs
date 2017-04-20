@@ -462,12 +462,18 @@ namespace KNet.DAL
                 {
                     model.KRS_IsWeb = 0;
                 }
-
-                if (ds.Tables[0].Rows[0]["ProductsType"] != null && ds.Tables[0].Rows[0]["ProductsType"].ToString() != "")
+                try
                 {
-                    model.ProductsType = ds.Tables[0].Rows[0]["ProductsType"].ToString();
+                    if (ds.Tables[0].Rows[0]["ProductsType"] != null && ds.Tables[0].Rows[0]["ProductsType"].ToString() != "")
+                    {
+                        model.ProductsType = ds.Tables[0].Rows[0]["ProductsType"].ToString();
+                    }
+                    else
+                    {
+                        model.ProductsType = "";
+                    }
                 }
-                else
+                catch
                 {
                     model.ProductsType = "";
                 }

@@ -133,7 +133,7 @@ namespace KNet.DBUtility
                 }
             }
             catch
-            {
+             {
                 throw;
             }
         }
