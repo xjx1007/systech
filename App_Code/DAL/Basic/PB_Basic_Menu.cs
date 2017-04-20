@@ -37,9 +37,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into PB_Basic_Menu(");
-            strSql.Append("PBM_ID,PBM_FatherID,PBM_Name,PBM_Module,PBM_Parenttab,PBM_URL,PBM_Del)");
+            strSql.Append("PBM_ID,PBM_FatherID,PBM_Name,PBM_Module,PBM_Parenttab,PBM_URL,PBM_Del, PBM_Order,PBM_CTime,PBM_MTime, PBM_Creator, PBM_Mender, PBM_ColSpan, PBM_RowSpan, PBM_Level, PBM_IsChild, PBM_Icon)");
             strSql.Append(" values (");
-            strSql.Append("@PBM_ID,@PBM_FatherID,@PBM_Name,@PBM_Module,@PBM_Parenttab,@PBM_URL,@PBM_Del)");
+            strSql.Append("@PBM_ID,@PBM_FatherID,@PBM_Name,@PBM_Module,@PBM_Parenttab,@PBM_URL,@PBM_Del,@PBM_Order,@PBM_CTime,@PBM_MTime, @PBM_Creator, @PBM_Mender, @PBM_ColSpan, @PBM_RowSpan, @PBM_Level, @PBM_IsChild, @PBM_Icon)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBM_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@PBM_FatherID", SqlDbType.VarChar,50),
@@ -47,7 +47,17 @@ namespace KNet.DAL
 					new SqlParameter("@PBM_Module", SqlDbType.VarChar,50),
 					new SqlParameter("@PBM_Parenttab", SqlDbType.VarChar,50),
 					new SqlParameter("@PBM_URL", SqlDbType.VarChar,200),
-					new SqlParameter("@PBM_Del", SqlDbType.VarChar,50)};
+					new SqlParameter("@PBM_Del", SqlDbType.VarChar,50),
+					new SqlParameter("@PBM_Order", SqlDbType.Int),
+					new SqlParameter("@PBM_CTime", SqlDbType.DateTime),
+					new SqlParameter("@PBM_MTime", SqlDbType.DateTime),
+					new SqlParameter("@PBM_Creator", SqlDbType.VarChar,50),
+					new SqlParameter("@PBM_Mender", SqlDbType.VarChar,50),
+					new SqlParameter("@PBM_ColSpan", SqlDbType.Int),
+					new SqlParameter("@PBM_RowSpan", SqlDbType.Int),
+					new SqlParameter("@PBM_Level", SqlDbType.Int),
+					new SqlParameter("@PBM_IsChild", SqlDbType.Int),
+					new SqlParameter("@PBM_Icon", SqlDbType.VarChar,150)};
             parameters[0].Value = model.PBM_ID;
             parameters[1].Value = model.PBM_FatherID;
             parameters[2].Value = model.PBM_Name;
@@ -55,6 +65,16 @@ namespace KNet.DAL
             parameters[4].Value = model.PBM_Parenttab;
             parameters[5].Value = model.PBM_URL;
             parameters[6].Value = model.PBM_Del;
+            parameters[7].Value = model.PBM_Order;
+            parameters[8].Value = model.PBM_CTime;
+            parameters[9].Value = model.PBM_MTime;
+            parameters[10].Value = model.PBM_Creator;
+            parameters[11].Value = model.PBM_Mender;
+            parameters[12].Value = model.PBM_ColSpan;
+            parameters[13].Value = model.PBM_RowSpan;
+            parameters[14].Value = model.PBM_Level;
+            parameters[15].Value = model.PBM_IsChild;
+            parameters[16].Value = model.PBM_Icon;
 
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -70,7 +90,17 @@ namespace KNet.DAL
             strSql.Append("PBM_Module=@PBM_Module,");
             strSql.Append("PBM_Parenttab=@PBM_Parenttab,");
             strSql.Append("PBM_URL=@PBM_URL,");
-            strSql.Append("PBM_Del=@PBM_Del");
+            strSql.Append("PBM_Del=@PBM_Del,");
+            strSql.Append("PBM_Order=@PBM_Order,");
+            strSql.Append("PBM_CTime=@PBM_CTime,");
+            strSql.Append("PBM_MTime=@PBM_MTime,");
+            strSql.Append("PBM_Creator=@PBM_Creator,");
+            strSql.Append("PBM_Mender=@PBM_Mender,");
+            strSql.Append("PBM_ColSpan=@PBM_ColSpan,");
+            strSql.Append("PBM_RowSpan=@PBM_RowSpan,");
+            strSql.Append("PBM_Level=@PBM_Level,");
+            strSql.Append("PBM_IsChild=@PBM_IsChild,");
+            strSql.Append("PBM_Icon=@PBM_Icon");
             strSql.Append(" where PBM_ID=@PBM_ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBM_FatherID", SqlDbType.VarChar,50),
@@ -79,7 +109,17 @@ namespace KNet.DAL
 					new SqlParameter("@PBM_Parenttab", SqlDbType.VarChar,50),
 					new SqlParameter("@PBM_URL", SqlDbType.VarChar,200),
 					new SqlParameter("@PBM_Del", SqlDbType.VarChar,50),
-					new SqlParameter("@PBM_ID", SqlDbType.VarChar,50)};
+					new SqlParameter("@PBM_ID", SqlDbType.VarChar,50),
+                    new SqlParameter("@PBM_Order", SqlDbType.Int),
+					new SqlParameter("@PBM_CTime", SqlDbType.DateTime),
+					new SqlParameter("@PBM_MTime", SqlDbType.DateTime),
+					new SqlParameter("@PBM_Creator", SqlDbType.VarChar,50),
+					new SqlParameter("@PBM_Mender", SqlDbType.VarChar,50),
+					new SqlParameter("@PBM_ColSpan", SqlDbType.Int),
+					new SqlParameter("@PBM_RowSpan", SqlDbType.Int),
+					new SqlParameter("@PBM_Level", SqlDbType.Int),
+					new SqlParameter("@PBM_IsChild", SqlDbType.Int),
+					new SqlParameter("@PBM_Icon", SqlDbType.VarChar,150)                           };
             parameters[0].Value = model.PBM_FatherID;
             parameters[1].Value = model.PBM_Name;
             parameters[2].Value = model.PBM_Module;
@@ -87,6 +127,16 @@ namespace KNet.DAL
             parameters[4].Value = model.PBM_URL;
             parameters[5].Value = model.PBM_Del;
             parameters[6].Value = model.PBM_ID;
+            parameters[7].Value = model.PBM_Order;
+            parameters[8].Value = model.PBM_CTime;
+            parameters[9].Value = model.PBM_MTime;
+            parameters[10].Value = model.PBM_Creator;
+            parameters[11].Value = model.PBM_Mender;
+            parameters[12].Value = model.PBM_ColSpan;
+            parameters[13].Value = model.PBM_RowSpan;
+            parameters[14].Value = model.PBM_Level;
+            parameters[15].Value = model.PBM_IsChild;
+            parameters[16].Value = model.PBM_Icon;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -186,6 +236,47 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["PBM_Del"] != null && ds.Tables[0].Rows[0]["PBM_Del"].ToString() != "")
                 {
                     model.PBM_Del = ds.Tables[0].Rows[0]["PBM_Del"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["PBM_Order"] != null && ds.Tables[0].Rows[0]["PBM_Order"].ToString() != "")
+                {
+                    model.PBM_Order = Convert.ToInt32(ds.Tables[0].Rows[0]["PBM_Order"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_CTime"] != null && ds.Tables[0].Rows[0]["PBM_CTime"].ToString() != "")
+                {
+                    model.PBM_CTime = Convert.ToDateTime(ds.Tables[0].Rows[0]["PBM_CTime"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_MTime"] != null && ds.Tables[0].Rows[0]["PBM_MTime"].ToString() != "")
+                {
+                    model.PBM_MTime = Convert.ToDateTime(ds.Tables[0].Rows[0]["PBM_MTime"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_Creator"] != null && ds.Tables[0].Rows[0]["PBM_Creator"].ToString() != "")
+                {
+                    model.PBM_Creator = ds.Tables[0].Rows[0]["PBM_Creator"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["PBM_Mender"] != null && ds.Tables[0].Rows[0]["PBM_Mender"].ToString() != "")
+                {
+                    model.PBM_Mender = ds.Tables[0].Rows[0]["PBM_Mender"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["PBM_ColSpan"] != null && ds.Tables[0].Rows[0]["PBM_ColSpan"].ToString() != "")
+                {
+                    model.PBM_ColSpan = Convert.ToInt32(ds.Tables[0].Rows[0]["PBM_ColSpan"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_RowSpan"] != null && ds.Tables[0].Rows[0]["PBM_RowSpan"].ToString() != "")
+                {
+                    model.PBM_RowSpan = Convert.ToInt32(ds.Tables[0].Rows[0]["PBM_RowSpan"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_Level"] != null && ds.Tables[0].Rows[0]["PBM_Level"].ToString() != "")
+                {
+                    model.PBM_Level = Convert.ToInt32(ds.Tables[0].Rows[0]["PBM_Level"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_IsChild"] != null && ds.Tables[0].Rows[0]["PBM_IsChild"].ToString() != "")
+                {
+                    model.PBM_IsChild = Convert.ToInt32(ds.Tables[0].Rows[0]["PBM_IsChild"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["PBM_Icon"] != null && ds.Tables[0].Rows[0]["PBM_Icon"].ToString() != "")
+                {
+                    model.PBM_Icon = ds.Tables[0].Rows[0]["PBM_Icon"].ToString();
                 }
                 return model;
             }

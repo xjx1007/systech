@@ -87,7 +87,10 @@ namespace KNet.DAL
 					new SqlParameter("@KRS_DepartPerson", SqlDbType.VarChar,50),
 					new SqlParameter("@KRS_MailPassWord", SqlDbType.VarChar,50),
 					new SqlParameter("@isSale", SqlDbType.Int),
-					new SqlParameter("@KRS_IsWeb", SqlDbType.Int)
+					new SqlParameter("@KRS_IsWeb", SqlDbType.Int),
+					new SqlParameter("@TelPhone", SqlDbType.VarChar,50),
+					new SqlParameter("@ProductsType", SqlDbType.VarChar,50)
+                    
                                         };
             
             parameters[0].Value = model.StaffNo;
@@ -109,6 +112,8 @@ namespace KNet.DAL
             parameters[16].Value = model.KRS_MailPassWord;
             parameters[17].Value = model.isSale;
             parameters[18].Value = model.KRS_IsWeb;
+            parameters[19].Value = model.TelPhone;
+            parameters[20].Value = model.ProductsType;
    
 
             DbHelperSQL.RunProcedure("Proc_KNet_Resource_Staff_ADD", parameters, out rowsAffected);
@@ -139,7 +144,11 @@ namespace KNet.DAL
 					new SqlParameter("@KRS_DepartPerson", SqlDbType.NVarChar,50),
 					new SqlParameter("@KRS_MailPassWord", SqlDbType.NVarChar,50),
 					new SqlParameter("@isSale", SqlDbType.Int),
-					new SqlParameter("@KRS_IsWeb", SqlDbType.Int)
+					new SqlParameter("@KRS_IsWeb", SqlDbType.Int),
+					new SqlParameter("@StaffName", SqlDbType.NVarChar,50),
+					new SqlParameter("@StaffCard", SqlDbType.NVarChar,50),
+					new SqlParameter("@TelPhone", SqlDbType.VarChar,50),
+					new SqlParameter("@ProductsType", SqlDbType.VarChar,50)
                                         };
 
             parameters[0].Value = model.ID;
@@ -159,6 +168,10 @@ namespace KNet.DAL
             parameters[14].Value = model.KRS_MailPassWord;
             parameters[15].Value = model.isSale;
             parameters[16].Value = model.KRS_IsWeb;
+            parameters[17].Value = model.StaffName;
+            parameters[18].Value = model.StaffCard;
+            parameters[19].Value = model.TelPhone;
+            parameters[20].Value = model.ProductsType;
             
 
             DbHelperSQL.RunProcedure("Proc_KNet_Resource_Staff_Update", parameters, out rowsAffected);
@@ -344,6 +357,11 @@ namespace KNet.DAL
                 {
                     model.KRS_IsWeb = int.Parse(ds.Tables[0].Rows[0]["KRS_IsWeb"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["TelPhone"] != null && ds.Tables[0].Rows[0]["TelPhone"].ToString() != "")
+                {
+                    model.TelPhone = ds.Tables[0].Rows[0]["TelPhone"].ToString();
+                }
+                
                 return model;
             }
             else
@@ -444,7 +462,22 @@ namespace KNet.DAL
                 {
                     model.KRS_IsWeb = 0;
                 }
-
+                try
+                {
+                    if (ds.Tables[0].Rows[0]["ProductsType"] != null && ds.Tables[0].Rows[0]["ProductsType"].ToString() != "")
+                    {
+                        model.ProductsType = ds.Tables[0].Rows[0]["ProductsType"].ToString();
+                    }
+                    else
+                    {
+                        model.ProductsType = "";
+                    }
+                }
+                catch
+                {
+                    model.ProductsType = "";
+                }
+                
                 return model;
             }
             else
@@ -477,6 +510,11 @@ namespace KNet.DAL
                 {
                     model.StaffNo = ds.Tables[0].Rows[0]["StaffNo"].ToString();
                 }
+                if (ds.Tables[0].Rows[0]["TelPhone"] != null && ds.Tables[0].Rows[0]["TelPhone"].ToString() != "")
+                {
+                    model.TelPhone = ds.Tables[0].Rows[0]["TelPhone"].ToString();
+                }
+                
                 if (ds.Tables[0].Rows[0]["StaffBranch"] != null && ds.Tables[0].Rows[0]["StaffBranch"].ToString() != "")
                 {
                     model.StaffBranch = ds.Tables[0].Rows[0]["StaffBranch"].ToString();
@@ -496,6 +534,11 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["StaffPassword"] != null && ds.Tables[0].Rows[0]["StaffPassword"].ToString() != "")
                 {
                     model.StaffPassword = ds.Tables[0].Rows[0]["StaffPassword"].ToString();
+                }
+                else
+                {
+                    model.StaffPassword = "";
+ 
                 }
                 if (ds.Tables[0].Rows[0]["Staffwages"] != null && ds.Tables[0].Rows[0]["Staffwages"].ToString() != "")
                 {
@@ -540,6 +583,12 @@ namespace KNet.DAL
                 {
                     model.Staff_LoginIP = ds.Tables[0].Rows[0]["Staff_LoginIP"].ToString();
                 }
+
+                if (ds.Tables[0].Rows[0]["TelPhone"] != null && ds.Tables[0].Rows[0]["TelPhone"].ToString() != "")
+                {
+                    model.TelPhone = ds.Tables[0].Rows[0]["TelPhone"].ToString();
+                }
+                
                 if (ds.Tables[0].Rows[0]["Staff_LoginDate"] != null && ds.Tables[0].Rows[0]["Staff_LoginDate"].ToString() != "")
                 {
                     model.Staff_LoginDate = DateTime.Parse(ds.Tables[0].Rows[0]["Staff_LoginDate"].ToString());
@@ -599,7 +648,11 @@ namespace KNet.DAL
                 {
                     model.KRS_IsWeb = int.Parse(ds.Tables[0].Rows[0]["KRS_IsWeb"].ToString());
                 }
-
+                if (ds.Tables[0].Rows[0]["ProductsType"] != null && ds.Tables[0].Rows[0]["ProductsType"].ToString() != "")
+                {
+                    model.ProductsType = ds.Tables[0].Rows[0]["ProductsType"].ToString();
+                }
+                
                 return model;
             }
             else
@@ -767,6 +820,18 @@ namespace KNet.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet GetList1(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * ");
+            strSql.Append(" FROM KNet_Resource_Staff ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where  " + strWhere + " ");
+            }
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

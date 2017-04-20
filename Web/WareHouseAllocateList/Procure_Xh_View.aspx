@@ -249,6 +249,9 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	};
 
 	function printPage() {
+	    var v_view = document.all("Tbx_View").value;
+        if(v_view=="")
+	    {
 	    var bdhtml = window.document.body.innerHTML;
 	    
 	    var strBodyStyle = "<style>" + document.getElementById("style1").innerHTML + "</style>";
@@ -258,12 +261,13 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	    //LODOP.SET_SAVE_MODE("PaperSize", 9);
 	    //LODOP.SET_SAVE_MODE("centerHorizontally", true);
 	     LODOP.SET_PRINT_MODE("PRINT_PAGE_PERCENT", "90%");
-	    LODOP.ADD_PRINT_HTM(0, 0, 800, 500, strFormHtml);
+	    LODOP.ADD_PRINT_HTM(0, 0, 800, 1200, strFormHtml);
 	    //LODOP.PREVIEW();
 	    LODOP.PRINT();
 	    //alert("1")
 	    // window.print();
-	   window.close();
+	    window.close();
+	    }
 	}
     </script>
     <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="0"
@@ -278,6 +282,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
     <asp:TextBox  runat="server" ID="Tbx_Title" CssClass="Custom_Hidden"></asp:TextBox>
     <asp:TextBox  runat="server" ID="TextBox1" TextMode="MultiLine" CssClass="Custom_Hidden"></asp:TextBox>
     <asp:TextBox  runat="server" ID="Tbx_Type" CssClass="Custom_Hidden"></asp:TextBox>
+    <asp:TextBox  runat="server" ID="Tbx_View" CssClass="Custom_Hidden"></asp:TextBox>
     </form>
 </body>
 </html>

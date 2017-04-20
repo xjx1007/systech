@@ -20,7 +20,10 @@
         var today, seconds;
         today = new Date();
         intSeconds = today.getSeconds();
-        var tempd = window.showModalDialog("SelectSuppliers.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+        //var tempd = window.showModalDialog("SelectSuppliers.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+        var tempd = window.open("SelectSuppliers.aspx?sID=" + intSeconds + "", "选择供应商", "width=850, height=500,top=100,left=120,toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no,alwaysRaised=yes,depended=yes");
+    }
+    function SetReturnValueInOpenner_Suppliers(tempd) {
         if (tempd != undefined) {
             var ss;
             ss = tempd.split("|");

@@ -21,8 +21,11 @@
        var today,seconds;
        today = new Date();
        intSeconds = today.getSeconds();
-       var tempd= window.showModalDialog("/Web/Common/SelectDeptPerson.aspx?sID="+intSeconds+"","","dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-       if(tempd!=undefined)   
+       //var tempd= window.showModalDialog("/Web/Common/SelectDeptPerson.aspx?sID="+intSeconds+"","","dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+       var tempd = window.open("/Web/Common/SelectDeptPerson.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+   }
+    function SetReturnValueInOpenner_DeptPerson(tempd) {
+       if (tempd != undefined)
        {   
           	 var ss;
 	         ss=tempd.split("|");
@@ -35,7 +38,7 @@
              document.all('Tbx_ExecutorName').value = "";
         }
     }
-    </SCRIPT>
+</SCRIPT>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
     

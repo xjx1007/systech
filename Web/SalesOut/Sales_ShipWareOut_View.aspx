@@ -466,7 +466,7 @@
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderStyle-Font-Size="12px" HeaderStyle-HorizontalAlign="Left"
-                                                                    HeaderText="遥控器" ItemStyle-HorizontalAlign="Left">
+                                                                    HeaderText="成品" ItemStyle-HorizontalAlign="Left">
                                                                     <ItemTemplate>
                                                                         <%# base.Base_GetProductsEdition_Link(DataBinder.Eval(Container.DataItem, "XPP_FaterBarCode").ToString())%>
                                                                     </ItemTemplate>

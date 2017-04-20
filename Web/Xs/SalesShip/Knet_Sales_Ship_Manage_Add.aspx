@@ -19,7 +19,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "&callback=SetReturnValueInOpenner_Customer1", "选择客户", "width=1000px, height=600px,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer1(tempd) {
             if (tempd != undefined) {
                 var ss;
                 ss = tempd.split("#");
@@ -99,7 +102,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "&callback=SetReturnValueInOpenner_Customer2", "选择客户", "width=1000px, height=600px,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Customer2(tempd) {
             if (tempd != undefined) {
                 var ss;
                 ss = tempd.split("#");
@@ -213,7 +219,10 @@
             var CustomerValue = document.all('Tbx_CustomerValue').value;
             var v_Contract = document.all("Tbx_ContractNo").value;
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("SelectSalesContractList.aspx?ID=" + intSeconds + "&Type=1&ContractNo=" + v_Contract + "&CustomerValue=" + CustomerValue + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no;dialogwidth=1000px;dialogHeight=600px");
+            //var temp = window.showModalDialog("SelectSalesContractList.aspx?ID=" + intSeconds + "&Type=1&ContractNo=" + v_Contract + "&CustomerValue=" + CustomerValue + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no;dialogwidth=1000px;dialogHeight=600px");
+            var temp = window.open("SelectSalesContractList.aspx?ID=" + intSeconds + "&Type=1&ContractNo=" + v_Contract + "&CustomerValue=" + CustomerValue + "", "选择合同单", "width=1000px, height=600,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SalesContract(temp) {
             if (temp != undefined) {
                 var i_num1 = parseInt(document.all('i_Num').value);
                 var ss;
@@ -228,8 +237,10 @@
         function btnGetContentPerson_onclick() {
             var s_Customer = "";
             s_Customer = document.all('Tbx_SCustomerValue').value;
-            var temaap = window.showModalDialog("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
-
+            //var temaap = window.showModalDialog("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            var temaap = window.open("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "选择联系人", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ContentPerson(temaap) {
             if (temaap != undefined) {
                 var sws;
                 sws = temaap.split(",");
@@ -252,11 +263,15 @@
             var v_Contract = document.all("Tbx_ContractNo").value;
             var tempd;
             if (v_Contract == "") {
-                tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ContractNo=" + v_Contract + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+                //tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ContractNo=" + v_Contract + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+                tempd = window.open("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ContractNo=" + v_Contract + "", "选择产品", "width=1000px, height=600,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
             else {
-                tempd = window.showModalDialog("SelectContractProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ContractNo=" + v_Contract + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+                //tempd = window.showModalDialog("SelectContractProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ContractNo=" + v_Contract + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+                tempd = window.open("SelectContractProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("Tbx_CustomerValue").value + "&ContractNo=" + v_Contract + "", "选择产品", "width=1000px, height=600,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
+        }
+        function SetReturnValueInOpenner_Product(tempd) {
             if (tempd != undefined) {
                 var i_num1 = parseInt(document.all('i_Num').value);
                 document.all('i_Num').value = i_num1;

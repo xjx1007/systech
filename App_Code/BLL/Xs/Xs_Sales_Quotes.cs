@@ -50,7 +50,6 @@ namespace KNet.BLL
         /// </summary>
         public bool Update(KNet.Model.Xs_Sales_Quotes model)
         {
-            return dal.Update(model);
             KNet.BLL.Xs_Sales_Quotes_Details BLL_Details = new KNet.BLL.Xs_Sales_Quotes_Details();
             if (BLL_Details.Delete(model.XSQ_ID))
             {
@@ -64,6 +63,7 @@ namespace KNet.BLL
                     }
                 }
             }
+            return dal.Update(model);
         }
 
         /// <summary>

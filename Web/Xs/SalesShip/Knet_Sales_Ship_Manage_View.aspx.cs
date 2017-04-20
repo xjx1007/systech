@@ -107,8 +107,8 @@ public partial class Web_Knet_Sales_Ship_Manage_View : BasePage
             this.Lbl_SCutomer.Text = base.Base_GetCustomerName_Link(Model.KSO_SCustomerValue);
             this.Lbl_Creator.Text = base.Base_GetUserName(Model.OutWareStaffNo);
             this.Lbl_PayMent.Text = base.Base_GetBasicCodeName("104", Model.KSO_PayMent);
-            //this.Lbl_MaterNumber.Text = "遥控器：" + Model.KSO_MaterNumber.Replace(",", "电池：");
-            //this.Lbl_OrderNo.Text = "遥控器：" + Model.KSO_OrderNo.Replace(",", "电池：");
+            //this.Lbl_MaterNumber.Text = "成品：" + Model.KSO_MaterNumber.Replace(",", "电池：");
+            //this.Lbl_OrderNo.Text = "成品：" + Model.KSO_OrderNo.Replace(",", "电池：");
             this.Lbl_Type.Text = base.Base_GetBasicCodeName("145", Model.KSO_Type);
             KNet.BLL.Xs_Customer_FhInfo Bll_FhDetails = new KNet.BLL.Xs_Customer_FhInfo();
             KNet.Model.Xs_Customer_FhInfo Model_FhDetails = Bll_FhDetails.GetModel(Model.KSO_FhDetails);

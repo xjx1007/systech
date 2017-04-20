@@ -47,12 +47,29 @@ namespace KNet.BLL
 
 
         /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateDel(string[] s_IDs,string s_ProductsBarCode)
+        {
+            return dal.UpdateDel(s_IDs, s_ProductsBarCode);
+        }
+
+        /// <summary>
         /// 删除一条数据
         /// </summary>
         public bool Delete(string XPD_FaterBarCode)
         {
 
             return dal.Delete(XPD_FaterBarCode);
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool DeleteByIDs(string[] s_IDs, string XPD_FaterBarCode)
+        {
+
+            return dal.DeleteByIDs(s_IDs, XPD_FaterBarCode);
         }
         /// <summary>
         /// 删除一条数据

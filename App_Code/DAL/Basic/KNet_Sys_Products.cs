@@ -141,9 +141,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_Sys_Products(");
-            strSql.Append("ProductsName,ProductsBarCode,ProductsPattern,ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProductsSellingPrice,ProductsCostPrice,ProductsStockAlert,ProductsPic,ProductsBigPicture,ProductsSmallPicture,ProductsDescription,ProductsDetailDescription,ProductsAddTime,ProductsAddMan,ProductsType,HandPrice,ProductsEdition,KSP_SampleId,KSP_Mould,KSP_Creator,KSP_CTime,KSP_MTime,KSP_Mender,KSP_Code,KSP_isModiy,KSP_GProductsBarCode,KSP_Weight,KSP_Volume,KSP_IsAdd,KSP_IsReplace,KSP_IsDelete)");
+            strSql.Append("ProductsName,ProductsBarCode,ProductsPattern,ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProductsSellingPrice,ProductsCostPrice,ProductsStockAlert,ProductsPic,ProductsBigPicture,ProductsSmallPicture,ProductsDescription,ProductsDetailDescription,ProductsAddTime,ProductsAddMan,ProductsType,HandPrice,ProductsEdition,KSP_SampleId,KSP_Mould,KSP_Creator,KSP_CTime,KSP_MTime,KSP_Mender,KSP_Code,KSP_isModiy,KSP_GProductsBarCode,KSP_Weight,KSP_Volume,KSP_IsAdd,KSP_IsReplace,KSP_IsDelete,KSP_CustomerProductsName,KSP_CustomerProductsCode,KSP_CustomerProductsEdition,KSP_CgType,KSP_RDPerson,KSP_BZNumber)");
             strSql.Append(" values (");
-            strSql.Append("@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsMainCategory,@ProductsSmallCategory,@ProductsUnits,@ProductsSellingPrice,@ProductsCostPrice,@ProductsStockAlert,@ProductsPic,@ProductsBigPicture,@ProductsSmallPicture,@ProductsDescription,@ProductsDetailDescription,@ProductsAddTime,@ProductsAddMan,@ProductsType,@HandPrice,@ProductsEdition,@KSP_SampleId,@KSP_Mould,@KSP_Creator,@KSP_CTime,@KSP_MTime,@KSP_Mender,@KSP_Code,@KSP_isModiy,@KSP_GProductsBarCode,@KSP_Weight,@KSP_Volume,@KSP_IsAdd,@KSP_IsReplace,@KSP_IsDelete)");
+            strSql.Append("@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsMainCategory,@ProductsSmallCategory,@ProductsUnits,@ProductsSellingPrice,@ProductsCostPrice,@ProductsStockAlert,@ProductsPic,@ProductsBigPicture,@ProductsSmallPicture,@ProductsDescription,@ProductsDetailDescription,@ProductsAddTime,@ProductsAddMan,@ProductsType,@HandPrice,@ProductsEdition,@KSP_SampleId,@KSP_Mould,@KSP_Creator,@KSP_CTime,@KSP_MTime,@KSP_Mender,@KSP_Code,@KSP_isModiy,@KSP_GProductsBarCode,@KSP_Weight,@KSP_Volume,@KSP_IsAdd,@KSP_IsReplace,@KSP_IsDelete,@KSP_CustomerProductsName,@KSP_CustomerProductsCode,@KSP_CustomerProductsEdition,@KSP_CgType,@KSP_RDPerson,@KSP_BZNumber)");
             SqlParameter[] parameters = {
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsBarCode", SqlDbType.NVarChar,50),
@@ -177,7 +177,15 @@ namespace KNet.DAL
 					new SqlParameter("@KSP_Volume", SqlDbType.Decimal,9),
 					new SqlParameter("@KSP_IsAdd", SqlDbType.Int,4),
 					new SqlParameter("@KSP_IsReplace", SqlDbType.Int,4),
-					new SqlParameter("@KSP_IsDelete", SqlDbType.Int,4)};
+					new SqlParameter("@KSP_IsDelete", SqlDbType.Int,4),
+                                        
+					new SqlParameter("@KSP_CustomerProductsName", SqlDbType.VarChar,50),
+					new SqlParameter("@KSP_CustomerProductsCode", SqlDbType.VarChar,50),
+					new SqlParameter("@KSP_CustomerProductsEdition", SqlDbType.VarChar,100),
+					new SqlParameter("@KSP_CgType", SqlDbType.Int,4),
+					new SqlParameter("@KSP_RDPerson", SqlDbType.VarChar,50),
+					new SqlParameter("@KSP_BZNumber", SqlDbType.Int,4)
+                                        };
             parameters[0].Value = model.ProductsName;
             parameters[1].Value = model.ProductsBarCode;
             parameters[2].Value = model.ProductsPattern;
@@ -212,6 +220,14 @@ namespace KNet.DAL
             parameters[31].Value = model.KSP_IsReplace;
             parameters[32].Value = model.KSP_IsDelete;
 
+            parameters[33].Value = model.KSP_CustomerProductsName;
+            parameters[34].Value = model.KSP_CustomerProductsCode;
+            parameters[35].Value = model.KSP_CustomerProductsEdition;
+            parameters[36].Value = model.KSP_CgType;
+            parameters[37].Value = model.KSP_RDPerson;
+            parameters[38].Value = model.KSP_BZNumber;
+            
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -252,7 +268,15 @@ namespace KNet.DAL
             strSql.Append("KSP_IsAdd=@KSP_IsAdd,");
             strSql.Append("KSP_IsReplace=@KSP_IsReplace,");
             strSql.Append("KSP_IsDelete=@KSP_IsDelete,");
-            strSql.Append("KSP_Volume=@KSP_Volume");
+            strSql.Append("KSP_Volume=@KSP_Volume,");
+
+            strSql.Append("KSP_CustomerProductsName=@KSP_CustomerProductsName,");
+            strSql.Append("KSP_CustomerProductsCode=@KSP_CustomerProductsCode,");
+            strSql.Append("KSP_CustomerProductsEdition=@KSP_CustomerProductsEdition,");
+            strSql.Append("KSP_CgType=@KSP_CgType,");
+            strSql.Append("KSP_RDPerson=@KSP_RDPerson,");
+            strSql.Append("KSP_BZNumber=@KSP_BZNumber");
+            
             
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
@@ -287,7 +311,14 @@ namespace KNet.DAL
 					new SqlParameter("@KSP_IsReplace", SqlDbType.Int,4),
 					new SqlParameter("@KSP_IsDelete", SqlDbType.Int,4),
 					new SqlParameter("@KSP_Volume", SqlDbType.Decimal,9),
-
+                    
+					new SqlParameter("@KSP_CustomerProductsName", SqlDbType.VarChar,50),
+					new SqlParameter("@KSP_CustomerProductsCode", SqlDbType.VarChar,50),
+					new SqlParameter("@KSP_CustomerProductsEdition", SqlDbType.VarChar,100),
+					new SqlParameter("@KSP_CgType", SqlDbType.Int,4),
+					new SqlParameter("@KSP_RDPerson", SqlDbType.VarChar,50),
+					new SqlParameter("@KSP_BZNumber", SqlDbType.Int,4),
+                    
 					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.ProductsName;
             parameters[1].Value = model.ProductsPattern;
@@ -320,7 +351,16 @@ namespace KNet.DAL
             parameters[27].Value = model.KSP_IsReplace;
             parameters[28].Value = model.KSP_IsDelete;
             parameters[29].Value = model.KSP_Volume;
-            parameters[30].Value = model.ID;
+
+            parameters[30].Value = model.KSP_CustomerProductsName;
+            parameters[31].Value = model.KSP_CustomerProductsCode;
+            parameters[32].Value = model.KSP_CustomerProductsEdition;
+
+            parameters[33].Value = model.KSP_CgType;
+            parameters[34].Value = model.KSP_RDPerson;
+            parameters[35].Value = model.KSP_BZNumber;
+            
+            parameters[36].Value = model.ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -400,6 +440,13 @@ namespace KNet.DAL
                 {
                     model.ProductsStockAlert = int.Parse(ds.Tables[0].Rows[0]["ProductsStockAlert"].ToString());
                 }
+
+
+                if (ds.Tables[0].Rows[0]["KSP_BZNumber"] != null && ds.Tables[0].Rows[0]["KSP_BZNumber"].ToString() != "")
+                {
+                    model.KSP_BZNumber = int.Parse(ds.Tables[0].Rows[0]["KSP_BZNumber"].ToString());
+                }
+                
                 if (ds.Tables[0].Rows[0]["ProductsPic"] != null && ds.Tables[0].Rows[0]["ProductsPic"].ToString() != "")
                 {
                     if ((ds.Tables[0].Rows[0]["ProductsPic"].ToString() == "1") || (ds.Tables[0].Rows[0]["ProductsPic"].ToString().ToLower() == "true"))
@@ -508,6 +555,33 @@ namespace KNet.DAL
                 {
                     model.KSP_IsDelete = int.Parse(ds.Tables[0].Rows[0]["KSP_IsDelete"].ToString());
                 }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsName"] != null)
+                {
+                    model.KSP_CustomerProductsName = ds.Tables[0].Rows[0]["KSP_CustomerProductsName"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsName = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsCode"] != null)
+                {
+                    model.KSP_CustomerProductsCode = ds.Tables[0].Rows[0]["KSP_CustomerProductsCode"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsCode = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsEdition"] != null)
+                {
+                    model.KSP_CustomerProductsEdition = ds.Tables[0].Rows[0]["KSP_CustomerProductsEdition"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsEdition = "";
+                }
                 return model;
             }
             else
@@ -591,6 +665,10 @@ namespace KNet.DAL
                 {
                     model.KSP_Del = int.Parse(ds.Tables[0].Rows[0]["KSP_Del"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["KSP_isModiy"] != null && ds.Tables[0].Rows[0]["KSP_isModiy"].ToString() != "")
+                {
+                    model.KSP_isModiy = int.Parse(ds.Tables[0].Rows[0]["KSP_isModiy"].ToString());
+                }
                 if (ds.Tables[0].Rows[0]["KSP_Mould"] != null && ds.Tables[0].Rows[0]["KSP_Mould"].ToString() != "")
                 {
                     model.KSP_Mould = ds.Tables[0].Rows[0]["KSP_Mould"].ToString();
@@ -614,10 +692,6 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["KSP_Code"] != null && ds.Tables[0].Rows[0]["KSP_Code"].ToString() != "")
                 {
                     model.KSP_Code = ds.Tables[0].Rows[0]["KSP_Code"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["KSP_isModiy"] != null && ds.Tables[0].Rows[0]["KSP_isModiy"].ToString() != "")
-                {
-                    model.KSP_isModiy = int.Parse(ds.Tables[0].Rows[0]["KSP_isModiy"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["KSP_GProductsBarCode"] != null && ds.Tables[0].Rows[0]["KSP_GProductsBarCode"].ToString() != "")
                 {
@@ -657,6 +731,49 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["KSP_DelRemarks"] != null && ds.Tables[0].Rows[0]["KSP_DelRemarks"].ToString() != "")
                 {
                     model.KSP_DelRemarks = ds.Tables[0].Rows[0]["KSP_DelRemarks"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsName"] != null)
+                {
+                    model.KSP_CustomerProductsName = ds.Tables[0].Rows[0]["KSP_CustomerProductsName"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsName = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsCode"] != null)
+                {
+                    model.KSP_CustomerProductsCode = ds.Tables[0].Rows[0]["KSP_CustomerProductsCode"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsCode = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsEdition"] != null)
+                {
+                    model.KSP_CustomerProductsEdition = ds.Tables[0].Rows[0]["KSP_CustomerProductsEdition"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsEdition = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_RDPerson"] != null && ds.Tables[0].Rows[0]["KSP_RDPerson"].ToString() != "")
+                {
+                    model.KSP_RDPerson = ds.Tables[0].Rows[0]["KSP_RDPerson"].ToString();
+                }
+
+
+                if (ds.Tables[0].Rows[0]["KSP_ShPerson"] != null && ds.Tables[0].Rows[0]["KSP_ShPerson"].ToString() != "")
+                {
+                    model.KSP_ShPerson = ds.Tables[0].Rows[0]["KSP_ShPerson"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_BZNumber"] != null && ds.Tables[0].Rows[0]["KSP_BZNumber"].ToString() != "")
+                {
+                    model.KSP_BZNumber = int.Parse(ds.Tables[0].Rows[0]["KSP_BZNumber"].ToString());
                 }
                 return model;
             }
@@ -802,6 +919,33 @@ namespace KNet.DAL
                 {
                     model.KSP_Volume = decimal.Parse(ds.Tables[0].Rows[0]["KSP_Volume"].ToString());
                 }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsName"] != null)
+                {
+                    model.KSP_CustomerProductsName = ds.Tables[0].Rows[0]["KSP_CustomerProductsName"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsName = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsCode"] != null)
+                {
+                    model.KSP_CustomerProductsCode = ds.Tables[0].Rows[0]["KSP_CustomerProductsCode"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsCode = "";
+                }
+
+                if (ds.Tables[0].Rows[0]["KSP_CustomerProductsEdition"] != null)
+                {
+                    model.KSP_CustomerProductsEdition = ds.Tables[0].Rows[0]["KSP_CustomerProductsEdition"].ToString();
+                }
+                else
+                {
+                    model.KSP_CustomerProductsEdition = "";
+                }
                 return model;
             }
             else
@@ -857,8 +1001,6 @@ namespace KNet.DAL
 
             return DbHelperSQL.Query(strSql.ToString());
         }
-
-
 
         #endregion  成员方法
     }

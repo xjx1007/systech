@@ -24,10 +24,10 @@ public partial class Web_Report_Xs_Report_Kc : BasePage
         {
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
             AdminloginMess AM = new AdminloginMess();
-            string s_Sql = "select * from KNet_Sys_WareHouse";
+            string s_Sql = "select * from KNet_Sys_WareHouse ";
             if (s_Type != "")
             {
-                s_Sql += " where KSW_Type='" + s_Type + "'";
+                s_Sql += " where KSW_Type='" + s_Type + "' and HouseYN=1 ";
             }
             s_Sql += " Order by KSW_Type,HouseName ";
             this.BeginQuery(s_Sql);

@@ -42,9 +42,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Knet_Procure_OrdersList(");
-            strSql.Append("OrderTopic,OrderNo,OrderDateTime,OrderPreToDate,SuppNo,OrderPaymentNotes,OrderStaffBranch,OrderStaffDepart,OrderStaffNo,OrderCheckStaffNo,OrderTransShare,OrderType,OrderRemarks,AdvancesPrice,paykings,ContractNo,ContractAddress,InvoRate,ReceiveSuppNo,Chk_IsChip,Chk_Battery,ParentOrderNo,ContractNos,KPO_CTime,KPO_Creator,KPO_MTime,KPO_Mender,ID,ArrivalDate,KPO_ScDetails,OrderCheckYN,KPO_PriceState)");
+            strSql.Append("OrderTopic,OrderNo,OrderDateTime,OrderPreToDate,SuppNo,OrderPaymentNotes,OrderStaffBranch,OrderStaffDepart,OrderStaffNo,OrderCheckStaffNo,OrderTransShare,OrderType,OrderRemarks,AdvancesPrice,paykings,ContractNo,ContractAddress,InvoRate,ReceiveSuppNo,Chk_IsChip,Chk_Battery,ParentOrderNo,ContractNos,KPO_CTime,KPO_Creator,KPO_MTime,KPO_Mender,ID,ArrivalDate,KPO_ScDetails,OrderCheckYN,KPO_PriceState,KPO_PreHouseNo)");
             strSql.Append(" values (");
-            strSql.Append("@OrderTopic,@OrderNo,@OrderDateTime,@OrderPreToDate,@SuppNo,@OrderPaymentNotes,@OrderStaffBranch,@OrderStaffDepart,@OrderStaffNo,@OrderCheckStaffNo,@OrderTransShare,@OrderType,@OrderRemarks,@AdvancesPrice,@paykings,@ContractNo,@ContractAddress,@InvoRate,@ReceiveSuppNo,@Chk_IsChip,@Chk_Battery,@ParentOrderNo,@ContractNos,@KPO_CTime,@KPO_Creator,@KPO_MTime,@KPO_Mender,@ID,@ArrivalDate,@KPO_ScDetails,@OrderCheckYN,@KPO_PriceState)");
+            strSql.Append("@OrderTopic,@OrderNo,@OrderDateTime,@OrderPreToDate,@SuppNo,@OrderPaymentNotes,@OrderStaffBranch,@OrderStaffDepart,@OrderStaffNo,@OrderCheckStaffNo,@OrderTransShare,@OrderType,@OrderRemarks,@AdvancesPrice,@paykings,@ContractNo,@ContractAddress,@InvoRate,@ReceiveSuppNo,@Chk_IsChip,@Chk_Battery,@ParentOrderNo,@ContractNos,@KPO_CTime,@KPO_Creator,@KPO_MTime,@KPO_Mender,@ID,@ArrivalDate,@KPO_ScDetails,@OrderCheckYN,@KPO_PriceState,@KPO_PreHouseNo)");
             SqlParameter[] parameters = {
 					new SqlParameter("@OrderTopic", SqlDbType.NVarChar,50),
 					new SqlParameter("@OrderNo", SqlDbType.NVarChar,50),
@@ -77,7 +77,8 @@ namespace KNet.DAL
                      new SqlParameter("@ArrivalDate", SqlDbType.DateTime),
                      new SqlParameter("@KPO_ScDetails", SqlDbType.Text),
                      new SqlParameter("@OrderCheckYN", SqlDbType.Bit),
-                     new SqlParameter("@KPO_PriceState", SqlDbType.Int)
+                     new SqlParameter("@KPO_PriceState", SqlDbType.Int),
+                     new SqlParameter("@KPO_PreHouseNo", SqlDbType.VarChar,50)
                      
                                         };
             parameters[0].Value = model.OrderTopic;
@@ -112,8 +113,9 @@ namespace KNet.DAL
             parameters[29].Value = model.KPO_ScDetails;
             parameters[30].Value = model.OrderCheckYN;
             parameters[31].Value = model.KPO_PriceState;
+            parameters[32].Value = model.KPO_PreHouseNo;
             
-
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -151,7 +153,8 @@ namespace KNet.DAL
             strSql.Append("ArrivalDate=@ArrivalDate,");
             strSql.Append("KPO_ScDetails=@KPO_ScDetails, ");
             strSql.Append("ParentOrderNo=@ParentOrderNo,");
-            strSql.Append("KPO_PriceState=@KPO_PriceState ");
+            strSql.Append("KPO_PriceState=@KPO_PriceState, ");
+            strSql.Append("KPO_PreHouseNo=@KPO_PreHouseNo ");
             
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
@@ -183,6 +186,7 @@ namespace KNet.DAL
 					new SqlParameter("@KPO_ScDetails", SqlDbType.Text),
                      new SqlParameter("@ParentOrderNo", SqlDbType.VarChar,50),
                      new SqlParameter("@KPO_PriceState", SqlDbType.Int,4),
+                     new SqlParameter("@KPO_PreHouseNo", SqlDbType.VarChar,50),
                      
 					new SqlParameter("@ID", SqlDbType.NVarChar,50)
                                         };
@@ -214,8 +218,9 @@ namespace KNet.DAL
             parameters[25].Value = model.KPO_ScDetails;
             parameters[26].Value = model.ParentOrderNo;
             parameters[27].Value = model.KPO_PriceState;
+            parameters[28].Value = model.KPO_PreHouseNo;
             
-            parameters[28].Value = model.ID;
+            parameters[29].Value = model.ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -337,7 +342,7 @@ namespace KNet.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 * from Knet_Procure_OrdersList a  join v_OrderRK b on a.OrderNO=b.V_OrderNo  ");
+            strSql.Append("select  top 1 * from Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo  ");
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
@@ -581,6 +586,16 @@ namespace KNet.DAL
                 {
                     model.KPO_PriceState = int.Parse(ds.Tables[0].Rows[0]["KPO_PriceState"].ToString());
                 }
+
+
+                if (ds.Tables[0].Rows[0]["KPO_PreHouseNo"] != null && ds.Tables[0].Rows[0]["KPO_PreHouseNo"].ToString() != "")
+                {
+                    model.KPO_PreHouseNo = ds.Tables[0].Rows[0]["KPO_PreHouseNo"].ToString();
+                }
+                else
+                {
+                    model.KPO_PreHouseNo = "";
+                }
                 
                 return model;
             }
@@ -597,7 +612,7 @@ namespace KNet.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 * from Knet_Procure_OrdersList a  join v_OrderRK b on a.OrderNO=b.V_OrderNo  ");
+            strSql.Append("select  top 1 * from Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo  ");
             strSql.Append(" where OrderNo=@OrderNo ");
             SqlParameter[] parameters = {
 					new SqlParameter("@OrderNo", SqlDbType.NVarChar,50)};
@@ -855,7 +870,15 @@ namespace KNet.DAL
                 {
                     model.KPO_IsChange = int.Parse(ds.Tables[0].Rows[0]["KPO_IsChange"].ToString());
                 }
-                
+
+                if (ds.Tables[0].Rows[0]["KPO_PreHouseNo"] != null && ds.Tables[0].Rows[0]["KPO_PreHouseNo"].ToString() != "")
+                {
+                    model.KPO_PreHouseNo = ds.Tables[0].Rows[0]["KPO_PreHouseNo"].ToString();
+                }
+                else
+                {
+                    model.KPO_PreHouseNo = "";
+                }
                 return model;
             }
             else
@@ -870,8 +893,8 @@ namespace KNet.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select *,case when RKState<>1 then cast (DATEDIFF(day,getdate(),OrderpretoDate) as varchar(100)) else '' end as DiffDay  ");
-            strSql.Append(" FROM Knet_Procure_OrdersList a  join v_OrderRK b on a.OrderNO=b.V_OrderNo  ");
+            strSql.Append("select *,a.ParentOrderNo,case when RKState<>1 then cast (DATEDIFF(day,getdate(),OrderpretoDate) as varchar(100)) else '' end as DiffDay  ");
+            strSql.Append(" FROM Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo  ");
             strSql.Append(" join KNet_Sys_ProcureType c on a.OrderType=c.ProcureTypeValue  ");
 
             if (strWhere.Trim() != "")

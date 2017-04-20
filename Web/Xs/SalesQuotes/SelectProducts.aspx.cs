@@ -22,7 +22,7 @@ public partial class Knet_Common_SelectProducts : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.Page.Title = "合同评审 产品选择";
+        this.Page.Title = "产品选择";
 
         if (!IsPostBack)
         {
@@ -34,10 +34,54 @@ public partial class Knet_Common_SelectProducts : BasePage
             }
             else
             {
+                BuildTree("M160818111359632", null);
+                this.TreeView1.CollapseAll();
+                this.TreeView1.Nodes[0].Expand();
+                this.TreeView1.Nodes[0].Select();
                 this.DataShows();
             }
         }
     }
+
+    public void BuildTree(string s_ID, TreeNode tree)
+    {
+        try
+        {
+            KNet.BLL.PB_Basic_ProductsClass Bll = new KNet.BLL.PB_Basic_ProductsClass();
+            TreeNode treeMainNode = new TreeNode();
+            KNet.BLL.PB_Basic_ProductsClass bll = new KNet.BLL.PB_Basic_ProductsClass();
+            if (tree == null)
+            {
+                KNet.Model.PB_Basic_ProductsClass Model = bll.GetModel(s_ID);
+                this.TreeView1.Nodes.Clear();
+                treeMainNode.Text = Model.PBP_Name;
+                treeMainNode.Value = Model.PBP_ID;
+                this.TreeView1.Nodes.Add(treeMainNode);
+            }
+            else
+            {
+                treeMainNode = tree;
+            }
+
+            DataSet Dts_Table = bll.GetList(" PBP_FaterID='" + s_ID + "'");
+
+
+            if (Dts_Table.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
+                {
+                    TreeNode treeNode1 = new TreeNode();
+                    treeNode1.Text = Dts_Table.Tables[0].Rows[i]["PBP_Name"].ToString();
+                    treeNode1.Value = Dts_Table.Tables[0].Rows[i]["PBP_ID"].ToString();
+                    treeMainNode.ChildNodes.Add(treeNode1);
+                    BuildTree(Dts_Table.Tables[0].Rows[i]["PBP_ID"].ToString(), treeNode1);
+                }
+            }
+        }
+        catch
+        { }
+    }
+
     /// <summary>
     /// 是不是有记录
     /// </summary>
@@ -80,6 +124,13 @@ public partial class Knet_Common_SelectProducts : BasePage
             SqlWhere += " and a.ProductsBarCode not in ('" + s_ProductsID.Substring(0, s_ProductsID.Length-1).Replace(",", "','") + "') ";
         }
 
+        if (this.TreeView1.SelectedNode.Value != "1")
+        {
+            KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
+            string s_SonID = Bll_ProductsDetails.GetSonIDs(this.TreeView1.SelectedNode.Value);
+            s_SonID = s_SonID.Replace(",", "','");
+            SqlWhere += " and ProductsType in ('" + s_SonID + "') ";
+        }
         this.BeginQuery(s_Sql + SqlWhere);
         this.QueryForDataSet();
         DataSet ds = this.Dts_Result;
@@ -90,6 +141,10 @@ public partial class Knet_Common_SelectProducts : BasePage
 
     }
 
+    protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
+    {
+        this.DataShows();
+    }
 
     /// <summary>
     /// 页内 搜索 （Y）
@@ -131,7 +186,16 @@ public partial class Knet_Common_SelectProducts : BasePage
         }
         StringBuilder s = new StringBuilder();
         s.Append("<script language=javascript>" + "\n"); 
-        s.Append("if(window.opener != undefined) {window.opener.returnValue='"+s_Return+"';} else{window.returnValue='"+s_Return+"';}" + "\n");
+        //s.Append("if(window.opener != undefined) {window.opener.returnValue='"+s_Return+"';} else{window.returnValue='"+s_Return+"';}" + "\n");
+        s.Append("if (window.opener != undefined)\n");
+        s.Append("{\n");
+        s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+        s.Append("    window.opener.SetReturnValueInOpenner_Products('" + s_Return + "');\n");
+        s.Append("}\n");
+        s.Append("else\n");
+        s.Append("{\n");
+        s.Append("    window.returnValue = '" + s_Return + "';\n");
+        s.Append("}\n");
         s.Append("window.close();" + "\n");
         s.Append("</script>");
         Type cstype = this.GetType();

@@ -37,7 +37,7 @@ public partial class Sc_Expend_Add : BasePage
             else
             {
                 base.Base_DropDutyPerson(this.Ddl_Batch);
-                this.Ddl_Batch.SelectedValue = "";
+                this.Ddl_Batch.SelectedValue = AM.KNet_StaffNo;
                 string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
                 string s_OrderNo = Request.QueryString["OrderNo"] == null ? "" : Request.QueryString["OrderNo"].ToString();
 
@@ -45,14 +45,36 @@ public partial class Sc_Expend_Add : BasePage
                 if (this.Tbx_Order.Text != "")
                 {
 
-                    KNet.BLL.Knet_Procure_OrdersList Bll_order = new KNet.BLL.Knet_Procure_OrdersList();
-                    KNet.Model.Knet_Procure_OrdersList Model_order = Bll_order.GetModelB(s_OrderNo);
-                    if (Model_order != null)
+                    string s_Sql1 = "Select Sum(KSP_isModiy) from KNet_Sys_Products a join Knet_Procure_OrdersList_Details b on a.ProductsBarCode=b.ProductsBarCode";
+                    s_Sql1 += " where b.OrderNo='" + s_OrderNo + "' ";
+                    this.BeginQuery(s_Sql1);
+                    string s_IsModiy = this.QueryForReturn();
+                    if (int.Parse(s_IsModiy) > 0)
                     {
-                        this.SuppNoSelectValue.Value = Model_order.SuppNo;
-                        this.SuppNo.Text = base.Base_GetSupplierName(Model_order.SuppNo);
+                        AlertAndClose("产品未审批不能领料！窗口将关闭");
                     }
-                    this.DataShows();
+                    else
+                    {
+                        KNet.BLL.Knet_Procure_OrdersList Bll_order = new KNet.BLL.Knet_Procure_OrdersList();
+                        KNet.Model.Knet_Procure_OrdersList Model_order = Bll_order.GetModelB(s_OrderNo);
+                        if (Model_order != null)
+                        {
+                            string s_SuppNo = Model_order.SuppNo;
+
+                            KNet.BLL.Knet_Procure_Suppliers bll = new KNet.BLL.Knet_Procure_Suppliers();
+                            DataSet ds = bll.GetList(" SuppNo in ('" + s_SuppNo + "','131187205665612658')  ");
+
+                            SuppNoSelectValue.DataSource = ds;
+                            SuppNoSelectValue.DataTextField = "SuppName";
+                            SuppNoSelectValue.DataValueField = "SuppNo";
+                            SuppNoSelectValue.DataBind();
+                            ListItem item = new ListItem("请选择加工厂", ""); //默认值
+                            SuppNoSelectValue.Items.Insert(0, item);
+                            this.SuppNoSelectValue.SelectedValue = s_SuppNo;
+                            //this.SuppNoSelectValue.SelectedValue = "131187205665612658";
+                        }
+                        this.DataShows();
+                    }
                 }
                 if (s_ID != "")
                 {
@@ -75,8 +97,25 @@ public partial class Sc_Expend_Add : BasePage
                         KNet.Model.Knet_Procure_OrdersList_Details Model_Details = BLL_Details.GetModel(s_DID);
                         KNet.BLL.Knet_Procure_OrdersList BLL = new KNet.BLL.Knet_Procure_OrdersList();
                         KNet.Model.Knet_Procure_OrdersList Model = BLL.GetModelB(Model_Details.OrderNo);
-                        this.SuppNoSelectValue.Value = Model.SuppNo;
-                        this.SuppNo.Text = base.Base_GetSupplierName(Model.SuppNo);
+                        if (Model != null)
+                        {
+                            string s_SuppNo = Model.SuppNo;
+
+                            KNet.BLL.Knet_Procure_Suppliers bll = new KNet.BLL.Knet_Procure_Suppliers();
+                            DataSet ds = bll.GetList(" SuppNo in ('" + s_SuppNo + "','131187205665612658')  ");
+
+                            SuppNoSelectValue.DataSource = ds;
+                            SuppNoSelectValue.DataTextField = "SuppName";
+                            SuppNoSelectValue.DataValueField = "SuppNo";
+                            SuppNoSelectValue.DataBind();
+                            ListItem item = new ListItem("请选择加工厂", ""); //默认值
+                            SuppNoSelectValue.Items.Insert(0, item);
+
+                            this.SuppNoSelectValue.SelectedValue = s_SuppNo;
+                            //this.SuppNoSelectValue.SelectedValue = "131187205665612658";
+                        }
+                        //this.SuppNoSelectValue.Value = Model.SuppNo;
+                        //this.SuppNo.Text = base.Base_GetSupplierName(Model.SuppNo);
                     }
                     catch
                     { }
@@ -110,10 +149,10 @@ public partial class Sc_Expend_Add : BasePage
                 model.SEM_Stime = DateTime.Parse(this.Tbx_Stime.Text);
             }
             catch { }
-            model.SEM_SuppNo = this.SuppNoSelectValue.Value;
-            model.SEM_CustomerName = this.Tbx_Customer.Text;
+            model.SEM_SuppNo = this.SuppNoSelectValue.SelectedValue;
+            model.SEM_CustomerName = "";
             model.SEM_DutyPerson = this.Ddl_Batch.SelectedValue;
-            model.SEM_ProductsEdition = this.SeachKey.Text;
+            model.SEM_ProductsEdition = "";
             try
             {
                 model.SEM_RkTime = DateTime.Parse(this.Tbx_Stime.Text);
@@ -132,7 +171,7 @@ public partial class Sc_Expend_Add : BasePage
             model.SEM_Mendor = AM.KNet_StaffNo;
             model.SEM_MTime = DateTime.Now;
 
-            ///遥控器消耗
+            ///成品消耗
             ArrayList arr_RcDetails = new ArrayList();
             int i_Num = 0;
             for (int i = 0; i < this.GridView1.Rows.Count; i++)
@@ -166,7 +205,7 @@ public partial class Sc_Expend_Add : BasePage
             model.arr_Details = arr_RcDetails;
             if (i_Num > 1)
             {
-                Alert("请指定一个遥控器生产！");
+                Alert("请指定一个成品生产！");
                 return false;
             }
 
@@ -186,6 +225,7 @@ public partial class Sc_Expend_Add : BasePage
                 CheckBox Chk_Chbk = (CheckBox)MyGridView2.Rows[i].Cells[0].FindControl("Chbk");
                 if (Chk_Chbk.Checked)
                 {
+                    /*
                     Mode_MaterDetails.SED_SEMID = model.SEM_ID;
                     Mode_MaterDetails.SED_HouseNo ="";
                     Mode_MaterDetails.SED_ProductsBarCode = Tbx_ProductsBarCode.Text;
@@ -242,7 +282,7 @@ public partial class Sc_Expend_Add : BasePage
                     catch { }
                     Mode_MaterDetails1.SED_Type = 1;
                     arr_MaterDetails.Add(Mode_MaterDetails1);
-
+                    */
                     //生产入库
                     KNet.Model.Sc_Expend_Manage_MaterDetails Mode_MaterDetails2 = new KNet.Model.Sc_Expend_Manage_MaterDetails();
                     Mode_MaterDetails2.SED_SEMID = model.SEM_ID;
@@ -292,20 +332,7 @@ public partial class Sc_Expend_Add : BasePage
     {
         string s_Sql = "Select b.ID as DID,a.*,b.*,c.CustomerValue,c.DutyPerson from Knet_Procure_OrdersList a left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo left join Knet_Sales_ContractList c on c.ContractNo=a.ContractNo ";
         s_Sql += " where OrderType='128860698200781250' and Isnull(KPO_RKState,'1')=0 ";
-        if (this.SuppNoSelectValue.Value != "")
-        {
-            s_Sql += " and a.SuppNo='" + this.SuppNoSelectValue.Value + "' ";
-        }
-        if (this.Tbx_Customer.Text != "")
-        {
-
-            s_Sql += " and c.CustomerValue in (Select CustomerValue From KNet_Sales_ClientList where CustomerName Like '%" + Tbx_Customer.Text + "%') ";
-        }
-        if (this.SeachKey.Text != "")
-        {
-            s_Sql += " and b.ProductsBarCode in (Select ProductsBarCode From KNet_Sys_Products where ProductsEdition Like '%" + SeachKey.Text + "%' or ProductsName like '%" + SeachKey.Text + "%')";
-
-        }
+      
         if (this.DID.Text != "")
         {
             s_Sql += " and b.ID='" + this.DID.Text + "' ";
@@ -323,39 +350,20 @@ public partial class Sc_Expend_Add : BasePage
         GridView1.DataKeyNames = new string[] { "OrderNo" };
         GridView1.DataBind();
 
-        //物料计划
+        //物料计划  
 
         //
-        string s_DSql = "Select distinct XPD_ProductsBarCode  as ProductsBarCode,XPD_Number,b.ProductsType,XPD_ReplaceProductsBarCode from  Xs_Products_Prodocts_Demo a  join KNet_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode  ";
-
-        s_DSql += " Where a.XPD_FaterBarCode in (Select b.ProductsBarCode from  Knet_Procure_OrdersList a left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo left join Knet_Sales_ContractList c on c.ContractNo=a.ContractNo ";
-        s_DSql += " where OrderType='128860698200781250' and Isnull(KPO_RKState,'1')=0 ";
-        //string s_DSql = "Select distinct a.XPP_ProductsBarCode as ProductsBarCode,XPP_Price,XPP_SuppNo,XPP_Number,b.ProductsType from Xs_Products_Prodocts a  join KNet_Sys_Products b on a.XPP_ProductsBarCode=b.ProductsBarCode ";
-        //s_DSql += " Where a.XPP_FaterBarCode in (Select b.ProductsBarCode from  Knet_Procure_OrdersList a left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo left join Knet_Sales_ContractList c on c.ContractNo=a.ContractNo ";
-        //s_DSql += " where OrderType='128860698200781250' and Isnull(KPO_RKState,'1')=0 ";
-        if (this.SuppNoSelectValue.Value != "")
-        {
-            s_DSql += " and a.SuppNo='" + this.SuppNoSelectValue.Value + "' ";
-        }
+        string s_DSql = "Select  BomOrder,KSP_Code,ProductsName,ProductsEdition,XPD_ProductsBarCode  as ProductsBarCode,XPD_Number,ProductsType,XPD_ReplaceProductsBarCode,NeedNumber,FaterProductsName from  v_Order_ProductsDemo_Details where 1=1 ";
 
         if (this.Tbx_Order.Text != "")
         {
-            s_DSql += " and a.OrderNo='" + this.Tbx_Order.Text + "'";
-        }
-        if (this.Tbx_Customer.Text != "")
-        {
-            s_DSql += " and c.CustomerValue in (Select CustomerValue From KNet_Sales_ClientList where CustomerName Like '%" + Tbx_Customer.Text + "%') ";
-        }
-        if (this.SeachKey.Text != "")
-        {
-            s_DSql += " and b.ProductsBarCode in (Select ProductsBarCode From KNet_Sys_Products where ProductsEdition Like '%" + SeachKey.Text + "%' or ProductsName like '%" + SeachKey.Text + "%')";
+            s_DSql += " and OrderNo='" + this.Tbx_Order.Text + "'";
         }
         if (this.DID.Text != "")
         {
-            s_DSql += " and b.ID='" + this.DID.Text + "' ";
+            s_DSql += " and ID='" + this.DID.Text + "' ";
         }
-        s_DSql += " ) ";
-        s_DSql += " order by b.ProductsType ";
+        s_DSql += " order by ProductsType ";
         this.BeginQuery(s_DSql);
         this.QueryForDataSet();
         DataSet ds1 = Dts_Result;
@@ -430,6 +438,7 @@ public partial class Sc_Expend_Add : BasePage
         return s_Return;
 
     }
+
     public string GetSCDate(string s_OrderDID)
     {
         string s_Return = "";
@@ -450,24 +459,15 @@ public partial class Sc_Expend_Add : BasePage
         string s_Return = "";
         try
         {
-            string s_DSql = "Select a.XPP_FaterBarCode from Xs_Products_Prodocts a ";
-            s_DSql += " Where a.XPP_FaterBarCode in (Select b.ProductsBarCode from  Knet_Procure_OrdersList a left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo left join Knet_Sales_ContractList c on c.ContractNo=a.ContractNo ";
+            string s_DSql = "Select a.XPD_FaterBarCode from Xs_Products_Prodocts_Demo a ";
+            s_DSql += " Where a.XPD_FaterBarCode in (Select b.ProductsBarCode from  Knet_Procure_OrdersList a left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo left join Knet_Sales_ContractList c on c.ContractNo=a.ContractNo ";
             s_DSql += " where OrderType='128860698200781250' and Isnull(KPO_RKState,'1')=0 ";
-            if (this.SuppNoSelectValue.Value != "")
+            if (this.SuppNoSelectValue.SelectedValue != "")
             {
-                s_DSql += " and a.SuppNo='" + this.SuppNoSelectValue.Value + "' ";
+                s_DSql += " and a.SuppNo='" + this.SuppNoSelectValue.SelectedValue + "' ";
             }
 
-            if (this.Tbx_Customer.Text != "")
-            {
-                s_DSql += " and c.CustomerValue in (Select CustomerValue From KNet_Sales_ClientList where CustomerName Like '%" + Tbx_Customer.Text + "%') ";
-            }
-            if (this.SeachKey.Text != "")
-            {
-                s_DSql += " and b.ProductsBarCode in (Select ProductsBarCode From KNet_Sys_Products where ProductsEdition Like '%" + SeachKey.Text + "%' or ProductsName like '%" + SeachKey.Text + "%')";
-
-            }
-            s_DSql += " ) and XPP_ProductsBarCode='" + s_ProductsBarCode + "' ";
+            s_DSql += " ) and XPD_ProductsBarCode='" + s_ProductsBarCode + "' ";
             this.BeginQuery(s_DSql);
             this.QueryForDataSet();
             DataSet Dts_Table = Dts_Result;
@@ -475,7 +475,7 @@ public partial class Sc_Expend_Add : BasePage
             {
                 for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
                 {
-                    s_Return += base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["XPP_FaterBarCode"].ToString()) + ",";
+                    s_Return += base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["XPD_FaterBarCode"].ToString()) + ",";
                 }
                 if (s_Return != "")
                 {
@@ -488,7 +488,6 @@ public partial class Sc_Expend_Add : BasePage
         { }
         return s_Return;
     }
-
 
     public string GetSCDateState(string s_OrderDID)
     {
@@ -530,6 +529,7 @@ public partial class Sc_Expend_Add : BasePage
         { }
         return s_Return;
     }
+
     protected void Button4_Click(object sender, EventArgs e)
     {
         this.DID.Text = "";
@@ -541,7 +541,7 @@ public partial class Sc_Expend_Add : BasePage
         string s_Return = "";
         try
         {
-            string s_SuppNo = this.SuppNoSelectValue.Value;
+            string s_SuppNo = this.SuppNoSelectValue.SelectedValue;
             KNet.BLL.KNet_Sys_WareHouse BLL = new KNet.BLL.KNet_Sys_WareHouse();
             DataSet Dtb_Table = BLL.GetList(" SuppNo='" + s_SuppNo + "' and KSW_Type='0' ");
             if (Dtb_Table.Tables[0].Rows.Count > 0)
@@ -561,16 +561,17 @@ public partial class Sc_Expend_Add : BasePage
         { }
         return s_Return;
     }
+
     public string GetXQ(string s_ProductsBarCode)
     {
         string s_Return = "";
         try
         {
             //物料计划
-            string s_DSql = "Select Sum(b.LeftNumber*XPP_Number ) OrderAmount from Knet_Procure_OrdersList a ";
+            string s_DSql = "Select Sum(b.LeftNumber*XPD_Number ) OrderAmount from Knet_Procure_OrdersList a ";
             s_DSql += "left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo ";
-            s_DSql += "join  Xs_Products_Prodocts c on c.XPP_FaterBarCode=b.ProductsBarCode ";
-            s_DSql += "where Isnull(KPO_RKState,'1')=0 and c.XPP_ProductsBarCode='" + s_ProductsBarCode + "' ";
+            s_DSql += "join  Xs_Products_Prodocts_Demo c on c.XPD_FaterBarCode=b.ProductsBarCode ";
+            s_DSql += "where Isnull(KPO_RKState,'1')=0 and c.XPD_ProductsBarCode='" + s_ProductsBarCode + "' ";
 
 
             if (this.Tbx_Order.Text != "")
@@ -614,7 +615,6 @@ public partial class Sc_Expend_Add : BasePage
         return s_Return;
     }
 
-
     public string GetNeedNumber(string s_ProductsBarCode)
     {
         string s_Return = "";
@@ -650,9 +650,10 @@ public partial class Sc_Expend_Add : BasePage
             TextBox Tbx_KcNumber = (TextBox)e.Row.Cells[0].FindControl("Tbx_KcNumber");
             string s_WareHouseNumber = Tbx_KcNumber.Text;
             CheckBox Chk_Check = (CheckBox)e.Row.Cells[0].FindControl("Chbk");
-            if (this.SuppNoSelectValue.Value != "")
+            if (this.SuppNoSelectValue.SelectedValue != "")
             {
-                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo='" + this.SuppNoSelectValue.Value + "' and KSW_Type='0' ");
+                //,
+                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo in ('" + this.SuppNoSelectValue.SelectedValue + "','131187205665612658')  and HouseNo<>'131235104473261008' and KSW_Type='0' ");
             }
             if (Tbx_ReplaceProductsBarCode.Text != "")
             {
@@ -698,11 +699,12 @@ public partial class Sc_Expend_Add : BasePage
         {
             DropDownList Ddl_House = (DropDownList)e.Row.Cells[0].FindControl("Ddl_House");
 
-            if (this.SuppNoSelectValue.Value != "")
+            if (this.SuppNoSelectValue.SelectedValue != "")
             {
-                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo='" + this.SuppNoSelectValue.Value + "' and KSW_Type='0' ");
+                //'" + this.SuppNoSelectValue.Value + "',
+                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo in ('" + this.SuppNoSelectValue.SelectedValue + "','131187205665612658') and HouseNo<>'131235104473261008' and KSW_Type='0' ");
+                
             }
-
             if (Ddl_House.SelectedValue== "")
             {
                 base.Base_DropWareHouseBindNoSelect(Ddl_House, " KSW_Type='0'");
@@ -720,5 +722,9 @@ public partial class Sc_Expend_Add : BasePage
             Tbx_YRKTime.Text = DateTime.Now.ToShortDateString();
             base.Base_DropWareHouseBindNoSelect(Ddl_House, " 1=1 ");
         }
+    }
+    protected void SuppNoSelectValue_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        this.DataShows();
     }
 }

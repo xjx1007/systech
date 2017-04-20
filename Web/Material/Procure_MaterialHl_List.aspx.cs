@@ -37,7 +37,7 @@ public partial class Procure_MaterialWw_List : BasePage
             }
 
             this.Btn_Show.Attributes.Add("onclick", "return confirm('您确定要显示全部吗？')");
-            this.BtnSave.Attributes.Add("onclick", "return confirm('您确定要计算选择的委外单价吗？')");
+            //this.BtnSave.Attributes.Add("onclick", "return confirm('您确定要计算选择的委外单价吗？')");
             base.Base_DropBindSearch(this.bas_searchfield, "Cg_Order_MaterialHl");
             base.Base_DropBindSearch(this.Fields, "Cg_Order_MaterialHl");
             this.ImgB.Attributes.Add("onclick", "return confirm('你确定要导出所包含的数据么？')");
@@ -517,13 +517,6 @@ public partial class Procure_MaterialWw_List : BasePage
         sw.Write("产品名称 " + "\t ");
         sw.Write("产品版本号 " + "\t ");
         sw.Write("领料数量 " + "\t ");
-        sw.Write("单价 " + "\t ");
-        sw.Write("金额 " + "\t ");
-        sw.Write("期初数量 " + "\t ");
-        sw.Write("期初金额 " + "\t ");
-        sw.Write("采购数量 " + "\t ");
-        sw.Write("采购金额 " + "\t ");
-        sw.Write("单价 " + "\t ");
         sw.Write("领料单价 " + "\t ");
         sw.Write("领料金额 " + "\t ");
         sw.Write("状态 " + "\t ");
@@ -545,13 +538,6 @@ public partial class Procure_MaterialWw_List : BasePage
                 sw.Write(dr["ProductsName"].ToString() + "\t ");
                 sw.Write(dr["ProductsEdition"].ToString() + "\t ");
                 sw.Write(dr["SED_RkNumber"].ToString() + "\t ");
-                sw.Write(dr["SED_RkPrice"].ToString() + "\t ");
-                sw.Write(dr["SED_RkMoney"].ToString() + "\t ");
-                sw.Write(base.FormatNumber1(GetKC(dr["ID"].ToString(), 0), 0) + "\t ");
-                sw.Write(base.FormatNumber1(GetKC(dr["ID"].ToString(), 1), 0) + "\t ");
-                sw.Write(base.FormatNumber1(GetKC(dr["ID"].ToString(), 2), 0) + "\t ");
-                sw.Write(base.FormatNumber1(GetKC(dr["ID"].ToString(), 3), 0) + "\t ");
-                sw.Write(base.FormatNumber1(GetKC(dr["ID"].ToString(), 4), 0) + "\t ");
                 sw.Write(dr["WwPrice"].ToString() + "\t ");
                 sw.Write(dr["WwMoney"].ToString() + "\t ");
                 if (dr["SEM_CheckYN"].ToString() == "0")

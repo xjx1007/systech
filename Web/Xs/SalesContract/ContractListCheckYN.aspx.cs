@@ -20,6 +20,7 @@ using KNet.Common;
 /// </summary>
 public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
 {
+    public string s_MyTable_Detail = "";
     protected void Page_PreInit(object sender, EventArgs e)
     {
         KNet.DBUtility.AdminloginMess AMLanguage = new KNet.DBUtility.AdminloginMess();
@@ -54,7 +55,104 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                 KNet.Model.KNet_Sales_ContractList Model_Contract = BLL_Contract.GetModelB(this.UsersNotxt.Text);
                 this.Tbx_ReDate.Text = DateTime.Parse(Model_Contract.ContractToDeliDate.ToString()).ToShortDateString();
                 this.Tbx_OldReDate.Text = DateTime.Parse(Model_Contract.ContractToDeliDate.ToString()).ToShortDateString();
+                this.Lbl_Remarks.Text = Model_Contract.ContractRemarks;
 
+                string s_OrdeURL = Model_Contract.KSC_OrderURL == null ? "" : Model_Contract.KSC_OrderURL;
+                if (s_OrdeURL != "")
+                {
+                    this.Lbl_Details.Text = "<input Name=\"KSC_OrderURL\"  type=\"hidden\"  value=" + Model_Contract.KSC_OrderURL + "><input Name=\"KSC_OrderName\"  type=\"hidden\"  value=" + Model_Contract.KSC_OrderName + "><a href=\"" + Model_Contract.KSC_OrderURL + "\" target=\"_blank\" >" + Model_Contract.KSC_OrderName + "</a>";
+                }
+
+                KNet.BLL.Xs_Contract_Manage BLL_ContractManage = new KNet.BLL.Xs_Contract_Manage();
+                KNet.Model.Xs_Contract_Manage Model_ContractManage = BLL_ContractManage.GetModel(Model_Contract.KSC_FaterId);
+                if (Model_ContractManage != null)
+                {
+                    this.Lbl_FaterCode.Text = "<a href=\"/Web/Xs/Contract/Xs_Contract_Manage_View.aspx?ID=" + Model_Contract.KSC_FaterId + "\">" + Model_ContractManage.XCM_Code + "</a>";
+                    this.Lbl_Type.Text = base.Base_GetBasicCodeName("216", Model_ContractManage.XCM_Type);
+                }
+                KNet.BLL.KNet_Sales_ContractList_Details BLL_Details = new KNet.BLL.KNet_Sales_ContractList_Details();
+                DataSet Dts_Details = BLL_Details.GetList(" ContractNo='" + this.UsersNotxt.Text + "'");
+                if (Dts_Details.Tables[0].Rows.Count > 0)
+                {
+                    int i_Num = 13;//单价限制
+                    //研发中心经理，市场销售部，总经理，财务部有权限查看金额
+                    if (AM.YNAuthority("销售单价查看") == false)
+                    {
+                        i_Num = 10;//单价限制
+                    }
+                    else
+                    {
+                        i_Num = 8;//单价限制
+                    }
+                    s_MyTable_Detail += "  <tr valign=\"top\">\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>产品名称</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>产品编码</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>型号</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>剩余备货</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>核销</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>数量</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>备货数量</b></td>\n";
+                    if (i_Num == 8)
+                    {
+                        s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>单价</b></td>\n";
+                        s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>金额</b></td>\n";
+                    }
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>是否随货</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>备注</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>上次下单日期</b></td>\n";
+                    s_MyTable_Detail += "  </tr>\n";
+                    for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
+                    {
+                        s_MyTable_Detail += "<tr>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                        string s_ProductsCode = base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + s_ProductsCode + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+
+                        string s_TotalNumber = Dts_Details.Tables[0].Rows[i]["totalNumber"].ToString();
+
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + s_TotalNumber + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"HxState_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["KSD_HxState"].ToString() + ">" + Dts_Details.Tables[0].Rows[i]["KSD_HxNumber"].ToString() + "</td>";
+
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ContractAmount"].ToString() + "</td>";
+                        if (Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() == "0")
+                        {
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
+                        }
+                        else
+                        {
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() + "</td>";
+                        }
+                        if (i_Num == 8)
+                        {
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["Contract_SalesUnitPrice"].ToString() + "</td>";
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["Contract_SalesTotalNet"].ToString() + "</td>";
+                        }
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KSD_IsFollow"].ToString() + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ContractRemarks"].ToString() + "</td>";
+                        if (s_ProductsCode.IndexOf("01") >= 0)
+                        {
+                            string s_LastDate = GetNearContractDate(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
+                            string s_DetailsDate = "";
+                            try
+                            {
+                                DateTime Dt_DateTime = (DateTime)Model_Contract.ContractDateTime;
+                                TimeSpan span = (TimeSpan)(Dt_DateTime - DateTime.Parse(s_LastDate));
+                                //if () ;
+                                s_DetailsDate = "上次下单：" + s_LastDate + "";
+                                s_DetailsDate += "<br/>距离上次下单超过 <font color=red size=4><b>" + span.Days + "</b> </font>天";
+                            }
+                            catch
+                            { s_DetailsDate = s_LastDate; }
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + s_DetailsDate + "</td>";
+                        }
+                        else
+                        {
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
+                        }
+                        s_MyTable_Detail += "</tr>";
+                    }
+                }
 
                 if ((AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffDepart == "129652783965723459") || (AM.KNet_StaffDepart == "129652784259578018"))
                 {
@@ -110,6 +208,35 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
         }
     }
 
+
+    private string GetNearContractDate(string s_ProductsBarCode)
+    {
+        string s_Return = "";
+        try
+        {
+            //上次下单日期；不要核销
+            string s_Sql = "select top 1 add_DateTime from KNet_Sales_ContractList_Details where ProductsBarCode='" + s_ProductsBarCode + "' and ContractNo not in ('" + this.UsersNotxt.Text + "') and isnull(KSD_HXNumber,0)-isnull(ContractAmount,0)-isnull(KSC_BNumber,0)<>0 order by add_DateTime desc ";
+            this.BeginQuery(s_Sql);
+            DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                s_Return = base.DateToString(Dtb_Table.Rows[0][0].ToString());
+
+            }
+            else
+            {
+                s_Return = "<font color=red><b>首单</b></font>";
+            }
+
+
+        }
+        catch
+        {
+            s_Return = "<font color=red><b>首单</b></font>";
+        }
+        return s_Return;
+
+    }
     ///// <summary>
     ///// 出库后更新仓库总账信息
     ///// </summary>
@@ -289,6 +416,9 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                     {
                         string DoSql = "update KNet_Sales_ContractList  set ContractCheckYN=" + AA + " , ContractState=1  where  ContractNo='" + OrderNotxt + "' ";
                         DbHelperSQL.ExecuteSql(DoSql);
+                        //发送给生产下单
+                        base.Base_SendMessage("130795804840200930,129785817148286979,130449499957844456", KNetPage.KHtmlEncode("有 有新的订单评审通过审批 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + OrderNotxt + "  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNotxt + "</a> 需安排下单，敬请关注！！"));
+
                     }
                     if (AddFlow(OrderNotxt, AA) == false)
                     {

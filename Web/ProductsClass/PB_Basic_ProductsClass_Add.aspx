@@ -124,6 +124,16 @@
                                                     OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="dvtCellLabel" >
+                                                类型:
+                                            </td>
+                                            <td class="dvtCellInfo" colspan="3">
+                                                <asp:DropDownList runat="server" ID="Ddl_Type">
+
+                                                </asp:DropDownList>
+                                            </td>
+                                        </tr>
              
                             <tr>
                                 <td colspan="4" align="center">

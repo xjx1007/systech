@@ -44,6 +44,7 @@
             var response = Knet_Common_SelectProducts.GetProductsInfo(ProdutsBarCode, Custom, Price, Number,s_ID,s_ContractNo);
             if (window.opener != undefined) {
                 window.opener.returnValue = ProdutsBarCode + "|" + response.value;
+                window.opener.SetReturnValueInOpenner_Products(ProdutsBarCode + "|" + response.value);
             }
             else {
                 window.returnValue = ProdutsBarCode + "|" + response.value;

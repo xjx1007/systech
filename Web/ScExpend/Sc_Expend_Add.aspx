@@ -23,31 +23,31 @@
        var today,seconds;
        today = new Date();
        intSeconds = today.getSeconds();
-       var temp = window.showModalDialog("../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Type=128860698200781250", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+       //var temp = window.showModalDialog("../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Type=128860698200781250", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+       var temp = window.open("../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Type=128860698200781250", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+   }
+    function SetReturnValueInOpenner_Suppliers(temp) {
+        if (temp != undefined) {
+            var ss;
+            ss = temp.split("|");
+            document.all('SuppNoSelectValue').value = ss[0];
+            document.all('SuppNo').value = ss[1];
+        }
+        else {
+            document.all('SuppNoSelectValue').value = "";
+            document.all('SuppNo').value = "";
+        }
+    }
 
-           if(temp!=undefined)   
-           {   
-              	 var ss;
-		         ss=temp.split("|");
-                 document.all('SuppNoSelectValue').value = ss[0];
-                 document.all('SuppNo').value =ss[1];
-            }   
-           else
-            {
-                 document.all('SuppNoSelectValue').value = ""; 
-                 document.all('SuppNo').value = ""; 
-            }
-         }
-
-         function ChangPrice(s_Value) {
-             var tb = document.getElementById("MyGridView2");
-             var rows = tb.rows;
-             for (var i = 1; i < rows.length; i++) {
-                 var Tbx_number = rows[i].cells[9].childNodes[0];
-                 var v_Number = rows[i].cells[3].innerText;
-                 Tbx_number.value = parseInt(v_Number) * parseInt(s_Value);
-             }
-         }
+   function ChangPrice(s_Value) {
+       var tb = document.getElementById("MyGridView2");
+       var rows = tb.rows;
+       for (var i = 1; i < rows.length; i++) {
+           var Tbx_number = rows[i].cells[8].childNodes[0];
+           var v_Number = rows[i].cells[5].innerText;
+           Tbx_number.value = parseInt(v_Number) * parseInt(s_Value);
+       }
+   }
 </script>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
@@ -129,27 +129,25 @@
                                                     <td align="left" class="dvtCellInfo">
                                                         <asp:TextBox ID="Tbx_Stime" runat="server" CssClass="Wdate" Width="150px" onFocus="WdatePicker()"></asp:TextBox>
                                                     </td>
-                                                </tr>
+                                                </tr>      
                                                 <tr>
+                                                    <td width="17%" height="25" align="right" class="dvtCellLabel">
+                                                        订单号:
+                                                    </td>
+                                                    <td align="left" class="dvtCellInfo" >
+                                                        <asp:TextBox ID="Tbx_Order" runat="server" Enabled="false" CssClass="detailedViewTextBox"
+                                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                            Width="150px"></asp:TextBox>
+                                                    </td>
                                                     <td width="17%" height="25" align="right" class="dvtCellLabel">
                                                         供应商:
                                                     </td>
                                                     <td align="left" class="dvtCellInfo">
+                                                        <asp:DropDownList runat="server" ID="SuppNoSelectValue" OnSelectedIndexChanged="SuppNoSelectValue_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                                         <asp:TextBox ID="DID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                        <input type="hidden" name="SuppNoSelectValue" id="SuppNoSelectValue" runat="server" />
-                                                        <asp:TextBox ID="SuppNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                            OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48"></asp:TextBox>
-                                                        <img tabindex="8" src="../../themes/softed/images/select.gif" alt="选择" title="选择"
-                                                            onclick="return btnGetReturnValue_onclick()" />
+                                                        
                                                         (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-                                                            runat="server" ErrorMessage="名称非空" ControlToValidate="SuppNo" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                    </td>
-                                                    <td align="right" class="dvtCellLabel">
-                                                        客户:
-                                                    </td>
-                                                    <td width="33%" align="left" class="dvtCellInfo">
-                                                        <asp:TextBox ID="Tbx_Customer" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                            OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:TextBox>
+                                                            runat="server" ErrorMessage="加工厂非空" ControlToValidate="SuppNoSelectValue" Display="Dynamic"></asp:RequiredFieldValidator>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -159,15 +157,6 @@
                                                     <td align="left" class="dvtCellInfo">
                                                         <asp:DropDownList runat="server" ID="Ddl_Batch">
                                                         </asp:DropDownList>
-                                                    </td>
-                                                    <td align="right" class="dvtCellLabel">
-                                                        产品型号:
-                                                    </td>
-                                                    <td width="33%" align="left" class="dvtCellInfo">
-                                                        <asp:TextBox ID="SeachKey" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                            OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:TextBox>
-                                                        <asp:Button ID="Button4" runat="server" Text="产品筛选" class="crmbutton small save"
-                                                            CausesValidation="false" OnClick="Button4_Click" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -302,48 +291,33 @@
                                                                         <asp:CheckBox ID="Chbk" runat="server" Checked></asp:CheckBox>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="产品编码" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                                                    HeaderStyle-HorizontalAlign="Left">
-                                                                    <ItemTemplate>
-                                                                        <%# base.Base_GetProductsCode(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="物料名称" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                                                    HeaderStyle-HorizontalAlign="Left">
-                                                                    <ItemTemplate>
-                                                                        <%# base.Base_GetProdutsName(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) + "(" + base.Base_GetProductsEdition(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) + ")"%>
-                                                                              <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>'></asp:TextBox>
-                                                                              <asp:TextBox ID="Tbx_ReplaceProductsBarCode" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "XPD_ReplaceProductsBarCode").ToString()%>'></asp:TextBox>
-                                                               
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
+                                                                <asp:BoundField HeaderText="Bom编号" DataField="BomOrder" SortExpression="BomOrder" HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField HeaderText="产品编码" DataField="KSP_Code" SortExpression="KSP_Code" HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField HeaderText="物料名称" DataField="ProductsName" SortExpression="ProductsName" HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField HeaderText="版本号" DataField="ProductsEdition" SortExpression="ProductsName" HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
                                                                 <asp:BoundField HeaderText="比例" DataField="XPD_Number" SortExpression="XPD_Number"
                                                                     DataFormatString="{0:f0}" HtmlEncode="false">
                                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                                 </asp:BoundField>
-                                                                <asp:TemplateField HeaderText="未入库数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                                                    HeaderStyle-HorizontalAlign="Left">
-                                                                    <ItemTemplate>
-                                                                        <%#GetWRK(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="库存" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                                                     HeaderStyle-HorizontalAlign="Left">
                                                                     <ItemTemplate>
                                                                         <%#base.FormatNumber1(GetKC(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()),0)%>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="需求数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                                                    HeaderStyle-HorizontalAlign="Left">
-                                                                    <ItemTemplate>
-                                                                        <%# GetXQ(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
-                                                                    </ItemTemplate>
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="需采购数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                                                    HeaderStyle-HorizontalAlign="Left">
-                                                                    <ItemTemplate>
-                                                                        <%# GetNeedNumber(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+                                                                         <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>'></asp:TextBox>
+                                                                              <asp:TextBox ID="Tbx_ReplaceProductsBarCode" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "XPD_ReplaceProductsBarCode").ToString()%>'></asp:TextBox>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="仓库" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
@@ -352,14 +326,19 @@
                                                                         <asp:DropDownList runat="server" ID="Ddl_House">
                                                                         </asp:DropDownList>
                                                                     </ItemTemplate>
+                                                                    
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="消耗数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                                                     HeaderStyle-HorizontalAlign="Left">
                                                                     <ItemTemplate>
                                                                         <asp:TextBox ID="Tbx_Number" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" Text='<%# GetXQ(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>'></asp:TextBox>
+                                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" Text='<%#DataBinder.Eval(Container.DataItem, "NeedNumber").ToString() %>'></asp:TextBox>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
+                                                                <asp:BoundField HeaderText="上级物料" DataField="FaterProductsName" SortExpression="FaterProductsName" HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
                                                                 <asp:TemplateField HeaderText="备注" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                                                     HeaderStyle-HorizontalAlign="Left">
                                                                     <ItemTemplate>
@@ -401,7 +380,6 @@
                         </tr>
                     </table>
                     <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-                    <asp:TextBox ID="Tbx_Order" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
             </td>
         </tr>
     </table>

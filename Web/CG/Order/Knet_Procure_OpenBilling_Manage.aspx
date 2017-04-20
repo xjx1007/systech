@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>采购订单</title>
 </head>
+
 <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
 <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../../../Web/DatePicker/WdatePicker.js"></script>
@@ -228,10 +229,11 @@
                                                     
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="合同编号" SortExpression="ContractNo" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="120px">
+                                                <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                                    HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
-                                                        <%#GetContract(DataBinder.Eval(Container.DataItem, "ContractNos").ToString(), DataBinder.Eval(Container.DataItem, "ContractNo").ToString())%>
+                                                        <a href="Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %>" target="_blank">
+                                                            <%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %></a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
@@ -240,6 +242,12 @@
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                 </asp:BoundField>
+                                                <asp:TemplateField HeaderText="采购方式" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Left"
+                                                    HeaderStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <%# GetPayMent(DataBinder.Eval(Container.DataItem, "SuppNo").ToString()) %>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:BoundField HeaderText="要求日期" DataField="ArrivalDate" SortExpression="ArrivalDate"
                                                     DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />

@@ -108,7 +108,7 @@
                 alert("请选择客户！")
                 return;
             }
-            var temp = window.showModalDialog("SelectProducts_Sales.aspx?CustomerValue=" + s_Customer + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no;dialogwidth=1000px;dialogHeight=600px");
+            var temp = window.showModalDialog("SelectProducts_Sales.aspx?CustomerValue=" + s_Customer + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no;dialogwidth=1200px;dialogHeight=600px");
             if (temp != undefined) {
                 document.all("Xs_ProductsCode").value = "";
                 var ss;
@@ -135,6 +135,14 @@
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = s_ProductsInfo[1];
+                    objCel.className = "ListHeadDetails";
+
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '<input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:50px;" Name=\"LeftTotalBhNumber_' + i_num2 + '\" value=' + s_Value[11] + '>';
+                    objCel.className = "ListHeadDetails";
+                    var v_Checked = s_Value[12];
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '<input type=\"hidden\" Name=\"HxState_' + i_num2 + '\" value=' + v_Checked + '><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:50px;" Name=\"HxNumber_' + i_num2 + '\" value="">';
                     objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
@@ -202,7 +210,35 @@
         function ChangPrice() {
             var num = document.all('i_Num').value;
             for (var i = 0; i < num; i++) {
-                document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
+                if (document.all("Money_" + i) != null)
+                {
+                    document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
+                }
+            }
+            ChangeNumber();
+        }
+
+        function ChangeNumber() {
+            var num = document.all('i_Num').value;
+            for (var i = 0; i < num; i++) {
+                
+                if (document.all("HxState_" + i) != null) {
+                    var v_HxState = document.all("HxState_" + i).value;
+                    if (v_HxState == "1") {
+
+                        var v_LeftTotalBhNumber = document.all("LeftTotalBhNumber_" + i).value == "" ? "0" : document.all("LeftTotalBhNumber_" + i).value;
+                        var v_number = document.all("Number_" + i).value == "" ? "0" : document.all("Number_" + i).value;
+                        var v_Bnumber = document.all("BNumber_" + i).value == "" ? "0" : document.all("BNumber_" + i).value;
+                        var v_Hxnumber = parseInt(v_number) + parseInt(v_Bnumber);
+                        if (parseInt(v_Hxnumber) > parseInt(v_LeftTotalBhNumber)) {
+
+                            document.all("HxNumber_" + i).value = v_LeftTotalBhNumber;
+                        }
+                        else {
+                            document.all("HxNumber_" + i).value = v_Hxnumber;
+                        }
+                    }
+                }
             }
         }
     </script>
@@ -259,6 +295,7 @@
                                             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
                                                 <tr>
                                                     <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
+                                                    <asp:TextBox ID="Tbx_Hx" runat="server" Style="display: none"></asp:TextBox>
                                                     <asp:TextBox ID="Tbx_Type" runat="server" Style="display: none"></asp:TextBox>
                                                     <asp:TextBox ID="Tbx_ContractState" runat="server" Style="display: none"></asp:TextBox>
                                                     <asp:TextBox ID="Tbx_ContractCheckYN" runat="server" Style="display: none"></asp:TextBox>

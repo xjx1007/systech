@@ -15,15 +15,20 @@
             window.close();
         }
 
-        function GetReturn(Value1, Value2, Value3, Value4) {
-
+        function GetReturn(Value1, Value2, Value3, Value4, Value5) {
+            var returnValue = "";
+            returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5;
             if (window.opener != undefined) {
-                window.opener.returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4;
+                window.opener.returnValue = returnValue;
+                <% if(Request.QueryString["callback"] != null && Request.QueryString["callback"] != ""){%>
+                window.opener.<%=Request.QueryString["callback"]%>(returnValue);
+                <%}else{%>
+                window.opener.SetReturnValueInOpenner_Suppliers(returnValue);
+                <%}%>
             }
             else {
-                window.returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4;
+                window.returnValue = returnValue;
             }
-
         }
     </script>
     <title>选择供应商</title>

@@ -17,15 +17,17 @@ namespace KNet.Model
         private string _pbm_parenttab;
         private string _pbm_url;
         private string _pbm_del;
-        private string _PBM_Icon;
-        /// <summary>
-        /// 
-        /// </summary>
-        public string PBM_Icon
-        {
-            set { _PBM_Icon = value; }
-            get { return _PBM_Icon; }
-        }
+        private int _pbm_order;
+        private DateTime _pbm_ctime;
+        private DateTime _pbm_mtime;
+        private string _pbm_creator;
+        private string _pbm_mender;
+        private int _pbm_colspan;
+        private int _pbm_rowspan;
+        private int _pbm_level;
+        private int _pbm_ischild;
+        private string _pbm_icon;
+
         /// <summary>
         /// 
         /// </summary>
@@ -81,6 +83,93 @@ namespace KNet.Model
         {
             set { _pbm_del = value; }
             get { return _pbm_del; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PBM_Order
+        {
+            set { _pbm_order = value; }
+            get { return _pbm_order; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime PBM_CTime
+        {
+            set { _pbm_ctime = value; }
+            get { return _pbm_ctime; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime PBM_MTime
+        {
+            set { _pbm_mtime = value; }
+            get { return _pbm_mtime; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PBM_Creator
+        {
+            set { _pbm_creator = value; }
+            get { return _pbm_creator; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PBM_Mender
+        {
+            set { _pbm_mender = value; }
+            get { return _pbm_mender; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PBM_ColSpan
+        {
+            set { _pbm_colspan = value; }
+            get { return _pbm_colspan; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PBM_RowSpan
+        {
+            set { _pbm_rowspan = value; }
+            get { return _pbm_rowspan; }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PBM_Level
+        {
+            set { _pbm_level = value; }
+            get { return _pbm_level; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PBM_IsChild
+        {
+            set { _pbm_ischild = value; }
+            get { return _pbm_ischild; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PBM_Icon
+        {
+            set { _pbm_icon = value; }
+            get { return _pbm_icon; }
         }
         #endregion Model
 

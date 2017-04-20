@@ -193,11 +193,11 @@ public partial class Knet_Common_SelectSuppliers : BasePage
         Sb_Return.Append("收货人: " + this.Dtb_Result.Rows[0][2].ToString() + "$");
         if (this.Dtb_Result.Rows[0][3].ToString() != "")
         {
-            Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][3].ToString() + "$");
+            Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][3].ToString() + "$");
         }
-        else
+        if (this.Dtb_Result.Rows[0][4].ToString() != "")
         {
-            Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
+            Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
         }
 
         //this.BeginQuery("Select * from Knet_Procure_OrdersList Where receiveSuppNo='" + SuppNoVale + "' Order by OrderDateTime desc");
@@ -216,7 +216,18 @@ public partial class Knet_Common_SelectSuppliers : BasePage
         string s_Return = "";
         try
         {
-            s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + this.KNetOddNumbers(s_ID) + "\", \"" + GetSuppNoAddress(s_ID) + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
+            //仓库
+            string s_WareHouseNo = "";
+            try
+            {
+                KNet.BLL.KNet_Sys_WareHouse Bll = new KNet.BLL.KNet_Sys_WareHouse();
+                KNet.Model.KNet_Sys_WareHouse Model = Bll.GetModelBySuppNo(s_ID);
+                s_WareHouseNo = Model.HouseNo;
+            }
+            catch
+            { }
+
+            s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + this.KNetOddNumbers(s_ID) + "\", \"" + GetSuppNoAddress(s_ID) + "\", \"" + s_WareHouseNo + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
         }
         catch { }
         return s_Return;

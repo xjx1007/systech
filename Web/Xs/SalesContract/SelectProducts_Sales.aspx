@@ -55,7 +55,35 @@
 
             <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="small">
                 <tr>
-                    <td>
+                      <td width="14%" valign="top">
+                <table border="0" cellspacing="0" cellpadding="3" width="100%" class="small">
+                    <tr>
+                        <td class="dvtTabCache" style="width: 10px" nowrap>
+                            &nbsp;
+                        </td>
+                        <td id="catalog_tab" class="dvtSelectedCell" align="center" nowrap>
+                            <a href="javascript:showProductCatalog()">产品分类</a>
+                        </td>
+                        <td class="dvtTabCache" style="width: 100%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <asp:TreeView ID="TreeView1" runat="server" ImageSet="XPFileExplorer" 
+                                NodeIndent="15" onselectednodechanged="TreeView1_SelectedNodeChanged">
+                                <HoverNodeStyle Font-Underline="True" ForeColor="#6666AA" />
+                                <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" 
+                                    HorizontalPadding="2px" NodeSpacing="0px" VerticalPadding="2px" />
+                                <ParentNodeStyle Font-Bold="False" />
+                                <SelectedNodeStyle BackColor="#B5B5B5" Font-Underline="False" 
+                                    HorizontalPadding="0px" VerticalPadding="0px" />
+                            </asp:TreeView>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="85%" align="left" valign="top" style="border-left: 2px dashed #cccccc;">
                         <asp:Label runat="server" ID="CustomerName"></asp:Label>
                         <!--GridView-->
                         <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" AllowSorting="True"
@@ -72,24 +100,18 @@
                                         <asp:CheckBox ID="Chbk" runat="server" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="名称" SortExpression="ProdutsName" ItemStyle-Width="60px"  HeaderStyle-Font-Size="12px"
+                                <asp:TemplateField HeaderText="名称" SortExpression="ProdutsName"  HeaderStyle-Font-Size="12px"
                                     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <%#base.Base_GetProdutsName_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="版本" SortExpression="ProductsEdition" ItemStyle-Width="150px" HeaderStyle-Font-Size="12px"
+                                <asp:TemplateField HeaderText="版本" SortExpression="ProductsPattern"  HeaderStyle-Font-Size="12px"
                                     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
-                                        <%#base.Base_GetProductsEdition(DataBinder.Eval(Container.DataItem, "ProductsBarCode"))%>
+                                        <%#DataBinder.Eval(Container.DataItem, "ProductsPattern")%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="Contract_SalesUnitPrice" ItemStyle-Font-Size="12px" ItemStyle-ForeColor="blue"
-                                    HeaderText="历史" HeaderStyle-Font-Size="12px" SortExpression="Contract_SalesUnitPrice"
-                                    HtmlEncode="false">
-                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                </asp:BoundField>
                                 <asp:TemplateField HeaderText="单价" SortExpression="Contract_SalesUnitPrice" ItemStyle-Width="50px" HeaderStyle-Font-Size="12px"
                                     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
@@ -98,12 +120,28 @@
                                             Text='<%#DataBinder.Eval(Container.DataItem, "Contract_SalesUnitPrice")%>'></pc:PTextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="总备货" HeaderStyle-Font-Size="12px"
+                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <pc:PTextBox ID="Tbx_TotalNumber" runat="server" CssClass="detailedViewTextBox"
+                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                            ValidType="int" Width="40px" Text='<%#DataBinder.Eval(Container.DataItem, "totalNumber")%>'></pc:PTextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="剩余备货" HeaderStyle-Font-Size="12px"
+                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <pc:PTextBox ID="Tbx_LeftNumber" runat="server" CssClass="detailedViewTextBox"
+                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                            ValidType="int" Width="40px" Text='<%#DataBinder.Eval(Container.DataItem, "totalNumber")%>'></pc:PTextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="数量" HeaderStyle-Font-Size="12px"
                                     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <pc:PTextBox ID="Tbx_Number" runat="server" CssClass="detailedViewTextBox"
                                             OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                            ValidType="int" Width="70px" Text=""></pc:PTextBox>
+                                            ValidType="int" Width="60px" Text=""></pc:PTextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="备品数量" HeaderStyle-Font-Size="12px"
@@ -111,64 +149,30 @@
                                     <ItemTemplate>
                                         <pc:PTextBox ID="Tbx_BNumber" runat="server" Text="" CssClass="detailedViewTextBox"
                                             OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                            ValidType="int" Width="70px"></pc:PTextBox>
+                                            ValidType="int" Width="60px"></pc:PTextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="计划单号" HeaderStyle-Font-Size="12px"
-                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <pc:PTextBox ID="Tbx_PlanNumber" runat="server" CssClass="detailedViewTextBox"
-                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                            Width="70px" Text=""></pc:PTextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="订单号" HeaderStyle-Font-Size="12px"
-                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <pc:PTextBox ID="Tbx_OrderNumber" runat="server" CssClass="detailedViewTextBox"
-                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                            Width="70px" Text=""></pc:PTextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="客户料号" HeaderStyle-Font-Size="12px"
-                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <pc:PTextBox ID="Tbx_MaterNumber" runat="server" CssClass="detailedViewTextBox"
-                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                            Width="70px" Text=""></pc:PTextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="客户型号" HeaderStyle-Font-Size="12px"
-                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <pc:PTextBox ID="Tbx_MaterPattern" runat="server" CssClass="detailedViewTextBox"
-                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                            Width="70px" Text=""></pc:PTextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="随货" HeaderStyle-Font-Size="12px" ItemStyle-Width="30px" ItemStyle-HorizontalAlign="Left"
+                                <asp:TemplateField HeaderText="确认" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                     HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
-                                        <asp:CheckBox runat="server" ID="Chk_IsFollow" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="备注" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px"
-                                    ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="Tbx_Remark" runat="server" Width="100px" Text="" CssClass="detailedViewTextBox"
-                                            OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"></asp:TextBox>
+                                        <%#base.Base_GetBasicCodeName("800",DataBinder.Eval(Container.DataItem, "KSP_isModiy").ToString())%>
+                                        
+                                        <asp:TextBox ID="Tbx_Remark" runat="server" Text=''
+                                            Style="display: none"></asp:TextBox>
                                         <asp:TextBox ID="Tbx_UnitValue" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsUnits")%>'
                                             Style="display: none"></asp:TextBox>
                                         <asp:TextBox ID="ProductsCostPrice" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsCostPrice")%>'
                                             Style="display: none"></asp:TextBox>
                                         <asp:TextBox ID="ProductsBarCode" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode")%>'
                                             Style="display: none"></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="样品" HeaderStyle-Font-Size="12px" ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Left"
-                                    HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <%#base.base_GetProductsDemoState(DataBinder.Eval(Container.DataItem, "KSP_SampleID").ToString())%>
+                                        <pc:PTextBox ID="Tbx_OrderNumber" runat="server" 
+                                            Style="display: none" Text=""></pc:PTextBox>
+                                        <pc:PTextBox ID="Tbx_MaterNumber" runat="server"
+                                            Style="display: none" Text=""></pc:PTextBox>
+                                        <pc:PTextBox ID="Tbx_MaterPattern" runat="server"
+                                            Style="display: none" Text=""></pc:PTextBox>
+                                        <pc:PTextBox ID="Tbx_PlanNumber" runat="server"
+                                            Style="display: none" Text=""></pc:PTextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 

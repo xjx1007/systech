@@ -26,7 +26,6 @@ namespace KNet.BLL
         /// </summary>
         public void Add(KNet.Model.KNet_WareHouse_AllocateList model)
         {
-            dal.Add(model);
             if (model.Arr_List != null)
             {
                 KNet.BLL.KNet_WareHouse_AllocateList_Details Bll_Details = new KNet_WareHouse_AllocateList_Details();
@@ -36,6 +35,17 @@ namespace KNet.BLL
                     Bll_Details.Add(model_Details);
                 }
             }
+
+            if (model.Arr_List1 != null)
+            {
+                KNet.BLL.KNet_WareHouse_AllocateList_CPDetails Bll_Details = new KNet_WareHouse_AllocateList_CPDetails();
+                for (int i = 0; i < model.Arr_List1.Count; i++)
+                {
+                    KNet.Model.KNet_WareHouse_AllocateList_CPDetails model_Details = (KNet.Model.KNet_WareHouse_AllocateList_CPDetails)model.Arr_List1[i];
+                    Bll_Details.Add(model_Details);
+                }
+            }
+            dal.Add(model);
         }
 
         /// <summary>
@@ -43,7 +53,6 @@ namespace KNet.BLL
         /// </summary>
         public void Update(KNet.Model.KNet_WareHouse_AllocateList model)
         {
-            dal.Update(model);
             if (model.Arr_List != null)
             {
                 KNet.BLL.KNet_WareHouse_AllocateList_Details Bll_Details = new KNet_WareHouse_AllocateList_Details();
@@ -54,6 +63,18 @@ namespace KNet.BLL
                     Bll_Details.Add(model_Details);
                 }
             }
+
+            if (model.Arr_List1 != null)
+            {
+                KNet.BLL.KNet_WareHouse_AllocateList_CPDetails Bll_Details = new KNet_WareHouse_AllocateList_CPDetails();
+                Bll_Details.DeleteByAllocateNo(model.AllocateNo);
+                for (int i = 0; i < model.Arr_List1.Count; i++)
+                {
+                    KNet.Model.KNet_WareHouse_AllocateList_CPDetails model_Details = (KNet.Model.KNet_WareHouse_AllocateList_CPDetails)model.Arr_List1[i];
+                    Bll_Details.Add(model_Details);
+                }
+            }
+            dal.Update(model);
         }
 
         /// <summary>

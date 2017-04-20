@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                出库管理 > <a class="hdrLink" href="KNet_WareHouse_DirectOut_Manage.aspx">出库管理</a>
+                仓库 > <a class="hdrLink" href="KNet_WareHouse_DirectOut_Manage.aspx">出库管理</a>
             </td>
             <td width="100%" nowrap>
                 <table border="0" cellspacing="0" cellpadding="0">

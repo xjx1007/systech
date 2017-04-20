@@ -44,9 +44,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Xs_Products_Prodocts_Demo(");
-            strSql.Append("XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address,XPD_ReplaceProductsBarCode,XPD_Order,XPD_Only)");
+            strSql.Append("XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address,XPD_ReplaceProductsBarCode,XPD_Order,XPD_Only,XPD_Place,XPD_Del)");
             strSql.Append(" values (");
-            strSql.Append("@XPD_ID,@XPD_ProductsBarCode,@XPD_SuppNo,@XPD_Price,@XPD_Number,@XPD_FaterBarCode,@XPD_IsOrder,@XPD_Address,@XPD_ReplaceProductsBarCode,@XPD_Order,@XPD_Only)");
+            strSql.Append("@XPD_ID,@XPD_ProductsBarCode,@XPD_SuppNo,@XPD_Price,@XPD_Number,@XPD_FaterBarCode,@XPD_IsOrder,@XPD_Address,@XPD_ReplaceProductsBarCode,@XPD_Order,@XPD_Only,@XPD_Place,@XPD_Del)");
             SqlParameter[] parameters = {
 					new SqlParameter("@XPD_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@XPD_ProductsBarCode", SqlDbType.VarChar,50),
@@ -58,7 +58,11 @@ namespace KNet.DAL
 					new SqlParameter("@XPD_Address", SqlDbType.VarChar,50),
 					new SqlParameter("@XPD_ReplaceProductsBarCode", SqlDbType.VarChar,50),
 					new SqlParameter("@XPD_Order", SqlDbType.Int),
-					new SqlParameter("@XPD_Only", SqlDbType.Int)};
+					new SqlParameter("@XPD_Only", SqlDbType.Int),
+					new SqlParameter("@XPD_Place", SqlDbType.VarChar,550),
+					new SqlParameter("@XPD_Del", SqlDbType.Int)
+                    
+                                        };
             parameters[0].Value = model.XPD_ID;
             parameters[1].Value = model.XPD_ProductsBarCode;
             parameters[2].Value = model.XPD_SuppNo;
@@ -70,8 +74,11 @@ namespace KNet.DAL
             parameters[8].Value = model.XPD_ReplaceProductsBarCode;
             parameters[9].Value = model.XPD_Order;
             parameters[10].Value = model.XPD_Only;
+            parameters[11].Value = model.XPD_Place;
+            parameters[12].Value = model.XPD_Del;
             
-
+            
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -110,6 +117,31 @@ namespace KNet.DAL
         }
 
         /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateDel(string[] s_IDs,string s_ProductsBarCode)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update Xs_Products_Prodocts_Demo set ");
+            strSql.Append(" XPD_Del=1 ");
+            strSql.Append(" where XPD_FaterBarCode='" + s_ProductsBarCode + "' and  XPD_ID not in (");
+            for (int i = 0; i < s_IDs.Length; i++)
+            {
+                strSql.Append("'"+s_IDs[i]+"',");
+            }
+
+            strSql.Append("'')");
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
         /// 删除一条数据
         /// </summary>
         public bool Delete(string XPD_FaterBarCode)
@@ -118,6 +150,7 @@ namespace KNet.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from Xs_Products_Prodocts_Demo ");
             strSql.Append(" where XPD_FaterBarCode=@XPD_FaterBarCode ");
+
             SqlParameter[] parameters = {
 					new SqlParameter("@XPD_FaterBarCode", SqlDbType.VarChar,50)};
             parameters[0].Value = XPD_FaterBarCode;
@@ -132,6 +165,35 @@ namespace KNet.DAL
                 return false;
             }
         }
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool DeleteByIDs(string[] s_IDs, string XPD_FaterBarCode)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from Xs_Products_Prodocts_Demo ");
+            strSql.Append(" where XPD_FaterBarCode=@XPD_FaterBarCode and  XPD_ID not in (");
+            for (int i = 0; i < s_IDs.Length; i++)
+            {
+                strSql.Append("'"+s_IDs[i]+"',");
+            }
+            strSql.Append("'')");
+            SqlParameter[] parameters = {
+					new SqlParameter("@XPD_FaterBarCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = XPD_FaterBarCode;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
         /// <summary>
         /// 批量删除数据
         /// </summary>
@@ -159,7 +221,7 @@ namespace KNet.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number from Xs_Products_Prodocts_Demo ");
+            strSql.Append("select  top 1 * from Xs_Products_Prodocts_Demo ");
             strSql.Append(" where XPD_ID=@XPD_ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@XPD_ID", SqlDbType.VarChar,50)};
@@ -200,6 +262,10 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["XPD_Only"] != null && ds.Tables[0].Rows[0]["XPD_Only"].ToString() != "")
                 {
                     model.XPD_Only = int.Parse(ds.Tables[0].Rows[0]["XPD_Only"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["XPD_AddDateTime"] != null && ds.Tables[0].Rows[0]["XPD_AddDateTime"].ToString() != "")
+                {
+                    model.XPD_AddDateTime = DateTime.Parse(ds.Tables[0].Rows[0]["XPD_AddDateTime"].ToString());
                 }
                 return model;
             }
@@ -280,11 +346,12 @@ namespace KNet.DAL
             strSql.Append(" FROM PB_Basic_ProductsClass c  left join (Select * from KNet_Sys_Products b join  Xs_Products_Prodocts_Demo a on a.XPD_ProductsBarCode=b.ProductsBarCode  " + strWhere + " ) bb on bb.ProductsType=c.PBP_ID  ");
 
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-            string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703044937286");
-            s_SonID = s_SonID.Replace("M130703044937286,","");
+            string s_SonID = Bll_ProductsDetails.GetSonIDs("M160901092354544");
+            s_SonID += "," + Bll_ProductsDetails.GetSonIDs("M160818111423567");
+            s_SonID = s_SonID.Replace(",M160818111423567", "");
             s_SonID = s_SonID.Replace(",", "','");
-            string s_sql = "  PBP_ID in ('" + s_SonID + "','M130704023830654') ";
-            strSql.Append(" where " + s_sql + "    Order by cast(PBP_Order as int)");
+            string s_sql = "  PBP_ID in ('" + s_SonID + "') ";
+            strSql.Append(" where " + s_sql + "    Order by PBP_Code,cast(PBP_Order as int)");
             return DbHelperSQL.Query(strSql.ToString());
         }
 

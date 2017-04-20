@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" EnableEventValidation="false"
     CodeFile="KnetProductsSetting_Add.aspx.cs" Inherits="Knet_Web_System_KnetProductsSetting_Add" %>
 
+<%@ Register Src="../Control/UploadListForProducts.ascx" TagName="CommentList" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,8 +20,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("SelectProduct.aspx", "", "dialogtop=150px;dialogleft=160px; dialogwidth=900px;dialogHeight=600px");
-
+            //var temp = window.showModalDialog("SelectProduct.aspx", "", "dialogtop=150px;dialogleft=160px; dialogwidth=900px;dialogHeight=500px");
+            var temp = window.open("SelectProduct.aspx", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Product(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split(",");
@@ -38,7 +41,10 @@
             today = new Date();
             intSeconds = today.getSeconds();
 
-            var tempd = window.showModalDialog("/Web/Common/SelectClientList.aspx?sID=" + document.all("Xs_ClientID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectClientList.aspx?sID=" + document.all("Xs_ClientID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectClientList.aspx?sID=" + document.all("Xs_ClientID").value + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Client(tempd) {
             if (tempd != undefined) {
 
                 var ss, s_Value, s_Name, i_row;
@@ -100,7 +106,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("/Web/Common/SelectSuppliersPriceForProducts.aspx", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1100px;dialogHeight=600px");
+            //var tempd = window.showModalDialog("/Web/Common/SelectSuppliersPriceForProducts.aspx", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1100px;dialogHeight=500px");
+            var tempd = window.open("/Web/Common/SelectSuppliersPriceForProducts.aspx", "选择供应商采购报价", "width=1100px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SuppliersPriceForProducts(tempd) {
             if (tempd != undefined) {
                 var ss, s_Value, s_Name, i_row, s_ID;
                 i_row = ProductsTable.rows.length;
@@ -167,7 +176,10 @@
             today = new Date();
             intSeconds = today.getSeconds();
             v_newNum = $("Products_BomNum").value;
-            var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&callBack=SetReturnValueInOpenner_ProductsDemo1", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ProductsDemo1(tempd) {
             if (tempd != undefined) {
                 var ss, s_Value, s_Name, i_row, s_ID;
                 i_row = ProductsBomTable.rows.length;
@@ -177,12 +189,19 @@
                     s_Value = ss[i].split(",");
                     var objRow = ProductsBomTable.insertRow(i_row);
                     v_newNum = parseInt(v_newNum) + i + 1;
+
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = "<font color=green>&nbsp;</font>";
                     objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"DemoOrder_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;width:50px\" value=' + v_newNum.toString() + ' >'
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '&nbsp;'
+
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '&nbsp;<A onclick=\"deleteRow2(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                    objCel.className = "tdcss";
+                    objCel.className = "ListHeadDetails";
+
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
                     objCel.innerHTML = '<input type=input Name=\"DemoProdoctsBarCode_' + v_newNum + '\" style=\"display:none;\" value=' + s_Value[0] + ' >' + s_Value[1];
@@ -192,15 +211,23 @@
 
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
-                    objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;\" value=' + s_Value[2] + '  >'
+                    objCel.innerHTML = '<input type=input Name=\"Place_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;width:300px\" value="" >'
 
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
-                    objCel.innerHTML = '<input type=input Name=\"DemoOrder_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;\" value=0 >'
+                    objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;width:50px\" value=' + s_Value[2] + '  >'
 
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
-                    objCel.innerHTML = '<input type=\"checkbox\" Name=\"DemoOnly_' + v_newNum.toString() + '\" checked>是 '
+                    objCel.innerHTML = '<input type=\"checkbox\" Name=\"DemoDel_' + v_newNum.toString() + '\" > '
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=\"checkbox\" Name=\"DemoOnly_' + v_newNum.toString() + '\" checked> '
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '&nbsp;'
                     i_row = i_row + 1;
                     s_ID = s_ID + s_Value[0] + ",";
                 }
@@ -212,7 +239,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&ProductsTypeID=" + ProductsTypeID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&ProductsTypeID=" + ProductsTypeID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&ProductsTypeID=" + ProductsTypeID + "", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ProductsDemo(tempd) {
             if (tempd != undefined) {
 
                 var ss, s_Value, s_Name, i_row, s_ID;
@@ -290,7 +320,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("SelectAlternativeProducts.aspx?ProductsType=" + document.all("Tbx_ProductsTypeNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("SelectAlternativeProducts.aspx?ProductsType=" + document.all("Tbx_ProductsTypeNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            var tempd = window.open("SelectAlternativeProducts.aspx?ProductsType=" + document.all("Tbx_ProductsTypeNo").value + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_AlternativeProducts(tempd) {
             if (tempd != undefined) {
                 var ss, s_Value, s_Name, i_row, s_ID;
                 i_row = ProductsAlternativeTable.rows.length;
@@ -353,8 +386,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ProductsClass(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split(",");
@@ -373,8 +408,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("SelectMouldProduct.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("SelectMouldProduct.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("SelectMouldProduct.aspx?ID=" + intSeconds + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_MouldProduct(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split(",");
@@ -414,22 +451,20 @@
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0" onload="detail_info_click('Div1');">
     <form id="form1" runat="server">
-        </div>
-    
-    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
-        <tr>
-            <td style="height: 2px"></td>
-        </tr>
-        <tr>
-            <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>产品字典 > <a class="hdrLink" href="KnetProductsSetting_Add.aspx">
-                <asp:Label runat="server" ID="Lbl_Title"></asp:Label></a>
-            </td>
-            <td width="100%" nowrap></td>
-        </tr>
-        <tr>
-            <td style="height: 2px"></td>
-        </tr>
-    </table>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>产品字典 > <a class="hdrLink" href="KnetProductsSetting_Add.aspx">
+                    <asp:Label runat="server" ID="Lbl_Title"></asp:Label></a>
+                </td>
+                <td width="100%" nowrap></td>
+            </tr>
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+        </table>
         <table border="0" cellspacing="0" cellpadding="0" width="98%" align="center">
             <tr>
                 <td valign="top">
@@ -533,6 +568,38 @@
                                                                         OnBlur="this.className='detailedViewTextBox'" Width="200px"></asp:TextBox>
                                                                 </td>
                                                             </tr>
+
+                                                            <tr>
+
+                                                                <td width="13%" align="right" class="dvtCellLabel">客户物料名称：
+                                                                </td>
+                                                                <td width="30%" align="left" class="dvtCellInfo">
+                                                                    <asp:TextBox ID="Tbx_CustomerProductsName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                        OnBlur="this.className='detailedViewTextBox'" Width="200px" MaxLength="40"></asp:TextBox>
+                                                                </td>
+                                                                <td align="right" class="dvtCellLabel">客户物料代码:
+                                                                </td>
+                                                                <td align="left" class="dvtCellInfo">
+                                                                    <asp:TextBox ID="Tbx_CustomerProductsCode" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                        OnBlur="this.className='detailedViewTextBox'" Width="200px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+
+                                                                <td width="13%" align="right" class="dvtCellLabel">客户规格型号：
+                                                                </td>
+                                                                <td width="30%" align="left" class="dvtCellInfo">
+                                                                    <asp:TextBox ID="Tbx_CustomerProductsEdition" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                        OnBlur="this.className='detailedViewTextBox'" Width="200px" MaxLength="40"></asp:TextBox>
+                                                                </td>
+                                                                <td width="13%" align="right" class="dvtCellLabel">包装数：
+                                                                </td>
+                                                                <td width="30%" align="left" class="dvtCellInfo">
+                                                                    <asp:TextBox ID="Tbx_BZNumber" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                        OnBlur="this.className='detailedViewTextBox'" Width="200px" MaxLength="40"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+
                                                             <tr>
                                                                 <td align="right" class="dvtCellLabel">单 位：
                                                                 </td>
@@ -584,6 +651,53 @@
                                                                     <asp:CheckBox ID="Chk_isModiy" runat="server" Checked />
                                                                 </td>
                                                             </tr>
+
+
+                                                            <tr>
+                                                                <td height="25" align="right" class="dvtCellLabel">研发工程师:
+                                                                </td>
+                                                                <td align="left" class="dvtCellInfo">
+                                                                    <asp:DropDownList runat="server" ID="Ddl_RDPerson"></asp:DropDownList>
+                                                                </td>
+                                                                <td height="25" align="right" class="dvtCellLabel">采购方式:
+                                                                </td>
+                                                                <td align="left" class="dvtCellInfo">
+                                                                    <asp:RadioButtonList runat="server" ID="Chk_CgType"></asp:RadioButtonList>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                            <tr runat="server" visible="false"> 
+                                                                <td
+                                                                    height="25" align="right" class="dvtCellLabel">品牌/厂家:
+                                                                </td>
+                                                                <td align="left" class="dvtCellInfo" style="text-align: left" colspan="3">
+                                                                    <table id="Table1" width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="ListDetails">
+                                                                        <tr id="tr2">
+                                                                            <td align="center" class="ListHead">品牌/厂家
+                                                                            </td>
+                                                                            <td align="center" class="ListHead">参数
+                                                                            </td>
+                                                                            <td align="center" class="ListHead">工具
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="left" class="ListHeadDetails">
+                                                                                <asp:TextBox ID="Tbx_BrandID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                                                <asp:TextBox ID="Tbx_BrandName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                                    OnBlur="this.className='detailedViewTextBox'" Width="200px"></asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" class="ListHeadDetails">
+                                                                                <asp:TextBox ID="Tbx_BrandRemarks" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                                    OnBlur="this.className='detailedViewTextBox'" 
+                                                                        TextMode="MultiLine" Width="340px" Height="30px"></asp:TextBox>
+                                                                            </td>
+                                                                            <td align="left" class="ListHeadDetails">
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
                                                             <tr>
                                                                 <td align="right" class="dvtCellLabel">参数描述:
                                                                 </td>
@@ -598,254 +712,211 @@
                                                                         ControlToValidate="ProductsDescription" ValidationExpression="^(\s|\S){0,300}$"
                                                                         ErrorMessage="简单描述字太多" Display="dynamic"></asp:RegularExpressionValidator>
                                                                 </td>
-                                                                <asp:TextBox ID="ProductsDetailDescription" runat="server" Style="display: none;"></asp:TextBox>
                                                             </tr>
+                                                            <tr>
+                                                                <td colspan="4">
 
+                                                                    <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
+                                                                </td>
+                                                            </tr>
                                                         </table>
                                                     </div>
-                                                </td>
-                                            </tr>
+                </td>
+            </tr>
 
 
-                                            <tr style="height: 16px; cursor: pointer;" class="detail-content-heading" onmouseover="this.className='detail-content-heading-over';" onmouseout="this.className='detail-content-heading'" onclick="detail_info_click('Div1');">
-                                                <!-- windLayerHeadingTr -->
-                                                <td colspan="4" class="" valign="middle">&nbsp;&nbsp;其他信息&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer; height: 16px; width: 30px;" onclick="detail_info_click('Div1');">
-                                                    <img align="absmiddle" id="Div1_IMG" src="/themes/softed/images/arrow-list-down.gif" border="0">
-                                                </span>
+            <tr style="height: 16px; cursor: pointer;" class="detail-content-heading" onmouseover="this.className='detail-content-heading-over';" onmouseout="this.className='detail-content-heading'" onclick="detail_info_click('Div1');">
+                <!-- windLayerHeadingTr -->
+                <td colspan="4" class="" valign="middle">&nbsp;&nbsp;其他信息&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer; height: 16px; width: 30px;" onclick="detail_info_click('Div1');">
+                    <img align="absmiddle" id="Div1_IMG" src="/themes/softed/images/arrow-list-down.gif" border="0">
+                </span>
 
-                                                    &nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4">
-                                                    <div id="Div1">
-                                                        <table width="100%" cellspacing="0" cellpadding="0">
+                    &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div id="Div1">
+                        <table width="100%" cellspacing="0" cellpadding="0">
 
-                                                            <tr>
-                                                                <td align="right" class="dvtCellLabel">销售价:
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
-                                                                    <asp:TextBox ID="ProductsSellingPrice" runat="server" Text="0.00" MaxLength="9" CssClass="detailedViewTextBox"
-                                                                        OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                                        Width="200px"></asp:TextBox>(<font color="red">*</font>)<asp:RequiredFieldValidator
-                                                                            ID="RequiredFieldValidator6" runat="server" ErrorMessage="建议售价非空" ControlToValidate="ProductsSellingPrice"
-                                                                            Display="Dynamic"></asp:RequiredFieldValidator><asp:RegularExpressionValidator ID="RegularExpressionValidator2"
-                                                                                runat="server" ErrorMessage="货币形式！" ControlToValidate="ProductsSellingPrice"
-                                                                                ValidationExpression="^(-)?(\d+|,\d{6})+(\.\d{0,6})?$" Display="Dynamic"></asp:RegularExpressionValidator>
-                                                                </td>
-                                                                <td align="right" class="dvtCellLabel">采购参考成本：
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
-                                                                    <asp:TextBox ID="ProductsCostPrice" runat="server" Text="0.00" MaxLength="9" CssClass="detailedViewTextBox"
-                                                                        OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                                        Width="200px"></asp:TextBox>(<font color="red">*</font>)<asp:RequiredFieldValidator
-                                                                            ID="RequiredFieldValidator2" runat="server" ErrorMessage="建议售价非空" ControlToValidate="ProductsCostPrice"
-                                                                            Display="Dynamic"></asp:RequiredFieldValidator><asp:RegularExpressionValidator ID="RegularExpressionValidator1"
-                                                                                runat="server" ErrorMessage="货币形式！" ControlToValidate="ProductsCostPrice" ValidationExpression="^(-)?(\d+|,\d{6})+(\.\d{0,6})?$"
-                                                                                Display="Dynamic"></asp:RegularExpressionValidator>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td height="25" align="right" class="dvtCellLabel">是否有图片:
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
-                                                                    <asp:CheckBox ID="ProductsPic" runat="server" OnCheckedChanged="ProductsPic_CheckedChanged"
-                                                                        AutoPostBack="true" /><font color="gray">（上传图片的请打勾）</font>
-                                                                </td>
-                                                                <td align="right" class="dvtCellLabel">加工费：
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
-                                                                    <pc:PTextBox ID="Tbx_HandPrice" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                        OnBlur="this.className='detailedViewTextBox'" Width="200px" runat="server" Text="0.00" ValidType="Float"></pc:PTextBox>
-                                                                </td>
-                                                            </tr>
-                                                            <tr id="AddPic" runat="server" visible="false">
-                                                                <td height="25" align="right" class="dvtCellLabel">请选择图片:
-                                                                </td>
-                                                                <td colspan="3" align="left" class="dvtCellInfo">
-                                                                    <asp:Label ID="Image1Big" runat="server" Text="" Visible="false"></asp:Label>
-                                                                    <asp:Image ID="Image1" runat="server" Width="95px" Height="75px" />&nbsp;<input id="uploadFile"
-                                                                        type="file" runat="server" class="Boxx" size="30" />&nbsp;<input id="button" type="button"
-                                                                            value="上传图片" runat="server" class="Btt" onserverclick="button_ServerClick" causesvalidation="false" />
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td height="25" align="right" class="dvtCellLabel">添加员：
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
-                                                                    <asp:TextBox ID="ProductsAddMan" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                        OnBlur="this.className='detailedViewTextBox'" ReadOnly="true" Width="200px"></asp:TextBox>
-                                                                    <asp:Label ID="ProductsAddMantxt" runat="server" Visible="false"></asp:Label>
-                                                                </td>
-                                                                <td align="right" class="dvtCellLabel">添加时间：
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
-                                                                    <asp:TextBox ID="ProductsAddTime" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                        OnBlur="this.className='detailedViewTextBox'" ReadOnly="true" Width="200px"></asp:TextBox>
-                                                                </td>
-                                                            </tr>
-                                                            <asp:TextBox ID="Tbx_num" Text="0" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                            <tr>
-                                                                <td height="25" align="right" class="dvtCellLabel">附件资料:
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo" style="text-align: left" colspan="3">
-                                                                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                                                        <tr id="tr5">
-                                                                            <td align="center" class="dvtCellLabel">工具
-                                                                            </td>
-                                                                            <td align="center" class="dvtCellLabel">名称
-                                                                            </td>
-                                                                            <td align="center" class="dvtCellLabel" colspan="2">资料
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr id="tr4">
-                                                                            <td colspan="4">
-                                                                                <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="dvtCellLabel">名称:
-                                                                </td>
-                                                                <td class="dvtCellInfo">
-                                                                    <pc:PTextBox runat="server" ID="Tbx_PicName" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                        OnBlur="this.className='detailedViewTextBox'" Width="200px"></pc:PTextBox>
-                                                                </td>
-                                                                <td class="dvtCellLabel">上传:
-                                                                </td>
-                                                                <td class="dvtCellInfo">
-                                                                    <input id="uploadFile1" type="file" runat="server" class="Boxx" size="30" />&nbsp;
-                                            <input id="button3" type="button" value="上传" runat="server" class="crmbutton small save"
-                                                onserverclick="button_ServerClick1" causesvalidation="false" />
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <asp:TextBox ID="Xs_ClientID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox><td
-                                                                    height="25" align="right" class="dvtCellLabel">选择销售客户:
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo" style="text-align: left" colspan="3">
-                                                                    <table id="myTable" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                                                        <tr id="tr1">
-                                                                            <td align="center" class="dvtCellLabel">工具
-                                                                            </td>
-                                                                            <td align="center" class="dvtCellLabel">客户编号
-                                                                            </td>
-                                                                            <td align="center" class="dvtCellLabel">客户名称
-                                                                            </td>
-                                                                        </tr>
-                                                                        <%=s_MyTable_Detail %>
-                                                                    </table>
-                                                                    <input id=" btnGetReturnValue" class="crmbutton small create" onclick="return btnGetReturnValue_onclick()"
-                                                                        type="button" value="选择客户" />
-                                                                </td>
-                                                            </tr>
+                            <tr>
+                                <td align="right" class="dvtCellLabel">销售价:
+                                </td>
+                                <td align="left" class="dvtCellInfo">
+                                    <asp:TextBox ID="ProductsSellingPrice" runat="server" Text="0.00" MaxLength="9" CssClass="detailedViewTextBox"
+                                        OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                        Width="200px"></asp:TextBox>(<font color="red">*</font>)<asp:RequiredFieldValidator
+                                            ID="RequiredFieldValidator6" runat="server" ErrorMessage="建议售价非空" ControlToValidate="ProductsSellingPrice"
+                                            Display="Dynamic"></asp:RequiredFieldValidator><asp:RegularExpressionValidator ID="RegularExpressionValidator2"
+                                                runat="server" ErrorMessage="货币形式！" ControlToValidate="ProductsSellingPrice"
+                                                ValidationExpression="^(-)?(\d+|,\d{6})+(\.\d{0,6})?$" Display="Dynamic"></asp:RegularExpressionValidator>
+                                </td>
+                                <td align="right" class="dvtCellLabel">采购参考成本：
+                                </td>
+                                <td align="left" class="dvtCellInfo">
+                                    <asp:TextBox ID="ProductsCostPrice" runat="server" Text="0.00" MaxLength="9" CssClass="detailedViewTextBox"
+                                        OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                        Width="200px"></asp:TextBox>(<font color="red">*</font>)<asp:RequiredFieldValidator
+                                            ID="RequiredFieldValidator2" runat="server" ErrorMessage="建议售价非空" ControlToValidate="ProductsCostPrice"
+                                            Display="Dynamic"></asp:RequiredFieldValidator><asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+                                                runat="server" ErrorMessage="货币形式！" ControlToValidate="ProductsCostPrice" ValidationExpression="^(-)?(\d+|,\d{6})+(\.\d{0,6})?$"
+                                                Display="Dynamic"></asp:RegularExpressionValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="25" align="right" class="dvtCellLabel">是否有图片:
+                                </td>
+                                <td align="left" class="dvtCellInfo">
+                                    <asp:CheckBox ID="ProductsPic" runat="server" OnCheckedChanged="ProductsPic_CheckedChanged"
+                                        AutoPostBack="true" /><font color="gray">（上传图片的请打勾）</font>
+                                </td>
+                                <td align="right" class="dvtCellLabel">加工费：
+                                </td>
+                                <td align="left" class="dvtCellInfo">
+                                    <pc:PTextBox ID="Tbx_HandPrice" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                        OnBlur="this.className='detailedViewTextBox'" Width="200px" runat="server" Text="0.00" ValidType="Float"></pc:PTextBox>
+                                </td>
+                            </tr>
+                            <tr id="AddPic" runat="server" visible="false">
+                                <td height="25" align="right" class="dvtCellLabel">请选择图片:
+                                </td>
+                                <td colspan="3" align="left" class="dvtCellInfo">
+                                    <asp:Label ID="Image1Big" runat="server" Text="" Visible="false"></asp:Label>
+                                    <asp:Image ID="Image1" runat="server" Width="95px" Height="75px" />&nbsp;<input id="uploadFile"
+                                        type="file" runat="server" class="Boxx" size="30" />&nbsp;<input id="button" type="button"
+                                            value="上传图片" runat="server" class="Btt" onserverclick="button_ServerClick" causesvalidation="false" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="25" align="right" class="dvtCellLabel">添加员：
+                                </td>
+                                <td align="left" class="dvtCellInfo">
+                                    <asp:TextBox ID="ProductsAddMan" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                        OnBlur="this.className='detailedViewTextBox'" ReadOnly="true" Width="200px"></asp:TextBox>
+                                    <asp:Label ID="ProductsAddMantxt" runat="server" Visible="false"></asp:Label>
+                                </td>
+                                <td align="right" class="dvtCellLabel">添加时间：
+                                </td>
+                                <td align="left" class="dvtCellInfo">
+                                    <asp:TextBox ID="ProductsAddTime" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                        OnBlur="this.className='detailedViewTextBox'" ReadOnly="true" Width="200px"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <asp:TextBox ID="Xs_ClientID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox><td
+                                    height="25" align="right" class="dvtCellLabel">选择销售客户:
+                                </td>
+                                <td align="left" class="dvtCellInfo" style="text-align: left" colspan="3">
+                                    <table id="myTable" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                        <tr id="tr1">
+                                            <td align="center" class="dvtCellLabel">工具
+                                            </td>
+                                            <td align="center" class="dvtCellLabel">客户编号
+                                            </td>
+                                            <td align="center" class="dvtCellLabel">客户名称
+                                            </td>
+                                        </tr>
+                                        <%=s_MyTable_Detail %>
+                                    </table>
+                                    <input id=" btnGetReturnValue" class="crmbutton small create" onclick="return btnGetReturnValue_onclick()"
+                                        type="button" value="选择客户" />
+                                </td>
+                            </tr>
 
-                                                        </table>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </asp:Panel>
+
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </asp:Panel>
 
 
                                         <tr style="height: 16px; cursor: pointer;" class="detail-content-heading" onmouseover="this.className='detail-content-heading-over';" onmouseout="this.className='detail-content-heading'" onclick="detail_info_click('Div3');">
                                             <!-- windLayerHeadingTr -->
-                                            <td colspan="4" class="" valign="middle">&nbsp;&nbsp;BOM&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer; height: 16px; width: 30px;" onclick="detail_info_click('Div3');">
+                                            <td colspan="2" class="" valign="middle">&nbsp;&nbsp;BOM&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer; height: 16px; width: 30px;" onclick="detail_info_click('Div3');">
                                                 <img align="absmiddle" id="Div3_IMG" src="/themes/softed/images/arrow-list-down.gif" border="0">
                                             </span>
 
                                                 &nbsp;</td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="4">
-                                                <div id="Div3" runat="server">
 
-                                                    <table width="100%" cellspacing="0" cellpadding="0">
 
-                                                        <tr>
-                                                            <asp:TextBox ID="Products_BomNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
-                                                            <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox><td
-                                                                height="25" align="right" class="dvtCellLabel">BOM:
-                                                            </td>
-                                                            <td align="left" class="dvtCellInfo" style="text-align: left">
-                                                                <table id="ProductsBomTable" width="100%" border="0" align="center" cellpadding="0"
-                                                                    cellspacing="0" class="ListDetails">
-                                                                    <tr id="tr3">
-                                                                        <td align="center" class="ListHead">类别
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">工具
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">产品名称
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">版本号
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">数量
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">优些等级
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">是否可替代
-                                                                        </td>
-                                                                        <td align="center" class="ListHead">当前采购<br/>使用物料
-                                                                        </td>
-                                                                    </tr>
-                                                                    <%=s_ProductsTable_BomDetail %>
-                                                                    <tr id="tr9">
-                                                            </td>
-                                                            <input id="Button4" runat="server" class="crmbutton small create" onclick="return btnGetBomProducts_onclick1()" type="button"
-                                                                value="选择材料" />
+            <tr>
+                <td colspan="2">
+                    <div id="Div3" runat="server">
+
+                        <table width="100%" cellspacing="0" cellpadding="0">
+
+                            <tr>
+                                <asp:TextBox ID="Products_BomNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
+                                <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                <td align="left" class="dvtCellInfo" style="text-align: left">
+                                    <table id="ProductsBomTable" width="100%" border="0" align="center" cellpadding="0"
+                                        cellspacing="0" class="ListDetails">
+                                        <tr id="tr3">
+                                            <td align="center" class="ListHead">序号
+                                            </td>
+                                            <td align="center" class="ListHead">类别
+                                            </td>
+                                            <td align="center" class="ListHead">工具
+                                            </td>
+                                            <td align="center" class="ListHead">产品名称
+                                            </td>
+                                            <td align="center" class="ListHead">版本号
+                                            </td>
+                                            <td align="center" class="ListHead">位号
+                                            </td>
+                                            <td align="center" class="ListHead">数量
+                                            </td>
+                                            <td align="center" class="ListHead">停用
+                                            </td>
+                                            <td align="center" class="ListHead">可替代
                                             </td>
                                         </tr>
+                                        <%=s_ProductsTable_BomDetail %>
+                                        <asp:Label runat="server" ID="Lbl_Bom" Visible="false"></asp:Label>
+
+
                                     </table>
+                                </td>
+                            </tr>
+                            
+                            <tr id="tr9">
+                                <td colspan="4">
+                                    <input id="Button4" runat="server" class="crmbutton small create" onclick="return btnGetBomProducts_onclick1()" type="button" value="选择材料" />
+
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </td>
             </tr>
-            <asp:Panel Visible="false" runat="server">
-                <tr>
-                    <asp:TextBox ID="Products_ID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox><td
-                        height="25" align="right" class="dvtCellLabel">选择配件:
-                    </td>
-                    <td align="left" class="dvtCellInfo" style="text-align: left">
-                        <table id="ProductsTable" width="100%" border="0" align="center" cellpadding="0"
-                            cellspacing="0" class="ListDetails">
-                            <tr id="tr2">
-                                <td align="center" class="ListHead">工具
+
+                            <asp:Panel runat="server" ID="Pan_Update" Visible="false">
+                            <tr>
+                                <td width="16%" height="25" align="right" class="dvtCellLabel">明细：
                                 </td>
-                                <td align="center" class="ListHead">产品名称
-                                </td>
-                                <td align="center" class="ListHead">版本号
-                                </td>
-                                <td align="center" class="ListHead">供应商
-                                </td>
-                                <td align="center" class="ListHead">单价
-                                </td>
-                                <td align="center" class="ListHead">数量
-                                </td>
-                                <td align="center" class="ListHead">是否采购
-                                </td>
-                                <td align="center" class="ListHead">发货地址
+                                <td class="dvtCellInfo" align="left" colspan="3">
+
+                                    <asp:TextBox ID="ProductsDetailDescription" runat="server" Style="display: none;"></asp:TextBox>
+                                    <iframe src='../eWebEditor/ewebeditor.htm?id=ProductsDetailDescription&style=gray'
+                                        frameborder='0' scrolling='no' width='620' height='350'></iframe>
                                 </td>
                             </tr>
-                            <%=s_ProductsTable_Detail %>
-                        </table>
-                        <input id="Button2" class="crmbutton small create" onclick="return btnGetProducts_onclick()" type="button"
-                            value="选择配件" />
-                    </td>
-                </tr>
-            </asp:Panel>
+                                </asp:Panel>
+
             <tr>
-                <td colspan="4" class="detailedViewHeader">
-                    <b>适用遥控器:</b>
+                <td colspan="2" class="detailedViewHeader">
+                    <b>适用成品:</b>
                     <asp:TextBox ID="TextBox1" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                 </td>
             </tr>
 
             <tr>
-                <td align="left" class="dvtCellInfo" style="text-align: left" colspan="4">
+                <td align="left" class="dvtCellInfo" style="text-align: left" colspan="2">
                     <table id="Table2" width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="ListDetails">
                         <tr id="tr8">
+                            <td align="center" class="ListHead">选择
+                            </td>
                             <td align="center" class="ListHead">产品名称
                             </td>
                             <td align="center" class="ListHead">版本号
@@ -859,7 +930,9 @@
                             <td align="center" class="ListHead">是否采购
                             </td>
                         </tr>
-                        <%=s_ProductsRC %>
+                                        <asp:Label runat="server" ID="Lbl_ProductsRC"></asp:Label>
+                    <asp:TextBox ID="Tbx_RCNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
+
                     </table>
                 </td>
             </tr>
@@ -871,6 +944,7 @@
                     <asp:Label ID="Lbl_Detail" runat="server"></asp:Label>
                 </td>
             </tr>
+                                        <asp:Panel runat="server" ID="Pan_D" Visible="false">
             <tr>
                 <td height="25" align="right" class="dvtCellLabel">操作:
                 </td>
@@ -879,7 +953,7 @@
                     <asp:CheckBox ID="Chk_IsReplace" runat="server" />替换<br />
                     <asp:CheckBox ID="Chk_Delete" runat="server" />删除
                 </td>
-            </tr>
+            </tr></asp:Panel>
             <tr>
                 <asp:TextBox ID="Products_AlternativeNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
 
@@ -944,21 +1018,22 @@
                 <td colspan="2" align="center">
                     <asp:TextBox runat="server" ID="Tbx_SampleID" CssClass="Custom_Hidden"></asp:TextBox>
                     <asp:TextBox runat="server" ID="Tbx_ID" CssClass="Custom_Hidden"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Tbx_Type" CssClass="Custom_Hidden"></asp:TextBox>
                     <asp:Button ID="Button1" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
                         class="crmbutton small save" OnClick="Button1_Click" Style="width: 55px; height: 33px;" />
                     <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                         type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                 </td>
             </tr>
-        </table>
-        </td>
+            </table>
+                                </td>
                             </tr>
                         </table>
                 </td>
                 <td align="right" valign="top">
                     <img src="/themes/softed/images/showPanelTopRight.gif">
                 </td>
-        </tr>
+            </tr>
         </table>
     </form>
 </body>

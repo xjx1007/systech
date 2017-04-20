@@ -27,7 +27,8 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
 
             KNet.BLL.PB_Basic_ProductsClass bll = new KNet.BLL.PB_Basic_ProductsClass();
-        
+            base.Base_DropBasicCodeBind(this.Ddl_Type, "801");
+            AdminloginMess AM = new AdminloginMess();
             if (s_ID != "")
             {
                 KNet.Model.PB_Basic_ProductsClass Model = bll.GetModel(s_ID);
@@ -37,24 +38,31 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
                     this.Tbx_FaterName.Text = bll.GetProductsName(s_ID);
                     this.Tbx_Code.Text = bll.GetMaxCode(s_ID);
                     this.Tbx_Order.Text = bll.GetMaxOrder(s_ID);
+                    this.Ddl_Type.SelectedValue = "0";
+                }
+                else if (s_Type != "D")
+                {
+                    bll.Delete(s_ID);
+                    AM.Add_Logs("删除分类" + s_ID + Model.PBP_Name);
+                    AlertAndClose("删除成功！");
                 }
                 else
                 {
                     this.Tbx_FaterID.Text = Model.PBP_FaterID;
                     this.Tbx_FaterName.Text = bll.GetProductsName(Model.PBP_FaterID);
                     this.Tbx_Code.Text = Model.PBP_Code;
-                    this.Tbx_Order.Text = Model.PBP_Order;
+                    this.Tbx_Order.Text = Model.PBP_Order.ToString();
                     this.Tbx_Name.Text = Model.PBP_Name;
                     this.Tbx_ID.Text = s_ID;
                     this.Tbx_Days.Text = Model.PBP_Days.ToString();
                     this.Tbx_OrderDays.Text = Model.PBP_OrderDays.ToString();
-                    
+                    this.Ddl_Type.SelectedValue = Model.PBP_Type.ToString();
                 }
             }
         }
     }
 
-    private void ShowInfo(string s_ID,string s_Code)
+    private void ShowInfo(string s_ID, string s_Code)
     {
         KNet.BLL.PB_Basic_ProductsClass bll = new KNet.BLL.PB_Basic_ProductsClass();
 
@@ -76,22 +84,30 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
             model.PBP_Code = this.Tbx_Code.Text;
             model.PBP_FaterID = this.Tbx_FaterID.Text;
             model.PBP_Name = this.Tbx_Name.Text;
-            model.PBP_Order = this.Tbx_Order.Text;
+            try
+            {
+                model.PBP_Order = int.Parse(this.Tbx_Order.Text);
+            }
+            catch
+            {
+                model.PBP_Order = 0;
+            }
             model.PBP_Creator = AM.KNet_StaffNo;
             model.PBP_CTime = DateTime.Now;
             model.PBP_Mender = AM.KNet_StaffNo;
             model.PBP_MTime = DateTime.Now;
-            string s_Days=this.Tbx_Days.Text==""?"0":this.Tbx_Days.Text;
+            string s_Days = this.Tbx_Days.Text == "" ? "0" : this.Tbx_Days.Text;
             model.PBP_Days = int.Parse(s_Days);
             string s_OrderDays = this.Tbx_Days.Text == "" ? "0" : this.Tbx_OrderDays.Text;
             model.PBP_OrderDays = int.Parse(s_OrderDays);
+            model.PBP_Type = int.Parse(this.Ddl_Type.SelectedValue);
             return true;
         }
         catch
         {
             return false;
         }
-       
+
     }
 
     protected void Btn_SaveOnClick(object sender, EventArgs e)
@@ -110,7 +126,7 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
             try
             {
                 bll.Update(model);
-                AM.Add_Logs("付款计划修改" );
+                AM.Add_Logs("付款计划修改");
                 AlertAndRedirect("修改成功！", "PB_Basic_ProductsClass_List.aspx");
             }
             catch { }

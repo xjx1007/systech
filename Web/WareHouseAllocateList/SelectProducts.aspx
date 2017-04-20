@@ -74,7 +74,7 @@ if(http_request.readyState==4){
 
 <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="small">
       <tr>
-    <td height="25" width="35%"><asp:Button ID="Button2" runat="server"  CssClass="crmbutton small save" Text="确定选择" OnClick="Button1_Click" style="width: 55px;height: 33px;"  />
+    <td height="25" width="35%"><asp:Button ID="Button2" runat="server"  CssClass="crmbutton small save" Text="确定选择" OnClick="Button1_Click" Width="79px"  />
     </td>
       <td width="65%" align="right" >关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="100px"></asp:TextBox>&nbsp;<asp:Button  ID="Button1" runat="server" Text="产品筛选"  CssClass="crmbutton small create" OnClick="Button1_Click1" /></td>
   </tr>

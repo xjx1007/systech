@@ -137,7 +137,7 @@ public partial class Web_Sales_Procure_ShipCheck_CView : BasePage
             for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
             {
                 s_MyTable_Detail += " <tr>";
-                if (Model.COC_Type == "0")//遥控器对账
+                if (Model.COC_Type == "0")//成品对账
                 {
                     KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll_DirectOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
                     KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DirectOutDetails = Bll_DirectOutDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());

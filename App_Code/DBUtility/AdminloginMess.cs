@@ -39,6 +39,8 @@ namespace KNet.DBUtility
         private int _StaffCatalogue;            //用户默认打开莱单栏
         private int _KRS_IsWeb;            //是否外网登陆
 
+        private string _ProductsType;            //是否外网登陆
+
 
         private string WareHouse_ForSQL;    //受权仓库集的SQL语句
         private string ClientList_ForSQL;    //指派的客户的SQL语句
@@ -109,6 +111,7 @@ namespace KNet.DBUtility
                     this._StaffLanguage = model.StaffLanguage;
                     this._StaffCatalogue = model.StaffCatalogue;
                     this._KRS_IsWeb = model.KRS_IsWeb;
+                    this._ProductsType = model.ProductsType;
                     if (model.isSale == 1)
                     {
                         IsSale = true;
@@ -130,7 +133,7 @@ namespace KNet.DBUtility
                 }
             }
             catch
-            {
+             {
                 throw;
             }
         }
@@ -715,6 +718,15 @@ namespace KNet.DBUtility
                 return StaffName;
             }
         }
+
+        public string ProductsType
+        {
+            get
+            {
+                return _ProductsType;
+            }
+        }
+        
         /// <summary>
         /// 本次登录IP地址 
         /// </summary>
@@ -970,7 +982,36 @@ namespace KNet.DBUtility
                 }
             }
         }
-
+        
+        //==================================
+        /// <summary>
+        /// 系统下载记录
+        /// </summary>
+        /// <param name="P_str_logContent">日志内容</param>
+        
+        public void Add_DownRecord(string s_FID)
+        {
+            string StaffNoss = StaffNo;
+            if (StaffNoss == null || StaffNoss == "") { StaffNoss = "未知用户"; }
+            if (KNet_Sys_LogsYN == true)
+            {
+                using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+                {
+                    BasePage base1=new BasePage();
+                    string s_Dosql = "insert into PB_Basic_Attachment_DownRecord values('" + base1.GetMainID() + "','" + s_FID + "',GetDate(),'" + StaffNoss + "','" + System.Web.HttpContext.Current.Request.UserHostAddress.ToString().Trim() + "')";
+                   
+                    try
+                    {
+                        DbHelperSQL.ExecuteSql(s_Dosql);
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+        
         //=========================================================================
         /// <summary>
         /// true 受权正式版

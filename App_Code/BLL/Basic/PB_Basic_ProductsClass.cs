@@ -39,10 +39,10 @@ namespace KNet.BLL
                 if (i_Type == 0)
                 {
                     s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1'>\n";
-                    s_Return += "<img src='../../themes/softed/images/Rolesadd.gif' align='absmiddle' border='0' alt='添加分类'title='添加分类'></a>\n";
-                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=M'>\n";
+                    s_Return += "<img src='../../themes/softed/images/Rolesadd.gif' align='absmiddle' border='0' alt='添加分类'title='添加分类'  target=\"_blank\"></a>\n";
+                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=M' target=\"_blank\">\n";
                     s_Return += "<img src='../../themes/softed/images/RolesEdit.gif' align='absmiddle' border='0' alt='编辑分类'title='编辑分类'></a>\n";
-                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=D'>\n";
+                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=D' target=\"_blank\">\n";
                     s_Return += "<img src='../../themes/softed/images/RolesDelete.gif' align='absmiddle' border='0' alt='删除分类'title='删除分类'></a>\n";
                  } 
                 s_Return += "</div>\n";
@@ -295,7 +295,7 @@ namespace KNet.BLL
                     }
                     if (dt.Rows[n]["PBP_Order"] != null && dt.Rows[n]["PBP_Order"].ToString() != "")
                     {
-                        model.PBP_Order = dt.Rows[n]["PBP_Order"].ToString();
+                        model.PBP_Order = int.Parse(dt.Rows[n]["PBP_Order"].ToString());
                     }
                     if (dt.Rows[n]["PBP_Creator"] != null && dt.Rows[n]["PBP_Creator"].ToString() != "")
                     {

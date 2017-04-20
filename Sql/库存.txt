@@ -1,0 +1,5 @@
+﻿
+insert into  KNet_WareHouse_DirectInto_Details
+select dbo.GetDID(),'D201610190001','',b.ProductsBarCode,'','',a.结存数,0,0,0,'',GETDATE() from 新版$ a 
+join KNet_Sys_Products b on a.料号=b.KSP_COde
+where 料号 is not null

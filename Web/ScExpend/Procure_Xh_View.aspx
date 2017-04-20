@@ -258,7 +258,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	    //LODOP.SET_SAVE_MODE("PaperSize", 9);
 	    //LODOP.SET_SAVE_MODE("centerHorizontally", true);
 	     LODOP.SET_PRINT_MODE("PRINT_PAGE_PERCENT", "90%");
-	    LODOP.ADD_PRINT_HTM(0, 0, 800, 700, strFormHtml);
+	    LODOP.ADD_PRINT_HTM(0, 0, 800, 1200, strFormHtml);
 	    //LODOP.PREVIEW();
 	    LODOP.PRINT();
 	    //alert("1")

@@ -37,9 +37,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into PB_Basic_Attachment(");
-            strSql.Append("PBA_ID,PBA_FID,PBA_Name,PBA_Type,PBA_URL,PBA_Creator,PBA_CTime,PBA_Remarks)");
+            strSql.Append("PBA_ID,PBA_FID,PBA_Name,PBA_Type,PBA_URL,PBA_Creator,PBA_CTime,PBA_Remarks,PBA_ProductsType,PBA_FileType,PBA_Del,PBA_State,PBA_UpdateFID,PBA_Edition)");
             strSql.Append(" values (");
-            strSql.Append("@PBA_ID,@PBA_FID,@PBA_Name,@PBA_Type,@PBA_URL,@PBA_Creator,@PBA_CTime,@PBA_Remarks)");
+            strSql.Append("@PBA_ID,@PBA_FID,@PBA_Name,@PBA_Type,@PBA_URL,@PBA_Creator,@PBA_CTime,@PBA_Remarks,@PBA_ProductsType,@PBA_FileType,@PBA_Del,@PBA_State,@PBA_UpdateFID,@PBA_Edition)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@PBA_FID", SqlDbType.VarChar,50),
@@ -48,7 +48,14 @@ namespace KNet.DAL
 					new SqlParameter("@PBA_URL", SqlDbType.VarChar,350),
 					new SqlParameter("@PBA_Creator", SqlDbType.VarChar,50),
 					new SqlParameter("@PBA_CTime", SqlDbType.DateTime),
-					new SqlParameter("@PBA_Remarks", SqlDbType.VarChar,500)};
+					new SqlParameter("@PBA_Remarks", SqlDbType.VarChar,500),
+					new SqlParameter("@PBA_ProductsType", SqlDbType.VarChar,50),
+					new SqlParameter("@PBA_FileType", SqlDbType.VarChar,50),
+					new SqlParameter("@PBA_Del", SqlDbType.Int,4),
+					new SqlParameter("@PBA_State", SqlDbType.Int,4),
+					new SqlParameter("@PBA_UpdateFID", SqlDbType.VarChar,50),
+					new SqlParameter("@PBA_Edition", SqlDbType.VarChar,50)
+        };
             parameters[0].Value = model.PBA_ID;
             parameters[1].Value = model.PBA_FID;
             parameters[2].Value = model.PBA_Name;
@@ -57,7 +64,13 @@ namespace KNet.DAL
             parameters[5].Value = model.PBA_Creator;
             parameters[6].Value = model.PBA_CTime;
             parameters[7].Value = model.PBA_Remarks;
-
+            parameters[8].Value = model.PBA_ProductsType;
+            parameters[9].Value = model.PBA_FileType;
+            parameters[10].Value = model.PBA_Del;
+            parameters[11].Value = model.PBA_State;
+            parameters[12].Value = model.PBA_UpdateFID;
+            parameters[13].Value = model.PBA_Edition;
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -98,6 +111,59 @@ namespace KNet.DAL
             }
         }
 
+        
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateByState(KNet.Model.PB_Basic_Attachment model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update PB_Basic_Attachment set ");
+            strSql.Append("PBA_State=@PBA_State ");
+            strSql.Append(" where PBA_ID=@PBA_ID ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PBA_State", SqlDbType.Int,4),
+					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50)};
+            parameters[0].Value = model.PBA_State;
+            parameters[1].Value = model.PBA_ID;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool UpdateByDel(KNet.Model.PB_Basic_Attachment model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update PB_Basic_Attachment set ");
+            strSql.Append("PBA_Del=@PBA_Del ");
+            strSql.Append(" where PBA_ID=@PBA_ID ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@PBA_Del", SqlDbType.Int,4),
+					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50)};
+            parameters[0].Value = model.PBA_Del;
+            parameters[1].Value = model.PBA_ID;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -169,51 +235,90 @@ namespace KNet.DAL
         /// </summary>
         public KNet.Model.PB_Basic_Attachment GetModel(string PBA_ID)
         {
-
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 * from PB_Basic_Attachment ");
-            strSql.Append(" where PBA_ID=@PBA_ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50)};
-            parameters[0].Value = PBA_ID;
-
-            KNet.Model.PB_Basic_Attachment model = new KNet.Model.PB_Basic_Attachment();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
+            if (PBA_ID != "")
             {
-                if (ds.Tables[0].Rows[0]["PBA_ID"] != null && ds.Tables[0].Rows[0]["PBA_ID"].ToString() != "")
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("select  top 1 * from PB_Basic_Attachment ");
+                strSql.Append(" where PBA_ID=@PBA_ID ");
+                SqlParameter[] parameters = {
+					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50)};
+                parameters[0].Value = PBA_ID;
+
+                KNet.Model.PB_Basic_Attachment model = new KNet.Model.PB_Basic_Attachment();
+                DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+                if (ds.Tables[0].Rows.Count > 0)
                 {
-                    model.PBA_ID = ds.Tables[0].Rows[0]["PBA_ID"].ToString();
+                    if (ds.Tables[0].Rows[0]["PBA_ID"] != null && ds.Tables[0].Rows[0]["PBA_ID"].ToString() != "")
+                    {
+                        model.PBA_ID = ds.Tables[0].Rows[0]["PBA_ID"].ToString();
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_FID"] != null && ds.Tables[0].Rows[0]["PBA_FID"].ToString() != "")
+                    {
+                        model.PBA_FID = ds.Tables[0].Rows[0]["PBA_FID"].ToString();
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_Name"] != null && ds.Tables[0].Rows[0]["PBA_Name"].ToString() != "")
+                    {
+                        model.PBA_Name = ds.Tables[0].Rows[0]["PBA_Name"].ToString();
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_Type"] != null && ds.Tables[0].Rows[0]["PBA_Type"].ToString() != "")
+                    {
+                        model.PBA_Type = ds.Tables[0].Rows[0]["PBA_Type"].ToString();
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_URL"] != null && ds.Tables[0].Rows[0]["PBA_URL"].ToString() != "")
+                    {
+                        model.PBA_URL = ds.Tables[0].Rows[0]["PBA_URL"].ToString();
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_Creator"] != null && ds.Tables[0].Rows[0]["PBA_Creator"].ToString() != "")
+                    {
+                        model.PBA_Creator = ds.Tables[0].Rows[0]["PBA_Creator"].ToString();
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_CTime"] != null && ds.Tables[0].Rows[0]["PBA_CTime"].ToString() != "")
+                    {
+                        model.PBA_CTime = DateTime.Parse(ds.Tables[0].Rows[0]["PBA_CTime"].ToString());
+                    }
+                    if (ds.Tables[0].Rows[0]["PBA_Remarks"] != null && ds.Tables[0].Rows[0]["PBA_Remarks"].ToString() != "")
+                    {
+                        model.PBA_Remarks = ds.Tables[0].Rows[0]["PBA_Remarks"].ToString();
+                    }
+
+                    if (ds.Tables[0].Rows[0]["PBA_Del"] != null && ds.Tables[0].Rows[0]["PBA_Del"].ToString() != "")
+                    {
+                        model.PBA_Del = int.Parse(ds.Tables[0].Rows[0]["PBA_Del"].ToString());
+                    }
+
+                    if (ds.Tables[0].Rows[0]["PBA_FileType"] != null && ds.Tables[0].Rows[0]["PBA_FileType"].ToString() != "")
+                    {
+                        model.PBA_FileType = ds.Tables[0].Rows[0]["PBA_FileType"].ToString();
+                    }
+
+                    if (ds.Tables[0].Rows[0]["PBA_State"] != null && ds.Tables[0].Rows[0]["PBA_State"].ToString() != "")
+                    {
+                        model.PBA_State = int.Parse(ds.Tables[0].Rows[0]["PBA_State"].ToString());
+                    }
+
+
+                    if (ds.Tables[0].Rows[0]["PBA_ProductsType"] != null && ds.Tables[0].Rows[0]["PBA_ProductsType"].ToString() != "")
+                    {
+                        model.PBA_ProductsType = ds.Tables[0].Rows[0]["PBA_ProductsType"].ToString();
+                    }
+
+                    if (ds.Tables[0].Rows[0]["PBA_Edition"] != null && ds.Tables[0].Rows[0]["PBA_Edition"].ToString() != "")
+                    {
+                        model.PBA_Edition = ds.Tables[0].Rows[0]["PBA_Edition"].ToString();
+                    }
+
+                    if (ds.Tables[0].Rows[0]["PBA_UpdateFID"] != null && ds.Tables[0].Rows[0]["PBA_UpdateFID"].ToString() != "")
+                    {
+                        model.PBA_UpdateFID = ds.Tables[0].Rows[0]["PBA_UpdateFID"].ToString();
+                    }
+
+
+                    return model;
                 }
-                if (ds.Tables[0].Rows[0]["PBA_FID"] != null && ds.Tables[0].Rows[0]["PBA_FID"].ToString() != "")
+                else
                 {
-                    model.PBA_FID = ds.Tables[0].Rows[0]["PBA_FID"].ToString();
+                    return null;
                 }
-                if (ds.Tables[0].Rows[0]["PBA_Name"] != null && ds.Tables[0].Rows[0]["PBA_Name"].ToString() != "")
-                {
-                    model.PBA_Name = ds.Tables[0].Rows[0]["PBA_Name"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["PBA_Type"] != null && ds.Tables[0].Rows[0]["PBA_Type"].ToString() != "")
-                {
-                    model.PBA_Type = ds.Tables[0].Rows[0]["PBA_Type"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["PBA_URL"] != null && ds.Tables[0].Rows[0]["PBA_URL"].ToString() != "")
-                {
-                    model.PBA_URL = ds.Tables[0].Rows[0]["PBA_URL"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["PBA_Creator"] != null && ds.Tables[0].Rows[0]["PBA_Creator"].ToString() != "")
-                {
-                    model.PBA_Creator = ds.Tables[0].Rows[0]["PBA_Creator"].ToString();
-                }
-                if (ds.Tables[0].Rows[0]["PBA_CTime"] != null && ds.Tables[0].Rows[0]["PBA_CTime"].ToString() != "")
-                {
-                    model.PBA_CTime = DateTime.Parse(ds.Tables[0].Rows[0]["PBA_CTime"].ToString());
-                }
-                if (ds.Tables[0].Rows[0]["PBA_Remarks"] != null && ds.Tables[0].Rows[0]["PBA_Remarks"].ToString() != "")
-                {
-                    model.PBA_Remarks = ds.Tables[0].Rows[0]["PBA_Remarks"].ToString();
-                }
-                return model;
             }
             else
             {

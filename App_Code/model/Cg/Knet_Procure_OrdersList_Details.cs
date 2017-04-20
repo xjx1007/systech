@@ -26,8 +26,11 @@ namespace KNet.Model
         private DateTime? _Add_DateTime;
         private decimal? _handprice;
         private decimal? _handtotal;
+        private string _KPO_FaterBarCode;
 
-
+        private int _KPOD_CPBZNumber;
+        private int _KPOD_BZNumber;
+        private string _KPOD_BrandName;
         /// <summary>
         /// 添加时间
         /// </summary>
@@ -92,6 +95,19 @@ namespace KNet.Model
             set { _orderamount = value; }
             get { return _orderamount; }
         }
+
+
+        public int KPOD_CPBZNumber
+        {
+            set { _KPOD_CPBZNumber = value; }
+            get { return _KPOD_CPBZNumber; }
+        }
+
+        public int KPOD_BZNumber
+        {
+            set { _KPOD_BZNumber = value; }
+            get { return _KPOD_BZNumber; }
+        }
         /// <summary>
         /// 采购明细---采购单价
         /// </summary>
@@ -124,7 +140,16 @@ namespace KNet.Model
             set { _orderremarks = value; }
             get { return _orderremarks; }
         }
-
+        
+        /// <summary>
+        /// 采购产品明细----备注
+        /// </summary>
+        public string KPO_FaterBarCode
+        {
+            set { _KPO_FaterBarCode = value; }
+            get { return _KPO_FaterBarCode; }
+        }
+        
         /// <summary>
         /// 采购明细---已收货数量
         /// </summary>
@@ -157,6 +182,13 @@ namespace KNet.Model
             get { return _handtotal; }
         }
 
+
+        public string KPOD_BrandName
+        {
+            set { _KPOD_BrandName = value; }
+            get { return _KPOD_BrandName; }
+        }
+        
         #endregion Model
 
     }

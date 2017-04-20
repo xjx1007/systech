@@ -12,20 +12,24 @@
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
+    <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js"></script>
     <title>采购管理</title>
     <script language="JAVASCRIPT">
         function btnGetReturnValue_onclick() {
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers1(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
                 document.all('SuppNoSelectValue').value = ss[0];
                 document.all('SuppNo').value = ss[1];
                 document.all('OrderNo').value = ss[2];
+
             }
             else {
                 document.all('SuppNoSelectValue').value = "";
@@ -33,12 +37,27 @@
                 document.all('OrderNo').value = "";
             }
         }
+        function TextisNaN(t)
+        {
+            if (t == "") {
+
+                alert(t + " 为空不能保存");
+            }
+            else {
+                if (isNaN(t)) {
+                    alert(t + " 不是数字");
+                }
+            }
+        }
         function btnSelectOrder_onclick() {
 
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("SelectOrder.aspx?WhereID=220", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=550px");
+            //var temp = window.showModalDialog("SelectOrder.aspx?WhereID=220", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=550px");
+            var temp = window.open("SelectOrder.aspx?WhereID=31", "选择订单", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Order(temp) {
             if (temp != undefined) {
                 document.all('OrderFaterNo').value = temp;
             }
@@ -51,8 +70,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers2", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers2(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -71,14 +92,23 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=780px;dialogHeight=550px");
-
+            //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=780px;dialogHeight=550px");
+            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Type=128860698200781250&callback=SetReturnValueInOpenner_Suppliers3", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers3(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
                 document.getElementById("Tbx_SuppNo").value = ss[0];
                 document.getElementById("Tbx_SuppName").value = ss[1];
                 document.all('OrderAddress').value = ss[3].replace(/\$/g, "\n");
+                objSelect = document.getElementById("Ddl_HouseNo")
+                for (var i = 0; i < objSelect.options.length; i++) {
+                    if (objSelect.options[i].value == ss[4]) {
+                        objSelect.options[i].selected = true;
+                        isExit = true;
+                    }
+                }
             }
             else {
                 document.all('Tbx_SuppNo').value = "";
@@ -91,7 +121,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("SelectSalesContractList.aspx", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            //var temp = window.showModalDialog("SelectSalesContractList.aspx", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+            var temp = window.open("SelectSalesContractList.aspx", "选择订单", "width=1000px, height=600px,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_ContractList(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -114,57 +147,71 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var tempd = window.showModalDialog("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            //var tempd = window.showModalDialog("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+            var tempd = window.open("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ScNo=" + document.all("OrderFaterNo").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "选择供应商", "width=1000px, height=700,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_SuppliersPrice(tempd) {
             if (tempd != undefined) {
                 var ss, s_Value, i_row;
                 ss = tempd.split("|");
                 i_row = myTable.rows.length;
                 s_ID = document.all("Xs_ProductsCode").value;
                 var v_Num = document.all("Tbx_Num").value;
-                var v_SuppNo = "", v_SuppName = "";
+                var v_SuppNo = "", v_SuppName = "", v_HouseNo="";
                 for (var i = 0; i < ss.length - 1; i++) {
                     s_Value = ss[i].split(",");
                     var objRow = myTable.insertRow(i_row);
                     var objCel = objRow.insertCell();
+                    var v_NumInt = parseInt(v_Num) + parseInt(i)
                     objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="../../../themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + parseInt(v_Num + i) + '\" value=' + s_Value[0] + '>' + s_Value[0];
+                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + v_NumInt + '\" value=' + s_Value[0] + '>' + s_Value[0];
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + parseInt(v_Num + i) + '\" value=' + s_Value[1] + '>' + s_Value[1];
+                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + v_NumInt + '\" value=' + s_Value[1] + '>' + s_Value[1];
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + parseInt(v_Num + i) + '\" value=' + s_Value[2] + '>' + s_Value[2];
+                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + v_NumInt + '\" value=' + s_Value[2] + '>' + s_Value[2];
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsEdition_' + parseInt(v_Num + i) + '\" value=' + s_Value[3] + '>' + s_Value[3];
+                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsEdition_' + v_NumInt + '\" value=' + s_Value[3] + '>' + s_Value[3];
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Number_' + parseInt(v_Num + i) + '\" value=' + s_Value[4] + '>';
+                    objCel.innerHTML = '<input type=\"hidden\"  Name=\"BrandName_' + v_NumInt + '\" value=' + s_Value[15] + '>' + s_Value[15];
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"Price_' + parseInt(v_Num + i) + '\" value=' + s_Value[5] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"CPBZNumber_' + v_NumInt + '\"  value=' + s_Value[13] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  readonly style="width:70px;"  Name=\"Money_' + parseInt(v_Num + i) + '\" value=' + s_Value[6] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"BZNumber_' + v_NumInt + '\" value=' + s_Value[14] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"HandPrice_' + parseInt(v_Num + i) + '\" value=' + s_Value[7] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Number_' + v_NumInt + '\" value=' + s_Value[4] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"HandMoney_' + parseInt(v_Num + i) + '\" value=' + s_Value[8] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"Price_' + v_NumInt + '\" value=' + s_Value[5] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Remarks_' + parseInt(v_Num + i) + '\" value=' + s_Value[9] + ' >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  readonly style="width:70px;"  Name=\"Money_' + v_NumInt + '\" value=' + s_Value[6] + '>';
+                    objCel.className = "ListHeadDetails";
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"HandPrice_' + v_NumInt + '\" value=' + s_Value[7] + '>';
+                    objCel.className = "ListHeadDetails";
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"HandMoney_' + v_NumInt + '\" value=' + s_Value[8] + '>';
+                    objCel.className = "ListHeadDetails";
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Remarks_' + v_NumInt + '\" value=' + s_Value[9] + ' >';
                     objCel.className = "ListHeadDetails";
                     i_row = i_row + 1;
                     s_ID = s_ID + s_Value[1] + ",";
                     v_SuppNo = s_Value[10];
                     v_SuppName = s_Value[11];
+                    v_HouseNo = s_Value[12];
                 }
-
-                document.all("Tbx_Num").value = v_Num + ss.length - 1;
+                
+                document.all("Tbx_Num").value = parseInt(v_Num) + ss.length - 1;
                 document.all("Xs_ProductsCode").value = s_ID;
                 if (v_SuppNo != "")
                 {
@@ -180,8 +227,20 @@
         function ChangPrice() {
             var num = document.all('Tbx_Num').value;
             for (var i = 0; i < num; i++) {
-                document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
-                document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
+                var CPBZNumber = document.all("CPBZNumber_" + i).value;
+                var BZNumber = document.all("BZNumber_" + i).value;
+                if ((CPBZNumber != 0) && (BZNumber != 0)) {
+                    document.all("Number_" + i).value = CPBZNumber * BZNumber;
+                    document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
+                    document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
+                }
+                else {
+                    document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
+                    document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
+                }
+                TextisNaN(CPBZNumber);
+                TextisNaN(BZNumber);
+                TextisNaN(document.all("Number_" + i).value);
             }
         }
         function deleteRow(obj) {
@@ -193,7 +252,7 @@
             }
             document.all("Xs_ProductsCode").value = bm_num;
         }
-
+        
     </script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
 </head>
@@ -259,7 +318,7 @@
                                                         </td>
                                                         <td class="dvtCellInfo" align="left">
                                                             <asp:TextBox ID="OrderNo" MaxLength="45" runat="server" Width="200px" CssClass="detailedViewTextBox"
-                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"></asp:TextBox>(<font
+                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" ></asp:TextBox>(<font
                                                                     color="red">*</font>)
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="采购单号不能为空"
                                                             ControlToValidate="OrderNo" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -295,12 +354,12 @@
                                             <td align="left" class="dvtCellInfo">
                                                 <input type="hidden" name="SuppNoSelectValue" id="SuppNoSelectValue" runat="server" />
                                                 <asp:TextBox ID="SuppNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />(<font
+                                                    OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48" Enabled="false"></asp:TextBox>
+                                                <img src="../../../themes/softed/images/select.gif" id="Img_SelectSuppNo" runat="server" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />(<font
                                                     color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
                                                         ErrorMessage="供应商不能为空" ControlToValidate="SuppNo" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </td>
-                                            <td align="right" class="dvtCellLabel">遥控器订单:
+                                            <td align="right" class="dvtCellLabel">成品订单:
                                             </td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:TextBox ID="OrderFaterNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
@@ -319,13 +378,11 @@
                                                     OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
                                                 <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnOrderValue_onclick()" />
                                             </td>
-                                            <td align="right" class="dvtCellLabel">&nbsp;选择收货供应商:
+                                            
+                                            <td align="right" class="dvtCellLabel">价格需确认:
                                             </td>
-                                            <td align="left" class="dvtCellInfo">
-                                                <input type="hidden" name="Tbx_SuppNo" id="Tbx_SuppNo" runat="server" />
-                                                <asp:TextBox ID="Tbx_SuppName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick1()" />
+                                            <td align="left" class="dvtCellInfo" >
+                                                <asp:CheckBox ID="Chk_PriceState" runat="server" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -359,10 +416,26 @@
                                             </asp:DropDownList>
                                         </tr>
                                         <tr>
-                                            <td align="right" class="dvtCellLabel">价格需确认:
+                                            
+                                            <td align="right" class="dvtCellLabel">&nbsp;选择收货供应商:
                                             </td>
-                                            <td align="left" class="dvtCellInfo" colspan="3" >
-                                                <asp:CheckBox ID="Chk_PriceState" runat="server" />
+                                            <td align="left" class="dvtCellInfo">
+                                                <input type="hidden" name="Tbx_SuppNo" id="Tbx_SuppNo" runat="server" />
+                                                <asp:TextBox ID="Tbx_SuppName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                    OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
+                                                <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick1()" />
+                                                
+                                                (<font color="red">*</font>)
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="收货供应商不能为空"
+                                                ControlToValidate="Tbx_SuppName" Display="Dynamic"></asp:RequiredFieldValidator>
+                                            </td>
+                                            <td align="right" class="dvtCellLabel">预入仓库:
+                                            </td>
+                                            <td align="left" class="dvtCellInfo" >
+                                                <asp:DropDownList runat="server" ID="Ddl_HouseNo"></asp:DropDownList>
+                                                (<font color="red">*</font>)
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="预入仓库不能为空"
+                                                ControlToValidate="Ddl_HouseNo" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </td>
                                         
                                         </tr>
@@ -426,6 +499,15 @@
                                                         </td>
                                                         <td class="ListHead" nowrap>
                                                             <b>版本号</b>
+                                                        </td>
+                                                        <td class="ListHead" nowrap>
+                                                            <b>品牌</b>
+                                                        </td>
+                                                        <td class="ListHead" nowrap>
+                                                            <b>包装数</b>
+                                                        </td>
+                                                        <td class="ListHead" nowrap>
+                                                            <b>包装数</b>
                                                         </td>
                                                         <td class="ListHead" nowrap>
                                                             <b>数量</b>

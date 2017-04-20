@@ -18,7 +18,12 @@ namespace KNet.Model
         private string _pba_creator;
         private DateTime? _pba_ctime;
         private string _PBA_Remarks;
-        
+        private string _PBA_ProductsType;
+        private int _PBA_State = 0;
+        private int _PBA_Del = 0;
+        private string _PBA_FileType;
+        private string _PBA_Edition;
+        private string _PBA_UpdateFID;
         /// <summary>
         /// 
         /// </summary>
@@ -80,6 +85,45 @@ namespace KNet.Model
             set { _PBA_Remarks = value; }
             get { return _PBA_Remarks; }
         }
+
+
+        public string PBA_ProductsType
+        {
+            set { _PBA_ProductsType = value; }
+            get { return _PBA_ProductsType; }
+        }
+
+
+        public string PBA_FileType
+        {
+            set { _PBA_FileType = value; }
+            get { return _PBA_FileType; }
+        }
+
+        public int PBA_State
+        {
+            set { _PBA_State = value; }
+            get { return _PBA_State; }
+        }
+
+        public int PBA_Del
+        {
+            set { _PBA_Del = value; }
+            get { return _PBA_Del; }
+        }
+
+        public string PBA_Edition
+        {
+            set { _PBA_Edition = value; }
+            get { return _PBA_Edition; }
+        }
+
+        public string PBA_UpdateFID
+        {
+            set { _PBA_UpdateFID = value; }
+            get { return _PBA_UpdateFID; }
+        }
+
         #endregion Model
 
     }

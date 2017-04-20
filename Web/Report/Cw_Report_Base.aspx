@@ -71,6 +71,9 @@
                                                                  <li><a href="../Report_Cw/Receive/Report_Reveive.aspx">应收款结存表</a></li>
                                                                  <li><a href="../Report_Cw/YS/Report_Reveive.aspx">应收帐款明细</a></li>
                                                                 <li><a href="../Report_Cw/Report_DlkDetails.aspx">代理费明细</a></li>
+                                                                <li><a href="../Report_Cw/Bond/Report_Bank.aspx">保证金</a></li>
+                                                                
+                                                                <li><a href="../Report_Cw/Products/Report_Kc.aspx">成品最新成本明细</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

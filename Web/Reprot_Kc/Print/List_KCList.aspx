@@ -1,8 +1,8 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="List_KCList.aspx.cs" Inherits="Web_Report_Xs_List_KCList" %>
+ï»¿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="List_KCList.aspx.cs" Inherits="Web_Report_Xs_List_KCList" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head runat="server">
-    <title>²Ö¿âµ¥¾İ´òÓ¡</title>
-    
+    <title>ä»“åº“å•æ®æ‰“å°</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <style type="text/css" id="style1">
 body {
  background: #FFF;
@@ -173,7 +173,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 .gg{background-color:#dee2f2}
   .MaterTitle
 	    {
-	    font-family:·½ÕıÒ¦Ìå;
+	    font-family:æ–¹æ­£å§šä½“;
 	    white-space:nowrap;
 	    color:windowtext;
 	    font-weight:700;
@@ -191,7 +191,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 }
 </style>
     <script language="javascript" type="text/javascript">   
-        var LODOP; //ÉùÃ÷ÎªÈ«¾Ö±äÁ¿ 
+        var LODOP; //å£°æ˜ä¸ºå…¨å±€å˜é‡ 
 	function prn1_preview() {	
 		CreateOneFormPage();	
 		LODOP.PREVIEW();	
@@ -206,7 +206,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	};	
 	function CreateOneFormPage(){
 		LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
-		LODOP.PRINT_INIT("²Ö¿âµ¥¾İ´òÓ¡");
+		LODOP.PRINT_INIT("ä»“åº“å•æ®æ‰“å°");
 		LODOP.SET_PRINT_STYLE("FontSize",18);
 		LODOP.SET_PRINT_STYLE("Bold",1);
         var strBodyStyle = "<style>" + document.getElementById("style1").innerHTML + "</style>";
@@ -227,17 +227,17 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 		strFormHtml = strFormHtml.replace("</THEAD> ", "");
 		LODOP.ADD_PRINT_HTM(0, 0, "100%", "100%", strFormHtml);
 		LODOP.SET_SAVE_MODE("PAGE_TYPE",1);
-		LODOP.SET_SAVE_MODE("centerHeader","Ò³Ã¼");
-		LODOP.SET_SAVE_MODE("centerFooter","µÚ&PÒ³");
-		LODOP.SET_SAVE_MODE("Caption", "²Ö¿âµ¥¾İ´òÓ¡");					
+		LODOP.SET_SAVE_MODE("centerHeader","é¡µçœ‰");
+		LODOP.SET_SAVE_MODE("centerFooter","ç¬¬&Pé¡µ");
+		LODOP.SET_SAVE_MODE("Caption", "ä»“åº“å•æ®æ‰“å°");					
 		LODOP.SET_SAVE_MODE("RETURN_FILE_NAME",1);
-		LODOP.SAVE_TO_FILE("²Ö¿âµ¥¾İ´òÓ¡.xls");		
+		LODOP.SAVE_TO_FILE("ä»“åº“å•æ®æ‰“å°.xls");		
 	};
 	function prrintALL() {
 	    var s_Paper = document.all("Tbx_Paper").value;
 	    var s_Value = document.all("Tbx_ID").value.split("|");
 	    if (s_Paper == "0") {
-            //Ô­²ÄÁÏÈë¿â
+            //åŸææ–™å…¥åº“
 	        var s_ID = s_Value[0].split(",");
 	            for (var j = 0; j < s_ID.length; j++)
 	            {
@@ -247,7 +247,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	                    GPrint(s_ID[j]);
 	                }
 	            }
-            //Éú²úÈë¿â
+            //ç”Ÿäº§å…¥åº“
 	             s_ID = s_Value[1].split(",");
 	             for (var j = 0; j < s_ID.length; j++) {
 	                 if (s_ID[j] != "")
@@ -256,21 +256,21 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	                 }
 	                 
 	            }
-	        //³ÉÆ·ÁìÁÏ
+	        //æˆå“é¢†æ–™
 	            s_ID = s_Value[2].split(",");
 	            for (var j = 0; j < s_ID.length; j++) {
 	                if (s_ID[j] != "") {
 	                    GRCBPrint(s_ID[j]);
 	                }
 	            }
-	        //Ô­²ÄÁÏÁìÁÏµ¥
+	        //åŸææ–™é¢†æ–™å•
 	            s_ID = s_Value[3].split(",");
 	            for (var j = 0; j < s_ID.length; j++) {
 	                if (s_ID[j] != "") {
 	                    GMaterLlPrint(s_ID[j]);
 	                }
 	            }
-	        //Ô­²ÄÁÏµ÷²¦
+	        //åŸææ–™è°ƒæ‹¨
 	            s_ID = s_Value[4].split(",");
 	            for (var j = 0; j < s_ID.length; j++) {
 	                if (s_ID[j] != "") {
@@ -280,14 +280,14 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	    }
 	    else if (s_Paper == "1") {
 	        var s_Value = document.all("Tbx_ID1").value.split("|");
-            //Ô­²ÄÁÏºÄÁÏ
+            //åŸææ–™è€—æ–™
 	        var s_ID = s_Value[0].split(",");
 	        for (var j = 0; j < s_ID.length; j++) {
 	            if (s_ID[j] != "") {
 	                HPrint(s_ID[j]);
 	            }
 	        }
-	        //1¿éÇ®
+	        //1å—é’±
 	         s_ID = s_Value[1].split(",");
 	         for (var j = 0; j < s_ID.length; j++) {
 	             if (s_ID[j] != "") {
@@ -298,45 +298,45 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	    }
 	}
 	function GPrint(ID) {
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/CG/OrderInWareHouse/Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	    // window.location.reload(); 
 	}
 
 	function GPrintSc(ID) {
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/ScExpend/Procure_RC_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	    // window.location.reload(); 
 	}
 	function HPrint(ID) {
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/ScExpend/Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	    // window.location.reload(); 
 	}
 	function QTGPrint(ID) {
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/ScExpend/QtProcure_Rk_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	    // window.location.reload(); 
 	}
 	function QTHPrint(ID) {
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/ScExpend/QtProcure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	    // window.location.reload(); 
 	}
 
 	function GRCBPrint(ID) {
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/WareHouseOut/Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	}
 
 	function GMaterLlPrint(ID) {
         alert
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
         var temp = window.showModalDialog("/Web/Reprot_Kc/Print/Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	}
 	function GMaterDBPrint(ID) {
 	    alert
-	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '²é¿´ÏêÏ¸', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+	    //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, 'æŸ¥çœ‹è¯¦ç»†', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
 	    var temp = window.showModalDialog("/Web/WareHouseAllocateList/Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
 	}
 	
@@ -351,9 +351,9 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 <body>
     <form id="form1" runat="server">
     <div >
-    <input type="button" value="´òÓ¡Ô¤ÀÀ" onclick="javascript:prn1_preview()" id="Button1" />
-    <input type="button" value="´òÓ¡È«²¿" onclick="javascript: prrintALL()" id="Button3" />
-    <input type="button" value="µ¼³öExcel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
+    <input type="button" value="æ‰“å°é¢„è§ˆ" onclick="javascript:prn1_preview()" id="Button1" />
+    <input type="button" value="æ‰“å°å…¨éƒ¨" onclick="javascript: prrintALL()" id="Button3" />
+    <input type="button" value="å¯¼å‡ºExcel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
     <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
     <asp:TextBox ID="Tbx_ID1" runat="server" Style="display: none"></asp:TextBox>
     <asp:TextBox ID="Tbx_Paper" runat="server" Style="display: none"></asp:TextBox>

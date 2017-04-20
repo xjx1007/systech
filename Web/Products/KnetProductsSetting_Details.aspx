@@ -1,12 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="KnetProductsSetting_Details.aspx.cs"
     Inherits="Knet_Web_System_KnetProductsSetting_Details" %>
-
-<%@ Register Src="../Control/UploadList.ascx" TagName="CommentList" TagPrefix="uc2" %>
+<%@ Register Src="../Control/UploadListForProducts.ascx" TagName="CommentList" TagPrefix="uc2" %>
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css" />
     <script type="text/javascript" src="/Web/Js/ajax_func.js"></script>
     <script language="JavaScript" src="/Web/Js/Global.js" type="text/javascript"></script>
@@ -35,6 +35,30 @@
             window.document.body.innerHTML = bdhtml;
         }
         
+        function btnGetBomProducts_onclick(ProductsTypeID, Rowi,Details) {
+            var today, seconds;
+            today = new Date();
+            intSeconds = today.getSeconds();
+            var tempd = window.showModalDialog("SelectProductsDemo.aspx?ProductsTypeID=" + ProductsTypeID + "&Details="+Details+"", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            if (tempd != undefined) {
+
+                var ss, s_Value, s_Name, i_row, s_ID;
+                i_row = ProductsBomTable.rows.length;
+                ss = tempd.split("|");
+                for (var i = 0; i < ss.length - 1; i++) {
+                    s_Value = ss[i].split(",");
+                    var v_ProductsBarCode = s_Value[0];
+                    var v_ProductsName = s_Value[1];
+                    var v_ProductsEdition = s_Value[3];
+                    document.all("ProdoctsBarCode_" + Rowi + "").value =v_ProductsBarCode;
+                    document.all("ProductsName_" + Rowi + "").value =v_ProductsName;
+                    document.all("ProductsEdition_" + Rowi + "").value = v_ProductsEdition;
+                    i_row = i_row + 1;
+                    s_ID = s_ID + s_Value[0] + ",";
+                }
+            }
+        }
+
     </script>
     <style type="text/css">
         .auto-style1 {
@@ -51,7 +75,6 @@
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
         <div>
-
             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
                 <tr>
                     <td style="height: 2px"></td>
@@ -122,6 +145,24 @@
                                                     <tr>
                                                         <td align="left" style="padding-left: 10px;">
                                                             <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                            <asp:Label runat="server" ID="Lbl_Create1"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left" style="padding-left: 10px;">
+                                                            <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                            <asp:Label runat="server" ID="Lbl_Bom"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left" style="padding-left: 10px;">
+                                                            <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                            <asp:Label runat="server" ID="Lbl_BomWithPrice"></asp:Label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left" style="padding-left: 10px;">
+                                                            <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
                                                             <asp:Label runat="server" ID="Lbl_Createsmpale"></asp:Label>
                                                         </td>
                                                     </tr>
@@ -154,6 +195,7 @@
                                                             <ul>
                                                                 <li><a href="#tab1">基本信息</a></li>
                                                                 <li><a href="#tab2">销售客户</a></li>
+                                                                <li><a href="#tab9">导入BOM信息</a></li>
                                                                 <li><a href="#tab3">生产问题</a></li>
                                                                 <li><a href="#tab4">作业指导书</a></li>
                                                                 <li><a href="#tab5">技术文档</a></li>
@@ -175,24 +217,24 @@
                                                                                 <tr>
                                                                                     <td>
                                                                                         <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit"
-                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>')"
-                                                                                            name="Edit" value="&nbsp;编辑&nbsp;">&nbsp;
-                                                        <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share"
-                                                            value="&nbsp;共享&nbsp;">&nbsp;
+                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    ')"
+                                                                                            name="Edit" value="&nbsp;编辑&nbsp;" style="width: 55px; height: 26px;">&nbsp;
+
                                                         <input title="" class="crmbutton small edit" onclick="PageGo('KnetProductsSetting.aspx')"
-                                                            type="button" name="ListView" value="&nbsp;返回列表&nbsp;">&nbsp;
-            <asp:Button ID="Button1" runat="server" Text="停用" 
-                        class="crmbutton small save" OnClick="Button1_Click"  />
+                                                            type="button" name="ListView" value="&nbsp;返回列表&nbsp;" style="width: 70px; height: 26px;">
                                                                                         <input title="升级 [Alt+J]" type="button" accesskey="E" class="crmbutton small edit"
-                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>&Type=2')"
-                                                                                            name="Edit" value="&nbsp;升级&nbsp;">&nbsp;
+                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    &Type=2')"
+                                                                                            name="Edit" value="&nbsp;升级&nbsp;" style="width: 55px; height: 26px;">&nbsp;&nbsp;
+            <asp:Button ID="Button1" runat="server" Text="停用"
+                class="crmbutton small save" OnClick="Button1_Click" Style="width: 70px; height: 26px;" />
+                                                                                        <asp:Button runat="server" ID="Btn_Sh" Text="审批"  class="crmbutton small cancel"  OnClick="Btn_Sh_Click"  Style="width: 70px; height: 26px;"/>&nbsp;
+
                                                                                     </td>
                                                                                     <td align="right">
                                                                                         <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create"
-                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>&Type=1')"
-                                                                                            name="Duplicate" value="复制">&nbsp;
-                                                        <input title="刪除 [Alt+D]" type="button" accesskey="D" class="crmbutton small delete"
-                                                            onclick=" return confirm('确定要删除这个记录吗?')" name="Delete" value="删除">&nbsp;
+                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    &Type=1')"
+                                                                                            name="Duplicate" value="复制" style="width: 55px; height: 26px;">&nbsp;
+
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -236,6 +278,30 @@
                                                                         <td class="dvtCellLabel">版本号:
                                                                         </td>
                                                                         <td class="dvtCellInfo">&nbsp;<asp:Label ID="Lbl_ProductsEdition" runat="server" Text=""></asp:Label>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td class="dvtCellLabel">客户物料名称:
+                                                                        </td>
+                                                                        <td class="dvtCellInfo">
+                                                                            <asp:Label ID="Tbx_CustomerProductsName" runat="server"></asp:Label>&nbsp;
+                                                                        </td>
+                                                                        <td class="dvtCellLabel">客户物料代码:
+                                                                        </td>
+                                                                        <td class="dvtCellInfo">&nbsp;<asp:Label ID="Tbx_CustomerProductsCode" runat="server" Text=""></asp:Label>&nbsp;
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="dvtCellLabel">客户规格型号:
+                                                                        </td>
+                                                                        <td class="dvtCellInfo">
+                                                                            <asp:Label ID="Tbx_CustomerProductsEdition" runat="server"></asp:Label>&nbsp;
+                                                                        </td>
+                                                                        <td class="dvtCellLabel">单包装数:
+                                                                        </td>
+                                                                        <td class="dvtCellInfo">
+                                                                            <asp:Label ID="Lbl_BzNumber" runat="server"></asp:Label>&nbsp;
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -285,7 +351,9 @@
                                                                         <td height="25" class="dvtCellLabel">是否图片:
                                                                         </td>
                                                                         <td class="dvtCellInfo">&nbsp;<asp:Label ID="ProductsPic" runat="server" Text=""></asp:Label>
-                                                                            <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" Visible="false"> <asp:Image ID="Image1" runat="server" Width="28" Height="24" Visible="false" /></asp:HyperLink>
+                                                                            <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" Visible="false">
+                                                                                <asp:Image ID="Image1" runat="server" Width="28" Height="24" Visible="false" />
+                                                                            </asp:HyperLink>
                                                                         </td>
                                                                         <td class="dvtCellLabel">采购方式:
                                                                         </td>
@@ -318,21 +386,27 @@
                                                                         </td>
                                                                         <td colspan="3" class="dvtCellInfo">&nbsp;<asp:Label ID="ProductsDescription" runat="server" Text=""></asp:Label>
                                                                     </tr>
+
+                                                                    <tr>
+                                                                        <td height="41" class="dvtCellLabel">停用说明:
+                                                                        </td>
+                                                                        <td colspan="3" class="dvtCellInfo">&nbsp;
+                                                                            <asp:TextBox ID="Tbx_DelRemarks" runat="server" CssClass="detailedViewTextBox"
+                                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                                                TextMode="MultiLine" Width="440px" Height="50px"></asp:TextBox>
+                                                                            <asp:Label ID="Lbl_DelRemarks" runat="server" Text=""></asp:Label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    
                                                                     <tr>
                                                                         <td height="41" class="dvtCellLabel">详细说明:
                                                                         </td>
                                                                         <td colspan="3" class="dvtCellInfo">&nbsp;<asp:Label ID="ProductsDetailDescription" runat="server" Text=""></asp:Label>
                                                                         </td>
                                                                     </tr>
-                                                                    
                                                                     <tr>
-                                                                        <td height="41" class="dvtCellLabel">停用说明:
-                                                                        </td>
-                                                                        <td colspan="3" class="dvtCellInfo">&nbsp;
-                                                                            <asp:TextBox ID="Tbx_DelRemarks" runat="server" CssClass="detailedViewTextBox"
-                                                                        OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                                        TextMode="MultiLine" Width="440px" Height="50px"></asp:TextBox>
-                                                                            <asp:Label ID="Lbl_DelRemarks" runat="server" Text=""></asp:Label>
+                                                                        <td colspan="4">
+                                                                            <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -358,81 +432,78 @@
                                                                             </table>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td colspan="4" class="detailedViewHeader">
-                                                                            <b>BOM:</b>
-                                                                            <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td align="left" class="dvtCellInfo" style="text-align: left" colspan="4">
-                                                                            <table id="ProductsBomTable" width="100%" border="0" align="center" cellpadding="0" class="ListDetails"
-                                                                                cellspacing="0">
-                                                                                         <tr>
-                                                                                    <td colspan="13" align="left">
+                                                                    <asp:Panel ID="Pan_Bom" Visible="false" runat="server">
+                                                                        <tr>
+                                                                            <td colspan="4" class="detailedViewHeader">
+                                                                                <b>BOM:</b>
+                                                                                <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="left" class="dvtCellInfo" style="text-align: left" colspan="4">
+                                                                                <table id="ProductsBomTable" width="100%" border="0" align="center" cellpadding="0" class="ListDetails"
+                                                                                    cellspacing="0">
+                                                                                    <tr id="tr3">
+                                                                                        <td align="center" class="ListHead">序号
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">类别
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">产品名称
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">版本号
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">料号
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">数量
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead"  width="40px" >位号
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">是否可替代
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">产品停用状态
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">BOM停用状态
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">产品审批
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">采购方式
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <asp:Label runat="server" ID="Lbl_BomDetails1"></asp:Label>
 
-                                                                                <asp:Button ID="Button2" runat="server" Text="更新采购部件" class="crmbutton small save" OnClick="Button2_Click"  />
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr id="tr3">
-                                                                                    <td align="center" class="ListHead">序号
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">类别
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">产品名称
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">版本号
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">料号
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">数量
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">是否可替代
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">环保要求
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">库存
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">状态
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">报价
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">目前采购<br>部件
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <%=s_ProductsTable_BomDetail %>
-                                                                       
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                    
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </asp:Panel>
+
+
                                                                     <tr>
                                                                         <td colspan="4" class="detailedViewHeader">
                                                                             <b>可替代物料:</b>
                                                                         </td>
                                                                     </tr>
-                                        <tr>
-                                            <td align="left" class="dvtCellInfo" style="text-align: left" colspan="3">
-                                                <asp:TextBox ID="Tbx_AlternativeProductsNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
+                                                                    <tr>
+                                                                        <td align="left" class="dvtCellInfo" style="text-align: left" colspan="3">
+                                                                            <asp:TextBox ID="Tbx_AlternativeProductsNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
 
-                                                <table id="ProductsAlternativeTable" width="100%" border="0" align="center" cellpadding="0"
-                                                    cellspacing="0"  class="ListDetails">
-                                                    <tr id="tr7">
-                                                        <td align="center" class="ListHead">工具
-                                                        </td>
-                                                        <td align="center" class="ListHead">产品名称
-                                                        </td>
-                                                        <td align="center" class="ListHead">版本号
-                                                        </td>
-                                                        <td align="center" class="ListHead">优先等级
-                                                        </td>
-                                                        <td align="center" class="ListHead">是否可替代
-                                                        </td>
-                                                    </tr>
-                                                    <%=s_AlternativeDetail %>
-                                                </table>
-                                            </td>
-                                        </tr> 
+                                                                            <table id="ProductsAlternativeTable" width="100%" border="0" align="center" cellpadding="0"
+                                                                                cellspacing="0" class="ListDetails">
+                                                                                <tr id="tr7">
+                                                                                    <td align="center" class="ListHead">工具
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">产品名称
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">版本号
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">优先等级
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">是否可替代
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <%=s_AlternativeDetail %>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td colspan="4" class="detailedViewHeader">
                                                                             <b>采购周期:</b>
@@ -458,7 +529,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="4" class="detailedViewHeader">
-                                                                            <b>适用遥控器:</b>
+                                                                            <b>适用成品:</b>
                                                                             <asp:TextBox ID="TextBox1" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                                                                         </td>
                                                                     </tr>
@@ -489,6 +560,57 @@
 
 
                                                             </div>
+                                                            <div id="tab9" class="tab">
+
+                                                                
+                                                                <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+                                                                    <tr>
+                                                                        <td colspan="3" class="detailedViewHeader">
+                                                                            <b>导入BOM:</b>
+                                                                            <asp:TextBox ID="TextBox6" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                                        </td>
+                                                                        
+                                                                                                <td class="detailedViewHeader" align="right" >
+                                                                                            <asp:Button ID="Button4" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Button3_Click" Style="width: 55px; height: 33px;" />
+                                                                                            
+                                                                                                </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td colspan="4">
+                                                                                    <asp:TextBox ID="Tbx_ImportNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
+                                                                                    <asp:TextBox ID="Tbx_ImportID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                                                        <table id="Table5" width="100%" border="0" align="center" cellpadding="0"
+                                                                                            cellspacing="0" class="ListDetails">
+                                                                                            <tr id="tr6">
+                                                                                                <td align="center" class="ListHead">序号
+                                                                                                </td>
+                                                                                                <td align="center" class="ListHead">物料名称
+                                                                                                </td>
+                                                                                                <td align="center" class="ListHead">物料型号
+                                                                                                </td>
+                                                                                                <td align="center" class="ListHead">封装
+                                                                                                </td>
+                                                                                                <td align="center" class="ListHead">数量
+                                                                                                </td>
+                                                                                                <td align="center" class="ListHead">备注
+                                                                                                </td>
+                                                                                                <td align="center" class="ListHead" colspan="2">系统对应产品
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <asp:Label runat="server" ID="lbl_BomDetails"></asp:Label>
+                                                                                            
+                                                                                            <tr id="tr8">
+                                                                                                <td align="left" colspan="7">
+                                                                                            <asp:Button ID="Button3" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Button3_Click" Style="width: 55px; height: 33px;" />
+                                                                                            
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </td>
+                                                                    </tr>
+                                                                    </table>
+                                                                </div>
                                                             <div id="tab2" class="tab">
                                                                 <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
 
@@ -601,28 +723,6 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="4" class="detailedViewHeader">
-                                                                            <b>丝印</b>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td colspan="4">
-                                                                            <asp:Label runat="server" ID="Lbl_Sy"></asp:Label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="4" class="detailedViewHeader">
-                                                                            <b>码值表</b>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td colspan="4">
-                                                                            <asp:Label runat="server" ID="Lbl_Mz"></asp:Label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="4" class="detailedViewHeader">
                                                                             <b>产品规格书</b>
                                                                         </td>
                                                                     </tr>
@@ -632,18 +732,13 @@
                                                                         </td>
                                                                     </tr>
 
-                                                                    <tr>
-                                                                        <td colspan="4">
-                                                                            <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
-                                                                        </td>
-                                                                    </tr>
                                                                 </table>
                                                             </div>
 
                                                             <div id="tab7" class="tab">
                                                                 <asp:Label runat="server" ID="Lbl_PriceLink"></asp:Label>
                                                                 <cc1:MyGridView ID="MyGridView4" runat="server" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
-                                                                    AllowPaging="true" PageSize="13"><Columns><asp:TemplateField HeaderText="供应商" SortExpression="SuppNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="名称" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField DataField="v_KSP_Code" HeaderText="料号" SortExpression="v_KSP_Code"><ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="v_ProductsEdition" HeaderText="版本号" SortExpression="v_ProductsEdition"><ItemStyle HorizontalAlign="left" Font-Size="12px" /><HeaderStyle HorizontalAlign="center" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="ProcureUnitPrice" ItemStyle-Font-Size="12px" HeaderText="单价" ItemStyle-Width="50px" HeaderStyle-Font-Size="12px" SortExpression="ProcureUnitPrice" DataFormatString="{0:F3}" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="HandPrice" ItemStyle-Font-Size="12px" HeaderText="加工费" ItemStyle-Width="40px" HeaderStyle-Font-Size="12px" SortExpression="HandPrice" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="KPP_Remarks" ItemStyle-Font-Size="12px" ItemStyle-Width="180px" HeaderText="备注" HeaderStyle-Font-Size="12px" SortExpression="HandPrice" DataFormatString="{0:c}" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="审核" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField DataField="ProcureUpdateDateTime" ItemStyle-Font-Size="12px" HeaderText="操作时间" HeaderStyle-Font-Size="12px" SortExpression="ProcureUpdateDateTime" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                    AllowPaging="true" PageSize="13"><Columns><asp:TemplateField HeaderText="供应商" SortExpression="SuppNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate><%# base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "SuppNo").ToString())%></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="名称" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center"><ItemTemplate> <%# base.Base_GetProdutsName_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%></ItemTemplate></asp:TemplateField><asp:BoundField DataField="v_KSP_Code" HeaderText="料号" SortExpression="v_KSP_Code"><ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="v_ProductsEdition" HeaderText="版本号" SortExpression="v_ProductsEdition"><ItemStyle HorizontalAlign="left" Font-Size="12px" /><HeaderStyle HorizontalAlign="center" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="ProcureUnitPrice" ItemStyle-Font-Size="12px" HeaderText="单价" ItemStyle-Width="50px" HeaderStyle-Font-Size="12px" SortExpression="ProcureUnitPrice" DataFormatString="{0:F4}" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="HandPrice" ItemStyle-Font-Size="12px" HeaderText="加工费" ItemStyle-Width="40px" HeaderStyle-Font-Size="12px" SortExpression="HandPrice" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="审核" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate><%#GetShState(DataBinder.Eval(Container.DataItem, "KPP_State").ToString())%></ItemTemplate></asp:TemplateField><asp:BoundField DataField="ProcureUpdateDateTime" ItemStyle-Font-Size="12px" HeaderText="操作时间" HeaderStyle-Font-Size="12px" SortExpression="ProcureUpdateDateTime" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
                                                             </div>
                                                             <div id="tab6" class="tab">
                                                                 <cc1:MyGridView ID="Grid_Order" runat="server" AllowPaging="True" AllowSorting="True"
@@ -667,38 +762,38 @@
                                                                             ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
                                                             </div>
 
-                                                            
+
 
                                                             <div id="tab8" class="tab" runat="server">
 
-                                                                                                                                            <table id="Table4" width="100%" border="0" align="center" cellpadding="0" class="ListDetails"
-                                                                                cellspacing="0">
-                                                                                <tr id="tr2">
-                                                                                    <td align="center" class="ListHead">序号
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">类别
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">产品名称
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">版本号
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">料号
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">数量
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">是否可替代
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">库存
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">状态
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">供应商
-                                                                                    </td>
-                                                                                    <td align="center" class="ListHead">最低报价
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <%=s_ProductsTable_BomDetail1 %>
-                                                                            </table>
+                                                                <table id="Table4" width="100%" border="0" align="center" cellpadding="0" class="ListDetails"
+                                                                    cellspacing="0">
+                                                                    <tr id="tr2">
+                                                                        <td align="center" class="ListHead">序号
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">类别
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">产品名称
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">版本号
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">料号
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">数量
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">是否可替代
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">库存
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">状态
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">供应商
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">最低报价
+                                                                        </td>
+                                                                    </tr>
+                                                                    <%=s_ProductsTable_BomDetail1 %>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                     </div>

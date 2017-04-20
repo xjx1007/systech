@@ -195,20 +195,22 @@ function initSmsbox() {
     });
 
     //列表hover效果
+
+
+    //列表hover效果
     var listBlocks = jQuery('#smsbox_list_container > div.list-block');
-    listBlocks.on('mouseenter','', function () { jQuery(this).addClass('list-block-hover'); });
-    listBlocks.on('mouseleave', '', function () { jQuery(this).removeClass('list-block-hover'); });
+    listBlocks.live('mouseenter', function () { jQuery(this).addClass('list-block-hover'); });
+    listBlocks.live('mouseleave', function () { jQuery(this).removeClass('list-block-hover'); });
 
     //列表click事件
-    jQuery(' div.list-block').on('click', '#smsbox_list_container ', function () {
-    //$(document).on('click', jQuery('#smsbox_list_container > div.list-block'), function(){
-        if (jQuery(this).hasClass('list-block-active')) return;
+    listBlocks.live('click', function () {
+        if (jQuery(this).attr('class').indexOf('list-block-active') > 0) return;
         jQuery('#smsbox_list_container > div.list-block').removeClass('list-block-active');
         jQuery(this).addClass('list-block-active');
         jQuery('table', this).removeClass('unread');
 
         var bGroupByName = jQuery('#group_by_name').attr('class').indexOf('active') >= 0;
-        var id = jQuery(this).prop('group_id');
+        var id = jQuery(this).attr('group_id');
         var html = '';
         selectedRecvSmsIdStr = selectedSendSmsIdStr = '';
         for (var i = 0; i < newSmsArray.length; i++) {
@@ -233,18 +235,17 @@ function initSmsbox() {
 
     });
 
+
     //全部已阅
     jQuery('#smsbox_read_all').click(function () {
         var array = GetSmsIds();
         RemoveSms(array.recv, array.send, 0);
     });
-
     //全部删除
     jQuery('#smsbox_delete_all').click(function () {
         var array = GetSmsIds();
         RemoveSms(array.recv, array.send, 1);
     });
-
     //全部详情
     jQuery('#smsbox_detail_all').click(function () {
         var sms_id_str = '';
@@ -303,22 +304,22 @@ function initSmsbox() {
 
     //内容块hover效果
     var msgBlocks = jQuery('#smsbox_msg_container > div.msg-block');
-    msgBlocks.on('mouseenter', '', function () { jQuery(this).addClass('msg-hover'); });
-    msgBlocks.on('mouseleave', '', function () { jQuery(this).removeClass('msg-hover'); });
+    msgBlocks.live('mouseenter', '', function () { jQuery(this).addClass('msg-hover'); });
+    msgBlocks.live('mouseleave', '', function () { jQuery(this).removeClass('msg-hover'); });
 
     //内容块click事件
-    msgBlocks.on('click', '', function () {
+    msgBlocks.live('click', '', function () {
         jQuery('#smsbox_msg_container > div.msg-block').removeClass('msg-active');
         jQuery(this).addClass('msg-active');
     });
 
     //回复事件
-    jQuery('.head > .operation > a.reply', msgBlocks).on('click','', function () {
+    jQuery('.head > .operation > a.reply', msgBlocks).live('click','', function () {
         jQuery('#smsbox_textarea').trigger('focus');
     });
 
     //查看详情事件
-    jQuery('.head > .operation > a.detail', msgBlocks).on('click','', function () {
+    jQuery('.head > .operation > a.detail', msgBlocks).live('click','', function () {
         var sms_id = jQuery(this).attr('sms_id');
         var url = jQuery(this).attr('url');
         RemoveSms(sms_id, '', 0);

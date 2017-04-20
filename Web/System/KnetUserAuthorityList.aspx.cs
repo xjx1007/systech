@@ -53,6 +53,8 @@ public partial class Knet_Web_System_KnetKnetUserAuthorityList: BasePage
             this.DataBindStaffBranch();
             this.Knet_Warehouse_Bind();
 
+            base.Base_DropBindSearch(this.bas_searchfield, "KNet_Sys_AuthorityUserGroup");
+            base.Base_DropBindSearch(this.Fields, "KNet_Sys_AuthorityUserGroup");
           
         }
     }
@@ -77,6 +79,11 @@ public partial class Knet_Web_System_KnetKnetUserAuthorityList: BasePage
         string SqlWhere = " StaffAdmin=0 ";
 
 
+        string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
+        string s_Fields = Request["Fields"] == null ? "" : Request["Fields"].ToString();
+        string s_Condition = Request["Condition"] == null ? "" : Request["Condition"].ToString();
+        string s_Text = Request["Srch_value"] == null ? "" : Request["Srch_value"].ToString();
+        string s_Type = "";
         if (Request["StaffBranch"] != null && Request["StaffBranch"] != "")
         {
             string KDBList = Request.QueryString["StaffBranch"].ToString().Trim();
@@ -84,6 +91,15 @@ public partial class Knet_Web_System_KnetKnetUserAuthorityList: BasePage
             this.StrucNameDList.SelectedValue = KDBList;
 
             SqlWhere = SqlWhere + " and StaffBranch = '" + KDBList + "' ";
+        }
+
+        if (s_WhereID != "")
+        {
+            SqlWhere += Base_GetBasicWhere(s_WhereID);
+        }
+        if ((this.bas_searchfield.SelectedValue != "") && (search_text.Text != ""))
+        {
+            SqlWhere += base.Base_GetBasicColumnWhere(this.bas_searchfield.SelectedValue, this.search_text.Text);
         }
         DataSet ds = bll.GetList(SqlWhere);
         

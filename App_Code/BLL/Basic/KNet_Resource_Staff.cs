@@ -96,6 +96,10 @@ namespace KNet.BLL
         {
             return dal.GetList(strWhere);
         }
+        public DataSet GetList1(string strWhere)
+        {
+            return dal.GetList1(strWhere);
+        }
 
         public string  GetSonIDs(string ID)
         {

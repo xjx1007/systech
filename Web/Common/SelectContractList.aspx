@@ -16,13 +16,10 @@
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" >
-    function set_return(ContractNo) {
-        if (window.opener != undefined) {
-            window.opener.returnValue = ContractNo;
-        }
-        else {
-            window.returnValue = ContractNo;
-        }
+        function set_return(ContractNo) {
+            if (window.opener != undefined) {
+                window.opener.SetReturnValueInOpenner_Contract(ContractNo);
+            } 
     }
 </script>
     <title></title>

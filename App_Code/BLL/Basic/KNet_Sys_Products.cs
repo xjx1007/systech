@@ -62,13 +62,14 @@ namespace KNet.BLL
                 {
                     //插入有老产品的BOM
                 }
-                //如果是遥控器
+                //如果是成品
+                /*
                 if ((model.ProductsMainCategory == "129678733470295462") && (model.KSP_SampleId != ""))
                 {
                     KNet.BLL.KNet_Sys_Products BLL_Products = new KNet.BLL.KNet_Sys_Products();
                     BLL_Products.UpdateBySampleID(model.KSP_SampleId);
                 }
-
+                */
                 if (model.CustomerList != null)
                 {
                     KNet.BLL.Xs_Customer_Products BLL_Customer_Products = new KNet.BLL.Xs_Customer_Products();
@@ -76,15 +77,6 @@ namespace KNet.BLL
                     {
                         KNet.Model.Xs_Customer_Products Model_Customer_Products = (KNet.Model.Xs_Customer_Products)model.CustomerList[i];
                         BLL_Customer_Products.Add(Model_Customer_Products);
-                    }
-                }
-                if (model.ProductsList != null)
-                {
-                    KNet.BLL.Xs_Products_Prodocts BLL_Products_Prodocts = new KNet.BLL.Xs_Products_Prodocts();
-                    for (int i = 0; i < model.ProductsList.Count; i++)
-                    {
-                        KNet.Model.Xs_Products_Prodocts Model_Products_Prodocts = (KNet.Model.Xs_Products_Prodocts)model.ProductsList[i];
-                        BLL_Products_Prodocts.Add(Model_Products_Prodocts);
                     }
                 }
                 if (model.DemoProductsList != null)
@@ -116,6 +108,7 @@ namespace KNet.BLL
                         KNet.Model.Pb_Products_Sample_Images Model_details = (KNet.Model.Pb_Products_Sample_Images)model.arr_Details[i];
                         Bll_Details.Add(Model_details);
                     }
+
                 }
                 //可替代物料
                 if (model.arr_Alternative != null)
@@ -128,6 +121,87 @@ namespace KNet.BLL
                     }
                 }
 
+                if (model.Type == 2)//升级
+                {
+                    bool b_Stop = true;
+                    #region 新产品升级
+                    try
+                    {
+                        //产品附件
+                        try
+                        {
+                            string s_DoSql = "insert into PB_Basic_Attachment select dbo.GetID(),'" + model.ProductsBarCode + "',PBA_Name,PBA_Type,PBA_URL ,PBA_Creator,PBA_CTime,PBA_Remarks,PBA_ProductsType,PBA_State,PBA_Del,PBA_FileType,PBA_Edition,PBA_UpdateFID";
+                            s_DoSql += " from PB_Basic_Attachment";
+                            s_DoSql += " where PBA_Del=0 ";
+                            s_DoSql += " and PBA_FID='" + model.KSP_GProductsBarCode.Trim() + "' ";
+                            DbHelperSQL.ExecuteSql(s_DoSql);
+                        }
+                        catch
+                        { }
+
+                        if (model.arr_RCDetails != null)
+                        {
+                            KNet.BLL.Xs_Products_Prodocts_Demo Bll_Demo = new KNet.BLL.Xs_Products_Prodocts_Demo();
+                            for (int i = 0; i < model.arr_RCDetails.Count; i++)
+                            {
+                                KNet.Model.Xs_Products_Prodocts_Demo Model_details = (KNet.Model.Xs_Products_Prodocts_Demo)model.arr_RCDetails[i];
+                                //如果是替换
+                                if (Model_details.XPD_IsModiy == 1)
+                                {
+                                    //插入
+                                    string s_Dosql = "insert into Xs_Products_Prodocts_Demo(";
+                                    s_Dosql += "XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address)";
+                                    s_Dosql += " select ";
+                                    s_Dosql += "dbo.GetID(),'" + model.ProductsBarCode + "',XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address from ";
+                                    s_Dosql += " Xs_Products_Prodocts_Demo  where XPD_ID='" + Model_details.XPD_ID + "'";
+
+
+                                    //停用原来的产品
+                                    s_Dosql += "Update Xs_Products_Prodocts_Demo set XPD_Del=1 ";
+                                    s_Dosql += "  where XPD_ID='" + Model_details.XPD_ID + "'";
+                                    DbHelperSQL.ExecuteSql(s_Dosql);
+                                }
+                                else if (Model_details.XPD_IsModiy == 2)//不替换
+                                {
+
+                                    //停用原来的产品
+                                    b_Stop = false;
+                                    /*
+                                    string s_Dosql = "Update Xs_Products_Prodocts_Demo set XPD_Del=1 ";
+                                    s_Dosql += "  where XPD_ID='" + Model_details.XPD_ID + "'";
+                                    DbHelperSQL.ExecuteSql(s_Dosql);
+                                     * */
+                                }
+                                else if (Model_details.XPD_IsModiy == 3)//共存
+                                {
+
+                                    b_Stop = false;
+                                    //插入
+                                    string s_Dosql = "insert into Xs_Products_Prodocts_Demo(";
+                                    s_Dosql += "XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address)";
+                                    s_Dosql += " select ";
+                                    s_Dosql += "dbo.GetID(),'" + model.ProductsBarCode + "',XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address from ";
+                                    s_Dosql += " Xs_Products_Prodocts_Demo  where XPD_ID='" + Model_details.XPD_ID + "'";
+                                    DbHelperSQL.ExecuteSql(s_Dosql);
+
+                                }
+                            }
+                        }
+
+                    }
+                    catch
+                    { }
+                    #endregion
+                    if (b_Stop)
+                    {
+
+                        //停用原来的BOM产品
+                        string s_Dosql = " Update KNET_Sys_Products set KSP_Del=1 ";
+                        s_Dosql += " where ProductsBarCode='" + model.KSP_GProductsBarCode + "'";
+                        DbHelperSQL.ExecuteSql(s_Dosql);
+                    }
+                }
+                #region 产品升级
                 //产品升级操作
                 try
                 {
@@ -185,11 +259,12 @@ namespace KNet.BLL
                 }
                 catch
                 { }
+                #endregion
                 dal.Add(model);
             }
             catch (Exception ex)
             {
- 
+
             }
         }
 
@@ -203,26 +278,19 @@ namespace KNet.BLL
             BLL_Customer_Products.Delete(model.ProductsBarCode);
             if (model.CustomerList != null)
             {
-                
+
                 for (int i = 0; i < model.CustomerList.Count; i++)
                 {
                     KNet.Model.Xs_Customer_Products Model_Customer_Products = (KNet.Model.Xs_Customer_Products)model.CustomerList[i];
                     BLL_Customer_Products.Add(Model_Customer_Products);
                 }
             }
-            KNet.BLL.Xs_Products_Prodocts BLL_Products_Prodocts = new KNet.BLL.Xs_Products_Prodocts();
-            BLL_Products_Prodocts.Delete(model.ProductsBarCode);
-            if (model.ProductsList != null)
-            {
-                for (int i = 0; i < model.ProductsList.Count; i++)
-                {
-                    KNet.Model.Xs_Products_Prodocts Model_Products_Prodocts = (KNet.Model.Xs_Products_Prodocts)model.ProductsList[i];
-                    BLL_Products_Prodocts.Add(Model_Products_Prodocts);
-                }
-            }
-
             KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Prodocts = new KNet.BLL.Xs_Products_Prodocts_Demo();
-            BLL_DemoProducts_Prodocts.Delete(model.ProductsBarCode);
+            if (model.s_BomIDs != null)
+            {
+                BLL_DemoProducts_Prodocts.UpdateDel(model.s_BomIDs, model.ProductsBarCode);
+                BLL_DemoProducts_Prodocts.DeleteByIDs(model.s_BomIDs, model.ProductsBarCode);
+            }
             if (model.DemoProductsList != null)
             {
                 for (int i = 0; i < model.DemoProductsList.Count; i++)
@@ -287,7 +355,7 @@ namespace KNet.BLL
                         s_Dosql += " delete from Xs_Products_Prodocts_Demo ";
                         s_Dosql += " where XPD_ProductsBarCode='" + model.ProductsBarCode + "'";
 
-                         s_Dosql = "insert into Xs_Products_Prodocts_Demo(";
+                        s_Dosql = "insert into Xs_Products_Prodocts_Demo(";
                         s_Dosql += "XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address)";
                         s_Dosql += " select ";
                         s_Dosql += "dbo.GetID(),'" + model.ProductsBarCode + "',XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address from ";

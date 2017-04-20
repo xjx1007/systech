@@ -67,7 +67,39 @@ if(http_request.readyState==4){
     <div>
 <!--头部-->
 
-
+        
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+            <tr>
+                <td style="height: 2px">
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
+                    产品 > <a class="hdrLink" href="SelectContentPerson.aspx">选择产品</a>
+                </td>
+                <td width="100%" nowrap>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="sep1" style="width: 1px;">
+                            </td>
+                            <td class="small">
+                                <!-- Add and Search -->
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 2px">
+                </td>
+            </tr>
+        </table>
 <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="small">
   <tr>
       
@@ -107,7 +139,10 @@ if(http_request.readyState==4){
         <Columns>
         
        <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <ItemTemplate>
+                            <HeaderTemplate>
+                    <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server"/>
+                 </HeaderTemplate>     
+            <ItemTemplate>
                     <asp:CheckBox ID="Chbk" runat="server"/>
                  </ItemTemplate>
         </asp:TemplateField>
@@ -144,6 +179,8 @@ if(http_request.readyState==4){
           <ItemTemplate>
                 <pc:PTextBox ID="Tbx_Number" runat="server" ValidType="Int" Width="80px" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"  Text="1"></pc:PTextBox>
                 <pc:PTextBox ID="Tbx_ProductsBarCode" runat="server"  CssClass="Custom_Hidden"  Text=<%#DataBinder.Eval(Container, "DataItem.ProductsBarCode").ToString()%>></pc:PTextBox>
+                <pc:PTextBox ID="Tbx_ProductsCode" runat="server"  CssClass="Custom_Hidden"  Text=<%#DataBinder.Eval(Container, "DataItem.KSP_Code").ToString()%>></pc:PTextBox>
+
           </ItemTemplate>
         </asp:TemplateField>
 

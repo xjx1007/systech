@@ -29,7 +29,8 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
             string s_OPPID = Request.QueryString["OPPID"] == null ? "" : Request.QueryString["OPPID"].ToString();
             base.Base_DropBasicCodeBind(this.Ddl_Step, "122");//类型
             this.Tbx_STime.Text = DateTime.Now.ToShortDateString();
-            base.Base_DropDutyPerson(this.Ddl_DutyPerson);
+            base.Base_DropDutyPerson(this.Ddl_DutyPerson, " and isSale=1");
+            this.Ddl_Step.SelectedValue = "101";
             if (s_ID != "")
             {
                 if (s_Type == "1")
@@ -93,7 +94,7 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
         this.Ddl_Step.SelectedValue = model.XSQ_Step;
         this.Tbx_STime.Text = DateTime.Parse(model.XSQ_STime.ToString()).ToShortDateString();
 
-        this.Tbx_Payment.Text = model.XSQ_Payment;
+        this.Tbx_Payment.Text = KNetPage.KHtmlDiscode(model.XSQ_Payment);
         this.Tbx_Remarks.Text = model.XSQ_Remarks;
         KNet.BLL.Xs_Sales_Quotes_Details BLL_Details = new KNet.BLL.Xs_Sales_Quotes_Details();
         DataSet Dts_Details = BLL_Details.GetList(" SQD_FID='" + model.XSQ_ID + "'");
@@ -103,7 +104,7 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
             for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
             {
                 this.Xs_ProductsCode.Text += Dts_Details.Tables[0].Rows[i]["SQD_ProductsBarCode"].ToString() + ",";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["SQD_ProductsBarCode"].ToString()) + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode\" value='" + Dts_Details.Tables[0].Rows[i]["SQD_ProductsBarCode"].ToString() + "'>" + Dts_Details.Tables[0].Rows[i]["SQD_ProductsBarCode"].ToString() + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["SQD_ProductsBarCode"].ToString()) + "</td>";
@@ -113,12 +114,15 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"PrecentMoney\" value='" + Dts_Details.Tables[0].Rows[i]["SQD_PercentedMoney"].ToString() + "'></td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Remarks\" value='" + Dts_Details.Tables[0].Rows[i]["SQD_Remarks"].ToString() + "'></td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Money\" value='" + Dts_Details.Tables[0].Rows[i]["SQD_Money"].ToString() + "'></td>";
-             }
+            }
 
-             s_MyTable_Detail += "</tr>";
+            s_MyTable_Detail += "</tr>";
         }
 
     }
+
+
+
     private bool SetValue(KNet.Model.Xs_Sales_Quotes model)
     {
 
@@ -127,7 +131,7 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
         {
             if (this.Tbx_ID.Text == "")
             {
-                model.XSQ_ID= base.GetNewID("Xs_Sales_Quotes", 1);
+                model.XSQ_ID = base.GetNewID("Xs_Sales_Quotes", 1);
             }
             else
             {
@@ -148,7 +152,7 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
             model.XSQ_CTime = DateTime.Now;
             model.XSQ_Mender = AM.KNet_StaffNo;
             model.XSQ_MTime = DateTime.Now.ToLongDateString();
-            model.XSQ_Payment = this.Tbx_Payment.Text;
+            model.XSQ_Payment = KNetPage.KHtmlEncode(this.Tbx_Payment.Text);
             ArrayList Arr_Products = new ArrayList();
             if (Request["ProductsBarCode"] != null)
             {
@@ -164,6 +168,8 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
                     KNet.Model.Xs_Sales_Quotes_Details Model_Details = new KNet.Model.Xs_Sales_Quotes_Details();
                     Model_Details.SQD_ID = GetNewID("Xs_Sales_Quotes_Details", 1);
                     Model_Details.SQD_ProductsBarCode = s_ProductsBarCode[i];
+                    s_PrecentMoney[i] = Convert.ToString(decimal.Parse(s_Price[i]) * decimal.Parse(s_Number[i]) * decimal.Parse(s_Precent[i]) / 100);
+                    s_Money[i] = Convert.ToString(decimal.Parse(s_Price[i]) * decimal.Parse(s_Number[i]) - decimal.Parse(s_PrecentMoney[i]));
                     Model_Details.SQD_Number = decimal.Parse(s_Number[i]);
                     Model_Details.SQD_Price = decimal.Parse(s_Price[i]);
                     Model_Details.SQD_Money = decimal.Parse(s_Money[i]);
@@ -180,13 +186,13 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
         {
             return false;
         }
-       
+
     }
 
     protected void Btn_SaveOnClick(object sender, EventArgs e)
     {
         AdminloginMess AM = new AdminloginMess();
-        string s_ID=this.Tbx_ID.Text;
+        string s_ID = this.Tbx_ID.Text;
 
         KNet.Model.Xs_Sales_Quotes model = new KNet.Model.Xs_Sales_Quotes();
         KNet.BLL.Xs_Sales_Quotes bll = new KNet.BLL.Xs_Sales_Quotes();
@@ -202,6 +208,9 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
             {
                 bll.Add(model);
                 AM.Add_Logs("报价单增加" + this.Tbx_ID.Text);
+
+                string JSD = "Xs/SalesQuotes/Xs_Sales_Quotes_Print.aspx?ID=" + model.XSQ_ID + "";
+                base.HtmlToPdf1(JSD, Server.MapPath("PDF"), this.Tbx_Code.Text);
                 AlertAndRedirect("新增成功！", "Xs_Sales_Quotes_List.aspx");
             }
             catch { }
@@ -214,6 +223,8 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
                 if (bll.Update(model))
                 {
                     AM.Add_Logs("报价单修改" + this.Tbx_ID.Text);
+                    string JSD = "Xs/SalesQuotes/Xs_Sales_Quotes_Print.aspx?ID=" + model.XSQ_ID + "";
+                    base.HtmlToPdf1(JSD, Server.MapPath("PDF"), this.Tbx_Code.Text);
                     AlertAndRedirect("修改成功！", "Xs_Sales_Quotes_List.aspx");
                 }
             }
@@ -222,26 +233,26 @@ public partial class Web_Sales_Xs_Sales_Quotes_Add : BasePage
     }
     private string s_GetCode()
     {
-        string s_Return="";
+        string s_Return = "";
         try
         {
-            KNet.BLL.Xs_Sales_Quotes Bll=new KNet.BLL.Xs_Sales_Quotes();
+            KNet.BLL.Xs_Sales_Quotes Bll = new KNet.BLL.Xs_Sales_Quotes();
 
             string S_Code = Bll.GetLastCode();
             if (S_Code == "")
             {
 
-                s_Return += "Q" + DateTime.Today.ToString("yyyyMMdd") +"-"+ "001";
+                s_Return += "SY" + DateTime.Today.ToString("yyyyMMdd") + "-" + "001";
             }
             else
             {
-                S_Code = "1" + S_Code.Substring(10, 3);
+                S_Code = "1" + S_Code.Substring(11, 3);
                 decimal d_NewCode = decimal.Parse(S_Code) + 1;
-                s_Return += "Q" + DateTime.Today.ToString("yyyyMMdd") + "-" +d_NewCode.ToString().Substring(1, d_NewCode.ToString().Length - 1);
+                s_Return += "SY" + DateTime.Today.ToString("yyyyMMdd") + "-" + d_NewCode.ToString().Substring(1, d_NewCode.ToString().Length - 1);
             }
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             s_Return = "-";
 

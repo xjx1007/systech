@@ -75,30 +75,34 @@
             var response = Xs_Sales_Freight_Add.GetKDCode(FSupp);
             document.all('Drop_KD').value = response.value;
         }
-        function btnGetWuliuSupp_onclick() {
-            var today, seconds;
-            today = new Date();
-            intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("/Web/Common/SelectSuppliers.aspx?Type=128860697896406251", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
-            if (temp != undefined) {
-                var ss;
-                ss = temp.split("|");
-                document.all('Tbx_WuliuSuppNo').value = ss[0];
-                document.all('Tbx_WuliuSuppName').value = ss[1];
-            }
-            else {
-                document.all('Tbx_WuliuSuppNo').value = "";
-                document.all('Tbx_WuliuSuppName').value = "";
-            }
-        }
+        //function btnGetWuliuSupp_onclick() {
+        //    var today, seconds;
+        //    today = new Date();
+        //    intSeconds = today.getSeconds();
+        //    //var temp = window.showModalDialog("/Web/Common/SelectSuppliers.aspx?Type=128860697896406251", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+        //    var temp = window.open("/Web/Common/SelectSuppliers.aspx?Type=128860697896406251&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        //}
+        //function SetReturnValueInOpenner_Suppliers1(temp) {
+        //    if (temp != undefined) {
+        //        var ss;
+        //        ss = temp.split("|");
+        //        document.all('Tbx_WuliuSuppNo').value = ss[0];
+        //        document.all('Tbx_WuliuSuppName').value = ss[1];
+        //    }
+        //    else {
+        //        document.all('Tbx_WuliuSuppNo').value = "";
+        //        document.all('Tbx_WuliuSuppName').value = "";
+        //    }
+        //}
 
         function btnGetReturnValue_onclick() {
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("/Web/Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            //var temp = window.showModalDialog("/Web/Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            var temp = window.open("/Web/Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function SetReturnValueInOpenner_Suppliers(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");

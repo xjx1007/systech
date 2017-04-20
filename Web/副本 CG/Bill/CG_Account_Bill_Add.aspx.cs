@@ -164,7 +164,7 @@ public partial class CG_Account_Bill_Add : BasePage
             }
             else
             {
-                //遥控器对账
+                //成品对账
                 KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
                 KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll_WareHouse.GetModel(Model.COC_HouseNo);
                 s_SuppNo = Model_WareHouse.SuppNo;
@@ -297,7 +297,7 @@ public partial class CG_Account_Bill_Add : BasePage
 
                     this.Lbl_Detail.Text += " <tr>";
 
-                    if (Model.COC_Type == "0")//遥控器对账
+                    if (Model.COC_Type == "0")//成品对账
                     {
                         KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll_DirectOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
                         KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DirectOutDetails = Bll_DirectOutDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());
@@ -488,7 +488,7 @@ public partial class CG_Account_Bill_Add : BasePage
             }
             else
             {
-                //遥控器对账
+                //成品对账
                 KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
                 KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll_WareHouse.GetModel(Model.COC_HouseNo);
                 s_SuppNo = Model_WareHouse.SuppNo;
@@ -518,7 +518,7 @@ public partial class CG_Account_Bill_Add : BasePage
         {
             if (s_InSuppNo != "")
             {
-                //原材料和遥控器对账单
+                //原材料和成品对账单
                 s_Sql1 += "  and COD_CheckNO in (Select COC_Code from Cg_Order_Checklist where COC_SuppNo ='" + s_InSuppNo + "' union all Select COC_Code from Cg_Order_Checklist a join KNet_Sys_WareHouse b on a.Coc_HouseNo=b.HouseNO where b.SuppNo='" + s_InSuppNo + "')";
 
             }

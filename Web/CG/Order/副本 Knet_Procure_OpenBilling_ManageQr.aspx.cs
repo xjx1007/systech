@@ -258,7 +258,7 @@ public partial class Knet_Procure_OpenBilling_ManageQr : BasePage
         using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
         {
             string s_Return = "", s_Str = "";
-            if (s_Type == "遥控器采购")
+            if (s_Type == "成品采购")
             {
                 s_Str += "发货日期：";
                 string s_Sql = "select top 1 SPD_EndTime from Sc_Produce_Plan_Details a ";
@@ -556,7 +556,7 @@ public partial class Knet_Procure_OpenBilling_ManageQr : BasePage
         string s_Return = "";
         try
         {
-            if(s_OrderType=="128860698200781250")//遥控器
+            if(s_OrderType=="128860698200781250")//成品
             {
                 s_Return = "<a href=\"/Web/Sc/Sc_Plan_Material.aspx?OrderNo=" + s_OrderNo + "\" target=\"_blank\">物料</a>";
             }
@@ -715,7 +715,7 @@ public partial class Knet_Procure_OpenBilling_ManageQr : BasePage
     }
     public string GetRk(string s_RKSTtate, string s_OrderNo, string s_Type)
     {
-        if (s_Type != "遥控器采购")
+        if (s_Type != "成品采购")
         {
             if (s_RKSTtate == "0")
             {

@@ -217,7 +217,7 @@
         
       <asp:TemplateField HeaderText="报价单阶段"  SortExpression="XSQ_Step" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
           <ItemTemplate>
-               <%# base.Base_GetBasicCodeName("121", DataBinder.Eval(Container.DataItem, "XSQ_Step").ToString())%>
+               <%# base.Base_GetBasicCodeName("122", DataBinder.Eval(Container.DataItem, "XSQ_Step").ToString())%>
           </ItemTemplate>
         </asp:TemplateField>
         
@@ -228,7 +228,7 @@
         </asp:TemplateField>
       <asp:TemplateField HeaderText="客户名称"  SortExpression="XSQ_CustomerValue" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
           <ItemTemplate>
-               <%# base.Base_GetCustomerName(DataBinder.Eval(Container.DataItem, "XSQ_CustomerValue").ToString())%>
+               <%# base.Base_GetCustomerName_Link(DataBinder.Eval(Container.DataItem, "XSQ_CustomerValue").ToString())%>
           </ItemTemplate>
         </asp:TemplateField>
         
@@ -246,6 +246,12 @@
             <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
         </asp:BoundField>
         
+                                                <asp:TemplateField HeaderText="查看" SortExpression="CustomerValue" HeaderStyle-Font-Size="12px"
+                                                    ItemStyle-Width="48px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <%# CheckView(DataBinder.Eval(Container.DataItem, "XSQ_ID").ToString())%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
         <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center" >
             <ItemTemplate>
                 <a href="Xs_Sales_Quotes_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "XSQ_ID") %>"><asp:Image ID="Image1" runat="server"  ImageUrl="/images/Edit.gif" border=0  ToolTip="修改" /></a>

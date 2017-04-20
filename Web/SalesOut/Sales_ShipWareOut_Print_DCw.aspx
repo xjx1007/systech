@@ -395,8 +395,8 @@
         </tr>
         <tr height="25">
             <td class="style2" colspan="9" height="32" style="mso-ignore: colspan">
-                地址：杭州市黄姑山路4号 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-88210386<span
-                    style="mso-spacerun: yes"> </span>传真：0571-88216187<span style="mso-spacerun: yes">
+                地址：杭州西湖科技园西园九路7号综合楼四楼 - 310012<span style="mso-spacerun: yes"> </span>电话：0571-88210386<span
+                    style="mso-spacerun: yes"> </span>传真：0571-87672166<span style="mso-spacerun: yes">
                 </span>调拨人：<asp:Label ID="Lbl_FPerson" runat="server"></asp:Label>
                 &nbsp;电话：88210386<span style="mso-spacerun: yes"> </span>
             </td>

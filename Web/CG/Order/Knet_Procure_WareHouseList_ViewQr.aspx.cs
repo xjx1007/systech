@@ -155,7 +155,7 @@ public partial class Web_Knet_Procure_WareHouseList_View : BasePage
 
                     if (Dts_Details.Tables[0].Rows[i]["OrderType"].ToString() == "128860698200781250")
                     {
-                        //如果是遥控器要显示委外料
+                        //如果是成品要显示委外料
 
                         string s_Sql1 = "Select b.ProductsType,a.XPD_ProductsBarCode,c.*,isnull(NeedNumber,0) NeedNumber,isnull(e.Number,0) WNumber,isnull(g.Number,0) as KCNumber  from Xs_Products_Prodocts_Demo a ";
                         s_Sql1 += " join KNet_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";

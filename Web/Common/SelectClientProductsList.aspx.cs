@@ -156,7 +156,17 @@ public partial class Knet_Common_SelectClientProductsList : BasePage
         {
             StringBuilder s = new StringBuilder();
             s.Append("<script language=javascript>" + "\n");
-            s.Append("window.returnValue='" + s_Return.Substring(0, s_Return.Length-1) + "';" + "\n");
+            //s.Append("window.returnValue='" + s_Return.Substring(0, s_Return.Length-1) + "';" + "\n");
+            //s.Append("window.close();" + "\n");
+            s.Append("if (window.opener != undefined)\n");
+            s.Append("{\n");
+            s.Append("    window.opener.returnValue = '" + s_Return.Substring(0, s_Return.Length - 1) + "';\n");
+            s.Append("    window.opener.SetReturnValueInOpenner_Product('" + s_Return.Substring(0, s_Return.Length - 1) + "');\n");
+            s.Append("}\n");
+            s.Append("else\n");
+            s.Append("{\n");
+            s.Append("    window.returnValue = '" + s_Return.Substring(0, s_Return.Length - 1) + "';\n");
+            s.Append("}\n");
             s.Append("window.close();" + "\n");
             s.Append("</script>");
             Type cstype = this.GetType();

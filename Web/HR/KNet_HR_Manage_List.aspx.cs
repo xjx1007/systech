@@ -37,6 +37,9 @@ public partial class KNet_HR_Manage_List : BasePage
             }
             this.Btn_Del.Attributes.Add("onclick", "return confirm('你确信要删除所选记录吗?！')");
              this.DataShows();
+
+             base.Base_DropBindSearch(this.bas_searchfield, "KNet_Resource_Staff");
+             base.Base_DropBindSearch(this.Fields, "KNet_Resource_Staff");
         }
 
     }

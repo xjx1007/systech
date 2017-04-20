@@ -77,7 +77,16 @@ public partial class Web_Common_SelectContentPerson : BasePage
             {
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>\n");
-                s.Append("window.returnValue='" + s_Return + "';");
+                //s.Append("window.returnValue='" + s_Return + "';");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                s.Append("    window.opener.SetReturnValueInOpenner_ContentPerson('" + s_Return + "');\n");
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
                 s.Append("window.close();\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();

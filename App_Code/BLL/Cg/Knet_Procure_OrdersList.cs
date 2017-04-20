@@ -68,20 +68,20 @@ namespace KNet.BLL
                     DbHelperSQL.ExecuteSql(DoSqlOrder);
                 }
             }
-           
+
             dal.Update(model);
 
             KNet.BLL.Knet_Procure_OrdersList_Details BLL_Details = new KNet.BLL.Knet_Procure_OrdersList_Details();
             BLL_Details.Delete(model.OrderNo);
-                if (model.Arr_ProductsList != null)
+            if (model.Arr_ProductsList != null)
+            {
+                for (int i = 0; i < model.Arr_ProductsList.Count; i++)
                 {
-                    for (int i = 0; i < model.Arr_ProductsList.Count; i++)
-                    {
-                        KNet.Model.Knet_Procure_OrdersList_Details Model_Details = (KNet.Model.Knet_Procure_OrdersList_Details)model.Arr_ProductsList[i];
-                        Model_Details.OrderNo = model.OrderNo;
-                        BLL_Details.Add(Model_Details);
-                    }
+                    KNet.Model.Knet_Procure_OrdersList_Details Model_Details = (KNet.Model.Knet_Procure_OrdersList_Details)model.Arr_ProductsList[i];
+                    Model_Details.OrderNo = model.OrderNo;
+                    BLL_Details.Add(Model_Details);
                 }
+            }
         }
 
 
@@ -111,7 +111,7 @@ namespace KNet.BLL
 
         public bool IsDetails(string s_OrderNo)
         {
-           return  dal.IsDetails(s_OrderNo);
+            return dal.IsDetails(s_OrderNo);
         }
         /// <summary>
         /// 删除一条数据

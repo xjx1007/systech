@@ -158,7 +158,7 @@
                             <td width="284">
                                 <asp:Label runat="server" ID="Lbl_Fax"></asp:Label></td>
                             <td width="163">FAX:</td>
-                            <td width="365">0571-88216187</td>
+                            <td width="365">0571-87672166</td>
                         </tr>
                         <tr>
                             <td width="163">E-MAIL:</td>

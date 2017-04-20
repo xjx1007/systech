@@ -273,23 +273,18 @@
                                                 <%# base.Base_GetProductsCode(Eval("ProductsBarCode").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField SortExpression="ProductsBarCode" HeaderText="产品型号" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                                            <ItemTemplate>
-                                                <%# base.Base_GetProductsPattern(Eval("ProductsBarCode").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
                                         <asp:TemplateField SortExpression="ProductsEdition" HeaderText="版本号" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
                                             <ItemTemplate>
                                                 <%# base.Base_GetProductsEdition(Eval("ProductsBarCode").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="WareHouseAmount" HeaderText="库存" SortExpression="WareHouseAmount" DataFormatString="{0:F0}">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="40px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
 
                                         <asp:BoundField DataField="StorageVolume" HeaderText="入库数" SortExpression="StorageVolume" DataFormatString="{0:F0}">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="40px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
 
@@ -298,21 +293,21 @@
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
 
-                                        <asp:BoundField DataField="ShippedQuantity" HeaderText="出库数" SortExpression="ShippedQuantity" DataFormatString="{0:F0}">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                        <asp:BoundField DataField="ShippedQuantity" HeaderText="出库" SortExpression="ShippedQuantity" DataFormatString="{0:F0}">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="40px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
 
-                                        <asp:BoundField DataField="XhQuantity" HeaderText="生产消耗" SortExpression="XhQuantity" DataFormatString="{0:F0}">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                        <asp:BoundField DataField="XhQuantity" HeaderText="消耗" SortExpression="XhQuantity" DataFormatString="{0:F0}">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="40px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
 
-                                        <asp:BoundField DataField="PdQuantity" HeaderText="盘点数" SortExpression="PdQuantity" DataFormatString="{0:F0}">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                        <asp:BoundField DataField="PdQuantity" HeaderText="盘点" SortExpression="PdQuantity" DataFormatString="{0:F0}">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="40px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
-                                        <asp:TemplateField HeaderText="库存均价" SortExpression="WareHouseTotalNet" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                        <asp:TemplateField HeaderText="库存均价" SortExpression="WareHouseTotalNet" HeaderStyle-Font-Size="12px" ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <%# GetPinPrice(DataBinder.Eval(Container.DataItem, "WareHouseTotalNet").ToString(),DataBinder.Eval(Container.DataItem, "WareHouseAmount").ToString())%>
                                             </ItemTemplate>

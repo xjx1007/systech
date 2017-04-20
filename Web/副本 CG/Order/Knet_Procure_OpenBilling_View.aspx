@@ -180,7 +180,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td width="17%" class="dvtCellLabel">遥控器订单:</td>
+                                                                    <td width="17%" class="dvtCellLabel">成品订单:</td>
                                                                     <td class="dvtCellInfo">
                                                                         <asp:Label ID="Lbl_ParentOrderNo" runat="server" Width="178px" ReadOnly="true"></asp:Label>&nbsp;
                                                                     </td>

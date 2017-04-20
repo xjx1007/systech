@@ -785,7 +785,7 @@ namespace KNet.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * ");
+            strSql.Append("select ID,ContractNo,CustomerValue,DutyPerson,ContractStaffNo,ContractClass,KSC_KpType,SystemDateTimes,ContractCheckYN,v_OutWareAmount,v_DirectOutAmount,v_KxNumber,ContractDateTime,ContractToDeliDate,v_ContractNotBatteryAmount,v_ContractBatteryAmount,isorder,V_ContractAmount,V_ContractBAmount,DirectOutState ");
             strSql.Append(" FROM KNet_Sales_ContractList left join v_Contract_OutWare_DirectOut_State on v_ContractNO=ContractNO  ");
             if (strWhere.Trim() != "")
             {

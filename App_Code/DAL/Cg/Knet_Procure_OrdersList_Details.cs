@@ -43,9 +43,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Knet_Procure_OrdersList_Details(");
-            strSql.Append("OrderNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,OrderAmount,OrderUnitPrice,OrderDiscount,OrderTotalNet,OrderRemarks,HandPrice,HandTotal,ID)");
+            strSql.Append("OrderNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,OrderAmount,OrderUnitPrice,OrderDiscount,OrderTotalNet,OrderRemarks,HandPrice,HandTotal,ID,KPO_FaterBarCode,KPOD_CPBZNumber,KPOD_BZNumber,KPOD_BrandName)");
             strSql.Append(" values (");
-            strSql.Append("@OrderNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@OrderAmount,@OrderUnitPrice,@OrderDiscount,@OrderTotalNet,@OrderRemarks,@HandPrice,@HandTotal,@ID)");
+            strSql.Append("@OrderNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@OrderAmount,@OrderUnitPrice,@OrderDiscount,@OrderTotalNet,@OrderRemarks,@HandPrice,@HandTotal,@ID,@KPO_FaterBarCode,@KPOD_CPBZNumber,@KPOD_BZNumber,@KPOD_BrandName)");
             SqlParameter[] parameters = {
 					new SqlParameter("@OrderNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -59,7 +59,13 @@ namespace KNet.DAL
 					new SqlParameter("@OrderRemarks", SqlDbType.NVarChar,300),
 					new SqlParameter("@HandPrice", SqlDbType.Decimal,9),
 					new SqlParameter("@HandTotal", SqlDbType.Decimal,9),
-					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
+					new SqlParameter("@ID", SqlDbType.NVarChar,50),
+					new SqlParameter("@KPO_FaterBarCode", SqlDbType.NVarChar,50),
+					new SqlParameter("@KPOD_CPBZNumber", SqlDbType.Int,4),
+					new SqlParameter("@KPOD_BZNumber", SqlDbType.Int,4),
+					new SqlParameter("@KPOD_BrandName", SqlDbType.NVarChar,150)
+                    
+                                        };
             parameters[0].Value = model.OrderNo;
             parameters[1].Value = model.ProductsName;
             parameters[2].Value = model.ProductsBarCode;
@@ -73,7 +79,11 @@ namespace KNet.DAL
             parameters[10].Value = model.HandPrice;
             parameters[11].Value = model.HandTotal;
             parameters[12].Value = model.ID;
-
+            parameters[13].Value = model.KPO_FaterBarCode;
+            parameters[14].Value = model.KPOD_CPBZNumber;
+            parameters[15].Value = model.KPOD_BZNumber;
+            parameters[16].Value = model.KPOD_BrandName;
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -284,8 +294,8 @@ namespace KNet.DAL
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select a.*,b.OrderDateTime,b.OrderPreToDate,b.OrderType,b.SuppNo,b.KPO_RkState,b.OrderCheckStaffNo,b.SystemDateTimes,b.OrderStaffNo,c.WrkNumber as thisNowAmount,c.WrkNumber*OrderUnitPrice as thistotalNet,c.RkNumber,c.WrkNumber");
-            strSql.Append(" FROM Knet_Procure_OrdersList_Details a join KNet_Procure_OrdersList b on a.OrderNo=b.OrderNo left join v_OrderRkDetails c on c.KPO_ID=a.ID ");
+            strSql.Append("select isnull(e.XPD_Order,0) XPD_Order,a.*,b.OrderDateTime,b.OrderPreToDate,b.OrderType,b.SuppNo,b.KPO_RkState,b.OrderCheckStaffNo,b.SystemDateTimes,b.OrderStaffNo,c.WrkNumber as thisNowAmount,c.WrkNumber*OrderUnitPrice as thistotalNet,c.RkNumber,c.WrkNumber,KPOD_CPBZNumber,KPOD_BZNumber,f.KSP_BZNumber");
+            strSql.Append(" FROM Knet_Procure_OrdersList_Details a join KNet_Procure_OrdersList b on a.OrderNo=b.OrderNo left join v_OrderRkDetails c on c.KPO_ID=a.ID left join Xs_Products_Prodocts_Demo e on e.XPD_ProductsBarCode=a.ProductsBarCode and e.XPD_FaterBarCode=a.KPO_FaterBarCode join KNET_Sys_Products f on f.ProductsBarCode=a.ProductsBarCode ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

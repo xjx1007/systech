@@ -302,7 +302,7 @@
                                                     color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
                                                         ErrorMessage="供应商不能为空" ControlToValidate="SuppNo" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </td>
-                                            <td align="right" class="dvtCellLabel">遥控器订单:
+                                            <td align="right" class="dvtCellLabel">成品订单:
                                             </td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:TextBox ID="OrderFaterNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
