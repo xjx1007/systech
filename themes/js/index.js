@@ -45,7 +45,7 @@ jQuery(document).ready(function (jQuery) {
     initSmsbox();
     //新短信、在线人员监控和状态栏文字滚动
     //alert($1('smsbox').className.indexOf('active'))
-    window.setTimeout(sms_mon, 3000);
+    window.setTimeout(sms_mon, 4000);
     window.setTimeout(online_mon, monInterval.online * 1000);
     // window.setInterval(StatusTextScroll, statusTextScroll * 1000);
 });

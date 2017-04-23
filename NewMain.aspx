@@ -191,13 +191,15 @@
         </div>
         <div id="overlay_startmenu">
         </div>
-        <!-- 短信提醒 -->
-        <div id="new_sms_mask">
+        <!-- 短信提醒 -->        '
+        <div id="new_sms_mask">   
         </div>
         <div id="new_sms_panel">
-            <div class="buttonMsn">
-                <a class="btn-white-big" href="javascript:;" onclick="ViewNewSms();" hidefocus="hidefocus">打开</a>&nbsp;&nbsp; <a class="btn-white-big" href="javascript:;" onclick="CloseRemind();"
-                    hidefocus="hidefocus">关闭</a>
+            <div id="new_sms_container">
+                <div class="buttonMsn">
+                    <a class="btn-white-big" href="javascript:;" onclick="ViewNewSms();" hidefocus="hidefocus">打开</a>&nbsp;&nbsp; <a class="btn-white-big" href="javascript:;" onclick="CloseRemind();"
+                        hidefocus="hidefocus">关闭</a>
+                </div>
             </div>
         </div>
         <!-- 短信箱 -->

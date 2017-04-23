@@ -364,7 +364,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                         if ((this.Dtb_Result.Rows.Count <= 0) && (AM.KNet_StaffDepart == "129652783693249229"))
                         {
                             string JSD = "ContractListCheckYN.aspx?ContractNo=" + aa.ToString() + "";
-                            string StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">审核</a><br/>等待 <font color=red>" + base.Base_GetUserName(s_DutyPerson) + "</font> 审核";
+                            string StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">审核</a><br/>等待 <font color=red>总经理</font> 审核";
 
                             return StrPop;
                         }

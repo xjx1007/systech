@@ -63,11 +63,11 @@
                             <tr>
                                 <td valign=top align=left >
                                     <table border=0 cellspacing=0 cellpadding=0 width=100%><tr><td>
-                                    <input title="编辑 [Alt+E]" type="button" accessKey="E" class="crmbutton small edit" onclick="PageGo('Knet_Procure_WareHouseList_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>')" name="Edit" value="&nbsp;编辑&nbsp;" >&nbsp;
+                                    <input title="编辑 [Alt+E]" type="button" accessKey="E" class="crmbutton small edit" onclick="PageGo('KNet_WareHouse_WareCheck_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    ')" name="Edit" value="&nbsp;编辑&nbsp;" >&nbsp;
                                     <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share" value="&nbsp;共享&nbsp;" >&nbsp;
                                     <input title="" class="crmbutton small edit" onclick="PageGo('Knet_Procure_WareHouseList_List.aspx')" type="button" name="ListView" value="&nbsp;返回列表&nbsp;" >&nbsp;</td>
                                     <td align=right>
-                                    <input title="复制 [Alt+U]" type="button" accessKey="U" class="crmbutton small create" onclick="PageGo('Knet_Procure_WareHouseList_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>&Type=1')"name="Duplicate" value="复制"  >&nbsp;
+                                    <input title="复制 [Alt+U]" type="button" accessKey="U" class="crmbutton small create" onclick="PageGo('KNet_WareHouse_WareCheck_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    &Type=1')"name="Duplicate" value="复制"  >&nbsp;
                                     <input title="刪除 [Alt+D]" type="button" accessKey="D" class="crmbutton small delete" onclick=" return confirm('确定要删除这个记录吗?')" name="Delete" value="删除" >&nbsp;
                                     </td></tr>
                                     </table>

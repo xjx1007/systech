@@ -155,7 +155,7 @@
       <asp:TemplateField HeaderText="备注" HeaderStyle-Font-Size="12px" HeaderStyle-ForeColor="blue"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
                 <asp:TextBox ID="Tbx_Remark" runat="server" MaxLength="9" CssClass="Boxx"  Width="40px"></asp:TextBox>
-                <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" CssClass="Custom_Hidden"  Text=<%#DataBinder.Eval(Container.DataItem, "Money").ToString() %>></asp:TextBox>
+                <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" CssClass="Custom_Hidden"  Text=<%#DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>></asp:TextBox>
 
                </ItemTemplate>
       </asp:TemplateField>
@@ -171,7 +171,7 @@
 
 <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" style="border-top:1px solid #A3B2CC;">
   <tr>
-    <td height="25" width="40%"><asp:Button ID="Button2" runat="server"  CssClass="Btt" Text="确定选择" OnClick="Button2_Click" /><input   name="button2"   type="button"   value="关闭窗口"  class="Btt"  onclick="closeWindow();"></td>
+    <td height="25" width="40%"><asp:Button ID="Button2" runat="server"   cssclass="crmbutton small save"  Text="确定选择" OnClick="Button2_Click" /><input   name="button2"   type="button"   value="关闭窗口" class="crmbutton small cancel"  onclick="closeWindow();"></td>
       <td width="60%" align="right" ><B>库存产品搜索</B>&nbsp;&nbsp;关健词:<asp:TextBox ID="KNetSeachKey" runat="server" Width="150px" CssClass="Boxx"></asp:TextBox>&nbsp;&nbsp;<asp:Button  ID="Button1" runat="server" Text="确定搜索" CssClass="Btt" OnClick="Button1_Click" style="width: 55px;height: 33px;"  /></td></tr>
 </table>
 <!--底部功能栏-->

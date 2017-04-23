@@ -250,6 +250,9 @@
                                             &nbsp;用于项目:
                                         </td>
                                         <td class="dvtCellInfo"><asp:DropDownList ID="Ddl_Project" runat="server" Width="150px"></asp:DropDownList>
+                                            (<font color="red">*</font>)
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="项目能为空"
+                                                ControlToValidate="Ddl_Project" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </td>
                                     </tr>
                                     <tr>

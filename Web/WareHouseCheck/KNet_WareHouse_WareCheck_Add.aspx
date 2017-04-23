@@ -37,40 +37,40 @@
                 var objRow = myTable.insertRow(i_row);
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="../../themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + parseInt(Num+i) + '\" value=' + s_Value[0] + '>' + s_Value[0];
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + parseInt(parseInt(Num) + parseInt(i)) + '\" value=' + s_Value[1] + '>' + s_Value[1];
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + parseInt(parseInt(Num) + parseInt(i)) + '\" value=' + s_Value[2] + '>' + s_Value[2];
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;" Name=\"Number_' + parseInt(parseInt(Num) + parseInt(i)) + '\" value=' + s_Value[3] + '>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;" Name=\"ZNumber_' + parseInt(parseInt(Num) + parseInt(i)) + '\" readonly value=' + s_Value[4] + '>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;" Name=\"DNumber_' + parseInt(parseInt(Num) + parseInt(i)) + '\" readonly value=' + parseInt(s_Value[4]) - parseInt(s_Value[3]) + '>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Price_' + parseInt(parseInt(Num) + parseInt(i)) + '\" value=' + s_Value[5] + '>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Money_' + parseInt(parseInt(Num) + parseInt(i)) + '\" value=' + s_Value[7] + '>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Remarks_' + parseInt(parseInt(Num) + parseInt(i)) + '\" value=' + s_Value[6] + ' >';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
                 i_row = i_row + 1;
                 s_ID = s_ID + s_Value[1] + ",";
             }
