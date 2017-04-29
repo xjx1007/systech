@@ -451,7 +451,7 @@
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0" onload="detail_info_click('Div1');">
     <form id="form1" runat="server">
-        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////<table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
             <tr>
                 <td style="height: 2px"></td>
             </tr>
@@ -651,8 +651,14 @@
                                                                     <asp:CheckBox ID="Chk_isModiy" runat="server" Checked />
                                                                 </td>
                                                             </tr>
-
-
+                                                            <tr>
+                                                                <td height="25" align="right" class="dvtCellLabel">使用方式:
+                                                                </td>
+                                                                <td align="left" class="dvtCellInfo">
+                                                                    <asp:DropDownList runat="server" ID="Ddl_UseType"></asp:DropDownList>
+                                                                </td>
+                                                            </tr>
+                                                            
                                                             <tr>
                                                                 <td height="25" align="right" class="dvtCellLabel">研发工程师:
                                                                 </td>
@@ -731,7 +737,7 @@
                     <img align="absmiddle" id="Div1_IMG" src="/themes/softed/images/arrow-list-down.gif" border="0">
                 </span>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
                 <td colspan="4">

@@ -141,73 +141,6 @@ public partial class BOM : BasePage
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
         StringBuilder Sb_BomDetails = new StringBuilder();
-
-        string s_Name = "";
-        try
-        {
-            s_Name = base.Base_GetProdutsName(this.Tbx_ID.Text) + "(" + base.Base_GetProductsPattern(this.Tbx_ID.Text) + ")";
-        }
-        catch { }
-        string s_FileName = s_Name + "_BOM";
-        this.Lbl_BomTitle.Text = s_FileName;
-        Lbl_BomTitle.Text = s_FileName;
-        Sb_BomDetails.Append(" <style>");
-        Sb_BomDetails.Append(".ListHead {");
-        Sb_BomDetails.Append("border-top: 0px solid #666666;");
-        Sb_BomDetails.Append("border-left: 1px solid #666666;");
-        Sb_BomDetails.Append("border-right: 0px solid #666666;");
-        Sb_BomDetails.Append("border-bottom: 1px solid #666666;");
-        Sb_BomDetails.Append("font-weight: bold;");
-
-        Sb_BomDetails.Append("background: #f6f6f6 url(images/mailSubHeaderBg-grey.gif) bottom repeat-x;");
-        Sb_BomDetails.Append("vertical-align:middle;");
-        Sb_BomDetails.Append("text-align:center;");
-        Sb_BomDetails.Append("}");
-
-        Sb_BomDetails.Append(".ListHeadDetails {");
-        Sb_BomDetails.Append("padding-left:2px;");
-        Sb_BomDetails.Append("border-bottom: 1px solid #666666;");
-        Sb_BomDetails.Append("border-right: 0px solid #666666;");
-        Sb_BomDetails.Append("border-left: 1px solid #666666;");
-        Sb_BomDetails.Append("border-top: 0px solid #666666;");
-        Sb_BomDetails.Append("}");
-
-        Sb_BomDetails.Append(".ListDetails {");
-        Sb_BomDetails.Append("BORDER-COLLAPSE: collapse;");
-        Sb_BomDetails.Append("border-color:#666666;");
-        Sb_BomDetails.Append("font-family: Arial, Helvetica, sans-serif;");
-        Sb_BomDetails.Append("font-size: 13px;");
-        Sb_BomDetails.Append("color: #000000;");
-        Sb_BomDetails.Append("border-top: 1px solid #666666;");
-        Sb_BomDetails.Append("border-left: 1px solid #666666;");
-        Sb_BomDetails.Append("border-right: 1px solid #666666;");
-        Sb_BomDetails.Append("}");
-        Sb_BomDetails.Append("</style>");
-        Sb_BomDetails.Append("<table id=\"ProductsBomTable\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" class=\"ListDetails\"");
-        Sb_BomDetails.Append("cellspacing=\"0\">");
-        Sb_BomDetails.Append("<tr>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\" colspan=\"8\" height=\"40px\"><h2>");
-        Sb_BomDetails.Append(Lbl_BomTitle.Text);
-        Sb_BomDetails.Append("</h2></td>");
-        Sb_BomDetails.Append("</tr>");
-        Sb_BomDetails.Append("<tr id=\"tr3\">");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">序号");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">BOM序号");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">产品名称");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">版本号");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">料号");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">数量");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">位号");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">使用方式");
-        Sb_BomDetails.Append("</td>");
-        Sb_BomDetails.Append("</tr>");
         if (Dtb_DemoProducts.Rows.Count > 0)
         {
 
@@ -225,12 +158,12 @@ public partial class BOM : BasePage
                 //Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>");
                 string s_ProductsCode = "";
 
-                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">&nbsp;" + Dtb_DemoProducts.Rows[i]["KSP_Code"].ToString() + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + Dtb_DemoProducts.Rows[i]["KSP_Code"].ToString() + "</td>");
                 Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"DemoNumber\" value='" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "'>" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "</td>");
                 // Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString()) + "</td>");
                 Sb_BomDetails.Append("<td class=\"ListHeadDetails\" style=\"max-width:250px;word-break: break-all;word-wrap:break-word;\">" + Dtb_DemoProducts.Rows[i]["XPD_Place"].ToString() + "</td>");
                 //使用方式
-                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetBasicCodeName("1134", Dtb_DemoProducts.Rows[i]["KSP_UseType"].ToString()) + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" +base.Base_GetBasicCodeName("1134", Dtb_DemoProducts.Rows[i]["KSP_UseType"].ToString() )+ "</td>");
 
                 /* string s_Only = Dtb_DemoProducts.Rows[i]["XPD_Only"] == null ? "0" : Dtb_DemoProducts.Rows[i]["XPD_Only"].ToString();
                  string s_Check = "";
@@ -267,11 +200,8 @@ public partial class BOM : BasePage
                 Sb_BomDetails.Append("</tr>");
             }
         }
-
-        Sb_BomDetails.Append("</table>");
         Lbl_BomDetails1.Text = Sb_BomDetails.ToString();
         Tbx_BomNumber.Text = Dtb_DemoProducts.Rows.Count.ToString();
-
     }
     public string GetContract(string s_ContractNos, string s_ContractNo1)
     {
@@ -409,18 +339,23 @@ public partial class BOM : BasePage
     private void SetBom()
     {
 
+        Excel export = new Excel();
+        string s_Name = "";
+        try
+        {
+            s_Name = base.Base_GetProdutsName(this.Tbx_ID.Text) + "(" + base.Base_GetProductsPattern(this.Tbx_ID.Text) + ")";
+        }
+        catch { }
+        string s_FileName = s_Name + "_BOM.xls";
         //if (MyGridView1.AllowPaging == true)
         //{
         //    MyGridView1.AllowPaging = false;
         //    this.DataBind();
         //}
-    }
-    protected void Btn_Excel_Click(object sender, EventArgs e)
-    {
-        /*
 
         KNet.BLL.Xs_Products_Prodocts BLL_Products_Products = new KNet.BLL.Xs_Products_Prodocts();
         KNet.BLL.PB_Basic_ProductsClass BLL_Basic_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
+        string s_DemoProductsID = "";
         KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
         string s_Where1 = " and XPD_FaterBarCode='" + this.Tbx_ID.Text + "' ";
         s_Where1 += " and  b.KSP_Del=0 ";
@@ -429,26 +364,16 @@ public partial class BOM : BasePage
         this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+        Tbx_Bom.Text = GetStringWriter(Dtb_DemoProducts).ToString();
+    }
+    protected void Btn_Excel_Click(object sender, EventArgs e)
+    {
         
-        Excel export = new Excel();
-        export.ExcelExport(GetStringWriter(Dtb_DemoProducts), this.Lbl_BomTitle.Text);
-        */
-
-        Response.Buffer = true;
-        Response.Clear();
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode(this.Lbl_BomTitle.Text + ".xls", System.Text.Encoding.UTF8).ToString());
-        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
-        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
-
-        Response.ContentType = "application/ms-excel";
-        Response.Write(Lbl_BomDetails1.Text);
-        Response.Flush();
-        Response.End();
+        //export.ExcelExport(GetStringWriter(Dtb_DemoProducts), s_FileName);
     }
 
-
-    public StringWriter GetStringWriter(DataTable dt)
+    
+    public   StringWriter GetStringWriter(DataTable dt)
     {
         StringWriter sw = new StringWriter();
 
@@ -472,16 +397,16 @@ public partial class BOM : BasePage
             int i = 0;
             foreach (DataRow dr in dt.Rows)
             {
-                sw.Write((i + 1).ToString() + "\t");
-
-                sw.Write(dt.Rows[i]["XPD_Order"].ToString() + "\t");
-                sw.Write(dt.Rows[i]["PBP_Name"].ToString() + "\t");
-                sw.Write(dt.Rows[i]["ProductsName"].ToString() + "\t");
+                sw.Write((i + 1).ToString()+ "\t");
+                
+                sw.Write(dt.Rows[i]["XPD_Order"].ToString()+ "\t");
+                sw.Write(dt.Rows[i]["PBP_Name"].ToString()+ "\t");
+                sw.Write(dt.Rows[i]["ProductsName"].ToString()+ "\t");
                 sw.Write(base.Base_GetProductsEdition(dt.Rows[i]["XPD_ProductsBarCode"].ToString()) + "\t");
                 sw.Write("'" + dt.Rows[i]["KSP_Code"].ToString() + "\t");
                 sw.Write(dt.Rows[i]["XPD_Number"].ToString() + "\t");
                 sw.Write(dt.Rows[i]["XPD_Place"].ToString() + "\t");
-                sw.Write(base.Base_GetBasicCodeName("1134", dt.Rows[i]["KSP_UseType"].ToString()) + "\t");
+                sw.Write(base.Base_GetBasicCodeName("1134",dt.Rows[i]["KSP_UseType"].ToString()) + "\t");
 
                 //换行 
                 sw.Write(sw.NewLine);
@@ -491,5 +416,5 @@ public partial class BOM : BasePage
         sw.Close();
 
         return sw;
-    }
+}
 }

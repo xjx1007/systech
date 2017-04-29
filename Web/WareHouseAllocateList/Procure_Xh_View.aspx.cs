@@ -54,7 +54,7 @@ public partial class Web_Procure_Xh_View : BasePage
             s_Sql += " join KNET_Sys_Products  c on c.ProductsBarCode=b.ProductsBarCode  ";
             s_Sql += " join PB_Basic_ProductsClass  d on c.ProductsType=d.PBP_ID  ";
             s_Sql += "  Where a.AllocateNo='" + s_ID + "' ";
-            s_Sql += "  group by  b.ProductsBarCode,c.ProductsName,AllocateUnitPrice,a.AllocateRemarks ";
+            s_Sql += "  group by  b.ProductsBarCode,c.ProductsName,AllocateUnitPrice,a.AllocateRemarks,c.KSP_COde ";
             if (this.Tbx_View.Text != "1")
             {
                 s_Sql += " ,KWAD_FaterBarCode";
@@ -177,8 +177,11 @@ public partial class Web_Procure_Xh_View : BasePage
             this.Lbl_Details.Text = s_Head + s_Details;
             if (this.Tbx_View.Text== "")
             {
-                string s_Sql1 = "Update KNet_WareHouse_AllocateList set KWA_PrintsNums=KWA_PrintsNums+1 where AllocateNo='" + s_ID + "' ";
-                DbHelperSQL.ExecuteSql(s_Sql1);
+                if (AM.KNet_StaffName != "项洲")
+                {
+                    string s_Sql1 = "Update KNet_WareHouse_AllocateList set KWA_PrintsNums=KWA_PrintsNums+1 where AllocateNo='" + s_ID + "' ";
+                    DbHelperSQL.ExecuteSql(s_Sql1);
+                }
             }
         }
 

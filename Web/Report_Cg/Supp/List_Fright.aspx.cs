@@ -49,6 +49,13 @@ public partial class Web_List_OrderIn : BasePage
             {
                 s_Sql += " and  a.KPS_Type='" + s_Type + "' ";
             }
+            string s_SuppName = Request.QueryString["SuppName"] == null ? "" : Request.QueryString["SuppName"].ToString();
+
+
+            if (s_SuppName != "")
+            {
+                s_Sql += " and  a.SuppName like '%" + s_SuppName + "%'";
+            }
             s_Sql += " Order by a.SuppName ";
             string s_House = "", s_Style = "";
             string s_Head = "";
@@ -69,7 +76,7 @@ public partial class Web_List_OrderIn : BasePage
                     }
                     s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
                     string s_Row = Dtb_Table.Rows[i]["LinkCount"].ToString();
-                    s_Details += "<td class='thstyleLeftDetails'align=center noWrap>" + (i + 1).ToString() + "</td>\n";
+                    s_Details += "<td class='thstyleLeftDetails'align=center  rowspan=" + s_Row + "   noWrap>" + (i + 1).ToString() + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + "  noWrap>&nbsp;" + Dtb_Table.Rows[i]["KPS_SName"].ToString() + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + "  noWrap>&nbsp;" + Dtb_Table.Rows[i]["SuppName"].ToString() + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + "  noWrap>&nbsp;" + Dtb_Table.Rows[i]["SuppCode"].ToString() + "</td>\n";
@@ -78,7 +85,8 @@ public partial class Web_List_OrderIn : BasePage
                     s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + "  noWrap>&nbsp;" + base.Base_GetBasicCodeName("300", Dtb_Table.Rows[i]["KPS_Days"].ToString()) + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + "  noWrap>&nbsp;" + Dtb_Table.Rows[i]["KPS_GiveDays"].ToString() + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + "  noWrap>&nbsp;" + Dtb_Table.Rows[i]["SuppAddress"].ToString() + "</td>\n";
-                    
+                    s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + " noWrap>&nbsp;" + Dtb_Table.Rows[i]["AddDateTime"].ToString() + "</td>\n";
+
                     string s_SuppNo1 = Dtb_Table.Rows[i]["SuppNo"].ToString();
                     try
                     {
@@ -119,12 +127,11 @@ public partial class Web_List_OrderIn : BasePage
                             s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + " noWrap>&nbsp;</td>\n";
 
                         }
-                        s_Details += "<td  class='thstyleLeftDetails' align=left rowspan=" + s_Row + " noWrap>&nbsp;" + Dtb_Table.Rows[i]["AddDateTime"].ToString() + "</td>\n";
-
                         s_Details += " </tr>";
                     }
                     catch
                     { }
+                    
 
                 }
             }
@@ -142,13 +149,13 @@ public partial class Web_List_OrderIn : BasePage
             s_Head += "<th class=\"thstyle\" align=center>付款周期</th>\n";
             s_Head += "<th class=\"thstyle\" align=center>交货周期</th>\n";
             s_Head += "<th class=\"thstyle\" align=center>地址</th>\n";
+            s_Head += "<th class=\"thstyle\" align=center>创建日期</th>\n";
             s_Head += "<th class=\"thstyle\" align=center>联系人</th>\n";
             s_Head += "<th class=\"thstyle\" align=center>职位</th>\n";
             s_Head += "<th class=\"thstyle\">手机</th>\n";
             s_Head += "<th class=\"thstyle\">电话</th>\n";
             s_Head += "<th class=\"thstyle\">QQ</th>\n";
             s_Head += "<th class=\"thstyle\">EMail</th>\n";
-            s_Head += "<th class=\"thstyle\" align=center>创建日期</th>\n";
             s_Head += "</thead><tbody class=\"scrollContent\">";
             s_Details += "</div>";
             this.Lbl_Details.Text = s_Head + s_Details;

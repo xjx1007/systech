@@ -176,6 +176,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 this.ProductsBarCode.Text = model.ProductsBarCode;
 
 
+               this.Ddl_UseType.Text= base.Base_GetBasicCodeName("1134", model.KSP_UseType);
                 this.Lbl_isModiy.Text = model.KSP_isModiy == 0 ? "是" : "<font color=red>否</font>";
                 this.ProductsUnits.Text = base.Base_GetUnitsName(model.ProductsUnits);
                 this.ProductsSellingPrice.Text = model.ProductsSellingPrice.ToString();

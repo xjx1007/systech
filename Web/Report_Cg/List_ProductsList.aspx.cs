@@ -68,7 +68,7 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
                     s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + (i + 1).ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["ProductsName"].ToString() + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>'" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["ProductsPattern"].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["ProductsEdition"].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["PBP_Name"].ToString() + "</td>\n";
@@ -79,9 +79,6 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + base.Base_GetUserName(Dtb_Table.Rows[i]["ProductsAddMan"].ToString()) + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + DateTime.Parse(Dtb_Table.Rows[i]["ProductsAddTime"].ToString()).ToShortDateString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails'  >&nbsp;" + Dtb_Table.Rows[i]["ProductsDescription"].ToString() + "</td>\n";
-                    
-
-
                     s_Details +=" </tr>";
                    // DTotalNum += Decimal.Parse(Dtb_Table.Rows[i][6].ToString());
                    // DTotalNet += Decimal.Parse(Dtb_Table.Rows[i][8].ToString());

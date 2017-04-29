@@ -1080,7 +1080,7 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                             KNet.BLL.KNet_Resource_Staff BLL_Resource_Staff = new KNet.BLL.KNet_Resource_Staff();
                             KNet.Model.KNet_Resource_Staff Model_Resource_Staff = BLL_Resource_Staff.GetModelC(this.Ddl_DutyPerson.SelectedValue);
                             s_Alert = base.Base_SendEmail(Model_Resource_Staff.StaffEmail, s_Text, "订单评审审核！");
-                            base.Base_SendMessage(this.Ddl_DutyPerson.SelectedValue, KNetPage.KHtmlEncode("有 订单评审 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + this.ContractNo.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + this.ContractNo.Text + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
+                            base.Base_SendMessage(base.Base_GetDeptPerson("总经理",102), KNetPage.KHtmlEncode("有 订单评审 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + this.ContractNo.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + this.ContractNo.Text + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
                         }
                     }
                     AdminloginMess LogAM = new AdminloginMess();

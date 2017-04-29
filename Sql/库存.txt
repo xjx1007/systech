@@ -43,3 +43,20 @@ from 新版$ a join KNet_Sys_Products b on a.料号=b.KSP_COde where 仓库=0
 
 select * from 新版$
 exec sp_addlinkedserver 'Local ', ' ', 'SQLOLEDB ', '173.36.45.169'
+
+
+
+delete from KNet_WareHouse_WareCheckList_Details
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170423-001','',a.ProductsBarCode,'','','0',-KcNumber,0,'0',-KcMoney,'',getdate(),'' from
+(
+select  SUM(a.DirectInAmount) KcNumber,SUM(a.DirectInTotalNet) KcMoney,a.ProductsBarCode,a.HouseNo 
+from v_Store a where DirectInDateTime<='2017-03-31'
+and a.houseNo='131187187069993664'
+group by a.ProductsBarCode,a.HouseNo 
+having SUM(a.DirectInTotalNet)<>0 or SUM(a.DirectInAmount)<>0) a
+
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170423-001','',b.ProductsBarCode,'','','0'
+,结存数,0,'0',金额,'',getdate(),'' 
+from 新版$ a join KNet_Sys_Products b on a.料号=b.KSP_COde where 仓库=0

@@ -122,17 +122,22 @@ public partial class Web_Report_CG_List_OrderList : BasePage
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][0].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + GetContract(Dtb_Table.Rows[i]["ContractNos"].ToString(), Dtb_Table.Rows[i]["ContractNo"].ToString()) + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["parentOrderNo"].ToString() + "&nbsp;</td>\n";
-                    if (Dtb_Table.Rows[i]["parentOrderNo"].ToString() == "")
+                    try
                     {
-                        KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
-                        KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(Dtb_Table.Rows[i]["parentOrderNo"].ToString());
-                        s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetHouseName(Model.SuppNo) + "&nbsp;</td>\n";
+                        if (Dtb_Table.Rows[i]["parentOrderNo"].ToString()!= "")
+                        {
+                            KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
+                            KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(Dtb_Table.Rows[i]["parentOrderNo"].ToString());
+                            s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetHouseName(Model.SuppNo) + "&nbsp;</td>\n";
 
+                        }
+                        else
+                        {
+                            s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetHouseName(Dtb_Table.Rows[i]["ReceiveSuppNo"].ToString()) + "&nbsp;</td>\n";
+                        }
                     }
-                    else {
-                        s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetHouseName(Dtb_Table.Rows[i]["ReceiveSuppNo"].ToString()) + "&nbsp;</td>\n";
-
-                    }
+                    catch
+                    { s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;</td>\n"; }
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + DateTime.Parse(Dtb_Table.Rows[i][1].ToString()).ToShortDateString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][3].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][4].ToString() + "</td>\n";

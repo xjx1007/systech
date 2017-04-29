@@ -71,6 +71,29 @@
         }
 
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            background: #F7F7F7 url('../../../themes/softed/images/testsidebar.jpg') repeat-y right center;
+            border-bottom: 1px solid #DEDEDE;
+            border-left: 1px solid #DEDEDE;
+            border-right: 1px solid #DEDEDE;
+            color: #545454;
+            padding-left: 10px;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: right;
+            height: 30px;
+        }
+        .auto-style2 {
+            padding-left: 10px;
+            padding-right: 10px;
+            border-bottom: 1px solid #dedede;
+            border-right: 1px solid #dedede;
+            border-left: 1px solid #dedede;
+            text-align: left;
+            height: 30px;
+        }
+    </style>
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form2" runat="server">
@@ -155,16 +178,16 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="16%" align="right" class="dvtCellLabel">产品版本:
+                                            <td width="16%" align="right" class="auto-style1">产品版本:
                                             </td>
-                                            <td class="dvtCellInfo" align="left">
+                                            <td class="auto-style2" align="left">
                                                 <asp:TextBox ID="Tbx_ProductsEdition" CssClass="detailedViewTextBox" Width="200px"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                     runat="server"></asp:TextBox>
                                             </td>
-                                            <td align="right" class="dvtCellLabel">产品分类：
+                                            <td align="right" class="auto-style1">产品分类：
                                             </td>
-                                            <td align="left" class="dvtCellInfo">
+                                            <td align="left" class="auto-style2">
                                                 <asp:TextBox ID="Tbx_ProductsTypeName" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                     MaxLength="48" Width="200px"></asp:TextBox>
@@ -177,7 +200,9 @@
                                                 <input id="Button1" type="button" runat="server" value="确定" class="crmbutton small save"
                                                     onclick="OnClick()" style="width: 55px; height: 30px" />&nbsp;&nbsp;
                                 <input type="button" class="crmbutton small cancel" value="返回" style="width: 55px; height: 30px"
-                                    onclick="window.history.back()">
+                                    onclick="window.history.back()">&nbsp;&nbsp;
+                                                
+                                               <asp:Button id="Button3" type="button" runat="server" Text="导出全部仓库Excel" class="crmbutton small save" Width="151px"  OnClick="Btn_SaveOnClick" />&nbsp;&nbsp;
                                             </td>
                                         </tr>
                                     </table>

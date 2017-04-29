@@ -58,8 +58,7 @@ namespace KNet.Model
         private string _KSP_DelRemarks;
         private string _KSP_RDPerson;
 
-
-
+        private string _KSP_UseType;
         private string _KSP_CustomerProductsName;
         private string _KSP_CustomerProductsCode;
         private string _KSP_CustomerProductsEdition;
@@ -94,6 +93,13 @@ namespace KNet.Model
             set { _productsname = value; }
             get { return _productsname; }
         }
+
+        public string KSP_UseType
+        {
+            set { _KSP_UseType = value; }
+            get { return _KSP_UseType; }
+        }
+        
         /// <summary>
         /// 编码（条形码）（唯一值）
         /// </summary>

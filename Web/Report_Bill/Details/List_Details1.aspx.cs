@@ -8,12 +8,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-
 using System.IO;
 using System.Text;
+using System.Data.SqlClient;
 
 using KNet.DBUtility;
 using KNet.Common;
+
 
 public partial class Web_List_Details : BasePage
 {
@@ -251,7 +252,7 @@ public partial class Web_List_Details : BasePage
             s_HouseName = "";// "入库仓库:" + base.Base_GetHouseName(s_HouseNo);
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n";
             s_Head += "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<thead class=\"fixedHeader\"> \n";
-            s_Head += "<tr>\n<th colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>期末金额调整单</th></tr>\n";
+            s_Head += "<tr>\n<th colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州博脉科技有限公司<br/>期末金额调整单</th></tr>\n";
             s_Head += "<tr>\n<th colspan=\"13\" class=\"thstyleleft\"  >" + s_HouseName + "</th><th colspan=\"13\" class=\"thstyleRight\" >" + s_Time + "</th></tr>\n";
             s_Head += "<th class=\"thstyle\"  align=center rowspan=2>序号</th>\n";
             s_Head += "<th class=\"thstyle\"  align=center rowspan=2>品名</th>\n";
@@ -485,6 +486,9 @@ public partial class Web_List_Details : BasePage
                 s_Sql += "update Sc_Expend_Manage_MaterDetails set SED_WwMoney=SED_RkMoney where SED_SEMID='" + model.SEM_ID + "'";
                 DbHelperSQL.ExecuteSql(s_Sql);
 
+                int i_Row1;
+                SqlParameter[] parameters1 = { };
+                DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
                 //base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "生产入库增加： <a href='Web/ScExpend/Sc_Expend_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.SEM_ID + "</a> 需要你审批！ ");
                 AlertAndRedirect("新增成功！", "List_Details1.aspx?EndDate=" + this.Tbx_EndDate.Text + "&StartDate=" + this.Tbx_StartDate.Text + "");
             }
@@ -501,12 +505,16 @@ public partial class Web_List_Details : BasePage
         {
             AdminloginMess AM = new AdminloginMess();
 
-            string sql1 = " delete from Sc_Expend_Manage_MaterDetails where SED_SEMID in (Select SEM_ID in  from Sc_Expend_Manage  where SEM_SuppNo='' and SEM_STime='" + DateTime.Parse(this.Tbx_EndDate.Text) + "' )"; //发货 明细
-            string sql2 = " delete from Sc_Expend_Manage_RCDetails where SER_SEMID in (Select SEM_ID in  from Sc_Expend_Manage  where SEM_SuppNo='' and SEM_STime='" + DateTime.Parse(this.Tbx_EndDate.Text) + "' ) "; //发货 明细
+            string sql1 = " delete from Sc_Expend_Manage_MaterDetails where SED_SEMID in (Select SEM_ID   from Sc_Expend_Manage  where SEM_SuppNo='' and SEM_STime='" + DateTime.Parse(this.Tbx_EndDate.Text) + "' )"; //发货 明细
+            string sql2 = " delete from Sc_Expend_Manage_RCDetails where SER_SEMID in (Select SEM_ID   from Sc_Expend_Manage  where SEM_SuppNo='' and SEM_STime='" + DateTime.Parse(this.Tbx_EndDate.Text) + "' ) "; //发货 明细
             DbHelperSQL.ExecuteSql(sql1);
             DbHelperSQL.ExecuteSql(sql2);
-            string sql = "delete from Sc_Expend_Manage where  where SEM_SuppNo='' and SEM_STime='" + DateTime.Parse(this.Tbx_EndDate.Text) + "' "; //删除生产消耗
+            string sql = "delete from Sc_Expend_Manage where   SEM_SuppNo='' and SEM_STime='" + DateTime.Parse(this.Tbx_EndDate.Text) + "' "; //删除生产消耗
             DbHelperSQL.ExecuteSql(sql);
+
+            int i_Row1;
+            SqlParameter[] parameters1 = { };
+            DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
             AlertAndRedirect("调整删除！", "List_Details1.aspx?EndDate=" + this.Tbx_EndDate.Text + "&StartDate=" + this.Tbx_StartDate.Text + "");
 
             AM.Add_Logs("期末金额调整删除");

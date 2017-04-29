@@ -85,6 +85,7 @@
                                                         </td>
                                                         <td width="33%">
                                                             <ul>
+                                                          <!--      <li><a href="../Report_Sc/ScCb/Report_OrderIn.aspx">生产成本</a></li>-->
                                                                 <li><a href="../Report_Sc/ScIn/Report_OrderIn.aspx">成品入库明细</a></li>
                                                                 <li><a href="../Report_Bill/Report_RC.aspx">成品入库单</a></li>
                                                                 <li><a href="../Report_Xs/Report_CkDetails2.aspx">成品领料明细</a></li>

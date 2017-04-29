@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BOM.aspx.cs"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="副本 BOM.aspx.cs"
     Inherits="BOM" %>
 
 <%@ Register Src="../Control/UploadList.ascx" TagName="CommentList" TagPrefix="uc2" %>
@@ -99,16 +99,39 @@
 
                                 <tr>
                                     <td colspan="4" class="detailedViewHeader">
-                                        <b><asp:Label runat="server" ID="Lbl_BomTitle"></asp:Label>:</b>
+                                        <b>BOM:</b>
                                         <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                                         <asp:Button runat="server" ID="Btn_Excel" Text="导出Excel" OnClick="Btn_Excel_Click" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="left" class="dvtCellInfo" style="text-align: left" colspan="4">
-                                        
+                                        <table id="ProductsBomTable" width="100%" border="0" align="center" cellpadding="0" class="ListDetails"
+                                            cellspacing="0">
+                                            <tr id="tr3">
+                                                <td align="center" class="ListHead">序号
+                                                </td>
+                                                <td align="center" class="ListHead">BOM序号
+                                                </td>
+                                                <td align="center" class="ListHead">产品名称
+                                                </td>
+                                                <td align="center" class="ListHead">版本号
+                                                </td>
+                                                <td align="center" class="ListHead">料号
+                                                </td>
+                                                <td align="center" class="ListHead">数量
+                                                </td>
+                                                <td align="center" class="ListHead">位号
+                                                </td>
+                                                <td align="center" class="ListHead">使用方式
+                                                </td>
+                                            </tr>
                                             <asp:Label runat="server" ID="Lbl_BomDetails1"></asp:Label>
 
+                                            <tr>
+                                                <td colspan="12" align="left">&nbsp;</td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             <tr>

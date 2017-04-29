@@ -15,7 +15,6 @@
             padding: 0;
             overflow-y: hidden;
         }
-
         table, td, a {
             color: #000;
             font: normal normal 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
@@ -26,6 +25,17 @@
         }
 
         div.tableContainer {
+            
+            overflow-y: scroll;
+            overflow-x: scroll;
+            margin-top: 5px;
+            margin-left: 12px;
+            padding-top: -2px;
+            padding-bottom: 5px;
+
+            background: none repeat scroll 0 0 #8F8F9A;
+            border-spacing: 1px;
+            margin: 0;
             clear: both;
             border: 1px solid #963;
             height: 551px;
@@ -33,57 +43,12 @@
             width: 100%;
         }
 
-        /html div.tableContainer {
-            padding: 0 16px 0 0;
-        }
-
-        html > body div.tableContainer {
-            height: auto;
-            padding: 0;
-            width: 90%;
-        }
-
-        head:first-child + body div[class].tableContainer {
-            /*height: 100%;*/
-            width: 100%;
-            overflow: hidden;
-            overflow-x: scroll;
-        }
-
-        div.tableContainer table {
-            float: left;
-            width: 100%;
-        }
-
-        html div.tableContainer table {
-            margin: 0 -16px 0 0;
-        }
-
-        html > body div.tableContainer table {
-            float: none;
-            margin: 0;
-            width: 100%;
-        }
-
-        head:first-child + body div[class].tableContainer table {
-            width: 100%;
-        }
-
-        thead.fixedHeader tr {
-            position: relative;
-            top: expression(document.getElementById("tableContainer").scrollTop);
-        }
-
-        thead.fixedHeader th {
-            position: relative;
-            top: expression(offsetParent.scrollTop); /*IE5+ only*/
+        .tr_Head {
+          position: relative;  
         }
 
         .thstyle {
             background: #C96;
-            border-left: 0px solid #EB8;
-            border-right: 0px solid #B74;
-            border-top: 0px solid #EB8;
             font-weight: normal;
             padding: 4px 1px;
             text-align: center;
@@ -91,6 +56,8 @@
             BORDER-LEFT: #000000 0px solid;
             BORDER-TOP: #000000 1px solid;
             BORDER-RIGHT: #000000 1px solid;
+            position: relative;
+            z-index: 1;
         }
 
         .thstyleleft {
@@ -101,6 +68,8 @@
             font-weight: normal;
             padding: 4px 3px;
             text-align: left;
+            position: relative;
+            z-index: 1;
         }
 
         .thstyleRight {
@@ -111,6 +80,8 @@
             font-weight: normal;
             padding: 4px 3px;
             text-align: right;
+            position: relative;
+            z-index: 1;
         }
 
         .thstyleLeftDetails {
@@ -121,9 +92,6 @@
             height: auto;
         }
 
-        .scrollTable {
-            BORDER-BOTTOM: #000000 1px solid;
-        }
 
         .thsTitle {
             background: #FFFFFF;
@@ -134,56 +102,14 @@
             padding: 4px 3px;
         }
 
-        head:first-child + body tbody[class].scrollContent {
-            display: block;
-            height: auto;
-            width: 98%;
-        }
-
-        */
-        /*overflow: auto;*/
-        tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
-            background: #FFF;
-            border-bottom: 0px solid #EEE;
-            border-left: 0px solid #EEE;
-            border-right: 0px solid #AAA;
-            border-top: 0px solid #AAA;
-            padding: 2px 3px;
-        }
-
-        tbody.scrollContent tr.alternateRow td {
-            background: #EEE;
-            border-bottom: 1px solid #EEE;
-            border-left: 1px solid #EEE;
-            border-right: 1px solid #AAA;
-            border-top: 1px solid #AAA;
-            padding: 2px 3px;
-        }
-
-        .fixedHeader {
-            position: relative;
-            table-layout: fixed;
-            border-style: solid;
-            border-top: 1px;
-            border-color: gray;
-            top: expression(this.offsetParent.scrollTop);
-            z-index: 10;
-        }
-
-        .scrollContent {
-            display: block;
-            height: 380px!important;
-            overflow-y: scroll;
-            width: 100% !important;
-        }
-
         .rr {
             background-color: #FFFFEE;
         }
-        
+
         .red1 {
             background-color: #FF4500;
         }
+
         .red {
             background-color: #FF00FF;
         }
@@ -209,6 +135,7 @@
             display: none;
         }
     </style>
+
     <script language="javascript" type="text/javascript">
         var LODOP; //声明为全局变量 
         function prn1_preview() {
@@ -229,7 +156,7 @@
             LODOP.PRINT_INIT("存货收发结存表");
             LODOP.SET_PRINT_STYLE("FontSize", 18);
             LODOP.SET_PRINT_STYLE("Bold", 1);
-            //  LODOP.ADD_PRINT_HTM(30, 0, "100%", "100%","<table width=\"100%\"><tr><td class=\"ListHeadDetails\" align=\"center\"><font color ='black' size ='6'>士腾与供应商对账确认单</font></td></tr></table>"); 
+            //  LODOP.ADD_PRINT_HTM(30, 0, "100%", "100%","<table width=\"100%\"><tr><td class=\"ListHeadDetails\" align=\"center\"><font color ='black' size ='6'>博脉与供应商对账确认单</font></td></tr></table>"); 
             //LODOP.ADD_PRINT_HTM(90, 0, "100%", "100%","<table width=\"100%\"><tr><td align=\"left\"><%=s_HouseName %></td><td align=\"right\"><%=s_Time %></td></tr></table>"); 
             var strBodyStyle = "<style>" + document.getElementById("style1").innerHTML + "</style>";
             var strFormHtml = strBodyStyle + "<body>" + document.getElementById("tableContainer").innerHTML + "</body>";
@@ -262,12 +189,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <input type="button" value="打印预览" onclick="javascript: prn1_preview()" id="Button1" />
-            <input type="button" value="导出Excel" onclick="javascript: OutToFileMoreSheet()" id="Button2" />
+            <input type="button" value="打印预览" onclick="javascript: prn1_preview()" id="Button1" Style="width: 55px; height: 30px;" />
+            <input type="button" value="导出Excel" onclick="javascript: OutToFileMoreSheet()" id="Button2" Style="width: 55px; height: 30px;" />
 
-            <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" Style="width: 55px; height: 30px;"
+            <asp:Button ID="Btn_Save" runat="server" Text="修改" AccessKey="S" title="修改[Alt+S]" Style="width: 55px; height: 30px;"
                 class="crmbutton small save" OnClick="Btn_SaveOnClick" />
-
+            <asp:Button ID="Button3" runat="server" Text="显示仓库" AccessKey="S" title="修改[Alt+S]" Style="width: 55px; height: 30px;"
+                class="crmbutton small save" OnClick="Btn_SaveOnClick1" />
             <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
             <asp:Label runat="server" ID="Lbl_Link"></asp:Label>
         </div>

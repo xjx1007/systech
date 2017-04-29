@@ -615,67 +615,70 @@ public partial class Knet_Procure_OpenBilling_Manage_ForSc : BasePage
     protected void Btn_Del_Click(object sender, EventArgs e)
     {
         AdminloginMess LogAM = new AdminloginMess();
-        string sql = "delete from Knet_Procure_OrdersList where"; //删除采购单
-        string sql2 = "delete from Knet_Procure_OrdersList_Details where"; //采购单明细
-
-        string s_Sql2 = "Delete from PB_Basic_Mail where PBM_FID  in (Select OrderNo from Knet_Procure_OrdersList where ";
-
-        string sql3 = "Select ContractNos from Knet_Procure_OrdersList where OrderType='128860698200781250' and  "; //采购单明细
-
-        string cal = "", cal1 = "";
-        for (int i = 0; i < GridView1.Rows.Count; i++)
+        if (LogAM.KNet_StaffName == "项洲")
         {
-            CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
-            if (cb.Checked == true)
+            string sql = "delete from Knet_Procure_OrdersList where"; //删除采购单
+            string sql2 = "delete from Knet_Procure_OrdersList_Details where"; //采购单明细
+
+            string s_Sql2 = "Delete from PB_Basic_Mail where PBM_FID  in (Select OrderNo from Knet_Procure_OrdersList where ";
+
+            string sql3 = "Select ContractNos from Knet_Procure_OrdersList where OrderType='128860698200781250' and  "; //采购单明细
+
+            string cal = "", cal1 = "";
+            for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                cal += " OrderNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
-                cal1 += " ParentOrderNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
-            }
-        }
-        if (cal != "")
-        {
-            sql += cal.Substring(0, cal.Length - 3);
-            sql2 += cal.Substring(0, cal.Length - 3);
-            sql3 += cal.Substring(0, cal.Length - 3);
-            s_Sql2 += cal.Substring(0, cal.Length - 3) + " ) and PBM_State=0 ";
-        }
-        else
-        {
-            sql = "";       //不删除
-            sql2 = "";       //不删除
-            sql3 = "";       //不删除
-            Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
-            Response.End();
-        }
-        string s_ContractNo = "";
-        try
-        {
-            this.BeginQuery(sql3);
-            this.QueryForDataTable();
-            if (this.Dtb_Result.Rows.Count > 0)
-            {
-                for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+                CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (cb.Checked == true)
                 {
-                    s_ContractNo += Dtb_Result.Rows[i][0].ToString() + ",";
+                    cal += " OrderNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
+                    cal1 += " ParentOrderNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
                 }
             }
-        }
-        catch
-        { }
-        if (s_ContractNo != "")
-        {
-            s_ContractNo = s_ContractNo.Substring(0, s_ContractNo.Length - 1);
-            string s_Sql = "Update  KNet_Sales_ContractList set IsOrder='0' where ContractNo in ('" + s_ContractNo.Replace(",", "','") + "')";
-            DbHelperSQL.ExecuteSql(s_Sql);
-        }
+            if (cal != "")
+            {
+                sql += cal.Substring(0, cal.Length - 3);
+                sql2 += cal.Substring(0, cal.Length - 3);
+                sql3 += cal.Substring(0, cal.Length - 3);
+                s_Sql2 += cal.Substring(0, cal.Length - 3) + " ) and PBM_State=0 ";
+            }
+            else
+            {
+                sql = "";       //不删除
+                sql2 = "";       //不删除
+                sql3 = "";       //不删除
+                Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
+                Response.End();
+            }
+            string s_ContractNo = "";
+            try
+            {
+                this.BeginQuery(sql3);
+                this.QueryForDataTable();
+                if (this.Dtb_Result.Rows.Count > 0)
+                {
+                    for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+                    {
+                        s_ContractNo += Dtb_Result.Rows[i][0].ToString() + ",";
+                    }
+                }
+            }
+            catch
+            { }
+            if (s_ContractNo != "")
+            {
+                s_ContractNo = s_ContractNo.Substring(0, s_ContractNo.Length - 1);
+                string s_Sql = "Update  KNet_Sales_ContractList set IsOrder='0' where ContractNo in ('" + s_ContractNo.Replace(",", "','") + "')";
+                DbHelperSQL.ExecuteSql(s_Sql);
+            }
 
-        DbHelperSQL.ExecuteSql(s_Sql2);
-        DbHelperSQL.ExecuteSql(sql);
-        DbHelperSQL.ExecuteSql(sql2);
-        Alert("删除成功！");
-        LogAM.Add_Logs("采购入库--->采购单管理--->采购单删除 操作成功！" + cal);
+            DbHelperSQL.ExecuteSql(s_Sql2);
+            DbHelperSQL.ExecuteSql(sql);
+            DbHelperSQL.ExecuteSql(sql2);
+            Alert("删除成功！");
+            LogAM.Add_Logs("采购入库--->采购单管理--->采购单删除 操作成功！" + cal);
 
-        this.DataShows();
+            this.DataShows();
+        }
     }
     public string GetRk(string s_RKSTtate, string s_OrderNo, string s_Type)
     {

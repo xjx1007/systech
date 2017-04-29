@@ -181,7 +181,6 @@
                                                             <asp:Label ID="Lbl_Stime" runat="server"></asp:Label>
                                                         </td>
                                                     </tr>
-
                                                     <tr>
                                                         <td class="dvtCellLabel">日期:</td>
                                                         <td class="dvtCellInfo">
@@ -301,8 +300,6 @@
                                                                 <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True" IsShowEmptyTemplate="true"
                                                                     AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%">
                                                                     <Columns>
-
-
                                                                         <asp:TemplateField HeaderText="编号" SortExpression="CAB_Code" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
                                                                             <ItemTemplate>
                                                                                 <a href="../Bill/CG_Account_Bill_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAB_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CAB_Code").ToString()%></a>
@@ -318,7 +315,6 @@
                                                                                 <%# base.Base_GetBasicCodeName("203", DataBinder.Eval(Container.DataItem, "CAB_BillType").ToString())%>
                                                                             </ItemTemplate>
                                                                         </asp:TemplateField>
-
                                                                         <asp:BoundField HeaderText="开票金额" DataField="CAB_Money" SortExpression="CAB_Money" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
                                                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />

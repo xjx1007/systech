@@ -192,23 +192,39 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
         StringBuilder s_Log = new StringBuilder();
         try
         {
+            string s_WareHouseNoLeft = "";
             for (int i = 0; i < MyGridView1.Rows.Count; i++)
             {
                 CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
                 if (Ckb.Checked)
                 {
                     string s_ID = MyGridView1.DataKeys[i].Value.ToString();
-                    s_Sql.Append(" delete from Knet_Procure_WareHouseList_Details Where  WareHouseNo='" + s_ID + "' ");
-                    s_Sql.Append(" delete from Knet_Procure_WareHouseList Where  WareHouseNo='" + s_ID + "' ");
-                    s_Log.Append(s_ID);
+                    if ((GetCheckState(s_ID) == "<font color=green>未对账</font>") && (GetOrderCheckYN(s_ID) == "<font color=blue>未审核</font>"))
+                    {
+                        s_Sql.Append(" delete from Knet_Procure_WareHouseList_Details Where  WareHouseNo='" + s_ID + "' ");
+                        s_Sql.Append(" delete from Knet_Procure_WareHouseList Where  WareHouseNo='" + s_ID + "' ");
+                        s_Log.Append(s_ID);
+                    }
+                    else
+                    {
+                        s_WareHouseNoLeft += s_ID + ",";
+                    }
                 }
             }
             if (DbHelperSQL.ExecuteSql(s_Sql.ToString()) > 0)
             {
                 this.DataShows();
                 AdminloginMess AM = new AdminloginMess();
-                AM.Add_Logs("Knet_Procure_WareHouseList 删除 编号：" + s_Log + "");
-                Alert("删除成功！");
+                AM.Add_Logs("Knet_Procure_WareHouseList 删除 编号：" + s_Log + ""); 
+                if (s_WareHouseNoLeft != "")
+                {
+                    Alert("删除成功！" + s_WareHouseNoLeft + "已对账或者已审批不能删除！");
+                }
+                else
+                {
+                    Alert("删除成功！");
+                }
+
             }
         }
         catch (Exception ex)

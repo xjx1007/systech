@@ -242,7 +242,7 @@
             LODOP.PRINT_INIT("期末金额调整");
             LODOP.SET_PRINT_STYLE("FontSize", 18);
             LODOP.SET_PRINT_STYLE("Bold", 1);
-            //  LODOP.ADD_PRINT_HTM(30, 0, "100%", "100%","<table width=\"100%\"><tr><td class=\"ListHeadDetails\" align=\"center\"><font color ='black' size ='6'>士腾与供应商对账确认单</font></td></tr></table>"); 
+            //  LODOP.ADD_PRINT_HTM(30, 0, "100%", "100%","<table width=\"100%\"><tr><td class=\"ListHeadDetails\" align=\"center\"><font color ='black' size ='6'>博脉与供应商对账确认单</font></td></tr></table>"); 
             //LODOP.ADD_PRINT_HTM(90, 0, "100%", "100%","<table width=\"100%\"><tr><td align=\"left\"><%=s_HouseName %></td><td align=\"right\"><%=s_Time %></td></tr></table>"); 
             var strBodyStyle = "<style>" + document.getElementById("style1").innerHTML + "</style>";
             var strFormHtml = strBodyStyle + "<body>" + document.getElementById("tableContainer").innerHTML + "</body>";

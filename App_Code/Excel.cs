@@ -147,14 +147,20 @@ public class Excel : BasePage
     }
     public void ExcelExport(StringWriter sw, string exportFileName)
     {
-
-        HttpContext.Current.Response.ClearContent();
-        HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode(exportFileName, System.Text.Encoding.UTF8).ToString());
-        HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
-        HttpContext.Current.Response.ContentType = "application/excel";
-
-        HttpContext.Current.Response.Write(sw.ToString());
-        HttpContext.Current.Response.End();
+        try
+        {
+            HttpContext.Current.Response.Buffer = true;
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.ClearContent();
+            HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode(exportFileName, System.Text.Encoding.UTF8).ToString());
+            HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+            HttpContext.Current.Response.ContentType = "application/ms-excel";
+            HttpContext.Current.Response.Write(sw.ToString());
+            HttpContext.Current.Response.Flush();
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
+        catch(Exception ex)
+        { }
 
 
     }

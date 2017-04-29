@@ -37,6 +37,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
             this.Tbx_SampleID.Text = s_SampleId;
             this.Tbx_ID.Text = s_ID;
             base.Base_DropDutyPerson(this.Ddl_RDPerson, " and staffDepart='129652783965723459' ");
+            base.Base_DropBasicCodeBind(this.Ddl_UseType,"1134");
             if (s_ID == "")
             {
 
@@ -308,6 +309,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         model.KSP_MTime = DateTime.Now;
         model.KSP_Code = this.Tbx_Code.Text;
         model.KSP_GProductsBarCode = this.Tbx_GProductsBarCode.Value;
+        model.KSP_UseType = this.Ddl_UseType.SelectedValue;
         try
         {
             model.Type = int.Parse(this.Tbx_Type.Text);
@@ -609,9 +611,13 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     BLL.Update(model);
                     AdminloginMess LogAM = new AdminloginMess();
                     LogAM.Add_Logs("系统设置--->产品字典--->产品字典 修改 操作成功！编码：" + ProductsBarCode);
-
-                    //产品修改
-                    //base.Base_SendMessage("130449499957844456", KNetPage.KHtmlEncode("有 产品修改 <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ProductsBarCode=" + ProductsBarCode + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.ProductsEdition + "</a> 相关的采购单进行，敬请关注！"));
+                    if (model.KSP_Code.IndexOf("01") == 0)
+                    {
+                        //产品修改
+                        //销售、采购、生产、仓库、品质
+                        base.Base_SendMessage("130449499957844456", KNetPage.KHtmlEncode("有 产品修改 <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ProductsBarCode=" + ProductsBarCode + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.ProductsEdition + "</a> 相关的采购单进行，敬请关注！"));
+ 
+                    }
 
                     AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
                 }
@@ -678,6 +684,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         this.Tbx_GProductsBarCode.Value = model.KSP_GProductsBarCode;
         this.Tbx_Volume.Text = model.KSP_Volume.ToString();
         this.Tbx_Weight.Text = model.KSP_Weight.ToString();
+
+        this.Ddl_UseType.SelectedValue= model.KSP_UseType ;
         this.Tbx_GProductsEdition.Text = base.Base_GetProductsEdition(model.KSP_GProductsBarCode);
         try
         {

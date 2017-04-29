@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Report_Fright.aspx.cs" Inherits="Web_Report_OrderIn" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Report_OrderIn.aspx.cs" Inherits="Web_Report_OrderIn" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,7 +13,7 @@
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
-    <title>合格供应商名录</title>
+    <title>生产成本</title>
     <script language="JAVASCRIPT">
         function btnGetReturnValue_onclick() {
             /*选择供应商*/
@@ -59,14 +59,21 @@
             }
         }
         function OnClick() {
+            var StartDate = document.all('StartDate').value;
+            var EndDate = document.all('EndDate').value;
             var SuppNoValue = document.all('Tbx_SuppNo').value;
-            var Type = document.all('Ddl_Type').value;
-            var SuppName = document.all('Tbx_SuppName').value;
-
-
-            var s_URL = 'List_Fright.aspx?SuppNo=' + SuppNoValue + '';
-            s_URL += '&Type=' + Type + '';
-            s_URL += '&SuppName=' + SuppName + '';
+            var ProductsEidition = document.all('Tbx_ProductsEdition').value;
+            var ProductsType = document.all('Tbx_ProductsTypeNo').value;
+            var State = document.all('Ddl_State').value;
+            var HouseNo = document.all('HouseNo').value;
+            
+            var s_URL = 'List_OrderIn.aspx?StartDate=' + StartDate + '&EndDate=' + EndDate + '';
+            s_URL += '&SuppNo=' + SuppNoValue + '';
+            s_URL += '&ProductsEdition=' + ProductsEidition + '';
+            s_URL += '&ProductsType=' + ProductsType + '';
+            s_URL += '&State=' + State + '';
+            s_URL += '&HouseNo=' + HouseNo + '';
+            
 
             window.open(s_URL, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
         }
@@ -81,7 +88,8 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                采购报表 > <a class="hdrLink" href="Procure_ShipCheck_List.aspx">合格供应商名录</a>
+                单据 > <a class="hdrLink" href="Procure_ShipCheck_List.aspx"></a>
+                <a href="Procure_ShipCheck_List.aspx">生产成本</a>
             </td>
             <td width="100%" nowrap>
             </td>
@@ -107,7 +115,51 @@
                         <tr>
                             <td align="right" valign="top">
                                 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-
+                                    <tr>
+                                        <td width="16%" align="right" class="dvtCellLabel">
+                                            日期:
+                                        </td>
+                                        <td class="dvtCellInfo" align="left" colspan="3">
+                                            <asp:TextBox ID="StartDate" runat="server" CssClass="Wdate" onFocus="var EndDate=$dp.$('EndDate');WdatePicker({onpicked:function(){EndDate.focus();},maxDate:'#F{$dp.$D(\'EndDate\')}'})"></asp:TextBox>&nbsp;到<asp:TextBox
+                                                ID="EndDate" runat="server" CssClass="Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'StartDate\')}'})"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="16%" align="right" class="dvtCellLabel">
+                                            仓库:
+                                        </td>
+                                        <td align="left" class="dvtCellInfo">
+                                            <asp:DropDownList ID="HouseNo" runat="server">
+                                            </asp:DropDownList>
+                                        </td>
+                                        <td width="16%" align="right" class="dvtCellLabel">
+                                            产品型号:
+                                        </td>
+                                        <td class="dvtCellInfo" align="left">
+                                            <asp:TextBox ID="Tbx_Type" CssClass="detailedViewTextBox" Width="200px" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                OnBlur="this.className='detailedViewTextBox'" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="16%" align="right" class="dvtCellLabel">
+                                            产品版本:
+                                        </td>
+                                        <td class="dvtCellInfo" align="left">
+                                            <asp:TextBox ID="Tbx_ProductsEdition" CssClass="detailedViewTextBox" Width="200px"
+                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                runat="server"></asp:TextBox>
+                                        </td>
+                                        <td align="right" class="dvtCellLabel">
+                                            产品分类：
+                                        </td>
+                                        <td align="left" class="dvtCellInfo">
+                                            <asp:TextBox ID="Tbx_ProductsTypeName" runat="server" CssClass="detailedViewTextBox"
+                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                MaxLength="48" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                            <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td align="right" class="dvtCellLabel">
                                             &nbsp;选择供应商:
@@ -118,14 +170,18 @@
                                                 OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
                                             <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />
                                         </td>
-                                        
-                                                        <td align="right" class="dvtCellLabel">供应商类型: </td>
-                                                        <td align="left" class="dvtCellInfo">
-                                                            <asp:DropDownList ID="Ddl_Type" runat="server" Width="150px">
-                                                            </asp:DropDownList>
-                                                        </td>
+                                        <td align="right" class="dvtCellLabel">
+                                            状态：
+                                        </td>
+                                        <td align="left" class="dvtCellInfo">
+                                            <asp:DropDownList ID="Ddl_State" runat="server">
+                                                <asp:ListItem Text="请选择" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="未审批" Value="0"></asp:ListItem>
+                                                <asp:ListItem Text="已审批" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="财务审批" Value="2"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
                                     </tr>
-                                 
                         <tr>
                             <td colspan="4" align="center" style="height: 30px">
                                 <input id="Button1" type="button" runat="server" value="确定" class="crmbutton small save"

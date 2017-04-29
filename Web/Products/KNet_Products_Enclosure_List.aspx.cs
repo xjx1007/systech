@@ -323,7 +323,7 @@ public partial class KNet_Products_Enclosure_List : BasePage
         {
             //if (am.KNet_StaffNo == Model.PBA_Creator)
             //
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || (am.YNAuthority("停用产品资料")))
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || am.KNet_Position == "103" || (am.YNAuthority("停用产品资料")))
             {
                 // bllComment.Delete(Id);
                 if (Model.PBA_Del == 0)
@@ -402,7 +402,7 @@ public partial class KNet_Products_Enclosure_List : BasePage
         else if (cmd == "Sp")
         {
             //如果是审批
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲"||am.KNet_Position=="103")
             {
                 if (Model.PBA_State == 1)
                 {

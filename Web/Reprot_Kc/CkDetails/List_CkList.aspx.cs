@@ -111,8 +111,13 @@ public partial class Web_Report_Xs_List_CkList : BasePage
                         s_Details += "<td align=right noWrap>" + base.FormatNumber1(d_Net.ToString(),2) + "</td>\n";//数量
           
                     s_Details +=" </tr>";
-                    DTotalNum += Decimal.Parse(Dtb_Table.Rows[i][5].ToString());
-                    DTotalNet += d_Net;
+                    try
+                    {
+                        DTotalNum += Decimal.Parse(Dtb_Table.Rows[i][5].ToString());
+                        DTotalNet += d_Net;
+                    }
+                    catch
+                    { }
                 }
             }
 
