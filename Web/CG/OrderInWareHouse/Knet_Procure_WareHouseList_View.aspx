@@ -62,7 +62,8 @@
                                     <input title="编辑 [Alt+E]" type="button" accessKey="E" class="crmbutton small edit" onclick="PageGo('Knet_Procure_WareHouseList_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>')" name="Edit" value="&nbsp;编辑&nbsp;" >&nbsp;
                                     <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share" value="&nbsp;共享&nbsp;" >&nbsp;
                                     <input title="" class="crmbutton small edit" onclick="PageGo('Knet_Procure_WareHouseList_List.aspx')" type="button" name="ListView" value="&nbsp;返回列表&nbsp;" >&nbsp;
-                                        <asp:Button ID="btn_Chcek" runat="server" class="crmbutton small edit" Text="审批"  OnClick="btn_Chcek_Click"/>
+                                        <asp:Button ID="btn_Chcek" runat="server" class="crmbutton small edit" Text="审批"  OnClick="btn_Chcek_Click"/>&nbsp;
+                                        <asp:Button ID="btn_Adjust" runat="server" class="crmbutton small edit" Text="调账" OnClick="btn_Adjust_Click" Visible="false" />
 
                                                                                                </td>
                                     <td align=right>
@@ -83,8 +84,7 @@
 
                                     <tr>
                                     <td align="left" style="padding-left:10px;border-bottom:1px dotted #CCCCCC;">
-                                    <img src="../../../themes/softed/images/pointer.gif" hspace="5" align="middle"/>
-                                    <a href="../../CustomerContent/Xs_Sales_Content_Add.aspx?CustomerValue=<%=s_CustomerValue %>&LinkMan=<%=s_LinkMan %>&OppID=<%=s_OppID %>" class="webMnu">创建合同评审</a> 
+                                    <img src="../../../themes/softed/images/pointer.gif" hspace="5" align="middle"/>                                    
                                     </td>
                                     </tr>
                                        <tr>
@@ -121,6 +121,8 @@
                                         <td  class="dvtCellLabel" >入库日期:</td>
                                         <td  class="dvtCellInfo">
                                         <asp:Label ID="Lbl_Stime" runat="server" ></asp:Label>
+                                            <pc:PTextBox ID="txt_WareHouseDateTime" runat="server" CssClass="Wdate" onFocus="WdatePicker()"
+                                                                AllowEmpty="false" Visible="false"></pc:PTextBox>
                                         </td>
                                         </tr>
                                             

@@ -74,7 +74,17 @@ public partial class Web_Knet_Procure_WareHouseList_View : BasePage
             KNet.Model.Knet_Procure_WareHouseList model = bll.GetModelB(s_ID);
             this.Tbx_ID.Text = s_ID;
             this.Lbl_Code.Text = model.WareHouseNo;
-            this.Lbl_Stime.Text = DateTime.Parse(model.WareHouseDateTime.ToString()).ToShortDateString();
+            if (model.WareHouseDateTime != null)
+            {
+                if (model.WareHouseDateTime.ToString() == "1900-01-01")
+                {
+                    this.Lbl_Stime.Text = "";
+                }
+                else
+                {
+                    this.Lbl_Stime.Text = DateTime.Parse(model.WareHouseDateTime.ToString()).ToShortDateString();
+                }
+            }
             this.Lbl_OrderNo.Text = model.OrderNo;
             this.Lbl_SuppNo.Text = base.Base_GetSupplierName_Link(model.SuppNo);
             this.Lbl_Dept.Text = base.Base_GetHouseName(model.HouseNo);
@@ -89,6 +99,10 @@ public partial class Web_Knet_Procure_WareHouseList_View : BasePage
             else
             {
                 this.Lbl_QrState.Text = "已确认";
+                if (model.WareHouseCheckYN == 0)
+                {
+                    this.btn_Adjust.Visible = true;
+                }
             }
 
             if (model.WareHouseCheckYN==1)
@@ -138,4 +152,26 @@ public partial class Web_Knet_Procure_WareHouseList_View : BasePage
         {}
     }
 
+    protected void btn_Adjust_Click(object sender, EventArgs e)
+    {
+        if (btn_Adjust.Text == "调账")
+        {
+            this.Lbl_Stime.Visible = false;
+            this.txt_WareHouseDateTime.Visible = true;
+            btn_Adjust.Text = "保存";
+        }
+        else
+        {
+            // Todo: 保存人库时间
+            if (txt_WareHouseDateTime.Text != "")
+            {
+                string DoSql = "update Knet_Procure_WareHouseList  set WareHouseDateTime='" + txt_WareHouseDateTime.Text.ToString() + "'  where  WareHouseNo='" + this.Tbx_ID.Text + "' ";
+                DbHelperSQL.ExecuteSql(DoSql);
+                this.Lbl_Stime.Visible = true;
+                this.txt_WareHouseDateTime.Visible = false;
+                btn_Adjust.Text = "调账";
+            }
+            
+        }
+    }
 }
