@@ -202,7 +202,7 @@
                                 <input type="button" class="crmbutton small cancel" value="返回" style="width: 55px; height: 30px"
                                     onclick="window.history.back()">&nbsp;&nbsp;
                                                 
-                                               <asp:Button id="Button3" type="button" runat="server" Text="导出全部仓库Excel" class="crmbutton small save" Width="151px"  OnClick="Btn_SaveOnClick" />&nbsp;&nbsp;
+                                           <!--    <asp:Button id="Button3" type="button" runat="server" Text="导出全部仓库Excel" class="crmbutton small save" Width="151px"  OnClick="Btn_SaveOnClick" />&nbsp;&nbsp;-->
                                             </td>
                                         </tr>
                                     </table>

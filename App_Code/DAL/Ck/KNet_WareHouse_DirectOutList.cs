@@ -33,6 +33,26 @@ namespace KNet.DAL
                 return false;
             }
         }
+
+        public void SetPrice(string DirectOutNo)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" update KNet_WareHouse_DirectOutList_Details  set ");
+            strSql.Append(" KWD_WwPrice=cgprice,KWD_WwMoney=cgprice*DirectOutAmount,DirectOutUnitPrice=cgprice,DirectOutTotalNet=cgprice*DirectOutAmount");
+            strSql.Append(" from KNet_WareHouse_DirectOutList_Details a,");
+            strSql.Append(" ( select a.ID,");
+            strSql.Append(" (select Top 1 ProcureUnitPrice from Knet_Procure_SuppliersPrice b");
+            strSql.Append(" where b.ProductsBarCode=a.ProductsBarCode and b.KPP_State=1 and b.KPP_Del=0) cgprice");
+            strSql.Append(" from KNet_WareHouse_DirectOutList_Details a ) bb");
+            strSql.Append("  where a.ID=bb.id  and a.DirectOutNo=@DirectOutNo");
+            SqlParameter[] parameters = {
+					new SqlParameter("@DirectOutNo", SqlDbType.NVarChar,50)
+                                         };
+
+            parameters[0].Value = DirectOutNo;
+
+            DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+        }
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -40,9 +60,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_DirectOutList(");
-            strSql.Append("DirectOutNo,DirectOutTopic,DirectOutDateTime,HouseNo,DirectOutStaffBranch,DirectOutStaffDepart,DirectOutStaffNo,DirectOutCheckStaffNo,DirectOutRemarks,DirectOutCheckYN,SystemDatetimes,KWD_ShipNo,KWD_Custmoer,KWD_Address,KWD_ContentPerson,KWD_Type,KWD_Del,isShip,KWD_Telphone,KWD_WuliuName,KWD_WuliuNameCode,KWD_WuliuCode,KWD_State,KWD_CwCode,KWD_CWOutTime,KWD_RkHouseNo,KWD_ReceTime,KWD_SCustomerValue,KWD_ContractDeliveMethods,KWD_ShipType,KWD_PayMent,KWD_KpType,KWD_MainProductsBarCode,KWD_MainProductsNumber)");
+            strSql.Append("DirectOutNo,DirectOutTopic,DirectOutDateTime,HouseNo,DirectOutStaffBranch,DirectOutStaffDepart,DirectOutStaffNo,DirectOutCheckStaffNo,DirectOutRemarks,DirectOutCheckYN,SystemDatetimes,KWD_ShipNo,KWD_Custmoer,KWD_Address,KWD_ContentPerson,KWD_Type,KWD_Del,isShip,KWD_Telphone,KWD_WuliuName,KWD_WuliuNameCode,KWD_WuliuCode,KWD_State,KWD_CwCode,KWD_CWOutTime,KWD_RkHouseNo,KWD_ReceTime,KWD_SCustomerValue,KWD_ContractDeliveMethods,KWD_ShipType,KWD_PayMent,KWD_KpType,KWD_MainProductsBarCode,KWD_MainProductsNumber,KWD_IsSupp,KWD_Project)");
             strSql.Append(" values (");
-            strSql.Append("@DirectOutNo,@DirectOutTopic,@DirectOutDateTime,@HouseNo,@DirectOutStaffBranch,@DirectOutStaffDepart,@DirectOutStaffNo,@DirectOutCheckStaffNo,@DirectOutRemarks,@DirectOutCheckYN,@SystemDatetimes,@KWD_ShipNo,@KWD_Custmoer,@KWD_Address,@KWD_ContentPerson,@KWD_Type,@KWD_Del,@isShip,@KWD_Telphone,@KWD_WuliuName,@KWD_WuliuNameCode,@KWD_WuliuCode,@KWD_State,@KWD_CwCode,@KWD_CWOutTime,@KWD_RkHouseNo,@KWD_ReceTime,@KWD_SCustomerValue,@KWD_ContractDeliveMethods,@KWD_ShipType,@KWD_PayMent,@KWD_KpType,@KWD_MainProductsBarCode,@KWD_MainProductsNumber)");
+            strSql.Append("@DirectOutNo,@DirectOutTopic,@DirectOutDateTime,@HouseNo,@DirectOutStaffBranch,@DirectOutStaffDepart,@DirectOutStaffNo,@DirectOutCheckStaffNo,@DirectOutRemarks,@DirectOutCheckYN,@SystemDatetimes,@KWD_ShipNo,@KWD_Custmoer,@KWD_Address,@KWD_ContentPerson,@KWD_Type,@KWD_Del,@isShip,@KWD_Telphone,@KWD_WuliuName,@KWD_WuliuNameCode,@KWD_WuliuCode,@KWD_State,@KWD_CwCode,@KWD_CWOutTime,@KWD_RkHouseNo,@KWD_ReceTime,@KWD_SCustomerValue,@KWD_ContractDeliveMethods,@KWD_ShipType,@KWD_PayMent,@KWD_KpType,@KWD_MainProductsBarCode,@KWD_MainProductsNumber,@KWD_IsSupp,@KWD_Project)");
             SqlParameter[] parameters = {
 					new SqlParameter("@DirectOutNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@DirectOutTopic", SqlDbType.NVarChar,50),
@@ -78,7 +98,9 @@ namespace KNet.DAL
 					new SqlParameter("@KWD_PayMent", SqlDbType.NVarChar,50),
 					new SqlParameter("@KWD_KpType", SqlDbType.NVarChar,50),
 					new SqlParameter("@KWD_MainProductsBarCode", SqlDbType.NVarChar,50),
-					new SqlParameter("@KWD_MainProductsNumber", SqlDbType.Int)
+					new SqlParameter("@KWD_MainProductsNumber", SqlDbType.Int),
+					new SqlParameter("@KWD_IsSupp", SqlDbType.Int),
+					new SqlParameter("@KWD_Project", SqlDbType.NVarChar,50)
                                         };
             parameters[0].Value = model.DirectOutNo;
             parameters[1].Value = model.DirectOutTopic;
@@ -114,8 +136,10 @@ namespace KNet.DAL
             parameters[31].Value = model.KWD_KpType;
             parameters[32].Value = model.KWD_MainProductsBarCode;
             parameters[33].Value = model.KWD_MainProductsNumber;
-            
-            
+            parameters[34].Value = model.KWD_IsSupp;
+            parameters[35].Value = model.KWD_Project;
+
+
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -155,8 +179,10 @@ namespace KNet.DAL
             strSql.Append("KWD_PayMent=@KWD_PayMent, ");
             strSql.Append("KWD_KpType=@KWD_KpType, ");
             strSql.Append("KWD_MainProductsBarCode=@KWD_MainProductsBarCode, ");
-            strSql.Append("KWD_MainProductsNumber=@KWD_MainProductsNumber ");
-            
+            strSql.Append("KWD_MainProductsNumber=@KWD_MainProductsNumber,  ");
+            strSql.Append("KWD_IsSupp=@KWD_IsSupp,  ");
+            strSql.Append("KWD_Project=@KWD_Project ");
+
             strSql.Append(" where DirectOutNo=@DirectOutNo ");
             SqlParameter[] parameters = {
 					new SqlParameter("@DirectOutTopic", SqlDbType.NVarChar,50),
@@ -191,6 +217,8 @@ namespace KNet.DAL
 					new SqlParameter("@KWD_KpType", SqlDbType.VarChar,50),
 					new SqlParameter("@KWD_MainProductsBarCode", SqlDbType.VarChar,50),
 					new SqlParameter("@KWD_MainProductsNumber", SqlDbType.Int),
+					new SqlParameter("@KWD_IsSupp", SqlDbType.Int),
+					new SqlParameter("@KWD_Project", SqlDbType.VarChar,50),
                     
 					new SqlParameter("@DirectOutNo", SqlDbType.VarChar,50)};
             parameters[0].Value = model.DirectOutTopic;
@@ -226,8 +254,10 @@ namespace KNet.DAL
 
             parameters[30].Value = model.KWD_MainProductsBarCode;
             parameters[31].Value = model.KWD_MainProductsNumber;
-            
-            parameters[32].Value = model.DirectOutNo;
+            parameters[32].Value = model.KWD_IsSupp;
+            parameters[33].Value = model.KWD_Project;
+
+            parameters[34].Value = model.DirectOutNo;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -263,7 +293,7 @@ namespace KNet.DAL
                 return false;
             }
         }
-        
+
         /// <summary>
         /// 更新一条数据
         /// </summary>
@@ -443,6 +473,16 @@ namespace KNet.DAL
                 {
                     model.KWD_MainProductsNumber = int.Parse(ds.Tables[0].Rows[0]["KWD_MainProductsNumber"].ToString());
                 }
+
+                if (ds.Tables[0].Rows[0]["KWD_Project"] != null && ds.Tables[0].Rows[0]["KWD_Project"].ToString() != "")
+                {
+                    model.KWD_Project = ds.Tables[0].Rows[0]["KWD_Project"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KWD_IsSupp"] != null && ds.Tables[0].Rows[0]["KWD_IsSupp"].ToString() != "")
+                {
+                    model.KWD_IsSupp = int.Parse(ds.Tables[0].Rows[0]["KWD_IsSupp"].ToString());
+                }
                 return model;
             }
             else
@@ -526,6 +566,16 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["KWD_Address"] != null && ds.Tables[0].Rows[0]["KWD_Address"].ToString() != "")
                 {
                     model.KWD_Address = ds.Tables[0].Rows[0]["KWD_Address"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KWD_Project"] != null && ds.Tables[0].Rows[0]["KWD_Project"].ToString() != "")
+                {
+                    model.KWD_Project = ds.Tables[0].Rows[0]["KWD_Project"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KWD_IsSupp"] != null && ds.Tables[0].Rows[0]["KWD_IsSupp"].ToString() != "")
+                {
+                    model.KWD_IsSupp = int.Parse(ds.Tables[0].Rows[0]["KWD_IsSupp"].ToString());
                 }
                 if (ds.Tables[0].Rows[0]["KWD_ContentPerson"] != null && ds.Tables[0].Rows[0]["KWD_ContentPerson"].ToString() != "")
                 {
@@ -627,7 +677,7 @@ namespace KNet.DAL
                 {
                     model.KWD_MainProductsNumber = int.Parse(ds.Tables[0].Rows[0]["KWD_MainProductsNumber"].ToString());
                 }
-                
+
                 return model;
             }
             else

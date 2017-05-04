@@ -252,7 +252,7 @@ public partial class Web_List_Details : BasePage
             s_HouseName = "";// "入库仓库:" + base.Base_GetHouseName(s_HouseNo);
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n";
             s_Head += "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<thead class=\"fixedHeader\"> \n";
-            s_Head += "<tr>\n<th colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州博脉科技有限公司<br/>期末金额调整单</th></tr>\n";
+            s_Head += "<tr>\n<th colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>期末金额调整单</th></tr>\n";
             s_Head += "<tr>\n<th colspan=\"13\" class=\"thstyleleft\"  >" + s_HouseName + "</th><th colspan=\"13\" class=\"thstyleRight\" >" + s_Time + "</th></tr>\n";
             s_Head += "<th class=\"thstyle\"  align=center rowspan=2>序号</th>\n";
             s_Head += "<th class=\"thstyle\"  align=center rowspan=2>品名</th>\n";

@@ -138,7 +138,7 @@ public partial class Web_List_Details : BasePage
         s_HouseName = "入库仓库:" + base.Base_GetHouseName(s_HouseNo);
 
         Sb_Details.Append("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n");
-        Sb_Details.Append("<tr>\n<td colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州博脉科技有限公司<br/>存货收发结存表单</td></tr>\n");
+        Sb_Details.Append("<tr>\n<td colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>存货收发结存表单</td></tr>\n");
         Sb_Details.Append("<tr>\n<td colspan=\"13\" class=\"thstyleleft\"  >" + s_HouseName + "</td>\n");
         Sb_Details.Append("<td colspan=\"13\" class=\"thstyleRight\" >" + s_Time + "</td></tr>\n");
         Sb_Details.Append("</table>\n");

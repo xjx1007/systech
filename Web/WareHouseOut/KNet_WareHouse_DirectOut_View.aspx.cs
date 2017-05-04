@@ -55,6 +55,17 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
             this.Lbl_MailProducts.Text = base.Base_GetProductsEdition(model.KWD_MainProductsBarCode);
             this.Lbl_MailProductsNumber.Text = model.KWD_MainProductsNumber.ToString();
 
+          this.Lbl_Project.Text= base.Base_GetBasicCodeName("779",model.KWD_Project);
+          if (model.KWD_IsSupp == 1)
+          {
+
+              Lbl_IsSuppNo.Text = "<font color=red>是</font>";
+          }
+          else
+          {
+
+              Lbl_IsSuppNo.Text = "否";
+          }
             if (model.DirectOutCheckYN == 3)
             {
 
@@ -100,6 +111,7 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
 
             this.BeginQuery(strSql.ToString());
             DataSet Dts_Details = (DataSet)this.QueryForDataSet();
+            decimal d_Money = 0, d_Amount = 0;
             if (Dts_Details.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
@@ -126,7 +138,18 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "&nbsp;</td>";
 
                     s_MyTable_Detail += "</tr>";
+                    d_Amount += int.Parse(Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString());
+                    d_Money += decimal.Parse(Dts_Details.Tables[0].Rows[i]["DirectOutTotalNet"].ToString());
                 }
+                s_MyTable_Detail += "<tr>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\" colspan=5>总计：</td>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Amount.ToString(), 0) + "</td>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Money.ToString(), 2) + "</td>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
+
+
+                s_MyTable_Detail += "</tr>";
                 this.Lbl_Details.Text = s_MyTable_Detail;
             }
         }

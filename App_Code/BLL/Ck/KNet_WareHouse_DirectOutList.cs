@@ -20,7 +20,10 @@ namespace KNet.BLL
         {
             return dal.Exists(DirectOutNo);
         }
-
+        public void SetPrice(string DirectOutNo)
+        {
+            dal.SetPrice(DirectOutNo);
+        }
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -48,6 +51,11 @@ namespace KNet.BLL
                 }
             }
             dal.Add(model);
+            if (model.KWD_IsSupp == 1)
+            {
+                SetPrice(model.DirectOutNo);
+            }
+
         }
 
         /// <summary>
@@ -69,6 +77,11 @@ namespace KNet.BLL
                     }
                 }
                 dal.Add(model);
+                if (model.KWD_IsSupp == 1)
+                {
+                    SetPrice(model.DirectOutNo);
+                }
+
             }
             catch(Exception ex) { }
         }
@@ -83,6 +96,7 @@ namespace KNet.BLL
         public void Update(KNet.Model.KNet_WareHouse_DirectOutList model)
         {
             dal.Update(model);
+
             KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll = new KNet_WareHouse_DirectOutList_Details();
             Bll.DeleteByDirectOutNO(model.DirectOutNo);
             if (model.Arr_Details != null)
@@ -104,6 +118,12 @@ namespace KNet.BLL
                         Bll_Freight.Update(Model);
                     }
                 }
+
+                if (model.KWD_IsSupp == 1)
+                {
+                    SetPrice(model.DirectOutNo);
+                }
+
         }
 
         /// <summary>

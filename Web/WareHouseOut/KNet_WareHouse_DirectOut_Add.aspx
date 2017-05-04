@@ -67,30 +67,30 @@
                     i_num1 = parseInt(document.all('Tbx_Num').value) + parseInt(i+1)
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="../../themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + i_num1 + '\" value=' + ss[0] + '>' + ss[0];
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + i_num1 + '\" value=' + ss[1] + '>' + ss[1];
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + i_num1 + '\" value=' + ss[2] + '>' + ss[2];
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[3] + ' >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Price_' + i_num1 + '\" value=' + ss[4] + ' >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num1 + '\"    >';
-                    objCel.className = "dvtCellInfo";
+                    objCel.className = "ListHeadDetails";
                     i_row = i_row + 1;
                     s_ID = s_ID + ss[0] + ",";
                 }
@@ -291,6 +291,15 @@
                                         <td class="dvtCellInfo">
                                             <asp:DropDownList runat="server" ID="Ddl_DutyPerson" Width="200px">
                                             </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="dvtCellLabel">
+                                            &nbsp;供应商承担:
+                                        </td>
+                                        <td class="dvtCellInfo">
+                                           <asp:CheckBox runat="server" ID="Chk_IsSuppNo" />
                                         </td>
                                     </tr>
                                     

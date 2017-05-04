@@ -272,25 +272,59 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
         this.Ddl_DutyPerson.SelectedValue = model.KWD_ContentPerson;
         this.Remarks.Text = model.DirectOutRemarks;
         KNet.BLL.KNet_WareHouse_DirectOutList_Details BLL_Details = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
+
+        if (model.KWD_IsSupp == 1)
+        {
+            Chk_IsSuppNo.Checked=true;
+        }
+        else
+        {
+            Chk_IsSuppNo.Checked = false;
+        }
+        this.Ddl_Project.SelectedValue = model.KWD_Project  ;
         DataSet Dts_Details = BLL_Details.GetList(" DirectOutNo='" + s_ID + "'");
         this.Tbx_Type.Text = model.KWD_Type;
+        StringBuilder Sb_Details = new StringBuilder();
+        Sb_Details.Append("<tr valign=\"top\">");
+        Sb_Details.Append("<td valign=\"top\" class=\"ListHead\" align=\"right\" nowrap>");
+        Sb_Details.Append("<b>工具</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("<td class=\"ListHead\" nowrap>");
+        Sb_Details.Append("<b>产品名称</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("<td class=\"ListHead\" nowrap>");
+        Sb_Details.Append("<b>产品编码</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("<td class=\"ListHead\" nowrap>");
+        Sb_Details.Append("<b>版本号</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("<td class=\"ListHead\" nowrap>");
+        Sb_Details.Append("<b>数量</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("<td class=\"ListHead\" nowrap>");
+        Sb_Details.Append("<b>单价</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("<td class=\"ListHead\" nowrap>");
+        Sb_Details.Append("<b>备注</b>");
+        Sb_Details.Append("</td>");
+        Sb_Details.Append("</tr>");
         if (Dts_Details.Tables[0].Rows.Count > 0)
         {
             for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
             {
-                s_MyTable_Detail += "<tr>";
+                Sb_Details.Append("<tr>");
                 this.Xs_ProductsCode.Text += Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ",";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "'>" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "'></td>";
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "'>" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "'></td>");
 
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString() + "'></td>";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Remarks_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "'></td>";
-                s_MyTable_Detail += "</tr>";
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString() + "'></td>");
+                Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Remarks_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "'></td>");
+                Sb_Details.Append("</tr>");
             }
-            this.Lbl_Details.Text = s_MyTable_Detail;
+            this.Lbl_Details.Text = Sb_Details.ToString();
             this.Tbx_Num.Text = Dts_Details.Tables[0].Rows.Count.ToString();
         }
 
@@ -365,7 +399,15 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
                 molel.KWD_Type = "102";
             }
 
-
+            if (Chk_IsSuppNo.Checked)
+            {
+                molel.KWD_IsSupp = 1;
+            }
+            else
+            {
+                molel.KWD_IsSupp = 0;
+            }
+            molel.KWD_Project = this.Ddl_Project.SelectedValue;
             ArrayList Arr_Products = new ArrayList();
             for (int i = 0; i <= int.Parse(this.Tbx_Num.Text); i++)
             {

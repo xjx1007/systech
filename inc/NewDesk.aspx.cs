@@ -314,29 +314,35 @@ public partial class NewDesk : BasePage
             string s_Sql = "select Sum(case when datediff(month,CustomerAddTime,getdate())=0 then 1 else 0 end) as ThisWeek,";
             s_Sql += "Sum(case when datediff(month,CustomerAddTime,getdate())=1 then 1 else 0 end) as LastWeek,Sum(case when datediff(year,CustomerAddTime,getdate())=0 then 1 else 0 end) as thisyear";
             s_Sql += " from KNet_sales_ClientList";
-            this.BeginQuery(s_Sql);
-            this.QueryForDataTable();
-            if (this.Dtb_Result.Rows.Count > 0)
+            try
             {
-                try
+                this.BeginQuery(s_Sql);
+                this.QueryForDataTable();
+            
+                if (this.Dtb_Result.Rows.Count > 0)
                 {
-                    s_LastWork[0] = Dtb_Result.Rows[0][0].ToString();
-                    s_LastWork[1] = Dtb_Result.Rows[0][1].ToString();
-                    s_LastWork[2] = Dtb_Result.Rows[0][2].ToString();
-                    /*
-                     * if (s_LastWork[1] != "0")
+                    try
                     {
+                        s_LastWork[0] = Dtb_Result.Rows[0][0].ToString();
+                        s_LastWork[1] = Dtb_Result.Rows[0][1].ToString();
+                        s_LastWork[2] = Dtb_Result.Rows[0][2].ToString();
+                        /*
+                         * if (s_LastWork[1] != "0")
+                        {
 
-                        s_LastWork[2] = Convert.ToString((decimal.Parse(s_LastWork[0]) - decimal.Parse(s_LastWork[1])) / decimal.Parse(s_LastWork[1]) * 100);
+                            s_LastWork[2] = Convert.ToString((decimal.Parse(s_LastWork[0]) - decimal.Parse(s_LastWork[1])) / decimal.Parse(s_LastWork[1]) * 100);
+                        }
+                        else
+                        {
+                            s_LastWork[2] = Convert.ToString((decimal.Parse(s_LastWork[0]) - decimal.Parse(s_LastWork[1])) * 100);
+                        }
+                         * */
                     }
-                    else
-                    {
-                        s_LastWork[2] = Convert.ToString((decimal.Parse(s_LastWork[0]) - decimal.Parse(s_LastWork[1])) * 100);
-                    }
-                     * */
+                    catch { }
                 }
-                catch { }
             }
+            catch
+            { }
             //联系记录
             string[] s_Content = new string[3];
             s_Sql = "select Sum(case when datediff(month,XSC_CTime,getdate())=0 then 1 else 0 end) as ThisWeek,";
@@ -687,25 +693,31 @@ public partial class NewDesk : BasePage
         s_Sql = "select Sum(DirectInAmount),Sum(case when DirectInDateTime <'" + s_Date + "' then  DirectInAmount else 0 end) from V_Store ";
         s_Sql += " a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
         s_Sql += " where  HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0 ) and a.KSP_Code like '01%'";
-        this.BeginQuery(s_Sql);
-        this.QueryForDataTable();
-        if (this.Dtb_Result.Rows.Count > 0)
+
+        try
         {
-            try
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            if (this.Dtb_Result.Rows.Count > 0)
             {
-                s_KC[0] = Dtb_Result.Rows[0][0].ToString();
-                s_KC[1] = Dtb_Result.Rows[0][1].ToString();
-                if (s_KC[1] != "0")
+                try
                 {
-                    s_KC[2] = Convert.ToString((decimal.Parse(s_KC[0]) - decimal.Parse(s_KC[1])) / decimal.Parse(s_KC[1]) * 100);
+                    s_KC[0] = Dtb_Result.Rows[0][0].ToString();
+                    s_KC[1] = Dtb_Result.Rows[0][1].ToString();
+                    if (s_KC[1] != "0")
+                    {
+                        s_KC[2] = Convert.ToString((decimal.Parse(s_KC[0]) - decimal.Parse(s_KC[1])) / decimal.Parse(s_KC[1]) * 100);
+                    }
+                    else
+                    {
+                        s_KC[2] = Convert.ToString((decimal.Parse(s_KC[0]) - decimal.Parse(s_KC[1])) * 100);
+                    }
                 }
-                else
-                {
-                    s_KC[2] = Convert.ToString((decimal.Parse(s_KC[0]) - decimal.Parse(s_KC[1])) * 100);
-                }
+                catch { }
             }
-            catch { }
         }
+        catch
+        { }
 
         string[] s_OrderIn = new string[3];
 
@@ -738,24 +750,31 @@ public partial class NewDesk : BasePage
         s_Sql = "select Sum(DirectInAmount),Sum(case when DirectInDateTime <'" + s_Date + "' then  DirectInAmount else 0 end) from V_Store ";
         s_Sql += " a join KNET_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
         s_Sql += " where   HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0 ) and a.KSP_Code not like '01%'";
-        this.BeginQuery(s_Sql);
-        this.QueryForDataTable();
-        if (this.Dtb_Result.Rows.Count > 0)
+        try
         {
-            try
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            if (this.Dtb_Result.Rows.Count > 0)
             {
-                s_ClKC[0] = Dtb_Result.Rows[0][0].ToString();
-                s_ClKC[1] = Dtb_Result.Rows[0][1].ToString();
-                if (s_ClKC[1] != "0")
+                try
                 {
-                    s_ClKC[2] = Convert.ToString((decimal.Parse(s_ClKC[0]) - decimal.Parse(s_ClKC[1])) / decimal.Parse(s_ClKC[1]) * 100);
+                    s_ClKC[0] = Dtb_Result.Rows[0][0].ToString();
+                    s_ClKC[1] = Dtb_Result.Rows[0][1].ToString();
+                    if (s_ClKC[1] != "0")
+                    {
+                        s_ClKC[2] = Convert.ToString((decimal.Parse(s_ClKC[0]) - decimal.Parse(s_ClKC[1])) / decimal.Parse(s_ClKC[1]) * 100);
+                    }
+                    else
+                    {
+                        s_ClKC[2] = Convert.ToString((decimal.Parse(s_ClKC[0]) - decimal.Parse(s_ClKC[1])) * 100);
+                    }
                 }
-                else
-                {
-                    s_ClKC[2] = Convert.ToString((decimal.Parse(s_ClKC[0]) - decimal.Parse(s_ClKC[1])) * 100);
-                }
+                catch { }
             }
-            catch { }
+        }
+        catch 
+        {
+            // 忽略空表
         }
 
         string s_TotalStyle = "height=\"50px\" width=\"12%\"  style=\"font-size:16px;color:#666666;font-weight:400;\"";

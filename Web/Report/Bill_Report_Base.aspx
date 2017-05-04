@@ -80,7 +80,8 @@
                                                                 <li><a href="../Report_Bill/ScLl/Report_CkDetails2.aspx">原材料领料明细</a></li>
                                                                 <li><a href="../Report_Bill/Db/Report_CkDetails3.aspx">原材料调拨明细</a></li>
                                                                 <li><a href="../Reprot_KC/KC/Report_Kc.aspx?Type=1">库存报表</a></li>
-                                                                <li><a href="../Report_Bill/Details/Report_Details.aspx">存货收发结存表</a></li>
+                                                                <li><a href="../Report_Bill/Details/Report_Details.aspx">存货收发结存表(原材料)</a></li>
+                                                                <li><a href="../Report_Bill/CPDetails/Report_Details.aspx">存货收发结存表(成品)</a></li>
                                                             </ul>
                                                         </td>
                                                         <td width="33%">

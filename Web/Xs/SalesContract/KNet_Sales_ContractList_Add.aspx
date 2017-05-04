@@ -610,6 +610,9 @@
                                                 type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td height="80px"><div class="height:80px">&nbsp;</div></td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>

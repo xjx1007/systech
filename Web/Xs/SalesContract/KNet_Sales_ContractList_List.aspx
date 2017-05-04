@@ -356,6 +356,9 @@
                                         <td style="line-height: 26px;" valign="top">●<a style="color: rgb(153, 102, 51);" href="javascript:;" onclick="PageGo('/web/Report_Xs/OrderList/Report_OrderList.aspx')">订单执行情况表</a>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td height="40px"><div class="height:80px">&nbsp;</div></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </td>

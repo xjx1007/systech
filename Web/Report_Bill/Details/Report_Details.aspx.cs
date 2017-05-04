@@ -23,6 +23,15 @@ using NPOI.HSSF.Util;
 using NPOI.POIFS;
 using NPOI.Util;
 using System.IO;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using NPOI.HSSF.UserModel;
+using NPOI.HPSF;
+using NPOI.POIFS.FileSystem;
+using NPOI.HSSF.Util;
+using NPOI.SS.UserModel;
+using System.IO;
+using NPOI.HSSF.Record.CF;
 public partial class Web_Report_Details : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -48,15 +57,110 @@ public partial class Web_Report_Details : BasePage
         ICellStyle style = book.CreateCellStyle();
         style.Alignment = HorizontalAlignment.Center;
         style.VerticalAlignment = VerticalAlignment.Center;
-        for (int i = 0; i < dt.Columns.Count; i++)
+
+
+
+        string s_StartDate = Request.QueryString["StartDate"] == null ? "" : Request.QueryString["StartDate"].ToString();
+        string s_EndDate = Request.QueryString["EndDate"] == null ? "" : Request.QueryString["EndDate"].ToString();
+        string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
+
+        string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+        string s_ProductsEdition = Request.QueryString["ProductsEdtion"] == null ? "" : Request.QueryString["ProductsEdtion"].ToString();
+
+        string s_ProductsType = Request.QueryString["ProductsType"] == null ? "" : Request.QueryString["ProductsType"].ToString();
+        string s_Sql = "select b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType,Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)  as QCAmount  ";
+
+
+        s_Sql += ",Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInTotalNet else 0 end)  as QCMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='102'  then DirectInAmount else 0 end)  as CgAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='102'  then DirectInTotalNet else 0 end)  as CgMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='106'  then DirectInAmount else 0 end)  as DbinAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='106'  then DirectInTotalNet else 0 end)  as DbinMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='105'  then -DirectInAmount else 0 end)  as DboutAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='105'  then -DirectInTotalNet else 0 end)  as DboutMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108') and TypeName<>'材料调整'  then -DirectInAmount else 0 end)  as XhAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108') and TypeName<>'材料调整'  then -DirectInTotalNet else 0 end)  as XhMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and (a.ProductsType<>'M130704050932527' ) then -DirectInAmount else 0 end)+Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and ((a.ProductsType='M130704050932527' and  typeName='部门领用') ) then -DirectInAmount else 0 end)   as DbrAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and (a.ProductsType<>'M130704050932527' ) then -DirectInTotalNet else 0 end) +Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and ((a.ProductsType='M130704050932527' and  typeName='部门领用')  ) then -DirectInTotalNet else 0 end)  as DbrMoney ";
+
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and a.ProductsType='M130704050932527' and typeName<>'销售出库' and typeName<>'部门领用' then -DirectInAmount else 0 end)  as DbrDCLlAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and a.ProductsType='M130704050932527' and typeName<>'销售出库' and typeName<>'部门领用' then -DirectInTotalNet else 0 end)  as DbrDCLlMoney ";
+
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and a.ProductsType='M130704050932527' and typeName='销售出库' then -DirectInAmount else 0 end)  as DbrDCXsAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and a.ProductsType='M130704050932527' and typeName='销售出库' then -DirectInTotalNet else 0 end)  as DbrDCXsMoney ";
+
+        s_Sql += ",Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)  as QMAmount ";
+        s_Sql += ",Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)  as QMMoney ";
+
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108') and TypeName='材料调整'  then -DirectInTotalNet else 0 end)  as TZMoney ";
+        s_Sql += " from V_Store a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
+        s_Sql += " join KNet_Sys_WareHouse c on a.HouseNo=c.HouseNo ";
+
+        s_Sql += " where 1=1 ";
+
+        if (s_HouseNo != "")
         {
+            s_Sql += " and  a.HouseNo='" + s_HouseNo + "'";
+        }
+        else
+        {
+            s_Sql += " and  a.HouseNo in (select HouseNo FROM KNet_Sys_WareHouse where HouseYN=1 and KSW_Type='0' )";
+        }
+        if (s_ProductsType != "")
+        {
+            KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
+            string s_SonID = Bll_ProductsDetails.GetSonIDs(s_ProductsType);
+            s_SonID = s_SonID.Replace(",", "','");
+            s_Sql += " and b.ProductsType in ('" + s_SonID + "') ";
+        }
+        if (s_ProductsEdition != "")
+        {
+            s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%') ";
+        }
+
+        s_Sql += " Group by b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType ";
+
+        if (Button3.Text == "隐藏仓库")
+        {
+            s_Sql += ",c.HouseName";
+        }
+        s_Sql += " HAVING Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInTotalNet else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)<>0  ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('102')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('105')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('106')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime<='" + s_EndDate + "' then DirectInAmount else 0 end)<>0  ";
+        s_Sql += " or Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)<>0 ";
+        s_Sql += " order by b.ProductsName,b.ProductsEdition,b.ProductsType ";
+        string s_Style = "";
+        string s_Head = "";
+        decimal d_QCTotalNumber = 0, d_QCTotalMoney = 0;
+        decimal d_CgTotalNumber = 0, d_CgTotalMoney = 0;
+        decimal d_WwTotalNumber = 0, d_WwTotalMoney = 0;
+        decimal d_DbrTotalNumber = 0, d_DbrTotalMoney = 0;
+        decimal d_QMTotalNumber = 0, d_QMTotalMoney = 0;
+        decimal d_XhTotalNumber = 0, d_XhTotalMoney = 0;
+        decimal d_outTotalNumber = 0, d_outTotalMoney = 0;
+
+        decimal d_DbrDCLlTotalNumber = 0, d_DbrDCLlTotalMoney = 0;
+        decimal d_DbrDCXsTotalNumber = 0, d_DbrDCXsTotalMoney = 0;
+
+        decimal d_TotalTZMoney = 0;
+
+        this.BeginQuery(s_Sql);
+        this.QueryForDataTable();
+        DataTable Dtb_Table = this.Dtb_Result;
+        for (int i = 0; i < Dtb_Table.Columns.Count; i++)
+        {   
             ICell cell = headerrow.CreateCell(i);
-            cell.CellStyle = style; 
-            cell.SetCellValue(dt.Columns[i].ColumnName);
+            cell.CellStyle = style;
+            cell.SetCellValue(Dtb_Table.Columns[i].ColumnName);
         } 
         MemoryStream ms = new MemoryStream();
         book.Write(ms);
-        Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", HttpUtility.UrlEncode(title + "_" + DateTime.Now.ToString("yyyy-MM-dd"), System.Text.Encoding.UTF8)));
+        Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", HttpUtility.UrlEncode("材料收发存报表" + "_" + DateTime.Now.ToString("yyyy-MM-dd"), System.Text.Encoding.UTF8)));
         Response.BinaryWrite(ms.ToArray()); 
         Response.End(); 
         book = null; 

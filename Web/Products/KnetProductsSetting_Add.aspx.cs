@@ -615,8 +615,19 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     {
                         //产品修改
                         //销售、采购、生产、仓库、品质
-                        base.Base_SendMessage("130449499957844456", KNetPage.KHtmlEncode("有 产品修改 <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ProductsBarCode=" + ProductsBarCode + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.ProductsEdition + "</a> 相关的采购单进行，敬请关注！"));
- 
+                        try
+                        {
+                            string s_StaffNo = "";
+                            s_StaffNo += base.Base_GetDeptPerson("供应链平台", 102);
+                            s_StaffNo += "," + base.Base_GetDeptPerson("质量管理中心（服务中心）", 102);
+                            s_StaffNo += "," + base.Base_GetDeptPerson("生产部", 102);
+                            s_StaffNo += "," + base.Base_GetDeptPerson("营销中心", 102);
+                            s_StaffNo += "," + base.Base_GetDeptPerson("供应链平台（物料部/仓库管理）", 102);
+
+                            base.Base_SendMessage(s_StaffNo, KNetPage.KHtmlEncode("有 产品修改 <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ProductsBarCode=" + ProductsBarCode + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.ProductsEdition + "</a> 相关的采购单进行，敬请关注！"));
+                        }
+                        catch
+                        { }
                     }
 
                     AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");

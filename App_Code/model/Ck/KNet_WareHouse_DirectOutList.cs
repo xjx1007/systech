@@ -53,7 +53,21 @@ namespace KNet.Model
 
         private string _KWD_MainProductsBarCode;
         private int _KWD_MainProductsNumber=0;
-        
+        private string _KWD_Project;
+        private int _KWD_IsSupp = 0;
+
+
+        public string KWD_Project
+        {
+            set { _KWD_Project = value; }
+            get { return _KWD_Project; }
+        }
+
+        public int KWD_IsSupp
+        {
+            set { _KWD_IsSupp = value; }
+            get { return _KWD_IsSupp; }
+        }
         /// <summary>
         /// 自动ID值
         /// </summary>

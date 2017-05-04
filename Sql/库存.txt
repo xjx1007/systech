@@ -60,3 +60,20 @@ insert into KNet_WareHouse_WareCheckList_Details
 select dbo.GetID(),'P20170423-001','',b.ProductsBarCode,'','','0'
 ,结存数,0,'0',金额,'',getdate(),'' 
 from 新版$ a join KNet_Sys_Products b on a.料号=b.KSP_COde where 仓库=0
+
+
+
+select * from KNet_WareHouse_WareCheckList_Details where ProductsBarCode='D1611072034228692'
+
+delete from  KNet_WareHouse_WareCheckList_Details where id='M170504721108270'
+
+select * from KNet_WareHouse_WareCheckList_Details where ProductsBarCode='D1610191353454470'
+
+delete from  KNet_WareHouse_WareCheckList_Details where id='M170504217454976'
+
+
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170423-001','',b.ProductsBarCode,'','','0'
+,结存数,0,'0',金额,'',getdate(),'' 
+from 新版$ a join KNet_Sys_Products b on a.料号=b.KSP_COde where 仓库=0
+and a. 料号='02010045'

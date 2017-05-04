@@ -136,9 +136,18 @@
 
                                                     <tr>
                                                         <td class="dvtCellLabel">出库仓库:</td>
-                                                        <td class="dvtCellInfo" colspan="3">
+                                                        <td class="dvtCellInfo">
                                                             <asp:Label ID="Lbl_House" runat="server"></asp:Label></td>
+                                                        <td class="dvtCellLabel">项目:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Label ID="Lbl_Project" runat="server"></asp:Label></td>
+                                                    </tr>
                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="dvtCellLabel">供应商承担:</td>
+                                            <td class="dvtCellInfo" colspan="3">
+                                                <asp:Label ID="Lbl_IsSuppNo" runat="server"></asp:Label></td>
                                         </tr>
                                         <tr>
                                             <td class="dvtCellLabel">客户:</td>
