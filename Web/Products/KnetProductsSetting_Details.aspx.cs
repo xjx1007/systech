@@ -161,7 +161,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 { this.Btn_Sh.Text = "已审批"; }
                 //if ((AM.KNet_StaffDepart == "129652783965723459") && (AM.KNet_Position == "102"))//如果是研发部经理
 
-                if (AM.KNet_StaffDepart == "129652783965723459") //如果是研发部经理
+                if ((AM.KNet_StaffDepart == "129652783965723459")||(AM.KNet_Position=="103"))//如果是研发部经理
                 {
                     Button1.Enabled = true;
                 }

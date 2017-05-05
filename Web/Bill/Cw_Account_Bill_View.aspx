@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                期初金额 > <a class="hdrLink" href="Cw_Account_Bill_List.aspx">期初金额</a>
+                财务 > <a class="hdrLink" href="Cw_Account_Bill_List.aspx">发票管理</a>
             </td>
             <td width="100%" nowrap>
                 <asp:Label ID="Lbl_ID" runat="server" Style="display: none"></asp:Label>
@@ -238,34 +238,31 @@
                                                 <td colspan="4">
                                                     <asp:Label runat="server" CssClass="Custom_Hidden" ID="Lbl_Num"></asp:Label>
                                                     <table id="myTable" width="100%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                                        class="crmTable">
+                                                        class="ListDetails">
                                                         <tr valign="top">
-                                                            <td align="left" class="dvtCellLabel1" width="1%">
-                                                                删除
+                                                            <td align="left" class="ListHeadDetails" width="1%">
+                                                                序号
                                                             </td>
-                                                            <td align="left" class="dvtCellLabel1">
-                                                                合同编号
+                                                            <td align="left" class="ListHeadDetails">
+                                                                出库单号
                                                             </td>
-                                                            <td align="left" class="dvtCellLabel1">
-                                                                发货单号
-                                                            </td>
-                                                            <td align="left" class="dvtCellLabel1">
+                                                            <td align="left" class="ListHeadDetails">
                                                                 产品
                                                             </td>
-                                                            <td align="left" class="dvtCellLabel1">
+                                                            <td align="left" class="ListHeadDetails">
                                                                 数量
                                                             </td>
-                                                            <td align="left" class="dvtCellLabel1">
+                                                            <td align="left" class="ListHeadDetails">
                                                                 单价
                                                             </td>
-                                                            <td align="left" class="dvtCellLabel1">
+                                                            <td align="left" class="ListHeadDetails">
                                                                 金额
                                                             </td>
-                                                            <td align="left" class="dvtCellLabel1">
+                                                            <td align="left" class="ListHeadDetails">
                                                                 备注
                                                             </td>
                                                         </tr>
-                                                        <%=s_MyTable_Detail %>
+                                                        <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
                                                     </table>
                                                 </td>
                                             </tr>

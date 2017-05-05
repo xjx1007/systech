@@ -61,12 +61,14 @@
             var HouseNo = document.all('HouseNo').value;
             var ProductsEdtion = document.all('Tbx_ProductsEdition').value;
             var ProductsType = document.all('Tbx_ProductsTypeNo').value;
-  
+            var Number = document.all('Ddl_Number').value;
+            
             var s_URL = 'List_Details.aspx?StartDate=' + StartDate + '&EndDate=' + EndDate + '';
             s_URL += '&HouseNo=' + HouseNo + '';
             s_URL += '&ProductsEdtion=' + ProductsEdtion + '';
             s_URL += '&ProductsType=' + ProductsType + '';
-
+            s_URL += '&Number=' + Number + '';
+            
             window.open(s_URL, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
         }
 
@@ -193,6 +195,19 @@
                                                     MaxLength="48" Width="200px"></asp:TextBox>
                                                 <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                                 <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="16%" align="right" class="auto-style1">结存数据:
+                                            </td>
+                                            <td class="auto-style2" align="left">
+                                                <asp:DropDownList runat="server" ID="Ddl_Number"><asp:ListItem Value="">全部</asp:ListItem>
+                                                <asp:ListItem Value="0">大于0</asp:ListItem>
+                                                <asp:ListItem Value="1">等于0</asp:ListItem>
+                                                <asp:ListItem Value="2">小于0</asp:ListItem>
+
+
+                                                </asp:DropDownList>
                                             </td>
                                         </tr>
                                         <tr>

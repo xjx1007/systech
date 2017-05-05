@@ -37,23 +37,26 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Cw_Account_Bill_Outimes(");
-            strSql.Append("CAO_ID,CAO_CADID,CAO_Money,CAO_OutDays,CAO_OutTime,CAO_Remarks)");
+            strSql.Append("CAO_ID,CAO_CADID,CAO_Money,CAO_OutDays,CAO_OutTime,CAO_Remarks,CAOC_DirectOutID)");
             strSql.Append(" values (");
-            strSql.Append("@CAO_ID,@CAO_CADID,@CAO_Money,@CAO_OutDays,@CAO_OutTime,@CAO_Remarks)");
+            strSql.Append("@CAO_ID,@CAO_CADID,@CAO_Money,@CAO_OutDays,@CAO_OutTime,@CAO_Remarks,@CAOC_DirectOutID)");
             SqlParameter[] parameters = {
 					new SqlParameter("@CAO_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@CAO_CADID", SqlDbType.VarChar,50),
 					new SqlParameter("@CAO_Money", SqlDbType.Decimal,9),
 					new SqlParameter("@CAO_OutDays", SqlDbType.Int,4),
 					new SqlParameter("@CAO_OutTime", SqlDbType.DateTime),
-					new SqlParameter("@CAO_Remarks", SqlDbType.VarChar,50)};
+					new SqlParameter("@CAO_Remarks", SqlDbType.VarChar,50),
+					new SqlParameter("@CAOC_DirectOutID", SqlDbType.VarChar,50)
+                                        };
             parameters[0].Value = model.CAO_ID;
             parameters[1].Value = model.CAO_CADID;
             parameters[2].Value = model.CAO_Money;
             parameters[3].Value = model.CAO_OutDays;
             parameters[4].Value = model.CAO_OutTime;
             parameters[5].Value = model.CAO_Remarks;
-
+            parameters[6].Value = model.CAOC_DirectOutID;
+            
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>

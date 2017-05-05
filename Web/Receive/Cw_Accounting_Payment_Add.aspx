@@ -143,7 +143,7 @@
         }
     </script>
 </head>
-<body topmargin="0" leftmargin="0" rightmargin="0">
+<body >
     <form id="form1" runat="server">
     <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
         <tr>
@@ -364,6 +364,7 @@
                                                                         </td>
                                                                     </tr>
                                                                     <%=s_MyTable_Detail %>
+                                                                    
                                                                 </table>
                                                                 <input id="Button4" class="crmbutton small create" onclick="return btnGetShip_onclick()"
                                                                     type="button" value="选择出库单" />

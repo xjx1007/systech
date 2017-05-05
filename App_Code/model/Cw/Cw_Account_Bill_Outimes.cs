@@ -16,6 +16,7 @@ namespace KNet.Model
         private int? _cao_outdays;
         private DateTime? _cao_outtime;
         private string _cao_remarks;
+        private string _CAOC_DirectOutID;
         /// <summary>
         /// 
         /// </summary>
@@ -23,6 +24,14 @@ namespace KNet.Model
         {
             set { _cao_id = value; }
             get { return _cao_id; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CAOC_DirectOutID
+        {
+            set { _CAOC_DirectOutID = value; }
+            get { return _CAOC_DirectOutID; }
         }
         /// <summary>
         /// 

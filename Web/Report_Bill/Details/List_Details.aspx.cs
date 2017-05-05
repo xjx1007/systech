@@ -37,6 +37,7 @@ public partial class Web_List_Details : BasePage
             Response.End();
         }
         string s_StartDate = Request.QueryString["StartDate"] == null ? "" : Request.QueryString["StartDate"].ToString();
+        string s_Number = Request.QueryString["Number"] == null ? "" : Request.QueryString["Number"].ToString();
         string s_EndDate = Request.QueryString["EndDate"] == null ? "" : Request.QueryString["EndDate"].ToString();
         string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
 
@@ -86,12 +87,14 @@ public partial class Web_List_Details : BasePage
         {
             s_Sql += " and  a.HouseNo in (select HouseNo FROM KNet_Sys_WareHouse where HouseYN=1 and KSW_Type='0' )";
         }
+
         if (s_ProductsType != "")
         {
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
             string s_SonID = Bll_ProductsDetails.GetSonIDs(s_ProductsType);
             s_SonID = s_SonID.Replace(",", "','");
             s_Sql += " and b.ProductsType in ('" + s_SonID + "') ";
+
         }
         if (s_ProductsEdition != "")
         {
@@ -104,15 +107,36 @@ public partial class Web_List_Details : BasePage
         {
             s_Sql += ",c.HouseName";
         }
-        s_Sql += " HAVING Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInTotalNet else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)<>0  ";
+
+        s_Sql += " HAVING (Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInTotalNet else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('102')  then DirectInAmount else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('105')  then DirectInAmount else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('106')  then DirectInAmount else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108')  then DirectInAmount else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  then DirectInAmount else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime<='" + s_EndDate + "' then DirectInAmount else 0 end)<>0  ";
-        s_Sql += " or Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime<='" + s_EndDate + "' then DirectInAmount else 0 end)<>0 ";
+
+        s_Sql += " or Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)<>0 ) ";
+        if (s_Number != "")
+        {
+            if (s_Number == "0")
+            {
+                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)>0 ";
+            }
+            else if (s_Number == "1")
+            {
+                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)=0 ";
+            }
+            else if (s_Number == "2")
+            {
+                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)<0 ";
+            }
+        }
+        else
+        {
+
+            s_Sql += " or Sum(case when DirectinDateTime<'" + s_EndDate + "' then DirectInAmount else 0 end)<>0  ";
+        }
         s_Sql += " order by b.ProductsName,b.ProductsEdition,b.ProductsType ";
         string s_Style = "";
         string s_Head = "";

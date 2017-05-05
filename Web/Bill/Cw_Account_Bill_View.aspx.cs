@@ -123,14 +123,13 @@ public partial class Web_Cw_Account_Bill_View : BasePage
             {
                 KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DirectOutList = bll_DirectOutList.GetModel(Dts_TableDetails.Tables[0].Rows[i]["CAD_OutNo"].ToString());
                 s_MyTable_Detail += " <tr> ";
-                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">&nbsp;</td>";
-                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_ContractNo"].ToString() + "</td>";
+                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">"+Convert.ToString(i+1)+"&nbsp;</td>";
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\"> " + Model_DirectOutList.DirectOutNo + "</td>";
                 string s_ProductsBarCode=Dts_TableDetails.Tables[0].Rows[i]["CAD_ProductsBarCode"].ToString()==""?Model_DirectOutList.ProductsBarCode:Dts_TableDetails.Tables[0].Rows[i]["CAD_ProductsBarCode"].ToString();
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(s_ProductsBarCode) + "</td>";
-                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Number"].ToString() + "</td>";
+                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_TableDetails.Tables[0].Rows[i]["CAD_Number"].ToString(),0) + "</td>";
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Price"].ToString() + " </td>";
-                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Money"].ToString() + "</td>";
+                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_TableDetails.Tables[0].Rows[i]["CAD_Money"].ToString(),2) + "</td>";
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Remarks"].ToString() + "</td>";
 
                 s_MyTable_Detail += " </tr> ";
@@ -138,6 +137,7 @@ public partial class Web_Cw_Account_Bill_View : BasePage
         }
         catch
         {}
+        Lbl_Details.Text = s_MyTable_Detail;
     }
 
 }

@@ -96,9 +96,9 @@ public partial class Cw_Account_Bill_Add : BasePage
                         }
                         s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"hidden\"  style=\"width:0px;\" Name=\"ShipNo_" + i.ToString() + "\" Value=\"" + Model_DircetOutDetails.ID + "\">" + Model_DircetOut.DirectOutNo + "</td>";
                         s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"hidden\"  style=\"width:0px;\" Name=\"ProductsBarCode_" + i.ToString() + "\" Value=\"" + Model_DircetOutDetails.ProductsBarCode + "\">" + base.Base_GetProductsEdition_Link(Model_DircetOutDetails.ProductsBarCode) + "</td>";
-                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangePrice();this.className=\'detailedViewTextBox\'\" style=\"width:170px;\" Name=\"Number_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["CAPD_Number"].ToString() + "></td>";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangePrice();this.className=\'detailedViewTextBox\'\" style=\"width:170px;\" Name=\"Number_" + i.ToString() + "\" value=" + base.FormatNumber1(Dts_Table.Tables[0].Rows[i]["CAPD_Number"].ToString(),0) + "></td>";
                         s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:170px;\" Name=\"Price_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["CAPD_Price"].ToString() + "> </td>";
-                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:170px;\" Name=\"Money_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["CAPD_Money"].ToString() + "> </td>";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:170px;\" Name=\"Money_" + i.ToString() + "\" value=" + base.FormatNumber1(Dts_Table.Tables[0].Rows[i]["CAPD_Money"].ToString(),2) + "> </td>";
                         s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:170px;\" Name=\"Remarks_" + i.ToString() + "\" > </td>";
                     }
                     s_MyTable_Detail += " </tr> ";
@@ -270,12 +270,32 @@ public partial class Cw_Account_Bill_Add : BasePage
                     Model_Details.CAD_Remarks = s_Remarks;
                     Model_Details.CAD_FID = s_FID;
                     arr_Details.Add(Model_Details);
+                    //根据账期和发货单金额去自动创建超期
+
+                    string s_DoSql="Select * from PB_Basic_PayMent where PBP_ID='"+model.CAB_BillType+"'";
+                    this.BeginQuery(s_DoSql);
+                    DataTable Dtb_tables = this.QueryForDataTable();
+                    for (int j = 0; j < Dtb_tables.Rows.Count; j++)
+                    {
+                        decimal s_D_Money = decimal.Parse(s_Money) * decimal.Parse(Dtb_tables.Rows[j]["PBP_Percent"].ToString());
+                        int s_OutDays = int.Parse(Dtb_tables.Rows[j]["PBP_OutDays"].ToString());
+                        DateTime s_OutTime =DateTime.Parse(model.CAB_Stime.ToString()).AddDays(s_OutDays);
+                        ArrayList arr_Details1 = new ArrayList();
+                        KNet.Model.Cw_Account_Bill_Outimes Model_Outimes = new KNet.Model.Cw_Account_Bill_Outimes();
+                        Model_Outimes.CAO_ID = base.GetMainID(i*10+j);
+                        Model_Outimes.CAO_Money = s_D_Money;
+                        Model_Outimes.CAO_OutDays = s_OutDays;
+                        Model_Outimes.CAO_OutTime = s_OutTime;
+                        Model_Outimes.CAO_CADID = model.CAB_ID;
+                        Model_Outimes.CAOC_DirectOutID = Model_Details.CAD_OutNo;
+                        arr_Details1.Add(Model_Outimes);
+                        model.arr_OutTimes = arr_Details1;
+                    }
                 }
             }
             model.arr_Details = arr_Details;
 
-
-
+            /*
             ArrayList arr_Details1 = new ArrayList();
             int i_Num1 = int.Parse(this.i_Num.Text);
             for (int i = 0; i < i_Num1; i++)
@@ -298,6 +318,7 @@ public partial class Cw_Account_Bill_Add : BasePage
                 }
             }
             model.arr_OutTimes = arr_Details1;
+             * */
             return true;
         }
         catch (Exception)

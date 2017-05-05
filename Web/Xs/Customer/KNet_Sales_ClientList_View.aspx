@@ -120,6 +120,13 @@
                                                                         class="webMnu">创建订单评审</a>
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td align="left" style="padding-left: 10px;">
+                                                                    <img src="/themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                                    <a href="#" onclick="window.open('/Web/Receive/Cw_Accounting_Payment_Add.aspx?CustomerValue=<%= Request.QueryString["CustomerValue"].ToString() %>','Attachments','top=100, left=100,width=1000,height=800');"
+                                                                        class="webMnu">创建开票通知</a>
+                                                                </td>
+                                                            </tr>
                                                         </table>
                                                     </td>
                                                 </tr>

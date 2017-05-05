@@ -66,7 +66,8 @@ public partial class Web_Report_Details : BasePage
 
         string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
         string s_ProductsEdition = Request.QueryString["ProductsEdtion"] == null ? "" : Request.QueryString["ProductsEdtion"].ToString();
-
+        string s_Number = Request.QueryString["Number"] == null ? "" : Request.QueryString["Number"].ToString();
+        
         string s_ProductsType = Request.QueryString["ProductsType"] == null ? "" : Request.QueryString["ProductsType"].ToString();
         string s_Sql = "select b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType,Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)  as QCAmount  ";
 
@@ -106,6 +107,7 @@ public partial class Web_Report_Details : BasePage
         {
             s_Sql += " and  a.HouseNo in (select HouseNo FROM KNet_Sys_WareHouse where HouseYN=1 and KSW_Type='0' )";
         }
+
         if (s_ProductsType != "")
         {
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
@@ -117,7 +119,6 @@ public partial class Web_Report_Details : BasePage
         {
             s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%') ";
         }
-
         s_Sql += " Group by b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType ";
 
         if (Button3.Text == "隐藏仓库")
@@ -133,6 +134,7 @@ public partial class Web_Report_Details : BasePage
         s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  then DirectInAmount else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime<='" + s_EndDate + "' then DirectInAmount else 0 end)<>0  ";
         s_Sql += " or Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)<>0 ";
+
         s_Sql += " order by b.ProductsName,b.ProductsEdition,b.ProductsType ";
         string s_Style = "";
         string s_Head = "";

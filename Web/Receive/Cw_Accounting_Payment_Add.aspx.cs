@@ -28,6 +28,8 @@ public partial class Cw_Accounting_Payment_Add : BasePage
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             string s_OutWareNo = Request.QueryString["OutWareNo"] == null ? "" : Request.QueryString["OutWareNo"].ToString();
             string s_ContractNo = Request.QueryString["ContractNo"] == null ? "" : Request.QueryString["ContractNo"].ToString();
+            string s_CustomerValue = Request.QueryString["CustomerValue"] == null ? "" : Request.QueryString["CustomerValue"].ToString();
+
             this.Tbx_ContractNo.Text = s_ContractNo;
             this.Tbx_OutWareNo.Text = s_OutWareNo;
             this.Tbx_ID.Text = s_ID;
@@ -38,6 +40,73 @@ public partial class Cw_Accounting_Payment_Add : BasePage
             this.Tbx_YTime.Text = DateTime.Now.ToShortDateString();
             base.Base_DropBasicCodeBind(this.Order, "206", false);
             base.Base_DropBasicCodeBind(this.Drop_Payment, "104");
+            if (s_CustomerValue != "")
+            {
+                //发货通知
+                this.Tbx_CustomerValue.Text = s_CustomerValue;
+                this.Tbx_CustomerName.Text = base.Base_GetCustomerName(s_CustomerValue);
+                //发货通知
+                this.Tbx_KCustomerValue.Text = s_CustomerValue;
+                this.Tbx_KCustomerName.Text = base.Base_GetCustomerName(s_CustomerValue);
+                string Sql = " Select a.*,b.KWD_CwCode,b.KWD_Custmoer,v_leftNumber,v_leftNumber*a.KWD_SalesUnitPrice as Money,b.KWD_ShipNo,b.DirectOutDateTime,b.DirectOutStaffBranch,b.HouseNo,b.DirectOutStaffNo,b.KWD_PayMent,KSC_PayMent ";
+                Sql += " From KNet_WareHouse_DirectOutList_Details a join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo";
+                Sql += " join KNet_Sales_OutWareList c on c.OutWareNo=b.KWD_ShipNo ";
+                Sql += " join v_Receive_Number e on e.v_DetailsID=a.ID ";
+                Sql += " join KNet_Sys_Products d on d.ProductsBarCode= a.ProductsBarCode";
+                Sql += " join KNET_Sales_ClientList f on f.CustomerValue= b.KWD_Custmoer";
+                Sql += "  Where isNull(KWD_Type,'101')='101' and e.v_State<>'2' and (d.ProductsType<>'M130704050932527' or (d.ProductsType='M130704050932527' and KWD_SalesUnitPrice<>0 )) ";
+                string SqlWhere = " ";//and OutWareCheckYN=1
+                if (this.Tbx_CustomerValue.Text != "")
+                {
+                    SqlWhere = SqlWhere + " and f.CustomerValue='" + s_CustomerValue + "' ";
+                }
+                SqlWhere = SqlWhere + "  order by b.KWD_CwOutTime ";
+                this.BeginQuery(Sql + SqlWhere);
+                this.QueryForDataTable();
+                DataSet Dts_table = this.Dts_Result;
+                decimal d_TotalMoney = 0;
+                if (Dts_table.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < Dts_table.Tables[0].Rows.Count; i++)
+                    {
+                        this.Drop_Payment.SelectedValue = Dts_table.Tables[0].Rows[0]["KSC_PayMent"].ToString();
+                        s_MyTable_Detail += " <tr> ";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
+
+                        KNet.BLL.KNet_WareHouse_DirectOutList_Details bll_DircetOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
+                        KNet.Model.KNet_WareHouse_DirectOutList_Details Model_DircetOutDetails = bll_DircetOutDetails.GetModel(Dts_table.Tables[0].Rows[i]["ID"].ToString());
+                        if (Model_DircetOutDetails != null)
+                        {
+                            KNet.BLL.KNet_WareHouse_DirectOutList bll_DircetOut = new KNet.BLL.KNet_WareHouse_DirectOutList();
+                            KNet.Model.KNet_WareHouse_DirectOutList Model_DircetOut = bll_DircetOut.GetModelB(Model_DircetOutDetails.DirectOutNo);
+                            if (Model_DircetOut.KWD_CwCode != "")
+                            {
+                                s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"hidden\"  style=\"width:0px;\" Name=\"ID_" + i.ToString() + "\" Value=\"" + Model_DircetOutDetails.ID + "\">" + Model_DircetOut.DirectOutNo + "</td>";
+                            }
+                            else
+                            {
+                                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">&nbsp;</td>";
+                            }
+                            s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"hidden\" ID=\"DirectOutTime_" + i.ToString() + "'\"   Name=\"DirectOutTime_" + i.ToString() + "\" value='" + DateTime.Parse(Model_DircetOut.KWD_CWOutTime.ToString()).ToShortDateString() + "'>" + DateTime.Parse(Model_DircetOut.KWD_CWOutTime.ToString()).ToShortDateString() + "</td>";
+
+                        }
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"hidden\" ID=\"ProductsBarCode_" + i.ToString() + "'\"   Name=\"ProductsBarCode_" + i.ToString() + "\" value='" + Model_DircetOutDetails.ProductsBarCode + "'>" + base.Base_GetProductsEdition_Link(Model_DircetOutDetails.ProductsBarCode) + "</td>";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangePrice();this.className=\'detailedViewTextBox\'\" style=\"width:130px;\" Name=\"Number_" + i.ToString() + "\" value=" + base.FormatNumber1(Dts_table.Tables[0].Rows[i]["v_leftNumber"].ToString(),0) + "></td>";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"hidden\" ID=\"OldPrice_" + i.ToString() + "\"   Name=\"OldPrice_" + i.ToString() + "\" value=" + Dts_table.Tables[0].Rows[i]["KWD_SalesUnitPrice"].ToString() + "><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangePrice();this.className=\'detailedViewTextBox\'\" style=\"width:130px;\" Name=\"Price_" + i.ToString() + "\" value=" + Dts_table.Tables[0].Rows[i]["KWD_SalesUnitPrice"].ToString() + "> </td>";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:130px;\" Name=\"Money_" + i.ToString() + "\" value=" + base.FormatNumber1(Dts_table.Tables[0].Rows[i]["Money"].ToString(),2) + "> </td>";
+                        s_MyTable_Detail += " <td  class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:130px;\" Name=\"Remarks_" + i.ToString() + "\" > </td>";
+
+                        s_MyTable_Detail += " </tr> ";
+                        try
+                        {
+                            d_TotalMoney += decimal.Parse(Dts_table.Tables[0].Rows[i]["Money"].ToString());
+                        }
+                        catch { }
+                    }
+                    this.Tbx_Num.Text = Dts_table.Tables[0].Rows.Count.ToString();
+                    this.Tbx_Money.Text = d_TotalMoney.ToString();
+                }
+            }
             if (s_OutWareNo != "")
             {
                 KNet.BLL.KNet_Sales_OutWareList Bll_OutWare = new KNet.BLL.KNet_Sales_OutWareList();
@@ -66,7 +135,7 @@ public partial class Cw_Accounting_Payment_Add : BasePage
                     {
                         SqlWhere = SqlWhere + " and c.OutWareNo='" + s_OutWareNo + "' ";
                     }
-                    SqlWhere = SqlWhere + " order by b.DirectOutDateTime desc";
+                    SqlWhere = SqlWhere + " order by b.KWD_CwOutTime ";
                     this.BeginQuery(Sql + SqlWhere);
                     this.QueryForDataTable();
                     DataSet Dts_table = this.Dts_Result;
@@ -284,11 +353,6 @@ public partial class Cw_Accounting_Payment_Add : BasePage
                 string s_Remarks = Request["Remarks_" + i + ""] == null ? "" : Request["Remarks_" + i + ""].ToString();
                 if (s_DetailsID != "")
                 {
-                    if (i_Count > 0)
-                    {
-                        Alert("请选择一条出库记录！");
-                        return false;
-                    }
                     i_Count+=1;
                     DateTime D_NowTime = DateTime.Parse(this.Tbx_YTime.Text);
                     DateTime D_OldTime = DateTime.Parse(s_OldDateTime);

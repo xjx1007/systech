@@ -108,7 +108,7 @@
                 document.all("Money_" + i + "").value = Total.toFixed(2);
             }
         }
-        //document.all("Tbx_Money").value = v_Total;
+        document.all("Tbx_Money").value = v_Total;
     }
 
     function ChangePayMent() {

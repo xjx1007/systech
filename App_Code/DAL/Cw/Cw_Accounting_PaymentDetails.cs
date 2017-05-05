@@ -251,7 +251,7 @@ namespace KNet.DAL
         public DataSet GetListByLeft(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 LeftMoney as CAPD_Money,LeftMoney/a.CAPD_Price as CAPD_Number,* ");
+            strSql.Append("select  LeftMoney as CAPD_Money,LeftMoney/a.CAPD_Price as CAPD_Number,* ");
             strSql.Append(" FROM Cw_Accounting_PaymentDetails a join Cw_Payment_BillSum b  on a.CAPD_ID=b.V_ID  and  b.v_State<>'2'");
             if (strWhere.Trim() != "")
             {
