@@ -38,6 +38,10 @@ public partial class List_CkList2 : BasePage
             string s_State = Request.QueryString["State"] == null ? "" : Request.QueryString["State"].ToString();
             
             string s_Ck = Request.QueryString["Ck"] == null ? "" : Request.QueryString["Ck"].ToString();
+            string s_ProductsBarCode = Request.QueryString["ProductsBarCode"] == null ? "" : Request.QueryString["ProductsBarCode"].ToString();
+            string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
+
+
      
             string s_Details="",s_Style="";
             string s_Head = "";
@@ -79,7 +83,15 @@ public partial class List_CkList2 : BasePage
             {
                 s_Sql += " and d.ProductsEdition like '%" + s_ProductsEdition + "%' ";
             }
+            if (s_ProductsBarCode != "")
+            {
+                s_Sql += " and d.ProductsbarCode='" + s_ProductsBarCode + "' ";
+            }
 
+            if (s_HouseNo != "")
+            {
+                s_Sql += " and a.HouseNo='" + s_HouseNo + "' ";
+            }
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
             string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703042640846");
             s_SonID = s_SonID.Replace(",", "','");

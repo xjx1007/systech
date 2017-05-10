@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="/Web/css/knetwork.css" type="text/css">
+    <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
 <script type="text/javascript">
      if(window != window.parent) 
      { var P = window.parent, D = P.loadinndlg(); }
@@ -123,8 +123,8 @@
 <!--底部功能栏-->
 <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" style="border-top:1px solid #A3B2CC;">
   <tr>
-    <td height="30" width="58%">&nbsp;<asp:Button ID="Button2" runat="server"  CssClass="Btt" Text="删除所选项" OnClick="Button1_Click" style="width: 55px;height: 33px;"  />
-    <asp:Button  ID="Button3" runat="server" Text="取消选择" CssClass="Btt" OnClick="Button2_Click"/></td>
+    <td height="30" width="58%">&nbsp;<asp:Button ID="Button2" runat="server"  CssClass="crmButton small save" Text="删除所选项" OnClick="Button1_Click" Width="75px"  />
+    <asp:Button  ID="Button3" runat="server" Text="取消选择" CssClass="crmButton small cancel" OnClick="Button2_Click" Width="72px" /></td>
       <td width="42%" align="right" >&nbsp;</td>
   </tr>
 </table>

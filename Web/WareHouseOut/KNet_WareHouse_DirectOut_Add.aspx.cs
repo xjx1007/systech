@@ -36,6 +36,8 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
             string s_Sql = "1=1";
             this.DirectInDateTime.Text = DateTime.Now.ToShortDateString();
             base.Base_DropBasicCodeBind(this.Ddl_Project, "779");
+           base.Base_DropSupp(this.Ddl_SuppNo,"and KPS_Type='128860698200781250'");
+           base.Base_DropBasicCodeBind(this.Ddl_LyType, "1135");
             this.Lbl_Title.Text = "新增直接出库";
             this.Tbx_ProductsBarCode.Text = s_ProductsBarCode;
             if (s_FaterBarCode != "")
@@ -282,6 +284,9 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
             Chk_IsSuppNo.Checked = false;
         }
         this.Ddl_Project.SelectedValue = model.KWD_Project  ;
+
+        this.Ddl_SuppNo.SelectedValue = model.KWD_SuppNo;
+        this.Ddl_LyType.SelectedValue = model.KWD_LyType;
         DataSet Dts_Details = BLL_Details.GetList(" DirectOutNo='" + s_ID + "'");
         this.Tbx_Type.Text = model.KWD_Type;
         StringBuilder Sb_Details = new StringBuilder();
@@ -408,6 +413,9 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
                 molel.KWD_IsSupp = 0;
             }
             molel.KWD_Project = this.Ddl_Project.SelectedValue;
+
+            molel.KWD_SuppNo = this.Ddl_SuppNo.SelectedValue;
+            molel.KWD_LyType = this.Ddl_LyType.SelectedValue;
             ArrayList Arr_Products = new ArrayList();
             for (int i = 0; i <= int.Parse(this.Tbx_Num.Text); i++)
             {

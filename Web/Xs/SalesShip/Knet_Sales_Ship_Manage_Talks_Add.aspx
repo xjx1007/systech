@@ -342,7 +342,7 @@
                                 &nbsp;
                             </td>
                             <td style="height: 28px">
-                                &nbsp;<asp:Button ID="Button1" runat="server" Text="确定添加跟踪" CssClass="Btt" OnClick="Button1_Click" style="width: 55px;height: 33px;"  />
+                                &nbsp;<asp:Button ID="Button1" runat="server" Text="添加跟踪" CssClass="crmButton small save" OnClick="Button1_Click" Width="83px"  />
                             </td>
                         </tr>
                     </table>

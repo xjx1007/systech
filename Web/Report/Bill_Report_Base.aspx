@@ -77,7 +77,8 @@
                                                             <ul>
                                                                 <li><a href="../Report_Bill/Rk/Report_Order.aspx">原材料入库明细和汇总</a></li>
                                                                 <li><a href="../Report_SC/ScDetails/Report_Xh.aspx">原材料耗料明细和汇总</a></li>
-                                                                <li><a href="../Report_Bill/ScLl/Report_CkDetails2.aspx">原材料领料明细</a></li>
+                                                                <li><a href="../Report_Bill/ScLl/Report_CkDetails2.aspx">原材料部门领料明细</a></li>
+                                                                <li><a href="../Report_Bill/ScDetails/Report_Xh.aspx">原材料生产领料明细</a></li>
                                                                 <li><a href="../Report_Bill/Db/Report_CkDetails3.aspx">原材料调拨明细</a></li>
                                                                 <li><a href="../Reprot_KC/KC/Report_Kc.aspx?Type=1">库存报表</a></li>
                                                                 <li><a href="../Report_Bill/Details/Report_Details.aspx">存货收发结存表(原材料)</a></li>

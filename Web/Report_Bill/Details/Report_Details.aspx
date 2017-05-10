@@ -62,12 +62,14 @@
             var ProductsEdtion = document.all('Tbx_ProductsEdition').value;
             var ProductsType = document.all('Tbx_ProductsTypeNo').value;
             var Number = document.all('Ddl_Number').value;
+            var Ly = document.all('Ddl_Ly').value;
             
-            var s_URL = 'List_Details.aspx?StartDate=' + StartDate + '&EndDate=' + EndDate + '';
+            var s_URL = 'List_DetailsNew.aspx?StartDate=' + StartDate + '&EndDate=' + EndDate + '';
             s_URL += '&HouseNo=' + HouseNo + '';
             s_URL += '&ProductsEdtion=' + ProductsEdtion + '';
             s_URL += '&ProductsType=' + ProductsType + '';
             s_URL += '&Number=' + Number + '';
+            s_URL += '&Ly=' + Ly + '';
             
             window.open(s_URL, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
         }
@@ -86,6 +88,7 @@
             text-align: right;
             height: 30px;
         }
+
         .auto-style2 {
             padding-left: 10px;
             padding-right: 10px;
@@ -132,28 +135,28 @@
 
                                         <tr style="height: 28px; cursor: pointer;" class="detail-content-heading" onmouseover="this.className='detail-content-heading-over';" onmouseout="this.className='detail-content-heading'" onclick="detail_info_click('Div2');">
                                             <!-- windLayerHeadingTr -->
-                                            <td colspan="4"  align="left" valign="middle">&nbsp;&nbsp;计算&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer; height: 30px; width: 30px;" onclick="detail_info_click('Div2');">
+                                            <td colspan="4" align="left" valign="middle">&nbsp;&nbsp;计算&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer; height: 30px; width: 30px;" onclick="detail_info_click('Div2');">
                                                 <img align="absmiddle" id="Div2_IMG" src="/themes/softed/images/arrow-list-down.gif" border="0">
                                             </span>
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td colspan="4">
-                                        <div id="Div2" style="display:none;">
-                                            <table width="100%" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td width="16%" align="right" class="dvtCellLabel">年月:
-                                                    </td>
-                                                    <td class="dvtCellInfo" align="left" colspan="3">
-                                                        <asp:TextBox ID="Tbx_Year" runat="server"></asp:TextBox>&nbsp;<asp:TextBox
-                                                            ID="Tbx_Month" runat="server"></asp:TextBox>
-                                                        <asp:Button ID="Button2" type="button" runat="server" Text="计算" class="crmbutton small save"
-                                                            Style="width: 55px; height: 30px" OnClick="Button2_Click" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                                <div id="Div2" style="display: none;">
+                                                    <table width="100%" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td width="16%" align="right" class="dvtCellLabel">年月:
+                                                            </td>
+                                                            <td class="dvtCellInfo" align="left" colspan="3">
+                                                                <asp:TextBox ID="Tbx_Year" runat="server"></asp:TextBox>&nbsp;<asp:TextBox
+                                                                    ID="Tbx_Month" runat="server"></asp:TextBox>
+                                                                <asp:Button ID="Button2" type="button" runat="server" Text="计算" class="crmbutton small save"
+                                                                    Style="width: 55px; height: 30px" OnClick="Button2_Click" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -201,12 +204,21 @@
                                             <td width="16%" align="right" class="auto-style1">结存数据:
                                             </td>
                                             <td class="auto-style2" align="left">
-                                                <asp:DropDownList runat="server" ID="Ddl_Number"><asp:ListItem Value="">全部</asp:ListItem>
-                                                <asp:ListItem Value="0">大于0</asp:ListItem>
-                                                <asp:ListItem Value="1">等于0</asp:ListItem>
-                                                <asp:ListItem Value="2">小于0</asp:ListItem>
+                                                <asp:DropDownList runat="server" ID="Ddl_Number">
+                                                    <asp:ListItem Value="">全部</asp:ListItem>
+                                                    <asp:ListItem Value="0">大于0</asp:ListItem>
+                                                    <asp:ListItem Value="1">等于0</asp:ListItem>
+                                                    <asp:ListItem Value="2">小于0</asp:ListItem>
 
 
+                                                </asp:DropDownList>
+                                            </td>
+                                            <td width="16%" align="right" class="auto-style1">显示来源:
+                                            </td>
+                                            <td class="auto-style2" align="left">
+                                                <asp:DropDownList runat="server" ID="Ddl_Ly">
+                                                    <asp:ListItem Value="0">是</asp:ListItem>
+                                                    <asp:ListItem Value="">否</asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>

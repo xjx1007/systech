@@ -56,6 +56,8 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
             this.Lbl_MailProductsNumber.Text = model.KWD_MainProductsNumber.ToString();
 
           this.Lbl_Project.Text= base.Base_GetBasicCodeName("779",model.KWD_Project);
+          this.Lbl_LyTYpe.Text = base.Base_GetBasicCodeName("1135", model.KWD_LyType);
+            this.Lbl_OEM.Text=base.Base_GetSupplierName_Link(model.KWD_SuppNo);
           if (model.KWD_IsSupp == 1)
           {
 

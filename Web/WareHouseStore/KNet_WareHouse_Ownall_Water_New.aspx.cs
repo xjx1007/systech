@@ -157,7 +157,7 @@ public partial class KNet_WareHouse_Ownall_Water_New1 : BasePage
             b_Where=true;
         }
         SqlWhere += " Order by DirectInDateTime desc";
-        s_Sql = " Select TypeName,DirectInDateTime,Type,HouseNo,ProductsPattern,ProductsName,ProductsUnits,DirectInAmount,DirectInUnitPrice,DirectInTotalNet,ProductsBarCode from v_Store Where ";
+        s_Sql = " Select TypeName,DirectInDateTime,Type,HouseNo,ProductsPattern,ProductsName,ProductsUnits,DirectInAmount,DirectInUnitPrice,DirectInTotalNet,ProductsBarCode,Code from v_Store Where ";
         s_Sql += "    HouseNo in(select HouseNo from KNet_Sys_WareHouse  where  KSW_Type=0  ) and " + SqlWhere;
         this.BeginQuery(s_Sql);
         this.QueryForDataSet();

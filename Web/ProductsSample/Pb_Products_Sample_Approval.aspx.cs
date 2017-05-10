@@ -274,8 +274,8 @@ public partial class Web_ProductsSample_Pb_Products_Sample_Approval : BasePage
         strSql.Append(" join  Xs_Products_Prodocts_Demo a on a.XPD_ProductsBarCode=b.ProductsBarCode   and XPD_FaterBarCode='" + s_ProductsBarCode + "'  ) bb on bb.ProductsType=c.PBP_ID  ");
         strSql.Append(" left join PB_Basic_Sample_ProductsDetails d on d.PBSP_ProductsType=c.PBP_ID and PBSP_FID='"+this.Tbx_ID.Text+"'  ");
         KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-        string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703044937286");
-        s_SonID = s_SonID.Replace("M130703044937286,", "");
+        string s_SonID = Bll_ProductsDetails.GetSonIDs("M160818111423567");
+        s_SonID = s_SonID.Replace("M160818111423567,", "");
         s_SonID = s_SonID.Replace(",", "','");
         string s_sql = "  PBP_ID in ('" + s_SonID + "','M130704023830654') ";
         strSql.Append(" where " + s_sql + "    Order by cast(PBP_Order as int)");

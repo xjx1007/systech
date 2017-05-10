@@ -162,7 +162,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                出库单管理 > <a class="hdrLink" href="KNet_WareHouse_DirectOut_Manage.aspx">出库单添加</a>
+                仓库 > <a class="hdrLink" href="KNet_WareHouse_DirectOut_Manage.aspx">领用单添加</a>
             </td>
             <td width="100%" nowrap>
                 <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
@@ -198,7 +198,7 @@
                                             &nbsp;
                                         </td>
                                         <td class="dvtSelectedCell" align="center" nowrap>
-                                            出库单信息
+                                            领用单信息
                                         </td>
                                         <td class="dvtTabCache" style="width: 10px">
                                             &nbsp;
@@ -301,8 +301,24 @@
                                         <td class="dvtCellInfo">
                                            <asp:CheckBox runat="server" ID="Chk_IsSuppNo" />
                                         </td>
+                                        <td class="dvtCellLabel">
+                                            &nbsp;OEM:
+                                        </td>
+                                        <td class="dvtCellInfo">
+                                            <asp:DropDownList runat="server" ID="Ddl_SuppNo">
+                                            </asp:DropDownList>
+                                        </td>
                                     </tr>
                                     
+                                    <tr>
+                                        <td class="dvtCellLabel">
+                                            &nbsp;领用用途:
+                                        </td>
+                                        <td class="dvtCellInfo">
+                                            <asp:DropDownList runat="server" ID="Ddl_LyType">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td class="dvtCellLabel">
                                             备注说明:

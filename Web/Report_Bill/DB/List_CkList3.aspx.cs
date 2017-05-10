@@ -35,6 +35,14 @@ public partial class List_CkList3 : BasePage
             string s_State = Request.QueryString["State"] == null ? "" : Request.QueryString["State"].ToString();
             
             string s_Ck = Request.QueryString["Ck"] == null ? "" : Request.QueryString["Ck"].ToString();
+            string s_InCk = Request.QueryString["InCk"] == null ? "" : Request.QueryString["InCk"].ToString();
+            
+            string s_Code = Request.QueryString["Code"] == null ? "" : Request.QueryString["Code"].ToString();
+
+
+            string s_OutHouseNo = Request.QueryString["OutHouseNo"] == null ? "" : Request.QueryString["OutHouseNo"].ToString();
+            string s_InHouseNo = Request.QueryString["InHouseNo"] == null ? "" : Request.QueryString["InHouseNo"].ToString();
+            string s_ProductsBarCode = Request.QueryString["ProductsBarCode"] == null ? "" : Request.QueryString["ProductsBarCode"].ToString();
      
             string s_Details="",s_Style="";
             string s_Head = "";
@@ -72,10 +80,13 @@ public partial class List_CkList3 : BasePage
             {
                 s_Sql += " and ProductsEdition like '%" + s_ProductsEdition + "%' ";
             }
-
+            if (s_Code != "")
+            {
+                s_Sql += " and KSP_Code = '" + s_Code + "' ";
+            }
             //显示原材料的调拨
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-            string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703044937286");
+            string s_SonID = Bll_ProductsDetails.GetSonIDs("M160818111423567");
             s_SonID = s_SonID.Replace(",", "','");
             s_Sql += " and ProductsType in ('" + s_SonID + "') ";
             if(s_ProductsType!="")
@@ -86,7 +97,25 @@ public partial class List_CkList3 : BasePage
             }
             if (s_Ck != "")
             {
-                s_Sql += " and OutHouseName like '%" + s_Ck + "%' ";
+                s_Sql += " and (inHoueName like '%" + s_Ck + "%' )";
+            }
+            if (s_InCk != "")
+            {
+                s_Sql += " and (OutHouseName like '%" + s_Ck + "%' )";
+            }
+
+
+            if (s_OutHouseNo != "")
+            {
+                s_Sql += " and (OutHouseNo='" + s_OutHouseNo + "' )";
+            }
+            if (s_InHouseNo != "")
+            {
+                s_Sql += " and (inHoueno='" + s_InHouseNo + "' )";
+            }
+            if (s_ProductsBarCode != "")
+            {
+                s_Sql += " and (ProductsBarCode='" + s_ProductsBarCode + "' )";
             }
             s_Sql += "Order by AllocateDateTime,AllocateNo ";
             this.BeginQuery(s_Sql);

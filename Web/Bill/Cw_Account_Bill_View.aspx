@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-    <title></title>
+    <title>查看发票</title>
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                财务 > <a class="hdrLink" href="Cw_Account_Bill_List.aspx">发票管理</a>
+                财务 > <a class="hdrLink" href="Cw_Account_Bill_List.aspx">查看发票管理</a>
             </td>
             <td width="100%" nowrap>
                 <asp:Label ID="Lbl_ID" runat="server" Style="display: none"></asp:Label>
@@ -240,25 +240,35 @@
                                                     <table id="myTable" width="100%" border="0" align="center" cellpadding="0" cellspacing="0"
                                                         class="ListDetails">
                                                         <tr valign="top">
-                                                            <td align="left" class="ListHeadDetails" width="1%">
+                                                            <td align="left" class="ListHead">
                                                                 序号
                                                             </td>
-                                                            <td align="left" class="ListHeadDetails">
+                                                            <td align="left" class="ListHead">
                                                                 出库单号
                                                             </td>
-                                                            <td align="left" class="ListHeadDetails">
+                                                            <td align="left" class="ListHead">
                                                                 产品
                                                             </td>
-                                                            <td align="left" class="ListHeadDetails">
+                                                            <td align="left" class="ListHead">
                                                                 数量
                                                             </td>
-                                                            <td align="left" class="ListHeadDetails">
+                                                            <td align="left" class="ListHead">
                                                                 单价
                                                             </td>
-                                                            <td align="left" class="ListHeadDetails">
+                                                            <td align="left" class="ListHead">
                                                                 金额
                                                             </td>
-                                                            <td align="left" class="ListHeadDetails">
+                                                            
+                                                            <td align="left" class="ListHead">
+                                                                超期天数
+                                                            </td>
+                                                            <td align="left" class="ListHead">
+                                                                超期日期
+                                                            </td>
+                                                            <td align="left" class="ListHead">
+                                                                超期金额
+                                                            </td>
+                                                            <td align="left" class="ListHead">
                                                                 备注
                                                             </td>
                                                         </tr>
@@ -270,6 +280,7 @@
                                         </table>
                                     </td>
                                 </tr>
+                                <tr><td style="height: 60px"></td></tr>
                             </table>
                         </td>
                     </tr>

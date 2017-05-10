@@ -1142,6 +1142,28 @@ public class BasePage : System.Web.UI.Page
         }
     }
 
+
+
+    public void Base_DropSupp(DropDownList DDL,string s_Sql)
+    {
+        try
+        {
+            KNet.BLL.Knet_Procure_Suppliers Bll_Suppliers = new KNet.BLL.Knet_Procure_Suppliers();
+            DataSet Dts_Table = Bll_Suppliers.GetList(" KPS_Del=0 and KPS_Type not in ('128860697896406251','128860697896406250') " + s_Sql + "  Order by KPS_Level desc,SuppName ");
+            DDL.DataSource = Dts_Table;
+            DDL.DataTextField = "KPS_SName";
+            DDL.DataValueField = "SuppNo";
+            DDL.DataBind();
+            ListItem item = new ListItem("请选择供应商", ""); //默认值
+            DDL.Items.Insert(0, item);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+
     public void Base_DropDutyPersonByFid(DropDownList DDL, string s_FID)
     {
         try

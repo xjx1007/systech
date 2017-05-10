@@ -273,6 +273,10 @@
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
+                                        <asp:BoundField DataField="Code" HeaderText="发生单号" SortExpression="Code" DataFormatString="{0:F0}">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="50px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
                                         <asp:BoundField DataField="TypeName" HeaderText="业务类型" SortExpression="TypeName">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
@@ -285,7 +289,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
 
-
+                                        
                                         <asp:TemplateField SortExpression="ProductsBarCode" HeaderText="料号" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
                                             <ItemTemplate>
                                                 <%# base.Base_GetProductsCode(Eval("ProductsBarCode").ToString())%>

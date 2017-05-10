@@ -37,12 +37,18 @@
             var State = document.all('Ddl_State').value;
             var ProductsType = document.all('Tbx_ProductsTypeNo').value;
             var ProductsEidition = document.all('Tbx_ProductsEdition').value;
+            var Code = document.all('Tbx_Code').value;
+            
             var Ck = document.all('Tbx_CK').value;
+            var InCk = document.all('Tbx_InCK').value;
             var s_URL = 'List_CkList3.aspx?StartDate=' + StartDate + '&EndDate=' + EndDate + '';
             s_URL += '&State=' + State + '';
             s_URL += '&ProductsType=' + ProductsType + '';
             s_URL += '&ProductsEidition=' + ProductsEidition + '';
+            s_URL += '&Code=' + Code + '';
+            
             s_URL += '&Ck=' + Ck + '';
+            s_URL += '&InCk=' + InCk + '';
             window.open(s_URL, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
 
         }
@@ -119,11 +125,28 @@
                                         </tr>
                                         <tr>
                                             <td width="16%" align="right" class="dvtCellLabel">
-                                                仓库:
+                                                调拨入仓库:
                                             </td>
                                             <td class="dvtCellInfo" align="left">
                                                 <asp:TextBox ID="Tbx_CK" CssClass="detailedViewTextBox" Width="200px" OnFocus="this.className='detailedViewTextBoxOn'"
                                                     OnBlur="this.className='detailedViewTextBox'" runat="server"></asp:TextBox>
+                                            </td>
+                                            <td width="16%" align="right" class="dvtCellLabel">
+                                                调拨出仓库:
+                                            </td>
+                                            <td class="dvtCellInfo" align="left">
+                                                <asp:TextBox ID="Tbx_InCK" CssClass="detailedViewTextBox" Width="200px" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                    OnBlur="this.className='detailedViewTextBox'" runat="server"></asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="16%" align="right" class="dvtCellLabel">
+                                                料号:
+                                            </td>
+                                            <td class="dvtCellInfo" align="left">
+                                                <asp:TextBox ID="Tbx_Code" CssClass="detailedViewTextBox" Width="200px"
+                                                    OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                    runat="server"></asp:TextBox>
                                             </td>
                                             <td width="16%" align="right" class="dvtCellLabel">
                                                 产品版本:

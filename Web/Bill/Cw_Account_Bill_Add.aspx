@@ -136,7 +136,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                发票管理 > <a class="hdrLink" href="Cw_Account_Bill_List.aspx">发票管理</a>
+                财务 > <a class="hdrLink" href="Cw_Account_Bill_List.aspx">新增发票管理</a>
             </td>
             <td width="100%" nowrap>
                 <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
@@ -243,6 +243,10 @@
                                                        >
                                                     </asp:DropDownList>
                                                     <asp:Label runat="server" ID="Lbl_PayMent"></asp:Label>
+                                                    
+                                                (<font color="red">*</font>)
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="付款方式非空"
+                                                ControlToValidate="Ddl_PayMent" Display="Dynamic"></asp:RequiredFieldValidator>
                                                 </td>
                                             </tr>
                                             <tr>

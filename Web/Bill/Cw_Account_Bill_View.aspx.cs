@@ -94,6 +94,7 @@ public partial class Web_Cw_Account_Bill_View : BasePage
             {
                 btn_Chcek.Text = "审批";
             }
+            /*
             s_Return = "<Table id=\"myTable\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"5\" cellspacing=\"0\" class=\"crmTable\">";
             s_Return += "<tr valign=\"top\">";// "<td valign=\"top\" class=\"lvtCol\" align=\"right\" nowrap><b>工具</b></td>";
             s_Return += "<td class=\"lvtCol\" nowrap> <b>金额</b></td>";
@@ -114,7 +115,7 @@ public partial class Web_Cw_Account_Bill_View : BasePage
                     }
                 }
             s_Return += " </table>";
-
+            */
             KNet.BLL.Cw_Account_Bill_Details bll_Details = new KNet.BLL.Cw_Account_Bill_Details();
             KNet.BLL.KNet_WareHouse_DirectOutList_Details bll_DirectOutList = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
             DataSet Dts_TableDetails = bll_Details.GetList(" CAD_CAAID='" + model.CAB_ID + "'");
@@ -130,8 +131,20 @@ public partial class Web_Cw_Account_Bill_View : BasePage
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_TableDetails.Tables[0].Rows[i]["CAD_Number"].ToString(),0) + "</td>";
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Price"].ToString() + " </td>";
                 s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_TableDetails.Tables[0].Rows[i]["CAD_Money"].ToString(),2) + "</td>";
-                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Remarks"].ToString() + "</td>";
 
+                KNet.BLL.Cw_Account_Bill_Outimes Bll_OutTimes = new KNet.BLL.Cw_Account_Bill_Outimes();
+                DataTable Dtb_Table = Bll_OutTimes.GetList(" CAO_CADID='" + model.CAB_ID + "' and CAOC_DirectOutID='" + Model_DirectOutList.ID+ "' ").Tables[0];
+                if (Dtb_Table.Rows.Count > 0)
+                {
+                    for (int j = 0; j < Dtb_Table.Rows.Count; j++)
+                    {
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\" nowrap>" + Dtb_Table.Rows[j][3].ToString() + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\" nowrap>" + DateTime.Parse(Dtb_Table.Rows[j][4].ToString()).ToShortDateString() + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\" nowrap>" + Dtb_Table.Rows[j][2].ToString() + "</td>";
+
+                    }
+                }
+                s_MyTable_Detail += " <td  class=\"ListHeadDetails\">" + Dts_TableDetails.Tables[0].Rows[i]["CAD_Remarks"].ToString() + "</td>";
                 s_MyTable_Detail += " </tr> ";
             }
         }

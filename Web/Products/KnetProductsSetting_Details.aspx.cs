@@ -263,7 +263,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
 
                 //适用成品1
                 KNet.BLL.Xs_Products_Prodocts_Demo BLL_RCProducts = new KNet.BLL.Xs_Products_Prodocts_Demo();
-                DataSet Dts_RCProducts = BLL_RCProducts.GetList(" XPD_ProductsBarCode='" + model.ProductsBarCode + "' and b.ksp_Del=0 ");
+                DataSet Dts_RCProducts = BLL_RCProducts.GetList(" XPD_ProductsBarCode='" + model.ProductsBarCode + "' and b.ksp_Del=0 and c.ksp_del=0  ");
                 DataTable Dtb_RCProducts = Dts_RCProducts.Tables[0];
                 if (Dtb_RCProducts.Rows.Count > 0)
                 {

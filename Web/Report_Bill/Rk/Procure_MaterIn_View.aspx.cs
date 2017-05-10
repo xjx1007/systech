@@ -39,6 +39,8 @@ public partial class Web_Procure_MaterIn_View : BasePage
             string s_State = Request.QueryString["State"] == null ? "" : Request.QueryString["State"].ToString();
             
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
+            string s_ProductsBarCode = Request.QueryString["ProductsBarCode"] == null ? "" : Request.QueryString["ProductsBarCode"].ToString();
+            
             string s_Sql = "";
             //原材料对账单
             if (s_Type == "0")//明细
@@ -74,6 +76,11 @@ public partial class Web_Procure_MaterIn_View : BasePage
             if (s_ProductsEdition != "")
             {
                 s_Sql += " and  ProductsBarCode in (Select ProductsBarCode From KNet_Sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%')";
+            }
+            if (s_ProductsBarCode != "")
+            {
+                s_Sql += " and  ProductsBarCode='" + s_ProductsBarCode + "'";
+ 
             }
             if (s_HouseNo != "")
             {

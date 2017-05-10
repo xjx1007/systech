@@ -135,7 +135,12 @@
             display: none;
         }
     </style>
+     <script language="javascript" type="text/javascript">
 
+         $(document).ready(function () {
+             $("#ListDetail").freezeHeader({ 'height': '300px' });
+         })
+    </script>
     <script language="javascript" type="text/javascript">
         var LODOP; //声明为全局变量 
         function prn1_preview() {
@@ -181,6 +186,8 @@
     <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
     <script language="JavaScript" src="../../Js/Report.js" type="text/javascript"></script>
     <script language="javascript" src="../../Js/LodopFuncs.js"></script>
+    <script src="/Web/Js/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="/Web/Js/jquery.freezeheader.js" type="text/javascript"></script>
     <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="0"
         height="0">
         <embed id="LODOP_EM" type="application/x-print-lodop" width="0" height="0" pluginspage="install_lodop.exe"></embed>
@@ -189,12 +196,12 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <input type="button" value="打印预览" onclick="javascript: prn1_preview()" id="Button1" Style="width: 55px; height: 30px;" />
-            <input type="button" value="导出Excel" onclick="javascript: OutToFileMoreSheet()" id="Button2" Style="width: 55px; height: 30px;" />
+            <input type="button" value="打印预览" onclick="javascript: prn1_preview()" id="Button1" Style="width: 70px; height: 30px;" />
+                                        <asp:Button runat="server" ID="Btn_Excel" Text="导出Excel" OnClick="Btn_Excel_Click"  Style="width: 70px; height: 30px;" />
 
-            <asp:Button ID="Btn_Save" runat="server" Text="修改" AccessKey="S" title="修改[Alt+S]" Style="width: 55px; height: 30px;"
+            <asp:Button ID="Btn_Save" runat="server" Text="修改" AccessKey="S" title="修改[Alt+S]" Style="width: 70px; height: 30px;"
                 class="crmbutton small save" OnClick="Btn_SaveOnClick" />
-            <asp:Button ID="Button3" runat="server" Text="显示仓库" AccessKey="S" title="修改[Alt+S]" Style="width: 55px; height: 30px;"
+            <asp:Button ID="Button3" runat="server" Text="显示仓库" AccessKey="S" title="修改[Alt+S]" Style="width: 70px; height: 30px;"
                 class="crmbutton small save" OnClick="Btn_SaveOnClick1" />
             <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
             <asp:Label runat="server" ID="Lbl_Link"></asp:Label>

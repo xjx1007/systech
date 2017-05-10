@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-<title></title>
+<title>发票管理</title>
 </head>
 <script type="text/javascript" src="../js/ajax_func.js"></script>
 <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
@@ -22,7 +22,7 @@
 <table border="0" cellspacing=0 cellpadding=0 width=100% class=small>
 <tr><td style="height:2px"></td></tr>
 <tr>
-	<td style="padding-left:10px;padding-right:50px" class="moduleName" nowrap>发票管理 >
+	<td style="padding-left:10px;padding-right:50px" class="moduleName" nowrap>财务 >
 	<a class="hdrLink" href="Cw_Account_Bill_List.aspx">发票管理</a>
         </td>
 	<td width=100% nowrap>

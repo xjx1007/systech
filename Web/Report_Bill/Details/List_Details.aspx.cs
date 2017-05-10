@@ -44,6 +44,8 @@ public partial class Web_List_Details : BasePage
         string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
         string s_ProductsEdition = Request.QueryString["ProductsEdtion"] == null ? "" : Request.QueryString["ProductsEdtion"].ToString();
 
+        string s_Ly = Request.QueryString["Ly"] == null ? "" : Request.QueryString["Ly"].ToString();
+
         string s_ProductsType = Request.QueryString["ProductsType"] == null ? "" : Request.QueryString["ProductsType"].ToString();
         string s_Sql = "select b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType,Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)  as QCAmount  ";
 
@@ -77,8 +79,8 @@ public partial class Web_List_Details : BasePage
         s_Sql += " join KNet_Sys_WareHouse c on a.HouseNo=c.HouseNo ";
 
         s_Sql += " where 1=1 ";
-
         Lbl_Link.Text = "<a target=\"_blank\" href=\"List_Details1.aspx?EndDate=" + s_EndDate + "&StartDate=" + s_StartDate + "\" >期末金额调整</a>";
+
         if (s_HouseNo != "")
         {
             s_Sql += " and  a.HouseNo='" + s_HouseNo + "'";
@@ -161,14 +163,16 @@ public partial class Web_List_Details : BasePage
         s_Time = "日期:" + s_StartDate + " 到" + s_EndDate;
         s_HouseName = "入库仓库:" + base.Base_GetHouseName(s_HouseNo);
 
+        /*
         Sb_Details.Append("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n");
         Sb_Details.Append("<tr>\n<td colspan=\"26\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>存货收发结存表单</td></tr>\n");
         Sb_Details.Append("<tr>\n<td colspan=\"13\" class=\"thstyleleft\"  >" + s_HouseName + "</td>\n");
         Sb_Details.Append("<td colspan=\"13\" class=\"thstyleRight\" >" + s_Time + "</td></tr>\n");
         Sb_Details.Append("</table>\n");
+         * */
         Sb_Details.Append("<div class=\"tableContainer\" id=\"tableContainer\" >\n");
 
-        Sb_Details.Append("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\" >\n");
+        Sb_Details.Append("<table id=\"ListDetail\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\" >\n");
         // Sb_Details.Append("<tdead class=\"fixedHeader\"> \n");
         Sb_Details.Append("<tr class=\"tr_Head\"><td class=\"thstyle\"  align=center  rowspan=\"2\" colspan=\"1\">序号</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">品名</td>\n");
@@ -243,7 +247,17 @@ public partial class Web_List_Details : BasePage
                 }
                 Sb_Details.Append(" <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n");
                 Sb_Details.Append("<td class='thstyleLeftDetails'align=center noWrap>" + (i + 1).ToString() + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap><a href='/web/WareHouseStore/KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "' target=\"_blank\">" + Dtb_Table.Rows[i]["ProductsName"].ToString() + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>");
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("<a href='/web/WareHouseStore/KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&startDate=" + s_StartDate + "&endDate=" + s_EndDate + "'  target=\"_blank\">");
+                }
+                Sb_Details.Append(Dtb_Table.Rows[i]["ProductsName"].ToString());
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("</a>");
+                }
+                Sb_Details.Append("</td>\n");
                 string s_ProductsEdition1 = Dtb_Table.Rows[i]["ProductsEdition"].ToString();
                 if (Dtb_Table.Rows[i]["ProductsType"].ToString() == "M130703044953260")
                 {
@@ -272,7 +286,17 @@ public partial class Web_List_Details : BasePage
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["QCMoney"].ToString(), 2) + "</td>\n");
 
                 //采购
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["CgAmount"].ToString(), 0) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("<a href='/Web/Report_Bill/Rk/Procure_MaterIn_View.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&Type=0&State=&House=" + s_HouseNo + "'  target=\"_blank\">");
+                }
+                Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["CgAmount"].ToString(), 0));
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("</a>");
+                }
+                Sb_Details.Append("</td>\n");
                 decimal d_CgPrice = 0;
                 try
                 {
@@ -286,7 +310,18 @@ public partial class Web_List_Details : BasePage
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["CgMoney"].ToString(), 2) + "</td>\n");
 
                 //调拨入
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbinAmount"].ToString(), 0) + "</td>\n");
+
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("<a href='/Web/Report_Bill/Db/List_CkList3.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&InHouseNo=" + s_HouseNo + "&OutHouseNo='  target=\"_blank\">");
+                }
+                Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["DbinAmount"].ToString(), 0));
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("</a>");
+                }
+                Sb_Details.Append("</td>\n");
                 decimal d_WwPrice = 0;
                 try
                 {
@@ -299,8 +334,21 @@ public partial class Web_List_Details : BasePage
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_WwPrice.ToString(), 5) + "</td>\n");
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbinMoney"].ToString(), 2) + "</td>\n");
 
+
                 //生产出库
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["XhAmount"].ToString(), 0) + "</td>\n");
+
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("<a href='/Web/Report_Bill/ScDetails/Procure_Xh_View.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&type=0'  target=\"_blank\">");
+                }
+                Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["XhAmount"].ToString(), 0));
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("</a>");
+                }
+                Sb_Details.Append("</td>\n");
+                //Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["XhAmount"].ToString(), 0) + "</td>\n");
                 decimal d_XhPrice = 0;
                 try
                 {
@@ -314,7 +362,19 @@ public partial class Web_List_Details : BasePage
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["XhMoney"].ToString(), 2) + "</td>\n");
 
                 //部门领料
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrAmount"].ToString(), 0) + "</td>\n");
+
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("<a href='/Web/Report_Bill/ScLl/List_CkList2.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&type=0'  target=\"_blank\">");
+                }
+                Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["DbrAmount"].ToString(), 0));
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("</a>");
+                }
+                Sb_Details.Append("</td>\n");
+                //Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrAmount"].ToString(), 0) + "</td>\n");
                 decimal d_DbrPrice = 0;
                 try
                 {
@@ -327,41 +387,19 @@ public partial class Web_List_Details : BasePage
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrPrice.ToString(), 5) + "</td>\n");
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrMoney"].ToString(), 2) + "</td>\n");
 
-
-                /*
-                //生产领用电池
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrDCLlAmount"].ToString(), 0) + "</td>\n");
-                decimal d_DbrDCLlPrice = 0;
-                try
-                {
-                    d_DbrDCLlTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["DbrDCLlAmount"].ToString());
-                    d_DbrDCLlTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["DbrDCLlMoney"].ToString());
-                    d_DbrDCLlPrice = decimal.Parse(Dtb_Table.Rows[i]["DbrDCLlMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["DbrDCLlAmount"].ToString());
-
-                }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrDCLlPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrDCLlMoney"].ToString(), 2) + "</td>\n");
-
-
-                //销售出库电池
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrDCXsAmount"].ToString(), 0) + "</td>\n");
-                decimal d_DbrDCXsPrice = 0;
-                try
-                {
-                    d_DbrDCXsTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["DbrDCXsAmount"].ToString());
-                    d_DbrDCXsTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["DbrDCXsMoney"].ToString());
-                    d_DbrDCXsPrice = decimal.Parse(Dtb_Table.Rows[i]["DbrDCXsMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["DbrDCXsAmount"].ToString());
-
-                }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrDCXsPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrDCXsMoney"].ToString(), 2) + "</td>\n");
-                */
-
-
                 //调出
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DboutAmount"].ToString(), 0) + "</td>\n");
+
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("<a href='/Web/Report_Bill/Db/List_CkList3.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&InHouseNo=&OutHouseNo=" + s_HouseNo + "'  target=\"_blank\">");
+                }
+                Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["DboutAmount"].ToString(), 0));
+                if (s_Ly == "0")
+                {
+                    Sb_Details.Append("</a>");
+                }
+               // Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DboutAmount"].ToString(), 0) + "</td>\n");
                 decimal d_outPrice = 0;
                 try
                 {
@@ -567,5 +605,37 @@ public partial class Web_List_Details : BasePage
         }
         this.Show();
 
+    }
+
+    protected void Btn_Excel_Click(object sender, EventArgs e)
+    {
+        /*
+
+        KNet.BLL.Xs_Products_Prodocts BLL_Products_Products = new KNet.BLL.Xs_Products_Prodocts();
+        KNet.BLL.PB_Basic_ProductsClass BLL_Basic_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
+        KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
+        string s_Where1 = " and XPD_FaterBarCode='" + this.Tbx_ID.Text + "' ";
+        s_Where1 += " and  b.KSP_Del=0 ";
+        string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 ";
+        this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
+        DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+        
+        Excel export = new Excel();
+        export.ExcelExport(GetStringWriter(Dtb_DemoProducts), this.Lbl_BomTitle.Text);
+        */
+
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("收发存.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
     }
 }

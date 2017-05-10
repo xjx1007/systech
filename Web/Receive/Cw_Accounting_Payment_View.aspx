@@ -227,7 +227,6 @@
                                             
                                             <tr>
                                                 <td colspan="4">
-                                                    
                             <cc1:MyGridView ID="MyGridView2" runat="server" AllowPaging="True" AllowSorting="True"
                                 IsShowEmptyTemplate="true" AutoGenerateColumns="False" CssClass="Custom_DgMain"
                                 PageSize="10" Width="100%">
@@ -257,13 +256,13 @@
                                             <itemstyle horizontalalign="Left" font-size="12px" />
                                             <headerstyle horizontalalign="Left" font-size="12px" />
                                         </asp:BoundField>
-                                        <asp:TemplateField HeaderText="产品版本" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
-                                            HeaderStyle-HorizontalAlign="Left">
-                                            <itemtemplate>
-               <%# base.Base_GetShipDetailProductsPatten(DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString())%>
-          </itemtemplate>
-                                        </asp:TemplateField>
-                                    <asp:BoundField HeaderText="数量" DataField="CAPD_Number" SortExpression="CAPD_Number"
+                                    <asp:TemplateField HeaderText="产品" SortExpression="KWD_Custmoer" ItemStyle-HorizontalAlign="left"
+                                        HeaderStyle-HorizontalAlign="left">
+                                        <ItemTemplate>
+                                            <%#base.Base_GetProductsEdition(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField HeaderText="数量" DataField="CAPD_Number" SortExpression="CAPD_Number" DataFormatString="{0:f0}"
                                         ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
@@ -273,7 +272,7 @@
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="金额" DataField="CAPD_Money" SortExpression="CAPD_Money"
+                                    <asp:BoundField HeaderText="金额" DataField="CAPD_Money" SortExpression="CAPD_Money"  DataFormatString="{0:f2}"
                                         ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />

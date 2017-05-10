@@ -240,6 +240,7 @@ public partial class Cw_Account_Bill_Add : BasePage
             //model.CAB_Day = this.Tbx_Day.Text;
             //model.CAB_OutTime = DateTime.Parse(this.Tbx_OutTime.Text);
             ArrayList arr_Details = new ArrayList();
+            ArrayList arr_Details1 = new ArrayList();
             int i_Num = int.Parse(this.Tbx_Num.Text);
             for (int i = 0; i < i_Num; i++)
             {
@@ -272,7 +273,7 @@ public partial class Cw_Account_Bill_Add : BasePage
                     arr_Details.Add(Model_Details);
                     //根据账期和发货单金额去自动创建超期
 
-                    string s_DoSql="Select * from PB_Basic_PayMent where PBP_ID='"+model.CAB_BillType+"'";
+                    string s_DoSql = "Select * from PB_Basic_PayMent where PBP_FID='" + model.CAB_PayMent + "'";
                     this.BeginQuery(s_DoSql);
                     DataTable Dtb_tables = this.QueryForDataTable();
                     for (int j = 0; j < Dtb_tables.Rows.Count; j++)
@@ -280,7 +281,6 @@ public partial class Cw_Account_Bill_Add : BasePage
                         decimal s_D_Money = decimal.Parse(s_Money) * decimal.Parse(Dtb_tables.Rows[j]["PBP_Percent"].ToString());
                         int s_OutDays = int.Parse(Dtb_tables.Rows[j]["PBP_OutDays"].ToString());
                         DateTime s_OutTime =DateTime.Parse(model.CAB_Stime.ToString()).AddDays(s_OutDays);
-                        ArrayList arr_Details1 = new ArrayList();
                         KNet.Model.Cw_Account_Bill_Outimes Model_Outimes = new KNet.Model.Cw_Account_Bill_Outimes();
                         Model_Outimes.CAO_ID = base.GetMainID(i*10+j);
                         Model_Outimes.CAO_Money = s_D_Money;
@@ -289,11 +289,11 @@ public partial class Cw_Account_Bill_Add : BasePage
                         Model_Outimes.CAO_CADID = model.CAB_ID;
                         Model_Outimes.CAOC_DirectOutID = Model_Details.CAD_OutNo;
                         arr_Details1.Add(Model_Outimes);
-                        model.arr_OutTimes = arr_Details1;
                     }
                 }
             }
             model.arr_Details = arr_Details;
+            model.arr_OutTimes = arr_Details1;
 
             /*
             ArrayList arr_Details1 = new ArrayList();

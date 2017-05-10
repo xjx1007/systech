@@ -243,7 +243,7 @@
                                                     HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
                                                         
-                                            <a href="/Web/OrderInWareHouse/Knet_Procure_WareHouseList_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "WareHouseNo") %>">
+                                            <a href="/Web/CG/OrderInWareHouse/Knet_Procure_WareHouseList_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "WareHouseNo") %>">
                                                 <%# DataBinder.Eval(Container.DataItem, "WareHouseNo").ToString()%></a>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>

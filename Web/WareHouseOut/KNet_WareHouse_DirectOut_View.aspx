@@ -145,9 +145,17 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td class="dvtCellLabel">领用用途:</td>
+                                            <td class="dvtCellInfo">
+                                                <asp:Label ID="Lbl_LyTYpe" runat="server"></asp:Label></td>
+                                        </tr>
+                                        <tr>
                                             <td class="dvtCellLabel">供应商承担:</td>
-                                            <td class="dvtCellInfo" colspan="3">
+                                            <td class="dvtCellInfo">
                                                 <asp:Label ID="Lbl_IsSuppNo" runat="server"></asp:Label></td>
+                                            <td class="dvtCellLabel">OEM:</td>
+                                            <td class="dvtCellInfo">
+                                                <asp:Label ID="Lbl_OEM" runat="server"></asp:Label></td>
                                         </tr>
                                         <tr>
                                             <td class="dvtCellLabel">客户:</td>
