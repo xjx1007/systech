@@ -57,20 +57,45 @@
                                         <tr>
                                             <td colspan="4" align="left">
 
-                                                <table>
+                                                <table width="100%">
                                                     <tr>
-                                                        <td>
+                                                        <td width="33%">
                                                             <font color="red" size="4">报表</font>
                                                         </td>
+                                                         <td width="33%">
+                                                            <font color="red" size="4">原材料</font>
+                                                        </td>
+                                                         <td width="33%">
+                                                            <font color="red" size="4">成品</font>
+                                                        </td>
                                                     </tr>
-                                                </table>
-                                                <table>
-                                                    <tr>
+                                                    <tr valign="top">
                                                         <td>
                                                             <ul>
+                                                                
+                                                                    <li><a href="../Report_CG/Report_ProductsDetails.aspx">产品明细</a></li>
                                                                 <li><a href="../Reprot_KC/CkDetails/Report_CkDetails.aspx">出入库明细</a></li>
                                                                 <li><a href="../Reprot_KC/KC/Report_Kc.aspx?Type=0">库存报表</a></li>
                                                                 <li><a href="../Reprot_KC/Print/Report_Kc.aspx">仓库单据打印</a></li>
+                                                                <li><a href="../Reprot_KC/Details/Report_Details.aspx">材料收发存</a></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <ul>
+                                                                <li><a href="../Report_Bill/Rk/Report_Order.aspx">原材料入库明细和汇总</a></li>
+                                                                <li><a href="../Report_SC/ScDetails/Report_Xh.aspx">原材料耗料明细和汇总</a></li>
+                                                                <li><a href="../Report_Bill/ScLl/Report_CkDetails2.aspx">原材料部门领料明细</a></li>
+                                                                <li><a href="../Report_Bill/ScDetails/Report_Xh.aspx">原材料生产领料明细</a></li>
+                                                                <li><a href="../Report_Bill/Db/Report_CkDetails3.aspx">原材料调拨明细</a></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <ul>
+                                                                <li><a href="../Report_Bill/DBCP/Report_CkDetails3.aspx">成品调回明细</a></li>
+                                                                <li><a href="../Report_Bill/DBCPWw/Report_CkDetails3.aspx">成品委外明细</a></li>
+                                                                <li><a href="../Report_Xs/Report_CkDetails.aspx">销售出库明细</a></li>
+                                                                <li><a href="../Report_Bill/ScIn/Report_OrderIn.aspx">成品直接入库明细</a></li>
+                                                                <li><a href="../Report_Sc/ScIn/Report_OrderIn.aspx">成品生产入库明细</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

@@ -365,8 +365,14 @@
                                                             <tr>
                                                                 <td height="25" align="right" class="dvtCellLabel">使用方式:
                                                                 </td>
-                                                                <td align="left" class="dvtCellInfo" colspan="3">
+                                                                <td align="left" class="dvtCellInfo">
                                                                             <asp:Label ID="Ddl_UseType" runat="server" Text=""></asp:Label>
+
+                                                                </td>
+                                                                <td height="25" align="right" class="dvtCellLabel">损耗类别:
+                                                                </td>
+                                                                <td align="left" class="dvtCellInfo">
+                                                                            <asp:Label ID="Lbl_Loss" runat="server" Text=""></asp:Label>
 
                                                                 </td>
                                                             </tr>

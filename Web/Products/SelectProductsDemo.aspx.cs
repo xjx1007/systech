@@ -36,8 +36,11 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
             else
             {
                 string s_Details = Request.QueryString["Details"] == null ? "" : Request.QueryString["Details"].ToString();
+
+                string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+                this.Tbx_ID.Text = s_ID;
                 this.SeachKey.Text = s_Details;
-        
+
                 BuildTree("1", null);
                 this.TreeView1.CollapseAll();
                 this.TreeView1.Nodes[0].Expand();
@@ -63,7 +66,7 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
         else
         {
             this.Button2.Enabled = true;
- 
+
         }
     }
     /// <summary>
@@ -75,10 +78,10 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
 
         string SqlWhere = " KSP_Del=0 ";
 
-        string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
         string s_ProductsTypeID = Request.QueryString["ProductsTypeID"] == null ? "" : Request.QueryString["ProductsTypeID"].ToString();
 
         string s_CustomerValue = Request.QueryString["CustomerValue"] == null ? "" : Request.QueryString["CustomerValue"].ToString();
+        string s_ID = this.Tbx_ID.Text;
         s_ID = s_ID.Replace(",", "','");
         if (s_ID != "")
         {
@@ -138,7 +141,7 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
                 string s_ProductsBarCode = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsBarCode")).Text;
                 string s_ProductsName = GridView1.Rows[i].Cells[1].Text;
                 string s_ProdctsEdition = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsEdition")).Text; ;
-             
+
                 int s_Number = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text == "" ? 1 : int.Parse(((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
                 cal += s_ProductsBarCode;
                 s_Return += s_ProductsBarCode + "," + s_ProductsName + "," + s_Number.ToString() + "," + s_ProdctsEdition + "|";

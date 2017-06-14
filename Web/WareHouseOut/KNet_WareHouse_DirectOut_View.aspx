@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-    <title></title>
+    <title>查看出库单</title>
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
@@ -201,8 +201,10 @@
                                             <td class="ListHead" nowrap><b>产品编码</b></td>
                                             <td class="ListHead" nowrap><b>型号</b></td>
                                             <td class="ListHead" nowrap><b>出库数量</b></td>
-                                            <td class="ListHead" nowrap><b>单价</b></td>
-                                            <td class="ListHead" nowrap><b>金额</b></td>
+                                            <td class="ListHead" nowrap><b>出库单价</b></td>
+                                            <td class="ListHead" nowrap><b>出库金额</b></td>
+                                            <td class="ListHead" nowrap><b>计算单价</b></td>
+                                            <td class="ListHead" nowrap><b>计算金额</b></td>
                                             <td class="ListHead" nowrap><b>备注</b></td>
                                         </tr>
                                         <asp:Label runat="server" ID="Lbl_Details"></asp:Label>

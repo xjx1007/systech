@@ -21,6 +21,17 @@ namespace KNet.BLL
             return dal.Exists(model);
         }
 
+        public bool ExistsProductsEdition(string ProductsName,string s_ProductsEdition)
+        {
+            return dal.ExistsProductsEdition(ProductsName, s_ProductsEdition);
+        }
+
+        public bool ExistsProductsPattern(string ProductsName, string s_ProductsEdition)
+        {
+            return dal.ExistsProductsPattern(ProductsName, s_ProductsEdition);
+        }
+
+        
         /// <summary>
         /// 更新一条数据
         /// </summary>

@@ -70,15 +70,14 @@ public partial class Web_Sales_Sales_ShipWareOut_Manage : BasePage
             {
                 s_Tables_Details += " <tr>";
                 s_Tables_Details += "<td align=\"center\" nowrap><b>" + (i + 1) + "</b></td>";
-                s_Tables_Details += "<td align=\"center\" nowrap><b>" + Dtb_Table.Rows[i]["CName"].ToString() + "</b></td>";
-                s_Tables_Details += "<td align=\"center\" nowrap><b>" + Dtb_Table.Rows[i]["ProductsEdition"].ToString() + "</b></td>";
-                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["CustomerProductsName"].ToString().Replace("?", "") + "</b></td>";
-                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["DirectOutAmount"].ToString() + "</b></td>";
-                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["KWD_BNumber"].ToString() + "</b></td>";
-                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["TotalNumber"].ToString() + "</b></td>";
-                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["PlanNo"].ToString().Replace("?", "") + "</b></td>";
                 s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["MaterNo"].ToString().Replace("?", "") + "</b></td>";
                 s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["OrderNo"].ToString().Replace("?", "") + "</b></td>";
+                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["CustomerProductsName"].ToString().Replace("?", "") + "</b></td>";
+
+                s_Tables_Details += "<td align=\"center\" nowrap><b>" + Dtb_Table.Rows[i]["CName"].ToString() + "</b></td>";
+                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["PlanNo"].ToString().Replace("?", "") + "</b></td>";
+                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["DirectOutAmount"].ToString() + "</b></td>";
+                s_Tables_Details += "<td class=\"ListHeadDetails\" align=\"center\"><b>" + Dtb_Table.Rows[i]["KWD_BNumber"].ToString() + "</b></td>";
                 s_Tables_Details += " </tr>";
                 s_Remarks= Dtb_Table.Rows[i]["DirectOutRemarks"].ToString();
             }

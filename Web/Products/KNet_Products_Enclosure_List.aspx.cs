@@ -94,10 +94,6 @@ public partial class KNet_Products_Enclosure_List : BasePage
                 Dts_Table = bll.GetList(" PBP_FaterID='" + s_ID + "'  order by PBP_Order");
             }
 
-
-
-
-
             if (Dts_Table.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
@@ -170,6 +166,13 @@ public partial class KNet_Products_Enclosure_List : BasePage
                 s_Type = "1";
             }
             SqlWhere += base.Base_GetAdvWhere(s_Fields, s_Condition, s_Text, s_Type);
+        }
+        //权限
+        string s_ProductsType = "";
+        s_ProductsType = base_GetProductsTypeYNvisable();
+        if (s_ProductsType != "")
+        {
+            SqlWhere += " and PBA_ProductsType in ('" + s_ProductsType.Replace(",", "','") + "') ";
         }
 
         if (this.TreeView1.SelectedNode.Value != "1")
@@ -293,6 +296,7 @@ public partial class KNet_Products_Enclosure_List : BasePage
 
     protected void GridView1_DataRowBinding(object sender, GridViewRowEventArgs e)
     {
+        AdminloginMess AM = new AdminloginMess();
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
 
@@ -300,7 +304,23 @@ public partial class KNet_Products_Enclosure_List : BasePage
             string Id = this.GridView1.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
             KNet.BLL.PB_Basic_Attachment bllComment = new KNet.BLL.PB_Basic_Attachment();
             KNet.Model.PB_Basic_Attachment Model = bllComment.GetModel(Id);
-            if ((Model.PBA_State == 0) || (Model.PBA_Del == 1))
+            if ((Model.PBA_State == 0) || (Model.PBA_Del == 1) )
+            {
+                if (AM.KNet_StaffDepart == "129652783965723459")
+                {
+                   
+                    btnDownload.Visible = true;
+                }
+                else
+                {
+                    btnDownload.Visible = false;
+                }
+            }
+            else
+            {
+                btnDownload.Visible = true;
+            }
+            if (AM.YNAuthority("产品资料下载权限") == false)
             {
                 btnDownload.Visible = false;
             }
@@ -402,7 +422,7 @@ public partial class KNet_Products_Enclosure_List : BasePage
         else if (cmd == "Sp")
         {
             //如果是审批
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲"||am.KNet_Position=="103")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || am.KNet_Position == "103")
             {
                 if (Model.PBA_State == 1)
                 {

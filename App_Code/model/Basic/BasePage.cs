@@ -1144,7 +1144,7 @@ public class BasePage : System.Web.UI.Page
 
 
 
-    public void Base_DropSupp(DropDownList DDL,string s_Sql)
+    public void Base_DropSupp(DropDownList DDL, string s_Sql)
     {
         try
         {
@@ -1755,49 +1755,49 @@ public class BasePage : System.Web.UI.Page
         AdminloginMess AM = new AdminloginMess();
         if (AM.YNAuthority("能查看客户"))
         {
-        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
-        {
-            conn.Open();
-            string Dostr = "select ID,CustomerValue,CustomerName,KSC_SampleName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
-            SqlCommand cmd = new SqlCommand(Dostr, conn);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
+            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
             {
-                string s_Name = dr["CustomerName"].ToString();
-                string s_SName = dr["KSC_SampleName"].ToString();
-                string s_CustomerValue = dr["CustomerValue"].ToString();
-                string s_Return = "";
-                if (b_IsShort == true)
+                conn.Open();
+                string Dostr = "select ID,CustomerValue,CustomerName,KSC_SampleName from KNet_Sales_ClientList where CustomerValue='" + s_Value + "'";
+                SqlCommand cmd = new SqlCommand(Dostr, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
+                    string s_Name = dr["CustomerName"].ToString();
+                    string s_SName = dr["KSC_SampleName"].ToString();
+                    string s_CustomerValue = dr["CustomerValue"].ToString();
+                    string s_Return = "";
+                    if (b_IsShort == true)
+                    {
 
-                    if (s_SName != "")
-                    {
-                        s_Name = s_SName;
-                    }
-                    else
-                    {
-                        if (dr["CustomerName"].ToString().Length > 5)
+                        if (s_SName != "")
                         {
-                            s_Name = dr["CustomerName"].ToString().Substring(0, 5);
+                            s_Name = s_SName;
                         }
+                        else
+                        {
+                            if (dr["CustomerName"].ToString().Length > 5)
+                            {
+                                s_Name = dr["CustomerName"].ToString().Substring(0, 5);
+                            }
+                        }
+                        s_Return = "<a href=\"/Web/Xs/Customer/KNet_Sales_ClientList_View.aspx?CustomerValue=" + s_CustomerValue + "\"  target=\"_self\" onMouseOver=\"fnDropDown1(this,'" + s_CustomerValue + "_sub');\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub');\" >" + s_Name + "</a>";
+                        s_Return += "<div class=\"Drop_Customer\" id=\"" + s_CustomerValue + "_sub\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub')\" onMouseOver=\"fnShowDrop('" + s_CustomerValue + "_sub')\">\n";
+                        s_Return += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
+
+                        s_Return += "<tr><td >客户：" + dr["CustomerName"].ToString();
+                        s_Return += "</td></tr>\n";
+                        s_Return += "</table>\n</div>\n";
                     }
-                    s_Return = "<a href=\"/Web/Xs/Customer/KNet_Sales_ClientList_View.aspx?CustomerValue=" + s_CustomerValue + "\"  target=\"_self\" onMouseOver=\"fnDropDown1(this,'" + s_CustomerValue + "_sub');\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub');\" >" + s_Name + "</a>";
-                    s_Return += "<div class=\"Drop_Customer\" id=\"" + s_CustomerValue + "_sub\" onMouseOut=\"fnHideDrop('" + s_CustomerValue + "_sub')\" onMouseOver=\"fnShowDrop('" + s_CustomerValue + "_sub')\">\n";
-                    s_Return += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
 
-                    s_Return += "<tr><td >客户：" + dr["CustomerName"].ToString();
-                    s_Return += "</td></tr>\n";
-                    s_Return += "</table>\n</div>\n";
+                    return s_Return;
                 }
+                else
+                {
+                    return "--";
+                }
+            }
 
-                return s_Return;
-            }
-            else
-            {
-                return "--";
-            }
-        }
-        
         }
         else
         {
@@ -3550,8 +3550,19 @@ public class BasePage : System.Web.UI.Page
         string s_Return = "";
         try
         {
-            KNet.BLL.PB_Basic_ProductsClass bll = new KNet.BLL.PB_Basic_ProductsClass();
-            s_Return = bll.GetProductsName(aa.ToString());
+            string[] s_ProductsCode = aa.ToString().Split(',');
+            for (int i = 0; i < s_ProductsCode.Length; i++)
+            {
+                KNet.BLL.PB_Basic_ProductsClass bll = new KNet.BLL.PB_Basic_ProductsClass();
+                if (i == 0)
+                {
+                    s_Return = bll.GetProductsName(s_ProductsCode[i]);
+                }
+                else
+                {
+                    s_Return += "," + bll.GetProductsName(s_ProductsCode[i]);
+                }
+            }
         }
         catch
         { }
@@ -6395,5 +6406,53 @@ public class BasePage : System.Web.UI.Page
         }
         catch
         { }
+    }
+    public string base_GetProductsTypeYNvisable()
+    {
+        AdminloginMess AM = new AdminloginMess();
+
+        string s_ProductsType = "";
+        if (AM.YNAuthority("全部附件资料可见权限") == false)
+        {
+            if (AM.YNAuthority("规格书可见权限"))
+            {
+                s_ProductsType += "1" + ",";
+            }
+            else if (AM.YNAuthority("生产文件可见权限"))
+            {
+                s_ProductsType += "4" + ",";
+            }
+            else if (AM.YNAuthority("烧录文件可见权限"))
+            {
+                s_ProductsType += "6" + ",";
+            }
+            else if (AM.YNAuthority("生产注意事项可见权限"))
+            {
+                s_ProductsType += "5" + ",";
+            }
+            else if (AM.YNAuthority("制板文件可见权限"))
+            {
+                s_ProductsType += "2" + ",";
+            }
+
+            else if (AM.YNAuthority("线束制作可见权限"))
+            {
+                s_ProductsType += "3" + ",";
+            }
+
+            else if (AM.YNAuthority("测试文件可见权限"))
+            {
+                s_ProductsType += "7" + ",";
+            }
+            else if (AM.YNAuthority("散热器可见权限"))
+            {
+                s_ProductsType += "8" + ",";
+            }
+            if (s_ProductsType != "")
+            {
+                s_ProductsType = s_ProductsType.Substring(0, s_ProductsType.Length - 1);
+            }
+        }
+        return s_ProductsType;
     }
 }

@@ -485,11 +485,11 @@ public partial class Web_List_Details : BasePage
                 string s_Sql = "update Sc_Expend_Manage set SEM_CheckYN=2 where SEM_ID='" + model.SEM_ID + "' ";
                 s_Sql += "update Sc_Expend_Manage_MaterDetails set SED_WwMoney=SED_RkMoney where SED_SEMID='" + model.SEM_ID + "'";
                 DbHelperSQL.ExecuteSql(s_Sql);
-
+                /*
                 int i_Row1;
                 SqlParameter[] parameters1 = { };
                 DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
-                //base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "生产入库增加： <a href='Web/ScExpend/Sc_Expend_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.SEM_ID + "</a> 需要你审批！ ");
+               */ //base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "生产入库增加： <a href='Web/ScExpend/Sc_Expend_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.SEM_ID + "</a> 需要你审批！ ");
                 AlertAndRedirect("新增成功！", "List_Details1.aspx?EndDate=" + this.Tbx_EndDate.Text + "&StartDate=" + this.Tbx_StartDate.Text + "");
             }
             catch (Exception ex)

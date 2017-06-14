@@ -116,19 +116,55 @@ public partial class Sc_Expend_Manage : BasePage
                     {
                         KNet.BLL.Sc_Expend_Manage bll = new KNet.BLL.Sc_Expend_Manage();
                         KNet.Model.Sc_Expend_Manage Model = bll.GetModel(s_ID);
-                        string s_CheckYN = "0";
-                        if (Model.SEM_CheckYN == 1)
+                        string s_CheckYN = "2";
+                        if (s_CheckYN != "0")
                         {
-                            s_CheckYN = "2";
+                            string sql = " update Sc_Expend_Manage  set SEM_CheckYN=" + s_CheckYN + ",SEM_CwCheckStaffNo ='" + AM.KNet_StaffNo + "',SEM_CwCheckTime='" + DateTime.Now.ToString() + "'  where  SEM_ID='" + s_ID + "'  ";
+                            DbHelperSQL.ExecuteSql(sql);
                         }
-                        else if (Model.SEM_CheckYN == 2)
-                        {
-                            s_CheckYN = "1";
-                        }
-                        else
-                        {
-                            s_CheckYN = "0";
-                        }
+                    }
+                    s_Log.Append(s_ID + ",");
+                }
+            }
+            if (s_Log.ToString() == "")
+            {
+                Alert("未选择出库单！");
+            }
+            else
+            {
+                this.DataShows();
+                AM.Add_Logs("KNet_WareHouse_DirectOutList 审批 编号：" + s_Log + "");
+                Alert("批量审批成功！");
+            }
+        }
+        catch (Exception ex)
+        {
+            Alert("批量审批失败！");
+            return;
+        }
+    }
+
+    protected void Btn_SpSave1(object sender, EventArgs e)
+    {
+
+        StringBuilder s_Sql = new StringBuilder();
+        StringBuilder s_Log = new StringBuilder();
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+
+            for (int i = 0; i < this.GridView1.Rows.Count; i++)
+            {
+                CheckBox Ckb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (Ckb.Checked)
+                {
+                    string s_ID = GridView1.DataKeys[i].Value.ToString();
+
+                    if (AM.CheckLogin("财务审核出库单") == true)
+                    {
+                        KNet.BLL.Sc_Expend_Manage bll = new KNet.BLL.Sc_Expend_Manage();
+                        KNet.Model.Sc_Expend_Manage Model = bll.GetModel(s_ID);
+                        string s_CheckYN = "1";
                         if (s_CheckYN != "0")
                         {
                             string sql = " update Sc_Expend_Manage  set SEM_CheckYN=" + s_CheckYN + ",SEM_CwCheckStaffNo ='" + AM.KNet_StaffNo + "',SEM_CwCheckTime='" + DateTime.Now.ToString() + "'  where  SEM_ID='" + s_ID + "'  ";

@@ -580,14 +580,6 @@ public partial class Web_Sales_ShipWareOut_Manage_Cw : BasePage
                         if (Model != null)
                         {
                             string s_CheckYN = "3";
-                            if (Model.DirectOutCheckYN == 2)
-                            {
-                                s_CheckYN = "3";
-                            }
-                            else if (Model.DirectOutCheckYN == 3)
-                            {
-                                s_CheckYN = "2";
-                            }
                             if (s_CheckYN != "0")
                             {
                                 string sql = " update KNet_WareHouse_DirectOutList  set DirectOutCheckYN=" + s_CheckYN + ",DirectOutCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  DirectOutNo='" + s_ID + "' ";
@@ -599,18 +591,72 @@ public partial class Web_Sales_ShipWareOut_Manage_Cw : BasePage
                         {
                             KNet.BLL.KNet_WareHouse_DirectInto Bll_DirectInto = new KNet.BLL.KNet_WareHouse_DirectInto();
                             KNet.Model.KNet_WareHouse_DirectInto Model_DirectInto = Bll_DirectInto.GetModelB(s_ID);
-                            if (Model_DirectInto.DirectInCheckYN == 1)
+
+                            string DoSql = "update KNet_WareHouse_DirectInto set DirectInCheckYN=3,DirectInCheckStaffNo='" + AM.KNet_StaffNo + "',KWD_CheckTime='" + DateTime.Now.ToString() + "'  where  DirectInNo='" + s_ID + "' ";
+                            DbHelperSQL.ExecuteSql(DoSql);
+                            AlertAndRedirect("审批成功！", "Sales_ShipWareOut_Manage_Cw.aspx");
+                        }
+                    }
+                    s_Log.Append(s_ID + ",");
+                }
+            }
+            if (s_Log.ToString() == "")
+            {
+                Alert("未选择出库单！");
+            }
+            else
+            {
+                this.DataBind();
+                AM.Add_Logs("批量审批发货出库单编号：" + s_Log + "");
+                AlertAndRedirect("批量审批成功！", "Sales_ShipWareOut_Manage_Cw.aspx");
+            }
+        }
+        catch (Exception ex)
+        {
+            Alert("批量审批失败！");
+            return;
+        }
+    }
+
+
+    protected void Btn_SpSave1(object sender, EventArgs e)
+    {
+
+        StringBuilder s_Sql = new StringBuilder();
+        StringBuilder s_Log = new StringBuilder();
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+
+            for (int i = 0; i < MyGridView1.Rows.Count; i++)
+            {
+                CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (Ckb.Checked)
+                {
+                    string s_ID = MyGridView1.DataKeys[i].Value.ToString();
+
+                    if (AM.CheckLogin("财务审核出库单") == true)
+                    {
+                        KNet.BLL.KNet_WareHouse_DirectOutList bll = new KNet.BLL.KNet_WareHouse_DirectOutList();
+                        KNet.Model.KNet_WareHouse_DirectOutList Model = bll.GetModelB(s_ID);
+                        if (Model != null)
+                        {
+                            string s_CheckYN = "2";
+                            if (s_CheckYN != "0")
                             {
-                                string DoSql = "update KNet_WareHouse_DirectInto set DirectInCheckYN=3,DirectInCheckStaffNo='" + AM.KNet_StaffNo + "',KWD_CheckTime='" + DateTime.Now.ToString() + "'  where  DirectInNo='" + s_ID + "' ";
-                                DbHelperSQL.ExecuteSql(DoSql);
-                                AlertAndRedirect("审批成功！", "Sales_ShipWareOut_Manage_Cw.aspx");
+                                string sql = " update KNet_WareHouse_DirectOutList  set DirectOutCheckYN=" + s_CheckYN + ",DirectOutCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  DirectOutNo='" + s_ID + "' ";
+                                DbHelperSQL.ExecuteSql(sql);
                             }
-                            else if (Model_DirectInto.DirectInCheckYN == 3)
-                            {
-                                string DoSql = "update KNet_WareHouse_DirectInto  set DirectInCheckYN=1,DirectInCheckStaffNo='" + AM.KNet_StaffNo + "',KWD_CheckTime='" + DateTime.Now.ToString() + "'  where  DirectInNo='" + s_ID + "' ";
-                                DbHelperSQL.ExecuteSql(DoSql);
-                                AlertAndRedirect("反审批成功！", "Sales_ShipWareOut_Manage_Cw.aspx");
-                            }
+
+                        }
+                        else
+                        {
+                            KNet.BLL.KNet_WareHouse_DirectInto Bll_DirectInto = new KNet.BLL.KNet_WareHouse_DirectInto();
+                            KNet.Model.KNet_WareHouse_DirectInto Model_DirectInto = Bll_DirectInto.GetModelB(s_ID);
+
+                            string DoSql = "update KNet_WareHouse_DirectInto  set DirectInCheckYN=1,DirectInCheckStaffNo='" + AM.KNet_StaffNo + "',KWD_CheckTime='" + DateTime.Now.ToString() + "'  where  DirectInNo='" + s_ID + "' ";
+                            DbHelperSQL.ExecuteSql(DoSql);
+                            AlertAndRedirect("反审批成功！", "Sales_ShipWareOut_Manage_Cw.aspx");
                         }
                     }
                     s_Log.Append(s_ID + ",");

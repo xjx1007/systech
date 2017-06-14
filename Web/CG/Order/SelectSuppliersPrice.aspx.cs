@@ -90,7 +90,7 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
         string isModiy = Request.QueryString["isModiy"] == null ? "" : Request.QueryString["isModiy"].ToString();
         string s_ProductsID = Request.QueryString["sID"] == null ? "" : Request.QueryString["sID"].ToString();
         string s_ContractNo = Request.QueryString["Contract"] == null ? "" : Request.QueryString["Contract"].ToString();
-        string s_Sql = "select  b.*,e.ProductsType,isnull(cc.PPB_BrandName,'') PPB_BrandName from Knet_Procure_SuppliersPrice b  join KNet_Sys_Products e on e.ProductsBarCode=b.ProductsBarCode left join PB_Products_Brand cc on cc.PPB_ID=b.KPP_Brand ";
+        string s_Sql = "select  b.*,e.ProductsType,isnull(cc.PPB_BrandName,'') PPB_BrandName,e.ksp_Code from Knet_Procure_SuppliersPrice b  join KNet_Sys_Products e on e.ProductsBarCode=b.ProductsBarCode left join PB_Products_Brand cc on cc.PPB_ID=b.KPP_Brand ";
         s_Sql += "left join KNet_Sales_ContractList_Details a on a.ProductsBarCode=b.ProductsBarCode  and b.ProcureState=1 and isnull(KPP_Del,'0')='0' ";
         string SqlWhere = " where 1=1 and b.KPP_Del=0  and b.KPP_State=1  and e.KSP_Del=0 ";
 
@@ -108,8 +108,15 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
         if (this.SeachKey.Text != "")
         {
             string KSeachKey = this.SeachKey.Text;
-            SqlWhere = SqlWhere + " and ( b.ProductsBarCode  like '%" + KSeachKey + "%' or e.ProductsPattern  like '%" + KSeachKey + "%' or e.ProductsEdition  like '%" + KSeachKey + "%' )";
+            SqlWhere = SqlWhere + " and ( e.ProductsName  like '%" + KSeachKey + "%' or e.ProductsPattern  like '%" + KSeachKey + "%' or e.ProductsEdition  like '%" + KSeachKey + "%' )";
         }
+
+        if (this.Tbx_Code.Text != "")
+        {
+            string BarCode = this.Tbx_Code.Text;
+            SqlWhere = SqlWhere + " and ( KSP_Code  like '%" + BarCode + "%'  )";
+        }
+        
         if (isModiy == "")
         {
             if (Request["Contract"] != null && Request["Contract"] != "")

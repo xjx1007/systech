@@ -211,12 +211,22 @@
                                 <div id="selectoperate" class="drop_mnu1" onmouseout="fnHideDrop('selectoperate')"
                                     onmouseover="fnShowDrop('selectoperate')">
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                
                                         <tr>
                                             <td>
+
                                                 <asp:Button ID="Btn_Sp" runat="server" Text="批量审批" Width="100%" BorderColor="White" OnClick="Btn_SpSave" />
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+
+
+                                                <asp:Button ID="Button1" runat="server" Text="批量反审批" Width="100%" BorderColor="White" OnClick="Btn_SpSave1" />
+                                            </td>
+                                        </tr>
                                     </table>
+
                                 </div>
                             </td>
                         </tr>
@@ -267,6 +277,11 @@
                                                 <%# base.Base_GetProductsPattern(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="料号" SortExpression="ProductsBarCode">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetProductsCode(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="版本号" SortExpression="ProductsBarCode">
                                             <ItemTemplate>
                                                 <%# base.Base_GetProductsEdition_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
@@ -278,52 +293,16 @@
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
 
-                                        <asp:TemplateField HeaderText="单价" SortExpression="allocateUnitPrice">
+                                        <asp:TemplateField HeaderText="单价" SortExpression="Allocate_WwPrice">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="Tbx_NewPrice" runat="server" CssClass="detailedViewTextBox" MaxLength="40" Text='<%# DataBinder.Eval(Container.DataItem, "allocateUnitPrice").ToString() %>' Width="100px"></asp:TextBox>
+                                                <asp:TextBox ID="Tbx_NewPrice" runat="server" CssClass="detailedViewTextBox" MaxLength="40" Text='<%# DataBinder.Eval(Container.DataItem, "Allocate_WwPrice").ToString() %>' Width="100px"></asp:TextBox>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <%# DataBinder.Eval(Container.DataItem, "allocateUnitPrice").ToString() %>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField HeaderText="金额" DataField="allocateTotalNet"  ReadOnly="True" 
-                                            SortExpression="COD_Money">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        </asp:BoundField>
-                                        <asp:TemplateField HeaderText="期末数量">
-                                            <ItemTemplate>
-                                                <%# GetKC(DataBinder.Eval(Container.DataItem, "ID").ToString(),0)%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="期末金额">
-                                            <ItemTemplate>
-                                                <%# GetKC(DataBinder.Eval(Container.DataItem, "ID").ToString(),1)%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="委外数量">
-                                            <ItemTemplate>
-                                                <%# GetKC(DataBinder.Eval(Container.DataItem, "ID").ToString(),2)%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="委外金额">
-                                            <ItemTemplate>
-                                                <%# GetKC(DataBinder.Eval(Container.DataItem, "ID").ToString(),3)%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="单价" >
-                                            <ItemTemplate>
-                                                <%# GetKC(DataBinder.Eval(Container.DataItem, "ID").ToString(),4)%>
                                                 <asp:TextBox runat="server" ID="Tbx_Price" CssClass="Custom_Hidden" Text='<%# GetKC(DataBinder.Eval(Container.DataItem, "ID").ToString(),4)%>'></asp:TextBox>
                                                 <asp:TextBox runat="server" ID="Tbx_Number" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "allocateAmount").ToString()%>'></asp:TextBox>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
-                                        <asp:BoundField HeaderText="委外单价" DataField="Allocate_WwPrice"
-                                            SortExpression="Allocate_WwPrice"  ReadOnly="True" >
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        </asp:BoundField>
                                         <asp:BoundField HeaderText="委外金额" DataField="Allocate_WwMoney"
                                             SortExpression="Allocate_WwMoney"  ReadOnly="True" >
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />

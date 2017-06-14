@@ -30,7 +30,15 @@ public partial class BOM : BasePage
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
             }
-            this.Get_Knet_Suppliers_ByID();
+
+            if (AM.YNAuthority("BOOM可见权限") == false)
+            {
+                AlertAndClose("没有BOOM可见权限!");
+            }
+            else
+            {
+                this.Get_Knet_Suppliers_ByID();
+            }
         }
     }
 
@@ -136,7 +144,8 @@ public partial class BOM : BasePage
             s_Where1 += " and  b.KSP_Del=0 ";
         }
         string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
-        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 ";
+        s_Sql += " left join PB_Basic_Code d on b.KSP_LossType=d.PBC_Code  and d.PBC_ID='1136' ";
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1  ";
         this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
@@ -186,7 +195,7 @@ public partial class BOM : BasePage
         Sb_BomDetails.Append("<table id=\"ProductsBomTable\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" class=\"ListDetails\"");
         Sb_BomDetails.Append("cellspacing=\"0\">");
         Sb_BomDetails.Append("<tr>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\" colspan=\"8\" height=\"40px\"><h2>");
+        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\" colspan=\"9\" height=\"40px\"><h2>");
         Sb_BomDetails.Append(Lbl_BomTitle.Text);
         Sb_BomDetails.Append("</h2></td>");
         Sb_BomDetails.Append("</tr>");
@@ -206,6 +215,9 @@ public partial class BOM : BasePage
         Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">位号");
         Sb_BomDetails.Append("</td>");
         Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">使用方式");
+        Sb_BomDetails.Append("</td>");
+        Sb_BomDetails.Append("</td>");
+        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">损耗类型");
         Sb_BomDetails.Append("</td>");
         Sb_BomDetails.Append("</tr>");
         if (Dtb_DemoProducts.Rows.Count > 0)
@@ -231,6 +243,7 @@ public partial class BOM : BasePage
                 Sb_BomDetails.Append("<td class=\"ListHeadDetails\" style=\"max-width:250px;word-break: break-all;word-wrap:break-word;\">" + Dtb_DemoProducts.Rows[i]["XPD_Place"].ToString() + "</td>");
                 //使用方式
                 Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetBasicCodeName("1134", Dtb_DemoProducts.Rows[i]["KSP_UseType"].ToString()) + "</td>");
+                Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + Dtb_DemoProducts.Rows[i]["PBC_Name"].ToString() + "(" + base.FormatNumber1(Convert.ToString(decimal.Parse(Dtb_DemoProducts.Rows[i]["PBC_Details"].ToString()) * 100),2) + "%)</td>");
 
                 /* string s_Only = Dtb_DemoProducts.Rows[i]["XPD_Only"] == null ? "0" : Dtb_DemoProducts.Rows[i]["XPD_Only"].ToString();
                  string s_Check = "";
@@ -433,18 +446,25 @@ public partial class BOM : BasePage
         Excel export = new Excel();
         export.ExcelExport(GetStringWriter(Dtb_DemoProducts), this.Lbl_BomTitle.Text);
         */
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.YNAuthority("BOM导出权限") == false)
+        {
+            Alert("没有BOM导出权限!");
+        }
+        else
+        {
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode(this.Lbl_BomTitle.Text + ".xls", System.Text.Encoding.UTF8).ToString());
+            //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+            Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
 
-        Response.Buffer = true;
-        Response.Clear();
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode(this.Lbl_BomTitle.Text + ".xls", System.Text.Encoding.UTF8).ToString());
-        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
-        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
-
-        Response.ContentType = "application/ms-excel";
-        Response.Write(Lbl_BomDetails1.Text);
-        Response.Flush();
-        Response.End();
+            Response.ContentType = "application/ms-excel";
+            Response.Write(Lbl_BomDetails1.Text);
+            Response.Flush();
+            Response.End();
+        }
     }
 
 

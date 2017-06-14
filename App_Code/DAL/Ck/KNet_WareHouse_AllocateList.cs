@@ -307,7 +307,11 @@ namespace KNet.DAL
                 {
                     model.KWA_DBType = int.Parse(ds.Tables[0].Rows[0]["KWA_DBType"].ToString());
                 }
-                
+
+                if (ds.Tables[0].Rows[0]["KWA_IsSave"] != null && ds.Tables[0].Rows[0]["KWA_IsSave"].ToString() != "")
+                {
+                    model.KWA_IsSave = int.Parse(ds.Tables[0].Rows[0]["KWA_IsSave"].ToString());
+                }
                 return model;
             }
             else

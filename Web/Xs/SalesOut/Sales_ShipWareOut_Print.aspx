@@ -198,23 +198,19 @@ TABLE.print1 .right {
             <td  height="28" align="center"  nowrap><b>
                 项目</b></td>
             <td align="center" nowrap><b>
-                产品名称</b></td>
-            <td align="center" nowrap><b>
-                士腾型号</b></td>
-            <td align="center" nowrap><b>
-                客户型号</b></td>
-            <td align="center" nowrap><b>
-                计价数</b></td>
-            <td align="center" nowrap><b>
-                备品数</b></td>
-            <td align="center" nowrap><b>
-                发货总数</b></td>
-            <td align="center" nowrap><b>
-                计划单号</b></td>
-            <td align="center" nowrap><b>
                 客户料号</b></td>
             <td align="center" nowrap><b>
                 客户订单号</b></td>
+            <td align="center" nowrap><b>
+                客户型号</b></td>
+            <td align="center" nowrap><b>
+                士腾型号</b></td>
+            <td align="center" nowrap><b>
+                件数</b></td>
+            <td align="center" nowrap><b>
+                发货数</b></td>
+            <td align="center" nowrap><b>
+                备品数</b></td>
         </tr>
                 
         <%=s_Tables_Details%>

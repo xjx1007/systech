@@ -68,6 +68,37 @@ public partial class Knet_Web_System_KnetKnetUserAuthorityList: BasePage
             this.Button2.Enabled = false;
         }
     }
+
+
+    protected string Get_MangerDetail(object GroupValue)
+    {
+        return "<a href=\"#\" onclick=\"javascript:window.open('KnetUserAuthoritySetC.aspx?StaffNo=" + GroupValue + "','用户权限设置','top=100,left=100,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=950,height=550');\">用户权限详细设置</a>";
+    }
+
+    //==============================
+    /// <summary>
+    /// 获取用户组是否已有设置了操作权限
+    /// </summary>
+    /// <param name="aa"></param>
+    /// <returns></returns>
+    protected string GetGroupNameYNPic(string GroupValue)
+    {
+        using (SqlConnection conn = DBClass.GetConnection("KNetJxcDB"))
+        {
+            conn.Open();
+            string Dostr = "select GroupValue,AuthorityValue,AuthorityGroup from KNet_Sys_AuthorityUserGroupSetup where  GroupValue='" + GroupValue + "'";
+            SqlCommand cmd = new SqlCommand(Dostr, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                return "<img src=\"../../images/Au1.gif\" />";
+            }
+            else
+            {
+                return "<img src=\"../../images/Au2.gif\" />";
+            }
+        }
+    }
     /// <summary>
     /// 绑定数据源
     /// </summary>

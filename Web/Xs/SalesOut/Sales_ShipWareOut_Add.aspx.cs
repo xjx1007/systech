@@ -44,7 +44,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 if (s_IsFreight != "")
                 {
                     this.Pan_DirectOut.Enabled = false;
-                    
+
                     this.Button_Select.Visible = false;
                 }
                 else
@@ -66,7 +66,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 base.Base_DropBasicCodeBind(this.Ddl_ShipType, "145");
                 base.Base_DropBasicCodeBind(this.Drop_Payment, "104");
                 base.Base_DropBasicCodeBind(this.Ddl_KpType, "768");
-                
+
                 this.BeginQuery("Select * from PB_Basic_Wl ");
                 this.QueryForDataTable();
                 this.Drop_KD.DataSource = this.Dtb_Result;
@@ -136,11 +136,12 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     s_HouseNo = this.Ddl_HouseNo.SelectedValue;
                 }
                 else
-                { 
-                if (s_HouseNo != "")
                 {
-                    this.Ddl_HouseNo.SelectedValue = s_HouseNo;
-                }}
+                    if (s_HouseNo != "")
+                    {
+                        this.Ddl_HouseNo.SelectedValue = s_HouseNo;
+                    }
+                }
                 KNet.BLL.KNet_Sales_OutWareList BLL = new KNet.BLL.KNet_Sales_OutWareList();
                 KNet.Model.KNet_Sales_OutWareList Model = BLL.GetModelB(s_ShipNo);
                 this.Tbx_ContentPerson.Text = base.Base_GetLinkManValue(Model.OutWareSideContact, "XOL_Name") == "" ? Model.KSO_ContentPersonName : base.Base_GetLinkManValue(Model.OutWareSideContact, "XOL_Name");
@@ -182,6 +183,8 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 }
                 //物流信息自动绑定
                 ShowWuliu();
+
+
                 /*
                if (this.Tbx_ID.Text == "")
                {
@@ -241,8 +244,8 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
 
             string Dostr = "select top 1 * from KNet_Sales_OutWareList_FlowList where OutWareNo='" + this.Tbx_ID.Text + "' and KDCode<>''  order by FollowDateTime desc";
             this.BeginQuery(Dostr);
-            DataTable Dtb_Tables= (DataTable)this.QueryForDataTable();
-            if(Dtb_Tables.Rows.Count>0)
+            DataTable Dtb_Tables = (DataTable)this.QueryForDataTable();
+            if (Dtb_Tables.Rows.Count > 0)
             {
                 this.span.Value = Dtb_Tables.Rows[0]["KDCodeName"].ToString();
                 this.Drop_KD.SelectedValue = Dtb_Tables.Rows[0]["KDName"].ToString();
@@ -252,33 +255,33 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             string s_Sql = "select XOL_Province,XOL_City,XOL_Name from XS_Compy_LinkMan where XOL_Compy='" + this.Tbx_CustomerValue.Text + "' and XOL_Name='" + this.Tbx_ContentPerson.Text + "' ";
             this.BeginQuery(s_Sql);
             DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
-            if (Dtb_Table.Rows.Count<=0)
+            if (Dtb_Table.Rows.Count <= 0)
             {
                 s_Sql = "select XOL_Province,XOL_City,XOL_Name from XS_Compy_LinkMan where XOL_Name='" + this.Tbx_ContentPerson.Text + "' ";
                 this.BeginQuery(s_Sql);
-                 Dtb_Table = (DataTable)this.QueryForDataTable();
+                Dtb_Table = (DataTable)this.QueryForDataTable();
             }
             s_CustomerProvinces = base.Base_GetCityName(Dtb_Table.Rows[0][0].ToString());
             s_CustomerCity = base.Base_GetShiName(Dtb_Table.Rows[0][1].ToString());
-            string s_Name =Dtb_Table.Rows[0][2].ToString();
-           /* if (s_CustomerCity != "")
-            {
-                s_CustomerCity = s_CustomerCity.Replace("市", "");
-            }
-            else
-            {
-                Alert("请维护 " + s_Name + " 所在市");
-            }
-            if (s_CustomerProvinces == "")
-            {
-                Alert("请维护 " + s_Name + " 所在省");
-            }
-            else
-            {
-                s_CustomerProvinces = s_CustomerProvinces.Replace("省", "");
-                s_CustomerProvinces = s_CustomerProvinces.Replace("市", "");
-            }
-            * */
+            string s_Name = Dtb_Table.Rows[0][2].ToString();
+            /* if (s_CustomerCity != "")
+             {
+                 s_CustomerCity = s_CustomerCity.Replace("市", "");
+             }
+             else
+             {
+                 Alert("请维护 " + s_Name + " 所在市");
+             }
+             if (s_CustomerProvinces == "")
+             {
+                 Alert("请维护 " + s_Name + " 所在省");
+             }
+             else
+             {
+                 s_CustomerProvinces = s_CustomerProvinces.Replace("省", "");
+                 s_CustomerProvinces = s_CustomerProvinces.Replace("市", "");
+             }
+             * */
             s_Sql = "Select top 10 * from Wl_Customer_Price a join Wl_Customer_Price_Details b on a.WCP_ID=WCPD_FID where ";
             s_Sql += " WCPD_Provice like '%" + s_CustomerProvinces + "%' and WCPD_City like '%" + s_CustomerCity + "%'";
             s_Sql += " and WCP_SuppNo in (Select SuppNo from KNET_Sys_WareHouse where HouseNo='" + this.Ddl_HouseNo.SelectedValue + "')";
@@ -354,7 +357,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             DataSet Dts_Table = Bll_Details.GetList(" DirectOutNo='" + model.DirectOutNo + "'");
             if (Dts_Table.Tables[0].Rows.Count > 0)
             {
-             for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
+                for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
                 {
                     string s_ID = Dts_Table.Tables[0].Rows[i]["ID"].ToString();
                     string s_FID = Dts_Table.Tables[0].Rows[i]["KWD_OutWareID"].ToString();
@@ -372,16 +375,25 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"FID_" + i.ToString() + "\" value='" + s_ID + "'><input type=\"hidden\"  Name=\"ID_" + i.ToString() + "\" value='" + s_FID + "'><input type=\"hidden\" ID=\"ProductsBarCode_" + i.ToString() + "\"  Name=\"ProductsBarCode_" + i.ToString() + "\" value='" + s_ProductsBarCode + "'>" + s_ProductsName + "&nbsp;</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(s_ProductsBarCode) + "&nbsp;</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsName_" + i.ToString() + "\" value='" + s_ProductsName + "'>" + s_ProductsEditon + "</td>";
+                    string s_HouseNumber = base.Base_GetHouseAndNumber1(s_ProductsBarCode, this.Ddl_HouseNo.SelectedValue);
+                    string s_OutNumber = Dts_Table.Tables[0].Rows[i]["DirectOutAmount"].ToString();
+                    string s_OutBNumber = Dts_Table.Tables[0].Rows[i]["KWD_BNumber"].ToString();
+                    try
+                    {
+                        s_HouseNumber = Convert.ToString(int.Parse(s_HouseNumber) + int.Parse(s_OutNumber) + int.Parse(s_OutBNumber));
+                    }
+                    catch
+                    { }
 
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"input\"  Name=\"KCNumber_" + i.ToString() + "\" style=\"width:70px;\" disabled=false  value='" + base.Base_GetHouseAndNumber1(s_ProductsBarCode, this.Ddl_HouseNo.SelectedValue) + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"input\"  Name=\"KCNumber_" + i.ToString() + "\" style=\"width:70px;\" disabled=false  value='" + s_HouseNumber + "'></td>";
 
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"Number_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"BNumber_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KWD_BNumber"].ToString() + " ></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"PlanNo_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["PlanNo"].ToString() + " ></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"OrderNo_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["OrderNo"].ToString() + " ></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"MaterNo_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["MaterNo"].ToString() + " ></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"CustomerProductsName_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["CustomerProductsName"].ToString() + " ></td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"IsFollow_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KWD_IsFollow"].ToString() + " ></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"Number_" + i.ToString() + "\" value=" + s_OutNumber + "></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"BNumber_" + i.ToString() + "\" value=" + s_OutBNumber + " ></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"PlanNo_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["PlanNo"].ToString().Replace("?", "") + " ></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"OrderNo_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["OrderNo"].ToString().Replace("?", "") + " ></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"MaterNo_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["MaterNo"].ToString().Replace("?", "") + " ></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"CustomerProductsName_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["CustomerProductsName"].ToString().Replace("?", "") + " ></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\"  OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"   Name=\"IsFollow_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["KWD_IsFollow"].ToString().Replace("?", "") + " ></td>";
                     s_MyTable_Detail += " <td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\"  Name=\"Remarks_" + i.ToString() + "\"  Text=\"" + Dts_Table.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "\" ></td>";
                     s_MyTable_Detail += " </tr>";
 
@@ -389,7 +401,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 }
                 this.Tbx_Num.Text = Dts_Table.Tables[0].Rows.Count.ToString();
             }
-               
+
             KNet.BLL.Xs_Sales_Freight Bll_Freight = new KNet.BLL.Xs_Sales_Freight();
             KNet.Model.Xs_Sales_Freight Model_Freight = Bll_Freight.GetModelByFID(this.Tbx_DirectInNo.Text);
 
@@ -823,7 +835,8 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     Response.Write("<script>alert('应收款更改开票方式  操作成功 ！');location.href='YSales_ShipWareOut_Manage.aspx';</script>");
                     Response.End();
                 }
-                else {
+                else
+                {
 
                     if (this.Tbx_Freight.Text != "")
                     {

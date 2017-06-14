@@ -134,6 +134,8 @@
                                                             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="ListDetails">
                                                                 <%=s_MyTable_Detail %>
                                                             </table>
+                                                        <asp:TextBox ID="i_Num" runat="Server" Text="0" CssClass="Custom_Hidden"></asp:TextBox>
+
                                                         </td>
                                                     </tr>
                             <tr>

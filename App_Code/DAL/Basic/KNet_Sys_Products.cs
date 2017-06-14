@@ -31,6 +31,35 @@ namespace KNet.DAL
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
+        public bool ExistsProductsEdition(string ProductsName, string s_ProductsEdition)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from KNet_Sys_Products");
+            strSql.Append(" where ProductsName=@ProductsName and ProductsEdition=@ProductsEdition ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
+					new SqlParameter("@ProductsEdition", SqlDbType.VarChar,200)};
+            parameters[0].Value = ProductsName;
+            parameters[1].Value = s_ProductsEdition;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
+
+        public bool ExistsProductsPattern(string ProductsName, string s_ProductsPattern)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from KNet_Sys_Products");
+            strSql.Append(" where ProductsName=@ProductsName and ProductsPattern=@ProductsPattern ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
+					new SqlParameter("@ProductsPattern", SqlDbType.VarChar,200)};
+            parameters[0].Value = ProductsName;
+            parameters[1].Value = s_ProductsPattern;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+        
 
         /// <summary>
         /// 更新一条数据
@@ -141,9 +170,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_Sys_Products(");
-            strSql.Append("ProductsName,ProductsBarCode,ProductsPattern,ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProductsSellingPrice,ProductsCostPrice,ProductsStockAlert,ProductsPic,ProductsBigPicture,ProductsSmallPicture,ProductsDescription,ProductsDetailDescription,ProductsAddTime,ProductsAddMan,ProductsType,HandPrice,ProductsEdition,KSP_SampleId,KSP_Mould,KSP_Creator,KSP_CTime,KSP_MTime,KSP_Mender,KSP_Code,KSP_isModiy,KSP_GProductsBarCode,KSP_Weight,KSP_Volume,KSP_IsAdd,KSP_IsReplace,KSP_IsDelete,KSP_CustomerProductsName,KSP_CustomerProductsCode,KSP_CustomerProductsEdition,KSP_CgType,KSP_RDPerson,KSP_BZNumber,KSP_UseType)");
+            strSql.Append("ProductsName,ProductsBarCode,ProductsPattern,ProductsMainCategory,ProductsSmallCategory,ProductsUnits,ProductsSellingPrice,ProductsCostPrice,ProductsStockAlert,ProductsPic,ProductsBigPicture,ProductsSmallPicture,ProductsDescription,ProductsDetailDescription,ProductsAddTime,ProductsAddMan,ProductsType,HandPrice,ProductsEdition,KSP_SampleId,KSP_Mould,KSP_Creator,KSP_CTime,KSP_MTime,KSP_Mender,KSP_Code,KSP_isModiy,KSP_GProductsBarCode,KSP_Weight,KSP_Volume,KSP_IsAdd,KSP_IsReplace,KSP_IsDelete,KSP_CustomerProductsName,KSP_CustomerProductsCode,KSP_CustomerProductsEdition,KSP_CgType,KSP_RDPerson,KSP_BZNumber,KSP_UseType,KSP_LossType)");
             strSql.Append(" values (");
-            strSql.Append("@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsMainCategory,@ProductsSmallCategory,@ProductsUnits,@ProductsSellingPrice,@ProductsCostPrice,@ProductsStockAlert,@ProductsPic,@ProductsBigPicture,@ProductsSmallPicture,@ProductsDescription,@ProductsDetailDescription,@ProductsAddTime,@ProductsAddMan,@ProductsType,@HandPrice,@ProductsEdition,@KSP_SampleId,@KSP_Mould,@KSP_Creator,@KSP_CTime,@KSP_MTime,@KSP_Mender,@KSP_Code,@KSP_isModiy,@KSP_GProductsBarCode,@KSP_Weight,@KSP_Volume,@KSP_IsAdd,@KSP_IsReplace,@KSP_IsDelete,@KSP_CustomerProductsName,@KSP_CustomerProductsCode,@KSP_CustomerProductsEdition,@KSP_CgType,@KSP_RDPerson,@KSP_BZNumber,@KSP_UseType)");
+            strSql.Append("@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsMainCategory,@ProductsSmallCategory,@ProductsUnits,@ProductsSellingPrice,@ProductsCostPrice,@ProductsStockAlert,@ProductsPic,@ProductsBigPicture,@ProductsSmallPicture,@ProductsDescription,@ProductsDetailDescription,@ProductsAddTime,@ProductsAddMan,@ProductsType,@HandPrice,@ProductsEdition,@KSP_SampleId,@KSP_Mould,@KSP_Creator,@KSP_CTime,@KSP_MTime,@KSP_Mender,@KSP_Code,@KSP_isModiy,@KSP_GProductsBarCode,@KSP_Weight,@KSP_Volume,@KSP_IsAdd,@KSP_IsReplace,@KSP_IsDelete,@KSP_CustomerProductsName,@KSP_CustomerProductsCode,@KSP_CustomerProductsEdition,@KSP_CgType,@KSP_RDPerson,@KSP_BZNumber,@KSP_UseType,@KSP_LossType)");
             SqlParameter[] parameters = {
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsBarCode", SqlDbType.NVarChar,50),
@@ -185,7 +214,9 @@ namespace KNet.DAL
 					new SqlParameter("@KSP_CgType", SqlDbType.Int,4),
 					new SqlParameter("@KSP_RDPerson", SqlDbType.VarChar,50),
 					new SqlParameter("@KSP_BZNumber", SqlDbType.Int,4),
-					new SqlParameter("@KSP_UseType", SqlDbType.VarChar,50)
+					new SqlParameter("@KSP_UseType", SqlDbType.VarChar,50),
+                    
+					new SqlParameter("@KSP_LossType", SqlDbType.Int,4)
                                         };
             parameters[0].Value = model.ProductsName;
             parameters[1].Value = model.ProductsBarCode;
@@ -228,6 +259,7 @@ namespace KNet.DAL
             parameters[37].Value = model.KSP_RDPerson;
             parameters[38].Value = model.KSP_BZNumber;
             parameters[39].Value = model.KSP_UseType;
+            parameters[40].Value = model.KSP_LossType;
             
             
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -278,7 +310,8 @@ namespace KNet.DAL
             strSql.Append("KSP_CgType=@KSP_CgType,");
             strSql.Append("KSP_RDPerson=@KSP_RDPerson,");
             strSql.Append("KSP_BZNumber=@KSP_BZNumber,");
-            strSql.Append("KSP_UseType=@KSP_UseType");
+            strSql.Append("KSP_UseType=@KSP_UseType,");
+            strSql.Append("KSP_LossType=@KSP_LossType");
             
             
             strSql.Append(" where ID=@ID ");
@@ -322,6 +355,7 @@ namespace KNet.DAL
 					new SqlParameter("@KSP_RDPerson", SqlDbType.VarChar,50),
 					new SqlParameter("@KSP_BZNumber", SqlDbType.Int,4),
 					new SqlParameter("@KSP_UseType", SqlDbType.NVarChar,50),
+					new SqlParameter("@KSP_LossType", SqlDbType.Int,4),
                     
 					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.ProductsName;
@@ -364,8 +398,9 @@ namespace KNet.DAL
             parameters[34].Value = model.KSP_RDPerson;
             parameters[35].Value = model.KSP_BZNumber;
             parameters[36].Value = model.KSP_UseType;
+            parameters[37].Value = model.KSP_LossType;
             
-            parameters[37].Value = model.ID;
+            parameters[38].Value = model.ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -564,7 +599,11 @@ namespace KNet.DAL
                 {
                     model.KSP_IsDelete = int.Parse(ds.Tables[0].Rows[0]["KSP_IsDelete"].ToString());
                 }
-
+                if (ds.Tables[0].Rows[0]["KSP_LossType"] != null && ds.Tables[0].Rows[0]["KSP_LossType"].ToString() != "")
+                {
+                    model.KSP_LossType = int.Parse(ds.Tables[0].Rows[0]["KSP_LossType"].ToString());
+                }
+                
                 if (ds.Tables[0].Rows[0]["KSP_CustomerProductsName"] != null)
                 {
                     model.KSP_CustomerProductsName = ds.Tables[0].Rows[0]["KSP_CustomerProductsName"].ToString();
@@ -645,10 +684,15 @@ namespace KNet.DAL
                         model.ProductsPic = false;
                     }
                 }
-                if (ds.Tables[0].Rows[0]["KSP_UseType"] != null && ds.Tables[0].Rows[0]["KSP_UseType"].ToString() != "")
+                try
                 {
-                    model.KSP_UseType = ds.Tables[0].Rows[0]["KSP_UseType"].ToString();
+                    if (ds.Tables[0].Rows[0]["KSP_UseType"] != null && ds.Tables[0].Rows[0]["KSP_UseType"].ToString() != "")
+                    {
+                        model.KSP_UseType = ds.Tables[0].Rows[0]["KSP_UseType"].ToString();
+                    }
                 }
+                catch
+                { }
                 
                 model.ProductsBigPicture = ds.Tables[0].Rows[0]["ProductsBigPicture"].ToString();
                 model.ProductsSmallPicture = ds.Tables[0].Rows[0]["ProductsSmallPicture"].ToString();

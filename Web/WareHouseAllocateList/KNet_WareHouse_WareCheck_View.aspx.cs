@@ -34,7 +34,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                 s_OrderStyle = "class=\"dvtUnSelectedCell\"";
                 s_DetailsStyle = "class=\"dvtSelectedCell\"";
                 Pan_Order.Visible = false;
-                Pan_Detail.Visible = true;
+                // Pan_Detail.Visible = true;
                 Table_Btn.Visible = false;
             }
             else
@@ -42,7 +42,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                 s_DetailsStyle = "class=\"dvtUnSelectedCell\"";
                 s_OrderStyle = "class=\"dvtSelectedCell\"";
                 Pan_Order.Visible = true;
-                Pan_Detail.Visible = false;
+                //  Pan_Detail.Visible = false;
                 Table_Btn.Visible = true;
             }
             this.Lbl_Title.Text = "查看调拨";
@@ -52,13 +52,14 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             }
 
 
-            KNet.BLL.Sc_Expend_Manage bll_Manage = new KNet.BLL.Sc_Expend_Manage();
+            /*KNet.BLL.Sc_Expend_Manage bll_Manage = new KNet.BLL.Sc_Expend_Manage();
             string SqlWhere = " SEM_Type=1 and SEM_DirectOutNO='" + s_ID + "' ";
             SqlWhere = SqlWhere + " order by SEM_MTime desc";
             DataSet ds_Manage = bll_Manage.GetList(SqlWhere);
             GridView1.DataSource = ds_Manage;
             GridView1.DataKeyNames = new string[] { "SEM_ID" };
             GridView1.DataBind();
+             * */
         }
 
     }
@@ -102,6 +103,8 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                             DbHelperSQL.ExecuteSql(DoSql);
                         }
                     }
+                    DoSql = "update KNet_WareHouse_AllocateList  set KWA_IsSave='0' where  AllocateNo='" + this.Tbx_ID.Text + "' ";
+                    DbHelperSQL.ExecuteSql(DoSql);
                 }
                 catch { }
                 btn_Chcek.Text = "反审批";
@@ -121,8 +124,8 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                         {
                             string s_ID = Request.Form["ID_" + i.ToString()] == null ? "" : Request.Form["ID_" + i.ToString()].ToString();
                             //string s_Number = Request.Form["Number_" + i.ToString()] == null ? "" : Request.Form["Number_" + i.ToString()].ToString();
-                           // DoSql = "update KNet_WareHouse_AllocateList_Details  set AllocateAmount=KWAD_SCDBNumber  where  ID='" + s_ID + "' ";
-                          //  DbHelperSQL.ExecuteSql(DoSql);
+                            // DoSql = "update KNet_WareHouse_AllocateList_Details  set AllocateAmount=KWAD_SCDBNumber  where  ID='" + s_ID + "' ";
+                            //  DbHelperSQL.ExecuteSql(DoSql);
 
                         }
                     }
@@ -157,6 +160,35 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
     }
 
 
+    protected void btn_Chcek1_Click1(object sender, EventArgs e)
+    {
+        try
+        {
+            string DoSql = "";
+            for (int i = 0; i < int.Parse(this.Tbx_Num.Text); i++)
+            {
+                if (Request["ID_" + i.ToString()] != null)
+                {
+                    string s_ID = Request.Form["ID_" + i.ToString()] == null ? "" : Request.Form["ID_" + i.ToString()].ToString();
+                    string s_Number = Request.Form["Number_" + i.ToString()] == null ? "" : Request.Form["Number_" + i.ToString()].ToString();
+                    string s_OldNumber = Request.Form["OldNumber_" + i.ToString()] == null ? "" : Request.Form["OldNumber_" + i.ToString()].ToString();
+                    DoSql = "update KNet_WareHouse_AllocateList_Details  set KWAD_SCDBNumber='" + s_OldNumber + "'  where  ID='" + s_ID + "' and KWAD_SCDBNumber=0 ";
+                    DbHelperSQL.ExecuteSql(DoSql);
+
+                    DoSql = "update KNet_WareHouse_AllocateList_Details  set AllocateAmount='" + s_Number + "',KWAD_OldNumber='" + s_Number + "'  where  ID='" + s_ID + "' ";
+                    DbHelperSQL.ExecuteSql(DoSql);
+                }
+            }
+
+            DoSql = "update KNet_WareHouse_AllocateList  set KWA_IsSave='1' where  AllocateNo='" + this.Tbx_ID.Text + "' ";
+            DbHelperSQL.ExecuteSql(DoSql);
+        }
+        catch { }
+        AlertAndRedirect("暂存成功！", "KNet_WareHouse_WareCheck_View.aspx?ID=" + this.Tbx_ID.Text + "");
+
+    }
+
+    /*
     private bool SetValue(KNet.Model.Sc_Expend_Manage model)
     {
 
@@ -317,7 +349,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             return false;
         }
     }
-
+    */
 
     private string GetIDByMonth(int i_num, string s_Type)
     {
@@ -344,6 +376,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
         return s_Return;
     }
 
+    /*
     protected void Btn_SaveOnClick(object sender, EventArgs e)
     {
         AdminloginMess AM = new AdminloginMess();
@@ -384,6 +417,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             Alert(ex.Message);
         }
     }
+     * */
     /// <summary>
     /// 添加提示
     /// </summary>
@@ -416,11 +450,12 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             this.Lbl_Case.Text = model.AllocateCause;
 
 
-            this.Tbx_OrderNo.Text = "<a href=\"/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=" + model.KWA_OrderNo + "\" target=\"_blank\">" + model.KWA_OrderNo + "</a>" ;
+            this.Tbx_OrderNo.Text = "<a href=\"/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=" + model.KWA_OrderNo + "\" target=\"_blank\">" + model.KWA_OrderNo + "</a>";
             this.Chk_Type.Text = base.Base_GetBasicCodeName("1132", model.KWA_DBType.ToString());
             if (model.AllocateCheckYN == 1)
             {
                 btn_Chcek.Text = "反审批";
+                btn_Chcek1.Visible = false;
                 if (AM.KNet_StaffName != "项洲")
                 {
                     if (AM.YNAuthority("单据财务审批"))
@@ -433,10 +468,12 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             {
 
                 this.btn_Chcek.Text = "反财务审批";
+                btn_Chcek1.Visible = false;
             }
             else
             {
                 btn_Chcek.Text = "审批";
+                btn_Chcek1.Visible = true;
             }
             KNet.BLL.KNet_WareHouse_AllocateList_Details BLL_Details = new KNet.BLL.KNet_WareHouse_AllocateList_Details();
             string s_SqlWhere = " a.AllocateNo='" + model.AllocateNo + "' ";
@@ -447,13 +484,38 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             }
 
             DataSet Dts_Details = BLL_Details.GetList(s_SqlWhere);
+
+
             StringBuilder Sb_Details = new StringBuilder();
+            Sb_Details.Append(" <tr valign=\"top\">");
+            Sb_Details.Append("  <td class=\"ListHead\" nowrap><b>序号</b></td>");
+            Sb_Details.Append("  <td class=\"ListHead\" nowrap><b>BOM序号</b></td>");
+            Sb_Details.Append("  <td class=\"ListHead\" nowrap><b>产品名称</b></td>");
+            Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>产品编码</b></td>");
+            Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>型号</b></td>");
+            Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>上级型号</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>最小包装</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>包数</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>调拨数量</b></td>");
+            if (Chk_Type.Text != "原材料调拨")
+            {
+
+                Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>士腾不良品</b></td>");
+                Sb_Details.Append("<td class=\"ListHead\" nowrap><b>加工厂不良品</b></td>");
+            }
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>确认数量</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>缺料数量</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>差额数量</b></td>");
+            Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>单价</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>金额</b></td>");
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>备注</b></td>");
+            Sb_Details.Append("</tr>");
             if (Dts_Details.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                 {
-                    Sb_Details.Append( "<tr>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ID_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["ID"].ToString() + "'><input type=\"hidden\"  Name=\"OldNumber_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["AllocateAmount"].ToString() + "'>" + Convert.ToString(i + 1) + "</td>");
+                    Sb_Details.Append("<tr>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ID_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["ID"].ToString() + "'><input type=\"hidden\"  Name=\"OldNumber_" + i.ToString() + "\" value='" + Dts_Details.Tables[0].Rows[i]["AllocateAmount"].ToString() + "'>" + Convert.ToString(i + 1) + "</td>");
                     string s_BomOrder = "";
                     try
                     {
@@ -461,13 +523,13 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                     }
                     catch
                     { }
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + s_BomOrder + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_BomOrder + "</td>");
 
 
                     this.Xs_ProductsCode.Text += Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ",";
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>");
 
 
                     Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["KWAD_FaterBarCode"].ToString()) + "</td>");
@@ -478,33 +540,41 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                     string s_BZNumber = Dts_Details.Tables[0].Rows[i]["KWAD_BZNumber"].ToString() == "" ? "0" : Dts_Details.Tables[0].Rows[i]["KWAD_BZNumber"].ToString();
 
 
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + s_CPBZNumber + "</td>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + s_BZNumber + "</td>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + s_DBNumber + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_CPBZNumber + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_BZNumber + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_DBNumber + "</td>");
 
                     string s_BadNumber = Dts_Details.Tables[0].Rows[i]["KWAD_BadNumber"].ToString() == "" ? "0" : Dts_Details.Tables[0].Rows[i]["KWAD_BadNumber"].ToString();
                     string s_AddBadNumber = Dts_Details.Tables[0].Rows[i]["KWAD_AddBadNumber"].ToString() == "" ? "0" : Dts_Details.Tables[0].Rows[i]["KWAD_AddBadNumber"].ToString();
 
                     if ((model.AllocateCheckYN == 0) && ((AM.KNet_StaffDepart == "129757466300748845") || (AM.KNet_StaffName == "项洲")))
                     {
-                        Sb_Details.Append( "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BadNumber_" + i.ToString() + "\" value='" + s_BadNumber + "'></td>");
-                        Sb_Details.Append( "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"AddBadNumber_" + i.ToString() + "\" value='" + s_AddBadNumber + "'></td>");
-                        Sb_Details.Append( "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + s_Number + "'></td>");
+                        if (Chk_Type.Text != "原材料调拨")
+                        {
+
+                            Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BadNumber_" + i.ToString() + "\" value='" + s_BadNumber + "'></td>");
+                            Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"AddBadNumber_" + i.ToString() + "\" value='" + s_AddBadNumber + "'></td>");
+                        }
+                        Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + s_Number + "'></td>");
 
                         string s_Sql = "Select isnull(Sum(NeedNumber),0)  from v_NeedNumberStore where ProductsBarCode='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "' and HouseNo='" + this.Lbl_House_int0.Text + "'  ";
                         this.BeginQuery(s_Sql);
                         string s_NeedNumber = this.QueryForReturn();
                         Sb_Details.Append("<td class=\"ListHeadDetails\">");
-                        Sb_Details.Append("<a href=\"/Web/Sc/Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + this.Lbl_House_int0.Text  + "\" target=\"_blank\">" + s_NeedNumber + "</a>\n");
+                        Sb_Details.Append("<a href=\"/Web/Sc/Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + this.Lbl_House_int0.Text + "\" target=\"_blank\">" + s_NeedNumber + "</a>\n");
 
                         Sb_Details.Append("</td>");
-                        
-                        
+
+
                     }
                     else
                     {
-                        Sb_Details.Append( "<td class=\"ListHeadDetails\">" + s_BadNumber + "</td>");
-                        Sb_Details.Append( "<td class=\"ListHeadDetails\">" + s_AddBadNumber + "</td>");
+                        if (Chk_Type.Text != "原材料调拨")
+                        {
+
+                            Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_BadNumber + "</td>");
+                            Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_AddBadNumber + "</td>");
+                        }
                         Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_Number + "</td>");
 
                         string s_Sql = "Select isnull(Sum(NeedNumber),0)  from v_NeedNumberStore where ProductsBarCode='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "' and HouseNo='" + this.Lbl_House_int0.Text + "'  ";
@@ -514,30 +584,31 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                         Sb_Details.Append("<a href=\"/Web/Sc/Sc_Plan_QLMaterial.aspx?ProductsBarCode=" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + this.Lbl_House_int0.Text + "\" target=\"_blank\">" + s_NeedNumber + "</a>\n");
 
                         Sb_Details.Append("</td>");
-                        
+
 
                     }
 
                     string s_CateNumber = "";
-                    try {
+                    try
+                    {
                         s_CateNumber = Convert.ToString(int.Parse(s_DBNumber) - int.Parse(s_Number));
                     }
                     catch
                     { }
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\"><font color=red>" + s_CateNumber + "</font></td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\"><font color=red>" + s_CateNumber + "</font></td>");
 
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["AllocateUnitPrice"].ToString() + "</td>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["AllocateTotalNet"].ToString() + "</td>");
-                    Sb_Details.Append( "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["AllocateRemarks"].ToString() + "&nbsp;</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["AllocateUnitPrice"].ToString() + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["AllocateTotalNet"].ToString() + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["AllocateRemarks"].ToString() + "&nbsp;</td>");
 
-                    Sb_Details.Append( "</tr>");
+                    Sb_Details.Append("</tr>");
                 }
                 this.Tbx_Num.Text = Dts_Details.Tables[0].Rows.Count.ToString(); ;
 
             }
-            Lbl_Details.Text +=Sb_Details.ToString();
+            Lbl_Details.Text += Sb_Details.ToString();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         { }
     }
 

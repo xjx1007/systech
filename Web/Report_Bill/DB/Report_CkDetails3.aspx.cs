@@ -20,8 +20,8 @@ public partial class Report_CkDetails3 : BasePage
         if (!IsPostBack)
         {
             DateTime datetime = DateTime.Now;
-            this.StartDate.Text = datetime.AddDays(1 - datetime.Day).ToShortDateString();
-            this.EndDate.Text = datetime.ToShortDateString();
+            this.StartDate.Text = datetime.AddMonths(-1).AddDays(1 - datetime.Day).ToShortDateString();
+            this.EndDate.Text = datetime.AddDays(1 - datetime.Day).AddDays(-1).ToShortDateString();
         }
     }
 

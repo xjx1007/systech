@@ -56,6 +56,36 @@
                 document.all('Tbx_ProductsTypeName').value = "";
             }
         }
+
+
+        //**************************************************//
+        //全选按钮操作		
+        function selectAll(obj) {
+            var i, j = 0;
+            var elements = document.getElementsByTagName("input");
+            //alert(obj.value.replace(/\s+/g,""));
+            if (obj.checked) {
+                for (i = 0; i < elements.length; i++) {
+                    if (elements[i].type == "checkbox")  //只处理datagrid中的checkbox
+                    {
+                        if (elements[i].disabled == false) {
+                            elements[i].checked = true;
+                            j++;
+                        }
+                    }
+                }
+            }
+            else {
+                for (i = 0; i < elements.length; i++) {
+                    if (elements[i].type == "checkbox") {
+                        elements[i].checked = false;
+                        j++;
+                    }
+                }
+            }
+        }
+
+
     </script>
     <title>库存报表</title>
 </head>
@@ -99,7 +129,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="16%" align="right" class="dvtCellLabel">仓库:
+                                            <td width="16%" align="right" class="dvtCellLabel">仓库:<input type="CheckBox" onclick="selectAll(this)" checked>
                                             </td>
                                             <td class="dvtCellInfo"  align="left" colspan="3">
                                                 <asp:Label runat="server" ID="HouseNo"></asp:Label>

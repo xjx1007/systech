@@ -45,7 +45,7 @@ public partial class Web_WareHouseCheck_KNet_WareHouse_WareCheck_Add : BasePage
             else
             {
 
-                base.Base_DropWareHouseBind(this.HouseNo, AM.MyDoSqlWith_Do);
+                base.Base_DropWareHouseBind(this.HouseNo, " 1=1 ");
             }
             if (s_ID != "")
             {

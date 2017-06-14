@@ -128,6 +128,12 @@
                                                     <a href="/Web/Xs/SalesOut/Sales_ShipWareOut_Add.aspx?ShipNo=<%=s_ID1 %>" class="webMnu">创建出库单</a>
                                                 </td>
                                             </tr>
+                                             <tr>
+                                                <td align="left" style="padding-left: 10px;">
+                                                    <img src="/themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                    <a href="/Web/Xs/SalesReturn/Knet_Sales_Retrun_Manage_Add.aspx?ShipNo=<%=s_ID1 %>" target="_blank" class="webMnu">创建销售退货</a>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>

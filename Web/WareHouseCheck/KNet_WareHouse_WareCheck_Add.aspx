@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-    <title></title>
+    <title>库存盘点新增</title>
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>

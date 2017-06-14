@@ -137,6 +137,11 @@ public partial class Web_Sc_Expend_View : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_ScNumber"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_ScPrice"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_ScMoney"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_ScHandPrice"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_ScHandMoney"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_MaterPrice"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Rc.Tables[0].Rows[i]["SER_MaterMoney"].ToString() + "</td>";
+     
                     s_MyTable_Detail += "</tr>";
                 }
             }
@@ -146,6 +151,7 @@ public partial class Web_Sc_Expend_View : BasePage
                 for (int i = 0; i < Dts_Mater.Tables[0].Rows.Count; i++)
                 {
                     s_MyTable_Detail1 += "<tr>";
+                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Convert.ToString(i+1) + "</td>";
                     s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + "</td>";
                     s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
@@ -155,8 +161,14 @@ public partial class Web_Sc_Expend_View : BasePage
                     s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetUserName(Dts_Mater.Tables[0].Rows[i]["SED_RkPerson"].ToString()) + "</td>";
                     s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + DateTime.Parse(Dts_Mater.Tables[0].Rows[i]["SED_RkTime"].ToString()).ToShortDateString() + "</td>";
                     s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_RkNumber"].ToString() + "</td>";
-                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_RkPrice"].ToString() + "</td>";
-                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_RkMoney"].ToString() + "</td>";
+                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetBasicCodeName("1136", Dts_Mater.Tables[0].Rows[i]["SED_LossType"].ToString()) + "</td>";
+
+                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_Mater.Tables[0].Rows[i]["SED_LossPercent"].ToString(),2) + "</td>";
+
+                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_LossNumber"].ToString() + "</td>";
+                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_NeedNumber"].ToString() + "</td>";
+                    s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_WwPrice"].ToString() + "</td>";
+                   s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_WwMoney"].ToString() + "</td>";
                     s_MyTable_Detail1 += "</tr>";
                 }
             }

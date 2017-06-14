@@ -177,6 +177,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
 
 
                this.Ddl_UseType.Text= base.Base_GetBasicCodeName("1134", model.KSP_UseType);
+               this.Lbl_Loss.Text = base.Base_GetBasicCodeName("1136", model.KSP_LossType.ToString());
+                
                 this.Lbl_isModiy.Text = model.KSP_isModiy == 0 ? "是" : "<font color=red>否</font>";
                 this.ProductsUnits.Text = base.Base_GetUnitsName(model.ProductsUnits);
                 this.ProductsSellingPrice.Text = model.ProductsSellingPrice.ToString();
@@ -189,14 +191,16 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 KNet.BLL.PB_Basic_ProductsClass Bll_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
                 this.Lbl_ProductsType.Text = Bll_ProductsClass.GetProductsName(model.ProductsType);
 
-
-                if ((model.KSP_Code.IndexOf("01") == 0) || (model.KSP_Code.IndexOf("03") == 0))
+                if ((model.KSP_Code != "")&&(model.KSP_Code != null))
                 {
-                    Pan_Bom.Visible = true;
-                }
-                else
-                {
-                    Pan_Bom.Visible = false;
+                    if ((model.KSP_Code.IndexOf("01") == 0) || (model.KSP_Code.IndexOf("03") == 0))
+                    {
+                        Pan_Bom.Visible = true;
+                    }
+                    else
+                    {
+                        Pan_Bom.Visible = false;
+                    }
                 }
                 this.Tbx_CustomerProductsName.Text = model.KSP_CustomerProductsName;
                 this.Tbx_CustomerProductsEdition.Text = model.KSP_CustomerProductsEdition;

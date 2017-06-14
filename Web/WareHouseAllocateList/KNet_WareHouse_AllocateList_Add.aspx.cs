@@ -262,9 +262,20 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
                     Sb_Details1.Append("<td class=\"ListHeadDetails\">" + Dts_MainDetails.Tables[0].Rows[i]["ProductsEdition"].ToString() + "&nbsp;</td>");
                     string s_OutHouseNumber = base.Base_GetWareHouseNumber(s_OutHouseNo, Dts_MainDetails.Tables[0].Rows[i]["ProductsBarCode"].ToString());
                     string s_InHouseNumber = base.Base_GetWareHouseNumber(s_InHouseNo, Dts_MainDetails.Tables[0].Rows[i]["ProductsBarCode"].ToString());
-                    Sb_Details1.Append("<td class=\"ListHeadDetails\">" + s_OutHouseNumber + "</td>");
+                    Sb_Details1.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"KcNumber_" + i.ToString() + "\" value='" + s_OutHouseNumber + "'>" + s_OutHouseNumber + "</td>");
                     Sb_Details1.Append("<td class=\"ListHeadDetails\">" + s_InHouseNumber + "</td>");
-                    Sb_Details1.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + Dts_MainDetails.Tables[0].Rows[i]["OrderAmount"].ToString() + "'></td>");
+
+                    string s_TDstyle = "";
+                    try
+                    {
+                        if (int.Parse(Dts_MainDetails.Tables[0].Rows[i]["OrderAmount"].ToString()) > int.Parse(s_OutHouseNumber))
+                        {
+                            s_TDstyle = " style=\"background:yellow\" ";
+                        }
+                    }
+                    catch
+                    { }
+                    Sb_Details1.Append("<td class=\"ListHeadDetails\" " + s_TDstyle + "><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + Dts_MainDetails.Tables[0].Rows[i]["OrderAmount"].ToString() + "'></td>");
 
                     if (this.Tbx_Type.Text == "1")
                     {
@@ -593,7 +604,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
                     Sb_Details.Append("<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["FaterProductsName"].ToString() + "&nbsp;</td>");
                     string s_OutHouseNumber = base.Base_GetWareHouseNumber(s_OutHouseNo, Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
                     string s_InHouseNumber = base.Base_GetWareHouseNumber(s_InHouseNo, Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
-                    Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_OutHouseNumber + "</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"KcNumber_" + i.ToString() + "\" value='" + s_OutHouseNumber + "'>" + s_OutHouseNumber + "</td>");
                     Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_InHouseNumber + "</td>");
 
                     string s_BZNumber = Dts_Details.Tables[0].Rows[i]["KSP_BZNumber"].ToString();
@@ -605,8 +616,17 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
 
                     Sb_Details.Append("<input id=\"BomNumber_" + i.ToString() + "\" type=\"hidden\" name=\"BomNumber_" + i.ToString() + "\"  style=\"width:50px\" onblur=\"ChangPrice()\"    value=\"" + Dts_Details.Tables[0].Rows[i]["XPD_Number"].ToString() + "\" />\n" + Dts_Details.Tables[0].Rows[i]["XPD_Number"].ToString());
                     Sb_Details.Append("</td>\n");
-
-                    Sb_Details.Append("<td class=\"ListHeadDetails\" width=\"50px\"  >\n");
+                    string s_TDstyle = "";
+                    try
+                    {
+                        if (int.Parse(s_OrderNum) > int.Parse(s_OutHouseNumber))
+                        {
+                            s_TDstyle = " style=\"background:yellow\" ";
+                        }
+                    }
+                    catch
+                    { }
+                    Sb_Details.Append("<td class=\"ListHeadDetails\" width=\"50px\" " + s_TDstyle + " >\n");
 
                     Sb_Details.Append(s_OrderNum);
                     Sb_Details.Append("</td>\n");
@@ -680,7 +700,12 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
 
                     Sb_Details.Append("</td>\n");
 
-                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + s_OrderNum + "'></td>");
+                     s_TDstyle = "";
+                    if (int.Parse(s_OrderNum) > int.Parse(s_OutHouseNumber))
+                    {
+                        s_TDstyle = " style=\"background:yellow\" ";
+                    }
+                    Sb_Details.Append("<td class=\"ListHeadDetails\" " + s_TDstyle + "><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + s_OrderNum + "'></td>");
 
                     Sb_Details.Append("<input type=\"text\" Class=\"Custom_Hidden\" Name=\"Price_" + i.ToString() + "\" value='0'>");
                     Sb_Details.Append("<input type=\"text\" Class=\"Custom_Hidden\" Name=\"Money_" + i.ToString() + "\" value='0'>");

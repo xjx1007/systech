@@ -17,6 +17,7 @@ namespace KNet.Model
         private string _PPBD_BrandName;
         private int _PPBD_IsMainBrand = 0;
         private int _PPBD_BZNumber = 0;
+        private string _PPBD_ProductsEdition;
         #endregion
         #region 属性设计器
 
@@ -28,6 +29,13 @@ namespace KNet.Model
             set { _PPBD_ID = value; }
             get { return _PPBD_ID; }
         }
+
+        public string PPBD_ProductsEdition
+        {
+            set { _PPBD_ProductsEdition = value; }
+            get { return _PPBD_ProductsEdition; }
+        }
+        
         /// <summary>
         /// 
         /// </summary>

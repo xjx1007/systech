@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  validateRequest="false" CodeFile="Knet_Procure_OpenBilling_Sc.aspx.cs" Inherits="Web_Sales_Knet_Procure_OpenBilling_View" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeFile="Knet_Procure_OpenBilling_Sc.aspx.cs" Inherits="Web_Sales_Knet_Procure_OpenBilling_View" %>
 
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -257,7 +257,7 @@
 
                                                                 <tr>
                                                                     <td class="dvInnerHeader">
-                                                                        <asp:CheckBoxList runat="server" ID="Ddl_Moudle"  CssClass="detailedViewTextBox" Width="100%" RepeatColumns="3"></asp:CheckBoxList>
+                                                                        <asp:CheckBoxList runat="server" ID="Ddl_Moudle" CssClass="detailedViewTextBox" Width="100%" RepeatColumns="3"></asp:CheckBoxList>
                                                                         <asp:Button ID="Button3" runat="server" class="crmbutton small edit" Text="审批所有订单" OnClick="Button3_Click" Style="height: 33px; width: 100px" />
                                                                         <asp:Button ID="Button4" runat="server" class="crmbutton small edit" Text="反审批所有订单" OnClick="Button6_Click" Style="height: 33px; width: 100px" />
 
@@ -265,11 +265,34 @@
 
                                                                     </td>
                                                                 </tr>
+                                                                
+                                                                    
+                                                                    <tr>
+                                                                        <td colspan="2" class="dvInnerHeader">
+                                                                            <b>生成分类选择</b>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+
+                                                                            <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0"
+                                                                                class="ListDetails">
+
+                                                                                <tr valign="top">
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>序号</b></td>
+                                                                                    <td class="ListHead" nowrap>
+                                                                                    <input type="CheckBox" onclick="selectAllPage(this)" checked>
+                                                                                        <b>类别</b></td>
+                                                                                </tr>
+                                                                                <asp:Label runat="server" ID="Lbl_Type"></asp:Label>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
                                                             </table>
                                                             <asp:Panel ID="Pan_Sc" runat="server" Visible="false">
 
                                                                 <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
-
 
                                                                     <tr>
                                                                         <td colspan="2" class="dvInnerHeader">
@@ -293,9 +316,8 @@
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>序号</b></td>
                                                                                     <td class="ListHead" nowrap>
+                                                                                    <input type="CheckBox" onclick="selectAllPage(this)" checked>
                                                                                         <b>类别</b></td>
-                                                                                    <td class="ListHead" nowrap>
-                                                                                        <b>供应商</b></td>
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>BOM序号</b></td>
                                                                                     <td class="ListHead" nowrap width="250px">
@@ -306,7 +328,9 @@
                                                                                         <b>小包数</b></td>
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>数量</b></td>
-                                                                                    <td class="ListHead" nowrap  width="30px">
+                                                                                    <td class="ListHead" nowrap>
+                                                                                        <b>供应商和单价</b></td>
+                                                                                    <td class="ListHead" nowrap width="30px">
                                                                                         <b>单价</b></td>
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>要求日期</b></td>
@@ -318,7 +342,7 @@
                                                                                         <b>库存</b></td>
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>OEM缺料</b></td>
-                                                                                    <td class="ListHead" nowrap  width="50px">
+                                                                                    <td class="ListHead" nowrap width="50px">
                                                                                         <b>操作</b></td>
                                                                                 </tr>
                                                                                 <asp:Label runat="server" ID="Lbl_SDetail"></asp:Label>
@@ -329,7 +353,7 @@
                                                                     <tr>
                                                                         <td align="center" style="height: 30px" colspan="2">
                                                                             <asp:Button ID="Btn_Save" runat="server" Text="执行" AccessKey="S" title="执行 [Alt+S]"
-                                                                                class="crmbutton small save" OnClick="Btn_Click"  Style="width: 55px; height: 30px;" />
+                                                                                class="crmbutton small save" OnClick="Btn_Click" Style="width: 55px; height: 30px;" />
                                                                             <asp:Button ID="Button2" runat="server" Text="取消" AccessKey="S" title="取消 [Alt+S]"
                                                                                 class="crmbutton small save" OnClick="Button2_Click" Style="width: 55px; height: 30px;" />
                                                                         </td>

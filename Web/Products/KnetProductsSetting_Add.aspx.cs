@@ -37,7 +37,9 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
             this.Tbx_SampleID.Text = s_SampleId;
             this.Tbx_ID.Text = s_ID;
             base.Base_DropDutyPerson(this.Ddl_RDPerson, " and staffDepart='129652783965723459' ");
-            base.Base_DropBasicCodeBind(this.Ddl_UseType,"1134");
+            base.Base_DropBasicCodeBind(this.Ddl_UseType, "1134");
+            base.Base_DropBasicCodeBind(this.Ddl_Loss, "1136");
+
             if (s_ID == "")
             {
 
@@ -312,6 +314,14 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         model.KSP_UseType = this.Ddl_UseType.SelectedValue;
         try
         {
+            model.KSP_LossType = int.Parse(this.Ddl_Loss.SelectedValue);
+        }
+        catch
+        {
+            model.KSP_LossType = 0;
+        }
+        try
+        {
             model.Type = int.Parse(this.Tbx_Type.Text);
         }
         catch
@@ -481,7 +491,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
                     Model_DemoProducts_Prodocts.XPD_FaterBarCode = ProductsBarCode;
                     Model_DemoProducts_Prodocts.XPD_ReplaceProductsBarCode = s_DemoRepacleProdoctsBarCode;
-                    Model_DemoProducts_Prodocts.XPD_Place = s_XPD_Place;
+                    Model_DemoProducts_Prodocts.XPD_Place = s_XPD_Place.Replace("，", ",");
                     Arr_DemoProducts.Add(Model_DemoProducts_Prodocts);
                     if (s_DemoID == "")
                     {
@@ -586,78 +596,59 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         try
         {
 
-            bool b_Isadd = true;
-            if (model.KSP_Code.IndexOf("02") == 0)
+            if (ID != "")
             {
-                //
-                b_Isadd = false;
-            }
-            if ((AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "姚丽春") || (AM.KNet_StaffDepart == "129652784259578018"))
-            {
-                b_Isadd = true;
-            }
-            if (b_Isadd == false)
-            {
-                //
-                AlertAndGoBack("原材料只能由采购添加！");
-                return;
+
+                BLL.Update(model);
+                AdminloginMess LogAM = new AdminloginMess();
+                LogAM.Add_Logs("系统设置--->产品字典--->产品字典 修改 操作成功！编码：" + ProductsBarCode);
+                if (model.KSP_Code.IndexOf("01") == 0)
+                {
+                    //产品修改
+                    //销售、采购、生产、仓库、品质
+                    try
+                    {
+                        string s_StaffNo = "";
+                        s_StaffNo += base.Base_GetDeptPerson("供应链平台", 102);
+                        s_StaffNo += "," + base.Base_GetDeptPerson("质量管理中心（服务中心）", 102);
+                        s_StaffNo += "," + base.Base_GetDeptPerson("生产部", 102);
+                        s_StaffNo += "," + base.Base_GetDeptPerson("营销中心", 102);
+                        s_StaffNo += "," + base.Base_GetDeptPerson("供应链平台（物料部/仓库管理）", 102);
+
+                        base.Base_SendMessage(s_StaffNo, KNetPage.KHtmlEncode("有 产品修改 <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ProductsBarCode=" + ProductsBarCode + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.ProductsEdition + "</a> 相关的采购单进行，敬请关注！"));
+                    }
+                    catch
+                    { }
+                }
+
+                AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
             }
             else
             {
-
-                if (ID != "")
+                if (BLL.Exists(model) == false)
                 {
-
-                    BLL.Update(model);
+                    BLL.Add(model);
                     AdminloginMess LogAM = new AdminloginMess();
-                    LogAM.Add_Logs("系统设置--->产品字典--->产品字典 修改 操作成功！编码：" + ProductsBarCode);
-                    if (model.KSP_Code.IndexOf("01") == 0)
+                    LogAM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！编码：" + ProductsBarCode);
+                    if (this.Tbx_SampleID.Text != "")
                     {
-                        //产品修改
-                        //销售、采购、生产、仓库、品质
-                        try
-                        {
-                            string s_StaffNo = "";
-                            s_StaffNo += base.Base_GetDeptPerson("供应链平台", 102);
-                            s_StaffNo += "," + base.Base_GetDeptPerson("质量管理中心（服务中心）", 102);
-                            s_StaffNo += "," + base.Base_GetDeptPerson("生产部", 102);
-                            s_StaffNo += "," + base.Base_GetDeptPerson("营销中心", 102);
-                            s_StaffNo += "," + base.Base_GetDeptPerson("供应链平台（物料部/仓库管理）", 102);
-
-                            base.Base_SendMessage(s_StaffNo, KNetPage.KHtmlEncode("有 产品修改 <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ProductsBarCode=" + ProductsBarCode + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.ProductsEdition + "</a> 相关的采购单进行，敬请关注！"));
-                        }
-                        catch
-                        { }
-                    }
-
-                    AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
-                }
-                else
-                {
-                    if (BLL.Exists(model) == false)
-                    {
-                        BLL.Add(model);
-                        AdminloginMess LogAM = new AdminloginMess();
-                        LogAM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！编码：" + ProductsBarCode);
-                        if (this.Tbx_SampleID.Text != "")
-                        {
-                            Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
-                            Response.End();
-                        }
-                        else
-                        {
-                            Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
-                            Response.End();
-
-                        }
+                        Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                        Response.End();
                     }
                     else
                     {
-                        Response.Write("<script>alert('该产品已存在 添加失败1！');history.back(-1);</script>");
+                        Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
                         Response.End();
+
                     }
                 }
+                else
+                {
+                    Response.Write("<script>alert('该产品已存在 添加失败1！');history.back(-1);</script>");
+                    Response.End();
+                }
             }
+
 
         }
         catch (Exception ex)
@@ -673,6 +664,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
     /// <param name="ID"></param>
     protected void ShowInfo(string ID)
     {
+        AdminloginMess AM = new AdminloginMess();
         KNet.BLL.KNet_Sys_Products bll = new KNet.BLL.KNet_Sys_Products();
         KNet.Model.KNet_Sys_Products model = bll.GetModel(ID);
         if (model == null)
@@ -685,6 +677,51 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
             this.Chk_CgType.SelectedValue = model.KSP_CgType.ToString();
         }
         catch { }
+
+        bool b_Isadd = true;
+        bool b_Isadd1 = true;
+        if ((model.KSP_Code != "") && (model.KSP_Code != null))
+        {
+            if (model.KSP_Code.IndexOf("02") == 0)
+            {
+                //采购部
+                if (AM.KNet_StaffDepart != "129652784259578018")
+                {
+                    b_Isadd = false;
+                }
+            }
+
+            // PCB,  线束， 散热片，成品
+            if ((model.KSP_Code.IndexOf("0203") == 0) || (model.KSP_Code.IndexOf("01") == 0) || (model.KSP_Code.IndexOf("0221") == 0) || (model.KSP_Code.IndexOf("0230") == 0))
+            {
+                //研发部
+                if (AM.KNet_StaffDepart != "129652783965723459")
+                {
+                    b_Isadd1 = false;
+                }
+                else
+                {
+                    b_Isadd = true;
+                }
+            }
+        }
+
+        /* if ((AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "姚丽春") || (AM.KNet_StaffName == "毛刚挺"))
+         {
+             b_Isadd = true;
+             b_Isadd1 = true;
+         }
+         * */
+        if (b_Isadd == false)
+        {
+            //
+            AlertAndGoBack("原材料只能由采购添加和更改！");
+        }
+        else if (b_Isadd1 == false)
+        {
+            //
+            AlertAndGoBack("PCB, 线束，散热片只能由研发部添加和更改！");
+        }
         this.Ddl_RDPerson.SelectedValue = model.KSP_RDPerson;
         this.ProductsName.Text = model.ProductsName;
         this.ProductsBarCode.Text = model.ProductsBarCode;
@@ -696,7 +733,9 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         this.Tbx_Volume.Text = model.KSP_Volume.ToString();
         this.Tbx_Weight.Text = model.KSP_Weight.ToString();
 
-        this.Ddl_UseType.SelectedValue= model.KSP_UseType ;
+        this.Ddl_UseType.SelectedValue = model.KSP_UseType;
+        this.Ddl_Loss.SelectedValue = model.KSP_LossType.ToString();
+
         this.Tbx_GProductsEdition.Text = base.Base_GetProductsEdition(model.KSP_GProductsBarCode);
         try
         {
@@ -776,7 +815,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
         //适用成品1
         KNet.BLL.Xs_Products_Prodocts_Demo BLL_RCProducts = new KNet.BLL.Xs_Products_Prodocts_Demo();
-        DataSet Dts_RCProducts = BLL_RCProducts.GetList(" XPD_ProductsBarCode='" + model.ProductsBarCode + "' ");
+        DataSet Dts_RCProducts = BLL_RCProducts.GetList(" XPD_ProductsBarCode='" + model.ProductsBarCode + "' and c.KSP_Del=0 ");
         DataTable Dtb_RCProducts = Dts_RCProducts.Tables[0];
         if (Dtb_RCProducts.Rows.Count > 0)
         {
@@ -880,7 +919,6 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
             KNet.BLL.Xs_Products_Prodocts BLL_Products_Products = new KNet.BLL.Xs_Products_Prodocts();
             KNet.BLL.PB_Basic_ProductsClass BLL_Basic_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
             string s_DemoProductsID = "";
-            AdminloginMess AM = new AdminloginMess();
             string s_Where1 = " and XPD_FaterBarCode='" + model.ProductsBarCode + "' ";
             if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffName == "项洲"))//如果是
             {
@@ -907,7 +945,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     s_ProductsTable_BomDetail += "<td class='ListHeadDetails' width=\"100px\"><input type=\"hidden\"  Name=\"DemoRepacleProdoctsBarCode_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString() + "'><input type=\"hidden\"  Name=\"DemoProdoctsBarCode_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() + "'><input type=\"input\"  readonly=\"true\"  Name=\"ProductsName_" + i.ToString() + "\" value='" + base.Base_GetProdutsName(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "'></td>\n";
                     s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\"  readonly=\"true\" style=\"width:300px\"  Name=\"ProductsEdition_" + i.ToString() + "\" value='" + base.Base_GetProductsEdition(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "'></td>\n";
 
-                    s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"Place_" + i.ToString() + "\"  style=\"width:350px\"  value='" + Dtb_DemoProducts.Rows[i]["XPD_Place"].ToString() + "'></td>\n";
+                    s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"Place_" + i.ToString() + "\"   ID=\"Place_" + i.ToString() + "\"   style=\"width:350px\" onblur=\"onPlaceblur()\"  value='" + Dtb_DemoProducts.Rows[i]["XPD_Place"].ToString() + "'></td>\n";
 
                     s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"DemoNumber_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "'></td>\n";
 
@@ -957,6 +995,21 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
 
 
+    [Ajax.AjaxMethod()]
+    public string CheckProductsEdition(string s_ProductsName, string s_ProductsEdition, string s_Type)
+    {
+        string s_Return = "";
+        KNet.BLL.KNet_Sys_Products BLL = new KNet.BLL.KNet_Sys_Products();
+        if (s_Type != "")
+        {
+            if (BLL.ExistsProductsEdition(s_ProductsName, s_ProductsEdition) == true)
+            {
+                s_Return = "1";
+            }
+        }
+
+        return s_Return;
+    }
 
     [Ajax.AjaxMethod()]
     public string GetRepalceProducts(string s_ProductsBarCode)

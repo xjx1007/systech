@@ -181,8 +181,8 @@ public partial class Web_Report_Details : BasePage
             this.Button2.Text = "计算中....";
             // string s_DoSql = " exec Pro_UpdateStore ";
             int i_Row1;
-            SqlParameter[] parameters1 = { };
-            DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
+         //   SqlParameter[] parameters1 = { };
+           // DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
 
 
             //  s_DoSql = "exec CalculationAllWwPrice '" + this.Tbx_Month.Text + "','" + this.Tbx_Year.Text + "'";
@@ -197,10 +197,11 @@ public partial class Web_Report_Details : BasePage
 
             if (i_Row > 0)
             {
-                DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
+               // DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
                 this.Button2.Text = "计算完成";
                 AM.Add_Logs("计算委外价格：年：" + this.Tbx_Year.Text + " 月" + this.Tbx_Month.Text);
                 Alert("计算成功！");
+               
             }
             //this.Button2.Text = "计算";
 

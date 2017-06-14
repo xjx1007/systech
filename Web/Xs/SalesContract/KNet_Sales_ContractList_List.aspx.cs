@@ -144,90 +144,94 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
     /// <param name="e"></param>
     protected void Button1_Click(object sender, EventArgs e)
     {
+        AdminloginMess AM = new AdminloginMess();
 
-        string sql = "delete from KNet_Sales_ContractList where"; //删除合同
-        string sql2 = "delete from KNet_Sales_ContractList_Details where"; //合同 明细
-
-        string cal = "";
-        for (int i = 0; i < GridView1.Rows.Count; i++)
+        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "项洲"))
         {
-            CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
 
-            bool b_Checked = true;
-            string s_ContractNo = GridView1.DataKeys[i].Value.ToString(); //获取ID值
-            KNet.BLL.KNet_Sales_ContractList Bll = new KNet.BLL.KNet_Sales_ContractList();
-            KNet.Model.KNet_Sales_ContractList Model = Bll.GetModelB(s_ContractNo);
-            string s_contractStaffNo = Model.ContractStaffNo;
-            AdminloginMess AM = new AdminloginMess();
-            if (AM.KNet_StaffNo != s_contractStaffNo)
+            string sql = "delete from KNet_Sales_ContractList where"; //删除合同
+            string sql2 = "delete from KNet_Sales_ContractList_Details where"; //合同 明细
+
+            string cal = "";
+            for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                b_Checked = false;
-            }
-            this.BeginQuery("select * from KNet_Sales_Flow a Where KSF_Del='0' and KSF_State='1' and  KSF_ContractNo='" + s_ContractNo + "'");
-            this.QueryForDataTable();
-            if ((this.Dtb_Result.Rows.Count <= 0))
-            {
-                b_Checked = true;
-            }
-            else
-            {
-                string s_DeptID = Base_GetNextDept(s_ContractNo, "101");
-                this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'  and KSF_ContractNo='" + s_ContractNo + "' and StaffDepart='" + s_DeptID + "'");
+                CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
+
+                bool b_Checked = true;
+                string s_ContractNo = GridView1.DataKeys[i].Value.ToString(); //获取ID值
+                KNet.BLL.KNet_Sales_ContractList Bll = new KNet.BLL.KNet_Sales_ContractList();
+                KNet.Model.KNet_Sales_ContractList Model = Bll.GetModelB(s_ContractNo);
+                string s_contractStaffNo = Model.ContractStaffNo;
+                if (AM.KNet_StaffNo != s_contractStaffNo)
+                {
+                    b_Checked = false;
+                }
+                this.BeginQuery("select * from KNet_Sales_Flow a Where KSF_Del='0' and KSF_State='1' and  KSF_ContractNo='" + s_ContractNo + "'");
                 this.QueryForDataTable();
-                if ((this.Dtb_Result.Rows.Count > 0))
+                if ((this.Dtb_Result.Rows.Count <= 0))
                 {
                     b_Checked = true;
                 }
                 else
                 {
-                    b_Checked = false;
-                }
-            }
-            if ((cb.Checked == true) && (b_Checked == true))
-            {
-                cal += " ContractNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
-
-                KNet.BLL.KNet_Sales_ContractList_Details BLL = new KNet.BLL.KNet_Sales_ContractList_Details();
-                DataSet ds = BLL.GetList(" ContractNo='" + GridView1.DataKeys[i].Value.ToString() + "' ");
-
-                for (int j = 0; j <= ds.Tables[0].Rows.Count - 1; j++)
-                {
-                    DataRowView mydrv = ds.Tables[0].DefaultView[j];
-
-                    string ID = mydrv["ID"].ToString();
-                    string ProductsBarCode = mydrv["ProductsBarCode"].ToString();
-                    string HouseNo = GetHouseNo(GridView1.DataKeys[i].Value.ToString());
-                    string OwnallPID = mydrv["OwnallPID"].ToString();
-                    try
+                    string s_DeptID = Base_GetNextDept(s_ContractNo, "101");
+                    this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'  and KSF_ContractNo='" + s_ContractNo + "' and StaffDepart='" + s_DeptID + "'");
+                    this.QueryForDataTable();
+                    if ((this.Dtb_Result.Rows.Count > 0))
                     {
-                        BLL.Delete(ID);
+                        b_Checked = true;
                     }
-                    catch
-                    { }
+                    else
+                    {
+                        b_Checked = false;
+                    }
+                }
+                if ((cb.Checked == true) && (b_Checked == true))
+                {
+                    cal += " ContractNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
+
+                    KNet.BLL.KNet_Sales_ContractList_Details BLL = new KNet.BLL.KNet_Sales_ContractList_Details();
+                    DataSet ds = BLL.GetList(" ContractNo='" + GridView1.DataKeys[i].Value.ToString() + "' ");
+
+                    for (int j = 0; j <= ds.Tables[0].Rows.Count - 1; j++)
+                    {
+                        DataRowView mydrv = ds.Tables[0].DefaultView[j];
+
+                        string ID = mydrv["ID"].ToString();
+                        string ProductsBarCode = mydrv["ProductsBarCode"].ToString();
+                        string HouseNo = GetHouseNo(GridView1.DataKeys[i].Value.ToString());
+                        string OwnallPID = mydrv["OwnallPID"].ToString();
+                        try
+                        {
+                            BLL.Delete(ID);
+                        }
+                        catch
+                        { }
+                    }
                 }
             }
-        }
-        if (cal != "")
-        {
-            sql += cal.Substring(0, cal.Length - 3);
-            sql2 += cal.Substring(0, cal.Length - 3);
-        }
-        else
-        {
-            sql = "";       //不删除
-            sql2 = "";       //不删除
-            Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
-            Response.End();
-        }
+            if (cal != "")
+            {
+                sql += cal.Substring(0, cal.Length - 3);
+                sql2 += cal.Substring(0, cal.Length - 3);
+            }
+            else
+            {
+                sql = "";       //不删除
+                sql2 = "";       //不删除
+                Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
+                Response.End();
+            }
 
-        DbHelperSQL.ExecuteSql(sql);
-        DbHelperSQL.ExecuteSql(sql2);
+            DbHelperSQL.ExecuteSql(sql);
+            DbHelperSQL.ExecuteSql(sql2);
 
-        AdminloginMess LogAM = new AdminloginMess();
-        LogAM.Add_Logs("销售管理--->销售合同管理--->合同单删除 操作成功！");
+            AdminloginMess LogAM = new AdminloginMess();
+            LogAM.Add_Logs("销售管理--->销售合同管理--->合同单删除 操作成功！");
 
-        this.DataShows();
-        this.RowOverYN();
+            this.DataShows();
+            this.RowOverYN();
+        }
     }
 
 

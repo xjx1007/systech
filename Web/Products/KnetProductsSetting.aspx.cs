@@ -23,6 +23,7 @@ using KNet.Common;
 public partial class Knet_Web_System_KnetProductsSetting : BasePage
 {
     public string s_AdvShow = "";
+    private static string s_TotalDetails="";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -143,7 +144,11 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             s_SonID = s_SonID.Replace(",", "','");
             SqlWhere += " and ProductsType in ('" + s_SonID + "') ";
         }
-
+        if (s_TotalDetails != "")
+        {
+            SqlWhere += " and ProductsType in ('" + s_TotalDetails.Replace(",", "','") +"') ";
+ 
+        }
 
         if (this.Ddl_Batch.SelectedValue != "")
         {
@@ -193,7 +198,7 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
             Response.Write("<script language=javascript>alert('您没有选择要删除的记录!');history.back(-1);</script>");
             Response.End();
         }
-        string s_Sql = "Select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo where  XPD_ProductsBarCode in ('" + s_BarCode.Replace(",", "','") + "') ";
+        string s_Sql = "Select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_FaterBarCode=b.ProductsBarCode where  XPD_ProductsBarCode in ('" + s_BarCode.Replace(",", "','") + "')  and b.KSP_Del=0 ";
        this.BeginQuery(s_Sql);
        DataTable Dtb_Res = (DataTable)this.QueryForDataTable();
        if (Dtb_Res.Rows.Count > 0)
@@ -310,6 +315,7 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
                 treeMainNode.Text = Model.PBP_Name;
                 treeMainNode.Value = Model.PBP_ID;
                 this.TreeView1.Nodes.Add(treeMainNode);
+                s_TotalDetails += Model.PBP_ID + ",";
             }
             else
             {
@@ -336,7 +342,6 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
                 {
                     s_Sql = " PBP_FaterID='" + s_ID + "' order by PBP_Order";
                 }
-                
                 Dts_Table = bll.GetList(s_Sql);
             }
             else
@@ -354,6 +359,7 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
                     TreeNode treeNode1 = new TreeNode();
                     treeNode1.Text = Dts_Table.Tables[0].Rows[i]["PBP_Name"].ToString();
                     treeNode1.Value = Dts_Table.Tables[0].Rows[i]["PBP_ID"].ToString();
+                    s_TotalDetails += treeNode1.Value+",";
                     treeMainNode.ChildNodes.Add(treeNode1);
                     BuildTree(Dts_Table.Tables[0].Rows[i]["PBP_ID"].ToString(), treeNode1);
                 }

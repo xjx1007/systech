@@ -22,19 +22,27 @@
             //var temp = window.showModalDialog("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
             var temp = window.open("/Web/ProductsClass/Pb_Basic_ProductsClass_Show.aspx?ID=" + intSeconds + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }
+
+        function Clear() {
+            document.all('Tbx_ProductsTypeNo').value = "";
+            document.all('Tbx_ProductsTypeName').value = "";
+        }
         function SetReturnValueInOpenner_ProductsClass(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split(",");
-                document.all('Tbx_ProductsTypeNo').value = ss[0];
-                document.all('Tbx_ProductsTypeName').value = ss[1];
-                document.all('Tbx_Code').value = ss[2];
-                GetProductsPattern();
+                if (document.all('Tbx_ProductsTypeNo').value != "") {
+                    document.all('Tbx_ProductsTypeNo').value += "," + ss[0];
+                    document.all('Tbx_ProductsTypeName').value += "," + ss[1];
+                }
+                else {
+                    document.all('Tbx_ProductsTypeNo').value = ss[0];
+                    document.all('Tbx_ProductsTypeName').value = ss[1];
+                }
             }
             else {
                 document.all('Tbx_ProductsTypeNo').value = "";
                 document.all('Tbx_ProductsTypeName').value = "";
-                document.all('Tbx_Code').value = "";
             }
         }
     </script>
@@ -199,7 +207,6 @@
                                                         </asp:DropDownList></td>
 
                                                     </tr>
-
                                                     <tr>
                                                         <td align="right" class="dvtCellLabel">负责分类:</td>
                                                         <td align="left" class="dvtCellInfo" colspan="3">
@@ -209,6 +216,7 @@
                                                             <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                                             <img src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
 
+                                                            <img src="/themes/softed/images/clear_field.gif" alt="清除" title="清除" onclick="return Clear()" />
                                                         </td>
 
                                                     </tr>

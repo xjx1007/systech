@@ -96,7 +96,7 @@ public partial class UploadListForProducts : UserControl
             if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲")
             {
 
-                if (Chk_Details.Checked==false)
+                if (Chk_Details.Checked == false)
                 {
                     SqlWhere += " and PBA_Del=0 ";
                 }
@@ -116,6 +116,7 @@ public partial class UploadListForProducts : UserControl
 
     protected void GridView1_DataRowBinding(object sender, GridViewRowEventArgs e)
     {
+        AdminloginMess AM = new AdminloginMess();
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
 
@@ -123,7 +124,7 @@ public partial class UploadListForProducts : UserControl
             string Id = this.GridView_Comment.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
             KNet.BLL.PB_Basic_Attachment bllComment = new KNet.BLL.PB_Basic_Attachment();
             KNet.Model.PB_Basic_Attachment Model = bllComment.GetModel(Id);
-            if ((Model.PBA_State == 0)||(Model.PBA_Del == 1))
+            if ((Model.PBA_State == 0) || (Model.PBA_Del == 1) || (AM.YNAuthority("产品资料下载权限") == false))
             {
                 btnDownload.Visible = false;
             }
@@ -215,7 +216,7 @@ public partial class UploadListForProducts : UserControl
         {
             //if (am.KNet_StaffNo == Model.PBA_Creator)
             //
-            if (am.KNet_Position=="103"||am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || (am.YNAuthority("停用产品资料")))
+            if (am.KNet_Position == "103" || am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || (am.YNAuthority("停用产品资料")))
             {
                 // bllComment.Delete(Id);
                 if (Model.PBA_Del == 0)

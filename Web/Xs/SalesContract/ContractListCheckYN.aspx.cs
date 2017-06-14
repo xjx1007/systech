@@ -91,7 +91,7 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                     s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>剩余备货</b></td>\n";
                     s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>核销</b></td>\n";
                     s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>数量</b></td>\n";
-                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>备货数量</b></td>\n";
+                    s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>备品</b></td>\n";
                     if (i_Num == 8)
                     {
                         s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>单价</b></td>\n";
@@ -112,17 +112,11 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                         string s_TotalNumber = Dts_Details.Tables[0].Rows[i]["totalNumber"].ToString();
 
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + s_TotalNumber + "</td>";
-                        s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"HxState_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["KSD_HxState"].ToString() + ">" + Dts_Details.Tables[0].Rows[i]["KSD_HxNumber"].ToString() + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"HxState_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["KSD_HxState"].ToString() + "><input type=\"hidden\" Name=\"ID_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["ID"].ToString() + ">" + Dts_Details.Tables[0].Rows[i]["KSD_HxNumber"].ToString() + "</td>";
 
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ContractAmount"].ToString() + "</td>";
-                        if (Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() == "0")
-                        {
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-                        }
-                        else
-                        {
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() + "</td>";
-                        }
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"input\" Name=\"BNumber_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() + "><input type=\"hidden\" Name=\"oldBNumber_" + i.ToString() + "\" value=" + Dts_Details.Tables[0].Rows[i]["KSC_BNumber"].ToString() + "></td>";
+
                         if (i_Num == 8)
                         {
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["Contract_SalesUnitPrice"].ToString() + "</td>";
@@ -154,6 +148,7 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                     }
                 }
 
+                this.i_Num.Text = Convert.ToString(Dts_Details.Tables[0].Rows.Count + 1);
                 if ((AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffDepart == "129652783965723459") || (AM.KNet_StaffDepart == "129652784259578018"))
                 {
                     this.Tbx_ReDate.Enabled = true;
@@ -416,6 +411,23 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                     {
                         string DoSql = "update KNet_Sales_ContractList  set ContractCheckYN=" + AA + " , ContractState=1  where  ContractNo='" + OrderNotxt + "' ";
                         DbHelperSQL.ExecuteSql(DoSql);
+
+                        int i_num = int.Parse(this.i_Num.Text);
+                        for (int i = 0; i < i_num; i++)
+                        {
+                            if (Request["ID_" + i] != null)
+                            {
+                                string s_ContractDetailsID = Request["ID_" + i] == null ? GetMainID(i) : Request["ID_" + i].ToString();
+                                string s_BNumber = Request["BNumber_" + i] == "" ? "0" : Request["BNumber_" + i].ToString();
+                                string s_oldBNumber = Request["oldBNumber_" + i] == "" ? "0" : Request["oldBNumber_" + i].ToString();
+
+                                
+
+                                DoSql = "update KNet_Sales_ContractList_Details  set KSC_BNumber=" + s_BNumber + "   where  ID='" + s_ContractDetailsID + "' ";
+                                DbHelperSQL.ExecuteSql(DoSql);
+                                AM.Add_Logs("更改备品数,老的备品：" + s_oldBNumber + " 新的备品：" + s_BNumber);
+                            }
+                        }
                         //发送给生产下单
                         base.Base_SendMessage("130795804840200930,129785817148286979,130449499957844456", KNetPage.KHtmlEncode("有 有新的订单评审通过审批 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + OrderNotxt + "  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNotxt + "</a> 需安排下单，敬请关注！！"));
 

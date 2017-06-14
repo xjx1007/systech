@@ -267,7 +267,7 @@
                                                     <asp:TemplateField HeaderText="类别" SortExpression="PBA_ProductsType" HeaderStyle-Font-Size="12px"
                                                         ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
-                                                            <%# base.Base_GetBasicCodeName("778",DataBinder.Eval(Container.DataItem, "PBA_ProductsType").ToString())%>
+                                                            <%# base.Base_GetBasicCodeName("780",DataBinder.Eval(Container.DataItem, "PBA_ProductsType").ToString())%>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="产品名称" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">

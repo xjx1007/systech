@@ -159,6 +159,29 @@
                 //var tempd = window.showModalDialog("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=yes; menubar=yes;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
                 var tempd = window.open("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
+
+            function Submitcheck() {
+                var v_Num = "";
+                v_Num = document.all("Tbx_Num").value;
+                if (v_Num != "") {
+                    var v_Right = "";
+                    for (var i = 0; i < parseInt(v_Num) ; i++) {
+                        if ($("KCNumber_" + i.toString() + "") != null)
+                        {
+                            var KcNumber = $("KCNumber_" + i.toString() + "").value;
+                            var Number = $("Number_" + i.toString() + "").value
+                            var BNumber = $("BNumber_" + i.toString() + "").value;
+                            if (parseInt(KcNumber) < parseInt(Number) + parseInt(BNumber)) {
+                                v_Right = "1"
+                            }
+                        }
+                    }
+                    if (v_Right == "1") {
+                        alert("不能小于库存数，请先补足库存！");
+                        return false;
+                    }
+                }
+            }
             function SetReturnValueInOpenner_WareHouse_Ownall(tempd) {
                 if (tempd != undefined) {
                     var ss, s_Value, i_row;
@@ -171,54 +194,54 @@
                         var objRow = myTable.insertRow(i_row);
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"hidden\"  Name=\"ID_' + parseInt(v_Num + i) + '\" value=' + s_Value[7] + '><input type=\"hidden\"  Name=\"ProductsName_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[0] + '\">' + s_Value[0];
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[1] + '\">' + s_Value[13];
 
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[0] + '\">' + s_Value[3];
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                     
                         var v_HouseNo=$('Ddl_HouseNo').value;
                         var response = Web_Sales_Sales_ShipWareOut_Add.GetKCNumber(s_Value[1] ,v_HouseNo);
                         var objCel = objRow.insertCell();
-                        objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"KCNumber_' + parseInt(v_Num + i) + '\" disabled=false  value=\"' + response.value + '\"' ;
+                        objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"KCNumber_' + parseInt(v_Num + i) + '\" disabled=false  value=\"' + response.value + '\">' ;
 
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Number_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[4] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"BNumber_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[6] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
 
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"PlanNo_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[11] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
 
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"OrderNo_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[8] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
 
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"MaterNo_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[9] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
 
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"CustomerProductsName_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[10] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
 
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"IsFollow_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[12] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
 
                         var objCel = objRow.insertCell();
                         objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"Remarks_' + parseInt(v_Num + i) + '\" value=\"' + s_Value[5] + '\" >';
-                        objCel.className = "dvtCellInfo";
+                        objCel.className = "ListHeadDetails";
                         i_row = i_row + 1;
                         s_ID = s_ID + s_Value[1] + ",";
                     }
@@ -914,7 +937,7 @@
                                                             <b>备品数量</b>
                                                         </td>
                                                         <td class="ListHead" nowrap>
-                                                            <b>计划单号</b>
+                                                            <b>件数</b>
                                                         </td>
                                                         <td class="ListHead" nowrap>
                                                             <b>订单号</b>
@@ -1247,7 +1270,7 @@
                                             <td colspan="4" align="center">&nbsp;
                                 <br />
                                                 <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                                    class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" />
+                                                    class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" OnClientClick="return Submitcheck();" />
                                                 <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                                                     type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                                             </td>

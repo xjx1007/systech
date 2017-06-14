@@ -30,22 +30,25 @@ new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into PB_Products_Brand_Details(");
-            strSql.Append("PPBD_ID,PPBD_FID,PPBD_ProductsBarCode,PPBD_BrandName,PPBD_IsMainBrand,PPBD_BZNumber ");
+            strSql.Append("PPBD_ID,PPBD_FID,PPBD_ProductsBarCode,PPBD_BrandName,PPBD_IsMainBrand,PPBD_BZNumber,PPBD_ProductsEdition ");
             strSql.Append(") values (");
-            strSql.Append("@PPBD_ID,@PPBD_FID,@PPBD_ProductsBarCode,@PPBD_BrandName,@PPBD_IsMainBrand,@PPBD_BZNumber)");
+            strSql.Append("@PPBD_ID,@PPBD_FID,@PPBD_ProductsBarCode,@PPBD_BrandName,@PPBD_IsMainBrand,@PPBD_BZNumber,@PPBD_ProductsEdition)");
             SqlParameter[] parameters = {
  new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50),
  new SqlParameter("@PPBD_FID", SqlDbType.VarChar,50),
  new SqlParameter("@PPBD_ProductsBarCode", SqlDbType.VarChar,50),
  new SqlParameter("@PPBD_BrandName", SqlDbType.VarChar,150),
  new SqlParameter("@PPBD_IsMainBrand", SqlDbType.Int,4),
- new SqlParameter("@PPBD_BZNumber", SqlDbType.Int,4)};
+ new SqlParameter("@PPBD_BZNumber", SqlDbType.Int,4),
+ new SqlParameter("@PPBD_ProductsEdition", SqlDbType.VarChar,50)};
             parameters[0].Value = model.PPBD_ID;
             parameters[1].Value = model.PPBD_FID;
             parameters[2].Value = model.PPBD_ProductsBarCode;
             parameters[3].Value = model.PPBD_BrandName;
             parameters[4].Value = model.PPBD_IsMainBrand;
             parameters[5].Value = model.PPBD_BZNumber;
+            parameters[6].Value = model.PPBD_ProductsEdition;
+            
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
@@ -56,6 +59,7 @@ new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50)
                 return false;
             }
         }
+
         /// <summary>
         /// 修改
         /// </summary>
@@ -67,7 +71,9 @@ new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50)
             strSql.Append("PPBD_ProductsBarCode=@PPBD_ProductsBarCode,");
             strSql.Append("PPBD_BrandName=@PPBD_BrandName,");
             strSql.Append("PPBD_IsMainBrand=@PPBD_IsMainBrand,");
-            strSql.Append("PPBD_BZNumber=@PPBD_BZNumber");
+            strSql.Append("PPBD_BZNumber=@PPBD_BZNumber,");
+            strSql.Append("PPBD_ProductsEdition=@PPBD_ProductsEdition");
+            
             strSql.Append(" where PPBD_ID=@PPBD_ID ");
             SqlParameter[] parameters = {
  new SqlParameter("@PPBD_FID", SqlDbType.VarChar,50),
@@ -75,13 +81,15 @@ new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50)
  new SqlParameter("@PPBD_BrandName", SqlDbType.VarChar,150),
  new SqlParameter("@PPBD_IsMainBrand", SqlDbType.Int,4),
  new SqlParameter("@PPBD_BZNumber", SqlDbType.Int,4),
+new SqlParameter("@PPBD_ProductsEdition", SqlDbType.VarChar,50),
 new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50)};
             parameters[0].Value = model.PPBD_FID;
             parameters[1].Value = model.PPBD_ProductsBarCode;
             parameters[2].Value = model.PPBD_BrandName;
             parameters[3].Value = model.PPBD_IsMainBrand;
             parameters[4].Value = model.PPBD_BZNumber;
-            parameters[5].Value = model.PPBD_ID;
+            parameters[5].Value = model.PPBD_ProductsEdition;
+            parameters[6].Value = model.PPBD_ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -272,6 +280,16 @@ new SqlParameter("@PPBD_ID", SqlDbType.VarChar,50)};
                 {
                     model.PPBD_BZNumber = 0;
                 }
+
+                if (row["PPBD_ProductsEdition"] != null)
+                {
+                    model.PPBD_ProductsEdition = row["PPBD_ProductsEdition"].ToString();
+                }
+                else
+                {
+                    model.PPBD_ProductsEdition = "";
+                }
+                
             }
             return model;
         }

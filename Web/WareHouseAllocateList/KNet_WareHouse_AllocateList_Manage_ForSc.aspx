@@ -75,11 +75,20 @@
 
 
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
-            <tr>
-                <td>
-                    <%=base.Base_BindView("KNet_WareHouse_AllocateList", "KNet_WareHouse_AllocateList_Manage_ForSc.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
-                </td>
-            </tr>
+          
+                                            <tr>
+                    <td>      <%=base.Base_BindViewByTitle("月份","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage.aspx","and PBW_Order  in ('0')","WhereID", this.Tbx_WhereID.Text,"&WhereID1="+this.Tbx_WhereID1.Text)%>
+                  
+                    </td>
+                </tr>
+                                    <tr>
+                    <td>
+                        <%=base.Base_BindViewByTitle("其他","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage.aspx","and PBW_Order not in ('0')","WhereID1", this.Tbx_WhereID1.Text,"&WhereID="+this.Tbx_WhereID.Text)%>
+                    </td>
+                </tr>
+            
+        <asp:TextBox ID="Tbx_WhereID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="Tbx_WhereID1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
 
             <tr>
                 <td>
@@ -213,7 +222,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="5" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
+                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
                                     OnRowDataBound="GridView1_DataRowBinding">
                                     <Columns>
                                         <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
@@ -279,6 +288,13 @@
                                         <asp:TemplateField HeaderText="经手人" SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        
+                                        <asp:TemplateField HeaderText="仓库确认" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+
+                                                <%# GetCheck(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center" HeaderStyle-Width="30px">

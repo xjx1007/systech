@@ -113,7 +113,7 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
 
             this.BeginQuery(strSql.ToString());
             DataSet Dts_Details = (DataSet)this.QueryForDataSet();
-            decimal d_Money = 0, d_Amount = 0;
+            decimal d_Money = 0, d_Amount = 0,d_Money1 = 0;
             if (Dts_Details.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
@@ -137,17 +137,31 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutTotalNet"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KWD_WwPrice"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KWD_WwMoney"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "&nbsp;</td>";
 
                     s_MyTable_Detail += "</tr>";
                     d_Amount += int.Parse(Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString());
                     d_Money += decimal.Parse(Dts_Details.Tables[0].Rows[i]["DirectOutTotalNet"].ToString());
+                    try
+                    {
+                        d_Money1 += decimal.Parse(Dts_Details.Tables[0].Rows[i]["KWD_WwMoney"].ToString());
+                    }
+                    catch
+                    {
+                        d_Money1 +=0;
+                    }
                 }
                 s_MyTable_Detail += "<tr>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\" colspan=5>总计：</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Amount.ToString(), 0) + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Money.ToString(), 2) + "</td>";
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
+
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Money1.ToString(), 2) + "</td>";
+                
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
 
 

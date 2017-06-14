@@ -75,12 +75,21 @@
 
 
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
-            <tr>
-                <td>
-                    <%=base.Base_BindView("KNet_WareHouse_AllocateList", "KNet_WareHouse_AllocateList_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
-                </td>
-            </tr>
-
+   
+            
+                                            <tr>
+                    <td>      <%=base.Base_BindViewByTitle("月份","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage.aspx","and PBW_Order  in ('0')","WhereID", this.Tbx_WhereID.Text,"&WhereID1="+this.Tbx_WhereID1.Text)%>
+                  
+                    </td>
+                </tr>
+                                    <tr>
+                    <td>
+                        <%=base.Base_BindViewByTitle("其他","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage.aspx","and PBW_Order not in ('0')","WhereID1", this.Tbx_WhereID1.Text,"&WhereID="+this.Tbx_WhereID.Text)%>
+                    </td>
+                </tr>
+            
+        <asp:TextBox ID="Tbx_WhereID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="Tbx_WhereID1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
             <tr>
                 <td>
                     <div id="Search_basic" style="display: none" runat="server">

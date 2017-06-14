@@ -336,7 +336,7 @@
                                                         <b>客户型号</b>
                                                     </td>
                                                     <td class="ListHead" nowrap>
-                                                        <b>计划单号</b>
+                                                        <b>件数</b>
                                                     </td>
                                                     <td class="ListHead" nowrap>
                                                         <b>订单号</b>

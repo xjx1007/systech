@@ -173,12 +173,11 @@ if(http_request.readyState==4){
                <asp:TextBox ID="Tbx_Remark" runat="server"    CssClass="Custom_Hidden" Text=""  ></asp:TextBox>
           </ItemTemplate>
         </asp:TemplateField>
-
-         <asp:TemplateField HeaderText="预计出货日期"  HeaderStyle-Font-Size="12px"    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-              <%# GetLinkScPlan(DataBinder.Eval(Container.DataItem, "SuppNo").ToString(),DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) %>
-          </ItemTemplate>
-        </asp:TemplateField>
+            
+        <asp:BoundField  DataField="KSP_Code"  HeaderText="料号"  SortExpression="KSP_Code">
+            <ItemStyle HorizontalAlign="Left"   Font-Size="12px" />
+            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
+        </asp:BoundField>
         </Columns>
         <HeaderStyle CssClass='colHeader' />
         <RowStyle CssClass='listTableRow' />
@@ -190,8 +189,10 @@ if(http_request.readyState==4){
 <!--底部功能栏-->
 <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" style="border-top:1px solid #A3B2CC;">
   <tr>
-    <td height="25" width="25%"><asp:Button ID="Button2" runat="server"  CssClass="crmButton small create" Text="确定选择" OnClick="Button1_Click" style="width: 70px;height: 30px;"  />
-      <td width="75%" align="right" >关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="Boxx" Width="100px"></asp:TextBox>&nbsp;<asp:Button  ID="Button1" runat="server" Text="产品筛选" CssClass="crmButton small save" OnClick="Button1_Click1" /></td>
+    <td height="25" width="25%"><asp:Button ID="Button2" runat="server"  CssClass="crmButton small create" Text="确定选择" OnClick="Button1_Click" style="width: 70px;height: 30px;"  /></td>
+      
+      <td width="75%" align="right" >料号:<asp:TextBox ID="Tbx_Code" runat="server" CssClass="detailedViewTextBox" Width="200px"></asp:TextBox>&nbsp;
+      关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="detailedViewTextBox" Width="200px"></asp:TextBox>&nbsp;<asp:Button  ID="Button1" runat="server" Text="产品筛选" CssClass="crmButton small save" OnClick="Button1_Click1" /></td>
   </tr>
 </table>
 <!--底部功能栏-->

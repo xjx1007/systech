@@ -321,7 +321,7 @@
                                         <asp:TemplateField HeaderText="消耗编号" SortExpression="SEM_ID" HeaderStyle-Font-Size="12px"
                                             ItemStyle-HorizontalAlign="left" HeaderStyle-HorizontalAlign="left">
                                             <ItemTemplate>
-                                                <a href="Sc_Expend_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>">
+                                                <a href="Sc_Expend_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>" target="_blank">
                                                     <%# DataBinder.Eval(Container.DataItem, "SEM_ID").ToString()%></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -348,12 +348,12 @@
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
-                                        <asp:BoundField HeaderText="消耗日期" DataField="SEM_Stime" SortExpression="SEM_Stime"
+                                        <asp:BoundField HeaderText="制单日期" DataField="SEM_Stime" SortExpression="SEM_Stime"
                                             DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
-                                        <asp:BoundField HeaderText="原材料入库日期" DataField="SEM_Rktime" SortExpression="SEM_Rktime"
+                                        <asp:BoundField HeaderText="生产入库日期" DataField="SEM_Rktime" SortExpression="SEM_Rktime"
                                             DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
@@ -362,17 +362,6 @@
                                             ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "SEM_RkPerson").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField HeaderText="原材料委外日期" DataField="SEM_Wwtime" SortExpression="SEM_Wwtime"
-                                            DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        </asp:BoundField>
-                                        <asp:TemplateField HeaderText="委外人" SortExpression="SEM_WwPerson" HeaderStyle-Font-Size="12px"
-                                            ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "SEM_WwPerson").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="生产人" SortExpression="SEM_Creator" HeaderStyle-Font-Size="12px"
@@ -398,18 +387,6 @@
                                             <ItemTemplate>
                                                 <a href="#" onclick="HPrint('<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>')">
                                                     <asp:Image ID="Image5" runat="server" ImageUrl="../../images/Print1.gif" border="0" ToolTip="查看发货详细信息" /></a>(<%# DataBinder.Eval(Container.DataItem, "SEM_MaterPrintNums")%>)
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="其他材料<br/>入库单" SortExpression="DirectOutCheckYN" HeaderStyle-Font-Size="12px"
-                                            ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                            <ItemTemplate>
-                                                <%# GetPrint(DataBinder.Eval(Container.DataItem, "SEM_ID").ToString(),DataBinder.Eval(Container.DataItem, "SEM_MaterPrintNums1").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="其他材料<br/>耗料单" SortExpression="DirectOutCheckYN" HeaderStyle-Font-Size="12px"
-                                            ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                            <ItemTemplate>
-                                                <%# GetQTHPrint(DataBinder.Eval(Container.DataItem, "SEM_ID").ToString(),DataBinder.Eval(Container.DataItem, "SEM_MaterPrintNums2").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="审核" SortExpression="WareHouseCheckYN" HeaderStyle-Font-Size="12px"

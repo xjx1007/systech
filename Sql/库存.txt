@@ -77,3 +77,145 @@ select dbo.GetID(),'P20170423-001','',b.ProductsBarCode,'','','0'
 ,结存数,0,'0',金额,'',getdate(),'' 
 from 新版$ a join KNet_Sys_Products b on a.料号=b.KSP_COde where 仓库=0
 and a. 料号='02010045'
+
+
+select * from KNet_WareHouse_DirectOutList
+where DirectOutNo='CK20170510000001'
+
+select * from KNet_WareHouse_DirectOutList_Details
+where DirectOutNo='CK20170510000001'
+update KNet_WareHouse_DirectOutList
+set DirectOutDateTime='2017-04-30 00:00:00.000'
+where DirectOutNo='CK20170510000001'
+
+insert into KNet_WareHouse_DirectOutList_Details
+select dbo.GetDID(),'CK20170510000001','',b.ProductsBarCode,'','',number,0,0,0,'',GETDATE(),'',0,0,0,0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0
+from a1
+join KNet_Sys_Products b on code=b.KSP_COde
+
+update a1 set code =SUBSTRING(code,0,LEN(code)-1)
+
+delete from a1
+
+select * from a1
+
+
+
+delete from KNet_WareHouse_WareCheckList_Details
+where WareCheckNo='P20170423-001'
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170423-001','',a.ProductsBarCode,'','','0',-KcNumber,0,'0',-KcMoney,'',getdate(),'' from
+(
+select  SUM(a.DirectInAmount) KcNumber,SUM(a.DirectInTotalNet) KcMoney,a.ProductsBarCode,a.HouseNo 
+from v_Store a where DirectInDateTime<='2017-03-31'
+and a.houseNo='131187187069993664'
+group by a.ProductsBarCode,a.HouseNo 
+having SUM(a.DirectInTotalNet)<>0 or SUM(a.DirectInAmount)<>0) a
+
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170423-001','',b.ProductsBarCode,'','','0'
+,结存数,0,'0',金额,'',getdate(),'' 
+from 新版$ a join KNet_Sys_Products b on SUBSTRING(料号,0,LEN(料号))=b.KSP_COde 
+
+
+select * from KNet_WareHouse_DirectOutList_Details
+where 
+DirectOutNo='CK2017042600008'
+update KNet_WareHouse_DirectOutList_Details set DirectOutAmount=-DirectOutAmount,
+DirectOutTotalNet=-DirectOutTotalNet
+where 
+DirectOutNo='CK2017042600008'
+update KNet_WareHouse_DirectOutList_Details
+set DirectOutUnitPrice=bb.price,DirectOutTotalNet=bb.price*DirectOutAmount
+from
+KNet_WareHouse_DirectOutList_Details aa,
+(
+select ID,isnull((select top 1 ProcureUnitPrice from Knet_Procure_SuppliersPrice where ProductsBarCode=a.ProductsBarCode order by ProcureUpdateDateTime desc),0) price from KNet_WareHouse_DirectOutList_Details  a
+) bb
+where  aa.id=bb.id and
+DirectOutNo in ('CK2017042600008','CK2017042600009','CK2017042600010','CK2017042600012','CK2017042600013','CK2017042600016')
+
+
+update KNet_WareHouse_DirectOutList
+set 
+KWD_IsSupp='1'
+where
+DirectOutNo in ('CK20170426000008','CK20170426000009','CK20170426000010','CK20170426000012','CK20170426000013','CK20170426000016')
+
+
+
+
+select * from KNet_Sys_WareHouse where HouseNo='131317756478720000'
+
+delete from KNet_WareHouse_WareCheckList_Details
+where WareCheckNo='P20170518-003'
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170518-003','',a.ProductsBarCode,'','','0',-KcNumber,0,'0',-KcMoney,'',getdate(),'' from
+(
+select  SUM(a.DirectInAmount) KcNumber,SUM(a.DirectInTotalNet) KcMoney,a.ProductsBarCode,a.HouseNo 
+from v_Store a where DirectInDateTime<='2017-04-30'
+and a.houseNo='131317756478720000' and DirectInDateTime is not null
+group by a.ProductsBarCode,a.HouseNo 
+having SUM(a.DirectInTotalNet)<>0 or SUM(a.DirectInAmount)<>0) a
+
+insert into KNet_WareHouse_WareCheckList_Details
+select dbo.GetID(),'P20170518-003','',b.ProductsBarCode,'','','0'
+,结存,0,'0',0,'',getdate(),'' 
+from  a   join KNet_Sys_Products b on 料号=b.KSP_COde 
+where 结存<>0
+
+
+select b.KSP_CwReamrks,' '+b.ksp_Code,a.ProductsBarCode
+,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType
+,b.KSP_ProdutsType,
+Sum(case when DirectinDateTime<'2017-05-31' then DirectInAmount else 0 end)  
+as QmAmount,
+isnull((select top 1 [ProcureUnitPrice] from Knet_Procure_SuppliersPrice 
+where ProductsBarCode=a.ProductsBarCode and kpp_del=0 and kpp_State=1),0) as price  
+,Sum(case when DirectinDateTime<'2017-05-31' then DirectInTotalNet else 0 end) 
+ as QmMoney 
+
+from V_Store a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode 
+ 
+  join KNet_Sys_WareHouse c on a.HouseNo=c.HouseNo 
+   where 1=1  and  a.HouseNo='131187187069993664' 
+   and b.ProductsType in ('M160818111423567','M16081811214092','M160818112202709','M160818112211593','M160818112243302','M16081811254294','M16082408020745','M160824080218861','M160824080236846','M160824080327266','M160824080343449','M160824080355964','M160824080422723','M160824080436507','M160824080502794','M160824080533508','M160824080548488','M160824080607454','M160824080650744','M16082408070525','M160824080725149','M160824080740424','M160824080808943','M160824080837787','M160824080901105','M160824080923266','M160824081023112','M160824081901795','M160824082818370','M160826094630594','M161111024236483','M160913045320605')  Group by b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType 
+   
+having Sum(case when DirectinDateTime<'2017-05-31' then DirectInAmount else 0 end)  <>0 and
+Sum(case when DirectinDateTime<'2017-05-31' then DirectInTotalNet else 0 end) =0
+   order by b.ProductsName,b.ProductsEdition,b.ProductsType 
+--select * from KNet_Sys_WareHouse
+
+select * from Knet_Procure_OrdersList_Details
+where OrderNo='POSTKJ170006'
+select dbo.GetDID() from Knet_Procure_OrdersList_Details
+where OrderNo='POSTKJ170006'
+delete from  Knet_Procure_OrdersList_Details
+where OrderNo='POSTKJ170006'
+insert into Knet_Procure_OrdersList_Details
+select 
+dbo.GetDID(),'POSTKJ170006',b.ProductsName,a.ProductsBarCode,b.ProductsEdition,'',1,
+isnull((select top 1 [ProcureUnitPrice] from Knet_Procure_SuppliersPrice 
+where ProductsBarCode=a.ProductsBarCode and kpp_del=0 and kpp_State=1),0) as price,'0',
+isnull((select top 1 [ProcureUnitPrice] from Knet_Procure_SuppliersPrice 
+where ProductsBarCode=a.ProductsBarCode and kpp_del=0 and kpp_State=1),0) as price,'',0,0,getdate(),0,0,null,null,null,null,1,0,''
+
+from V_Store a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode 
+ 
+  join KNet_Sys_WareHouse c on a.HouseNo=c.HouseNo 
+   where 1=1  and  a.HouseNo='131187187069993664' 
+   and b.ProductsType in ('M160818111423567','M16081811214092','M160818112202709','M160818112211593','M160818112243302','M16081811254294','M16082408020745','M160824080218861','M160824080236846','M160824080327266','M160824080343449','M160824080355964','M160824080422723','M160824080436507','M160824080502794','M160824080533508','M160824080548488','M160824080607454','M160824080650744','M16082408070525','M160824080725149','M160824080740424','M160824080808943','M160824080837787','M160824080901105','M160824080923266','M160824081023112','M160824081901795','M160824082818370','M160826094630594','M161111024236483','M160913045320605')  Group by b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType 
+   
+having Sum(case when DirectinDateTime<'2017-05-31' then DirectInAmount else 0 end)  <>0 and
+Sum(case when DirectinDateTime<'2017-05-31' then DirectInTotalNet else 0 end) =0
+   order by b.ProductsName,b.ProductsEdition,b.ProductsType 
+
+   delete from KNet_WareHouse_DirectOutList_Details
+where DirectOutNo='CK20170523000009'
+
+select * from KNet_WareHouse_DirectOutList_Details
+where DirectOutNo='CK20170523000009'
+insert into KNet_WareHouse_DirectOutList_Details
+select dbo.GetDID(),'CK20170523000009','',a.ProductsBarCode,'','',1,0,0,0,'',GETDATE(),'',0,0,0,0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0
+from Knet_Procure_WareHouseList_Details a
+where WareHouseNo='W20170523-0439'

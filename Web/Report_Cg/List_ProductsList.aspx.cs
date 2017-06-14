@@ -21,12 +21,13 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
     {
         if(!IsPostBack)
         {
-            string s_Sql = "Select ProductsName,KSP_Code,ProductsPattern,ProductsEdition,PBP_Name,UnitsName,KSP_BZNumber,ProductsAddTime,ProductsAddMan,ProductsDescription ";
-            s_Sql += "  from Knet_Sys_Products a join PB_Basic_ProductsClass b on a.ProductsType=b.PBP_ID join KNet_Sys_Units c on c.UnitsNo=a.ProductsUnits Where 1=1  ";
+            string s_Sql = "Select ProductsName,KSP_Code,ProductsPattern,ProductsEdition,PBP_Name,UnitsName,KSP_BZNumber,ProductsAddTime,ProductsAddMan,ProductsDescription,KSP_UseType,KSP_LossType ";
+            s_Sql += "  from Knet_Sys_Products a join PB_Basic_ProductsClass b on a.ProductsType=b.PBP_ID join KNet_Sys_Units c on c.UnitsNo=a.ProductsUnits Where 1=1 and ksp_Del=0 ";
             string s_ProductsName = Request.QueryString["ProductsName"] == null ? "" : Request.QueryString["ProductsName"].ToString();
             string s_ProductsPattern = Request.QueryString["ProductsPattern"] == null ? "" : Request.QueryString["ProductsPattern"].ToString();
             string s_ProductsEdition = Request.QueryString["ProductsEdition"] == null ? "" : Request.QueryString["ProductsEdition"].ToString();
             string s_ProductsMainCategory = Request.QueryString["ProductsMainCategory"] == null ? "" : Request.QueryString["ProductsMainCategory"].ToString();
+            string s_ProductsType = Request.QueryString["ProductsType"] == null ? "" : Request.QueryString["ProductsType"].ToString();
 
             
             string s_Details="",s_Style="";
@@ -48,6 +49,14 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
             {
                 s_Sql += " and ProductsMainCategory = '" + s_ProductsMainCategory + "'";
             }
+
+            if (s_ProductsType != "")
+            {
+                KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
+                string s_SonID = Bll_ProductsDetails.GetSonIDs(s_ProductsType);
+                s_SonID = s_SonID.Replace(",", "','");
+                s_Sql += " and ProductsType in ('" + s_SonID + "') ";
+            }
             s_Sql += "Order by ProductsPattern";
 
             this.BeginQuery(s_Sql);
@@ -68,14 +77,15 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
                     s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + (i + 1).ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["ProductsName"].ToString() + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>'" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["ProductsPattern"].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i]["ProductsEdition"].ToString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["PBP_Name"].ToString() + "</td>\n";
                     
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["UnitsName"].ToString()  + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i]["KSP_BZNumber"].ToString() + "</td>\n";
-
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + base.Base_GetBasicCodeName("1134", Dtb_Table.Rows[i]["KSP_UseType"].ToString()) + "</td>\n";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + base.Base_GetBasicCodeName("1136", Dtb_Table.Rows[i]["KSP_LossType"].ToString()) + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>&nbsp;" + base.Base_GetUserName(Dtb_Table.Rows[i]["ProductsAddMan"].ToString()) + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + DateTime.Parse(Dtb_Table.Rows[i]["ProductsAddTime"].ToString()).ToShortDateString() + "</td>\n";
                     s_Details += "<td align=left class='thstyleLeftDetails'  >&nbsp;" + Dtb_Table.Rows[i]["ProductsDescription"].ToString() + "</td>\n";
@@ -109,6 +119,8 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
             s_Head += "<th class=\"thstyle\">产品分类</th>\n";
             s_Head += "<th class=\"thstyle\">单位</th>\n";
             s_Head += "<th class=\"thstyle\">最小包装</th>\n";
+            s_Head += "<th class=\"thstyle\">使用方式</th>\n";
+            s_Head += "<th class=\"thstyle\">损耗分类</th>\n";
             s_Head += "<th class=\"thstyle\">添加人员</th>\n";
             s_Head += "<th class=\"thstyle\">时间</th>\n";
             s_Head += "<th class=\"thstyle\">参数描述</th>\n";
@@ -118,5 +130,20 @@ public partial class Web_Report_Xs_List_ProductsList : BasePage
 
         }
 
+    }
+
+    protected void Btn_Excel_Click(object sender, EventArgs e)
+    {
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("产品明细.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
     }
 }

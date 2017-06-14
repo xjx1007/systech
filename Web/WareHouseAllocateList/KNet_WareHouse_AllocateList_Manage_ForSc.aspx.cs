@@ -101,6 +101,9 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         KNet.BLL.KNet_WareHouse_AllocateList bll = new KNet.BLL.KNet_WareHouse_AllocateList();
 
         string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
+        this.Tbx_WhereID.Text = s_WhereID;
+        string s_WhereID1 = Request.QueryString["WhereID1"] == null ? "" : Request.QueryString["WhereID1"].ToString();
+        this.Tbx_WhereID1.Text = s_WhereID1;
         string s_Fields = Request["Fields"] == null ? "" : Request["Fields"].ToString();
         string s_Condition = Request["Condition"] == null ? "" : Request["Condition"].ToString();
         string s_Text = Request["Srch_value"] == null ? "" : Request["Srch_value"].ToString();
@@ -114,6 +117,14 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
             SqlWhere += Base_GetBasicWhere(this.Ddl_Batch.SelectedValue);
         }
 
+        if (this.Tbx_WhereID.Text != "")
+        {
+            SqlWhere += Base_GetBasicWhere(this.Tbx_WhereID.Text);
+        }
+        if (this.Tbx_WhereID1.Text != "")
+        {
+            SqlWhere += Base_GetBasicWhere(this.Tbx_WhereID1.Text);
+        }
         if ((this.bas_searchfield.SelectedValue != "") && (search_text.Text != ""))
         {
             SqlWhere += base.Base_GetBasicColumnWhere(this.bas_searchfield.SelectedValue, this.search_text.Text);
@@ -142,6 +153,35 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
     }
 
 
+    public string GetCheck(string s_AllocateNo)
+    {
+        string s_Return = "";
+        try
+        { }
+        catch
+        { }
+        KNet.BLL.KNet_WareHouse_AllocateList Bll = new KNet.BLL.KNet_WareHouse_AllocateList();
+        KNet.Model.KNet_WareHouse_AllocateList model = Bll.GetModelB(s_AllocateNo);
+        if (model != null)
+        {
+            if (model.AllocateCheckYN == 0)
+            {
+                s_Return = "<a href=\"KNet_WareHouse_WareCheck_View.aspx?ID=" + s_AllocateNo + "&HouseQR=1\"><font color=\"red\">确认</font></a>";
+            }
+            else
+            {
+                s_Return = "<font color=blue>已确认</font>";
+            }
+
+            if (model.KWA_IsSave == 1)
+            {
+
+                s_Return += "<BR/><font color=blue>已暂存</font>";
+            }
+        }
+        return s_Return;
+
+    }
     public string GetDirectInProductsPatten(string s_Order)
     {
         string s_Return = "";

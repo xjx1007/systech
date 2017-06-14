@@ -425,6 +425,58 @@ public partial class Procure_MaterialIN_List : BasePage
     }
 
 
+    protected void Btn_SpSave1(object sender, EventArgs e)
+    {
+
+        StringBuilder s_Sql = new StringBuilder();
+        StringBuilder s_Log = new StringBuilder();
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+
+            for (int i = 0; i < MyGridView1.Rows.Count; i++)
+            {
+                CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (Ckb.Checked)
+                {
+                    string s_ID = MyGridView1.DataKeys[i].Value.ToString();
+
+                    if (AM.CheckLogin("财务审核出库单") == true)
+                    {
+                        KNet.BLL.Knet_Procure_WareHouseList_Details bll_Details = new KNet.BLL.Knet_Procure_WareHouseList_Details();
+                        KNet.Model.Knet_Procure_WareHouseList_Details Model_Details = bll_Details.GetModel(s_ID);
+                        KNet.BLL.Knet_Procure_WareHouseList bll = new KNet.BLL.Knet_Procure_WareHouseList();
+                        KNet.Model.Knet_Procure_WareHouseList Model = bll.GetModelB(Model_Details.WareHouseNo);
+                        string s_CheckYN = "0";
+                        s_CheckYN = "1";
+                        if (s_CheckYN != "0")
+                        {
+                            string sql = " update Knet_Procure_WareHouseList  set WareHouseCheckYN=" + s_CheckYN + ",WareHouseCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  WareHouseNo='" + Model_Details.WareHouseNo + "' ";
+                            DbHelperSQL.ExecuteSql(sql);
+                        }
+                    }
+                    s_Log.Append(s_ID + ",");
+                }
+            }
+            if (s_Log.ToString() == "")
+            {
+                Alert("未选择入库单！");
+            }
+            else
+            {
+                this.DataBind();
+                AM.Add_Logs("Knet_Procure_WareHouseList 审批 编号：" + s_Log + "");
+                Alert("批量反审批成功！");
+            }
+        }
+        catch (Exception ex)
+        {
+            Alert("批量审批失败！");
+            return;
+        }
+    }
+
+
     protected void Btn_SpSave(object sender, EventArgs e)
     {
 
@@ -448,19 +500,7 @@ public partial class Procure_MaterialIN_List : BasePage
                         KNet.BLL.Knet_Procure_WareHouseList bll = new KNet.BLL.Knet_Procure_WareHouseList();
                         KNet.Model.Knet_Procure_WareHouseList Model = bll.GetModelB(Model_Details.WareHouseNo);
                         string s_CheckYN = "0";
-                        if (Model.WareHouseCheckYN == 1)
-                        {
-                            s_CheckYN = "2";
-                        }
-                        else if (Model.WareHouseCheckYN == 0)
-                        {
-
-                            s_CheckYN = "0";
-                        }
-                        else
-                        {
-                            s_CheckYN = "1";
-                        }
+                        s_CheckYN = "2";
                         if (s_CheckYN != "0")
                         {
                             string sql = " update Knet_Procure_WareHouseList  set WareHouseCheckYN=" + s_CheckYN + ",WareHouseCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  WareHouseNo='" + Model_Details.WareHouseNo + "' ";
@@ -528,6 +568,7 @@ public partial class Procure_MaterialIN_List : BasePage
         sw.Write("供应商 " + "\t ");
         sw.Write("仓库 " + "\t ");
         sw.Write("产品名称 " + "\t ");
+        sw.Write("料号 " + "\t ");
         sw.Write("产品版本号 " + "\t ");
         sw.Write("入库数量 " + "\t ");
         sw.Write("单价 " + "\t ");
@@ -552,6 +593,7 @@ public partial class Procure_MaterialIN_List : BasePage
                 sw.Write(base.Base_GetSupplierName(dr["SuppNo"].ToString()) + "\t ");
                 sw.Write(base.Base_GetHouseName(dr["HouseNo"].ToString()) + "\t ");
                 sw.Write(base.Base_GetProdutsName(dr["productsBarCode"].ToString()) + "\t ");
+                sw.Write(base.Base_GetProductsCode(dr["productsBarCode"].ToString()) + "\t ");
                 sw.Write(base.Base_GetProductsEdition(dr["productsBarCode"].ToString()) + "\t ");
                 sw.Write(base.FormatNumber1(dr["WareHouseAmount"].ToString(), 0) + "\t ");
                 sw.Write(base.FormatNumber1(dr["WareHouseunitPrice"].ToString(), 6) + "\t ");

@@ -119,7 +119,7 @@
                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="ProductsPattern" HeaderText="产品型号" SortExpression="ProductsPattern">
+                                <asp:BoundField DataField="ProductsEdition" HeaderText="版本号" SortExpression="ProductsEdition">
                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                 </asp:BoundField>
@@ -153,6 +153,7 @@
                         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" style="border-top: 1px solid #A3B2CC;">
                             <tr>
                                 <td width="25%" style="height: 29px">
+                                    <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                     <asp:Button ID="Button2" runat="server" CssClass="crmbutton small save" Text="确定选择" OnClick="Button1_Click" Style="width: 70px; height: 33px;" />
                                     关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="Boxx" Width="300px"></asp:TextBox>&nbsp;<asp:Button ID="Button1" runat="server" Text="产品筛选" CssClass="crmButton small create" OnClick="Button1_Click1" Style="width: 70px; height: 33px;" /></td>
                             </tr>

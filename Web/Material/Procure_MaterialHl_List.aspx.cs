@@ -70,7 +70,7 @@ public partial class Procure_MaterialWw_List : BasePage
         {
             SqlWhere += Base_GetBasicWhere(this.Tbx_WhereID1.Text);
         }
-        
+
 
         if ((this.bas_searchfield.SelectedValue != "") && (search_text.Text != ""))
         {
@@ -284,11 +284,11 @@ public partial class Procure_MaterialWw_List : BasePage
                 }
             }
             catch { }
-       
-       
- 
+
+
+
         }
-        
+
         return s_Return;
     }
 
@@ -324,67 +324,67 @@ public partial class Procure_MaterialWw_List : BasePage
 
     protected void BtnSave_Click(object sender, EventArgs e)
     {
-       /*
-        this.Tbx_Num.Text = "1";
-        this.DataBind();
-        KNet.BLL.Sc_Expend_Manage_MaterDetails Bll = new KNet.BLL.Sc_Expend_Manage_MaterDetails();
-        int i_Num = 0;
-        for (int i = 0; i < MyGridView1.Rows.Count; i++)
-        {
-            CheckBox chb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
-            TextBox Tbx_Number = (TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Number");
-            TextBox Tbx_Price = (TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Price");
-            string s_ID = MyGridView1.DataKeys[i].Value.ToString();
-            if (s_ID.Length == 12)
-            {
+        /*
+         this.Tbx_Num.Text = "1";
+         this.DataBind();
+         KNet.BLL.Sc_Expend_Manage_MaterDetails Bll = new KNet.BLL.Sc_Expend_Manage_MaterDetails();
+         int i_Num = 0;
+         for (int i = 0; i < MyGridView1.Rows.Count; i++)
+         {
+             CheckBox chb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+             TextBox Tbx_Number = (TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Number");
+             TextBox Tbx_Price = (TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Price");
+             string s_ID = MyGridView1.DataKeys[i].Value.ToString();
+             if (s_ID.Length == 12)
+             {
 
-                KNet.Model.Sc_Expend_Manage_MaterDetails Model = new KNet.Model.Sc_Expend_Manage_MaterDetails();
-                if (chb.Checked)
-                {
-                    Model.SED_ID = s_ID;
-                    Model.SED_WwPrice = decimal.Parse(Tbx_Price.Text == "" ? "0" : Tbx_Price.Text);
-                    Model.SED_WwMoney = Model.SED_WwPrice * decimal.Parse(Tbx_Number.Text == "" ? "0" : Tbx_Number.Text);
-                    try
-                    {
-                        if (Bll.UpdateWwPrice(Model))
-                        {
-                            i_Num = i_Num + 1;
-                        }
-                        else
-                        {
-                        }
-                    }
-                    catch
-                    { }
-                }
-            }
-            else
-            {
+                 KNet.Model.Sc_Expend_Manage_MaterDetails Model = new KNet.Model.Sc_Expend_Manage_MaterDetails();
+                 if (chb.Checked)
+                 {
+                     Model.SED_ID = s_ID;
+                     Model.SED_WwPrice = decimal.Parse(Tbx_Price.Text == "" ? "0" : Tbx_Price.Text);
+                     Model.SED_WwMoney = Model.SED_WwPrice * decimal.Parse(Tbx_Number.Text == "" ? "0" : Tbx_Number.Text);
+                     try
+                     {
+                         if (Bll.UpdateWwPrice(Model))
+                         {
+                             i_Num = i_Num + 1;
+                         }
+                         else
+                         {
+                         }
+                     }
+                     catch
+                     { }
+                 }
+             }
+             else
+             {
 
-                KNet.Model.KNet_WareHouse_DirectOutList_Details Model = new KNet.Model.KNet_WareHouse_DirectOutList_Details();
-                if (chb.Checked)
-                {
-                    decimal d_Price=decimal.Parse(Tbx_Price.Text == "" ? "0" : Tbx_Price.Text);
-                    decimal d_Number=decimal.Parse(Tbx_Number.Text == "" ? "0" : Tbx_Number.Text);
-                    string s_Sql = "Update KNet_WareHouse_DirectOutList_Details set KWD_WwPrice='"+d_Price.ToString()+"' ";
-                    s_Sql+=",KWD_WwMoney='"+d_Price * d_Number+"' ";
-                    s_Sql+=" where ID='"+s_ID+"'";
-                    try
-                    {
-                        if (DbHelperSQL.ExecuteSql(s_Sql)>0)
-                        {
-                            i_Num = i_Num + 1;
-                        }
-                        else
-                        {
-                        }
-                    }
-                    catch
-                    { }
-                }
-            }
-        }
-        */
+                 KNet.Model.KNet_WareHouse_DirectOutList_Details Model = new KNet.Model.KNet_WareHouse_DirectOutList_Details();
+                 if (chb.Checked)
+                 {
+                     decimal d_Price=decimal.Parse(Tbx_Price.Text == "" ? "0" : Tbx_Price.Text);
+                     decimal d_Number=decimal.Parse(Tbx_Number.Text == "" ? "0" : Tbx_Number.Text);
+                     string s_Sql = "Update KNet_WareHouse_DirectOutList_Details set KWD_WwPrice='"+d_Price.ToString()+"' ";
+                     s_Sql+=",KWD_WwMoney='"+d_Price * d_Number+"' ";
+                     s_Sql+=" where ID='"+s_ID+"'";
+                     try
+                     {
+                         if (DbHelperSQL.ExecuteSql(s_Sql)>0)
+                         {
+                             i_Num = i_Num + 1;
+                         }
+                         else
+                         {
+                         }
+                     }
+                     catch
+                     { }
+                 }
+             }
+         }
+         */
         string s_Sql = " msdb.dbo.sp_start_job @job_name = 'calculationWwPrice' ";
         if (DbHelperSQL.ExecuteSql(s_Sql) > 0)
         {
@@ -441,19 +441,16 @@ public partial class Procure_MaterialWw_List : BasePage
                         string s_CheckYN = "0";
 
 
-                        if ((Model.DirectOutCheckYN == 2)|| (Model.DirectOutCheckYN == 1))
-                        {
-                            s_CheckYN = "3";
-                        }
-                            /*
-                        else if (Model.DirectOutCheckYN == 3)
-                        {
-                            s_CheckYN = "1";
-                        }
-                        else
-                        {
-                            s_CheckYN = "0";
-                        }*/
+                        s_CheckYN = "3";
+                        /*
+                    else if (Model.DirectOutCheckYN == 3)
+                    {
+                        s_CheckYN = "1";
+                    }
+                    else
+                    {
+                        s_CheckYN = "0";
+                    }*/
                         if (s_CheckYN != "0")
                         {
                             string sql = " update KNet_WareHouse_DirectOutList  set DirectOutCheckYN=" + s_CheckYN + ",DirectOutCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  DirectOutNo='" + Model_Details.DirectOutNo + "' ";
@@ -480,19 +477,82 @@ public partial class Procure_MaterialWw_List : BasePage
             return;
         }
     }
+
+
+
+    protected void Btn_SpSave1(object sender, EventArgs e)
+    {
+        StringBuilder s_Sql = new StringBuilder();
+        StringBuilder s_Log = new StringBuilder();
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+
+            for (int i = 0; i < MyGridView1.Rows.Count; i++)
+            {
+                CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (Ckb.Checked)
+                {
+                    string s_ID = MyGridView1.DataKeys[i].Value.ToString();
+
+                    if (AM.CheckLogin("财务审核出库单") == true)
+                    {
+                        KNet.BLL.KNet_WareHouse_DirectOutList_Details bll_Details = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
+                        KNet.Model.KNet_WareHouse_DirectOutList_Details Model_Details = bll_Details.GetModel(s_ID);
+                        KNet.BLL.KNet_WareHouse_DirectOutList bll = new KNet.BLL.KNet_WareHouse_DirectOutList();
+                        KNet.Model.KNet_WareHouse_DirectOutList Model = bll.GetModelB(Model_Details.DirectOutNo);
+                        string s_CheckYN = "0";
+
+                        s_CheckYN = "2";
+                        /*
+                    else if (Model.DirectOutCheckYN == 3)
+                    {
+                        s_CheckYN = "1";
+                    }
+                    else
+                    {
+                        s_CheckYN = "0";
+                    }*/
+                        if (s_CheckYN != "0")
+                        {
+                            string sql = " update KNet_WareHouse_DirectOutList  set DirectOutCheckYN=" + s_CheckYN + ",DirectOutCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  DirectOutNo='" + Model_Details.DirectOutNo + "' ";
+                            DbHelperSQL.ExecuteSql(sql);
+                        }
+                    }
+                    s_Log.Append(s_ID + ",");
+                }
+            }
+            if (s_Log.ToString() == "")
+            {
+                Alert("未选择出库单！");
+            }
+            else
+            {
+                this.DataBind();
+                AM.Add_Logs("KNet_WareHouse_DirectOutList财务批量审批 编号：" + s_Log + "");
+                Alert("批量反审批成功！");
+            }
+        }
+        catch (Exception ex)
+        {
+            Alert("批量反审批失败！");
+            return;
+        }
+    }
+
     protected void ImgB_Click(object sender, ImageClickEventArgs e)
     {
         Excel export = new Excel();
-        string s_FileName="原材料领料单.xls";
-        if(this.Tbx_WhereID.Text!="")
+        string s_FileName = "原材料领料单.xls";
+        if (this.Tbx_WhereID.Text != "")
         {
             this.BeginQuery("Select PBW_Name from PB_Basic_Where where PBW_ID='" + this.Tbx_WhereID.Text + "'");
-            s_FileName=this.QueryForReturn()+s_FileName;
+            s_FileName = this.QueryForReturn() + s_FileName;
         }
-        if(this.Tbx_WhereID1.Text!="")
+        if (this.Tbx_WhereID1.Text != "")
         {
             this.BeginQuery("Select PBW_Name from PB_Basic_Where where PBW_ID='" + this.Tbx_WhereID1.Text + "'");
-            s_FileName=this.QueryForReturn()+s_FileName;
+            s_FileName = this.QueryForReturn() + s_FileName;
         }
         //if (MyGridView1.AllowPaging == true)
         //{
@@ -504,7 +564,7 @@ public partial class Procure_MaterialWw_List : BasePage
         //MyGridView1.AllowPaging = true;
         //this.DataBind();
     }
-    public   StringWriter GetStringWriter(DataTable dt)
+    public StringWriter GetStringWriter(DataTable dt)
     {
         StringWriter sw = new StringWriter();
 
@@ -531,7 +591,7 @@ public partial class Procure_MaterialWw_List : BasePage
             {
                 sw.Write(i.ToString() + "\t");
 
-                sw.Write("=trim("+dr["SED_ID"].ToString() + ")\t ");
+                sw.Write("=trim(" + dr["SED_ID"].ToString() + ")\t ");
                 sw.Write(base.DateToString(dr["SED_RkTime"].ToString()) + "\t ");
                 sw.Write(dr["typeName"].ToString() + "\t ");
                 sw.Write(base.Base_GetHouseName(dr["HouseNo"].ToString()) + "\t ");
@@ -556,5 +616,5 @@ public partial class Procure_MaterialWw_List : BasePage
         }
         sw.Close();
         return sw;
-    } 
+    }
 }

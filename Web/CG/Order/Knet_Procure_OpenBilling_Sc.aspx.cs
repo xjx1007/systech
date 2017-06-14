@@ -86,6 +86,50 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
         //    }
     }
 
+    private void GetType()
+    {
+        //得到该
+        string s_Code = this.Tbx_ID.Text;
+        //如果是底层不是半成品
+        string sql = "select distinct ProductsType from (Select a.XPD_FaterBarCode as FaterBarCode,a.*,b.ProductsBarCode,b.OrderAmount,d.SuppNo,c.ProductsType,c.KSP_Code,c.KSP_CgType,c.KSP_isModiy,c.KSP_BZNumber  ";
+        sql += " from Xs_Products_Prodocts_Demo a ";//底层BOM
+
+        sql += " join Knet_Procure_OrdersList_Details b  on a.XPD_FaterBarCode=b.ProductsBarCode ";
+        sql += " join Knet_Procure_OrdersList d on d.OrderNo=b.OrderNo ";
+
+        sql += " join KNet_Sys_Products c on c.ProductsBarCode=a.XPD_ProductsBarCode ";
+        // sql += " left join Knet_Procure_SuppliersPrice e on e.ProductsBarCode=a.XPD_ProductsBarCode and e.KPP_Del=0 and e.KPP_State=1  ";
+        sql += " where  b.OrderNo='" + s_Code + "' and c.ProductsType<>'M160901092354544' ";
+        sql += " and c.KSP_Del=0  ";
+        sql += "  union all  ";
+        //如果是底层是半成品
+        sql += " Select a.XPD_FaterBarCode as FaterBarCode,a.*,b.ProductsBarCode,b.OrderAmount,d.SuppNo,c.ProductsType,c.KSP_Code,c.KSP_CgType,c.KSP_isModiy,c.KSP_BZNumber ";
+        sql += " from Xs_Products_Prodocts_Demo a ";//底层BOM
+        sql += " join Xs_Products_Prodocts_Demo f on a.XPD_FaterBarCode=f.XPD_ProductsBarCode ";//半成品
+
+        sql += " join Knet_Procure_OrdersList_Details b  on f.XPD_FaterBarCode=b.ProductsBarCode ";
+        sql += " join Knet_Procure_OrdersList d on d.OrderNo=b.OrderNo ";
+
+        sql += " join KNet_Sys_Products c on c.ProductsBarCode=a.XPD_ProductsBarCode ";
+        // sql += " left join Knet_Procure_SuppliersPrice e on e.ProductsBarCode=a.XPD_ProductsBarCode and e.KPP_Del=0 and e.KPP_State=1  ";
+        sql += " where  b.OrderNo='" + s_Code + "' ";
+        sql += " and c.KSP_Del=0) aa order by XPD_Order,ProductsType,KSP_Code,XPD_ReplaceProductsBarCode,SuppNo ";
+        this.BeginQuery(sql);
+        DataTable dtb_Table = new DataTable();
+
+        StringBuilder SB_MyTable_Detail = new StringBuilder();
+        if (dtb_Table.Rows.Count > 0)
+        {
+            for (int i = 0; i < dtb_Table.Rows.Count; i++)
+            {
+                SB_MyTable_Detail.Append("<td class=\"ListHeadDetails\" align=\"center\">" + Convert.ToString(i + 1) + "</td>");
+                SB_MyTable_Detail.Append("<td class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProductsType(dtb_Table.Rows[i]["ProductsType"].ToString()) + "</td>");
+            }
+ 
+        }
+
+        Lbl_Type.Text = SB_MyTable_Detail.ToString() ;
+    }
 
     private void ShowInfo(string s_ID)
     {
@@ -185,10 +229,6 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
 
             }
         }
-
-
-
-
     }
 
     /// <summary>
@@ -790,25 +830,24 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                 DateTime D_NDays = DateTime.Parse(Model_Procure_OrderList.OrderDateTime.ToString());
 
                 //计算库存
-                GetNewStore();
+                //GetNewStore();
                 this.Pan_Sc.Visible = true;
                 //二级BOM读取 如果产品下面有半成品
                 string s_Sql3 = "Select * from Xs_Products_Prodocts_Demo a join Knet_Procure_OrdersList_Details b on a.XPD_FaterBarCode=b.ProductsBarCode join KNET_Sys_Products c on a.XPD_ProductsBarCode=c.ProductsBarCode where ProductsType='M160901092354544'";
                 //如果是底层不是半成品
-
-                string sql = "select * from (Select e.SuppNo as XPDSuppNo,a.XPD_FaterBarCode as FaterBarCode,isnull(e.ProcureUnitPrice,0)+isnull(e.HandPrice,0)  as XPDPrice,a.*,b.ProductsBarCode,b.OrderAmount,d.SuppNo,c.ProductsType,c.KSP_Code,c.KSP_CgType,c.KSP_isModiy,c.KSP_BZNumber  ";
+                string sql = "select * from (Select a.XPD_FaterBarCode as FaterBarCode,a.*,b.ProductsBarCode,b.OrderAmount,d.SuppNo,c.ProductsType,c.KSP_Code,c.KSP_CgType,c.KSP_isModiy,c.KSP_BZNumber  ";
                 sql += " from Xs_Products_Prodocts_Demo a ";//底层BOM
 
                 sql += " join Knet_Procure_OrdersList_Details b  on a.XPD_FaterBarCode=b.ProductsBarCode ";
                 sql += " join Knet_Procure_OrdersList d on d.OrderNo=b.OrderNo ";
 
                 sql += " join KNet_Sys_Products c on c.ProductsBarCode=a.XPD_ProductsBarCode ";
-                sql += " left join Knet_Procure_SuppliersPrice e on e.ProductsBarCode=a.XPD_ProductsBarCode and e.KPP_Del=0 and e.KPP_State=1  ";
+               // sql += " left join Knet_Procure_SuppliersPrice e on e.ProductsBarCode=a.XPD_ProductsBarCode and e.KPP_Del=0 and e.KPP_State=1  ";
                 sql += " where  b.OrderNo='" + s_Code + "' and c.ProductsType<>'M160901092354544' ";
                 sql += " and c.KSP_Del=0  ";
-
+                sql += "  union all  ";
                 //如果是底层是半成品
-                sql += " union all Select e.SuppNo as XPDSuppNo,a.XPD_FaterBarCode as FaterBarCode,isnull(e.ProcureUnitPrice,0)+isnull(e.HandPrice,0)  as XPDPrice,a.*,b.ProductsBarCode,b.OrderAmount,d.SuppNo,c.ProductsType,c.KSP_Code,c.KSP_CgType,c.KSP_isModiy,c.KSP_BZNumber ";
+                sql += " Select a.XPD_FaterBarCode as FaterBarCode,a.*,b.ProductsBarCode,b.OrderAmount,d.SuppNo,c.ProductsType,c.KSP_Code,c.KSP_CgType,c.KSP_isModiy,c.KSP_BZNumber ";
                 sql += " from Xs_Products_Prodocts_Demo a ";//底层BOM
                 sql += " join Xs_Products_Prodocts_Demo f on a.XPD_FaterBarCode=f.XPD_ProductsBarCode ";//半成品
 
@@ -816,9 +855,9 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                 sql += " join Knet_Procure_OrdersList d on d.OrderNo=b.OrderNo ";
 
                 sql += " join KNet_Sys_Products c on c.ProductsBarCode=a.XPD_ProductsBarCode ";
-                sql += " left join Knet_Procure_SuppliersPrice e on e.ProductsBarCode=a.XPD_ProductsBarCode and e.KPP_Del=0 and e.KPP_State=1  ";
+               // sql += " left join Knet_Procure_SuppliersPrice e on e.ProductsBarCode=a.XPD_ProductsBarCode and e.KPP_Del=0 and e.KPP_State=1  ";
                 sql += " where  b.OrderNo='" + s_Code + "' ";
-                sql += " and c.KSP_Del=0) aa order by XPDSuppNo,XPD_Order,ProductsType,KSP_Code,XPD_ReplaceProductsBarCode,SuppNo ";
+                sql += " and c.KSP_Del=0) aa order by XPD_Order,ProductsType,KSP_Code,XPD_ReplaceProductsBarCode,SuppNo ";
 
 
                 this.BeginQuery(sql);
@@ -832,7 +871,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                         //
                         string s_IsOrder = Dtb_Table.Rows[i]["XPD_IsOrder"].ToString();
                         string s_Address = Dtb_Table.Rows[i]["XPD_Address"].ToString();
-                        string s_SuppNo = Dtb_Table.Rows[i]["XPDSuppNo"].ToString();
+                        string s_SuppNo = "";//Dtb_Table.Rows[i]["XPDSuppNo"].ToString();
                         string s_GoSuppNo = Dtb_Table.Rows[i]["SuppNo"].ToString();
                         string s_Order = Dtb_Table.Rows[i]["XPD_Order"].ToString();
                         string s_ProductsBarCode = Dtb_Table.Rows[i]["XPD_ProductsBarCode"].ToString();
@@ -841,7 +880,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                         string s_ReplaceProductsBarCode = Dtb_Table.Rows[i]["XPD_ReplaceProductsBarCode"].ToString();
                         string s_FaterProductsBarCode = Dtb_Table.Rows[i]["ProductsBarCode"].ToString();
                         int s_OrderNumber = int.Parse(Dtb_Table.Rows[i]["OrderAmount"].ToString());
-                        string s_Price = Dtb_Table.Rows[i]["XPDPrice"].ToString();
+                        string s_Price = "";// Dtb_Table.Rows[i]["XPDPrice"].ToString();
                         string s_ProductsType = Dtb_Table.Rows[i]["ProductsType"].ToString();
                         int s_Number = int.Parse(base.FormatNumber(Dtb_Table.Rows[i]["XPD_Number"].ToString(), 0));
                         string s_BZNumber = Dtb_Table.Rows[i]["KSP_BZNumber"].ToString();
@@ -884,12 +923,6 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                         Sb_Details.Append("<input id=\"Chk_Check_" + i.ToString() + "\" type=\"checkbox\" name=\"Chk_Check_" + i.ToString() + "\" " + s_Checked + " />\n");
                         Sb_Details.Append("" + base.Base_GetProductsType(s_ProductsType) + "<a href=\"#\" onclick=\"ShowDivByID(" + i.ToString() + ")\">明细</a>\n");
                         Sb_Details.Append("</td>\n");
-                        Sb_Details.Append("<td class=\"ListHeadDetails\" nowrap>\n");
-                        Sb_Details.Append("<input id=\"Tbx_SuppNo_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_SuppNo_" + i.ToString() + "\"  value=\"" + s_SuppNo + "\" />" + base.Base_GetSupplierName_Link(s_SuppNo) + "\n");
-                        Sb_Details.Append("<input id=\"Tbx_OrderType_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_OrderType_" + i.ToString() + "\"  value=\"" + s_OrderType + "\" />\n");
-
-                        Sb_Details.Append("</td>\n");
-
                         Sb_Details.Append("<td class=\"ListHeadDetails\" nowrap>\n");
                         Sb_Details.Append("<input id=\"Tbx_FaterBarCode_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_FaterBarCode_" + i.ToString() + "\"  value=\"" + s_FaterBarCode + "\" /><input id=\"Tbx_ProductsBarCode_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_ProductsBarCode_" + i.ToString() + "\"  value=\"" + s_ProductsBarCode + "\" /><input id=\"Tbx_ProductsCode_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_ProductsCode_" + i.ToString() + "\"  value=\"" + s_ProductsCode + "\" />" + s_Order + "\n");
                         Sb_Details.Append("</td>\n");
@@ -946,6 +979,13 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                         this.BeginQuery("select top 1 ProcureUnitPrice from Knet_Procure_SuppliersPrice where SuppNo='" + s_SuppNo + "' and ProcureUnitPrice<>'" + s_Price + "' and ProductsBarCode='" + s_ProductsBarCode + "' and KPP_Del=0 and e.KPP_State=1   order by ProcureUpdateDateTime desc ");
                         s_NewPrice = this.QueryForReturn();
                         */
+
+                        Sb_Details.Append("<td class=\"ListHeadDetails\" nowrap>\n");
+                        Sb_Details.Append("<input id=\"Tbx_SuppNo_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_SuppNo_" + i.ToString() + "\"  value=\"" + s_SuppNo + "\" />" + base.Base_GetSupplierName_Link(s_SuppNo) + "\n");
+                        Sb_Details.Append("<input id=\"Tbx_OrderType_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_OrderType_" + i.ToString() + "\"  value=\"" + s_OrderType + "\" />\n");
+
+                        Sb_Details.Append("</td>\n");
+
                         Sb_Details.Append("<td class=\"ListHeadDetails\" >\n");
                         Sb_Details.Append("<input id=\"Tbx_Price_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_Price_" + i.ToString() + "\"  value=\"" + s_Price + "\" />" + s_Price + "\n");
                         /*

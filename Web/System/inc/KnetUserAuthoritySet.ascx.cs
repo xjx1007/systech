@@ -17,8 +17,6 @@ public partial class KNet_Web_System_inc_KnetUserAuthoritySet : System.Web.UI.Us
         if (!IsPostBack)
         {
 
-            if (Request.QueryString["GroupValue"] != null)
-            {
                 string GroupValue = Request.QueryString["GroupValue"];
 
                 int King = 1;
@@ -43,12 +41,6 @@ public partial class KNet_Web_System_inc_KnetUserAuthoritySet : System.Web.UI.Us
                        s_ArrDetails += "<td width=\"3\" align=\"center\"></td></tr>";
                    }
                }
-            }
-            else
-            {
-                Response.Write("<script language=javascript>alert('非法参数 操作失败！');history.back(-1);</script>");
-                Response.End();
-            }
         }
     }
 }

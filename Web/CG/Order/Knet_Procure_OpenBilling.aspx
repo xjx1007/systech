@@ -148,7 +148,7 @@
             today = new Date();
             intSeconds = today.getSeconds();
             //var tempd = window.showModalDialog("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-            var tempd = window.open("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ScNo=" + document.all("OrderFaterNo").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "选择供应商", "width=1000px, height=700,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            var tempd = window.open("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ScNo=" + document.all("OrderFaterNo").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "选择供应商", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }
         function SetReturnValueInOpenner_SuppliersPrice(tempd) {
             if (tempd != undefined) {

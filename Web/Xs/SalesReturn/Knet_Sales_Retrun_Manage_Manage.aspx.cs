@@ -69,10 +69,6 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Manage : BasePage
             SqlWhere += Base_GetBasicWhere(s_WhereID);
         }
 
-        if (this.Ddl_Batch.SelectedValue != "")
-        {
-            SqlWhere += Base_GetBasicWhere(this.Ddl_Batch.SelectedValue);
-        }
         if ((this.bas_searchfield.SelectedValue != "") && (search_text.Text != ""))
         {
             SqlWhere += base.Base_GetBasicColumnWhere(this.bas_searchfield.SelectedValue, this.search_text.Text);
@@ -353,45 +349,95 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Manage : BasePage
         using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
         {
             conn.Open();
-            string Dostr = "select ID,ReturnNo,ReturnCheckYN from KNet_Sales_ReturnList where ReturnNo='" + aa + "'";
+            string Dostr = "select ID,ReturnNo,ReturnCheckYN,OutWareNo,ReturnType from KNet_Sales_ReturnList where ReturnNo='" + aa + "'";
             SqlCommand cmd = new SqlCommand(Dostr, conn);
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
             {
                 if (dr["ReturnCheckYN"].ToString() == "True")
                 {
+                    string ReturnType = dr["ReturnType"].ToString();
+                    string OutWareNo = dr["OutWareNo"].ToString();
                     string s_Return = "";
                     decimal d_DirectOutAmount=0,d_ReturnAmount=0;
-                    this.BeginQuery("Select a.DirectInNo,isnull(Sum(b.DirectInAmount),0) as Number from KNet_WareHouse_DirectInto a join KNet_WareHouse_DirectInto_Details b on a.DirectInNo=b.DirectInNo where a.KWD_Type='102' and a.KWD_ReturnNo='" + aa + "' Group by a.DirectInNo ");
-                    this.QueryForDataTable();
-                    if (this.Dtb_Result.Rows.Count > 0)
-                    {
-                        d_DirectOutAmount=Decimal.Parse(Dtb_Result.Rows[0][1].ToString());
- 
-                    }
 
-                    this.BeginQuery("Select a.ReturnNo,isnull(Sum(b.ReturnAmount),0) as Number from KNet_Sales_ReturnList a join KNet_Sales_ReturnList_Details b on a.ReturnNo=b.ReturnNo where a.ReturnNo='" + aa + "' Group by a.ReturnNo ");
-                    this.QueryForDataTable();
-                    if (this.Dtb_Result.Rows.Count > 0)
+                    if (ReturnType == "101")
                     {
-                        d_ReturnAmount = Decimal.Parse(Dtb_Result.Rows[0][1].ToString());
-                    }
-                    if (d_ReturnAmount > d_DirectOutAmount)
-                    {
-                        s_Return = "<a href=\"/Web/WareHouseIn/KNet_WareHouse_DirectInto_Add.aspx?ReturnNo=" + aa + "&Type=2\"><font Color=Red>部分入库</font></a>";
-                    }
-                    if (d_DirectOutAmount == 0)
-                    {
-                        s_Return = "<a href=\"/Web/WareHouseIn/KNet_WareHouse_DirectInto_Add.aspx?ReturnNo=" + aa + "&Type=2\"><font Color=Red>未入库</font></a>";
-                    }
-                    if (d_ReturnAmount== d_DirectOutAmount)
-                    {
-                        s_Return = "已入库";
-                    }
 
-                    if (d_ReturnAmount < d_DirectOutAmount)
+                        this.BeginQuery("Select a.DirectInNo,isnull(Sum(b.DirectInAmount),0) as Number from KNet_WareHouse_DirectInto a join KNet_WareHouse_DirectInto_Details b on a.DirectInNo=b.DirectInNo where a.KWD_Type='102' and a.KWD_ReturnNo='" + aa + "' Group by a.DirectInNo ");
+                        this.QueryForDataTable();
+                        if (this.Dtb_Result.Rows.Count > 0)
+                        {
+                            d_DirectOutAmount = Decimal.Parse(Dtb_Result.Rows[0][1].ToString());
+                        }
+
+                        this.BeginQuery("Select a.ReturnNo,isnull(Sum(b.ReturnAmount),0) as Number from KNet_Sales_ReturnList a join KNet_Sales_ReturnList_Details b on a.ReturnNo=b.ReturnNo where a.ReturnNo='" + aa + "' Group by a.ReturnNo ");
+                        this.QueryForDataTable();
+                        if (this.Dtb_Result.Rows.Count > 0)
+                        {
+                            d_ReturnAmount = Decimal.Parse(Dtb_Result.Rows[0][1].ToString());
+                        }
+                        if (d_ReturnAmount > d_DirectOutAmount)
+                        {
+                            s_Return = "<a href=\"/Web/WareHouseIn/KNet_WareHouse_DirectInto_Add.aspx?ReturnNo=" + aa + "&Type=2\"><font Color=Red>部分入库</font></a>";
+
+                        }
+                        if (d_DirectOutAmount == 0)
+                        {
+
+                            s_Return = "<a href=\"/Web/WareHouseIn/KNet_WareHouse_DirectInto_Add.aspx?ReturnNo=" + aa + "&Type=2\"><font Color=Red>未入库</font></a>";
+
+                        }
+                        if (d_ReturnAmount == d_DirectOutAmount)
+                        {
+                            s_Return = "已入库";
+                        }
+
+                        if (d_ReturnAmount < d_DirectOutAmount)
+                        {
+                            s_Return = "<font Color=Green>已多入库</font>";
+                        }
+                    }
+                    else
                     {
-                        s_Return = "<font Color=Green>已多入库</font>";
+
+                        try
+                        {
+                            this.BeginQuery("Select a.DirectOutNo,isnull(Sum(b.DirectOutAmount),0) as Number from KNET_WareHouse_DirectOutList a join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo where a.KWD_ReturnNo='" + aa + "' Group by a.DirectOutNo ");
+                        this.QueryForDataTable();
+                        if (this.Dtb_Result.Rows.Count > 0)
+                        {
+                            d_DirectOutAmount = Decimal.Parse(Dtb_Result.Rows[0][1].ToString())*-1;
+                        }}
+                        catch
+                        { }
+
+                        this.BeginQuery("Select a.ReturnNo,isnull(Sum(b.ReturnAmount),0) as Number from KNet_Sales_ReturnList a join KNet_Sales_ReturnList_Details b on a.ReturnNo=b.ReturnNo where a.ReturnNo='" + aa + "' Group by a.ReturnNo ");
+                        this.QueryForDataTable();
+                        if (this.Dtb_Result.Rows.Count > 0)
+                        {
+                            d_ReturnAmount = Decimal.Parse(Dtb_Result.Rows[0][1].ToString());
+                        }
+                        if (d_ReturnAmount > d_DirectOutAmount)
+                        {
+                            s_Return = "<a href=\"/Web/Xs/SalesOut/Sales_ShipWareOut_Add.aspx?ShipNo=" + OutWareNo + "&ReturnNo=" + aa + "&Type=2\"><font Color=Red>部分入库</font></a>";
+
+                        }
+                        if (d_DirectOutAmount == 0)
+                        {
+
+                            s_Return = "<a href=\"/Web/Xs/SalesOut/Sales_ShipWareOut_Add.aspx?ShipNo=" + OutWareNo + "&ReturnNo=" + aa + "&Type=2\"><font Color=Red>未入库</font></a>";
+
+                        }
+                        if (d_ReturnAmount == d_DirectOutAmount)
+                        {
+                            s_Return = "已入库";
+                        }
+
+                        if (d_ReturnAmount < d_DirectOutAmount)
+                        {
+                            s_Return = "<font Color=Green>已多入库</font>";
+                        }
                     }
                     return s_Return;
                 }
@@ -403,7 +449,7 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Manage : BasePage
                     }
                     else
                     {
-                        string JSD = "Knet_Sales_RetrunCheckYN.aspx?ReturnNo=" + aa.ToString() + "";
+                        string JSD = "Knet_Sales_Retrun_Manage_View.aspx?ID=" + aa.ToString() + "";
                         string StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=400,height=250');\"  title=\"点击进行审核操作\">审核</a>";
                         return StrPop;
                     }

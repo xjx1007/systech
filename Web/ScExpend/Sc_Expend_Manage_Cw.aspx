@@ -240,6 +240,12 @@
                                                                 <asp:Button ID="Btn_Sp" runat="server" Text="批量审批" Width="100%" BorderColor="White" OnClick="Btn_SpSave" />
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td>
+
+                                                                <asp:Button ID="Button1" runat="server" Text="批量反审批" Width="100%" BorderColor="White" OnClick="Btn_SpSave1" />
+                                                            </td>
+                                                        </tr>
                                                         
                                                     </table>
                                                 </div>

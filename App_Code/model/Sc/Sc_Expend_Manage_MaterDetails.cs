@@ -25,6 +25,32 @@ namespace KNet.Model
         private string _SED_Code;
         private decimal? _sed_WwMoney;
         private decimal? _sed_WwPrice;
+
+        private string _SED_LossType;
+        private decimal _SED_LossPercent=0;
+        private int _SED_LossNumber = 0;
+        private int _SED_NeedNumber = 0;
+
+        public string SED_LossType
+        {
+            set { _SED_LossType = value; }
+            get { return _SED_LossType; }
+        }
+        public decimal SED_LossPercent
+        {
+            set { _SED_LossPercent = value; }
+            get { return _SED_LossPercent; }
+        }
+        public int SED_LossNumber
+        {
+            set { _SED_LossNumber = value; }
+            get { return _SED_LossNumber; }
+        }
+        public int SED_NeedNumber
+        {
+            set { _SED_NeedNumber = value; }
+            get { return _SED_NeedNumber; }
+        }
         /// <summary>
         /// 
         /// </summary>

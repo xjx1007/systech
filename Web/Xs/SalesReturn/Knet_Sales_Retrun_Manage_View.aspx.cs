@@ -50,6 +50,35 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
         }
     }
 
+    protected void btn_Chcek_Click(object sender, EventArgs e)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        if (btn_Chcek.Text == "审批")
+        {
+
+
+            string DoSql = "update KNet_Sales_ReturnList  set ReturnCheckYN=1,ReturnCheckStaffNo ='" + AM.KNet_StaffNo + "' ,ReturnState=1  where  ReturnNo='" + this.ReturnNo.Text + "' ";
+            DbHelperSQL.ExecuteSql(DoSql);
+            btn_Chcek.Text = "反审批";
+            AM.Add_Logs("退货单审核成功，审批成功" + this.ReturnNo.Text);
+            AlertAndRedirect("审批成功！", "Knet_Sales_Retrun_Manage_View.aspx?ID=" + this.ReturnNo.Text + "");
+
+            // this.Panel_SCDetails.Visible = true;
+        }
+        else if (btn_Chcek.Text == "反审批")
+        {
+
+
+            string DoSql = "update KNet_Sales_ReturnList  set ReturnCheckYN=0,ReturnCheckStaffNo ='" + AM.KNet_StaffNo + "' ,ReturnState=0  where  ReturnNo='" + this.ReturnNo.Text + "' ";
+            DbHelperSQL.ExecuteSql(DoSql);
+            btn_Chcek.Text = "反审批";
+            AM.Add_Logs("退货单反审核成功，审批成功" + this.ReturnNo.Text);
+            AlertAndRedirect("审批成功！", "Knet_Sales_Retrun_Manage_View.aspx?ID=" + this.ReturnNo.Text + "");
+
+        }
+    }
+
+
     private void ShowInfo(string s_ID)
     {
 
@@ -58,17 +87,28 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
 
         if (s_ID != "")
         {
-            this.ReturnNo.Text=Model.ReturnNo;
+            this.ReturnNo.Text = Model.ReturnNo;
             try
             {
                 this.ReturnDateTime.Text = DateTime.Parse(Model.ReturnDateTime.ToString()).ToShortDateString();
             }
             catch
             { }
-
+            this.Ddl_DutyPerson.Text = base.Base_GetLinMan_Link(Model.ContentPerson);
             this.CustomerName.Text = base.Base_GetCustomerName(Model.CustomerValue);
             this.ReturnRemarks.Text = Model.ReturnRemarks;
-            this.Ddl_ReturnType.Text = base.Base_GetBasicCodeName( "110",Model.ReturnType);
+            this.ReturnPorPay.Text = Base_GetCheckMethod(Model.ReturnPorPay);
+            this.Ddl_ReturnType.Text = base.Base_GetBasicCodeName("110", Model.ReturnType);
+            if (Model.ReturnCheckYN)
+            {
+                btn_Chcek.Text = "反审批";
+            }
+            else
+            {
+
+                btn_Chcek.Text = "审批";
+            }
+            this.Lbl_OutWareNo.Text = "<a href=\"Knet_Sales_Retrun_Manage_View.aspx?ID=" + Model.OutWareNo + "\" target=\"_blank\">" + Model.OutWareNo + "</a>";
             KNet.BLL.KNet_Sales_ReturnList_Details BLL_Details = new KNet.BLL.KNet_Sales_ReturnList_Details();
             DataSet Dts_Details = BLL_Details.GetList(" ReturnNo='" + Model.ReturnNo + "'");
             if (Dts_Details.Tables[0].Rows.Count > 0)
@@ -76,8 +116,8 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                 {
                     s_MyTable_Detail += "<tr>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ReturnAmount"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["Return_SalesUnitPrice"].ToString() + "</td>";
@@ -95,5 +135,5 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
         }
     }
 
-   
+
 }

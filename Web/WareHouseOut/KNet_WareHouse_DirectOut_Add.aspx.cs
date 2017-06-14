@@ -36,8 +36,8 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
             string s_Sql = "1=1";
             this.DirectInDateTime.Text = DateTime.Now.ToShortDateString();
             base.Base_DropBasicCodeBind(this.Ddl_Project, "779");
-           base.Base_DropSupp(this.Ddl_SuppNo,"and KPS_Type='128860698200781250'");
-           base.Base_DropBasicCodeBind(this.Ddl_LyType, "1135");
+            base.Base_DropSupp(this.Ddl_SuppNo, "and KPS_Type='128860698200781250'");
+            base.Base_DropBasicCodeBind(this.Ddl_LyType, "1135");
             this.Lbl_Title.Text = "新增直接出库";
             this.Tbx_ProductsBarCode.Text = s_ProductsBarCode;
             if (s_FaterBarCode != "")
@@ -89,8 +89,8 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
                     Sb_Details.Append("<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>");
                     Sb_Details.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(s_ProductsBarCode) + "</td>");
                     Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode_0\" value='" + s_ProductsBarCode + "'>" + base.Base_GetProductsCode(s_ProductsBarCode) + "</td>");
-                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"FaterBarCode_0\" value=''>" + base.Base_GetProductsEdition(s_ProductsBarCode)+ "&nbsp;</td>");
-                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"HouseNumber_0\" value=''>" + base.Base_GetWareHouseNumber(s_OutHouseNo,s_ProductsBarCode) + "&nbsp;</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"FaterBarCode_0\" value=''>" + base.Base_GetProductsEdition(s_ProductsBarCode) + "&nbsp;</td>");
+                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"HouseNumber_0\" value=''>" + base.Base_GetWareHouseNumber(s_OutHouseNo, s_ProductsBarCode) + "&nbsp;</td>");
 
                     string s_NeedNumber = "1";
                     Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"BomNumber_0\" value='" + s_NeedNumber + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_0\" value='" + s_NeedNumber + "'></td>");
@@ -277,13 +277,13 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
 
         if (model.KWD_IsSupp == 1)
         {
-            Chk_IsSuppNo.Checked=true;
+            Chk_IsSuppNo.Checked = true;
         }
         else
         {
             Chk_IsSuppNo.Checked = false;
         }
-        this.Ddl_Project.SelectedValue = model.KWD_Project  ;
+        this.Ddl_Project.SelectedValue = model.KWD_Project;
 
         this.Ddl_SuppNo.SelectedValue = model.KWD_SuppNo;
         this.Ddl_LyType.SelectedValue = model.KWD_LyType;
@@ -421,7 +421,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
             {
                 if (Request["ProductsBarCode_" + i.ToString()] != null)
                 {
-                    string s_ProductsBarCode = Request.Form["ProductsBarCode_" + i.ToString()] == null ? "" : Request.Form["ProductsBarCode_" + i.ToString()].ToString(); 
+                    string s_ProductsBarCode = Request.Form["ProductsBarCode_" + i.ToString()] == null ? "" : Request.Form["ProductsBarCode_" + i.ToString()].ToString();
                     string s_FaterBarCode = Request.Form["FaterBarCode_" + i.ToString()] == null ? "" : Request.Form["FaterBarCode_" + i.ToString()].ToString();
                     string s_Number = Request.Form["Number_" + i.ToString()] == null ? "0" : Request.Form["Number_" + i.ToString()].ToString();
                     string s_Price = Request.Form["Price_" + i.ToString()] == null ? "0" : Request.Form["Price_" + i.ToString()].ToString();

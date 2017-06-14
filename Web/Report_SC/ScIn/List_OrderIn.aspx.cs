@@ -37,7 +37,7 @@ public partial class Web_List_OrderIn : BasePage
             string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
             string s_QRState = Request.QueryString["QRState"] == null ? "" : Request.QueryString["QRState"].ToString();
             string s_State = Request.QueryString["State"] == null ? "" : Request.QueryString["State"].ToString();
-            
+
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             string s_ProductsEdition = Request.QueryString["ProductsEdition"] == null ? "" : Request.QueryString["ProductsEdition"].ToString();
 
@@ -45,10 +45,10 @@ public partial class Web_List_OrderIn : BasePage
             string s_DutyPerson = Request.QueryString["DutyPerson"] == null ? "" : Request.QueryString["DutyPerson"].ToString();
 
             string s_Sql = "Select a.SER_HouseNo,c.SuppNo,c.OrderType,b.SEM_STime,d.ProductsBarCode,d.OrderAmount,a.SER_scNumber,0,b.SEM_Remarks,b.SEM_ID,c.OrderNo,a.SER_HouseNo,0,a.SER_ScPrice,a.SER_ScMoney,isnull(d.OrderUnitPrice,0) as OrderMoney,isnull(d.HandPrice,0) as HandMoney,isnull(d.OrderUnitPrice,0)*SER_scNumber+isnull(d.HandPrice,0)*SER_scNumber as TotalMoney ";
-            s_Sql += " from Sc_Expend_Manage_RCDetails a join Sc_Expend_Manage b on a.SER_SEMID=b.SEM_ID   ";
+            s_Sql += ",SER_MaterFaxMoney,SER_ScHandFaxMoney,SER_MaterMoney,SER_MaterPrice from Sc_Expend_Manage_RCDetails a join Sc_Expend_Manage b on a.SER_SEMID=b.SEM_ID   ";
             s_Sql += " left join Knet_Procure_OrdersList_details d on d.ID=a.SER_ORderDetailID ";
             s_Sql += "  join Knet_Procure_OrdersList c on d.OrderNo=c.OrderNo join KNet_Sys_Products e on e.ProductsBarCode=d.ProductsBarCode  ";
-          
+
             s_Sql += "  Where 1=1 ";
 
             if (s_StartDate != "")
@@ -88,7 +88,8 @@ public partial class Web_List_OrderIn : BasePage
             s_Sql += " Order by b.SEM_STime ";
             string s_House = "", s_Style = "";
             decimal d_TotalNet = 0;
-            decimal d_TotalNumber = 0, d_TotalNumber1 = 0, d_TotalNumber2 = 0, d_TotalNumber3=0;
+            decimal d_TotalNumber = 0, d_TotalNumber1 = 0, d_TotalNumber2 = 0, d_TotalNumber3 = 0;
+            decimal d_TotalNumber4 = 0, d_TotalNumber5 = 0, d_TotalNumber6 = 0, d_TotalNumber7 = 0;
             string s_Head = "";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
@@ -107,27 +108,35 @@ public partial class Web_List_OrderIn : BasePage
                     }
                     s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
                     s_Details += "<td class='thstyleLeftDetails'>" + (i + 1).ToString() + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' >&nbsp;" + Dtb_Table.Rows[i][9].ToString() + "</td>\n";
-               
-                        try
-                        {
-                            s_Details += "<td  class='thstyleLeftDetails'align=left >" + DateTime.Parse(Dtb_Table.Rows[i][3].ToString()).ToShortDateString() + "</td>\n";
-                        }
-                        catch
-                        {
-                            s_Details += "<td class='thstyleLeftDetails' align=center >&nbsp;</td>\n";
-                        }
-                        s_Details += "<td class='thstyleLeftDetails' >" + base.Base_GetHouseName(Dtb_Table.Rows[i][11].ToString()) + "</td>\n";
-                        s_Details += "<td class='thstyleLeftDetails' >" + base.Base_GetProductsCode(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
-                        s_Details += "<td class='thstyleLeftDetails' >" + base.Base_GetProdutsName(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
-                        s_Details += "<td  class='thstyleLeftDetails'align=center >" + base.Base_GetProductsPattern(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
-                        s_Details += "<td  class='thstyleLeftDetails'align=center >" + base.Base_GetProductsEdition(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
+                    string s_DID = Dtb_Table.Rows[i][9].ToString();
 
-                        s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i][6].ToString(), 0) + "</td>\n";
-                        s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["OrderMoney"].ToString(), 2) + "</td>\n";
-                        s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["HandMoney"].ToString(), 2) + "</td>\n";
-                        s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["TotalMoney"].ToString(), 2) + "</td>\n";
-                        s_Details += "<td  class='thstyleLeftDetails' align=right  >&nbsp;" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' >&nbsp;<a href=\"/Web/ScExpend/Sc_Expend_View.aspx?ID=" + s_DID + "\" target=\"_blank\">" + s_DID + "</a></td>\n";
+
+                    try
+                    {
+                        s_Details += "<td  class='thstyleLeftDetails'align=left >" + DateTime.Parse(Dtb_Table.Rows[i][3].ToString()).ToShortDateString() + "</td>\n";
+                    }
+                    catch
+                    {
+                        s_Details += "<td class='thstyleLeftDetails' align=center >&nbsp;</td>\n";
+                    }
+                    s_Details += "<td class='thstyleLeftDetails' >" + base.Base_GetHouseName(Dtb_Table.Rows[i][11].ToString()) + "</td>\n";
+                    s_Details += "<td class='thstyleLeftDetails' >" + base.Base_GetProductsCode(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
+                    s_Details += "<td class='thstyleLeftDetails' >" + base.Base_GetProdutsName(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails'align=center >" + base.Base_GetProductsPattern(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails'align=center >" + base.Base_GetProductsEdition(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
+
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i][6].ToString(), 0) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["OrderMoney"].ToString(), 4) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["HandMoney"].ToString(), 4) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["TotalMoney"].ToString(), 2) + "</td>\n";
+
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_MaterFaxMoney"].ToString(), 2) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_ScHandFaxMoney"].ToString(), 2) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_MaterPrice"].ToString(), 6) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_MaterMoney"].ToString(), 2) + "</td>\n";
+
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  >&nbsp;" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
 
                     s_Details += " </tr>";
                     try
@@ -136,6 +145,9 @@ public partial class Web_List_OrderIn : BasePage
                         d_TotalNumber += decimal.Parse(Dtb_Table.Rows[i]["OrderMoney"].ToString());
                         d_TotalNumber2 += decimal.Parse(Dtb_Table.Rows[i]["HandMoney"].ToString());
                         d_TotalNumber3 += decimal.Parse(Dtb_Table.Rows[i]["TotalMoney"].ToString());
+                        d_TotalNumber4 += decimal.Parse(Dtb_Table.Rows[i]["SER_MaterFaxMoney"].ToString());
+                        d_TotalNumber5 += decimal.Parse(Dtb_Table.Rows[i]["SER_ScHandFaxMoney"].ToString());
+                        d_TotalNumber6 += decimal.Parse(Dtb_Table.Rows[i]["SER_MaterMoney"].ToString());
                     }
                     catch
                     {
@@ -146,12 +158,17 @@ public partial class Web_List_OrderIn : BasePage
                 s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber1.ToString(), 0) + "</td>\n";
                 s_Details += "<td  class='thstyleLeftDetails' align=right noWrap colspan='2' >&nbsp;</td>\n";//money
                 s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber3.ToString(), 2) + "</td>\n";
+                s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber4.ToString(), 2) + "</td>\n";
+                s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber5.ToString(), 2) + "</td>\n";
+                s_Details += "<td  class='thstyleLeftDetails' align=right noWrap  >&nbsp;</td>\n";//money
+
+                s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber6.ToString(), 2) + "</td>\n";
                 s_Details += "<td  class='thstyleLeftDetails' align=right noWrap  >&nbsp;</td>\n";//money
                 s_Details += " </tr>";
                 s_House = Dtb_Table.Rows[0][0].ToString();
             }
             s_Details += "</tbody></table></td></tr>";
-                s_Time = "日期:" + s_StartDate + " 到" + s_EndDate;
+            s_Time = "日期:" + s_StartDate + " 到" + s_EndDate;
             s_HouseName = "入库仓库:" + base.Base_GetHouseName(s_House);
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n";
             s_Head += "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<thead class=\"fixedHeader\"> \n";
@@ -169,6 +186,10 @@ public partial class Web_List_OrderIn : BasePage
             s_Head += "<th class=\"thstyle\">材料费</th>\n";
             s_Head += "<th class=\"thstyle\">加工费</th>\n";
             s_Head += "<th class=\"thstyle\">金额</th>\n";
+            s_Head += "<th class=\"thstyle\">材料费不含税</th>\n";
+            s_Head += "<th class=\"thstyle\">加工费不含税</th>\n";
+            s_Head += "<th class=\"thstyle\">材料费单价</th>\n";
+            s_Head += "<th class=\"thstyle\">材料费合计</th>\n";
             s_Head += "<th class=\"thstyle\">备注</th>\n";
             s_Head += "</thead><tbody class=\"scrollContent\">";
             s_Details += "</div>";

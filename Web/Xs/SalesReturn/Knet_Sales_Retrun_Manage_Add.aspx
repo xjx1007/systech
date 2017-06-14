@@ -19,10 +19,7 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            //var temp = window.showModalDialog("/Web/Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            var temp = window.open("/Web/Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
-        }
-        function SetReturnValueInOpenner_SalesShip(temp) {
+            var temp = window.showModalDialog("/Web/Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -45,10 +42,8 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            //var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            var tempd = window.open("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
-        }
-        function SetReturnValueInOpenner_Customer(tempd) {
+            var tempd = window.showModalDialog("/Web/Common/SelectCustomer.aspx?sID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+
             if (tempd == undefined) {
                 tempd = window.returnValue;
             }
@@ -91,10 +86,7 @@
         function btnGetContentPerson_onclick() {
             var s_Customer = "";
             s_Customer = document.all('CustomerValue').value;
-            //var temaap = window.showModalDialog("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            var temaap = window.open("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
-        }
-        function SetReturnValueInOpenner_ContentPerson(temaap) {
+            var temaap = window.showModalDialog("/Web/Common/SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
             if (temaap != undefined) {
                 var sws;
                 sws = temaap.split(",");
@@ -114,10 +106,8 @@
             today = new Date();
             intSeconds = today.getSeconds();
 
-            //var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("CustomerValue").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
-            var tempd = window.open("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("CustomerValue").value + "", "选择产品", "width=1000px, height=600,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
-        }
-        function SetReturnValueInOpenner_Products(tempd) {
+
+            var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&CustomerValue=" + document.all("CustomerValue").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
             if (tempd != undefined) {
                 var i_num1 = parseInt(document.all('Tbx_Num').value);
                 document.all('Tbx_Num').value = i_num1;
@@ -129,31 +119,31 @@
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsName_' + i_num1 + '\" value=' + ss[2] + '>' + ss[2];
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsBarCode_' + i_num1 + '\" value=' + ss[0] + '>' + ss[0];
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"hidden\"  Name=\"ProductsPattern_' + i_num1 + '\" value=' + ss[3] + '>' + ss[3];
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[4] + ' >';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Price_' + i_num1 + '\" value=' + ss[5] + ' >';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
 
                 var objCel = objRow.insertCell();
                 objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num1 + '\"  >';
-                objCel.className = "dvtCellInfo";
+                objCel.className = "ListHeadDetails";
                 i_row = i_row + 1;
 
                 document.all('Tbx_Num').value = parseInt(document.all('Tbx_Num').value) + 1;
@@ -181,7 +171,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                退货单管理 > <a class="hdrLink" href="Knet_Sales_Retrun_Manage_Manage.aspx">退货单添加</a>
+                销售 > <a class="hdrLink" href="Knet_Sales_Retrun_Manage_Manage.aspx">退货单添加</a>
             </td>
             <td width="100%" nowrap>
                 <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
@@ -256,6 +246,16 @@
                                     </tr>
                                     <tr>
                                         <td class="dvtCellLabel">
+                                            &nbsp;发货出库:
+                                        </td>
+                                        <td class="dvtCellInfo">
+                                            <asp:TextBox ID="Tbx_DirectOutNo" MaxLength="40" runat="server" CssClass="detailedViewTextBox"
+                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                Width="150px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dvtCellLabel">
                                             &nbsp;客户:
                                         </td>
                                         <td class="dvtCellInfo">
@@ -282,7 +282,8 @@
                                         </td>
                                         <td class="dvtCellInfo">
                                             <asp:DropDownList runat="server" ID="Ddl_DutyPerson">
-                                            </asp:DropDownList>
+                                            </asp:DropDownList>  (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator3"
+                                                runat="server" ErrorMessage="联系人不能为空" ControlToValidate="Ddl_DutyPerson" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </td>
                                         <td class="dvtCellLabel">
                                             退款方式:
@@ -370,7 +371,7 @@
                                     <tr>
                                         <td colspan="3">
                                             ①选择产品:
-                                            <input type="button" name="Button" class="crmbutton small create" value="添加产品" onclick="btnGetProducts_onclick();" />
+                                            <input type="button" name="Button" id ="Select"  runat="server" class="crmbutton small create" value="添加产品" onclick="btnGetProducts_onclick();" />
                                         </td>
                                     </tr>
                                 </table>

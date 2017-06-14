@@ -490,45 +490,45 @@ public partial class Web_List_Details : BasePage
             this.Tbx_Num.Text = Dtb_Table.Rows.Count.ToString();
             Sb_Details.Append(" <tr >\n");
             Sb_Details.Append("<td class='thstyleLeftDetails'align=center noWrap colspan='5'>合计:</td>\n");
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QCTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_QCTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QCTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_QCTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_CgTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_CgTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_CgTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_CgTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_WwTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_WwTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_WwTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_WwTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_XhTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_XhTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_XhTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_XhTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrTotalMoney.ToString(), 2) + "</td>\n");
             /*
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrDCLlTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrDCLlTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrDCLlTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrDCLlTotalMoney.ToString(), 2) + "</td>\n");
             a
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrDCXsTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrDCXsTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrDCXsTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrDCXsTotalMoney.ToString(), 2) + "</td>\n");
                */
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_outTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_outTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_outTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_outTotalMoney.ToString(), 2) + "</td>\n");
 
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >0</td>\n");//money
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >0</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalTZMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_TotalTZMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QMTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_QMTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QMTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_QMTotalMoney.ToString(), 2) + "</td>\n");
 
 
             Sb_Details.Append("<td  class='thstyleLeftDetails' align=right noWrap colspan=3 >&nbsp;</td>\n");//money

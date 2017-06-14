@@ -66,7 +66,8 @@ namespace KNet.Model
         private int _KSP_BZNumber;
         private int _Type;
         private string[] _s_BomIDs;
-
+        private int _KSP_LossType;
+        
         public string[] s_BomIDs
         {
             set { _s_BomIDs = value; }
@@ -98,6 +99,12 @@ namespace KNet.Model
         {
             set { _KSP_UseType = value; }
             get { return _KSP_UseType; }
+        }
+
+        public int KSP_LossType
+        {
+            set { _KSP_LossType = value; }
+            get { return _KSP_LossType; }
         }
         
         /// <summary>

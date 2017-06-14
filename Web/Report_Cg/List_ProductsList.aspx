@@ -236,8 +236,9 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 <body>
     <form id="form1" runat="server">
     <div >
-    <input type="button" value="打印预览" onclick="javascript:prn1_preview()" id="Button1" />
-    <input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
+    <input type="button" value="打印预览" onclick="javascript:prn1_preview()" id="Button1" Style="width: 70px; height: 30px;"/>
+        
+                                        <asp:Button runat="server" ID="Btn_Excel" Text="导出Excel" OnClick="Btn_Excel_Click"  Style="width: 70px; height: 30px;" />
     <table  width=100% cellspacing=0 cellpadding=0 ID=tMater class=pTable>
     	<tr><td>
     		<asp:Label ID="Lbl_Details" runat="server"></asp:Label>

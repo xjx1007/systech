@@ -216,6 +216,7 @@
                                         <td>
                                             
                                 <asp:Button ID="Btn_Sp" runat="server" Text="批量审批"  width="100%" BorderColor="White" OnClick="Btn_SpSave" />
+                                <asp:Button ID="Button1" runat="server" Text="批量反审批"  width="100%" BorderColor="White" OnClick="Btn_SpSave1" />
                                         </td>
                                     </tr>
                                 </table>
@@ -282,36 +283,6 @@
                                     </asp:BoundField>
                                     <asp:BoundField HeaderText="金额" DataField="SED_RkMoney"
                                         SortExpression="SED_RkMoney">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="期初数量" DataField="SED_QCNumber"
-                                        SortExpression="SED_QCNumber">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="期初金额" DataField="SED_QCMoney"
-                                        SortExpression="SED_QCMoney">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="采购数量" DataField="SED_CGNumber"
-                                        SortExpression="SED_CGNumber">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="采购金额" DataField="SED_CGMoney"
-                                        SortExpression="SED_CGMoney">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="领料单价" DataField="WwPrice"
-                                        SortExpression="WwPrice">
-                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    </asp:BoundField>
-                                    <asp:BoundField HeaderText="领料金额" DataField="WwMoney"
-                                        SortExpression="WwMoney">
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                     </asp:BoundField>

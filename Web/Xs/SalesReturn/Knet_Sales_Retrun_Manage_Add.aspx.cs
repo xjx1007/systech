@@ -36,6 +36,8 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
 
                 string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
                 string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+                string s_ShipNo = Request.QueryString["ShipNo"] == null ? "" : Request.QueryString["ShipNo"].ToString();
+                this.Tbx_DirectOutNo.Text = s_ShipNo;
                 this.Lbl_Title.Text = "新增发货通知单";
                 if (s_ID != "")
                 {
@@ -52,8 +54,41 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
                     }
                     this.Btn_Save.Text = "保存";
                     ShowInfo(s_ID);
-                
-            }
+
+                }
+                else
+                {
+                    if (this.Tbx_DirectOutNo.Text != "")
+                    {
+                        KNet.BLL.KNet_Sales_OutWareList Bll = new KNet.BLL.KNet_Sales_OutWareList();
+                        KNet.Model.KNet_Sales_OutWareList Model = Bll.GetModelB(this.Tbx_DirectOutNo.Text);
+
+                        this.CustomerValue.Value = Model.CustomerValue;
+                        this.CustomerValueName.Text = base.Base_GetCustomerName(Model.CustomerValue);
+                        base.Base_DropLinkManBind(this.Ddl_DutyPerson, Model.CustomerValue);
+                        this.Ddl_DutyPerson.SelectedValue = Model.OutWareSideContact;
+                        Select.Visible = false;
+                        KNet.BLL.KNet_Sales_OutWareList_Details BLL_Details = new KNet.BLL.KNet_Sales_OutWareList_Details();
+                        DataSet Dts_Details = BLL_Details.GetList(" OutWareNo='" + this.Tbx_DirectOutNo.Text + "'");
+                        if (Dts_Details.Tables[0].Rows.Count > 0)
+                        {
+                            for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
+                            {
+                                s_MyTable_Detail += "<tr>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"/themes/softed/images/delete.gif\" border=0></a></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ID_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["ID"].ToString() + "><input type=\"hidden\"  Name=\"ProductsBarCode_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"Number_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["OutWareAmount"].ToString() + "></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"Price_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["OutWare_SalesUnitPrice"].ToString() + "></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"Remarks_" + i + "\" value=\"\"></td>";
+                                s_MyTable_Detail += "</tr>";
+                            }
+
+                        }
+                        this.Tbx_Num.Text = Dts_Details.Tables[0].Rows.Count.ToString();
+                    }
+                }
                 if (AM.CheckLogin(this.Lbl_Title.Text) == false)
                 {
                     Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
@@ -99,7 +134,6 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"Number_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["ReturnAmount"].ToString() + "></td>";
-
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"Price_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["Return_SalesUnitPrice"].ToString() + "></td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" Name=\"Remarks_" + i + "\" value=" + Dts_Details.Tables[0].Rows[i]["ReturnRemarks"].ToString() + "></td>";
                 s_MyTable_Detail += "</tr>";
@@ -294,7 +328,7 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
         molel.ReturnRemarks = ReturnRemarks;
         molel.ContentPerson = this.Ddl_DutyPerson.SelectedValue;
         molel.ReturnType = this.Ddl_ReturnType.SelectedValue;
-
+        molel.OutWareNo = this.Tbx_DirectOutNo.Text;
         KNet.BLL.KNet_Sales_ReturnList BLL = new KNet.BLL.KNet_Sales_ReturnList();
 
         ArrayList Arr_Details = new ArrayList();
@@ -306,6 +340,7 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
             if (Request["ProductsBarCode_" + i] != null)
             {
                 string s_ProductsBarCode = Request["ProductsBarCode_" + i].ToString();
+                string s_ID = Request["ID_" + i].ToString();
                 string s_Number = Request["Number_" + i].ToString();
                 string s_Price = Request["Price_" + i].ToString();
                 
@@ -315,6 +350,7 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
                 ModelDetails.Return_SalesUnitPrice = decimal.Parse(s_Price);
                 ModelDetails.Return_SalesTotalNet = decimal.Parse(s_Price) * int.Parse(s_Number);
                 ModelDetails.ReturnNo = ReturnNo;
+                ModelDetails.ProductsName = ModelDetails.ID;
                 Arr_Details.Add(ModelDetails);
             }
         }
@@ -338,6 +374,23 @@ public partial class Knet_Web_Sales_Knet_Sales_Retrun_Manage_Add : BasePage
                 if (BLL.Exists(ReturnNo) == false)
                 {
                     BLL.Add(molel);
+                    //维修品
+                    try
+                    {
+                        if (molel.ReturnType == "101")
+                        {
+                            string s_DeptPerson = base.Base_GetDeptPerson("质量管理中心", 101) + "," + base.Base_GetDeptPerson("质量管理中心", 102) + "," + "129785817148286979";
+                            base.Base_SendMessage(s_DeptPerson, KNetPage.KHtmlEncode("有 维修品退货 <a href='Web/Xs/SalesReturn/Knet_Sales_Retrun_Manage_View.aspx?ID=" + molel.ReturnNo + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + molel.ReturnNo + "</a> 需要您处理，敬请关注！"));
+
+                        }
+                        else
+                        {
+                            string s_DeptPerson = base.Base_GetDeptPerson("供应链平台", 101) + "," + "129785817148286979";
+                            base.Base_SendMessage(s_DeptPerson, KNetPage.KHtmlEncode("有 销售退货 <a href='Web/Xs/SalesReturn/Knet_Sales_Retrun_Manage_View.aspx?ID=" + molel.ReturnNo + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + molel.ReturnNo + "</a> 需要您处理，敬请关注！"));
+                        }
+                    }
+                    catch
+                    { }
                     LogAM.Add_Logs("销售管理--->销售退货管理--->退货开单 添加 操作成功！退货单号：" + ReturnNo);
 
                     Response.Write("<script>alert('退货开单 添加  操作成功！ 确定进入添加退货单产品明细！');location.href='Knet_Sales_Retrun_Manage_Manage.aspx';</script>");

@@ -114,6 +114,32 @@ function selectAll(obj)
 		}   
      }
 }
+
+
+function selectAllPage(obj) {
+    var i, j = 0;
+    var elements = document.getElementsByTagName("input");
+    //alert(obj.value.replace(/\s+/g,""));
+    if (obj.checked) {
+        for (i = 0; i < elements.length; i++) {
+            if (elements[i].type == "checkbox")  //只处理datagrid中的checkbox
+            {
+                if (elements[i].disabled == false) {
+                    elements[i].checked = true;
+                    j++;
+                }
+            }
+        }
+    }
+    else {
+        for (i = 0; i < elements.length; i++) {
+            if (elements[i].type == "checkbox" ) {
+                elements[i].checked = false;
+                j++;
+            }
+        }
+    }
+}
 function PageGo(url)
 {
 	window.location.href = url;

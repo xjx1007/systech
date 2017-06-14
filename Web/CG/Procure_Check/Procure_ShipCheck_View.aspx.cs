@@ -84,7 +84,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                     s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_Number.ToString(), 0) + "</td>\n";
                     s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_Number1.ToString(), 0) + "</td>\n";
                     s_Details += "<td align=center class='ListHeadDetails' noWrap colspan='3'>&nbsp;</td>\n";//money
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_Number2.ToString(), 3) + "</td>\n";
+                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_Number2.ToString(), 4) + "</td>\n";
                     s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
                     s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_Number3.ToString(), 0) + "</td>\n";
                     s_Details += "<td align=center class='ListHeadDetails' noWrap colspan='2'>&nbsp;</td>\n";//money
@@ -633,7 +633,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                         s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
 
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 3) + "</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
                         s_Return += "<td class=\"ListHeadDetails\" align=\"center\">17%</td>";
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
@@ -730,7 +730,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
 
                     s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
 
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 3) + "</td>";
+                    s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
                     s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
 
                     s_Return += "<td class=\"ListHeadDetails\" align=\"center\">17%</td>";

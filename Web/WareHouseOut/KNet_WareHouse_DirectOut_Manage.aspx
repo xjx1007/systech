@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>出库管理</title>
+<title>领用管理</title>
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                仓库 > <a class="hdrLink" href="KNet_WareHouse_DirectOut_Manage.aspx">出库管理</a>
+                仓库 > <a class="hdrLink" href="KNet_WareHouse_DirectOut_Manage.aspx">领用管理</a>
             </td>
             <td width="100%" nowrap>
                 <table border="0" cellspacing="0" cellpadding="0">
@@ -54,7 +54,7 @@
                                             <tr>
                                                 <td style="padding-right: 0px; padding-left: 10px;">
                                                     <a href="javascript:;" onclick="add()">
-                                                    <img src="../../themes/softed/images/btnL3Add.gif" alt="*创建 出库信息" title="*创建 出库信息" 
+                                                    <img src="../../themes/softed/images/btnL3Add.gif" alt="*创建 领用信息" title="*创建 领用信息" 
                                                         border="0"></a>
                                                 </td>
                                                 <td style="padding-right: 0px;">
@@ -63,15 +63,15 @@
                                                 </td>
                                                 <td style="padding-right: 10px">
                                                     <a href="javascript:;" onclick="ShowDiv();">
-                                                        <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 出库信息..." title="查找 出库信息..."
+                                                        <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 领用信息..." title="查找 领用信息..."
                                                             border="0"></a>
                                                 </td>
                                                 <td style="padding-right: 0px; padding-left: 10px;">
-                                                    <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 出库信息" title="*导入 出库信息"
+                                                    <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 领用信息" title="*导入 领用信息"
                                                         border="0">
                                                 </td>
                                                 <td style="padding-right: 10px">
-                                                    <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 出库信息" title="*导出 出库信息"
+                                                    <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 领用信息" title="*导出 领用信息"
                                                         border="0">
                                                 </td>
                                             </tr>
@@ -280,23 +280,33 @@
         </asp:TemplateField>
           
         
-         <asp:TemplateField HeaderText="出库单号"  SortExpression="DirectOutNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+         <asp:TemplateField HeaderText="领用单号"  SortExpression="DirectOutNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
           <ItemTemplate>
-               <a href="KNet_WareHouse_DirectOut_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "DirectOutNo") %>"><%# DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString()%></a>
+               <a href="KNet_WareHouse_DirectOut_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "DirectOutNo") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString()%></a>
                </ItemTemplate>
         </asp:TemplateField>
         
-         <asp:BoundField   HeaderText="出单日期"  DataField="DirectOutDateTime" SortExpression="DirectOutDateTime"  DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+         <asp:BoundField   HeaderText="领用日期"  DataField="DirectOutDateTime" SortExpression="DirectOutDateTime"  DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
             <ItemStyle HorizontalAlign="Left" Font-Size="12px"  />
             <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
         </asp:BoundField>
         
+        <asp:TemplateField HeaderText="领用类型"  SortExpression="KWD_LyType" HeaderStyle-Font-Size="12px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+          <ItemTemplate>
+               <%# base.Base_GetBasicCodeName("1135",DataBinder.Eval(Container.DataItem, "KWD_LyType").ToString())%>
+          </ItemTemplate>
+        </asp:TemplateField>
         <asp:TemplateField HeaderText="出货仓库"  SortExpression="HouseNo" HeaderStyle-Font-Size="12px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
                <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
           </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="出库型号"   HeaderStyle-Font-Size="12px"     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+        <asp:TemplateField HeaderText="出货仓库"  SortExpression="HouseNo" HeaderStyle-Font-Size="12px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+          <ItemTemplate>
+               <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
+          </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField HeaderText="领用型号"   HeaderStyle-Font-Size="12px"     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
                <%# GetDirectOutProductsPatten(DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString())%>
           </ItemTemplate>

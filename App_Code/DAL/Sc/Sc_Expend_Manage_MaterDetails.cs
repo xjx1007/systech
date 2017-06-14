@@ -37,9 +37,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Sc_Expend_Manage_MaterDetails(");
-            strSql.Append("SED_ID,SED_SEMID,SED_ProductsBarCode,SED_HouseNo,SED_RkNumber,SED_RkPrice,SED_RkMoney,SED_RkTime,SED_RkPerson,SED_Type,SED_Remarks,SED_FromHouseNo,SED_Code)");
+            strSql.Append("SED_ID,SED_SEMID,SED_ProductsBarCode,SED_HouseNo,SED_RkNumber,SED_RkPrice,SED_RkMoney,SED_RkTime,SED_RkPerson,SED_Type,SED_Remarks,SED_FromHouseNo,SED_Code,SED_LossType,SED_LossPercent,SED_LossNumber,SED_NeedNumber)");
             strSql.Append(" values (");
-            strSql.Append("@SED_ID,@SED_SEMID,@SED_ProductsBarCode,@SED_HouseNo,@SED_RkNumber,@SED_RkPrice,@SED_RkMoney,@SED_RkTime,@SED_RkPerson,@SED_Type,@SED_Remarks,@SED_FromHouseNo,@SED_Code)");
+            strSql.Append("@SED_ID,@SED_SEMID,@SED_ProductsBarCode,@SED_HouseNo,@SED_RkNumber,@SED_RkPrice,@SED_RkMoney,@SED_RkTime,@SED_RkPerson,@SED_Type,@SED_Remarks,@SED_FromHouseNo,@SED_Code,@SED_LossType,@SED_LossPercent,@SED_LossNumber,@SED_NeedNumber)");
             SqlParameter[] parameters = {
 					new SqlParameter("@SED_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@SED_SEMID", SqlDbType.VarChar,50),
@@ -53,7 +53,11 @@ namespace KNet.DAL
 					new SqlParameter("@SED_Type", SqlDbType.Int,4),
 					new SqlParameter("@SED_Remarks", SqlDbType.VarChar,50),
 					new SqlParameter("@SED_FromHouseNo", SqlDbType.VarChar,50),
-					new SqlParameter("@SED_Code", SqlDbType.VarChar,50)};
+					new SqlParameter("@SED_Code", SqlDbType.VarChar,50),
+					new SqlParameter("@SED_LossType", SqlDbType.VarChar,50),
+					new SqlParameter("@SED_LossPercent", SqlDbType.Decimal,9),
+					new SqlParameter("@SED_LossNumber", SqlDbType.Int,4),
+					new SqlParameter("@SED_NeedNumber", SqlDbType.Int,4)};
             parameters[0].Value = model.SED_ID;
             parameters[1].Value = model.SED_SEMID;
             parameters[2].Value = model.SED_ProductsBarCode;
@@ -67,6 +71,10 @@ namespace KNet.DAL
             parameters[10].Value = model.SED_Remarks;
             parameters[11].Value = model.SED_FromHouseNo;
             parameters[12].Value = model.SED_Code;
+            parameters[13].Value = model.SED_LossType;
+            parameters[14].Value = model.SED_LossPercent;
+            parameters[15].Value = model.SED_LossNumber;
+            parameters[16].Value = model.SED_NeedNumber;
             
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -255,6 +263,22 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["SED_Remarks"] != null && ds.Tables[0].Rows[0]["SED_Remarks"].ToString() != "")
                 {
                     model.SED_Remarks = ds.Tables[0].Rows[0]["SED_Remarks"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["SED_LossType"] != null && ds.Tables[0].Rows[0]["SED_LossType"].ToString() != "")
+                {
+                    model.SED_LossType = ds.Tables[0].Rows[0]["SED_LossType"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["SED_LossPercent"] != null && ds.Tables[0].Rows[0]["SED_LossPercent"].ToString() != "")
+                {
+                    model.SED_LossPercent = decimal.Parse(ds.Tables[0].Rows[0]["SED_LossPercent"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["SED_LossNumber"] != null && ds.Tables[0].Rows[0]["SED_LossNumber"].ToString() != "")
+                {
+                    model.SED_LossNumber = int.Parse(ds.Tables[0].Rows[0]["SED_LossNumber"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["SED_NeedNumber"] != null && ds.Tables[0].Rows[0]["SED_NeedNumber"].ToString() != "")
+                {
+                    model.SED_NeedNumber = int.Parse(ds.Tables[0].Rows[0]["SED_NeedNumber"].ToString());
                 }
                 return model;
             }

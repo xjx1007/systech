@@ -44,6 +44,27 @@
             //var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo_out").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
             var tempd = window.open("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo_out").value + "", "选择客户", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }
+
+        function Submitcheck() {
+            var v_Num = "";
+            v_Num = document.all("Tbx_Num").value;
+            if (v_Num != "") {
+                var v_Right = "";
+                for (var i = 0; i < parseInt(v_Num) ; i++) {
+                    if ($("KcNumber_" + i.toString() + "") != null) {
+                        var KcNumber = $("KcNumber_" + i.toString() + "").value;
+                        var Number = $("Number_" + i.toString() + "").value
+                        if (parseInt(KcNumber) < parseInt(Number)) {
+                            v_Right = "1"
+                        }
+                    }
+                }
+                if (v_Right == "1") {
+                    alert("不能小于库存数，请先补足库存！");
+                    return false;
+                }
+            }
+        }
         function SetReturnValueInOpenner_Products(tempd) {
             if (tempd != undefined) {
                 var i_num1 = parseInt(document.all('Tbx_Num').value);
@@ -327,7 +348,7 @@
                                 <td colspan="4" align="center">&nbsp;
                                 <br />
                                     <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                        class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" />
+                                        class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;"   OnClientClick="return Submitcheck();" />
                                     <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                                         type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                                 </td>

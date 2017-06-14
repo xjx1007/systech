@@ -219,70 +219,17 @@ public partial class Sc_Expend_Add : BasePage
                 TextBox Tbx_ProductsBarCode = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode");
                 TextBox Tbx_Remarks = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Remarks");
                 TextBox Tbx_Number = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Number");
+
+                TextBox Tbx_ShNumber = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_ShNumber");
+                TextBox Tbx_ShPersent = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_ShPersent");
+                TextBox Tbx_XqNumber = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_XqNumber");
+                TextBox Tbx_LossType = (TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_LossType");
                 string SED_RkPrice = "0";
                 KNet.Model.Sc_Expend_Manage_MaterDetails Mode_MaterDetails = new KNet.Model.Sc_Expend_Manage_MaterDetails();
 
                 CheckBox Chk_Chbk = (CheckBox)MyGridView2.Rows[i].Cells[0].FindControl("Chbk");
                 if (Chk_Chbk.Checked)
                 {
-                    /*
-                    Mode_MaterDetails.SED_SEMID = model.SEM_ID;
-                    Mode_MaterDetails.SED_HouseNo ="";
-                    Mode_MaterDetails.SED_ProductsBarCode = Tbx_ProductsBarCode.Text;
-                    Mode_MaterDetails.SED_Remarks = Tbx_Remarks.Text;
-                    try
-                    {
-                        Mode_MaterDetails.SED_RkNumber = int.Parse(Tbx_Number.Text);
-                    }
-                    catch { }
-                    try
-                    {
-                        Mode_MaterDetails.SED_RkPrice = decimal.Parse(SED_RkPrice);
-                    }
-                    catch { }
-                    try
-                    {
-                        Mode_MaterDetails.SED_RkMoney = decimal.Parse(SED_RkPrice) * int.Parse(Tbx_Number.Text);
-                    }
-                    catch { }
-                    Mode_MaterDetails.SED_RkPerson = AM.KNet_StaffNo;
-                    try
-                    {
-                        Mode_MaterDetails.SED_RkTime = DateTime.Parse(this.Tbx_Stime.Text);
-                    }
-                    catch { }
-                    Mode_MaterDetails.SED_Type = 0;
-                    arr_MaterDetails.Add(Mode_MaterDetails);
-                    //委外发料
-                    KNet.Model.Sc_Expend_Manage_MaterDetails Mode_MaterDetails1 = new KNet.Model.Sc_Expend_Manage_MaterDetails();
-                    Mode_MaterDetails1.SED_SEMID = model.SEM_ID;
-                    Mode_MaterDetails1.SED_HouseNo = Ddl_House.SelectedValue;
-                    Mode_MaterDetails1.SED_ProductsBarCode = Tbx_ProductsBarCode.Text;
-                    Mode_MaterDetails1.SED_Remarks = Tbx_Remarks.Text;
-                    try
-                    {
-                        Mode_MaterDetails1.SED_RkNumber = int.Parse(Tbx_Number.Text);
-                    }
-                    catch { }
-                    try
-                    {
-                        Mode_MaterDetails1.SED_RkPrice = decimal.Parse(SED_RkPrice);
-                    }
-                    catch { }
-                    try
-                    {
-                        Mode_MaterDetails1.SED_RkMoney = decimal.Parse(SED_RkPrice) * int.Parse(Tbx_Number.Text);
-                    }
-                    catch { }
-                    Mode_MaterDetails1.SED_RkPerson = AM.KNet_StaffNo;
-                    try
-                    {
-                        Mode_MaterDetails1.SED_RkTime = DateTime.Parse(this.Tbx_Stime.Text);
-                    }
-                    catch { }
-                    Mode_MaterDetails1.SED_Type = 1;
-                    arr_MaterDetails.Add(Mode_MaterDetails1);
-                    */
                     //生产入库
                     KNet.Model.Sc_Expend_Manage_MaterDetails Mode_MaterDetails2 = new KNet.Model.Sc_Expend_Manage_MaterDetails();
                     Mode_MaterDetails2.SED_SEMID = model.SEM_ID;
@@ -311,6 +258,11 @@ public partial class Sc_Expend_Add : BasePage
                     }
                     catch { }
                     Mode_MaterDetails2.SED_Type = 2;
+                    Mode_MaterDetails2.SED_LossType = Tbx_LossType.Text;
+                    Mode_MaterDetails2.SED_NeedNumber = int.Parse(Tbx_XqNumber.Text);
+                    Mode_MaterDetails2.SED_LossNumber = int.Parse(Tbx_ShNumber.Text);
+                    Mode_MaterDetails2.SED_LossPercent = decimal.Parse(Tbx_ShPersent.Text);
+
                     arr_MaterDetails.Add(Mode_MaterDetails2);
                 }
             }
@@ -353,7 +305,7 @@ public partial class Sc_Expend_Add : BasePage
         //物料计划  
 
         //
-        string s_DSql = "Select  BomOrder,KSP_Code,ProductsName,ProductsEdition,XPD_ProductsBarCode  as ProductsBarCode,XPD_Number,ProductsType,XPD_ReplaceProductsBarCode,NeedNumber,FaterProductsName from  v_Order_ProductsDemo_Details where 1=1 ";
+        string s_DSql = "Select  BomOrder,KSP_Code,ProductsName,ProductsEdition,XPD_ProductsBarCode  as ProductsBarCode,XPD_Number,ProductsType,XPD_ReplaceProductsBarCode,NeedNumber,FaterProductsName,PBC_Name,cast(LossPercent as decimal(18,2)) LossPercent,cast(TotalNumber as decimal(18,0))  TotalNumber,cast(LossNumber as decimal(18,0)) LossNumber,KSP_LossType from  v_Order_ProductsDemo_Details where 1=1 ";
 
         if (this.Tbx_Order.Text != "")
         {

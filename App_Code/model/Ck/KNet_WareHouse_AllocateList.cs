@@ -30,6 +30,7 @@ namespace KNet.Model
         
         private string _KWA_Type;
         private int _KWA_DBType;
+        private int _KWA_IsSave;
         
         /// <summary>
         /// 自动ID值
@@ -136,6 +137,12 @@ namespace KNet.Model
             get { return _allocatecheckyn; }
         }
 
+        public int KWA_IsSave
+        {
+            set { _KWA_IsSave = value; }
+            get { return _KWA_IsSave; }
+        }
+        
         public ArrayList Arr_List
         {
             set { _Arr_List = value; }

@@ -301,15 +301,7 @@ public partial class Procure_MaterialDbWw_List : BasePage
                         KNet.Model.KNet_WareHouse_AllocateList_Details Model_Details = bll_Details.GetModel(s_ID);
                         KNet.BLL.KNet_WareHouse_AllocateList bll = new KNet.BLL.KNet_WareHouse_AllocateList();
                         KNet.Model.KNet_WareHouse_AllocateList Model = bll.GetModelB(Model_Details.AllocateNo);
-                        string s_CheckYN = "0";
-                        if (Model.AllocateCheckYN == 1)
-                        {
-                            s_CheckYN = "3";
-                        }
-                        else if (Model.AllocateCheckYN == 3)
-                        {
-                            s_CheckYN = "1";
-                        }
+                        string s_CheckYN = "3";
                         if (s_CheckYN != "0")
                         {
                             string sql = " update KNet_WareHouse_AllocateList  set AllocateCheckYN=" + s_CheckYN + ",AllocateCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  AllocateNo='" + Model_Details.AllocateNo + "' ";
@@ -337,6 +329,55 @@ public partial class Procure_MaterialDbWw_List : BasePage
         }
     }
 
+    protected void Btn_SpSave1(object sender, EventArgs e)
+    {
+
+        StringBuilder s_Sql = new StringBuilder();
+        StringBuilder s_Log = new StringBuilder();
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+
+            for (int i = 0; i < MyGridView1.Rows.Count; i++)
+            {
+                CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+                if (Ckb.Checked)
+                {
+                    string s_ID = MyGridView1.DataKeys[i].Value.ToString();
+
+                    if (AM.CheckLogin("财务审核出库单") == true)
+                    {
+                        KNet.BLL.KNet_WareHouse_AllocateList_Details bll_Details = new KNet.BLL.KNet_WareHouse_AllocateList_Details();
+                        KNet.Model.KNet_WareHouse_AllocateList_Details Model_Details = bll_Details.GetModel(s_ID);
+                        KNet.BLL.KNet_WareHouse_AllocateList bll = new KNet.BLL.KNet_WareHouse_AllocateList();
+                        KNet.Model.KNet_WareHouse_AllocateList Model = bll.GetModelB(Model_Details.AllocateNo);
+                        string s_CheckYN = "1";
+                        if (s_CheckYN != "0")
+                        {
+                            string sql = " update KNet_WareHouse_AllocateList  set AllocateCheckYN=" + s_CheckYN + ",AllocateCheckStaffNo ='" + AM.KNet_StaffNo + "'  where  AllocateNo='" + Model_Details.AllocateNo + "' ";
+                            DbHelperSQL.ExecuteSql(sql);
+                        }
+                    }
+                    s_Log.Append(s_ID + ",");
+                }
+            }
+            if (s_Log.ToString() == "")
+            {
+                Alert("未选择入库单！");
+            }
+            else
+            {
+                AM.Add_Logs("KNet_WareHouse_AllocateList 审批 编号：" + s_Log + "");
+                Alert("批量审批成功！");
+                this.DataShow();
+            }
+        }
+        catch (Exception ex)
+        {
+            Alert("批量审批失败！");
+            return;
+        }
+    }
     /// <summary>
     /// 更新数据记录
     /// </summary>

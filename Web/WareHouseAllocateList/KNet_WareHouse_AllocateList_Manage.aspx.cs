@@ -101,13 +101,22 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         KNet.BLL.KNet_WareHouse_AllocateList bll = new KNet.BLL.KNet_WareHouse_AllocateList();
 
         string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
+        this.Tbx_WhereID.Text = s_WhereID;
+        string s_WhereID1 = Request.QueryString["WhereID1"] == null ? "" : Request.QueryString["WhereID1"].ToString();
+        this.Tbx_WhereID1.Text = s_WhereID1;
+
         string s_Fields = Request["Fields"] == null ? "" : Request["Fields"].ToString();
         string s_Condition = Request["Condition"] == null ? "" : Request["Condition"].ToString();
         string s_Text = Request["Srch_value"] == null ? "" : Request["Srch_value"].ToString();
         string s_Type = "";
-        if (s_WhereID != "")
+
+        if (this.Tbx_WhereID.Text != "")
         {
-            SqlWhere += Base_GetBasicWhere(s_WhereID);
+            SqlWhere += Base_GetBasicWhere(this.Tbx_WhereID.Text);
+        }
+        if (this.Tbx_WhereID1.Text != "")
+        {
+            SqlWhere += Base_GetBasicWhere(this.Tbx_WhereID1.Text);
         }
         if (this.Ddl_Batch.SelectedValue != "")
         {
@@ -439,6 +448,11 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
             else
             {
                 s_Return = "<font color=blue>已确认</font>";
+            }
+            if (model.KWA_IsSave == 1)
+            {
+
+                s_Return += "<BR/><font color=blue>已暂存</font>";
             }
 
         }

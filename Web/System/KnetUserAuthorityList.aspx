@@ -18,7 +18,7 @@
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
-        
+
 
         <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
             <tr>
@@ -63,7 +63,7 @@
                 <td style="height: 2px"></td>
             </tr>
         </table>
-            <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     <%=base.Base_BindView("KNet_Sys_AuthorityUserGroup", "KnetUserGroup.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
@@ -178,97 +178,104 @@
                 <td>
 
                     <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="small">
-                          <tr>
-                    <td>
-                        <!--GridView-->
+                        <tr>
+                            <td>
+                                <!--GridView-->
 
-                        <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="5" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
-                            OnRowDeleting="GridView1_RowDeleting" OnRowDataBound="GridView1_RowDataBound">
-                            <Columns>
+                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="5" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
+                                    OnRowDeleting="GridView1_RowDeleting" OnRowDataBound="GridView1_RowDataBound">
+                                    <Columns>
 
-                                <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                                    <HeaderTemplate>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" onclick="selectAll(this)" />
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="Chbk" runat="server" /><asp:Image ID="Image1" runat="server" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="StaffCard" HeaderText="员工卡号" SortExpression="StaffCard">
-                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="100px" />
-                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                </asp:BoundField>
+                                        <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="CheckBox1" runat="server" onclick="selectAll(this)" />
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="Chbk" runat="server" /><asp:Image ID="Image1" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="StaffCard" HeaderText="员工卡号" SortExpression="StaffCard">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="100px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
 
-                                <asp:BoundField DataField="StaffName" HeaderText="员工姓名" SortExpression="StaffName">
-                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="80px" />
-                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                </asp:BoundField>
+                                        <asp:BoundField DataField="StaffName" HeaderText="员工姓名" SortExpression="StaffName">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="80px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
 
 
-                                <asp:TemplateField HeaderText="所在部门" SortExpression="StaffDepart" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                    <ItemTemplate>
-                                        <%# base.Base_GeDept(DataBinder.Eval(Container.DataItem, "StaffDepart").ToString())%>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="所在部门" SortExpression="StaffDepart" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GeDept(DataBinder.Eval(Container.DataItem, "StaffDepart").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="已分配用户组" SortExpression="StaffNo" ItemStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" HeaderStyle-Font-Size="12px">
-                                    <ItemTemplate><%# GetKNet_Sys_WareHouseName(Eval("StaffNo").ToString())%></ItemTemplate>
-                                </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="已分配用户组" SortExpression="StaffNo" ItemStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" HeaderStyle-Font-Size="12px">
+                                            <ItemTemplate><%# GetKNet_Sys_WareHouseName(Eval("StaffNo").ToString())%></ItemTemplate>
+                                        </asp:TemplateField>
 
-                                <asp:CommandField ShowDeleteButton="True" HeaderText="设置用户组" DeleteText="设置用户组">
-                                    <ItemStyle HorizontalAlign="Left" Width="100px" Font-Size="12px" />
-                                    <HeaderStyle Font-Size="12px" HorizontalAlign="Left" />
-                                </asp:CommandField>
+                                        <asp:CommandField ShowDeleteButton="True" HeaderText="设置用户组" DeleteText="设置用户组">
+                                            <ItemStyle HorizontalAlign="Left" Width="100px" Font-Size="12px" />
+                                            <HeaderStyle Font-Size="12px" HorizontalAlign="Left" />
+                                        </asp:CommandField>
 
-                                <asp:CommandField ShowSelectButton="true" HeaderText="取消用户组" SelectText="取消用户组">
-                                    <ItemStyle HorizontalAlign="Left" Width="100px" Font-Size="12px" />
-                                    <HeaderStyle Font-Size="12px" HorizontalAlign="Left" />
-                                </asp:CommandField>
-                            </Columns>
+                                        <asp:CommandField ShowSelectButton="true" HeaderText="取消用户组" SelectText="取消用户组">
+                                            <ItemStyle HorizontalAlign="Left" Width="100px" Font-Size="12px" />
+                                            <HeaderStyle Font-Size="12px" HorizontalAlign="Left" />
+                                        </asp:CommandField>
+
+
+                                        <asp:TemplateField HeaderText="权限设置" HeaderStyle-Font-Size="12px" SortExpression="StaffNo" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# Get_MangerDetail(Eval("StaffNo").ToString())%>&nbsp;<%# GetGroupNameYNPic(Eval("StaffNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
                                     <HeaderStyle CssClass='colHeader' />
                                     <RowStyle CssClass='listTableRow' />
                                     <AlternatingRowStyle BackColor="#E3EAF2" />
                                     <PagerStyle CssClass='Custom_DgPage' />
-                        </cc1:MyGridView>
+                                </cc1:MyGridView>
 
-                        <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" style="border-top: 1px solid #A3B2CC;">
-                            <tr>
-                                <td height="30" width="70%">
-                                    <asp:Button ID="Button4" runat="server" CssClass="crmButton small create" Text="禁用所选项" OnClick="Button4_Click" />&nbsp;<asp:Button ID="Button6" runat="server" CssClass="crmButton small cancel" Text="取消禁用" OnClick="Button6_Click" />
-                                    <asp:Button ID="Button5" runat="server" Text="取消选择" CssClass="crmButton small save" OnClick="Button5_Click" />&nbsp;&nbsp;<img src="../../images/Au1.gif" />表示用户正常&nbsp;&nbsp;<img src="../../images/Au2.gif" />表示用户被禁用&nbsp;</td>
-                                <td width="30%" align="right">
-                                    <asp:DropDownList ID="StrucNameDList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="StrucNameDList_SelectedIndexChanged">
-                                    </asp:DropDownList></td>
-                            </tr>
-                        </table>
+                                <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" style="border-top: 1px solid #A3B2CC;">
+                                    <tr>
+                                        <td height="30" width="70%">
+                                            <asp:Button ID="Button4" runat="server" CssClass="crmButton small create" Text="禁用所选项" OnClick="Button4_Click" />&nbsp;<asp:Button ID="Button6" runat="server" CssClass="crmButton small cancel" Text="取消禁用" OnClick="Button6_Click" />
+                                            <asp:Button ID="Button5" runat="server" Text="取消选择" CssClass="crmButton small save" OnClick="Button5_Click" />&nbsp;&nbsp;<img src="../../images/Au1.gif" />表示用户正常&nbsp;&nbsp;<img src="../../images/Au2.gif" />表示用户被禁用&nbsp;</td>
+                                        <td width="30%" align="right">
+                                            <asp:DropDownList ID="StrucNameDList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="StrucNameDList_SelectedIndexChanged">
+                                            </asp:DropDownList></td>
+                                    </tr>
+                                </table>
 
-                    </td>
-                </tr>
-            </table>
-                    </td>
-                </tr>
-                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
 
-            <div style="margin-top: 5px"></div>
+        <div style="margin-top: 5px"></div>
 
-            <table width="99%" id="Apant" runat="server" border="0" cellspacing="1" cellpadding="1" class="small" align="center">
-                <tr>
-                    <td width="46%" height="47" valign="top">&nbsp;
+        <table width="99%" id="Apant" runat="server" border="0" cellspacing="1" cellpadding="1" class="small" align="center">
+            <tr>
+                <td width="46%" height="47" valign="top">&nbsp;
       <asp:ListBox ID="AuthWareHouse1" runat="server" Width="300px" Height="150px" SelectionMode="Multiple"></asp:ListBox><br />
-                        &nbsp;<asp:Button ID="Button1" runat="server" Text="确定设置所属用户组" CssClass="crmButton small save" OnClick="Button1_Click" Style="width: 70px; height: 33px;" />&nbsp;&nbsp;<asp:Button
-                            ID="Button2" runat="server" Text="放弃受权" CssClass="crmButton small cancel" Style="width: 70px; height: 33px;" OnClick="Button2_Click" /></td>
-                    <td width="54%" valign="top"><font color="#666666">给人员 <font color="red"><b>
-                        <asp:Label ID="StaffNo1" runat="server" Text=""></asp:Label></b></font> 受权所属用户组。<br />
-                        <br />
-                        请在左边选择仓库，按Ctrl可多选。<br />
-                        <br />
-                        设置所属用户组后该员工就会拥有该用户组所有的操作权限。没有设置用户组的员工没有操作权限！<br />
-                        <br />
-                        设置用户组的目的就是分配给人员系统的操作权限。</font>
-                        <asp:HiddenField ID="HiddenFieldStaffNo1" runat="server" />
-                    </td>
-                </tr>
-            </table>
+                    &nbsp;<asp:Button ID="Button1" runat="server" Text="确定设置所属用户组" CssClass="crmButton small save" OnClick="Button1_Click" Style="width: 70px; height: 33px;" />&nbsp;&nbsp;<asp:Button
+                        ID="Button2" runat="server" Text="放弃受权" CssClass="crmButton small cancel" Style="width: 70px; height: 33px;" OnClick="Button2_Click" /></td>
+                <td width="54%" valign="top"><font color="#666666">给人员 <font color="red"><b>
+                    <asp:Label ID="StaffNo1" runat="server" Text=""></asp:Label></b></font> 受权所属用户组。<br />
+                    <br />
+                    请在左边选择仓库，按Ctrl可多选。<br />
+                    <br />
+                    设置所属用户组后该员工就会拥有该用户组所有的操作权限。没有设置用户组的员工没有操作权限！<br />
+                    <br />
+                    设置用户组的目的就是分配给人员系统的操作权限。</font>
+                    <asp:HiddenField ID="HiddenFieldStaffNo1" runat="server" />
+                </td>
+            </tr>
+        </table>
     </form>
 </body>
 </html>
