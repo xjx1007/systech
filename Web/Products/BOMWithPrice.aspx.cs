@@ -53,6 +53,15 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             if (GetKNet_Sys_ProductsYN(BarCode) == true)
             {
                 KNet.Model.KNet_Sys_Products model = BLL.GetModelB(BarCode);
+                if (model.KSP_Code.IndexOf("01") == 0)
+                {
+                    if (CheckYNProducts(model.ProductsType) == false)
+                    {
+                        AlertAndClose("您没有权限查看该类产品,如需要请联系研发经理！");
+
+                        return;
+                    }
+                }
                 GetBomDetails(model);
                 //适用成品1
                 KNet.BLL.Xs_Products_Prodocts_Demo BLL_RCProducts = new KNet.BLL.Xs_Products_Prodocts_Demo();
@@ -128,12 +137,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         string s_DemoProductsID = "";
         KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
         string s_Where1 = " and XPD_FaterBarCode='" + model.ProductsBarCode + "' ";
-        if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffName == "项洲"))//如果是
-        {
-            s_Where1 += " and  b.KSP_Del=0 ";
-        }
         string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
-        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 ";
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 and  b.KSP_Del=0 ";
         this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];

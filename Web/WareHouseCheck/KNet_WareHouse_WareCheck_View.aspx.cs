@@ -63,8 +63,8 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["WareCheckAmount"].ToString() + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsKCNumberBySql(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString(), " and HouseNo='"+model.HouseNo+"' and DirectInDateTime<'" + model.WareCheckDateTime.ToString() + "'") + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsKCNumberBySql(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString(), " and HouseNo='" + model.HouseNo + "' and DirectInDateTime<='" + model.WareCheckDateTime.ToString() + "'") + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["WareCheckRemarks"].ToString() + "</td>";
-
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["WareCheckTotalNet"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["WareCheckRemarks"].ToString() + "&nbsp;</td>";
                     s_MyTable_Detail += "</tr>";
                 }
 

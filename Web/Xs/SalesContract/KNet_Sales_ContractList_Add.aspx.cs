@@ -319,20 +319,29 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
         {
             if (this.Tbx_Type.Text != "1")
             {
-                if (AM.KNet_StaffNo != Model.ContractStaffNo)
+                if (Model.ContractCheckYN == true)
                 {
+
                     AlertAndGoBack("不可修改!");
                     return;
                 }
                 else
                 {
-                    string s_DeptID = Base_GetNextDept(s_ID, "101");
-                    this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'  and KSF_ContractNo='" + s_ID + "' and StaffDepart='" + s_DeptID + "'");
-                    this.QueryForDataTable();
-                    if ((this.Dtb_Result.Rows.Count < 0))
+                    if (AM.KNet_StaffNo != Model.ContractStaffNo)
                     {
                         AlertAndGoBack("不可修改!");
                         return;
+                    }
+                    else
+                    {
+                        string s_DeptID = Base_GetNextDept(s_ID, "101");
+                        this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'  and KSF_ContractNo='" + s_ID + "' and StaffDepart='" + s_DeptID + "'");
+                        this.QueryForDataTable();
+                        if ((this.Dtb_Result.Rows.Count < 0))
+                        {
+                            AlertAndGoBack("不可修改!");
+                            return;
+                        }
                     }
                 }
             }
@@ -986,6 +995,15 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                         ModelDetails.KSD_HxState = 0;
                         ModelDetails.KSD_HxNumber = 0;
                     }
+                    try
+                    {
+                        ModelDetails.KSD_HxState = 0;
+                        ModelDetails.KSD_HxNumber = 0;
+                        b_True = false;
+                        //去除核销
+                    }
+                    catch
+                    { }
                     if (this.Tbx_Type.Text == "1")
                     {
                         ModelDetails.ID = base.GetMainID(i);
@@ -999,12 +1017,14 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                     Arr_Details.Add(ModelDetails);
                 }
             }
+            /*
             if (b_True == false)
             {
                 molel.ContractCheckYN = true;
                 molel.ContractState = 1;
                 molel.isOrder = 1;
             }
+             * */
 
             molel.arr_Details = Arr_Details;
 
@@ -1079,9 +1099,12 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
                             s_Text = "订单编号为：" + this.ContractNo.Text + " 需要您审批,请及时登录系统审批。";
                             KNet.BLL.KNet_Resource_Staff BLL_Resource_Staff = new KNet.BLL.KNet_Resource_Staff();
                             KNet.Model.KNet_Resource_Staff Model_Resource_Staff = BLL_Resource_Staff.GetModelC(this.Ddl_DutyPerson.SelectedValue);
-                            s_Alert = base.Base_SendEmail(Model_Resource_Staff.StaffEmail, s_Text, "订单评审审核！");
-                            base.Base_SendMessage(base.Base_GetDeptPerson("总经理",102), KNetPage.KHtmlEncode("有 订单评审 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + this.ContractNo.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + this.ContractNo.Text + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
-                        }
+                            try
+                            {
+                                base.Base_SendMessage(base.Base_GetDeptPerson("总经理", 1), KNetPage.KHtmlEncode("有 订单评审 <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_View.aspx?ID=" + this.ContractNo.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + this.ContractNo.Text + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
+                               // s_Alert = base.Base_SendEmail(Model_Resource_Staff.StaffEmail, s_Text, "订单评审审核！");
+                            }
+                            catch { } }
                     }
                     AdminloginMess LogAM = new AdminloginMess();
                     LogAM.Add_Logs("销售管理--->添加销售订单 操作成功！订单编号：" + this.ContractNo.Text);

@@ -105,10 +105,10 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     this.Tbx_CustomerName.Text = "杭州士腾科技有限公司";
                     this.Tbx_SCustomerValue.Text = "100751";
                     this.Tbx_SCustomerName.Text = "杭州士腾科技有限公司";
-                    this.Tbx_ContentPerson.Text = "曹柱立";
-                    this.Tbx_ContentPersonID.Text = "20121127000001";
-                    this.Tbx_TelPhone.Text = "13082821205";
-                    this.Tbx_Address.Text = "杭州市西湖区黄姑山路4号";
+                    this.Tbx_ContentPerson.Text = "";
+                    this.Tbx_ContentPersonID.Text = "";
+                    this.Tbx_TelPhone.Text = "";
+                    this.Tbx_Address.Text = "";
                     this.ContractDeliveMethods.SelectedValue = "129687525603715469";
                 }
                 if (s_ID != "")

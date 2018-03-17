@@ -12,7 +12,6 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
 using System.Data.SqlClient;
-
 using KNet.DBUtility;
 using KNet.Common;
 
@@ -104,6 +103,7 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
     /// </summary>
     protected void DataShows()
     {
+       
         KNet.BLL.KNet_Sys_Products bll = new KNet.BLL.KNet_Sys_Products();
         string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
         string s_Fields = Request["Fields"] == null ? "" : Request["Fields"].ToString();
@@ -147,7 +147,6 @@ public partial class Knet_Web_System_KnetProductsSetting : BasePage
         if (s_TotalDetails != "")
         {
             SqlWhere += " and ProductsType in ('" + s_TotalDetails.Replace(",", "','") +"') ";
- 
         }
 
         if (this.Ddl_Batch.SelectedValue != "")

@@ -321,7 +321,7 @@
                                         <asp:TemplateField HeaderText="消耗编号" SortExpression="SEM_ID" HeaderStyle-Font-Size="12px"
                                             ItemStyle-HorizontalAlign="left" HeaderStyle-HorizontalAlign="left">
                                             <ItemTemplate>
-                                                <a href="Sc_Expend_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>" target="_blank">
+                                                <a href="Sc_Expend_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>&&SEM_CheckYN=<%# DataBinder.Eval(Container.DataItem, "SEM_CheckYN")%>&&SER_ProductsBarCode=<%# DataBinder.Eval(Container.DataItem, "SER_ProductsBarCode")%>" target="_blank">
                                                     <%# DataBinder.Eval(Container.DataItem, "SEM_ID").ToString()%></a>
                                             </ItemTemplate>
                                         </asp:TemplateField>

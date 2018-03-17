@@ -59,7 +59,7 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <table>
+                                                <table " width="100%">
                                                     
                                                     <tr>
                                                         <td  width="33%">
@@ -86,23 +86,19 @@
                                                         </td>
                                                         <td width="33%" valign="top">
                                                             <ul>
-                                                                
-                                                                <li><a href="../Report_Bill/DBCP/Report_CkDetails3.aspx">成品调回明细</a></li>
+                                                                <li><a href="../Report_Bill/ScIn/Report_OrderIn.aspx">成品直接入库明细</a></li>
+                                                                <li><a href="../Report_Bill/ScInD/Report_OrderIn.aspx">成品生产入库明细</a></li>
+                                                                <li><a href="../Report_Bill/ScLlDetails/Report_CkDetails2.aspx">成品领料明细</a></li>
+                                                                <li><a href="../Report_Bill/XsOut/Report_CkDetails.aspx">销售出库明细</a></li>
+                                                                <li><a href="../Report_Bill/DBCP/Report_CkDetails3.aspx">成品调拨明细</a></li>
                                                                 <li><a href="../Report_Bill/DBCPWw/Report_CkDetails3.aspx">成品委外明细</a></li>
-                                                                <li><a href="../Report_Xs/Report_CkDetails.aspx">销售出库明细</a></li>
+
                                                                 <li><a href="../Report_Bill/CPDetailsNew/Report_Details.aspx">存货收发结存表(成品)</a></li>
 
                                                                <!--      <li><a href="../Report_Bill/CPDetails/Report_Details.aspx">存货收发结存表(成品)</a></li>-->
 
                                                                 
-                                                                <li></li>
                                                           <!--      <li><a href="../Report_Sc/ScCb/Report_OrderIn.aspx">生产成本</a></li>-->
-                                                                <li><a href="../Report_Bill/ScIn/Report_OrderIn.aspx">成品直接入库明细</a></li>
-                                                                <li><a href="../Report_Sc/ScIn/Report_OrderIn.aspx">成品生产入库明细</a></li>
-                                                                <li><a href="../Report_Bill/Report_RC.aspx">成品入库单</a></li>
-                                                                <li><a href="../Report_Xs/Report_CkDetails2.aspx">成品领料明细</a></li>
-                                                                <li><a href="../Report_Xs/Report_CkDetails3.aspx">成品调拨明细</a></li>
-                                                                <li><a href="../Report_Xs/Report_CkDetails1.aspx">销售出库明细(打印发货单)</a></li>
                                                             </ul>
 
                                                             </td>
@@ -110,10 +106,6 @@
                                                             <ul>
                                                                 <li><a href="../Report_Bill/Report_CustomerPayTime.aspx">客户帐期统计</a></li>
                                                                 
-                                                                <li></li>
-                                                                <li><a href="../Report_Bill/Ww/Report_Ww_Details.aspx">原材料委外发料单明细和汇总</a></li>
-                                                                <li><a href="../Report_Bill/DbWw/Report_DbWw_Details.aspx">原材料委外加工调拨发料明细和汇总</a></li>
-                                                                <li><a href="../Report_Bill/Xh/Report_Xh.aspx">原材料委外加工单明细和汇总</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

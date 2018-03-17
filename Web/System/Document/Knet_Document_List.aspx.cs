@@ -175,7 +175,7 @@ public partial class Knet_Web_System_Knet_Document_List : BasePage
     {
         KNet.BLL.PB_Basic_Document Bll = new KNet.BLL.PB_Basic_Document();
         KNet.Model.PB_Basic_Document Model = Bll.GetModel(s_ID);
-        string s_XPS_SpceName = "<a href='/Web/UpLoadPic/Word/" + Model.PBM_DocName + "' >" + Model.PBM_DocName + "</a>";
+        string s_XPS_SpceName = "<a href='/UpFile/Word/" + Model.PBM_DocName + "' >" + Model.PBM_DocName + "</a>";
 
         return s_XPS_SpceName;
     }

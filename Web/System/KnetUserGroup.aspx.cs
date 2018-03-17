@@ -221,7 +221,7 @@ public partial class Knet_Web_System_KnetUserGroup : BasePage
         KNet.Model.KNet_Sys_AuthorityUserGroup model = new KNet.Model.KNet_Sys_AuthorityUserGroup();
 
         string GroupValue = GridView1.DataKeys[e.RowIndex].Value.ToString().Trim();
-        string GroupName = KNetPage.KHtmlEncode(((TextBox)GridView1.Rows[e.RowIndex].Cells[2].Controls[0]).Text.ToString().Trim());
+        string GroupName = KNetPage.KHtmlEncode(((TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0]).Text.ToString().Trim());
 
         int GroupPai = int.Parse(KNetPage.KHtmlEncode(((TextBox)GridView1.Rows[e.RowIndex].Cells[3].FindControl("GroupPaitxt")).Text.ToString()));
 

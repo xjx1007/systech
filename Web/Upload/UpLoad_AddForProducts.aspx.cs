@@ -22,7 +22,9 @@ public partial class UpLoad_AddForProducts : BasePage
     {
         if (!Page.IsPostBack)
         {
-            base.Base_DropBasicCodeBind(this.Ddl_Type, "780");
+            string s_DoSql = base_GetProductsFileUpdateType();
+            
+            base.Base_DropBasicCodeBindByWhere(this.Ddl_Type, "780", " and PBC_Code in('"+s_DoSql+"')");
             string s_ID = Request.QueryString["UpdateID"] == null ? "" : Request.QueryString["UpdateID"].ToString();
             this.Tbx_UpdateID.Text = s_ID;
            
@@ -31,7 +33,14 @@ public partial class UpLoad_AddForProducts : BasePage
             if (model != null)
             {
                 this.Tbx_UpdateName.Text = model.PBA_Name;
+                this.Ddl_Type.SelectedValue = model.PBA_ProductsType;
+                if (base_GetProductsFileUpdateType(model.PBA_ProductsType)==false)
+                {
+                    AlertAndClose("没有 更新" + base.Base_GetBasicCodeName("780", model.PBA_ProductsType) + " 权限!");
+                }
             }
+
+            
         }
 
     }

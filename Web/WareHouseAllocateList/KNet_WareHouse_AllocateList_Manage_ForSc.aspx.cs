@@ -20,7 +20,7 @@ using KNet.Common;
 /// <summary>
 /// 库存管理-----库间调拨 管理
 /// </summary>
-public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : BasePage
+public partial class KNet_WareHouse_AllocateList_Manage_ForSc : BasePage
 {
     public string s_AdvShow = "";
     protected void Page_Load(object sender, EventArgs e)
@@ -145,6 +145,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         {
             SqlWhere += " and AllocateTopic='102'";
         }
+        SqlWhere += " and KWA_DBType='1'";
         SqlWhere = SqlWhere + " order by systemDateTimes desc";
         DataSet ds = bll.GetList(SqlWhere);
         GridView1.DataSource = ds;

@@ -47,20 +47,28 @@ public partial class Knet_Common_SelectKNet_WareHouse_Ownall : BasePage
         string s_OutWareNo = Request.QueryString["OutWareNo"] == null ? "" : Request.QueryString["OutWareNo"].ToString();
         string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
         string sID = Request.QueryString["sID"] == null ? "" : Request.QueryString["sID"].ToString();
+
         string s_Sql = "";
         if (s_OutWareNo != "")
         {
-                s_Sql = " Select a.ID,a.ProductsBarCode,a.KSO_Battery,a.KSO_Manual,a.OutWareAmount-Isnull(aa.Number,0) as OutWareAmount,b.HouseNo,isNull(b.Number,0) as Number,isNull(b.TotalNet,0) as TotalNet,a.KSD_BNumber,RCOrderNo as OrderNo,RCMNo as MaterNo,MaterOrderNo,MaterMNo,KSO_IsFollow from KNet_Sales_OutWareList_Details a Left join v_ProdutsStore b on a.ProductsBarCode=b.ProductsBarCode join KNet_Sales_OutWareList d on d.OutWareNo=a.OutWareNo and HouseType=0 ";
+            s_Sql = " Select a.ID,a.ProductsBarCode,a.KSO_Battery,a.KSO_Manual,a.OutWareAmount-Isnull(aa.Number,0) as OutWareAmount,b.HouseNo HouseNo,isNull(b.Number,0) as Number,isNull(b.TotalNet,0) as TotalNet,a.KSD_BNumber,RCOrderNo as OrderNo,RCMNo as MaterNo,MaterOrderNo,MaterMNo,KSO_IsFollow from KNet_Sales_OutWareList_Details a Left join v_ProdutsStore b on a.ProductsBarCode=b.ProductsBarCode and HouseType=0 ";
+           
+            s_Sql += " join KNet_Sales_OutWareList d on d.OutWareNo=a.OutWareNo ";
             s_Sql += " left join (Select a.ProductsBarCode,b.KWD_ShipNo,Sum(DirectOutAmount) as Number from KNet_WareHouse_DirectOutList_Details a join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo group by a.ProductsBarCode,b.KWD_ShipNo) aa on aa.ProductsBarCode=a.ProductsBarCode and aa.KWD_ShipNo=a.OutWareNo ";
 
             s_Sql += " where 1=1";
+            if (s_HouseNo != "")
+            {
+                s_Sql += " and b.HouseNo='" + s_HouseNo + "'  ";
+            }
+            else
+            {
+
+                s_Sql += " and b.HouseNo is not null ";
+            }
             if (s_OutWareNo != "")
             {
                 s_Sql += " and a.OutWareNo='" + s_OutWareNo + "' ";
-            }
-            if (s_HouseNo != "")
-            {
-                s_Sql += " and b.HouseNo='" + s_HouseNo + "' ";
             }
             if (this.SeachKey.Text != "")
             {
@@ -88,7 +96,7 @@ public partial class Knet_Common_SelectKNet_WareHouse_Ownall : BasePage
                 s_Sql += " and b.ProductsBarCode not in ('" + sID.Substring(0, sID.Length - 1).Replace(",", "','") + "') ";
             }
         }
-        
+
         this.BeginQuery(s_Sql);
         this.QueryForDataSet();
         DataSet ds = Dts_Result;
@@ -120,14 +128,15 @@ public partial class Knet_Common_SelectKNet_WareHouse_Ownall : BasePage
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            try{
+            try
+            {
             }
-            catch{}
+            catch { }
             string DirectOutNo = GridView1.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
             CheckBox cb = (CheckBox)e.Row.Cells[1].FindControl("Chbk");
             TextBox Tbx_Number = (TextBox)e.Row.Cells[1].FindControl("Tbx_Number");
             string s_KcNumber = e.Row.Cells[7].Text;
-            int i_Number=int.Parse(Tbx_Number.Text);
+            int i_Number = int.Parse(Tbx_Number.Text);
             if (int.Parse(s_KcNumber) >= i_Number)
             {
                 cb.Checked = true;
@@ -164,7 +173,7 @@ public partial class Knet_Common_SelectKNet_WareHouse_Ownall : BasePage
                 string s_Number = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text;
                 TextBox Tbx_BNumber = (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_BNumber");
                 string s_HouseNo = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("HouseNo")).Text;
-                
+
                 string s_BNumber = Tbx_BNumber.Text;
                 string s_OrderNo = GridView1.Rows[i].Cells[9].Text;
                 string s_MaterNo = GridView1.Rows[i].Cells[10].Text;
@@ -174,12 +183,12 @@ public partial class Knet_Common_SelectKNet_WareHouse_Ownall : BasePage
                 string s_ProductsCode = base.Base_GetProductsCode(s_ProductsBarCode);
                 s_Number = s_Number == "" ? "1" : s_Number;
                 string s_Remark = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Remarks")).Text;
-                s_Return += s_ProductsName + "," + s_ProductsBarCode + "," + s_ProductsPattern + "," + s_ProductsEdition + "," + s_Number + "," + s_Remark + "," + s_BNumber + "," + s_ID + "," + s_OrderNo.Trim() + "," + s_MaterNo.Trim() + "," + s_CustomerProductsName + "," + s_PlanNo.Trim() + "," + s_IsFollow + "," + s_ProductsCode +","+s_HouseNo+ "|";
+                s_Return += s_ProductsName + "," + s_ProductsBarCode + "," + s_ProductsPattern + "," + s_ProductsEdition + "," + s_Number + "," + s_Remark + "," + s_BNumber + "," + s_ID + "," + s_OrderNo.Trim() + "," + s_MaterNo.Trim() + "," + s_CustomerProductsName + "," + s_PlanNo.Trim() + "," + s_IsFollow + "," + s_ProductsCode + "," + s_HouseNo + "|";
             }
         }
         StringBuilder s = new StringBuilder();
         s.Append("<script language=javascript>" + "\n");
-       // s.Append("if(window.opener != undefined) {window.opener.returnValue='" + s_Return + "';} else{window.returnValue='" + s_Return + "';}" + "\n");
+        // s.Append("if(window.opener != undefined) {window.opener.returnValue='" + s_Return + "';} else{window.returnValue='" + s_Return + "';}" + "\n");
         s.Append("if (window.opener != undefined)\n");
         s.Append("{\n");
         s.Append("    window.opener.returnValue = '" + s_Return + "';\n");

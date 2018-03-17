@@ -174,11 +174,19 @@ public partial class Web_Procure_Xh_View : BasePage
                         try
                         {
                             d_TotalNumber += decimal.Parse(Dtb_Table.Rows[i]["SED_RkNumber"].ToString());
+                        }
+                        catch
+                        {
+                        }
+
+                        try
+                        {
                             d_TotalNet += decimal.Parse(Dtb_Table.Rows[i]["SED_WwMoney"].ToString());
                         }
                         catch
                         {
                         }
+
                         k = k + 1;
                     }
                     s_Details += " <tr >\n";
@@ -203,7 +211,6 @@ public partial class Web_Procure_Xh_View : BasePage
 
                 s_Details += "<td  class='thstyleLeftDetails' align=right noWrap>&nbsp;</td>\n";//money
                 s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNet.ToString(), 2) + "</td>\n";
-
                 s_Details += "<td  class='thstyleLeftDetails' align=right noWrap>&nbsp;</td>\n";//money
 
                 s_Details += " </tr>";

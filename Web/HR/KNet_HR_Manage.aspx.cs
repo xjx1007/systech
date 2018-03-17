@@ -56,7 +56,6 @@ public partial class Knet_Web_HR_KNet_HR_Manage : BasePage
                     LogAM.Add_Logs("启用用户 操作成功！");
                     Alert("操作成功！");
                 }
-
             }
             //企业人事查看
             //if (AM.YNAuthority(NQ.Str5003) == false)

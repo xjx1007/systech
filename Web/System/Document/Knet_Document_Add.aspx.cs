@@ -138,7 +138,7 @@ public partial class Knet_Web_System_Knet_Document_Add : BasePage
     /// </summary>
     protected void GetThumbnailImage()
     {
-        string UploadPath = "../UpLoadPic/Word/";  //上传路径
+        string UploadPath = "/UpFile/Word/";  //上传路径
         string AutoPath = "";
 
         if (this.Tbx_Name.Text == "")
@@ -172,7 +172,7 @@ public partial class Knet_Web_System_Knet_Document_Add : BasePage
 
     protected void Lbl_Spce_Click(object sender, EventArgs e)
     {
-        string UploadPath = "../UpLoadPic/Word/" + this.Lbl_Spce.Text;  //上传文件
+        string UploadPath = "/UpFile/Word/" + this.Lbl_Spce.Text;  //上传文件
         Response.Redirect(UploadPath);
     }
     protected void Button1_Click(object sender, EventArgs e)

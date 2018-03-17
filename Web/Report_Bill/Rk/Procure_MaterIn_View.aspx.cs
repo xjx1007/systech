@@ -67,6 +67,7 @@ public partial class Web_Procure_MaterIn_View : BasePage
             }
             if (s_EndDate != "")
             {
+                s_EndDate = s_EndDate + " 23:59:59";
                 s_Sql += " and  WareHouseDateTime<='" + s_EndDate + "'";
             }
             if (s_SuppNo != "")

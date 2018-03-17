@@ -83,6 +83,14 @@ public partial class UploadListForProducts : UserControl
             {
                 SqlWhere += " and PBA_Del=0 ";
             }
+            //权限
+            string s_ProductsType = "";
+            BasePage BasePage = new BasePage();
+            s_ProductsType = BasePage.base_GetProductsTypeYNvisable();
+            if (s_ProductsType != "")
+            {
+                SqlWhere += " and PBA_ProductsType in ('" + s_ProductsType.Replace(",", "','") + "') ";
+            }
             SqlWhere += " order by PBA_ProductsType,PBA_CTime desc";
             DataSet ds_Comment = bllComment.GetList(SqlWhere);
             GridView_Comment.DataSource = ds_Comment.Tables[0];
@@ -104,6 +112,14 @@ public partial class UploadListForProducts : UserControl
             else
             {
                 SqlWhere += " and PBA_Del=0 ";
+            }
+            //权限
+            string s_ProductsType = "";
+            BasePage BasePage = new BasePage();
+            s_ProductsType = BasePage.base_GetProductsTypeYNvisable();
+            if (s_ProductsType != "")
+            {
+                SqlWhere += " and PBA_ProductsType in ('" + s_ProductsType.Replace(",", "','") + "') ";
             }
             SqlWhere += " order by PBA_ProductsType,PBA_CTime desc";
             DataSet ds_Comment = bllComment.GetList(SqlWhere);

@@ -33,6 +33,33 @@ public partial class Procure_MaterialWw_List : BasePage
             }
             else
             {
+                string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
+                this.Tbx_WhereID.Text = s_WhereID;
+                if (Tbx_WhereID.Text == "")
+                {
+                    try
+                    {
+                        string s_Sql = "Select PBW_ID from PB_Basic_Where  where PBW_Del=0 and PBW_Type='101' and PBW_Table='Cg_Order_MaterialHl'";
+                        DateTime Dtm_now = DateTime.Now;
+                        int i_Month = Dtm_now.Month - 1;
+                        if (i_Month == 0)
+                        {
+                            s_Sql += " and PBW_Name like '上年%' ";
+                            i_Month = 12;
+                        }
+                        else
+                        {
+                            s_Sql += " and PBW_Name like '" + i_Month.ToString() + "%' ";
+                        }
+                        this.BeginQuery(s_Sql);
+                        this.Tbx_WhereID.Text = this.QueryForReturn();
+                        Response.Redirect("Procure_MaterialHl_List.aspx?WhereID=" + this.Tbx_WhereID.Text + "");
+                    }
+                    catch (Exception ex)
+                    {
+                        Alert(ex.Message);
+                    }
+                }
                 this.DataBind();
             }
 
@@ -103,8 +130,8 @@ public partial class Procure_MaterialWw_List : BasePage
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 d_totalNum += decimal.Parse(ds.Tables[0].Rows[i]["SED_RkNumber"].ToString());
-                d_totalMoney += decimal.Parse(ds.Tables[0].Rows[i]["SED_RkMoney"].ToString());
-                d_TotalTaxMoney += decimal.Parse(ds.Tables[0].Rows[i]["SED_WwMoney"].ToString());
+                d_totalMoney += decimal.Parse(ds.Tables[0].Rows[i]["wwMoney"].ToString());
+                d_TotalTaxMoney += decimal.Parse(ds.Tables[0].Rows[i]["wwMoney"].ToString());
             }
             Lbl_Total.Text = "总数量：<font color=red>" + d_totalNum.ToString() + "</font> | 总金额：<font color=red>" + d_totalMoney.ToString() + "</font> | 总不含税金额：<font color=red>" + d_TotalTaxMoney.ToString() + "</font>";
 

@@ -546,3 +546,8 @@ where PBC_Code='1020' and PBC_ID='152'
 //                document.all('Tbx_Phone').value = "";
 //                document.all('ContractDeliveMethods').value = "";
 //                document.all('i_Num').value = 0;
+查看售后库存总账
+查看售后流水帐
+邮件列表
+支出管理列表
+快递跟踪列表

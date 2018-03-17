@@ -32,7 +32,7 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
             if (s_ID != "")
             {
                 KNet.Model.PB_Basic_ProductsClass Model = bll.GetModel(s_ID);
-                if (s_Type != "M")
+                if (s_Type == "M")
                 {
                     this.Tbx_FaterID.Text = s_ID;
                     this.Tbx_FaterName.Text = bll.GetProductsName(s_ID);
@@ -40,7 +40,7 @@ public partial class PB_Basic_ProductsClass_Add : BasePage
                     this.Tbx_Order.Text = bll.GetMaxOrder(s_ID);
                     this.Ddl_Type.SelectedValue = "0";
                 }
-                else if (s_Type != "D")
+                else if (s_Type == "D")
                 {
                     bll.Delete(s_ID);
                     AM.Add_Logs("删除分类" + s_ID + Model.PBP_Name);

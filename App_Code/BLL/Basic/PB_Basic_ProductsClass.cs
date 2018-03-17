@@ -38,9 +38,9 @@ namespace KNet.BLL
                 s_Return += "<div id=\"layer_H\" class=\"drag_Element\">\n";
                 if (i_Type == 0)
                 {
-                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1'>\n";
+                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=M'>\n";
                     s_Return += "<img src='../../themes/softed/images/Rolesadd.gif' align='absmiddle' border='0' alt='添加分类'title='添加分类'  target=\"_blank\"></a>\n";
-                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=M' target=\"_blank\">\n";
+                    s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1' target=\"_blank\">\n";
                     s_Return += "<img src='../../themes/softed/images/RolesEdit.gif' align='absmiddle' border='0' alt='编辑分类'title='编辑分类'></a>\n";
                     s_Return += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=1&Type=D' target=\"_blank\">\n";
                     s_Return += "<img src='../../themes/softed/images/RolesDelete.gif' align='absmiddle' border='0' alt='删除分类'title='删除分类'></a>\n";
@@ -137,9 +137,9 @@ namespace KNet.BLL
                             s_Tree += "<div id=\"layer_H" + s_ID + "\" class=\"drag_Element\">\n";
                             if (i_Type == 0)
                             {
-                                s_Tree += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=" + s_ID + "'>\n";
-                                s_Tree += "<img src='../../themes/softed/images/Rolesadd.gif' align='absmiddle' border='0' alt='添加分类'title='添加分类'></a>\n";
                                 s_Tree += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=" + s_ID + "&Type=M'>\n";
+                                s_Tree += "<img src='../../themes/softed/images/Rolesadd.gif' align='absmiddle' border='0' alt='添加分类'title='添加分类'></a>\n";
+                                s_Tree += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=" + s_ID + "'>\n";
                                 s_Tree += "<img src='../../themes/softed/images/RolesEdit.gif' align='absmiddle' border='0' alt='编辑分类'title='编辑分类'></a>\n";
                                 s_Tree += "<a href='Pb_Basic_ProductsClass_Add.aspx?ID=" + s_ID + "&Type=D'>\n";
                                 s_Tree += "<img src='../../themes/softed/images/RolesDelete.gif' align='absmiddle' border='0' alt='删除分类'title='删除分类'></a>\n";
@@ -182,6 +182,12 @@ namespace KNet.BLL
         public string GetSonIDs(string PBP_ID)
         {
             return dal.GetSonIDs(PBP_ID);
+        }
+        /// 得到全部子项的ID
+        /// </summary>
+        public string GetSonIDss(string PBP_ID)
+        {
+            return dal.GetSonIDss(PBP_ID);
         }
         /// <summary>
         /// 增加一条数据

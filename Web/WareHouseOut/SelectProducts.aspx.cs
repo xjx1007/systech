@@ -11,7 +11,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.IO;
 using System.Text;
-
+using KNet.BLL;
 using KNet.DBUtility;
 using KNet.Common;
 
@@ -70,7 +70,7 @@ public partial class Knet_Common_SelectProducts : BasePage
         string s_ProductsID = Request.QueryString["sID"] == null ? "" : Request.QueryString["sID"].ToString();
         string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
         KNet.BLL.KNet_Sys_Products bll = new KNet.BLL.KNet_Sys_Products();
-        string s_Sql = "Select a.Number,a.TotalNet,case when a.Number<>0 then a.TotalNet/a.Number else 0 end as Price,b.* from KNet_Sys_Products b left join v_ProdutsStore a on a.ProductsBarCode=b.ProductsBarCode Where HouseNo='" + s_HouseNo + "' ";
+        string s_Sql = "Select a.Number,a.TotalNet,isnull(case when a.Number<>0 then a.TotalNet/a.Number else 0 end,0) as Price,b.* from KNet_Sys_Products b left join v_ProdutsStore a on a.ProductsBarCode=b.ProductsBarCode Where HouseNo='" + s_HouseNo + "' ";
         if (this.SeachKey.Text != "")
         {
             s_Sql += " and  (ProductsEdition like '%" + this.SeachKey.Text + "%' or ProductsPattern like '%" + this.SeachKey.Text + "%') ";
@@ -175,10 +175,28 @@ public partial class Knet_Common_SelectProducts : BasePage
                 string s_Number = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text;
                 string s_Price = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Price")).Text;
                 s_Price = s_Price == "" ? "0" : s_Price;
-                s_Number = s_Number == "" ? "1" : s_Number;
-                string s_Remark = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Remark")).Text;
-                decimal s_Money = decimal.Parse(s_Price) * decimal.Parse(s_Number);
-                s_Return += s_ProductsName + "," + s_ProductsBarCode + "," + s_ProductsEdition + "," + s_Number + "," + s_Price + "," + s_Remark + "," + s_Money.ToString() + "|";
+                if (Request.QueryString["Chk_IsSuppNo"] =="true")
+                {
+                    KNet.BLL.Knet_Procure_SuppliersPrice BLL=new Knet_Procure_SuppliersPrice();
+                    string str =
+                        ((TextBox) GridView1.Rows[i].Cells[0].FindControl("TXB_ProductBarCode")).Text.ToString();
+                    string wheresql = " ProductsBarCode='" +str + "'" +"  and  KPP_State=1";
+                   DataSet ds= BLL.GetTop(wheresql);
+                    s_Price = ds.Tables[0].Rows[0]["ProcureUnitPrice"].ToString();
+                    s_Number = s_Number == "" ? "1" : s_Number;
+                    string Total_Price = (Convert.ToDecimal(s_Price)*Convert.ToDecimal(s_Number)).ToString();
+                    string s_Remark = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Remark")).Text;
+                    //decimal s_Money = decimal.Parse(s_Price) * decimal.Parse(s_Number);
+                    s_Return += s_ProductsName + "," + s_ProductsBarCode + "," + s_ProductsEdition + "," + s_Number + "," + s_Price + "," + Total_Price  + ""+ s_Remark + "|" ;
+                }
+                else
+                {
+                    s_Number = s_Number == "" ? "1" : s_Number;
+                    string s_Remark = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Remark")).Text;
+                    decimal s_Money = decimal.Parse(s_Price) * decimal.Parse(s_Number);
+                    s_Return += s_ProductsName + "," + s_ProductsBarCode + "," + s_ProductsEdition + "," + s_Number + "," + s_Price + "," + s_Money.ToString()  + "," + s_Remark + "|";
+                }
+               
             }
         }
         StringBuilder s = new StringBuilder();

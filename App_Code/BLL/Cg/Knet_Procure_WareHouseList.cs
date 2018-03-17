@@ -30,7 +30,6 @@ namespace KNet.BLL
         /// </summary>
         public void Add(KNet.Model.Knet_Procure_WareHouseList model)
         {
-            dal.Add(model);
             if (model.Arr_Products != null)
             {
                 for (int i = 0; i < model.Arr_Products.Count; i++)
@@ -61,6 +60,7 @@ namespace KNet.BLL
                     //}
                     Bll_Details.Add(Model_Details);
                 }
+                dal.Add(model);
             }
         }
 

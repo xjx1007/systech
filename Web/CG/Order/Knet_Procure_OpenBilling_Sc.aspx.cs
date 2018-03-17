@@ -1176,7 +1176,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                             }
 
                             s_EmailPDF = Server.MapPath("/Web/CG/Order/PDF/" + s_NewOrderNo + ".PDF");
-                            s_EmailTitle = "博脉采购单：" + s_NewOrderNo + " 请尽快回复交期；详细见明细";
+                            s_EmailTitle = "士腾采购单：" + s_NewOrderNo + " 请尽快回复交期；详细见明细";
                             s_EmailDetails = "尊敬的 " + base.Base_GetSupplierName(s_SuppNo) + ":<br/>";
                             KNet.BLL.KNet_Resource_Staff Bll_Staff = new KNet.BLL.KNet_Resource_Staff();
                             KNet.Model.KNet_Resource_Staff Model_Staff = Bll_Staff.GetModelC(AM.KNet_StaffNo);

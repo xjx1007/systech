@@ -257,7 +257,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	    document.all.TextBox1.value = strFormHtml;
 	    //LODOP.SET_SAVE_MODE("PaperSize", 9);
 	    //LODOP.SET_SAVE_MODE("centerHorizontally", true);
-	     LODOP.SET_PRINT_MODE("PRINT_PAGE_PERCENT", "90%");
+	     LODOP.SET_PRINT_MODE("PRINT_PAGE_PERCENT", "98%");
 	    LODOP.ADD_PRINT_HTM(0, 0, 800, 700, strFormHtml);
 	    //LODOP.PREVIEW();
 	    LODOP.PRINT();

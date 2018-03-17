@@ -36,7 +36,7 @@ public class GetMessage : IHttpHandler, IRequiresSessionState
                 s_Return.Append("type_name:\"" + Page.Base_GetBasicCodeName("147", Dts_Table.Tables[0].Rows[i]["SMM_Type"].ToString()) + "\",");
                 s_Return.Append("send_time:\"" + DateTime.Parse(Dts_Table.Tables[0].Rows[i]["SMM_SendTime"].ToString()).Hour + ":" + DateTime.Parse(Dts_Table.Tables[0].Rows[i]["SMM_SendTime"].ToString()).Minute + "\",");
                 s_Return.Append("unread:\"" + Dts_Table.Tables[0].Rows[i]["SMM_UnRead"].ToString() + "\",");
-                s_Return.Append("content:\"" + KNetPage.KHtmlEncode(Dts_Table.Tables[0].Rows[i]["SMM_Detail"].ToString()) + "\",");
+                s_Return.Append("content:\"" + KHtmlDiscode1(KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[i]["SMM_Detail"].ToString())) + "\",");
                 s_Return.Append("url:\"Web/Message/System_Message_List.aspx?Type=inbox\",");
                 s_Return.Append("receive:\"" + Dts_Table.Tables[0].Rows[i]["SMM_Receive"].ToString() + "\"");
                 s_Return.Append("},");
@@ -49,7 +49,16 @@ public class GetMessage : IHttpHandler, IRequiresSessionState
         context.Response.Flush();
         context.Response.End();
     }
+    public  string KHtmlDiscode1(string theString)
+    {
+        if (theString != null)
+        {
+            theString = theString.Replace("\"", "\\\"");
 
+        }
+        return theString;
+
+    }
     public bool IsReusable
     {
         get

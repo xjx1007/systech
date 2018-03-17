@@ -19,8 +19,11 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
+            
+                var temp = window.open("../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+           
             //var temp = window.showModalDialog("../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            var temp = window.open("../Common/SelectSalesShipList.aspx?ID=" + intSeconds + "", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+          
         }
         function SetReturnValueInOpenner_SalesShip(temp) {
             if (temp != undefined) {
@@ -28,6 +31,7 @@
                 ss = temp.split("|");
                 document.all('OutWareNoSelectValue').value = ss[0];
                 document.all('OutWareNoName').value = ss[1];
+                document.all("Money").value = ss[6];
             }
             else {
                 document.all('OutWareNoSelectValue').value = "";
@@ -51,20 +55,32 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
+            if (document.getElementById("Chk_IsSuppNo").checked) {
+                var temp = window.open("SelectProducts.aspx?HouseNo=" + document.all("HouseNo").value + "&&" + "Chk_IsSuppNo=true", "选择客户", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
+            else {
+                var tempd = window.open("SelectProducts.aspx?HouseNo=" + document.all("HouseNo").value + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
             //var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-            var tempd = window.open("SelectProducts.aspx?HouseNo=" + document.all("HouseNo").value + "", "选择产品", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+           
         }
         function SetReturnValueInOpenner_Products(tempd) {
+            
             if (tempd != undefined) {
                 var i_num1 = parseInt(document.all('Tbx_Num').value);
                 var ss, ss1, s_Value, i_row;
                 ss1 = tempd.split("|");
                 s_ID = document.all("Xs_ProductsCode").value;
+                var moneycount = 0;
+                document.getElementById("moneycount").innerText = moneycount;
+                
+                var count = 0;
+                document.getElementById("count").innerText = count;
                 for (var i = 0; i < ss1.length - 1; i++) {
                     var ss = ss1[i].split(",");
                     i_row = myTable.rows.length;
                     var objRow = myTable.insertRow(i_row);
-                    i_num1 = parseInt(document.all('Tbx_Num').value) + parseInt(i+1)
+                    i_num1 = parseInt(document.all('Tbx_Num').value) + parseInt(i)
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="../../themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
                     objCel.className = "ListHeadDetails";
@@ -82,25 +98,65 @@
                     objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[3] + ' >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[3] + ' >';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Price_' + i_num1 + '\" value=' + ss[4] + ' >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Price_' + i_num1 + '\" value=' + ss[4] + ' >';
+                    objCel.className = "ListHeadDetails";
+
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Money_' + i_num1 + '\" value=' + ss[5] + ' >';
                     objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;"  Name=\"Remarks_' + i_num1 + '\"    >';
                     objCel.className = "ListHeadDetails";
+                    moneycount = eval(moneycount + "+" + ss[5]);
+                    count = eval(count + "+" + ss[3]);
+                    //alert(moneycount)
                     i_row = i_row + 1;
                     s_ID = s_ID + ss[0] + ",";
                 }
-                document.all('Tbx_Num').value = i_num1;
+                //document.all('moneycount').value = moneycount;
+                document.getElementById("moneycount").innerText = moneycount;
+                document.getElementById("count").innerText = parseInt(document.getElementById("count").innerText) + count;
+                document.all('Tbx_Num').value = parseInt(document.all('Tbx_Num').value) + ss1.length - 1;;
 
                 document.all("Xs_ProductsCode").value = s_ID;
             }
         }
+        ///计算
+        function ChangPrice()
+        {
+            var num = document.all('Tbx_Num').value;
+            var moneycount = 0;
+            var count = 0;
+            for (var i = 0; i < num; i++) {
+                //var CPBZNumber = document.all("CPBZNumber_" + i).value;
+               // var BZNumber = document.all("BZNumber_" + i).value;
+                //if ((CPBZNumber != 0) && (BZNumber != 0)) {
+                    //document.all("Number_" + i).value = CPBZNumber * BZNumber;
+                    document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
+                    //moneycount += document.all("Money_" + i).value;
+                    moneycount = eval(moneycount + "+" + document.all("Money_" + i).value);
+                    count = eval(count + "+" + document.all("Number_" + i).value);
+                //document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
+                //}
+                //else {
+                //    document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
+                //    document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
+                //}
+                //TextisNaN(CPBZNumber);
+                //TextisNaN(BZNumber);
+                //TextisNaN(document.all("Number_" + i).value);
+            }
+            //document.all('moneycount').value = moneycount;
+            document.getElementById("moneycount").innerText = moneycount;
+            document.getElementById("count").innerText = count;
+        }
         function deleteRow(obj) {
             myTable.deleteRow(obj.parentElement.parentElement.rowIndex);
+            ChangPrice();
             var bm_num = "";
             var v_Num = document.all("Tbx_Num").value;
             for (i = 0; i < v_Num; i++) {
@@ -299,7 +355,8 @@
                                             &nbsp;供应商承担:
                                         </td>
                                         <td class="dvtCellInfo">
-                                           <asp:CheckBox runat="server" ID="Chk_IsSuppNo" />
+                                         <%--  <asp:CheckBox runat="server" ID="Chk_IsSuppNo" />--%>
+                                            <input type="checkbox" runat="server" id="Chk_IsSuppNo"/>
                                         </td>
                                         <td class="dvtCellLabel">
                                             &nbsp;OEM:
@@ -318,6 +375,7 @@
                                             <asp:DropDownList runat="server" ID="Ddl_LyType">
                                             </asp:DropDownList>
                                         </td>
+                                       
                                     </tr>
                                     <tr>
                                         <td class="dvtCellLabel">
@@ -339,6 +397,10 @@
                                     <tr>
                                         <td colspan="10" class="dvInnerHeader">
                                             <b>产品详细信息</b>
+                                             <a style="color:brown">总数量：</a>
+                                            <a style="color: brown" id="count"></a>&nbsp; &nbsp;   
+                                            <a style="color: red">总金额：</a>
+                                            <a style="color: red" id="moneycount"></a>
                                         </td>
                                     </tr>
                                     <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
@@ -348,12 +410,13 @@
                                     <tr>
                                         <td colspan="3">
                                             ①选择产品:
-                                            <input type="button" name="Button" class="crmbutton small create" value="添加产品" onclick="btnGetProducts_onclick();" />
+                                            <input type="button" name="Button" class="crmbutton small create" value="添加产品" onclick="btnGetProducts_onclick();"/>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
+                        <input type="text" id="Total_Price" style="display: none" runat="server" />
                         <tr>
                             <td colspan="4" align="center">
                                 &nbsp;
@@ -371,6 +434,7 @@
             </td>
         </tr>
     </table>
+        
     </form>
 </body>
 </html>

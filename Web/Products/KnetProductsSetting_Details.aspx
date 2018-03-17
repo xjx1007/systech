@@ -419,6 +419,14 @@
                                                                         <td colspan="3" class="dvtCellInfo">&nbsp;<asp:Label ID="ProductsDetailDescription" runat="server" Text=""></asp:Label>
                                                                         </td>
                                                                     </tr>
+                                                                       <tr runat="server" id="Time">
+                                                                        <td height="50" class="dvtCellLabel">工时(秒):
+                                                                        </td>
+                                                                        <td colspan="3" class="dvtCellInfo">&nbsp;<asp:TextBox ID="WorkTime" runat="server"></asp:TextBox>
+                                                                             <%--<asp:Button runat="server" ID="SaveWorkTime" OnClick="SaveWorkTime" Text="保 存"  class="crmbutton small cancel"   Style="width: 70px; height: 26px;"/>--%>
+                                                                            <asp:Button ID="SaveWorkTime" runat="server" OnClick="SaveWorkTime_OnClick" class="crmbutton small cancel"   Style="width: 70px; height: 26px;" Text="保 存" />
+                                                                        </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td colspan="4">
                                                                             <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
@@ -482,6 +490,8 @@
                                                                                         <td align="center" class="ListHead">产品审批
                                                                                         </td>
                                                                                         <td align="center" class="ListHead">采购方式
+                                                                                        </td>
+                                                                                        <td align="center" class="ListHead">库存
                                                                                         </td>
                                                                                     </tr>
                                                                                     <asp:Label runat="server" ID="Lbl_BomDetails1"></asp:Label>
@@ -553,6 +563,8 @@
                                                                         <td align="left" class="dvtCellInfo" style="text-align: left" colspan="4">
                                                                             <table id="Table2" width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="ListDetails">
                                                                                 <tr id="tr4">
+                                                                                    <td align="center" class="ListHead">序号
+                                                                                    </td>
                                                                                     <td align="center" class="ListHead">产品名称
                                                                                     </td>
                                                                                     <td align="center" class="ListHead">版本号
@@ -666,7 +678,7 @@
                                                                                 AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="10"
                                                                                 BorderColor="#4974C2"
                                                                                 EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"><Columns><asp:TemplateField HeaderText="生产问题名称" SortExpression="ZPP_Title" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="Left"><ItemTemplate><a href="../Problem/Zl_Produce_Problem_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ZPP_ID") %>"><%# DataBinder.Eval(Container.DataItem, "ZPP_Title") %></a></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="产品型号" SortExpression="ZPP_ProdutsBarCode" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="Left"><ItemTemplate><a href="/Web/Zl/Problem/Zl_Produce_Problem_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ZPP_ID") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "ZPP_Title") %></a></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="产品型号" SortExpression="ZPP_ProdutsBarCode" ItemStyle-HorizontalAlign="Left"
                                                                                         HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="记录编号" DataField="ZPP_Code" SortExpression="ZPP_Code" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField HeaderText="日期" DataField="ZPP_STime" SortExpression="ZPP_STime"
                                                                                         DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField HeaderText="希望完成日期" DataField="ZPP_HopeDate" SortExpression="ZPP_HopeDate"
                                                                                         DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="生产阶段" SortExpression="ZPP_ScStage" ItemStyle-HorizontalAlign="Left"

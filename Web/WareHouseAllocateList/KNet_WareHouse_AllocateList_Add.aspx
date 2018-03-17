@@ -42,7 +42,7 @@
             today = new Date();
             intSeconds = today.getSeconds();
             //var tempd = window.showModalDialog("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo_out").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-            var tempd = window.open("SelectProducts.aspx?sID=" + document.all("Xs_ProductsCode").value + "&HouseNo=" + document.all("HouseNo_out").value + "", "选择客户", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            var tempd = window.open("SelectProducts.aspx?HouseNo=" + document.all("HouseNo_out").value + "", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }
 
         function Submitcheck() {
@@ -148,22 +148,30 @@
                     }
                 }
             }
-            if (Type== false)
-            {
+            if (Type == false) {
                 ChangPrice();
             }
         }
 
-
-
         function ChangPrice() {
             var num = document.all('Tbx_Num').value;
-            for (var i = 0; i < num; i++) {
-                var CPBZNumber = document.all("Tbx_CPBZNumber_" + i).value;
-                var BZNumber = document.all("Tbx_BZNumber_" + i).value
-                if ((CPBZNumber != 0) && (BZNumber != 0)) {
-                    document.all("Number_" + i).value = CPBZNumber * BZNumber;
+            var ID = document.all('Tbx_ID').value;
+            if (ID == "") {
+                for (var i = 0; i < num; i++) {
+                    var CPBZNumber = document.all("Tbx_CPBZNumber_" + i).value;
+                    var BZNumber = document.all("Tbx_BZNumber_" + i).value
+                    if ((CPBZNumber != 0) && (BZNumber != 0)) {
+                        document.all("Number_" + i).value = CPBZNumber * BZNumber;
+                    }
                 }
+            }
+        }
+        function ChangPrice1(i) {
+            var ID = document.all('Tbx_ID').value;
+            var CPBZNumber = document.all("Tbx_CPBZNumber_" + i).value;
+            var BZNumber = document.all("Tbx_BZNumber_" + i).value
+            if ((CPBZNumber != 0) && (BZNumber != 0)) {
+                document.all("Number_" + i).value = CPBZNumber * BZNumber;
             }
         }
     </script>
@@ -180,6 +188,7 @@
                 <td width="100%" nowrap>
                     <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
                     <asp:TextBox ID="Tbx_Type" runat="server" Style="display: none"></asp:TextBox>
+                    <asp:TextBox ID="Tbx_SuppNo" runat="server" Style="display: none"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -256,16 +265,17 @@
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="调入仓库不能为空" ControlToValidate="HouseNo_int" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </td>
                                         </tr>
-                                        
+
                                         <tr>
                                             <td class="dvtCellLabel">调拨类型:
                                             </td>
-                                            <td class="dvtCellInfo" > <asp:DropDownList ID="Ddl_Type" runat="server" Width="150px"></asp:DropDownList>(<font color="red">*</font>)<br />
+                                            <td class="dvtCellInfo">
+                                                <asp:DropDownList ID="Ddl_Type" runat="server" Width="150px"></asp:DropDownList>(<font color="red">*</font>)<br />
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="调拨类型不能为空" ControlToValidate="Ddl_Type" Display="Dynamic"></asp:RequiredFieldValidator>
                                             </td>
                                             <td class="dvtCellLabel">生产订单号:
                                             </td>
-                                            <td class="dvtCellInfo" >
+                                            <td class="dvtCellInfo">
 
                                                 <asp:TextBox ID="Tbx_OrderNo" MaxLength="40" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
@@ -275,13 +285,13 @@
                                         <tr>
                                             <td class="dvtCellLabel">按耗料调拨:
                                             </td>
-                                            <td class="dvtCellInfo" >
-                                                <asp:CheckBox runat="server" ID="Chk_Type" AutoPostBack="true"  OnCheckedChanged="Chk_Type_CheckedChanged"/>
+                                            <td class="dvtCellInfo">
+                                                <asp:CheckBox runat="server" ID="Chk_Type" AutoPostBack="true" OnCheckedChanged="Chk_Type_CheckedChanged" />
                                             </td>
                                             <td class="dvtCellLabel">消耗库存:
                                             </td>
-                                            <td class="dvtCellInfo" >
-                                                <asp:CheckBox runat="server" ID="Chk_KC" AutoPostBack="true"  OnCheckedChanged="Chk_Type_CheckedChanged"/>
+                                            <td class="dvtCellInfo">
+                                                <asp:CheckBox runat="server" ID="Chk_KC" AutoPostBack="true" OnCheckedChanged="Chk_Type_CheckedChanged" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -348,7 +358,7 @@
                                 <td colspan="4" align="center">&nbsp;
                                 <br />
                                     <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                        class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;"   OnClientClick="return Submitcheck();" />
+                                        class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" OnClientClick="return Submitcheck();" />
                                     <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                                         type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                                 </td>

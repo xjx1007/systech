@@ -157,7 +157,9 @@
                 today = new Date();
                 intSeconds = today.getSeconds();
                 //var tempd = window.showModalDialog("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=yes; menubar=yes;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-                var tempd = window.open("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+ 
+                    var tempd = window.open("SelectKNet_WareHouse_Ownall.aspx?sID=" + $("Xs_ProductsCode").value + "&isModiy=" + $("Tbx_ID").value + "&OutWareNo=" + $("OutWareNo").value + "&HouseNo=" + $("Ddl_HouseNo").value + " ", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+              
             }
 
             function Submitcheck() {

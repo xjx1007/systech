@@ -40,6 +40,7 @@ public partial class Web_Message_Default2 : BasePage
                         s_AuthorityID = Dtb_Result.Rows[0][2].ToString();
                         s_GroupValue = Dtb_Result.Rows[0][3].ToString();
                     }
+
                     //找使用的权限组
                     this.BeginQuery("Select * from KNet_Sys_Authority_AuthList where StaffNo ='" + s_StaffNo + "'");
                     this.QueryForDataTable();

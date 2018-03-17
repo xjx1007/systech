@@ -1,0 +1,17 @@
+﻿
+SELECT     b.ID, a.HouseNo, c.ProductsName, b.ProductsBarCode, c.ProductsPattern, c.ProductsEdition, b.ProductsUnits, - b.AllocateAmount AS Expr1, 
+                      - b.Allocate_WwMoney AS Expr2, b.Allocate_WwPrice, 105 AS Expr3, '调拨出库' AS Expr4, a.AllocateDateTime, a.AllocateNo, c.ProductsType, 
+                      d .KSW_Type AS HouseType
+FROM         dbo.KNet_WareHouse_AllocateList_Details AS b INNER JOIN
+                      dbo.KNet_WareHouse_AllocateList AS a ON a.AllocateNo = b.AllocateNo INNER JOIN
+                      dbo.KNet_Sys_Products AS c ON c.ProductsBarCode = b.ProductsBarCode INNER JOIN
+                      dbo.KNet_Sys_WareHouse AS d ON a.HouseNo = d .HouseNo AND (a.AllocateDateTime >= '2017-4-1')
+                      where b.KWAD_AddBadNumber<>0 
+UNION ALL
+SELECT     b.ID, '131429356506502002', c.ProductsName, b.ProductsBarCode, c.ProductsPattern, c.ProductsEdition, b.ProductsUnits, b.AllocateAmount, b.AllocateTotalNet, 
+                      b.AllocateUnitPrice, 106 AS Expr1, '调拨入库' AS Expr2, a.AllocateDateTime, a.AllocateNo, c.ProductsType, d .KSW_Type AS HouseType
+FROM         dbo.KNet_WareHouse_AllocateList_Details AS b INNER JOIN
+                      dbo.KNet_WareHouse_AllocateList AS a ON a.AllocateNo = b.AllocateNo INNER JOIN
+                      dbo.KNet_Sys_Products AS c ON c.ProductsBarCode = b.ProductsBarCode INNER JOIN
+                      dbo.KNet_Sys_WareHouse AS d ON a.HouseNo_int = d .HouseNo AND (a.AllocateDateTime >= '2017-4-1')
+                      where b.KWAD_AddBadNumber<>0 

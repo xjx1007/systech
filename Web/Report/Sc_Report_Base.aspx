@@ -63,7 +63,7 @@
                                                                             <li><a href="../Report_Sc/ScDetails/Report_Xh.aspx">生产耗料明细</a></li>
                                                                             <li><a href="../Report_Sc/ScDetailsPrint/Report_Xh.aspx">生产耗料明细单</a></li>
                                                                             <li><a href="../Report_Sc/ScSum/Report_OrderIn.aspx">产品出货统计表</a></li>
-                                                                            
+                                                                <li><a href="../Report_Bill/CPDetailsNew/Report_Details.aspx">存货收发结存表(成品)</a></li>
                                                                         </ul>
                                                                     </td>
                                                                 </tr>

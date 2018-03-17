@@ -186,7 +186,7 @@ namespace KNet.DAL
 					new SqlParameter("@ProductsPic", SqlDbType.Bit,1),
 					new SqlParameter("@ProductsBigPicture", SqlDbType.NVarChar,60),
 					new SqlParameter("@ProductsSmallPicture", SqlDbType.NVarChar,60),
-					new SqlParameter("@ProductsDescription", SqlDbType.NVarChar,500),
+					new SqlParameter("@ProductsDescription", SqlDbType.NVarChar,1000),
 					new SqlParameter("@ProductsDetailDescription", SqlDbType.NText),
 					new SqlParameter("@ProductsAddTime", SqlDbType.DateTime),
 					new SqlParameter("@ProductsAddMan", SqlDbType.NVarChar,50),
@@ -327,7 +327,7 @@ namespace KNet.DAL
 					new SqlParameter("@ProductsPic", SqlDbType.Bit,1),
 					new SqlParameter("@ProductsBigPicture", SqlDbType.NVarChar,60),
 					new SqlParameter("@ProductsSmallPicture", SqlDbType.NVarChar,60),
-					new SqlParameter("@ProductsDescription", SqlDbType.NVarChar,500),
+					new SqlParameter("@ProductsDescription", SqlDbType.NVarChar,1000),
 					new SqlParameter("@ProductsDetailDescription", SqlDbType.NText),
 					new SqlParameter("@ProductsAddTime", SqlDbType.DateTime),
 					new SqlParameter("@ProductsAddMan", SqlDbType.NVarChar,50),
@@ -423,6 +423,33 @@ namespace KNet.DAL
             parameters[0].Value = ID;
 
             DbHelperSQL.RunProcedure("Proc_KNet_Sys_Products_Delete", parameters, out rowsAffected);
+        }
+        /// <summary>
+        /// 更新工时
+        /// </summary>
+        /// <param name="time"></param>
+        public bool UpdateTime(KNet.Model.KNet_Sys_Products model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update KNet_Sys_Products set ");
+            strSql.Append("KSP_WorkTime=@KSP_WorkTime");
+            strSql.Append(" where ProductsBarCode=@ProductsBarCode ");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@KSP_WorkTime", SqlDbType.Decimal),
+                    new SqlParameter("@ProductsBarCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = model.KSP_WorkTime;
+            parameters[1].Value = model.ProductsBarCode;
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         /// <summary>
         /// 得到一个对象实体

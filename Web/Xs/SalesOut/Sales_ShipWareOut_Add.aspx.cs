@@ -813,7 +813,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 {
                     BLL.Add(molel);
                     string JSD = "SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
-                    base.HtmlToPdfNoWater(JSD, Server.MapPath("PDF"), molel.DirectOutNo);
+                    //base.HtmlToPdfNoWater(JSD, Server.MapPath("PDF"), molel.DirectOutNo);
                     LogAM.Add_Logs("销售管理--->发货出库管理--->出库开单 添加 操作成功！出库单号：" + this.Tbx_ID.Text);
 
                     Response.Write("<script>alert('发货出库开单 添加  操作成功！');location.href='Sales_ShipWareOut_Manage.aspx';</script>");

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="KNet_WareHouse_AllocateList_Manage_ForSc.aspx.cs" Inherits="Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="KNet_WareHouse_AllocateList_Manage_ForSc.aspx.cs" Inherits="KNet_WareHouse_AllocateList_Manage_ForSc" %>
 
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -23,7 +23,7 @@
             // window.location.reload(); 
         }
     </script>
-    <title>库间调拨</title>
+    <title>原材料库间调拨</title>
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form2" runat="server">
@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>生产 >
-	<a class="hdrLink" href="KNet_WareHouse_AllocateList_Manage_ForSc.aspx">库间调拨</a>
+	<a class="hdrLink" href="KNet_WareHouse_AllocateList_Manage_ForSc_ForSc.aspx">原材料库间调拨</a>
                 </td>
                 <td width="100%" nowrap>
                     <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
@@ -49,15 +49,15 @@
                                             <table border="0" cellspacing="0" cellpadding="5">
                                                 <tr>
                                                     <td style="padding-right: 0px; padding-left: 10px;"><a href="javascript:;" onclick="PageGo('KNet_WareHouse_AllocateList_Add.aspx?Type=<%= Request.QueryString["Type"]==null?"":Request.QueryString["Type"].ToString() %>')">
-                                                        <img src="../../themes/softed/images/btnL3Add.gif" alt="创建 库间调拨..." title="创建 库间调拨..." border="0"></a></td>
+                                                        <img src="../../themes/softed/images/btnL3Add.gif" alt="创建 原材料库间调拨..." title="创建 原材料库间调拨..." border="0"></a></td>
                                                     <td style="padding-right: 0px;">
                                                         <asp:ImageButton ImageUrl="../../themes/softed/images/btnL3Delete.gif" runat="server" ID="Btn_Del" OnClick="Btn_Del_Click" /></td>
                                                     <td style="padding-right: 10px"><a href="javascript:;" onclick="ShowDiv()">
-                                                        <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 库间调拨..." title="查找 库间调拨..." border="0"></a></td>
+                                                        <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 原材料库间调拨..." title="查找 原材料库间调拨..." border="0"></a></td>
                                                     <td style="padding-right: 0px; padding-left: 10px;">
-                                                        <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 库间调拨" title="*导入 库间调拨" border="0"></td>
+                                                        <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 原材料库间调拨" title="*导入 原材料库间调拨" border="0"></td>
                                                     <td style="padding-right: 10px">
-                                                        <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 库间调拨" title="*导出 库间调拨" border="0"></td>
+                                                        <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 原材料库间调拨" title="*导出 原材料库间调拨" border="0"></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -77,13 +77,13 @@
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
           
                                             <tr>
-                    <td>      <%=base.Base_BindViewByTitle("月份","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage.aspx","and PBW_Order  in ('0')","WhereID", this.Tbx_WhereID.Text,"&WhereID1="+this.Tbx_WhereID1.Text)%>
+                    <td>      <%=base.Base_BindViewByTitle("月份","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage_ForSc.aspx","and PBW_Order  in ('0')","WhereID", this.Tbx_WhereID.Text,"&WhereID1="+this.Tbx_WhereID1.Text)%>
                   
                     </td>
                 </tr>
                                     <tr>
                     <td>
-                        <%=base.Base_BindViewByTitle("其他","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage.aspx","and PBW_Order not in ('0')","WhereID1", this.Tbx_WhereID1.Text,"&WhereID="+this.Tbx_WhereID.Text)%>
+                        <%=base.Base_BindViewByTitle("其他","Cg_Order_MaterialDbIN", "KNet_WareHouse_AllocateList_Manage_ForSc.aspx","and PBW_Order not in ('0')","WhereID1", this.Tbx_WhereID1.Text,"&WhereID="+this.Tbx_WhereID.Text)%>
                     </td>
                 </tr>
             

@@ -12,10 +12,7 @@
 <script type="text/javascript" src="../KDialog/lhgdialog.js"></script>
 <body>
     <form id="form1" runat="server">
-    
      <div class="TitleBar">发货对账单</div>
-    
-
     <table width="100%" border="0"   cellpadding="0" cellspacing="0" align="center" class="tablecss" >
  <tr>
   <td width="17%" align="right" class="tableBotcss" style="height: 25px">&nbsp;开始日期:</td>

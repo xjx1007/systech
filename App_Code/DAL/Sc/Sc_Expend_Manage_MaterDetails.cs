@@ -302,6 +302,22 @@ namespace KNet.DAL
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
+        /// <summary>
+        /// 获取物料单最大号
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet GetListTop(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select top1 * ");
+            strSql.Append(" FROM Sc_Expend_Manage_MaterDetails ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
         /// <summary>
         /// 获得前几行数据

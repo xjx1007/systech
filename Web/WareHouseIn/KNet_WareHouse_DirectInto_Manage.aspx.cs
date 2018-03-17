@@ -22,7 +22,7 @@ using KNet.Common;
 /// </summary>
 public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectInto_Manage : BasePage
 {
-    public string s_AdvShow = "", s_Type="";
+    public string s_AdvShow = "", s_Type = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -31,7 +31,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectInto_Manage : BaseP
             AdminloginMess AM = new AdminloginMess();
             if (s_Type != "")
             {
-            //直接入库单删除
+                //直接入库单删除
                 if (AM.YNAuthority("售后入库列表") == false)
                 {
                     AM.NoAuthority("售后入库列表");
@@ -120,7 +120,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectInto_Manage : BaseP
         {
             SqlWhere += " and KWD_Type<>'102' and KWD_Type<>'3' ";
         }
-        
+
         SqlWhere = SqlWhere + " order by SystemDatetimes desc ";
         DataSet ds = bll.GetList(SqlWhere);
         GridView1.DataSource = ds;
@@ -263,21 +263,21 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectInto_Manage : BaseP
         if (this.Dtb_Result.Rows.Count > 0)
         {
 
-                if (Dtb_Result.Rows.Count < 5)
+            if (Dtb_Result.Rows.Count < 5)
+            {
+                for (int i = 0; i < Dtb_Result.Rows.Count; i++)
                 {
-                    for (int i = 0; i < Dtb_Result.Rows.Count; i++)
-                    {
-                        s_Return += base.Base_GetProdutsName(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
-                    }
+                    s_Return += base.Base_GetProdutsName(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        s_Return += base.Base_GetProdutsName(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
-                    }
-                    s_Return += "<font color=gray>更多...</font>" + "<br>";
+                    s_Return += base.Base_GetProdutsName(Dtb_Result.Rows[i]["ProductsBarCode"].ToString()) + "<br>";
                 }
+                s_Return += "<font color=gray>更多...</font>" + "<br>";
+            }
             s_Return = s_Return.Substring(0, s_Return.Length - 1);
         }
         return s_Return;

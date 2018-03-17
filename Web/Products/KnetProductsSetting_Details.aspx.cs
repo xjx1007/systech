@@ -12,9 +12,10 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
 using System.Data.SqlClient;
-
+using KNet.BLL;
 using KNet.DBUtility;
 using KNet.Common;
+using KNet.Model;
 
 public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
 {
@@ -27,8 +28,17 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             AdminloginMess AM = new AdminloginMess();
             if (AM.CheckLogin("查看产品") == false)
             {
+                if (AM.YNAuthority("添加工时"))
+                {
+                    this.Time.Visible = true;
+                }
+                else
+                {
+                    this.Time.Visible = false;
+                }
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
+
             }
             this.Get_Knet_Suppliers_ByID();
         }
@@ -80,25 +90,22 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         //停用
         if (s_ID != "")
         {
-            if ((AM.KNet_Position == "103") || (AM.KNet_StaffName == "李文立") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "毛刚挺"))
+            if (AM.YNAuthority("停用产品") == true)
             {
-                if (AM.YNAuthority("停用产品") == true)
-                {
-                    KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
-                    KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
-                    Model.ProductsBarCode = s_ID;
-                    int i_Del = Math.Abs(Model.KSP_Del - 1);
+                KNet.BLL.KNet_Sys_Products Bll = new KNet.BLL.KNet_Sys_Products();
+                KNet.Model.KNet_Sys_Products Model = Bll.GetModelB(s_ID);
+                Model.ProductsBarCode = s_ID;
+                int i_Del = Math.Abs(Model.KSP_Del - 1);
 
-                    Model.KSP_DelRemarks = this.Tbx_DelRemarks.Text;
-                    Model.KSP_Del = i_Del;
-                    Bll.UpdateDel(Model);
-                    AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
-                    AlertAndRedirect("操作成功！", "KnetProductsSetting.aspx?ProductsBarCode=" + s_ID + "");
-                }
-                else
-                {
-                    AM.NoAuthority("停用产品");
-                }
+                Model.KSP_DelRemarks = this.Tbx_DelRemarks.Text;
+                Model.KSP_Del = i_Del;
+                Bll.UpdateDel(Model);
+                AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！停用产品编码：" + s_ID);
+                AlertAndRedirect("操作成功！", "KnetProductsSetting.aspx?ProductsBarCode=" + s_ID + "");
+            }
+            else
+            {
+                AM.NoAuthority("停用产品");
             }
         }
 
@@ -130,6 +137,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         string s_Model = Request.QueryString["Model"] == null ? "" : Request.QueryString["Model"].ToString();
         if (Request["BarCode"] != null && Request["BarCode"] != "")
         {
+
             string BarCode = Request.QueryString["BarCode"].ToString().Trim();
             this.Tbx_ID.Text = BarCode;
             s_RC_ProductsBarCode = Request.QueryString["BarCode"].ToString().Trim();
@@ -137,7 +145,21 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             {
 
                 KNet.Model.KNet_Sys_Products model = BLL.GetModelB(BarCode);
+                if (model.KSP_Code.IndexOf("01") == 0)
+                {
+                    //AdminloginMess AM1 = new AdminloginMess();
 
+
+                    if (CheckYNProducts(model.ProductsType) == false)
+                    {
+                        AlertAndClose("您没有权限查看该类产品,如需要请联系研发经理！");
+                        return;
+                    }
+                }
+                if(model.KSP_Code.IndexOf("01") != 0)
+                {
+                    this.Time.Visible = false;
+                }
                 this.Lbl_DelRemarks.Text = model.KSP_DelRemarks;
 
                 this.Tbx_DelRemarks.Text = model.KSP_DelRemarks;
@@ -161,14 +183,6 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 { this.Btn_Sh.Text = "已审批"; }
                 //if ((AM.KNet_StaffDepart == "129652783965723459") && (AM.KNet_Position == "102"))//如果是研发部经理
 
-                if ((AM.KNet_StaffDepart == "129652783965723459")||(AM.KNet_Position=="103"))//如果是研发部经理
-                {
-                    Button1.Enabled = true;
-                }
-                else
-                {
-                    Button1.Enabled = false;
-                }
                 this.CommentList2.CommentFID = model.ProductsBarCode;
                 this.CommentList2.CommentType = "Products";
                 this.ProductsName.Text = model.ProductsName;
@@ -176,9 +190,9 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 this.ProductsBarCode.Text = model.ProductsBarCode;
 
 
-               this.Ddl_UseType.Text= base.Base_GetBasicCodeName("1134", model.KSP_UseType);
-               this.Lbl_Loss.Text = base.Base_GetBasicCodeName("1136", model.KSP_LossType.ToString());
-                
+                this.Ddl_UseType.Text = base.Base_GetBasicCodeName("1134", model.KSP_UseType);
+                this.Lbl_Loss.Text = base.Base_GetBasicCodeName("1136", model.KSP_LossType.ToString());
+
                 this.Lbl_isModiy.Text = model.KSP_isModiy == 0 ? "是" : "<font color=red>否</font>";
                 this.ProductsUnits.Text = base.Base_GetUnitsName(model.ProductsUnits);
                 this.ProductsSellingPrice.Text = model.ProductsSellingPrice.ToString();
@@ -191,7 +205,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 KNet.BLL.PB_Basic_ProductsClass Bll_ProductsClass = new KNet.BLL.PB_Basic_ProductsClass();
                 this.Lbl_ProductsType.Text = Bll_ProductsClass.GetProductsName(model.ProductsType);
 
-                if ((model.KSP_Code != "")&&(model.KSP_Code != null))
+                if ((model.KSP_Code != "") && (model.KSP_Code != null))
                 {
                     if ((model.KSP_Code.IndexOf("01") == 0) || (model.KSP_Code.IndexOf("03") == 0))
                     {
@@ -207,13 +221,13 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 this.Tbx_CustomerProductsCode.Text = model.KSP_CustomerProductsCode;
 
                 this.Lbl_Create.Text = "<a href=\"../CG/Order/Knet_Procure_Suppliers_Price_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建报价单</a>";
-                this.Lbl_Create1.Text = "<a href=\"/Web/WareHouseOut/KNet_WareHouse_DirectOut_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建产品领用单</a>";
+                this.Lbl_Create1.Text = "<a href=\"/Web/WareHouseOut/KNet_WareHouse_DirectOut_Add.aspx?Lytype=1&FaterBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建产品领用单</a>";
                 Lbl_Bom.Text = "<a href=\"/Web/Products/BOM.aspx?BarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\" target=\"_blank\">BOM表</a>";
                 Lbl_BomWithPrice.Text = "<a href=\"/Web/Products/BOMWithPrice.aspx?BarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\" target=\"_blank\">BOM报价表</a>";
-                Lbl_Createsmpale.Text = "<a href=\"/Web/ProductsSample/Pb_Products_Sample_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "&isModify=1\" class=\"webMnu\">创建设计修改</a>";
-                this.Lbl_ScProblem.Text = "<a href=\"../Problem/Zl_Produce_Problem_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建生产问题</a>";
-                this.Lbl_Zy.Text = "<a href=\"../Instruction/ZL_Task_Instruction_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建作业指导书</a>";
-                Lbl_Spce.Text = "<a href=\"KnetProductsSpec_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\">创建规格说明书</a>";
+                Lbl_Createsmpale.Text = "<a href=\"/Web/ProductsSample/Pb_Products_Sample_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "&isModify=1\" class=\"webMnu\" target=\"_blank\"> 创建设计修改</a>";
+                this.Lbl_ScProblem.Text = "<a href=\"/Web/Zl/Problem/Zl_Produce_Problem_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\" target=\"_blank\">创建生产问题</a>";
+                this.Lbl_Zy.Text = "<a href=\"../Instruction/ZL_Task_Instruction_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\"  target=\"_blank\">创建作业指导书</a>";
+                //this.Lbl_Spce.Text = "<a href=\"../Instruction/ZL_Task_Instruction_Add.aspx?ProductsBarCode=" + s_RC_ProductsBarCode + "\" class=\"webMnu\"  target=\"_blank\">创建作业指导书</a>";
                 if (model.ProductsPic == true)
                 {
                     this.Image1.Visible = true;
@@ -275,6 +289,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     for (int i = 0; i < Dtb_RCProducts.Rows.Count; i++)
                     {
                         s_ProductsRC += "<tr>";
+                        s_ProductsRC += "<td class=\"ListHeadDetails\">" + Convert.ToString(i + 1) + "</td>";
+
                         s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString()) + "</td>";
                         s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString()) + "</td>";
                         s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString())) + "</td>";
@@ -633,12 +649,27 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 {
                     Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=green>分批</font></td>");
                 }
+                if (AM.YNAuthority("查看库存总账台"))
+                {
+
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetHouseAndNumber1(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\">&nbsp;</td>");
+                }
 
 
                 Sb_BomDetails.Append("</tr>");
             }
         }
         Lbl_BomDetails1.Text = Sb_BomDetails.ToString();
+
+        if (AM.YNAuthority("BOOM可见权限") == false)
+        {
+            Lbl_BomDetails1.Text = "";
+        }
+
         Tbx_BomNumber.Text = Dtb_DemoProducts.Rows.Count.ToString();
     }
 
@@ -849,4 +880,27 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         catch { }
     }
 
+    protected void SaveWorkTime_OnClick(object sender, EventArgs e)
+    {
+        if(this.Lbl_KSPCode.Text.IndexOf("01")!=0)
+        {
+            Alert("不能对物料添加工时");
+            this.WorkTime.Text = "";
+            return;
+        }
+        KNet.Model.KNet_Sys_Products modelKNetSysProducts= new KNet.Model.KNet_Sys_Products();
+        KNet.BLL.KNet_Sys_Products bllKNetSysProducts=new KNet.BLL.KNet_Sys_Products();
+        modelKNetSysProducts.KSP_WorkTime =Convert.ToDecimal(this.WorkTime.Text) ;
+        modelKNetSysProducts.ProductsBarCode = this.ProductsBarCode.Text;
+       bool bl= bllKNetSysProducts.UpdateTime(modelKNetSysProducts);
+        if(bl==true)
+        {
+            Alert("保存成功");
+        }
+        if (bl == false)
+        {
+            Alert("保存失败");
+        }
+
+    }
 }

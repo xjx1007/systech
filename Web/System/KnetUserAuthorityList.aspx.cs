@@ -107,7 +107,7 @@ public partial class Knet_Web_System_KnetKnetUserAuthorityList: BasePage
         KNet.BLL.KNet_Resource_Staff bll = new KNet.BLL.KNet_Resource_Staff();
         string KSeachKey = null;
 
-        string SqlWhere = " StaffAdmin=0 ";
+        string SqlWhere = " StaffAdmin=0 and StaffYN=0 ";
 
 
         string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();

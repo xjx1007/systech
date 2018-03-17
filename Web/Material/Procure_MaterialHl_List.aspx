@@ -276,13 +276,13 @@
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="单价" DataField="SED_RkPrice"
-                                        SortExpression="SED_RkPrice">
+                                    <asp:BoundField HeaderText="单价" DataField="WwPrice"
+                                        SortExpression="WwPrice">
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                     </asp:BoundField>
-                                    <asp:BoundField HeaderText="金额" DataField="SED_RkMoney"
-                                        SortExpression="SED_RkMoney">
+                                    <asp:BoundField HeaderText="金额" DataField="WwMoney"
+                                        SortExpression="WwMoney">
                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                     </asp:BoundField>

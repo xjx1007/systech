@@ -157,6 +157,7 @@
                                                 <td class="ListHead" nowrap><b>数量</b></td>
                                                 <td class="ListHead" nowrap><b>调整前库存</b></td>
                                                  <td class="ListHead" nowrap><b>调整后库存</b></td>
+                                                 <td class="ListHead" nowrap><b>调整金额</b></td>
                                                 <td   class="ListHead" nowrap><b>备注</b></td>
                                                 </tr>
                                                 <%=s_MyTable_Detail %>

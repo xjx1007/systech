@@ -89,7 +89,7 @@ namespace KNet.DAL
 					new SqlParameter("@isSale", SqlDbType.Int),
 					new SqlParameter("@KRS_IsWeb", SqlDbType.Int),
 					new SqlParameter("@TelPhone", SqlDbType.VarChar,50),
-					new SqlParameter("@ProductsType", SqlDbType.VarChar,50)
+					new SqlParameter("@ProductsType", SqlDbType.VarChar,500)
                     
                                         };
             
@@ -148,7 +148,7 @@ namespace KNet.DAL
 					new SqlParameter("@StaffName", SqlDbType.NVarChar,50),
 					new SqlParameter("@StaffCard", SqlDbType.NVarChar,50),
 					new SqlParameter("@TelPhone", SqlDbType.VarChar,50),
-					new SqlParameter("@ProductsType", SqlDbType.VarChar,50)
+					new SqlParameter("@ProductsType", SqlDbType.VarChar,500)
                                         };
 
             parameters[0].Value = model.ID;

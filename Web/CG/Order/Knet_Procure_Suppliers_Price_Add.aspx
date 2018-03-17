@@ -224,13 +224,13 @@
                                                                             <asp:TextBox ID="ProcureUnitPrice" runat="server" CssClass="detailedViewTextBox" Width="80px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),0)%>'
                                                                                 MaxLength="9"></asp:TextBox>
                                                                             <asp:RegularExpressionValidator ID="JoinNumberb33b" runat="server" ErrorMessage="正货币形式!"
-                                                                                ControlToValidate="ProcureUnitPrice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
+                                                                                ControlToValidate="ProcureUnitPrice" ValidationExpression="^(\d+|,\d{6})+(\.\d{0,6})?$"
                                                                                 Display="Dynamic"></asp:RegularExpressionValidator>
                                                                             
                                                                             <asp:TextBox ID="Salesprice" runat="server" CssClass="Custom_Hidden" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),2)%>'
                                                                                 MaxLength="9"></asp:TextBox><br />
                                                                             <asp:RegularExpressionValidator ID="JoinNumberb33sdgsdb" runat="server" ErrorMessage="正货币形式!"
-                                                                                ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
+                                                                                ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,6})?$"
                                                                                 Display="Dynamic"></asp:RegularExpressionValidator>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
@@ -240,7 +240,7 @@
                                                                             <asp:TextBox ID="HandPrice" runat="server" CssClass="detailedViewTextBox" Width="80px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),1)%>'
                                                                                 MaxLength="9"></asp:TextBox><br />
                                                                             <asp:RegularExpressionValidator ID="HandPrice33db" runat="server" ErrorMessage="正货币形式!"
-                                                                                ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,4})?$"
+                                                                                ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,6})?$"
                                                                                 Display="Dynamic"></asp:RegularExpressionValidator>
                                                                             <asp:RequiredFieldValidator ID="HandPrice33" runat="server" ErrorMessage="非空值" ControlToValidate="HandPrice"
                                                                                 Display="Dynamic"></asp:RequiredFieldValidator>

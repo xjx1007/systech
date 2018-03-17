@@ -422,7 +422,7 @@ public partial class KNet_Products_Enclosure_List : BasePage
         else if (cmd == "Sp")
         {
             //如果是审批
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || am.KNet_Position == "103")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || am.KNet_Position == "103" || (am.YNAuthority("产品资料审批")))
             {
                 if (Model.PBA_State == 1)
                 {

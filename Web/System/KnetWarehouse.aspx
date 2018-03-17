@@ -299,6 +299,12 @@
             <ItemStyle HorizontalAlign="Left" Font-Size="12px"  Width="70px" />
             <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
         </asp:BoundField>
+        <asp:TemplateField HeaderText="调回"  SortExpression="KSW_Type" HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+          <ItemTemplate>
+              <a href="/Web/WareHouseAllocateList/KNet_WareHouse_AllocateList_Add.aspx?HosueNo=<%# Eval("HouseNO") %>" target="_blank" class="webMnu">原材料调回</a> 
+          </ItemTemplate>
+        </asp:TemplateField>
+        
         
         <asp:HyperLinkField  ItemStyle-Font-Size="12px" HeaderStyle-Font-Size="12px"  ItemStyle-Width="30px" HeaderStyle-HorizontalAlign="Left"  DataNavigateUrlFields="HouseNo"   DataNavigateUrlFormatString="KnetWarehouse_Add.aspx?ID={0}"   Text="修改"  HeaderText="修改"/>
         

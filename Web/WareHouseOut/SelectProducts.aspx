@@ -135,6 +135,8 @@
                                 </asp:BoundField>
                                 <asp:TemplateField HeaderText="数量" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
+                                        <asp:TextBox ID="TXB_ProductBarCode" runat="server" CssClass="Custom_Hidden"  Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>' ></asp:TextBox>
+                                       
                                         <pc:PTextBox ID="Tbx_Number" runat="server" Width="70px" Text='<%# base.FormatNumber1(DataBinder.Eval(Container.DataItem, "Number").ToString(),0)%>' ValidType="int"></pc:PTextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>

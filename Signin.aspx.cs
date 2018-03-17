@@ -10,171 +10,205 @@ using System.Data.SqlClient;
 using System.Data;
 
 
-    public partial class Signin : System.Web.UI.Page
+public partial class Signin : BasePage
+{
+    protected void Page_Load(object sender, EventArgs e)
     {
-        protected void Page_Load(object sender, EventArgs e)
+
+    }
+    protected void btnSignIn_Click(object sender, EventArgs e)
+    {
+        BackMess.Visible = false;
+        string AdminUserName = KNetPage.KHtmlEncode(this.username.Text.Trim());
+
+        if (AdminUserName == null || AdminUserName == "")
         {
-
-        }
-        protected void btnSignIn_Click(object sender, EventArgs e)
-        {
-            BackMess.Visible = false;
-            string AdminUserName = KNetPage.KHtmlEncode(this.username.Text.Trim());
-
-            if (AdminUserName == null || AdminUserName == "")
-            {
-                AdminUserName = "登陆名为空";
-            }
-
-            string AdminPassword = this.password.Text.ToString().Trim().ToUpper();
-            //  string VryCode = VerifyCode.Text.ToString().Trim().ToUpper();
-            // if (VryCode.CompareTo(Session["VerifyCode"]) != 0)
-            // {
-            //     this.Add_Logs("登陆系统失败，原因:验证码不正确！", AdminUserName);
-            //     BackMess.Text = "验证码不正确！";
-            //     return;
-            //}
-
-            if (AdminUserName == "" || AdminPassword == "")
-            {
-                this.Add_Logs("登陆系统失败，原因:用户名或密码为空！", AdminUserName);
-                BackMess.Text = "用户名和密码不能为空！";
-                return;
-            }
-
-            //string AdminUserName = "admin";
-            //string AdminPassword = "admin";
-
-            string backmess = User_Login(AdminUserName, AdminPassword);
-            if (backmess.CompareTo("登录成功") == 0)
-            {
-                Add_Logs("登陆系统成功....", AdminUserName);
-
-                Response.Write("<script language='javascript' type='text/javascript'>this.window.location.href='NewMain.aspx';</script>");
-                Response.End();
-            }
-            else
-            {
-                BackMess.Visible = true;
-                BackMess.Text = backmess;
-            }
+            AdminUserName = "登陆名为空";
         }
 
+        string AdminPassword = this.password.Text.ToString().Trim().ToUpper();
+        //  string VryCode = VerifyCode.Text.ToString().Trim().ToUpper();
+        // if (VryCode.CompareTo(Session["VerifyCode"]) != 0)
+        // {
+        //     this.Add_Logs("登陆系统失败，原因:验证码不正确！", AdminUserName);
+        //     BackMess.Text = "验证码不正确！";
+        //     return;
+        //}
 
-        /// <summary>
-        /// 登录方法 
-        /// </summary>
-        /// <param name="user">用户名</param>
-        /// <param name="pass">密  码</param>
-        /// <returns></returns>
-        protected string User_Login(string user, string pass)
+        if (AdminUserName == "" || AdminPassword == "")
         {
-            string myssss;
-            if (user == "" || pass == "")
+            this.Add_Logs("登陆系统失败，原因:用户名或密码为空！", AdminUserName);
+            BackMess.Text = "用户名和密码不能为空！";
+            return;
+        }
+
+        //string AdminUserName = "admin";
+        //string AdminPassword = "admin";
+
+        string backmess = User_Login(AdminUserName, AdminPassword);
+        if (backmess.CompareTo("登录成功") == 0)
+        {
+            Add_Logs("登陆系统成功....", AdminUserName);
+            AdminloginMess AM = new AdminloginMess();
+            //
+            string s_Sql = "Select *  FROM KNet_Sales_ContractList left join v_Contract_OutWare_DirectOut_State on v_ContractNO=ContractNO where   datediff(day,getdate(),ContractToDeliDate)<=3  and DirectOutState<2 ";
+            this.BeginQuery(s_Sql);
+            DataTable Dtb_Table = this.QueryForDataTable();
+            if (Dtb_Table.Rows.Count > 0)
             {
-                return "用户名和密码不能为空！";
-            }
-            try
-            {
-                using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+                if (((AM.KNet_StaffDepart == "129652783822281241") || (AM.KNet_StaffDepart == "129652784446995911") || ((AM.KNet_StaffDepart == "129652783693249229"))) && (AM.KNet_Position == "102"))
                 {
-                    conn.Open();
-                    int result = -1;
-                    string mywps = KNetPage.KNetMD5(pass.ToUpper().Trim());
-                    SqlCommand sqlcomm = new SqlCommand("checkAdminLogin", conn);
-                    sqlcomm.CommandType = CommandType.StoredProcedure;
-
-                    sqlcomm.Parameters.Add("@StaffCard_StaffName", SqlDbType.NVarChar, 50).Value = user;
-                    sqlcomm.Parameters.Add("@StaffPassword", SqlDbType.NVarChar, 50).Value = mywps;
-                    sqlcomm.Parameters.Add("@Staff_LoginIP", SqlDbType.VarChar, 40).Value = Request.UserHostAddress.ToString();
-
-                    sqlcomm.Parameters.Add("@StaffNo", SqlDbType.NVarChar, 50).Direction = ParameterDirection.Output;
-                    sqlcomm.Parameters.Add("@Staff_LoginIP_Out", SqlDbType.NVarChar, 40).Direction = ParameterDirection.Output;
-                    sqlcomm.Parameters.Add("@Staff_LoginDate_Out", SqlDbType.NVarChar, 50).Direction = ParameterDirection.Output;
-                    sqlcomm.Parameters.Add("return1", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
-                    sqlcomm.ExecuteNonQuery();
-
-                    result = int.Parse(sqlcomm.Parameters["return1"].Value.ToString());
-
-                    switch (result)
-                    {
-                        case 0:
-                            this.Session["KNet_Admin_StaffName"] = user; //卡号或是用名
-                            this.Session["KNet_Admin_PassWord"] = mywps;
-
-                            this.Session["KNet_Admin_StaffNo"] = sqlcomm.Parameters["@StaffNo"].Value.ToString();
-                            this.Session["KNet_Admin_Staff_LoginIP_Out"] = sqlcomm.Parameters["@Staff_LoginIP_Out"].Value.ToString();
-                            this.Session["KNet_Admin_Staff_LoginDate_Out"] = sqlcomm.Parameters["@Staff_LoginDate_Out"].Value.ToString();
-
-                            AdminloginMess AM = new AdminloginMess();
-                            AM.DeleteTimeOutUser();
-                            myssss = "登录成功";
-                            break;
-                        case 1:
-                            myssss = "用户名或卡号不存在，或已被禁用！";
-                            break;
-                        case 2:
-                            myssss = "密码错误！";
-                            break;
-                        case 3:
-                            myssss = "未知错误";
-                            break;
-                        default:
-                            myssss = "未知错误,请稍后再试";
-                            break;
-                    }
-                    conn.Close();
+                    base.Base_SendMessage(AM.KNet_StaffNo + ",129785817148286979", KNetPage.KHtmlEncode(" <a href='Web/Xs/SalesContract/KNet_Sales_ContractList_List.aspx?WhereID=M170823051813470'  target=\"_blank\" onclick=\"RemoveSms('#ID', '', 0);\">今日有 " + Convert.ToString(Dtb_Table.Rows.Count + 1) + "条 订单评审距离交货 还有3天，请跟踪！</a> "));
                 }
             }
-            catch
+            s_Sql = "select * FROM Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo   join KNet_Sys_ProcureType c on a.OrderType=c.ProcureTypeValue   where  1=1  and datediff(day,getdate(),OrderPreToDate)<=3   and rkState<>'1' and KPO_RkState='0' and orderType='128860698200781250' ";
+            this.BeginQuery(s_Sql);
+            Dtb_Table = this.QueryForDataTable();
+            if (Dtb_Table.Rows.Count > 0)
             {
-                myssss = "连接数据库发生错误！";
+                if (((AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffDepart == "129652783693249229")) && (AM.KNet_Position == "102"))
+                {
+                    base.Base_SendMessage(AM.KNet_StaffNo + ",129785817148286979", KNetPage.KHtmlEncode(" <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage_ForSc.aspx?WhereID=M150318091226587'  target=\"_blank\" onclick=\"RemoveSms('#ID', '', 0);\">今日有 " + Convert.ToString(Dtb_Table.Rows.Count + 1) + "条 生产订单距离交货 还有3天，请跟踪！</a> "));
+
+                }
             }
-            return myssss;
+
+            s_Sql = "select * FROM Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo   join KNet_Sys_ProcureType c on a.OrderType=c.ProcureTypeValue   where  1=1  and datediff(day,getdate(),OrderPreToDate)<=3   and rkState<>'1' and KPO_RkState='0' and orderType<>'128860698200781250' ";
+            this.BeginQuery(s_Sql);
+            Dtb_Table = this.QueryForDataTable();
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                if (((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffDepart == "129652783693249229")) && (AM.KNet_Position == "102"))
+                {
+                    base.Base_SendMessage(AM.KNet_StaffNo + ",129785817148286979", KNetPage.KHtmlEncode(" <a href='Web/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?WhereID=M170823070418459'  target=\"_blank\" onclick=\"RemoveSms('#ID', '', 0);\">今日有 " + Convert.ToString(Dtb_Table.Rows.Count + 1) + "条 采购订单距离交货 还有3天，请跟踪！</a> "));
+
+                }
+            }
+            Response.Write("<script language='javascript' type='text/javascript'>this.window.location.href='NewMain.aspx';</script>");
+            Response.End();
         }
+        else
+        {
+            BackMess.Visible = true;
+            BackMess.Text = backmess;
+        }
+    }
 
 
-        //==================================
-        /// <summary>
-        /// 系统操作日志
-        /// </summary>
-        /// <param name="P_str_logContent">日志内容</param>
-        public void Add_Logs(string P_str_logContent, string StaffNoss)
+    /// <summary>
+    /// 登录方法 
+    /// </summary>
+    /// <param name="user">用户名</param>
+    /// <param name="pass">密  码</param>
+    /// <returns></returns>
+    protected string User_Login(string user, string pass)
+    {
+        string myssss;
+        if (user == "" || pass == "")
+        {
+            return "用户名和密码不能为空！";
+        }
+        try
         {
             using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
             {
-                SqlCommand myCmd = new SqlCommand("Proc_KNet_Static_logs_ADD", conn);
-                myCmd.CommandType = CommandType.StoredProcedure;
-
-                //添加参数
-                SqlParameter StaffNo = new SqlParameter("@StaffNo", SqlDbType.VarChar, 30);
-                StaffNo.Value = StaffNoss;
-                myCmd.Parameters.Add(StaffNo);
-                //添加参数
-                SqlParameter logContent = new SqlParameter("@logContent", SqlDbType.VarChar, 250);
-                logContent.Value = P_str_logContent;
-                myCmd.Parameters.Add(logContent);
-
-                //添加参数
-                SqlParameter logIP = new SqlParameter("@logIP", SqlDbType.VarChar, 30);
-                logIP.Value = System.Web.HttpContext.Current.Request.UserHostAddress.ToString().Trim();
-                myCmd.Parameters.Add(logIP);
                 conn.Open();
-                try
+                int result = -1;
+                string mywps = KNetPage.KNetMD5(pass.ToUpper().Trim());
+                SqlCommand sqlcomm = new SqlCommand("checkAdminLogin", conn);
+                sqlcomm.CommandType = CommandType.StoredProcedure;
+
+                sqlcomm.Parameters.Add("@StaffCard_StaffName", SqlDbType.NVarChar, 50).Value = user;
+                sqlcomm.Parameters.Add("@StaffPassword", SqlDbType.NVarChar, 50).Value = mywps;
+                sqlcomm.Parameters.Add("@Staff_LoginIP", SqlDbType.VarChar, 40).Value = Request.UserHostAddress.ToString();
+
+                sqlcomm.Parameters.Add("@StaffNo", SqlDbType.NVarChar, 50).Direction = ParameterDirection.Output;
+                sqlcomm.Parameters.Add("@Staff_LoginIP_Out", SqlDbType.NVarChar, 40).Direction = ParameterDirection.Output;
+                sqlcomm.Parameters.Add("@Staff_LoginDate_Out", SqlDbType.NVarChar, 50).Direction = ParameterDirection.Output;
+                sqlcomm.Parameters.Add("return1", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                sqlcomm.ExecuteNonQuery();
+
+                result = int.Parse(sqlcomm.Parameters["return1"].Value.ToString());
+
+                switch (result)
                 {
-                    myCmd.ExecuteNonQuery();
+                    case 0:
+                        this.Session["KNet_Admin_StaffName"] = user; //卡号或是用名
+                        this.Session["KNet_Admin_PassWord"] = mywps;
+
+                        this.Session["KNet_Admin_StaffNo"] = sqlcomm.Parameters["@StaffNo"].Value.ToString();
+                        this.Session["KNet_Admin_Staff_LoginIP_Out"] = sqlcomm.Parameters["@Staff_LoginIP_Out"].Value.ToString();
+                        this.Session["KNet_Admin_Staff_LoginDate_Out"] = sqlcomm.Parameters["@Staff_LoginDate_Out"].Value.ToString();
+
+                        AdminloginMess AM = new AdminloginMess();
+                        AM.DeleteTimeOutUser();
+                        myssss = "登录成功";
+                        break;
+                    case 1:
+                        myssss = "用户名或卡号不存在，或已被禁用！";
+                        break;
+                    case 2:
+                        myssss = "密码错误！";
+                        break;
+                    case 3:
+                        myssss = "未知错误";
+                        break;
+                    default:
+                        myssss = "未知错误,请稍后再试";
+                        break;
                 }
-                catch
-                {
-                    throw;
-                }
-                finally
-                {
-                    myCmd.Dispose();
-                    conn.Close();
-                    conn.Dispose();
-                }
+                conn.Close();
             }
         }
+        catch
+        {
+            myssss = "连接数据库发生错误！";
+        }
+        return myssss;
+    }
+
+
+    //==================================
+    /// <summary>
+    /// 系统操作日志
+    /// </summary>
+    /// <param name="P_str_logContent">日志内容</param>
+    public void Add_Logs(string P_str_logContent, string StaffNoss)
+    {
+        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        {
+            SqlCommand myCmd = new SqlCommand("Proc_KNet_Static_logs_ADD", conn);
+            myCmd.CommandType = CommandType.StoredProcedure;
+
+            //添加参数
+            SqlParameter StaffNo = new SqlParameter("@StaffNo", SqlDbType.VarChar, 30);
+            StaffNo.Value = StaffNoss;
+            myCmd.Parameters.Add(StaffNo);
+            //添加参数
+            SqlParameter logContent = new SqlParameter("@logContent", SqlDbType.VarChar, 250);
+            logContent.Value = P_str_logContent;
+            myCmd.Parameters.Add(logContent);
+
+            //添加参数
+            SqlParameter logIP = new SqlParameter("@logIP", SqlDbType.VarChar, 30);
+            logIP.Value = System.Web.HttpContext.Current.Request.UserHostAddress.ToString().Trim();
+            myCmd.Parameters.Add(logIP);
+            conn.Open();
+            try
+            {
+                myCmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                myCmd.Dispose();
+                conn.Close();
+                conn.Dispose();
+            }
+        }
+    }
 
 }

@@ -51,7 +51,7 @@
             var v_LossNumber = parseInt(v_Number) * parseInt(s_Value) * parseFloat(Tbx_LossPercent.value) / 100.0
             Tbx_LossNumber.value = Math.round(v_LossNumber);
             Tbx_NeedNumber.value = parseInt(v_Number) * parseInt(s_Value);
-           Tbx_number.value = parseInt(v_Number) * parseInt(s_Value) + parseInt(v_LossNumber);
+            Tbx_number.value = parseInt(v_Number) * parseInt(s_Value) + parseInt(v_LossNumber);
         }
     }
 
@@ -68,8 +68,7 @@
                 v_Index = "0" + v_Index.toString();
             }
             var Chbk = document.getElementById("MyGridView2_ctl" + v_Index + "_Chbk");
-            if (Chbk != null)
-            {
+            if (Chbk != null) {
                 if (Chbk.checked) {
                     var Tbx_Number = document.getElementById("MyGridView2_ctl" + v_Index + "_Tbx_Number");
                     var Tbx_KcNumber = document.getElementById("MyGridView2_ctl" + v_Index + "_Tbx_KcNumber");
@@ -81,10 +80,10 @@
 
             }
         }
-            if (v_Right == "1") {
-                alert("不能小于库存数，请先补足库存！");
-                return false;
-            }
+        if (v_Right == "1") {
+            alert("不能小于库存数，请先补足库存！");
+            return false;
+        }
     }
 </script>
 <body topmargin="0" leftmargin="0" rightmargin="0">
@@ -399,7 +398,7 @@
                                                                         <ItemTemplate>
                                                                             <asp:TextBox ID="Tbx_Remarks" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                                                 OnBlur="this.className='detailedViewTextBox'" Width="100px"></asp:TextBox>
-                                                                            <asp:TextBox ID="Tbx_KcNumber" runat="server" CssClass="Custom_Hidden" Width="100px" Text='<%# GetKC(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>'></asp:TextBox>
+                                                                            <asp:TextBox ID="Tbx_KcNumber" runat="server" Width="100px" CssClass="Custom_Hidden" Text='<%# GetKC(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>'></asp:TextBox>
                                                                             <asp:TextBox ID="Tbx_LossType" runat="server" CssClass="Custom_Hidden" Width="100px" Text='<%# DataBinder.Eval(Container.DataItem, "KSP_LossType").ToString()%>'></asp:TextBox>
 
                                                                         </ItemTemplate>

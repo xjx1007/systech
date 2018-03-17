@@ -58,7 +58,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 Table_Btn.Visible = true;
             }
 
-            if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffName == "项洲"))
+            if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffName == "项洲"))
             {
                 this.Button2.Visible = true;
                 this.Button3.Visible = true;
@@ -68,6 +68,8 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 this.Button2.Visible = false;
                 this.Button3.Visible = false;
             }
+
+
             if (s_ID != "")
             {
                 ShowInfo(s_ID);
@@ -186,6 +188,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
         KNet.Model.KNet_Sales_ContractList Model = BLL_Sales_ContractList.GetModelB(s_ID);
         try
         {
+
             this.ContractNo.Text = Model.ContractNo;
             this.DutyPerson.Text = base.Base_GetUserName(Model.DutyPerson);
             this.Stime.Text = DateTime.Parse(Model.ContractDateTime.ToString()).ToShortDateString();

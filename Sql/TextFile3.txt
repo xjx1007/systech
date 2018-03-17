@@ -1,0 +1,25 @@
+﻿select * from a2 join KNet_Sys_Products b
+ on substring(a2.Code,2,10)=b.KSP_COde
+
+select * from a2
+select * from PB_Basic_Code where PBC_Name ='贴片'
+update a2 set UseTypeName='1'  
+where a2.UseType like '%贴片%'
+
+update a2 set UseTypeName='0'  
+where a2.UseType like '%插件%'
+update a2 set 
+lossType=0
+where Price>=1
+
+update a2 set 
+lossType=1
+where Price<1 and Price>='0.2'
+
+update a2 set 
+lossType=2
+where  Price<'0.2'
+
+update KNet_Sys_Products set KSP_UseType=b.UseTypeName,KSP_LossType=b.lossType
+from KNet_Sys_Products a ,a2 b 
+where a.KSP_COde=substring(b.Code,2,10)

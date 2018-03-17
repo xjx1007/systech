@@ -97,7 +97,7 @@ public partial class Sales_ShipWareOut_Manage_BCw : BasePage
         string s_Sql = "Select * from v_RCOutList ";
         string SqlWhere = "where 1=1 ";
         KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
-        string s_SonID = Bll_ProductsDetails.GetSonIDs("01");
+        string s_SonID = Bll_ProductsDetails.GetSonIDs("M160818111359632");
         s_SonID = s_SonID.Replace(",", "','");
         SqlWhere += " and ProductsType  in ('" + s_SonID + "') ";
 

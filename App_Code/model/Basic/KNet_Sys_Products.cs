@@ -28,6 +28,8 @@ namespace KNet.Model
         private DateTime? _productsaddtime;
         private string _productsaddman;
         private string _productstype;
+        private decimal _ksp_worktime;
+
         private ArrayList _CustomerList;
         private ArrayList _ProductsList;
         private ArrayList _DemoProductsList;
@@ -67,7 +69,8 @@ namespace KNet.Model
         private int _Type;
         private string[] _s_BomIDs;
         private int _KSP_LossType;
-        
+
+        private decimal _KSP_WorkTime;
         public string[] s_BomIDs
         {
             set { _s_BomIDs = value; }
@@ -78,6 +81,13 @@ namespace KNet.Model
             set { _Type = value; }
             get { return _Type; }
         }
+
+        public decimal KSP_WorkTime
+        {
+            set { _ksp_worktime = value; }
+            get { return _ksp_worktime; }
+        }
+
         /// <summary>
         /// 自动ID值
         /// </summary>

@@ -218,4 +218,10 @@ where DirectOutNo='CK20170523000009'
 insert into KNet_WareHouse_DirectOutList_Details
 select dbo.GetDID(),'CK20170523000009','',a.ProductsBarCode,'','',1,0,0,0,'',GETDATE(),'',0,0,0,0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0
 from Knet_Procure_WareHouseList_Details a
-where WareHouseNo='W20170523-0439'
+where WareHouseNo='W20170523-0439'	
+
+
+insert into KNet_WareHouse_DirectOutList_Details
+select dbo.GetDID(),'CK20171020000001','',a.XPD_ProductsBarCode,'','',XPD_Number*5000,0,0,0,'',GETDATE(),'',0,0,0,0,0,0,0,'','','','','','',0,0,0,0,0,0,0,0
+from  Xs_Products_Prodocts_Demo a where 
+XPD_FaterBarCode in('D1705021014443479','D1703311058198011')

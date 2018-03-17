@@ -16,6 +16,7 @@ public class UserOnline : IHttpHandler, IRequiresSessionState
         BasePage Page = new BasePage();
         KNet.BLL.System_Message_Manage BLL = new KNet.BLL.System_Message_Manage();
         KNet.Model.System_Message_Manage Model = new KNet.Model.System_Message_Manage();
+        Model.SMM_ID = Page.GetNewID("System_Message_Manage", 1);
         Model.SMM_Del = 0;
         Model.SMM_ReceiveID = context.Request["TO_ID"];
         Model.SMM_SenderID = AM.KNet_StaffNo;

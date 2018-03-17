@@ -180,7 +180,7 @@ public partial class Web_Report_Xs_List_CkList : BasePage
                     s_Details += "<td align=center class='thstyleLeftDetails'  noWrap>&nbsp;" + base.Base_GetUserName(Dtb_Table.Rows[i][9].ToString()) + "</td>\n";//制单人
                     if (Dtb_Table.Rows[i]["DirectOutCheckYN"].ToString() == "3")
                     {
-                        s_Details += "<td align=center  class='thstyleLeftDetails' noWrap>&nbsp;宗微微</td>\n";//制单人
+                        s_Details += "<td align=center  class='thstyleLeftDetails' noWrap>&nbsp;是</td>\n";//制单人
                     }
                     else
                     {

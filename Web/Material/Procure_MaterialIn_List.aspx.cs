@@ -31,7 +31,32 @@ public partial class Procure_MaterialIN_List : BasePage
             {
                 string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"];
                 base.Base_DropWareHouseBind(this.Ddl_House, " KSW_Type='0' ");
+                string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
+                this.Tbx_WhereID.Text = s_WhereID;
+                if (Tbx_WhereID.Text == "")
+                {
 
+                    try
+                    {
+                        string s_Sql = "Select PBW_ID from PB_Basic_Where  where PBW_Del=0 and PBW_Type='101' and PBW_Table='Procure_MaterialIn'";
+                        DateTime Dtm_now = DateTime.Now;
+                        int i_Month = Dtm_now.Month - 1;
+                        if (i_Month == 0)
+                        {
+                            s_Sql += " and PBW_Name like '上年%' ";
+                            i_Month = 12;
+                        }
+                        else
+                        {
+                            s_Sql += " and PBW_Name like '" + i_Month.ToString() + "%' ";
+                        }
+                        this.BeginQuery(s_Sql);
+                        this.Tbx_WhereID.Text = this.QueryForReturn();
+                        Response.Redirect("Procure_MaterialIn_List.aspx?WhereID=" + this.Tbx_WhereID.Text + "");
+                    }
+                    catch
+                    { }
+                }
                 if (s_ID != "")
                 {
                     if (AM.CheckLogin("财务审核出库单") == true)

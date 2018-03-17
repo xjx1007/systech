@@ -131,10 +131,6 @@ public partial class Web_List_OrderIn : BasePage
                     s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["HandMoney"].ToString(), 4) + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["TotalMoney"].ToString(), 2) + "</td>\n";
 
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_MaterFaxMoney"].ToString(), 2) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_ScHandFaxMoney"].ToString(), 2) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_MaterPrice"].ToString(), 6) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  >" + base.FormatNumber1(Dtb_Table.Rows[i]["SER_MaterMoney"].ToString(), 2) + "</td>\n";
 
                     s_Details += "<td  class='thstyleLeftDetails' align=right  >&nbsp;" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
 
@@ -158,11 +154,6 @@ public partial class Web_List_OrderIn : BasePage
                 s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber1.ToString(), 0) + "</td>\n";
                 s_Details += "<td  class='thstyleLeftDetails' align=right noWrap colspan='2' >&nbsp;</td>\n";//money
                 s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber3.ToString(), 2) + "</td>\n";
-                s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber4.ToString(), 2) + "</td>\n";
-                s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber5.ToString(), 2) + "</td>\n";
-                s_Details += "<td  class='thstyleLeftDetails' align=right noWrap  >&nbsp;</td>\n";//money
-
-                s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalNumber6.ToString(), 2) + "</td>\n";
                 s_Details += "<td  class='thstyleLeftDetails' align=right noWrap  >&nbsp;</td>\n";//money
                 s_Details += " </tr>";
                 s_House = Dtb_Table.Rows[0][0].ToString();
@@ -186,10 +177,6 @@ public partial class Web_List_OrderIn : BasePage
             s_Head += "<th class=\"thstyle\">材料费</th>\n";
             s_Head += "<th class=\"thstyle\">加工费</th>\n";
             s_Head += "<th class=\"thstyle\">金额</th>\n";
-            s_Head += "<th class=\"thstyle\">材料费不含税</th>\n";
-            s_Head += "<th class=\"thstyle\">加工费不含税</th>\n";
-            s_Head += "<th class=\"thstyle\">材料费单价</th>\n";
-            s_Head += "<th class=\"thstyle\">材料费合计</th>\n";
             s_Head += "<th class=\"thstyle\">备注</th>\n";
             s_Head += "</thead><tbody class=\"scrollContent\">";
             s_Details += "</div>";

@@ -362,7 +362,8 @@
                                         <td style="line-height: 26px;" valign="top">●<a style="color: rgb(153, 102, 51);" href="javascript:;" onclick="PageGo('../../Report_Cg/Order/Report_Order.aspx')">订单汇总表</a>
                                             ●<a style="color: rgb(153, 102, 51);" href="javascript:;" onclick="PageGo('../../Report_Cg/Order/Report_OrderList.aspx')">订单明细表</a>
                                             ●<a style="color: rgb(153, 102, 51);" href="javascript:;" onclick="PageGo('../../Report_Cg/MonthOrder/Report_Order.aspx')">供应商月采购金额</a>
-                                            ●<a style="color: rgb(153, 102, 51);" href="/Web/Sc/Sc_Plan_Material.aspx"  target="_blank">物料计划</a>
+                                                                                      ●<a style="color: rgb(153, 102, 51);" href="/Web/Cg/Order/Sc_Plan_Material.aspx"  target="_blank">物料计划</a>
+
                                         </td>
                                     </tr>
                                 </tbody>

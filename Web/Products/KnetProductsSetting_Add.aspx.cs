@@ -705,7 +705,16 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 }
             }
         }
-
+        /*
+        if (AM.YNAuthority("一般元器件增删改权限"))
+        {
+            b_Isadd = true;
+        }
+        if (AM.YNAuthority("特殊物料增删改权限"))
+        {
+            b_Isadd1 = true;
+        }
+        */
         /* if ((AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "姚丽春") || (AM.KNet_StaffName == "毛刚挺"))
          {
              b_Isadd = true;
@@ -925,7 +934,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 s_Where1 += " and  b.KSP_Del=0 ";
             }
             string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
-            s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 ";
+            s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1  and  b.KSP_Del=0  ";
             this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
 
             DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();

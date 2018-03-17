@@ -6,7 +6,7 @@
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="../css/knetwork.css" type="text/css">
+<link rel="stylesheet" href="../../css/knetwork.css" type="text/css">
 <base target="_self" />
 <script>   
   function closeWindow()   
@@ -58,14 +58,14 @@ function set_return(Return_id, Return_name) {
 <style type="text/css">
 .Div11
 {
-  background-image:url(../images/midbottonA2.gif); 
+  background-image:url(../../images/midbottonA2.gif); 
   background-repeat:no-repeat;
   z-index:0px;
   padding-top:3px;
 }
 .Div22
 {
-  background-image:url(../images/midbottonB2.gif); 
+  background-image:url(../../images/midbottonB2.gif); 
   background-repeat:no-repeat;
   z-index:0px;
   padding-top:3px;

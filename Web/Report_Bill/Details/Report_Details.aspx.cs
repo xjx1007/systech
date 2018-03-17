@@ -67,7 +67,7 @@ public partial class Web_Report_Details : BasePage
         string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
         string s_ProductsEdition = Request.QueryString["ProductsEdtion"] == null ? "" : Request.QueryString["ProductsEdtion"].ToString();
         string s_Number = Request.QueryString["Number"] == null ? "" : Request.QueryString["Number"].ToString();
-        
+
         string s_ProductsType = Request.QueryString["ProductsType"] == null ? "" : Request.QueryString["ProductsType"].ToString();
         string s_Sql = "select b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType,Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)  as QCAmount  ";
 
@@ -155,18 +155,18 @@ public partial class Web_Report_Details : BasePage
         this.QueryForDataTable();
         DataTable Dtb_Table = this.Dtb_Result;
         for (int i = 0; i < Dtb_Table.Columns.Count; i++)
-        {   
+        {
             ICell cell = headerrow.CreateCell(i);
             cell.CellStyle = style;
             cell.SetCellValue(Dtb_Table.Columns[i].ColumnName);
-        } 
+        }
         MemoryStream ms = new MemoryStream();
         book.Write(ms);
         Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", HttpUtility.UrlEncode("材料收发存报表" + "_" + DateTime.Now.ToString("yyyy-MM-dd"), System.Text.Encoding.UTF8)));
-        Response.BinaryWrite(ms.ToArray()); 
-        Response.End(); 
-        book = null; 
-        ms.Close(); 
+        Response.BinaryWrite(ms.ToArray());
+        Response.End();
+        book = null;
+        ms.Close();
         ms.Dispose();
     }
 
@@ -181,8 +181,8 @@ public partial class Web_Report_Details : BasePage
             this.Button2.Text = "计算中....";
             // string s_DoSql = " exec Pro_UpdateStore ";
             int i_Row1;
-         //   SqlParameter[] parameters1 = { };
-           // DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
+            //   SqlParameter[] parameters1 = { };
+            // DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
 
 
             //  s_DoSql = "exec CalculationAllWwPrice '" + this.Tbx_Month.Text + "','" + this.Tbx_Year.Text + "'";
@@ -197,11 +197,11 @@ public partial class Web_Report_Details : BasePage
 
             if (i_Row > 0)
             {
-               // DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
+                // DbHelperSQL.RunProcedure("Pro_UpdateStore", parameters1, out i_Row1);
                 this.Button2.Text = "计算完成";
                 AM.Add_Logs("计算委外价格：年：" + this.Tbx_Year.Text + " 月" + this.Tbx_Month.Text);
                 Alert("计算成功！");
-               
+
             }
             //this.Button2.Text = "计算";
 
@@ -209,6 +209,7 @@ public partial class Web_Report_Details : BasePage
         catch (Exception ex)
         {
             this.Button2.Text = "计算";
+            Alert("计算失败！");
         }
     }
 }

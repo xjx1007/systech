@@ -51,7 +51,7 @@ public partial class Knet_Web_System_Knet_Document_View : BasePage
             this.Lbl_Name.Text = Model.PBM_Name;
         this.Lbl_Type.Text = base.Base_GetBasicCodeName("111",Model.PBM_Type);
         this.Lbl_DutyPerson.Text = base.Base_GetUserName(Model.PBM_DutyPerson);
-        this.Lbl_Spce.Text = "<a href=\"/Web/UpLoadPic/Word/" + Model.PBM_DocName + "\">" + Model.PBM_DocName + "";
+        this.Lbl_Spce.Text = "<a href=\"/UpFile/Word/" + Model.PBM_DocName + "\">" + Model.PBM_DocName + "";
         this.Lbl_Details.Text = Model.PBM_Details;
         this.Lbl_Visio.Text = Model.PBM_Visio;
         this.Lbl_FaterName.Text = "<a href=\"/Web/UpLoadPic/Word/" + BLL.GetDocumentName(Model.PBM_FatherID) + "\">" + BLL.GetDocumentName(Model.PBM_FatherID) + "";
@@ -67,7 +67,7 @@ public partial class Knet_Web_System_Knet_Document_View : BasePage
 
     protected void Lbl_Spce_Click(object sender, EventArgs e)
     {
-        string UploadPath = "/Web/UpLoadPic/Word/" + this.Lbl_Spce.Text;  //上传文件
+        string UploadPath = "/UpFile/Word/" + this.Lbl_Spce.Text;  //上传文件
         Response.Redirect(UploadPath);
     }
 }

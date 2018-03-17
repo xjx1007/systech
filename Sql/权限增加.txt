@@ -1,0 +1,7 @@
+﻿
+
+select * from KNet_Sys_AuthorityUserGroupSetup
+
+insert into KNet_Sys_AuthorityUserGroupSetup
+select AuthorityValue,'131461501157950475',AuthorityGroup from KNet_Sys_AuthorityUserGroupSetup
+where GroupValue='130167701451718750'

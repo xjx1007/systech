@@ -373,6 +373,40 @@ namespace KNet.DAL
                 return PBP_ID;
             }
         }
+
+        public string GetSonIDss(string PBP_ID)
+        {
+            string s_ID = PBP_ID + ",";
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select   * from PB_Basic_ProductsClass ");
+            strSql.Append(" where PBP_FaterID in('" + PBP_ID.Replace(",", "','") + "') ");
+       
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+
+                    if (ds.Tables[0].Rows[i]["PBP_ID"] != null && ds.Tables[0].Rows[i]["PBP_ID"].ToString() != "")
+                    {
+                        //s_ID += ds.Tables[0].Rows[i]["PBP_ID"].ToString() + ",";
+                        s_ID += GetSonIDs(ds.Tables[0].Rows[i]["PBP_ID"].ToString()) + ",";
+                    }
+                    else
+                    {
+                        s_ID += "";
+                    }
+                }
+                s_ID = s_ID.Substring(0, s_ID.Length - 1);
+
+                return s_ID;
+            }
+            else
+            {
+                return PBP_ID;
+            }
+        }
+
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

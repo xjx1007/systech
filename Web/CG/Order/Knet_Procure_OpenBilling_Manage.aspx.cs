@@ -497,17 +497,26 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
             string s_Sql = "Select Sum(KSP_isModiy) from KNet_Sys_Products a join Knet_Procure_OrdersList_Details b on a.ProductsBarCode=b.ProductsBarCode";
             s_Sql += " where b.OrderNo='" + Model.OrderNo + "' ";
             this.BeginQuery(s_Sql);
-            string s_IsModiy = this.QueryForReturn();
-            if (int.Parse(s_IsModiy) > 0)
+            try
             {
-                s_Return += "<font color=red>产品需确认</font>";
+                string s_IsModiy = this.QueryForReturn();
+
+                if (int.Parse(s_IsModiy) > 0)
+                {
+                    s_Return += "<font color=red>产品需确认</font>";
+                }
+                else
+                {
+                    JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "";
+                    s_Return = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=120,left=150,toolbar=yes, menubar=yes,scrollbars=yes, resizable=yes, location=yes, status=yes, width=780,height=500');\"  title=\"点击查看\"><img src=\"../../images/View.gif\"  border=\"0\" /></a>";
+                    s_Return += "  <a href=\"PDF/" + Model.OrderNo + ".PDF\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/pdf.gif\"  border=\"0\" /></a> ";
+                    s_Return += "  <a href=\"../../Mail/PB_Basic_Mail_Add.aspx?OrderNo=" + Model.OrderNo + "\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/email.gif\"  border=\"0\" /></a> ";
+
+                }
             }
-            else
+            catch
             {
-                JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "";
-                s_Return = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=120,left=150,toolbar=yes, menubar=yes,scrollbars=yes, resizable=yes, location=yes, status=yes, width=780,height=500');\"  title=\"点击查看\"><img src=\"../../images/View.gif\"  border=\"0\" /></a>";
-                s_Return += "  <a href=\"PDF/" + Model.OrderNo + ".PDF\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/pdf.gif\"  border=\"0\" /></a> ";
-                s_Return += "  <a href=\"../../Mail/PB_Basic_Mail_Add.aspx?OrderNo=" + Model.OrderNo + "\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/email.gif\"  border=\"0\" /></a> ";
+                s_Return += "<font color=red>产品不存在</font>";
 
             }
         }

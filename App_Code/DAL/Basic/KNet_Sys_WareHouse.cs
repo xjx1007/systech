@@ -292,7 +292,7 @@ namespace KNet.DAL
             {
                 strSql.Append(" where " + strWhere);
             }
-            strSql.Append(" order by  HouseDate desc ");
+            strSql.Append(" order by KSW_Order desc, HouseDate desc ");
             return DbHelperSQL.Query(strSql.ToString());
         }
         #endregion  成员方法

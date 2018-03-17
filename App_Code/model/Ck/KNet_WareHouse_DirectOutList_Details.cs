@@ -35,6 +35,23 @@ namespace KNet.Model
         private string _OrderNo;
         private string _MaterNo;
         private string _KWD_IsFollow;
+        private decimal _KWD_WwPrice;
+        private decimal _KWD_WwMoney;
+
+
+        public decimal KWD_WwMoney
+        {
+            set { _KWD_WwMoney = value; }
+            get { return _KWD_WwMoney; }
+        }
+        /// <summary>
+        /// 总仓库中的产品ID值
+        /// </summary>
+        public decimal KWD_WwPrice
+        {
+            set { _KWD_WwPrice = value; }
+            get { return _KWD_WwPrice; }
+        }
         /// <summary>
         /// 总仓库中的产品ID值
         /// </summary>

@@ -301,11 +301,6 @@
                <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
           </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="出货仓库"  SortExpression="HouseNo" HeaderStyle-Font-Size="12px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
         <asp:TemplateField HeaderText="领用型号"   HeaderStyle-Font-Size="12px"     ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
           <ItemTemplate>
                <%# GetDirectOutProductsPatten(DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString())%>

@@ -146,7 +146,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
     {
         AdminloginMess AM = new AdminloginMess();
 
-        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "项洲"))
+        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "陈晓玲"))
         {
 
             string sql = "delete from KNet_Sales_ContractList where"; //删除合同
@@ -157,57 +157,10 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
             {
                 CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
 
-                bool b_Checked = true;
-                string s_ContractNo = GridView1.DataKeys[i].Value.ToString(); //获取ID值
-                KNet.BLL.KNet_Sales_ContractList Bll = new KNet.BLL.KNet_Sales_ContractList();
-                KNet.Model.KNet_Sales_ContractList Model = Bll.GetModelB(s_ContractNo);
-                string s_contractStaffNo = Model.ContractStaffNo;
-                if (AM.KNet_StaffNo != s_contractStaffNo)
-                {
-                    b_Checked = false;
-                }
-                this.BeginQuery("select * from KNet_Sales_Flow a Where KSF_Del='0' and KSF_State='1' and  KSF_ContractNo='" + s_ContractNo + "'");
-                this.QueryForDataTable();
-                if ((this.Dtb_Result.Rows.Count <= 0))
-                {
-                    b_Checked = true;
-                }
-                else
-                {
-                    string s_DeptID = Base_GetNextDept(s_ContractNo, "101");
-                    this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where KSF_State='0'  and KSF_ContractNo='" + s_ContractNo + "' and StaffDepart='" + s_DeptID + "'");
-                    this.QueryForDataTable();
-                    if ((this.Dtb_Result.Rows.Count > 0))
-                    {
-                        b_Checked = true;
-                    }
-                    else
-                    {
-                        b_Checked = false;
-                    }
-                }
-                if ((cb.Checked == true) && (b_Checked == true))
+                if (cb.Checked == true) 
                 {
                     cal += " ContractNo='" + GridView1.DataKeys[i].Value.ToString() + "' or";
 
-                    KNet.BLL.KNet_Sales_ContractList_Details BLL = new KNet.BLL.KNet_Sales_ContractList_Details();
-                    DataSet ds = BLL.GetList(" ContractNo='" + GridView1.DataKeys[i].Value.ToString() + "' ");
-
-                    for (int j = 0; j <= ds.Tables[0].Rows.Count - 1; j++)
-                    {
-                        DataRowView mydrv = ds.Tables[0].DefaultView[j];
-
-                        string ID = mydrv["ID"].ToString();
-                        string ProductsBarCode = mydrv["ProductsBarCode"].ToString();
-                        string HouseNo = GetHouseNo(GridView1.DataKeys[i].Value.ToString());
-                        string OwnallPID = mydrv["OwnallPID"].ToString();
-                        try
-                        {
-                            BLL.Delete(ID);
-                        }
-                        catch
-                        { }
-                    }
                 }
             }
             if (cal != "")
@@ -227,7 +180,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
             DbHelperSQL.ExecuteSql(sql2);
 
             AdminloginMess LogAM = new AdminloginMess();
-            LogAM.Add_Logs("销售管理--->销售合同管理--->合同单删除 操作成功！");
+            LogAM.Add_Logs("销售管理--->销售合同管理--->合同单删除 操作成功！" + cal);
 
             this.DataShows();
             this.RowOverYN();

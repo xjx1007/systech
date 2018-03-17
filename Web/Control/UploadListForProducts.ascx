@@ -109,11 +109,11 @@
                         <ItemStyle Width="80px" />
                     </asp:TemplateField>
 
-                                                    <asp:TemplateField HeaderText="状态" SortExpression="PBA_Del">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="ImageButton1" runat="server"  CommandName="De" CommandArgument='<%#Eval("PBA_ID") %>' OnClientClick="return confirm('确定停用或启用当前附件？')"><%#GetBasicCode("204",DataBinder.Eval(Container.DataItem, "PBA_Del").ToString())%></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="状态" SortExpression="PBA_Del">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="ImageButton1" runat="server" CommandName="De" CommandArgument='<%#Eval("PBA_ID") %>' OnClientClick="return confirm('确定停用或启用当前附件？')"><%#GetBasicCode("204",DataBinder.Eval(Container.DataItem, "PBA_Del").ToString())%></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="审批" SortExpression="PBA_State" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                         <ItemTemplate>
                             <asp:LinkButton ID="Btn_Sp" runat="server" CommandName="Sp" CommandArgument='<%#Eval("PBA_ID") %>'><%#GetAtt(DataBinder.Eval(Container.DataItem, "PBA_State").ToString())%></asp:LinkButton>
@@ -122,7 +122,7 @@
                     <asp:TemplateField HeaderText="更新" HeaderStyle-Font-Size="12px"
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <input type="button" id="btn" onclick="return btnGetFJReturnValue_onclick1('<%#Eval("PBA_ID") %>')" value="更新" />
+                            <input type="button" id="btn" onclick="return btnGetFJReturnValue_onclick1('<%#Eval("PBA_ID") %> ')" value="更新" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

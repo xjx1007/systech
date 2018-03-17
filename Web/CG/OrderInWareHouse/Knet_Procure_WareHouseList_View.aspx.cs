@@ -138,7 +138,17 @@ public partial class Web_Knet_Procure_WareHouseList_View : BasePage
                     try
                     {
                         decimal d_Money=decimal.Parse(Dts_Details.Tables[0].Rows[i]["WareHouseAmount"].ToString())*decimal.Parse(Dts_Details.Tables[0].Rows[i]["WareHouseUnitPrice"].ToString());
-                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +d_Money.ToString() + "</td>";
+                        if (d_Money == 0)
+                        {
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["WareHouseTotalNet"].ToString() + "</td>";
+
+
+                        }
+                        else
+                        {
+                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + d_Money.ToString() + "</td>";
+ 
+                        }
                     }
                     catch
                     { }

@@ -79,8 +79,8 @@ namespace KNet.DBUtility
                     s_Script += "rootpath =\"http://\"+host+\"/\";parent.location.href = rootpath+\"Default.aspx\";";
                     s_Script += " }\n";
                     s_Script += " </script>\n";
-                    
-                   
+
+
                     System.Web.HttpContext.Current.Response.Write(s_Script);
                     System.Web.HttpContext.Current.Response.End();
                 }
@@ -133,7 +133,7 @@ namespace KNet.DBUtility
                 }
             }
             catch
-             {
+            {
                 throw;
             }
         }
@@ -726,7 +726,7 @@ namespace KNet.DBUtility
                 return _ProductsType;
             }
         }
-        
+
         /// <summary>
         /// 本次登录IP地址 
         /// </summary>
@@ -809,7 +809,7 @@ namespace KNet.DBUtility
             set { _KRS_IsWeb = value; }
             get { return _KRS_IsWeb; }
         }
-        
+
         //************************************************************************
         /// <summary>
         /// 检查会员是否登录true已经登陆,false为没有登陆
@@ -982,13 +982,13 @@ namespace KNet.DBUtility
                 }
             }
         }
-        
+
         //==================================
         /// <summary>
         /// 系统下载记录
         /// </summary>
         /// <param name="P_str_logContent">日志内容</param>
-        
+
         public void Add_DownRecord(string s_FID)
         {
             string StaffNoss = StaffNo;
@@ -997,9 +997,9 @@ namespace KNet.DBUtility
             {
                 using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
                 {
-                    BasePage base1=new BasePage();
+                    BasePage base1 = new BasePage();
                     string s_Dosql = "insert into PB_Basic_Attachment_DownRecord values('" + base1.GetMainID() + "','" + s_FID + "',GetDate(),'" + StaffNoss + "','" + System.Web.HttpContext.Current.Request.UserHostAddress.ToString().Trim() + "')";
-                   
+
                     try
                     {
                         DbHelperSQL.ExecuteSql(s_Dosql);
@@ -1011,7 +1011,7 @@ namespace KNet.DBUtility
                 }
             }
         }
-        
+
         //=========================================================================
         /// <summary>
         /// true 受权正式版

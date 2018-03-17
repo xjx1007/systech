@@ -72,7 +72,7 @@ public partial class CG_Payment_For_Print : BasePage
             this.Lbl_Shi.Text = model.CPF_Shi;
             if (model.CPF_State == 2)
             {
-                this.Lbl_CwPerson.Text = "宗微微";
+                this.Lbl_CwPerson.Text = "是";
             }
             this.Lbl_ZPerson.Text = base.Base_GetUserName(model.CPF_ZPerson);
           //  string s_Sql = "Update CG_Payment_For set CPF_PrintNums=CPF_PrintNums+1 where CPF_ID='" + model.CPF_ID + "'";

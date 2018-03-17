@@ -23,7 +23,7 @@ public partial class List_CkList3 : BasePage
         {
             AdminloginMess Am = new AdminloginMess();
             string s_Sql = "Select AllocateNo,AllocateDateTime,OutHouseNo,inHoueNO,inHoueName,ProductsName,ProductsBarCode,KSP_COde,AllocateAmount,Allocate_WwPrice,";
-            s_Sql += " Allocate_WwMoney ,AllocateStaffNo,AllocateCheckStaffNo,OutHouseName,ProductsEdition ";
+            s_Sql += " Allocate_WwMoney ,AllocateStaffNo,AllocateCheckStaffNo,OutHouseName,ProductsEdition,AllocateTotalNet,AllocateUnitPrice ";
             s_Sql += " from  v_AllocateList  ";
             s_Sql += " Where 1=1 and AllocateNo not like 'FX%'  ";
             string s_StartDate = Request.QueryString["StartDate"] == null ? "" : Request.QueryString["StartDate"].ToString();
@@ -48,7 +48,7 @@ public partial class List_CkList3 : BasePage
 
             string s_Details = "", s_Style = "";
             string s_Head = "";
-            Decimal DTotalNum = 0, DTotalNum1 = 0;;
+            Decimal DTotalNum = 0, DTotalNum1 = 0, DTotalNum2 = 0;
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n";
             s_Head += "<thead class=\"fixedHeader\"> \n";
             s_Head += "<tr>\n<th colspan=\"13\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>原材料调拨明细</th></tr>\n";
@@ -64,7 +64,9 @@ public partial class List_CkList3 : BasePage
             s_Head += "<th class=\"thstyle\">数量</th>\n";
             s_Head += "<th class=\"thstyle\">单价</th>\n";
 
-            s_Head += "<th class=\"thstyle\">金额</th>\n";
+            s_Head += "<th class=\"thstyle\">调拨出金额</th>\n";
+            s_Head += "<th class=\"thstyle\">单价</th>\n";
+            s_Head += "<th class=\"thstyle\">调拨入金额</th>\n";
 
             s_Head += "<th class=\"thstyle\">制单人</th>\n";
             s_Head += "<th class=\"thstyle\">审核</th>\n";
@@ -168,6 +170,8 @@ public partial class List_CkList3 : BasePage
 
                     s_Details += "<td align=right class='thstyleLeftDetails'  noWrap>" + Dtb_Table.Rows[i]["Allocate_WwPrice"].ToString() + "</td>\n";//数量
                     s_Details += "<td align=right class='thstyleLeftDetails'  noWrap>" + Dtb_Table.Rows[i]["Allocate_WwMoney"].ToString() + "</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails'  noWrap>" + Dtb_Table.Rows[i]["AllocateUnitPrice"].ToString() + "</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails'  noWrap>" + Dtb_Table.Rows[i]["AllocateTotalNet"].ToString() + "</td>\n";//数量
                     s_Details += "<td align=center class='thstyleLeftDetails'  noWrap>&nbsp;" + base.Base_GetUserName(Dtb_Table.Rows[i]["AllocateStaffNo"].ToString()) + "</td>\n";//制单人
                     s_Details += "<td align=center  class='thstyleLeftDetails' noWrap>&nbsp;" + base.Base_GetUserName(Dtb_Table.Rows[i]["AllocateCheckStaffNo"].ToString()) + "</td>\n";//制单人
                     s_Details += " </tr>";
@@ -178,7 +182,16 @@ public partial class List_CkList3 : BasePage
                     }
                     catch
                     {
-                        DTotalNum1 += 0;
+                        DTotalNum2 += 0;
+                    }
+                    try
+                    {
+
+                        DTotalNum2 += Decimal.Parse(Dtb_Table.Rows[i]["AllocateTotalNet"].ToString());
+                    }
+                    catch
+                    {
+                        DTotalNum2 += 0;
                     }
                 }
             }
@@ -191,6 +204,9 @@ public partial class List_CkList3 : BasePage
             s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + DTotalNum.ToString() + "</td>\n";//数量
             s_Details += "<td align=right class='thstyleLeftDetails'  noWrap>&nbsp;</td>\n";//单价
             s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + DTotalNum1.ToString() + "</td>\n";//数量
+            s_Details += "<td align=right class='thstyleLeftDetails'  noWrap>&nbsp;</td>\n";//单价
+
+            s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + DTotalNum2.ToString() + "</td>\n";//数量
 
             
             s_Details += "<td align=right class='thstyleLeftDetails' colspan=2 noWrap>&nbsp;</td>\n";//单价

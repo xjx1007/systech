@@ -59,6 +59,12 @@
                       var   firstdate = year + '-' + month + '-01';  
                        var  day = new Date(year,month,0);   
                        var lastdate = year + '-' + month + '-' + day.getDate();//获取当月最后一天日期    
+                       if (month > 12)
+                       {
+                           year = year + 1;
+                           month = month - 12;
+                       }
+                       firstdate = year + '-' + month + '-01';
           //给文本控件赋值。同下  
                        return firstdate;
                     }  

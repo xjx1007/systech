@@ -182,7 +182,7 @@
                             <td>
                                 <!--GridView-->
 
-                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="5" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
+                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
                                     OnRowDeleting="GridView1_RowDeleting" OnRowDataBound="GridView1_RowDataBound">
                                     <Columns>
 
@@ -225,12 +225,6 @@
                                             <HeaderStyle Font-Size="12px" HorizontalAlign="Left" />
                                         </asp:CommandField>
 
-
-                                        <asp:TemplateField HeaderText="权限设置" HeaderStyle-Font-Size="12px" SortExpression="StaffNo" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# Get_MangerDetail(Eval("StaffNo").ToString())%>&nbsp;<%# GetGroupNameYNPic(Eval("StaffNo").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
                                     </Columns>
                                     <HeaderStyle CssClass='colHeader' />
                                     <RowStyle CssClass='listTableRow' />

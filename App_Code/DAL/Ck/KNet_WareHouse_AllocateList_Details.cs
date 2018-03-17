@@ -47,9 +47,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_AllocateList_Details(");
-            strSql.Append("AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID,KWAD_FaterBarCode,KWAD_CPBZNumber,KWAD_BZNumber)");
+            strSql.Append("AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID,KWAD_FaterBarCode,KWAD_CPBZNumber,KWAD_BZNumber,KWAD_BadNumber,KWAD_AddBadNumber)");
             strSql.Append(" values (");
-            strSql.Append("@AllocateNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@AllocateAmount,@AllocateUnitPrice,@AllocateDiscount,@AllocateTotalNet,@AllocateRemarks,@OwnallPID,@KWAD_FaterBarCode,@KWAD_CPBZNumber,@KWAD_BZNumber)");
+            strSql.Append("@AllocateNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@AllocateAmount,@AllocateUnitPrice,@AllocateDiscount,@AllocateTotalNet,@AllocateRemarks,@OwnallPID,@KWAD_FaterBarCode,@KWAD_CPBZNumber,@KWAD_BZNumber,@KWAD_BadNumber,@KWAD_AddBadNumber)");
             SqlParameter[] parameters = {
 					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -64,7 +64,10 @@ namespace KNet.DAL
 					new SqlParameter("@OwnallPID", SqlDbType.NVarChar,50),
 					new SqlParameter("@KWAD_FaterBarCode", SqlDbType.NVarChar,50),
 					new SqlParameter("@KWAD_CPBZNumber", SqlDbType.Int,4),
-					new SqlParameter("@KWAD_BZNumber", SqlDbType.Int,4)
+					new SqlParameter("@KWAD_BZNumber", SqlDbType.Int,4),
+					new SqlParameter("@KWAD_BadNumber", SqlDbType.Int,4),
+					new SqlParameter("@KWAD_AddBadNumber", SqlDbType.Int,4)
+
                                         };
             parameters[0].Value = model.AllocateNo;
             parameters[1].Value = model.ProductsName;
@@ -80,6 +83,8 @@ namespace KNet.DAL
             parameters[11].Value = model.KWAD_FaterBarCode;
             parameters[12].Value = model.KWAD_CPBZNumber;
             parameters[13].Value = model.KWAD_BZNumber;
+            parameters[14].Value = model.KWAD_BadNumber;
+            parameters[15].Value = model.KWAD_AddBadNumber;
             
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -309,7 +314,7 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * ");
-            strSql.Append(" FROM KNet_WareHouse_AllocateList_Details  a  join KNet_WareHouse_AllocateList b on a.AllocateNo=b.AllocateNo  left join v_Order_ProductsDemo_Details e on e.XPD_ProductsBarCode=a.ProductsBarCode  and e.FaterBarCode=a.KWAD_FaterBarCode  and KWA_OrderNo=OrderNo ");
+            strSql.Append(" FROM KNet_WareHouse_AllocateList_Details  a  join KNet_WareHouse_AllocateList b on a.AllocateNo=b.AllocateNo ");
             strSql.Append(" join knet_sys_products c on a.productsBarCode=c.productsBarCode ");
 
             if (strWhere.Trim() != "")

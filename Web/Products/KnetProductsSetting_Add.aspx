@@ -177,7 +177,7 @@
             intSeconds = today.getSeconds();
             v_newNum = $("Products_BomNum").value;
             //var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            var tempd = window.open("SelectProductsDemo.aspx?ID=&callBack=SetReturnValueInOpenner_ProductsDemo1", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            var tempd = window.open("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&callBack=SetReturnValueInOpenner_ProductsDemo1", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }
         function SetReturnValueInOpenner_ProductsDemo1(tempd) {
             if (tempd != undefined) {
@@ -334,7 +334,7 @@
             var v_Num = "";
             v_Num = document.all("Products_BomNum").value;
             if (v_Num != "") {
-
+                var v_Have = "";
                 var v_ErrorText = "";
                 for (var i = 0; i < parseInt(v_Num) + 1 ; i++) {
 
@@ -349,37 +349,53 @@
 
                         var DemoOrder = "";
                         DemoOrder = document.all("DemoOrder_" + i + "").value;
+                        var ProductsName = document.all("ProductsName_" + i + "").value;
 
                         if (place != "") {
                             var ss = place.split(",");
                             var v_length = ss.length;
 
-                            if (parseInt(v_length) != parseInt(DemoNumber))
+                            if (ProductsName != "辅料") {
+                                if (parseInt(v_length) != parseInt(DemoNumber))
 
-                                v_ErrorText += "<font color=red>行号：" + DemoOrder + "的" + ProductsEdition + " 的位号个数和BOM个数不一致！</font><br/>";
+                                    v_ErrorText += "<font color=red>行号：" + DemoOrder + "的" + ProductsEdition + " 的位号个数和BOM个数不一致！</font><br/>";
+                            }
+                        }
+                        var v_havebool = "0";
+                        if (v_Have != "") {
+                            var v_Haves = v_Have.split(",");
+                            for (var jj = 0; jj < v_Haves.length - 1; jj++) {
+                                if (i == v_Haves[jj]) {
+                                    v_havebool = 1;
+                                }
+                            }
                         }
                         for (var j = 0; j < parseInt(v_Num) + 1 ; j++) {
                             if (j != i) {
-
                                 var place1 = "";
-                                if (document.all("Place_" + j + "") != null) {
-                                    place1 = document.all("Place_" + j + "").value;
-                                    var ProductsEdition1 = document.all("ProductsEdition_" + j + "").value;
-                                    var DemoOrder1 = "";
-                                    DemoOrder1 = document.all("DemoOrder_" + j + "").value;
-                                    if (place1 == place) {
-                                        v_ErrorText += "<font color=red>位号已经存在！序号：" + DemoOrder + " 的 " + ProductsEdition + "和 序号：" + DemoOrder1 + " 的 " + ProductsEdition1 + " 位号相同！</font><br/>";
-
-                                        //alert(place1 + " 位号已经存在！序号："+DemoOrder+" 的 " + ProductsEdition + "和 序号："+DemoOrder1+" 的 " + ProductsEdition1 + " 位号相同！");
-                                        //   document.all("Place_" + i + "").focus();
-                                        // return false;
+                                if (v_havebool == 0)
+                                {
+                                    if (document.all("Place_" + j + "") != null) {
+                                        place1 = document.all("Place_" + j + "").value;
+                                        var ProductsEdition1 = document.all("ProductsEdition_" + j + "").value;
+                                        var DemoOrder1 = "";
+                                        DemoOrder1 = document.all("DemoOrder_" + j + "").value;
+                                        if (place1 != "") {
+                                            if (place1 == place) {
+                                                v_ErrorText += "<font color=red>位号已经存在！序号：" + DemoOrder + " 的 " + ProductsEdition + "和 序号：" + DemoOrder1 + " 的 " + ProductsEdition1 + " 位号相同！</font><br/>";
+                                                v_Have += j + ",";
+                                                //alert(place1 + " 位号已经存在！序号："+DemoOrder+" 的 " + ProductsEdition + "和 序号："+DemoOrder1+" 的 " + ProductsEdition1 + " 位号相同！");
+                                                //   document.all("Place_" + i + "").focus();
+                                                // return false;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-               // document.all("Lbl_Error").innerHTML = v_ErrorText;
+                document.all("Lbl_Error").innerHTML = v_ErrorText;
             }
         }
         function btnGetAlternativeProductsNum_onclick() {
@@ -782,12 +798,15 @@
                                                                         TextMode="MultiLine" Width="440px" Height="50px"></asp:TextBox>
                                                                 </td>
                                                                 <td align="left" class="dvtCellLabel">
-                                                                    <font color="gray">300字内.如体积大小,品牌,产地等.</font><br />
+                                                                    <font color="gray">1000字内.如体积大小,品牌,产地等.</font><br />
                                                                     &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server"
-                                                                        ControlToValidate="ProductsDescription" ValidationExpression="^(\s|\S){0,300}$"
+                                                                        ControlToValidate="ProductsDescription" ValidationExpression="^(\s|\S){0,1000}$"
                                                                         ErrorMessage="简单描述字太多" Display="dynamic"></asp:RegularExpressionValidator>
                                                                 </td>
+                                                                
+                                                                
                                                             </tr>
+                                                             
                                                             <tr>
                                                                 <td colspan="4">
 
@@ -950,7 +969,6 @@
                                                                     <%=s_ProductsTable_BomDetail %>
                                                                     <asp:Label runat="server" ID="Lbl_Bom" Visible="false"></asp:Label>
 
-                                                                    <asp:Label runat="server" ID="Lbl_Error"></asp:Label>
 
                                                                 </table>
                                                             </td>
@@ -958,6 +976,7 @@
 
                                                         <tr id="tr9">
                                                             <td colspan="4">
+                                                                    <asp:Label runat="server" ID="Lbl_Error"></asp:Label>
                                                                 <input id="Button4" runat="server" class="crmbutton small create" onclick="return btnGetBomProducts_onclick1()" type="button" value="选择材料" />
 
                                                             </td>

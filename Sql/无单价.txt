@@ -1,0 +1,60 @@
+﻿
+ select  * from KNet_WareHouse_DirectOutList_Details where DirectOutNo in(
+ select a.DirectOutNo from KNet_WareHouse_DirectOutList_Details a
+  join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo 
+  join KNet_Sys_Products d on d.ProductsBarCode=a.ProductsBarCode
+  where b.DirectOutDateTime<='2017-11-30' and b.DirectOutDateTime>='2017-11-1' and
+  d.KSP_COde like '02%'
+ group by a.DirectOutNo
+ having COUNT(a.DirectOutNo)=2 and
+ sum(a.directOutamount)=0)   and  isnull(KWD_WwMoney,0)<=0
+ 
+ select * from KNet_WareHouse_DirectOutList_Details where DirectOutNo in(
+ select a.DirectOutNo from KNet_WareHouse_DirectOutList_Details a
+  join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo join KNet_Sys_Products d on d.ProductsBarCode=a.ProductsBarCode
+  where b.DirectOutDateTime<='2017-11-30' and b.DirectOutDateTime>='2017-11-1' and
+  d.KSP_COde like '02%' 
+ group by a.DirectOutNo
+ having COUNT(a.DirectOutNo)=2 and 
+ sum(a.directOutamount)=0)    and  isnull(KWD_WwMoney,0)<=0
+ create view 结存无单价 as
+select a.ProductsBarCode,b.HouseNo,c.ProductsEdition '版本号',b.HouseName '仓库',SUM(DirectInAmount) '11结存数量',SUM(DirectInTotalNet) '11月结存金额',
+isnull((select top 1 ProcureUnitPrice from Knet_Procure_SuppliersPrice  
+where ProductsBarCode=a.ProductsBarCode ),0) '系统单价'
+ from v_Store a join KNet_Sys_WareHouse b on a.HouseNo=b.HouseNo 
+ join KNet_Sys_Products c on c.ProductsBarCode=a.ProductsBarCode
+  where DirectInDateTime<='2017-11-30' and c.KSP_COde like '02%'
+ group by a.ProductsBarCode,b.HouseNo,c.ProductsEdition,HouseName
+ having SUM(case when DirectInDateTime<='2017-11-30' then DirectInAmount else 0 end)<>0 and
+ SUM(case when DirectInDateTime<='2017-11-30' then DirectInTotalNet else 0 end)=0
+ order by HouseName,c.ProductsEdition
+
+ --先做采购单，
+ --做采购入库
+
+ delete from Knet_Procure_OrdersList_Details 
+ where OrderNo='POSTKJ170014'
+ 
+ insert into Knet_Procure_OrdersList_Details
+ select distinct dbo.GetID(),'POSTKJ170014',b.ProductsName,b.ProductsBarCode,b.ProductsPattern,'',1,系统单价,0,系统单价,'',0,0,GETDATE(),0,0,'',null,'','',0,0,''
+  from 结存无单价 a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode
+  select * from KNet_WareHouse_DirectOutList_Details where DirectOutNo='CK20171206000002'
+ insert into KNet_WareHouse_DirectOutList_Details 
+ select dbo.GetID(),'CK20171206000002',ProductsName,
+ ProductsBarCode,ProductsPattern,null,1000,WareHouseUnitPrice,null,
+ WareHouseTotalNet,'',GETDATE(),null,0,null,null,null,null,0,0,null,null,null,null,null,null,null,null,0,0,0,0,0,null
+ from Knet_Procure_WareHouseList_Details where WareHouseNo='W20171206-1666'
+ 
+
+
+ 
+select a.ProductsBarCode,b.HouseNo,c.ProductsEdition '版本号',b.HouseName '仓库',SUM(DirectInAmount) '11结存数量',SUM(DirectInTotalNet) '11月结存金额',
+isnull((select top 1 ProcureUnitPrice from Knet_Procure_SuppliersPrice  
+where ProductsBarCode=a.ProductsBarCode ),0) '系统单价'
+ from v_Store a join KNet_Sys_WareHouse b on a.HouseNo=b.HouseNo 
+ join KNet_Sys_Products c on c.ProductsBarCode=a.ProductsBarCode
+  where DirectInDateTime<='2017-11-30' and c.KSP_COde like '02%'
+ group by a.ProductsBarCode,b.HouseNo,c.ProductsEdition,HouseName
+ having SUM(case when DirectInDateTime<='2017-11-30' then DirectInAmount else 0 end)=0 and
+ SUM(case when DirectInDateTime<='2017-11-30' then DirectInTotalNet else 0 end)<>0
+ order by HouseName,c.ProductsEdition

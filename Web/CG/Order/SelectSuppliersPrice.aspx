@@ -147,7 +147,7 @@ if(http_request.readyState==4){
             <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
         </asp:BoundField>
         
-        <asp:BoundField  DataField="ProcureUnitPrice" ItemStyle-Font-Size="12px"  ItemStyle-ForeColor="blue"  HeaderText="单价"    HeaderStyle-Font-Size="12px"   SortExpression="ProcureUnitPrice" DataFormatString="{0:F4}" HtmlEncode="false">
+        <asp:BoundField  DataField="ProcureUnitPrice" ItemStyle-Font-Size="12px"  ItemStyle-ForeColor="blue"  HeaderText="单价"    HeaderStyle-Font-Size="12px"   SortExpression="ProcureUnitPrice" DataFormatString="{0:F6}" HtmlEncode="false">
             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
             <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
         </asp:BoundField> 

@@ -24,6 +24,7 @@ using System.Linq;
 using System.Web.Caching;
 using System.Xml;
 using System.Web.Script.Serialization;
+using KNet.BLL;
 
 /// <summary>
 /// BasePage 的摘要说明
@@ -45,6 +46,34 @@ public class BasePage : System.Web.UI.Page
         #endregion
     }
 
+    public bool CheckYNProducts(string s_ProductsType)
+    {
+        bool b_Bool = true;
+        AdminloginMess AM = new AdminloginMess();
+        if (AM.ProductsType != "")
+        {
+            try
+            {
+                //成品
+
+                KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
+                string s_SonID = Bll_ProductsDetails.GetSonIDss(AM.ProductsType);
+                s_SonID = s_SonID.Replace(",", "','");
+                string s_Sql = "select * from PB_Basic_ProductsClass where PBP_ID='" + s_ProductsType + "'  and PBP_ID in ('" + AM.ProductsType + "','" + s_SonID + "')";
+                this.BeginQuery(s_Sql);
+                this.QueryForDataTable();
+                if (Dtb_Result.Rows.Count <= 0)
+                {
+                    b_Bool = false;
+                }
+
+            }
+            catch
+            { }
+        }
+
+        return b_Bool;
+    }
     /// <summary>
     /// 弹出JavaScript小窗口,并返回上一步
     /// </summary>
@@ -1375,7 +1404,7 @@ public class BasePage : System.Web.UI.Page
     protected void Base_DropWareHouseBind(DropDownList DropHouse, string HouseNoSql)
     {
         KNet.BLL.KNet_Sys_WareHouse bll = new KNet.BLL.KNet_Sys_WareHouse();
-        DataSet ds = bll.GetList(" HouseYN=1 and (" + HouseNoSql + ") ");
+        DataSet ds = bll.GetList(" HouseYN=1 and (" + HouseNoSql + ")  ");
 
         DropHouse.DataSource = ds;
         DropHouse.DataTextField = "HouseName";
@@ -2217,6 +2246,45 @@ public class BasePage : System.Web.UI.Page
                     if ((Dtb_Table.Rows[i][0].ToString() != "") && (Dtb_Table.Rows[i][0].ToString() != "0"))
                     {
                         s_Return += Base_GetHouseName(Dtb_Table.Rows[i][1].ToString()) + "(" + Dtb_Table.Rows[i][0].ToString() + ")<br/>";
+                    }
+                }
+            }
+            else
+            {
+                s_Return = "-<br/>";
+            }
+        }
+        catch (Exception ex)
+        {
+            s_Return = "-<br/>";
+            throw;
+        }
+        return s_Return;
+    }
+
+
+    /// <summary>
+    /// 得到ck库存数量
+    /// </summary>
+    /// <param name="s_HouseNo"></param>
+    /// <param name="s_ProductsBarCode"></param>
+    /// <returns></returns>
+    public string Base_GetHouseAndNumber1(string s_ProductsBarCode)
+    {
+        string s_Return = "";
+        try
+        {
+            string s_Sql = "Select Sum(DirectInAmount),a.HouseNo from v_Store a join KNet_Sys_WareHouse b on a.HouseNo=b.HouseNo  Where a.ProductsBarCode='" + s_ProductsBarCode + "' and a.HouseType='0' Group by a.HouseNo having Sum(DirectInAmount)>0 ";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            DataTable Dtb_Table = this.Dtb_Result;
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                for (int i = 0; i < Dtb_Table.Rows.Count; i++)
+                {
+                    if ((Dtb_Table.Rows[i][0].ToString() != "") && (Dtb_Table.Rows[i][0].ToString() != "0"))
+                    {
+                        s_Return += Base_GetHouseName(Dtb_Table.Rows[i][1].ToString()) + "(" + Dtb_Table.Rows[i][0].ToString() + ")|";
                     }
                 }
             }
@@ -6418,41 +6486,220 @@ public class BasePage : System.Web.UI.Page
             {
                 s_ProductsType += "1" + ",";
             }
-            else if (AM.YNAuthority("生产文件可见权限"))
+            if (AM.YNAuthority("生产文件可见权限"))
             {
                 s_ProductsType += "4" + ",";
             }
-            else if (AM.YNAuthority("烧录文件可见权限"))
+            if (AM.YNAuthority("烧录文件可见权限"))
             {
                 s_ProductsType += "6" + ",";
             }
-            else if (AM.YNAuthority("生产注意事项可见权限"))
+            if (AM.YNAuthority("生产注意事项可见权限"))
             {
                 s_ProductsType += "5" + ",";
             }
-            else if (AM.YNAuthority("制板文件可见权限"))
+            if (AM.YNAuthority("制板文件可见权限"))
             {
                 s_ProductsType += "2" + ",";
             }
 
-            else if (AM.YNAuthority("线束制作可见权限"))
+            if (AM.YNAuthority("线束制作可见权限"))
             {
                 s_ProductsType += "3" + ",";
             }
 
-            else if (AM.YNAuthority("测试文件可见权限"))
+            if (AM.YNAuthority("测试文件可见权限"))
             {
                 s_ProductsType += "7" + ",";
             }
-            else if (AM.YNAuthority("散热器可见权限"))
+            if (AM.YNAuthority("散热器可见权限"))
             {
                 s_ProductsType += "8" + ",";
             }
+            if (AM.YNAuthority("生产SOP文件可见权限"))
+            {
+                s_ProductsType += "9" + ",";
+            }
+            if (AM.YNAuthority("测试SOP可见权限"))
+            {
+                s_ProductsType += "10" + ",";
+            }
+            if (AM.YNAuthority("IQC可见权限"))
+            {
+                s_ProductsType += "11" + ",";
+            }
+            if (AM.YNAuthority("OQC可见权限"))
+            {
+                s_ProductsType += "12" + ",";
+            }
+            if (AM.YNAuthority("代码工程可见权限"))
+            {
+                s_ProductsType += "13" + ",";
+            }
+            
+
             if (s_ProductsType != "")
             {
                 s_ProductsType = s_ProductsType.Substring(0, s_ProductsType.Length - 1);
             }
         }
         return s_ProductsType;
+    }
+    public string base_GetProductsFileUpdateType()
+    {
+        string s_Return = "";
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+            if (AM.YNAuthority("规格书修改权限"))
+            {
+                s_Return += "1,";
+            }
+            if (AM.YNAuthority("特殊物料增删改权限"))
+            {
+                s_Return += "2,3,8,";
+            }
+            if (AM.YNAuthority("生产文件修改权限"))
+            {
+                s_Return += "4,";
+            }
+            if (AM.YNAuthority("生产注意事项修改权限"))
+            {
+                s_Return += "5,";
+            }
+            if (AM.YNAuthority("生产SOP文件修改权限"))
+            {
+                s_Return += "9,";
+            }
+            if (AM.YNAuthority("测试SOP修改权限"))
+            {
+                s_Return += "10,";
+            }
+            if (AM.YNAuthority("烧录文件修改权限"))
+            {
+                s_Return += "6,";
+            }
+
+            if (AM.YNAuthority("IQC修改权限"))
+            {
+                s_Return += "11,";
+            }
+            if (AM.YNAuthority("OQC修改权限"))
+            {
+                s_Return += "12,";
+            }
+
+            if (AM.YNAuthority("代码工程修改权限"))
+            {
+                s_Return += "13,";
+            }
+
+            
+
+            if (s_Return != "")
+            {
+                s_Return = s_Return.Replace(",", "','");
+            }
+        }
+        catch
+        { }
+        return s_Return;
+    }
+
+
+    public bool base_GetProductsFileUpdateType(string s_ID)
+    {
+        bool s_Return = false;
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+            if (s_ID == "1")
+            {
+                if (AM.YNAuthority("规格书修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+
+            else if ((s_ID == "2") || (s_ID == "3") || (s_ID == "8"))
+            {
+                if (AM.YNAuthority("特殊物料增删改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "4")
+            {
+                if (AM.YNAuthority("生产文件修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "5")
+            {
+                if (AM.YNAuthority("生产注意事项修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "6")
+            {
+                if (AM.YNAuthority("烧录文件修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+
+            else if (s_ID == "9")
+            {
+                if (AM.YNAuthority("生产SOP文件修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+
+            else if (s_ID == "10")
+            {
+                if (AM.YNAuthority("测试SOP修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "11")
+            {
+                if (AM.YNAuthority("IQC修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "12")
+            {
+                if (AM.YNAuthority("OQC修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "13")
+            {
+                if (AM.YNAuthority("代码工程修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            
+        }
+        catch
+        { }
+        return s_Return;
+    }
+
+    public void base_GetExpendDropDownList(DropDownList DropDownListName, string whereSql, bool IsTrue)
+    {
+        Sc_Expend_Manage_MaterDetails BLL=new Sc_Expend_Manage_MaterDetails();
+        BLL.GetList(whereSql);
+        DropDownListName.DataSource = Dts_Result;
+        DropDownListName.DataTextField = "PBC_Name";
+        DropDownListName.DataValueField = "PBC_Code";
+
     }
 }

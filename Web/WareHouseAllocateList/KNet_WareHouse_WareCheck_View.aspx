@@ -78,9 +78,9 @@
                                     <input title="" class="crmbutton small edit" onclick="PageGo('KNet_WareHouse_AllocateList_Manage.aspx')" type="button" name="ListView" value="&nbsp;返回列表&nbsp;">&nbsp;
                                      
                                                              <asp:Button ID="btn_Chcek1" runat="server" class="crmbutton small edit" Text="暂存"
-                                          OnClick="btn_Chcek1_Click1" Width="54px" />
-                                                             <asp:Button ID="btn_Chcek" runat="server" class="crmbutton small edit" Text="审批"
-                                          OnClick="btn_Chcek_Click" Width="54px" /></td>
+                                                                 OnClick="btn_Chcek1_Click1" Width="54px" />
+                                                            <asp:Button ID="btn_Chcek" runat="server" class="crmbutton small edit" Text="审批"
+                                                                OnClick="btn_Chcek_Click" Width="54px" /></td>
 
                                                         <td align="right">
                                                             <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create" onclick="PageGo('KNet_WareHouse_AllocateList_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    &Type=1')" name="Duplicate" value="复制">&nbsp;
@@ -143,83 +143,171 @@
                                                                 <asp:Label ID="Lbl_Stime" runat="server"></asp:Label>
                                                             </td>
                                                         </tr>
-                                                        
-                                        <tr>
-                                            <td class="dvtCellLabel">生产订单号:
-                                            </td>
-                                            <td class="dvtCellInfo" >
-                                                                <asp:Label ID="Tbx_OrderNo" runat="server"></asp:Label></td>
 
+                                                        <tr>
+                                                            <td class="dvtCellLabel">生产订单号:
+                                                            </td>
+                                                            <td class="dvtCellInfo">
+                                                                <asp:Label ID="Tbx_OrderNo" runat="server"></asp:Label></td>
                                             </td>
                                             <td class="dvtCellLabel">调拨类型:
                                             </td>
-                                            <td class="dvtCellInfo" >
-                                                                <asp:Label ID="Chk_Type" runat="server"></asp:Label></td>
+                                            <td class="dvtCellInfo">
+                                                <asp:Label ID="Chk_Type" runat="server"></asp:Label></td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dvtCellLabel">调出仓库:</td>
+                                <td class="dvtCellInfo" colspan="3">
+                                    <asp:Label ID="Lbl_HouseNo" runat="server" Style="display: none"></asp:Label>
+                                    <asp:Label ID="Lbl_House_Out" runat="server"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td class="dvtCellLabel">调入仓库:</td>
+                                <td class="dvtCellInfo" colspan="3">
+                                    <asp:Label ID="Lbl_House_int" runat="server"></asp:Label>
+                                    <asp:Label ID="Lbl_House_int0" runat="server" CssClass="Custom_Hidden"></asp:Label></td>
 
-                                            </td>
-                                        </tr>
-                                                        <tr>
-                                                            <td class="dvtCellLabel">调出仓库:</td>
-                                                            <td class="dvtCellInfo" colspan="3">
-                                                                <asp:Label ID="Lbl_HouseNo" runat="server" Style="display: none"></asp:Label>
-                                                                <asp:Label ID="Lbl_House_Out" runat="server"></asp:Label></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="dvtCellLabel">调入仓库:</td>
-                                                            <td class="dvtCellInfo" colspan="3">
-                                                                <asp:Label ID="Lbl_House_int" runat="server"></asp:Label>
-                                                                <asp:Label ID="Lbl_House_int0" runat="server" CssClass="Custom_Hidden"></asp:Label></td>
+                            </tr>
 
-                                                        </tr>
+                            <tr>
+                                <td class="dvtCellLabel">生产订单号:</td>
+                                <td class="dvtCellInfo" colspan="3">
+                                    <asp:Label ID="Lbl_OrderNo" runat="server"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="detailedViewHeader"><b>描述信息</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="dvtCellLabel">原因:</td>
+                                <td valign="top" class="dvtCellInfo" colspan="3">
+                                    <asp:Label ID="Lbl_Case" runat="server"></asp:Label>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="dvtCellLabel">备注:</td>
+                                <td valign="top" class="dvtCellInfo">
+                                    <asp:Label ID="Lbl_Remarks" runat="server"></asp:Label>&nbsp;</td>
+                            </tr>
 
-                                                        <tr>
-                                                            <td class="dvtCellLabel">生产订单号:</td>
-                                                            <td class="dvtCellInfo" colspan="3">
-                                                                <asp:Label ID="Lbl_OrderNo" runat="server"></asp:Label></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="4" class="detailedViewHeader"><b>描述信息</b>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="dvtCellLabel">原因:</td>
-                                                            <td valign="top" class="dvtCellInfo" colspan="3">
-                                                                <asp:Label ID="Lbl_Case" runat="server"></asp:Label>&nbsp;</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="dvtCellLabel">备注:</td>
-                                                            <td valign="top" class="dvtCellInfo">
-                                                                <asp:Label ID="Lbl_Remarks" runat="server"></asp:Label>&nbsp;</td>
-                                                        </tr>
+                            <tr>
+                                <td colspan="4" class="dvInnerHeader">
+                                    <b>产品详细信息</b>
+                                    <asp:CheckBox Visible="false" runat="server" ID="Chk_IsDetails" Checked="true" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <asp:TextBox ID="Tbx_Num" runat="Server" Text="0" CssClass="Custom_Hidden"></asp:TextBox>
 
-                                                        <tr>
-                                                            <td colspan="4" class="dvInnerHeader">
-                                                                <b>产品详细信息</b>
-                                                                <asp:CheckBox Visible="false" runat="server" ID="Chk_IsDetails" Checked="true" />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                <asp:TextBox ID="Tbx_Num" runat="Server" Text="0" CssClass="Custom_Hidden"></asp:TextBox>
+                                    <asp:TextBox ID="Xs_ProductsCode" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                    <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0" class="ListDetails" style="height: 28px">
 
-                                                    <asp:TextBox ID="Xs_ProductsCode" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                    <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0" class="ListDetails" style="height: 28px">
-
-                                                        <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
-                                                    </table>
-
-                                                </asp:Panel>
-
-                                            </td>
-                                        </tr>
+                                        <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
                                     </table>
                                 </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="4" class="dvInnerHeader">
+                                    <b>维修品调拨</b>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="4">
+                              <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px">
+                                    <Columns>
+
+                                        <asp:TemplateField HeaderText="调拨单号" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"  target="_blank"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                            HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <a href="/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %>" target="_blank">
+                                                    <%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        
+                                        <asp:TemplateField HeaderText="调拨维修品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),0)%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="维修品数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),1)%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="调拨日期" DataField="AllocateDateTime" SortExpression="AllocateDateTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="调出仓库" SortExpression="HouseNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo_int").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="调出入库" SortExpression="HouseNo_int" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetHouseName("131429356506502002")%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="调拨产品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDirectInProductsPatten(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+
+                                        <asp:TemplateField HeaderText="调拨总数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDirectInNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="经手人" SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        
+                                        <asp:TemplateField HeaderText="仓库确认" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+
+                                                <%# GetCheck(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="审核" SortExpression="AllocateCheckYN" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%# GetOrderCheckYN(DataBinder.Eval(Container.DataItem, "AllocateNo"))%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <HeaderStyle CssClass='colHeader' />
+                                    <RowStyle CssClass='listTableRow' />
+                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                    <PagerStyle CssClass='Custom_DgPage' />
+                                </cc1:MyGridView>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+
+                </td>
+            </tr>
+        </table>
+        </td>
                             </tr>
                         </table>
                 </td>
                 <td valign="top">
                     <img src="../../themes/softed/images/showPanelTopRight.gif"></td>
 
-            </tr>
+        </tr>
         </table>
 
 

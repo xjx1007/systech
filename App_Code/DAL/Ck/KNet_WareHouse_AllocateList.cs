@@ -341,7 +341,7 @@ namespace KNet.DAL
         public DataSet GetDetailsList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select b.ID,CASE WHEN a.HouseNo_int = '128502353068906250' THEN '130088401935635079' ELSE c.suppNo END as HouseNo_int,CASE WHEN a.HouseNo = '128502353068906250' THEN '130088401935635079' ELSE d.suppNo END as HouseNo1,b.ProductsBarCode,allocateAmount,allocateunitPrice,allocateTotalNet,a.SystemDateTimes,AllocateStaffNo,a.AllocateNo,a.AllocateDateTime,Allocate_WwPrice,Allocate_WwMoney,AllocateCheckYN ");
+            strSql.Append("select b.ID,HouseNo_int as HouseNo_int,a.HouseNo  as HouseNo1,b.ProductsBarCode,allocateAmount,allocateunitPrice,allocateTotalNet,a.SystemDateTimes,AllocateStaffNo,a.AllocateNo,a.AllocateDateTime,Allocate_WwPrice,Allocate_WwMoney,AllocateCheckYN ");
             strSql.Append(" FROM KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo  join dbo.KNet_Sys_WareHouse AS c ON c.HouseNo = a.HouseNo_int  join dbo.KNet_Sys_WareHouse AS d ON d.HouseNo = a.HouseNo join KNET_sys_Products e on e.ProductsBarCode=b.ProductsBarCode ");
             if (strWhere.Trim() != "")
             {

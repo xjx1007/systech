@@ -213,7 +213,7 @@
                                                             <asp:TextBox ID="Tbx_ProductsTypeName" runat="server" CssClass="detailedViewTextBox"
                                                                 OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                                 MaxLength="48" Width="200px"></asp:TextBox>
-                                                            <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                            <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server"  CssClass="Custom_Hidden" ></asp:TextBox>
                                                             <img src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
 
                                                             <img src="/themes/softed/images/clear_field.gif" alt="清除" title="清除" onclick="return Clear()" />

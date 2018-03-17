@@ -31,9 +31,9 @@ public partial class System_Message_Manage : BasePage
             string s_AuthorityName = Request.QueryString["AuthorityName"] == null ? "" : Request.QueryString["AuthorityName"].ToString();
             if (s_AuthorityName != "")
             {
-                s_To_ID = "129785817148286992";
+                s_To_ID = "129785817148286974";
                 this.Tbx_Title.Text = base.Base_GeDept(AM.KNet_StaffDepart)+"-"+AM.KNet_StaffName + " 申请 <" + s_AuthorityName + ">权限";
-                this.Tbx_Remark.Text = this.Tbx_Title.Text + "   <br><hr><a target=\"_blank\" href=\"Web/Message/System_Message_Sh.aspx?StaffNo=" + AM.KNet_StaffNo + "&PageName=" + Server.UrlEncode(s_AuthorityName) + "&Type=0\">同意</a>   <a target=\"_blank\" href=\"Web/Message/System_Message_Sh.aspx?StaffNo=" + AM.KNet_StaffNo + "&PageName=" + s_AuthorityName + "&Type=1\">不同意</a>";
+                this.Tbx_Remark.Text = this.Tbx_Title.Text + "   <br><hr><a target=\"_blank\" href=\"/Web/Message/System_Message_Sh.aspx?StaffNo=" + AM.KNet_StaffNo + "&PageName=" + Server.UrlEncode(s_AuthorityName) + "&Type=0\" onclick=\"RemoveSms('#ID', '', 0);\">同意</a>   <a target=\"_blank\" href=\"/Web/Message/System_Message_Sh.aspx?StaffNo=" + AM.KNet_StaffNo + "&PageName=" + Server.UrlEncode(s_AuthorityName) + "&Type=1\"  onclick=\"RemoveSms('#ID', '', 0);\">不同意</a>";
             }
             this.Tbx_ToID.Text = s_To_ID;
             KNet.BLL.KNet_Resource_Staff BLL = new KNet.BLL.KNet_Resource_Staff();
@@ -64,11 +64,12 @@ public partial class System_Message_Manage : BasePage
             {
                 KNet.BLL.System_Message_Manage BLL = new KNet.BLL.System_Message_Manage();
                 KNet.Model.System_Message_Manage model = new KNet.Model.System_Message_Manage();
+                model.SMM_ID = base.GetNewID("System_Message_Manage", 1);
                 model.SMM_Del = 0;
                 model.SMM_ReceiveID = s_ReceiveId[i];
                 model.SMM_SenderID = s_SendId;
                 model.SMM_State = 0;
-                model.SMM_Detail = KNetPage.KHtmlEncode(s_Detail);
+                model.SMM_Detail = KNetPage.KHtmlEncode(s_Detail.Replace("#ID", model.SMM_ID).Replace("#ID", model.SMM_ID));
                 model.SMM_Title = s_Title;
                 model.SMM_SendTime = DateTime.Now;
                 model.SMM_LookTime = null;

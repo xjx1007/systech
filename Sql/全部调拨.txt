@@ -1,0 +1,32 @@
+﻿select dbo.GetID(),'DB20170816000012','',ProductsBarCode,'','',SUM(DirectInAmount),0,0,0,'',GETDATE(),'',null,null,'',0,0,0,0,0,null,0 from v_Store
+where HouseNo='131238323280280000'
+and ksp_Code not like '01%'
+group by ProductsBarCode
+having SUM(DirectInAmount)<>0
+
+select * from v_Store
+select * from KNet_WareHouse_AllocateList where AllocateNo='DB20170816000011'
+
+select * from KNet_WareHouse_AllocateList_Details   where AllocateNo='DB20170816000011'
+
+insert into KNet_WareHouse_AllocateList_Details
+select dbo.GetID(),'DB20170816000012','',ProductsBarCode,'','',SUM(DirectInAmount),0,0,0,'',GETDATE(),'',null,null,'',0,0,0,0,0,null,0 from v_Store
+where HouseNo='131238323280280000'
+and ksp_Code not like '01%'
+group by ProductsBarCode
+having SUM(DirectInAmount)<>0
+
+
+
+insert into KNet_WareHouse_AllocateList_Details
+select dbo.GetID(),'DB20170816000011','',ProductsBarCode,'','',SUM(DirectInAmount),0,0,0,'',GETDATE(),'',null,null,'',0,0,0,0,0,null,0 from v_Store
+where HouseNo='131455426122982002'
+and ksp_Code not like '01%'
+group by ProductsBarCode
+having SUM(DirectInAmount)<>0
+
+select dbo.GetID(),'DB20170816000012','',ProductsBarCode,'','',SUM(DirectInAmount),0,0,0,'',GETDATE(),'',null,null,'',0,0,0,0,0,null,0 from v_Store
+where HouseNo='131455426122982002'
+and ksp_Code not like '01%'
+group by ProductsBarCode
+having SUM(DirectInAmount)<>0

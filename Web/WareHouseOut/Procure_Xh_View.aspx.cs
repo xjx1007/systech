@@ -41,7 +41,7 @@ public partial class Web_Procure_Xh_View : BasePage
             //明细
             KNet.BLL.KNet_WareHouse_DirectOutList BLL = new KNet.BLL.KNet_WareHouse_DirectOutList();
             KNet.Model.KNet_WareHouse_DirectOutList Model = BLL.GetModelB(s_ID);
-            s_Sql = "Select *";
+            s_Sql = "Select b.DirectOutRemarks,*";
             s_Sql += " from KNet_WareHouse_DirectOutList  a  join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo ";
             s_Sql += "  Where a.DirectOutNo='" + s_ID + "' ";
             string s_Preson = "";
@@ -86,7 +86,7 @@ public partial class Web_Procure_Xh_View : BasePage
                     }
                     catch
                     { }
-                     s_Details += "<td  class='thstyleLeftDetails' align=center >&nbsp;" + KNetPage.KHtmlDiscode(Dtb_Table.Rows[i]["DirectOutRemarks"].ToString()) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=center >&nbsp;" + KNetPage.KHtmlDiscode(Dtb_Table.Rows[i]["DirectOutRemarks"].ToString()) + "</td>\n";
                     s_Details += " </tr>";
                     try
                     {
@@ -118,8 +118,8 @@ public partial class Web_Procure_Xh_View : BasePage
             else
             {
                 s_LyType = "原材料";
- 
             }
+
             s_Details += "<tr>\n<td colspan=\"5\" class=\"thstyleleft\"  >" + s_Depart + "</td><td colspan=\"5\" class=\"thstyleRight\" >" + s_StaffName + "</td></tr>\n";
 
             s_Details += "</tbody></table></td></tr>";

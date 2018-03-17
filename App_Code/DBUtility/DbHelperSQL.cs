@@ -341,7 +341,9 @@ public abstract class DbHelperSQL
             {
                 int result;
                 connection.Open();
+                
                 SqlCommand command = BuildIntCommand(connection, storedProcName, parameters);
+                command.CommandTimeout = 10000;
                 rowsAffected = command.ExecuteNonQuery();
                 result = (int)command.Parameters["ReturnValue"].Value;
                 //Connection.Close();

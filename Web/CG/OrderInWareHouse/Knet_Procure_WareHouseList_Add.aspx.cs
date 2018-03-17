@@ -25,7 +25,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
         string s_OrderNo = Request.QueryString["OrderNo"] == null ? "" : Request.QueryString["OrderNo"].ToString();
         if (!Page.IsPostBack)
         {
-            AdminloginMess AM=new AdminloginMess();
+            AdminloginMess AM = new AdminloginMess();
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             this.ReceivDateTime.Text = DateTime.Now.ToShortDateString();
@@ -75,7 +75,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                     if (Model.ReceiveSuppNo != "")
                     {
                         KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
-                        DataSet Dts_Table = Bll_WareHouse.GetList(" SuppNo='" + Model.ReceiveSuppNo + "' and KSW_Type=0 ");
+                        DataSet Dts_Table = Bll_WareHouse.GetList(" SuppNo='" + Model.ReceiveSuppNo + "' and KSW_Type=0  ");
                         try
                         {
                             this.ReceivPaymentNotes.SelectedValue = Dts_Table.Tables[0].Rows[0]["HouseNo"].ToString();
@@ -121,9 +121,9 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                     }
                 }
             }
-           // base.Base_DropLinkManBind(this.Ddl_LinkMan, this.Tbx_CustomerValue.Value);
+            // base.Base_DropLinkManBind(this.Ddl_LinkMan, this.Tbx_CustomerValue.Value);
         }
-        
+
     }
 
     private void ShowInfo(string s_ID)
@@ -131,7 +131,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
         KNet.BLL.Knet_Procure_WareHouseList bll = new KNet.BLL.Knet_Procure_WareHouseList();
         KNet.Model.Knet_Procure_WareHouseList model = bll.GetModelB(s_ID);
 
-        if (model.WareHouseCheckYN>1)
+        if (model.WareHouseCheckYN > 1)
         {
             AlertAndGoBack("已审核，不可修改!");
             return;
@@ -220,8 +220,8 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                 string[] s_Remarks = Request.Form["Remarks"].Split(',');
                 string[] s_ID = Request.Form["ID"].Split(',');
                 string s_PIDs = Request.Form["PID"] == null ? "" : Request.Form["PID"].ToString();
-                string[] s_PID =s_PIDs.Split(',');
-                
+                string[] s_PID = s_PIDs.Split(',');
+
                 for (int i = 0; i < s_ProductsBarCode.Length; i++)
                 {
                     KNet.Model.Knet_Procure_WareHouseList_Details Model_Details = new KNet.Model.Knet_Procure_WareHouseList_Details();
@@ -238,12 +238,16 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                     Model_Details.WareHouseAmount = int.Parse(s_Number[i]);
                     Model_Details.WareHouseUnitPrice = decimal.Parse(s_Price[i]);
                     decimal d_Money = int.Parse(s_Number[i]) * decimal.Parse(s_Price[i]);
+                    if ((decimal.Parse(s_Money[i]) != 0)&&(Model_Details.WareHouseAmount==0))
+                    {
+                        d_Money = decimal.Parse(s_Money[i]);
+                    }
                     Model_Details.WareHouseTotalNet = d_Money;
                     Model_Details.WareHouseRemarks = s_Remarks[i];
                     Model_Details.ProductsUnits = s_ID[i];
                     Model_Details.WareHouseBAmount = int.Parse(s_BNumber[i]);
                     Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.17")), 2));
-                    if (Model_Details.WareHouseAmount != 0)
+                    if ((Model_Details.WareHouseAmount != 0) ||(d_Money != 0))
                     {
                         Arr_Products.Add(Model_Details);
                     }
@@ -265,7 +269,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
         bool b_True = true;
         try
         {
-            if (this.Tbx_SuppNo.Text != "129682186266972172")
+            if ((this.Tbx_SuppNo.Text != "129682186266972172")&&(this.Tbx_SuppNo.Text != "131187205665612658"))
             {
                 string[] s_ProductsBarCode = Request.Form["ProductsBarCode"].Split(',');
                 string[] s_Number = Request.Form["Number"].Split(',');
@@ -298,7 +302,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                 try
                 {
                     bll.Add(model);
-                    AM.Add_Logs("采购入库增加" + this.Tbx_ID.Text);
+                    AM.Add_Logs("采购入库增加" + model.WareHouseNo);
                     //base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "采购入库增加： <a href='Web/OrderInWareHouse/Knet_Procure_WareHouseList_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.WareHouseNo + "</a> 需要你审批！ ");
                     AlertAndRedirect("新增成功！", "Knet_Procure_WareHouseList_List.aspx");
                 }
@@ -310,7 +314,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                 try
                 {
                     bll.Update(model);
-                    AM.Add_Logs("采购入库修改" + this.Tbx_ID.Text);
+                    AM.Add_Logs("采购入库修改" + model.WareHouseNo);
                     //base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "采购入库修改： <a href='Web/OrderInWareHouse/Knet_Procure_WareHouseList_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.WareHouseNo + "</a> 需要你审批！ ");
                     AlertAndRedirect("修改成功！", "Knet_Procure_WareHouseList_List.aspx");
 
@@ -328,7 +332,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
             KNet.BLL.Knet_Procure_WareHouseList Bll = new KNet.BLL.Knet_Procure_WareHouseList();
 
             string S_Code = Bll.GetLastCode();
-            
+
             if (S_Code == "")
             {
 
@@ -356,7 +360,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
         }
         catch (Exception ex)
         {
-           s_Return = "-";
+            s_Return = "-";
         }
         return s_Return;
     }

@@ -284,7 +284,7 @@ public partial class Sc_Expend_Add : BasePage
     {
         string s_Sql = "Select b.ID as DID,a.*,b.*,c.CustomerValue,c.DutyPerson from Knet_Procure_OrdersList a left join View_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo left join Knet_Sales_ContractList c on c.ContractNo=a.ContractNo ";
         s_Sql += " where OrderType='128860698200781250' and Isnull(KPO_RKState,'1')=0 ";
-      
+
         if (this.DID.Text != "")
         {
             s_Sql += " and b.ID='" + this.DID.Text + "' ";
@@ -344,11 +344,12 @@ public partial class Sc_Expend_Add : BasePage
             {
                 bll.Add(model);
                 AM.Add_Logs("生产入库增加" + this.Tbx_ID.Text);
-                
+
                 //base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "生产入库增加： <a href='Web/ScExpend/Sc_Expend_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.SEM_ID + "</a> 需要你审批！ ");
                 AlertAndRedirect("新增成功！", "Sc_Expend_Manage.aspx");
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 Alert(ex.Message);
             }
         }
@@ -358,7 +359,7 @@ public partial class Sc_Expend_Add : BasePage
             {
                 bll.Update(model);
                 AM.Add_Logs("生产入库修改" + this.Tbx_ID.Text);
-               // base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "生产入库修改： <a href='Web/ScExpend/Sc_Expend_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.SEM_ID + "</a> 需要你审批！ ");
+                // base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台", 1), "生产入库修改： <a href='Web/ScExpend/Sc_Expend_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.SEM_ID + "</a> 需要你审批！ ");
 
                 AlertAndRedirect("修改成功！", "Sc_Expend_Manage.aspx");
             }
@@ -493,20 +494,31 @@ public partial class Sc_Expend_Add : BasePage
         string s_Return = "";
         try
         {
+            string s_HouseNo = "";
             string s_SuppNo = this.SuppNoSelectValue.SelectedValue;
-            KNet.BLL.KNet_Sys_WareHouse BLL = new KNet.BLL.KNet_Sys_WareHouse();
-            DataSet Dtb_Table = BLL.GetList(" SuppNo='" + s_SuppNo + "' and KSW_Type='0' ");
-            if (Dtb_Table.Tables[0].Rows.Count > 0)
+            if (s_SuppNo == "131187205665612658")
             {
-                for (int i = 0; i < Dtb_Table.Tables[0].Rows.Count; i++)
-                {
-                    s_Return += base.Base_GetWareHouseNumber(Dtb_Table.Tables[0].Rows[i]["HouseNo"].ToString(), s_ProductsBarCode) + ",";
-                }
-                if (s_Return != "")
-                {
-                    s_Return = s_Return.Substring(0, s_Return.Length - 1);
-                }
+                s_HouseNo = "131187187069993664";
+                s_Return = base.Base_GetWareHouseNumber(s_HouseNo, s_ProductsBarCode);
+            }
+            else
+            {
+                KNet.BLL.KNet_Sys_WareHouse BLL = new KNet.BLL.KNet_Sys_WareHouse();
+                DataSet Dtb_Table = BLL.GetList(" SuppNo='" + s_SuppNo + "' and KSW_Type='0' ");
 
+                if (Dtb_Table.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < Dtb_Table.Tables[0].Rows.Count; i++)
+                    {
+                        s_HouseNo = Dtb_Table.Tables[0].Rows[i]["HouseNo"].ToString();
+                        s_Return += base.Base_GetWareHouseNumber(s_HouseNo, s_ProductsBarCode) + ",";
+                    }
+                    if (s_Return != "")
+                    {
+                        s_Return = s_Return.Substring(0, s_Return.Length - 1);
+                    }
+
+                }
             }
         }
         catch
@@ -605,7 +617,7 @@ public partial class Sc_Expend_Add : BasePage
             if (this.SuppNoSelectValue.SelectedValue != "")
             {
                 //,
-                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo in ('" + this.SuppNoSelectValue.SelectedValue + "','131187205665612658')  and HouseNo<>'131235104473261008' and KSW_Type='0' ");
+                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo in ('" + this.SuppNoSelectValue.SelectedValue + "','131187205665612658')   and KSW_Type='0' ");
             }
             if (Tbx_ReplaceProductsBarCode.Text != "")
             {
@@ -616,6 +628,18 @@ public partial class Sc_Expend_Add : BasePage
                 Chk_Check.Checked = true;
             }
 
+            if (this.SuppNoSelectValue.SelectedValue != "131187205665612658")
+            {
+                KNet.BLL.KNet_Sys_WareHouse BLL_warehouse = new KNet.BLL.KNet_Sys_WareHouse();
+                KNet.Model.KNet_Sys_WareHouse Model_warehouse = BLL_warehouse.GetModelBySuppNo(this.SuppNoSelectValue.SelectedValue);
+
+                Ddl_House.SelectedValue = Model_warehouse.HouseNo;
+
+            }
+            else
+            {
+                Ddl_House.SelectedValue = "131187187069993664";
+            }
             try
             {
                 if (decimal.Parse(s_WareHouseNumber) > 0)
@@ -637,7 +661,7 @@ public partial class Sc_Expend_Add : BasePage
             }
             catch { }
             //耗料如果是一种类型的打勾有库存的。
-            
+
         }
     }
     /// <summary>
@@ -654,16 +678,27 @@ public partial class Sc_Expend_Add : BasePage
             if (this.SuppNoSelectValue.SelectedValue != "")
             {
                 //'" + this.SuppNoSelectValue.Value + "',
-                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo in ('" + this.SuppNoSelectValue.SelectedValue + "','131187205665612658') and HouseNo<>'131235104473261008' and KSW_Type='0' ");
-                
+                base.Base_DropWareHouseBindNoSelect(Ddl_House, "  SuppNo in ('" + this.SuppNoSelectValue.SelectedValue + "','131187205665612658')  and KSW_Type='0' ");
+
             }
-            if (Ddl_House.SelectedValue== "")
+            if (this.SuppNoSelectValue.SelectedValue != "131187205665612658")
+            {
+                KNet.BLL.KNet_Sys_WareHouse BLL_warehouse = new KNet.BLL.KNet_Sys_WareHouse();
+                KNet.Model.KNet_Sys_WareHouse Model_warehouse = BLL_warehouse.GetModelBySuppNo(this.SuppNoSelectValue.SelectedValue);
+
+                Ddl_House.SelectedValue = Model_warehouse.HouseNo;
+            }
+            else
+            {
+                Ddl_House.SelectedValue = "131235104473261008";
+            }
+            if (Ddl_House.SelectedValue == "")
             {
                 base.Base_DropWareHouseBindNoSelect(Ddl_House, " KSW_Type='0'");
             }
         }
     }
-    
+
     protected void GridView2_DataRowBinding(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
