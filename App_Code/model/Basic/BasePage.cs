@@ -4530,8 +4530,11 @@ public class BasePage : System.Web.UI.Page
                     {
                         s_FromWhere += " and ";
                     }
-
-                    Sb_Return.Append(" and " + s_Cloumn + " in (Select " + s_FromValue + " from " + s_FromTable + " where " + s_FromWhere + " " + s_FromName + " like  '%" + s_Text + "%')  ");
+                    if (s_Cloumn=="SuppNo")
+                    {
+                        s_Cloumn = "HouseNo";
+                    }
+                    Sb_Return.Append(" and " + s_Cloumn + " in (Select " + s_FromValue + " from " + s_FromTable + " where " + s_FromWhere + "" + s_FromName + " like  '%" + s_Text + "%')  ");
                 }
                 else
                 {
