@@ -312,7 +312,7 @@
                                     <asp:TemplateField HeaderText="成品入库单号" SortExpression="SEM_ID" HeaderStyle-Font-Size="12px"
                                         ItemStyle-HorizontalAlign="left" HeaderStyle-HorizontalAlign="left">
                                         <ItemTemplate>
-                                            <a href="Sc_Expend_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>"
+                                            <a href="Sc_Expend_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "SEM_ID")%>&&SEM_CheckYN=<%# DataBinder.Eval(Container.DataItem, "SEM_CheckYN")%>"
                                                 >
                                                 <%# DataBinder.Eval(Container.DataItem, "SEM_ID").ToString()%></a>
                                         </ItemTemplate>
