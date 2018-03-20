@@ -34,6 +34,7 @@ namespace KNet.Model
         private string _contractaddress;
         private decimal? _invorate;
         private string _receivesuppno;
+        private decimal _kpo_countweight;
         private string _Chk_IsChip;
         private string _Chk_Battery;
         private string _ParentOrderNo;
@@ -56,7 +57,8 @@ namespace KNet.Model
         private int _KPO_PriceState;
         private int _KPO_IsChange;
         private string _KPO_PreHouseNo;
-        
+        private decimal _KPO_CountWeight;
+
         /// <summary>
         /// 自动ID值
         /// </summary>
@@ -64,6 +66,14 @@ namespace KNet.Model
         {
             set { _id = value; }
             get { return _id; }
+        }
+        /// <summary>
+        /// 订单总重量
+        /// </summary>
+        public decimal KPO_CountWeight
+        {
+            set { _kpo_countweight = value; }
+            get { return _kpo_countweight; }
         }
         /// <summary>
         /// 采购主题

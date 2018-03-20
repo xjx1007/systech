@@ -690,6 +690,7 @@
                                                                     </asp:DropDownList>
                                                                     (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                                                         runat="server" ErrorMessage="单位非空" ControlToValidate="ProductsUnits" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                                    <asp:TextBox ID="BigUnits" runat="server" Text=""></asp:TextBox><asp:Label ID="WLweight" runat="server" Text="物料重量"></asp:Label>
                                                                 </td>
                                                                 <td align="right" class="dvtCellLabel">库存预警：
                                                                 </td>

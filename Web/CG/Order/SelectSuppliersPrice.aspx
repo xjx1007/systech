@@ -151,6 +151,12 @@ if(http_request.readyState==4){
             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
             <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
         </asp:BoundField> 
+            <%--//添加一个大单位--%>
+       <%-- <asp:TemplateField HeaderText="包装数"  HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+          <ItemTemplate>
+            <%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>
+          </ItemTemplate>
+        </asp:TemplateField>--%>
          <asp:BoundField  DataField="HandPrice" ItemStyle-Font-Size="12px"  ItemStyle-ForeColor="blue"  HeaderText="加工费"  HeaderStyle-Font-Size="12px"   SortExpression="HandPrice" DataFormatString="{0:F4}" HtmlEncode="false">
             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
             <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
@@ -169,6 +175,8 @@ if(http_request.readyState==4){
           <asp:TextBox ID="Tbx_Number" Width="60px" runat="server" CssClass="detailedViewTextBox" value=<%# GetNumber(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) %>></asp:TextBox>
           <asp:TextBox ID="Tbx_SuppNo" runat="server" CssClass="Custom_Hidden" value=<%# DataBinder.Eval(Container.DataItem, "SuppNo").ToString() %>></asp:TextBox>
           <asp:TextBox ID="Tbx_BrandName" runat="server" CssClass="Custom_Hidden" value=<%# DataBinder.Eval(Container.DataItem, "PPB_BrandName").ToString() %>></asp:TextBox>
+          <asp:TextBox ID="BigUnits" runat="server" CssClass="Custom_Hidden" value=<%#base.Base_GetBigUnits(DataBinder.Eval(Container.DataItem, "KSP_Code").ToString()) %>></asp:TextBox>
+
 
                <asp:TextBox ID="Tbx_Remark" runat="server"    CssClass="Custom_Hidden" Text=""  ></asp:TextBox>
           </ItemTemplate>

@@ -312,6 +312,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         model.KSP_Code = this.Tbx_Code.Text;
         model.KSP_GProductsBarCode = this.Tbx_GProductsBarCode.Value;
         model.KSP_UseType = this.Ddl_UseType.SelectedValue;
+        model.KSP_BigUnits = Convert.ToDecimal(this.BigUnits.Text);
         try
         {
             model.KSP_LossType = int.Parse(this.Ddl_Loss.SelectedValue);

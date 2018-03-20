@@ -284,6 +284,12 @@
                                                         <%# base.Base_GetOrderDetailNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
+                                                 <asp:TemplateField HeaderText="重量" HeaderStyle-Font-Size="12px" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Left"
+                                                    HeaderStyle-HorizontalAlign="Left">
+                                                    <ItemTemplate>
+                                                        <%# base.Base_GetOrderDetailWeight( DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="入库" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                                     HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>

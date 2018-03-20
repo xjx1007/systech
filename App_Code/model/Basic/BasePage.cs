@@ -861,6 +861,31 @@ public class BasePage : System.Web.UI.Page
             }
         }
     }
+    /// <summary>
+    /// 根据料号查询大单位
+    /// </summary>
+    /// <param name="KSP_COde"></param>
+    /// <returns></returns>
+    public string Base_GetBigUnits(string KSP_COde)
+    {
+        string s_Return = "";
+        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        {
+            conn.Open();
+            string Dostr = "select  KSP_BigUnits from KNet_Sys_Products where KSP_COde='" + KSP_COde + "'";
+            SqlCommand cmd = new SqlCommand(Dostr, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                s_Return = dr["KSP_BigUnits"].ToString();
+                return s_Return;
+            }
+            else
+            {
+                return "--";
+            }
+        }
+    }
     protected string Base_GetProductsEdition_Link(object aa)
     {
         string s_Return = "", s_Details = "";
@@ -3071,6 +3096,29 @@ public class BasePage : System.Web.UI.Page
         }
         return s_Return;
     }
+    /// <summary>
+    /// 采购订单重量
+    /// </summary>
+    /// <param name="s_Order"></param>
+    /// <returns></returns>
+    public string Base_GetOrderDetailWeight(string s_Order)
+    {
+        string s_Return = "";
+        string s_Sql = "Select CountWeight from Knet_Procure_OrdersList_Details Where OrderNo='" + s_Order + "' order by ID ";
+        //s_Sql += " join Knet_Procure_OrdersList b  on a.OrderNo =b.OrderNo Where  a.OrderNo='" + s_Order + "'  order by a.ID";
+        this.BeginQuery(s_Sql);
+        this.QueryForDataTable();
+        if (this.Dtb_Result.Rows.Count > 0)
+        {
+            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            {
+                s_Return += Dtb_Result.Rows[i]["CountWeight"].ToString();
+
+                s_Return += "<br/>";
+            }
+        }
+        return s_Return;
+    }
 
     /// <summary>
     /// 未入库数量
@@ -4530,10 +4578,15 @@ public class BasePage : System.Web.UI.Page
                     {
                         s_FromWhere += " and ";
                     }
-                    if (s_Cloumn=="SuppNo")
+                    if (s_Cloumn == "SuppNo" && s_FromTable == "Knet_Procure_Suppliers")
+                    {
+                        s_Cloumn = "SuppNo";
+                    }
+                    if (s_Cloumn=="SuppNo" && s_FromTable == "v_House")
                     {
                         s_Cloumn = "HouseNo";
                     }
+                    
                     Sb_Return.Append(" and " + s_Cloumn + " in (Select " + s_FromValue + " from " + s_FromTable + " where " + s_FromWhere + "" + s_FromName + " like  '%" + s_Text + "%')  ");
                 }
                 else
