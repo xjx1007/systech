@@ -241,12 +241,17 @@
                     document.all("Number_" + i).value = CPBZNumber * BZNumber;
                     document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
                     document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
-                    document.all("CountWeight_" + i).value = document.all("Number_" + i).value*document.all("BigUnits_" + i).value/1000;
+                    if (document.all("BigUnits_" + i).value!="") {
+                        document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
+                    }
+                   
                 }
                 else {
                     document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
                     document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
-                    document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
+                    if (document.all("BigUnits_" + i).value != "") {
+                        document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
+                    }
                 }
                 TextisNaN(CPBZNumber);
                 TextisNaN(BZNumber);

@@ -686,11 +686,13 @@
                                                                 <td align="right" class="dvtCellLabel">单 位：
                                                                 </td>
                                                                 <td align="left" class="dvtCellInfo">
-                                                                    <asp:DropDownList ID="ProductsUnits" runat="server" Width="200px" CssClass="detailedViewTextBox">
+                                                                    <asp:DropDownList ID="ProductsUnits" runat="server" Width="100px" CssClass="detailedViewTextBox">
                                                                     </asp:DropDownList>
                                                                     (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                                                         runat="server" ErrorMessage="单位非空" ControlToValidate="ProductsUnits" Display="Dynamic"></asp:RequiredFieldValidator>
-                                                                    <asp:TextBox ID="BigUnits" runat="server" Text=""></asp:TextBox><asp:Label ID="WLweight" runat="server" Text="物料重量"></asp:Label>
+                                                                    <asp:TextBox ID="BigUnits" Width="40px" runat="server" Text=""></asp:TextBox><%--<asp:Label ID="WLweight" runat="server" Text="物料重量"></asp:Label>--%>
+                                                                    <%-- <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" CssClass="detailedViewTextBox">
+                                                                    </asp:DropDownList>--%>
                                                                 </td>
                                                                 <td align="right" class="dvtCellLabel">库存预警：
                                                                 </td>

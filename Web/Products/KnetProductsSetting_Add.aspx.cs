@@ -216,6 +216,13 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         this.ProductsUnits.DataBind();
         ListItem item = new ListItem("请选择单位", ""); //默认值
         this.ProductsUnits.Items.Insert(0, item);
+
+        //this.DropDownList1.DataSource = ds;
+        //this.DropDownList1.DataTextField = "UnitsName";
+        //this.DropDownList1.DataValueField = "UnitsNo";
+        //this.DropDownList1.DataBind();
+        //ListItem item1 = new ListItem("请选择单位", ""); //默认值
+        //this.DropDownList1.Items.Insert(0, item);
     }
 
 

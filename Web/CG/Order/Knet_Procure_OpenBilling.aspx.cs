@@ -568,7 +568,15 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 Model_Details.OrderUnitPrice = decimal.Parse(s_Price);
                 Model_Details.KPOD_CPBZNumber = int.Parse(s_CPBZNumber);
                 Model_Details.KPOD_BZNumber = int.Parse(s_BZNumber);
-                Model_Details.CountWeight =Convert.ToDecimal(s_CountWeight);
+                if (s_CountWeight=="NaN")
+                {
+                    Model_Details.CountWeight = null;
+                }
+                else
+                {
+                    Model_Details.CountWeight = Convert.ToDecimal(s_CountWeight);
+                }
+                
                 Model_Details.KPOD_BrandName = s_BrandName;
                 Model_Details.ID = s_DID;
                 try
