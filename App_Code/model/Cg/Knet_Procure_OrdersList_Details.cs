@@ -20,7 +20,7 @@ namespace KNet.Model
         private decimal? _orderdiscount;
         private decimal? _ordertotalnet;
         private string _orderremarks;
-        private decimal? _countweight;
+        private string _kpod_bigunits;
 
         private int? _OrderHaveReceiving;
         private int? _OrderHasReturned;
@@ -32,7 +32,7 @@ namespace KNet.Model
         private int _KPOD_CPBZNumber;
         private int _KPOD_BZNumber;
         private string _KPOD_BrandName;
-        private decimal? _CountWeight;
+        private string _KPOD_BigUnits;
         /// <summary>
         /// 添加时间
         /// </summary>
@@ -52,10 +52,10 @@ namespace KNet.Model
         /// <summary>
         /// 总重量
         /// </summary>
-        public decimal? CountWeight
+        public string KPOD_BigUnits
         {
-            set { _countweight = value; }
-            get { return _countweight; }
+            set { _kpod_bigunits = value; }
+            get { return _kpod_bigunits; }
         }
         /// <summary>
         /// 关联采购单号

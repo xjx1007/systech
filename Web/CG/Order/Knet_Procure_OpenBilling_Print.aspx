@@ -229,6 +229,7 @@
                                     <td nowrap align="center">规格</td>
                                     <td nowrap align="center">版本号</td>
                                     <td nowrap align="center">品牌</td>
+                                    <td nowrap align="center">单位</td>
                                     <td nowrap align="center">数量</td>
                                     <td nowrap align="center" width="50px">单价</td>
                                     <td nowrap align="center" width="50px">加工费</td>

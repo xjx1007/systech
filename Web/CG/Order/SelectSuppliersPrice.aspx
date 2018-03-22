@@ -175,8 +175,9 @@ if(http_request.readyState==4){
           <asp:TextBox ID="Tbx_Number" Width="60px" runat="server" CssClass="detailedViewTextBox" value=<%# GetNumber(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) %>></asp:TextBox>
           <asp:TextBox ID="Tbx_SuppNo" runat="server" CssClass="Custom_Hidden" value=<%# DataBinder.Eval(Container.DataItem, "SuppNo").ToString() %>></asp:TextBox>
           <asp:TextBox ID="Tbx_BrandName" runat="server" CssClass="Custom_Hidden" value=<%# DataBinder.Eval(Container.DataItem, "PPB_BrandName").ToString() %>></asp:TextBox>
-          <asp:TextBox ID="BigUnits" runat="server" CssClass="Custom_Hidden" value=<%#base.Base_GetBigUnits(DataBinder.Eval(Container.DataItem, "KSP_Code").ToString()) %>></asp:TextBox>
-
+         <%-- <asp:TextBox ID="BigUnits" runat="server" CssClass="Custom_Hidden" value=<%#base.Base_GetBigUnits(DataBinder.Eval(Container.DataItem, "KSP_Code").ToString()) %>></asp:TextBox>--%>
+          <asp:TextBox ID="BigUnits" runat="server" CssClass="Custom_Hidden" value=<%# DataBinder.Eval(Container.DataItem, "KSP_BigUnits").ToString() %>></asp:TextBox>
+          <asp:TextBox ID="ProductsUnits" runat="server" CssClass="Custom_Hidden" value=<%#base.Base_GetUnitsName(DataBinder.Eval(Container.DataItem, "ProductsUnits").ToString()) %>></asp:TextBox>
 
                <asp:TextBox ID="Tbx_Remark" runat="server"    CssClass="Custom_Hidden" Text=""  ></asp:TextBox>
           </ItemTemplate>

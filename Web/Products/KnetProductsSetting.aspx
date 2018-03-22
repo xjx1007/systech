@@ -340,7 +340,8 @@
                                                 <asp:TemplateField HeaderText="单位" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px"
                                                     ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
                                                     <ItemTemplate>
-                                                        <%# base.Base_GetUnitsName(DataBinder.Eval(Container.DataItem, "ProductsUnits").ToString())%>
+                                                        <%# base.Base_GetUnitsName(DataBinder.Eval(Container.DataItem, "ProductsUnits").ToString(),DataBinder.Eval(Container.DataItem, "KSP_COde").ToString())%>
+                                                       <%-- <%# base.Base_GetBigUnitsName(DataBinder.Eval(Container.DataItem, "KSP_COde").ToString())%>--%>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                  <asp:TemplateField HeaderText="工时(秒)" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px"

@@ -775,21 +775,66 @@ public class BasePage : System.Web.UI.Page
     /// </summary>
     /// <param name="aa"></param>
     /// <returns></returns>
-    protected string Base_GetUnitsName(object aa)
+    protected string Base_GetUnitsName(string aa, string bb)
+    {
+        if (aa!="")
+        {
+            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+            {
+                conn.Open();
+                string Dostr = "select ID,UnitsNo,UnitsName from KNet_Sys_Units where UnitsNo='" + aa + "'";
+                SqlCommand cmd = new SqlCommand(Dostr, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return dr["UnitsName"].ToString().Trim();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+        else
+        {
+            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+            {
+                conn.Open();
+                string Dostr = "select KSP_BigUnits from KNet_Sys_Products where KSP_COde='" + bb + "'";
+                SqlCommand cmd = new SqlCommand(Dostr, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    return dr["KSP_BigUnits"].ToString().Substring(dr["KSP_BigUnits"].ToString().LastIndexOf("/") + 1);
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+            
+    }
+    /// <summary>
+    /// 获取大单位
+    /// </summary>
+    /// <param name="aa"></param>
+    /// <returns></returns>
+    protected string Base_GetBigUnitsName(object aa)
     {
         using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
         {
             conn.Open();
-            string Dostr = "select ID,UnitsNo,UnitsName from KNet_Sys_Units where UnitsNo='" + aa + "'";
+            string Dostr = "select KSP_BigUnits from KNet_Sys_Products where KSP_COde='" + aa + "'";
             SqlCommand cmd = new SqlCommand(Dostr, conn);
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                return dr["UnitsName"].ToString().Trim();
+                return dr["KSP_BigUnits"].ToString().Substring(dr["KSP_BigUnits"].ToString().LastIndexOf("/") + 1);
             }
             else
             {
-                return "--";
+                return "";
             }
         }
     }
@@ -3104,7 +3149,7 @@ public class BasePage : System.Web.UI.Page
     public string Base_GetOrderDetailWeight(string s_Order)
     {
         string s_Return = "";
-        string s_Sql = "Select CountWeight from Knet_Procure_OrdersList_Details Where OrderNo='" + s_Order + "' order by ID ";
+        string s_Sql = "Select KPOD_BigUnits from Knet_Procure_OrdersList_Details Where OrderNo='" + s_Order + "' order by ID ";
         //s_Sql += " join Knet_Procure_OrdersList b  on a.OrderNo =b.OrderNo Where  a.OrderNo='" + s_Order + "'  order by a.ID";
         this.BeginQuery(s_Sql);
         this.QueryForDataTable();
@@ -3112,7 +3157,7 @@ public class BasePage : System.Web.UI.Page
         {
             for (int i = 0; i < Dtb_Result.Rows.Count; i++)
             {
-                s_Return += Dtb_Result.Rows[i]["CountWeight"].ToString();
+                s_Return += Dtb_Result.Rows[i]["KPOD_BigUnits"].ToString();
 
                 s_Return += "<br/>";
             }

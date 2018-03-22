@@ -194,15 +194,15 @@
                     objCel.className = "ListHeadDetails";
                     ///添加一个单位
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"BigUnits_' + v_NumInt + '\" value=' + s_Value[16] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Units_' + v_NumInt + '\" value='+s_Value[17] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  readonly style="width:70px;"  Name=\"Money_' + v_NumInt + '\" value=' + s_Value[6] + '>';
                     objCel.className = "ListHeadDetails";
-                    //添加一个总重量
-                    var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"CountWeight_' + v_NumInt + '\" value=' + eval((s_Value[16] + "*" + s_Value[4])/1000) + ' >';
-                    objCel.className = "ListHeadDetails";
+                    ////添加一个大单位
+                    //var objCel = objRow.insertCell();
+                    //objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"BigUnits_' + v_NumInt + '\" value=' + s_Value[16] + ' >';
+                    //objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"HandPrice_' + v_NumInt + '\" value=' + s_Value[7] + '>';
                     objCel.className = "ListHeadDetails";
@@ -241,17 +241,17 @@
                     document.all("Number_" + i).value = CPBZNumber * BZNumber;
                     document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
                     document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
-                    if (document.all("BigUnits_" + i).value!="") {
-                        document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
-                    }
+                    //if (document.all("BigUnits_" + i).value!="") {
+                    //    document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
+                    //}
                    
                 }
                 else {
                     document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
                     document.all("HandMoney_" + i).value = document.all("HandPrice_" + i).value * document.all("Number_" + i).value
-                    if (document.all("BigUnits_" + i).value != "") {
-                        document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
-                    }
+                    //if (document.all("BigUnits_" + i).value != "") {
+                    //    document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
+                    //}
                 }
                 TextisNaN(CPBZNumber);
                 TextisNaN(BZNumber);
@@ -531,14 +531,14 @@
                                                             <b>单价</b>
                                                         </td>
                                                          <td class="ListHead" nowrap>
-                                                            <b>单位(g)</b>
+                                                            <b>单位</b>
                                                         </td>
                                                         <td class="ListHead" nowrap>
                                                             <b>金额</b>
                                                         </td>
-                                                         <td class="ListHead" nowrap>
-                                                            <b>总重量(Kg)</b>
-                                                        </td>
+                                                       <%--  <td class="ListHead" nowrap>
+                                                            <b>大单位</b>
+                                                        </td>--%>
                                                         <td class="ListHead" nowrap>
                                                             <b>加工费单价</b>
                                                         </td>

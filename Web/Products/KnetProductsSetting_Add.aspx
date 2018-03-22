@@ -691,8 +691,8 @@
                                                                     (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                                                         runat="server" ErrorMessage="单位非空" ControlToValidate="ProductsUnits" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     <asp:TextBox ID="BigUnits" Width="40px" runat="server" Text=""></asp:TextBox><%--<asp:Label ID="WLweight" runat="server" Text="物料重量"></asp:Label>--%>
-                                                                    <%-- <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" CssClass="detailedViewTextBox">
-                                                                    </asp:DropDownList>--%>
+                                                                     <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" CssClass="detailedViewTextBox">
+                                                                    </asp:DropDownList>
                                                                 </td>
                                                                 <td align="right" class="dvtCellLabel">库存预警：
                                                                 </td>

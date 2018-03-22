@@ -194,7 +194,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                     string s_BZNumber = Dts_Table.Tables[0].Rows[i]["KPOD_BZNumber"].ToString();
                     string s_OrderPrice = Dts_Table.Tables[0].Rows[i]["OrderUnitPrice"].ToString();
                     string s_OrderTotalNet = Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString();
-                    decimal CountWeight=Convert.ToDecimal(Dts_Table.Tables[0].Rows[i]["CountWeight"]);
+                    decimal BigUnits= Convert.ToDecimal(Dts_Table.Tables[0].Rows[i]["KPOD_BigUnits"]);
                     string s_HandPrice =  FormatNumber(Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString(), 3) ;
                    string s_HandTotal = FormatNumber(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString(), 3);
                     string s_OrderCPBZNumber = "0", s_OrderBZNumber = "0";
@@ -254,12 +254,12 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
 
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"   Name=\"Number_" + i.ToString() + "\" value='" + s_OrderAmount + "'></td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"    Name=\"Price_" + i.ToString() + "\" value='" + s_OrderPrice + "'></td>";
-                    //添加一个大单位
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"BigUnits_" + i.ToString() + "\" value=''></td>";
+                    //添加一个小单位
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"Units_" + i.ToString() + "\" value='" + BigUnits + "'></td>";
 
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"Money_" + i.ToString() + "\" value='" + s_OrderTotalNet + "'></td>";
-                    //添加一个总重量
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"CountWeight_" + i.ToString() + "\" value='" + CountWeight + "'></td>";
+                   //// 添加一个大单位
+                   // s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"CountWeight_" + i.ToString() + "\" value='" + BigUnits + "'></td>";
 
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input  type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"HandPrice_" + i.ToString() + "\" value='" +s_HandPrice + "'></td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\"  Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  style=\"width:70px;\"  Name=\"HandMoney_" + i.ToString() + "\" value='" +s_HandTotal+ "'></td>";
@@ -558,7 +558,15 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 string s_CPBZNumber = Request.Form["CPBZNumber_" + i];
                 string s_BZNumber = Request.Form["BZNumber_" + i];
                 string s_BrandName = Request.Form["BrandName_" + i];
-                string s_CountWeight= Request.Form["CountWeight_" + i];
+                string BigUnits= Request.Form["BigUnits_" + i].ToString();
+                //if (Request.Form["BigUnits_" + i].ToString()!="")
+                //{
+                //     BigUnits = Request.Form["BigUnits_" + i].ToString();
+                //}
+                //else
+                //{
+                //     BigUnits = Request.Form["Units_" + i].ToString();
+                //}
                 string s_DID = Request.Form["ID_" + i] == null ? GetMainID(i) : Request.Form["ID_" + i];
                 KNet.Model.Knet_Procure_OrdersList_Details Model_Details = new KNet.Model.Knet_Procure_OrdersList_Details();
                 Model_Details.ProductsBarCode = s_ProductsBarCode;
@@ -568,14 +576,14 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 Model_Details.OrderUnitPrice = decimal.Parse(s_Price);
                 Model_Details.KPOD_CPBZNumber = int.Parse(s_CPBZNumber);
                 Model_Details.KPOD_BZNumber = int.Parse(s_BZNumber);
-                if (s_CountWeight=="NaN")
-                {
-                    Model_Details.CountWeight = null;
-                }
-                else
-                {
-                    Model_Details.CountWeight = Convert.ToDecimal(s_CountWeight);
-                }
+                //if (s_CountWeight=="NaN")
+                //{
+                //    Model_Details.CountWeight = null;
+                //}
+                //else
+                //{
+                    Model_Details.KPOD_BigUnits = BigUnits;
+               // }
                 
                 Model_Details.KPOD_BrandName = s_BrandName;
                 Model_Details.ID = s_DID;
@@ -807,6 +815,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
         }
         catch (Exception ex)
         {
+            throw ex;
             Response.Write("<script>alert('采购添加失败！');history.back(-1);</script>");
             Response.End();
             ShowInfo(this.Tbx_ID.Text);

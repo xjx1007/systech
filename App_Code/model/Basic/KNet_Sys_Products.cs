@@ -29,7 +29,7 @@ namespace KNet.Model
         private string _productsaddman;
         private string _productstype;
         private decimal _ksp_worktime;
-        private decimal _ksp_bigunits;
+        private string _ksp_bigunits;
 
         private ArrayList _CustomerList;
         private ArrayList _ProductsList;
@@ -72,7 +72,7 @@ namespace KNet.Model
         private int _KSP_LossType;
 
         private decimal _KSP_WorkTime;
-        private decimal _KSP_BigUnits;
+        private string _KSP_BigUnits;
         public string[] s_BomIDs
         {
             set { _s_BomIDs = value; }
@@ -86,7 +86,7 @@ namespace KNet.Model
         /// <summary>
         /// 大单位（如：80kg/支）
         /// </summary>
-        public decimal KSP_BigUnits
+        public string KSP_BigUnits
         {
             set { _ksp_bigunits = value; }
             get { return _ksp_bigunits; }

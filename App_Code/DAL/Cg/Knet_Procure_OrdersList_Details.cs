@@ -43,9 +43,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Knet_Procure_OrdersList_Details(");
-            strSql.Append("OrderNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,OrderAmount,OrderUnitPrice,OrderDiscount,OrderTotalNet,OrderRemarks,HandPrice,HandTotal,ID,KPO_FaterBarCode,KPOD_CPBZNumber,KPOD_BZNumber,KPOD_BrandName,CountWeight)");
+            strSql.Append("OrderNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,OrderAmount,OrderUnitPrice,OrderDiscount,OrderTotalNet,OrderRemarks,HandPrice,HandTotal,ID,KPO_FaterBarCode,KPOD_CPBZNumber,KPOD_BZNumber,KPOD_BrandName,KPOD_BigUnits)");
             strSql.Append(" values (");
-            strSql.Append("@OrderNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@OrderAmount,@OrderUnitPrice,@OrderDiscount,@OrderTotalNet,@OrderRemarks,@HandPrice,@HandTotal,@ID,@KPO_FaterBarCode,@KPOD_CPBZNumber,@KPOD_BZNumber,@KPOD_BrandName,@CountWeight)");
+            strSql.Append("@OrderNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@OrderAmount,@OrderUnitPrice,@OrderDiscount,@OrderTotalNet,@OrderRemarks,@HandPrice,@HandTotal,@ID,@KPO_FaterBarCode,@KPOD_CPBZNumber,@KPOD_BZNumber,@KPOD_BrandName,@KPOD_BigUnits)");
             SqlParameter[] parameters = {
 					new SqlParameter("@OrderNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -64,7 +64,7 @@ namespace KNet.DAL
 					new SqlParameter("@KPOD_CPBZNumber", SqlDbType.Int,4),
 					new SqlParameter("@KPOD_BZNumber", SqlDbType.Int,4),
 					new SqlParameter("@KPOD_BrandName", SqlDbType.NVarChar,150),
-                    new SqlParameter("@CountWeight", SqlDbType.Decimal,6)
+                    new SqlParameter("@KPOD_BigUnits", SqlDbType.NVarChar,50)
 
                                         };
             parameters[0].Value = model.OrderNo;
@@ -84,7 +84,7 @@ namespace KNet.DAL
             parameters[14].Value = model.KPOD_CPBZNumber;
             parameters[15].Value = model.KPOD_BZNumber;
             parameters[16].Value = model.KPOD_BrandName;
-            parameters[17].Value = model.CountWeight;
+            parameters[17].Value = model.KPOD_BigUnits;
 
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
