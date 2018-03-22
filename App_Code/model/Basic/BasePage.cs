@@ -931,6 +931,32 @@ public class BasePage : System.Web.UI.Page
             }
         }
     }
+    /// <summary>
+    /// 根据产品编号查询大单位
+    /// </summary>
+    /// <param name="ProductsBarCode"></param>
+    /// <returns></returns>
+    public string Base_GetBigUnitsByProductCode(string ProductsBarCode)
+    {
+        string s_Return = "";
+        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        {
+            conn.Open();
+            string Dostr = "select  KSP_BigUnits from KNet_Sys_Products where ProductsBarCode='" + ProductsBarCode + "'";
+            SqlCommand cmd = new SqlCommand(Dostr, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                s_Return = dr["KSP_BigUnits"].ToString();
+                return s_Return;
+            }
+            else
+            {
+                return "--";
+            }
+        }
+    }
+
     protected string Base_GetProductsEdition_Link(object aa)
     {
         string s_Return = "", s_Details = "";

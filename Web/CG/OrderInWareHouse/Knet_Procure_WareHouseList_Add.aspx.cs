@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
 using System.Data.SqlClient;
+using KNet.BLL;
 using KNet.DBUtility;
 using KNet.Common;
 
@@ -95,24 +96,43 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                             this.ReceivPaymentNotes.SelectedValue = Dtb_Result.Rows[0]["HouseNo"].ToString();
                         }
                     }
-
+                    
                     KNet.BLL.Knet_Procure_OrdersList_Details BLL_Details = new KNet.BLL.Knet_Procure_OrdersList_Details();
                     DataSet Dts_Details = BLL_Details.GetList(" a.OrderNo='" + s_OrderNo + "'");
+                    KNet.BLL.KNet_Sys_Products kNetSysProducts = new KNet_Sys_Products();
+                   //DataSet ds= kNetSysProducts.GetModelB(Dts_Details.Tables[0].Rows[0]["ProductsBarCode"].ToString());
+                  
                     if (Dts_Details.Tables[0].Rows.Count > 0)
                     {
                         for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                         {
+                            string BigUnits =
+                      base.Base_GetBigUnitsByProductCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
                             s_MyTable_Detail += "<tr>";
                             this.Xs_ProductsCode.Text += Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ",";
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ID\" value='" + Dts_Details.Tables[0].Rows[i]["ID"].ToString() + "'>" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode\" value='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "'>" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "</td>";
+                            if (BigUnits.Length>0)
+                            {
+                                string c = BigUnits.Remove(BigUnits.LastIndexOf("/"));
+                                //s_Number = s_Number / Convert.ToInt32(c);
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) * Convert.ToInt32(c) + "</td>";
 
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "'></td>";
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BNumber\" value='0'></td>";
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price\" readOnly value='" + Dts_Details.Tables[0].Rows[i]["OrderUnitPrice"].ToString() + "'></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) * Convert.ToInt32(c) + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) * Convert.ToInt32(c) + "'></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BNumber\" value='0'></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price\" readOnly value='" +Convert.ToDecimal(Dts_Details.Tables[0].Rows[i]["OrderUnitPrice"].ToString())/ Convert.ToInt32(c) + "'></td>";
+                            }
+                            else
+                            {
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "</td>";
+
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "'></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BNumber\" value='0'></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price\" readOnly value='" + Dts_Details.Tables[0].Rows[i]["OrderUnitPrice"].ToString() + "'></td>";
+                            }
+                           
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Money\" value='" + Dts_Details.Tables[0].Rows[i]["thistotalNet"].ToString() + "'></td>";
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Remarks\" value='" + Dts_Details.Tables[0].Rows[i]["OrderRemarks"].ToString() + "'></td>";
                             s_MyTable_Detail += "</tr>";
