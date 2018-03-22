@@ -558,7 +558,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 string s_CPBZNumber = Request.Form["CPBZNumber_" + i];
                 string s_BZNumber = Request.Form["BZNumber_" + i];
                 string s_BrandName = Request.Form["BrandName_" + i];
-                string BigUnits= Request.Form["BigUnits_" + i].ToString();
+                string Units= Request.Form["Units_" + i].ToString();
                 //if (Request.Form["BigUnits_" + i].ToString()!="")
                 //{
                 //     BigUnits = Request.Form["BigUnits_" + i].ToString();
@@ -582,7 +582,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 //}
                 //else
                 //{
-                    Model_Details.KPOD_BigUnits = BigUnits;
+                    Model_Details.KPOD_BigUnits = Units;
                // }
                 
                 Model_Details.KPOD_BrandName = s_BrandName;
