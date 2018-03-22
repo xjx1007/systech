@@ -1,0 +1,520 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="15"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="9"  class="ListHead" >供应商名称:杭州跃驰电子有限公司</td><td colspan="6" class="ListHead">对账月份:2018-3</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >发货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center>总额</td>
+<td class="ListHead">备注</td>
+<td class="ListHead" >确认人</td>
+<td class="ListHead" >确认时间</td>
+<td class="ListHead" >确认方法</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>LL4148(LL34)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>50000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.024000</td>
+<td align=right class='ListHeadDetails' noWrap>1200.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>FR107/FFM107-M(SOD-123)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.110000</td>
+<td align=right class='ListHeadDetails' noWrap>330.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>LED红色(0805)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>30000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.050000</td>
+<td align=right class='ListHeadDetails' noWrap>1500.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>1N4148WS(SOD-323)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>30000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.055000</td>
+<td align=right class='ListHeadDetails' noWrap>1650.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>100R/3W绕线电阻</td>
+<td align=left class='ListHeadDetails' noWrap>100R/3WS</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.190000</td>
+<td align=right class='ListHeadDetails' noWrap>1900.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>6</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>MM1Z12/12V(SOD-123)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>30000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.065000</td>
+<td align=right class='ListHeadDetails' noWrap>1950.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>7</td>
+<td align=left class='ListHeadDetails' noWrap>三极管</td>
+<td align=left class='ListHeadDetails' noWrap>MMBT5401(SOT23)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>90000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.060000</td>
+<td align=right class='ListHeadDetails' noWrap>5400.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>8</td>
+<td align=left class='ListHeadDetails' noWrap>贴片电容</td>
+<td align=left class='ListHeadDetails' noWrap>472/50V/(C0805)(4.7nF)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC170081</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/30</td>
+<td align=right class='ListHeadDetails' noWrap>56000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.026000</td>
+<td align=right class='ListHeadDetails' noWrap>1456.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>9</td>
+<td align=left class='ListHeadDetails' noWrap>贴片电容</td>
+<td align=left class='ListHeadDetails' noWrap>104/100NF(0603R/50V)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/1/31</td>
+<td align=right class='ListHeadDetails' noWrap>40000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.072000</td>
+<td align=right class='ListHeadDetails' noWrap>2880.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>10</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>FR107/FFM107-M(SOD-123)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/5</td>
+<td align=right class='ListHeadDetails' noWrap>9000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.110000</td>
+<td align=right class='ListHeadDetails' noWrap>990.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>11</td>
+<td align=left class='ListHeadDetails' noWrap>贴片电容</td>
+<td align=left class='ListHeadDetails' noWrap>104/100NF(0603R/50V)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180008</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/5</td>
+<td align=right class='ListHeadDetails' noWrap>130000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.072000</td>
+<td align=right class='ListHeadDetails' noWrap>9360.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>12</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>US1M/US1K(DIODE-4001)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC170092</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/10</td>
+<td align=right class='ListHeadDetails' noWrap>100000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.050000</td>
+<td align=right class='ListHeadDetails' noWrap>5000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>13</td>
+<td align=left class='ListHeadDetails' noWrap>贴片电容</td>
+<td align=left class='ListHeadDetails' noWrap>102/1NF(0603R/50V)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC170080</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/10</td>
+<td align=right class='ListHeadDetails' noWrap>32000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.010500</td>
+<td align=right class='ListHeadDetails' noWrap>336.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>14</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>LED红色(0805)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/26</td>
+<td align=right class='ListHeadDetails' noWrap>60000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.050000</td>
+<td align=right class='ListHeadDetails' noWrap>3000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>15</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>LED黄色0805)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/26</td>
+<td align=right class='ListHeadDetails' noWrap>60000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.070000</td>
+<td align=right class='ListHeadDetails' noWrap>4200.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>16</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>LED绿色(高亮)(0805)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/26</td>
+<td align=right class='ListHeadDetails' noWrap>270000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.080000</td>
+<td align=right class='ListHeadDetails' noWrap>21600.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>17</td>
+<td align=left class='ListHeadDetails' noWrap>继电器</td>
+<td align=left class='ListHeadDetails' noWrap>SARF-S-112DMP(26.4*26.4田中触点)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180011</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/26</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>7.200000</td>
+<td align=right class='ListHeadDetails' noWrap>7200.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>18</td>
+<td align=left class='ListHeadDetails' noWrap>三极管</td>
+<td align=left class='ListHeadDetails' noWrap>SS8050(SOT23)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>60000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.060000</td>
+<td align=right class='ListHeadDetails' noWrap>3600.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>19</td>
+<td align=left class='ListHeadDetails' noWrap>热敏电阻</td>
+<td align=left class='ListHeadDetails' noWrap>NTC3450/10K(0805R/5%)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>100000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.120000</td>
+<td align=right class='ListHeadDetails' noWrap>12000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>20</td>
+<td align=left class='ListHeadDetails' noWrap>三极管</td>
+<td align=left class='ListHeadDetails' noWrap>2SA1013(SOT89)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>90000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.290000</td>
+<td align=right class='ListHeadDetails' noWrap>26100.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>21</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>BAV99（SOT23）</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180010</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>18000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.040000</td>
+<td align=right class='ListHeadDetails' noWrap>720.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>22</td>
+<td align=left class='ListHeadDetails' noWrap>二极管</td>
+<td align=left class='ListHeadDetails' noWrap>LL4148(LL34)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180010</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>50000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.024000</td>
+<td align=right class='ListHeadDetails' noWrap>1200.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>23</td>
+<td align=left class='ListHeadDetails' noWrap>三极管</td>
+<td align=left class='ListHeadDetails' noWrap>S8550/MMBT8550D(SOT23)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180010</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>99000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.044000</td>
+<td align=right class='ListHeadDetails' noWrap>4356.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>24</td>
+<td align=left class='ListHeadDetails' noWrap>三极管</td>
+<td align=left class='ListHeadDetails' noWrap>MMBT5551(SOT23)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180010</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>300000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.060000</td>
+<td align=right class='ListHeadDetails' noWrap>18000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>25</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>MOS管TIP42C(TO220)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180011</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>3000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.170000</td>
+<td align=right class='ListHeadDetails' noWrap>3510.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>26</td>
+<td align=left class='ListHeadDetails' noWrap>470R/3W/5%绕线电阻</td>
+<td align=left class='ListHeadDetails' noWrap>470R/3WS/5%(厚声)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POYC180011</td>
+<td align=left class='ListHeadDetails' noWrap>2018/2/27</td>
+<td align=right class='ListHeadDetails' noWrap>20000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.190000</td>
+<td align=right class='ListHeadDetails' noWrap>3800.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >02260005</td>
+<td class="ListHeadDetails" align="left">三极管</td><td class="ListHeadDetails" align="left">2SA1013(SOT89)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">90000</td><td class="ListHeadDetails" align="right">0.2900</td><td class="ListHeadDetails" align="right">26100.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>3792.31</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >02250016</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">1N4148WS(SOD-323)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">30000</td><td class="ListHeadDetails" align="right">0.0550</td><td class="ListHeadDetails" align="right">1650.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>239.74</td></tr><tr ><td class="ListHeadDetails" align="left" >3</td><td class='ListHeadDetails'align=center >02250002</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">LED红色(0805)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">90000</td><td class="ListHeadDetails" align="right">0.0500</td><td class="ListHeadDetails" align="right">4500.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>653.85</td></tr><tr ><td class="ListHeadDetails" align="left" >4</td><td class='ListHeadDetails'align=center >02260009</td>
+<td class="ListHeadDetails" align="left">三极管</td><td class="ListHeadDetails" align="left">S8550/MMBT8550D(SOT23)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">99000</td><td class="ListHeadDetails" align="right">0.0440</td><td class="ListHeadDetails" align="right">4356.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>632.92</td></tr><tr ><td class="ListHeadDetails" align="left" >5</td><td class='ListHeadDetails'align=center >02050011</td>
+<td class="ListHeadDetails" align="left">MOS</td><td class="ListHeadDetails" align="left">MOS管TIP42C(TO220)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">3000</td><td class="ListHeadDetails" align="right">1.1700</td><td class="ListHeadDetails" align="right">3510.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>510.00</td></tr><tr ><td class="ListHeadDetails" align="left" >6</td><td class='ListHeadDetails'align=center >02250013</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">US1M/US1K(DIODE-4001)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">100000</td><td class="ListHeadDetails" align="right">0.0500</td><td class="ListHeadDetails" align="right">5000.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>726.50</td></tr><tr ><td class="ListHeadDetails" align="left" >7</td><td class='ListHeadDetails'align=center >02190009</td>
+<td class="ListHeadDetails" align="left">继电器</td><td class="ListHeadDetails" align="left">SARF-S-112DMP(26.4*26.4田中触点)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">7.2000</td><td class="ListHeadDetails" align="right">7200.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1046.15</td></tr><tr ><td class="ListHeadDetails" align="left" >8</td><td class='ListHeadDetails'align=center >02100013</td>
+<td class="ListHeadDetails" align="left">贴片电容</td><td class="ListHeadDetails" align="left">102/1NF(0603R/50V)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">32000</td><td class="ListHeadDetails" align="right">0.0105</td><td class="ListHeadDetails" align="right">336.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>48.82</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;445000</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;52652.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;7650.29</td>
+ </tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票2</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >9</td><td class='ListHeadDetails'align=center >02250004</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">LED绿色(高亮)(0805)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">270000</td><td class="ListHeadDetails" align="right">0.0800</td><td class="ListHeadDetails" align="right">21600.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>3138.46</td></tr><tr ><td class="ListHeadDetails" align="left" >10</td><td class='ListHeadDetails'align=center >02260008</td>
+<td class="ListHeadDetails" align="left">三极管</td><td class="ListHeadDetails" align="left">SS8050(SOT23)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">60000</td><td class="ListHeadDetails" align="right">0.0600</td><td class="ListHeadDetails" align="right">3600.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>523.08</td></tr><tr ><td class="ListHeadDetails" align="left" >11</td><td class='ListHeadDetails'align=center >02150001</td>
+<td class="ListHeadDetails" align="left">热敏电阻</td><td class="ListHeadDetails" align="left">NTC3450/10K(0805R/5%)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">100000</td><td class="ListHeadDetails" align="right">0.1200</td><td class="ListHeadDetails" align="right">12000.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1743.59</td></tr><tr ><td class="ListHeadDetails" align="left" >12</td><td class='ListHeadDetails'align=center >02260010</td>
+<td class="ListHeadDetails" align="left">三极管</td><td class="ListHeadDetails" align="left">MMBT5551(SOT23)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">300000</td><td class="ListHeadDetails" align="right">0.0600</td><td class="ListHeadDetails" align="right">18000.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>2615.38</td></tr><tr ><td class="ListHeadDetails" align="left" >13</td><td class='ListHeadDetails'align=center >02260014</td>
+<td class="ListHeadDetails" align="left">三极管</td><td class="ListHeadDetails" align="left">MMBT5401(SOT23)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">90000</td><td class="ListHeadDetails" align="right">0.0600</td><td class="ListHeadDetails" align="right">5400.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>784.62</td></tr><tr ><td class="ListHeadDetails" align="left" >14</td><td class='ListHeadDetails'align=center >02100015</td>
+<td class="ListHeadDetails" align="left">贴片电容</td><td class="ListHeadDetails" align="left">104/100NF(0603R/50V)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">170000</td><td class="ListHeadDetails" align="right">0.0720</td><td class="ListHeadDetails" align="right">12240.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>1778.46</td></tr><tr ><td class="ListHeadDetails" align="left" >15</td><td class='ListHeadDetails'align=center >02250014</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">LL4148(LL34)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">100000</td><td class="ListHeadDetails" align="right">0.0240</td><td class="ListHeadDetails" align="right">2400.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>348.72</td></tr><tr ><td class="ListHeadDetails" align="left" >16</td><td class='ListHeadDetails'align=center >02140001</td>
+<td class="ListHeadDetails" align="left">100R/3W绕线电阻</td><td class="ListHeadDetails" align="left">100R/3WS</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">10000</td><td class="ListHeadDetails" align="right">0.1900</td><td class="ListHeadDetails" align="right">1900.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>276.07</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;1100000</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;77140.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;11208.38</td>
+ </tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票3</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >17</td><td class='ListHeadDetails'align=center >02140006</td>
+<td class="ListHeadDetails" align="left">470R/3W/5%绕线电阻</td><td class="ListHeadDetails" align="left">470R/3WS/5%(厚声)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">20000</td><td class="ListHeadDetails" align="right">0.1900</td><td class="ListHeadDetails" align="right">3800.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>552.14</td></tr><tr ><td class="ListHeadDetails" align="left" >18</td><td class='ListHeadDetails'align=center >02250039</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">FR107/FFM107-M(SOD-123)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">12000</td><td class="ListHeadDetails" align="right">0.1100</td><td class="ListHeadDetails" align="right">1320.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>191.79</td></tr><tr ><td class="ListHeadDetails" align="left" >19</td><td class='ListHeadDetails'align=center >02250029</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">MM1Z12/12V(SOD-123)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">30000</td><td class="ListHeadDetails" align="right">0.0650</td><td class="ListHeadDetails" align="right">1950.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>283.33</td></tr><tr ><td class="ListHeadDetails" align="left" >20</td><td class='ListHeadDetails'align=center >02250048</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">LED黄色0805)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">60000</td><td class="ListHeadDetails" align="right">0.0700</td><td class="ListHeadDetails" align="right">4200.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>610.26</td></tr><tr ><td class="ListHeadDetails" align="left" >21</td><td class='ListHeadDetails'align=center >02250058</td>
+<td class="ListHeadDetails" align="left">二极管</td><td class="ListHeadDetails" align="left">BAV99（SOT23）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">18000</td><td class="ListHeadDetails" align="right">0.0400</td><td class="ListHeadDetails" align="right">720.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>104.62</td></tr><tr ><td class="ListHeadDetails" align="left" >22</td><td class='ListHeadDetails'align=center >02100099</td>
+<td class="ListHeadDetails" align="left">贴片电容</td><td class="ListHeadDetails" align="left">472/50V/(C0805)(4.7nF)</td><td class="ListHeadDetails" align="left"></td><td class="ListHeadDetails" align="right">56000</td><td class="ListHeadDetails" align="right">0.0260</td><td class="ListHeadDetails" align="right">1456.00</td><td class="ListHeadDetails" align="center">17%</td><td class="ListHeadDetails" align="right"  colspan=2>211.56</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;196000</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;13446.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=2>&nbsp;1953.70</td>
+ </tr></table>

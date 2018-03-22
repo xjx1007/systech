@@ -775,7 +775,7 @@ public class BasePage : System.Web.UI.Page
     /// </summary>
     /// <param name="aa"></param>
     /// <returns></returns>
-    protected string Base_GetUnitsName(string aa)
+    protected string Base_GetUnitsName(object aa)
     {
         //if (aa!="")
         //{
