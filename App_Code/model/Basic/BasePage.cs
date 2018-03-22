@@ -791,7 +791,7 @@ public class BasePage : System.Web.UI.Page
                 }
                 else
                 {
-                    return "";
+                    return "--";
                 }
             }
        // }

@@ -979,7 +979,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                         this.BeginQuery("select top 1 ProcureUnitPrice from Knet_Procure_SuppliersPrice where SuppNo='" + s_SuppNo + "' and ProcureUnitPrice<>'" + s_Price + "' and ProductsBarCode='" + s_ProductsBarCode + "' and KPP_Del=0 and e.KPP_State=1   order by ProcureUpdateDateTime desc ");
                         s_NewPrice = this.QueryForReturn();
                         */
-
+                        //供应商和单价
                         Sb_Details.Append("<td class=\"ListHeadDetails\" nowrap>\n");
                         Sb_Details.Append("<input id=\"Tbx_SuppNo_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_SuppNo_" + i.ToString() + "\"  value=\"" + s_SuppNo + "\" />" + base.Base_GetSupplierName_Link(s_SuppNo) + "\n");
                         Sb_Details.Append("<input id=\"Tbx_OrderType_" + i.ToString() + "\" type=\"hidden\" name=\"Tbx_OrderType_" + i.ToString() + "\"  value=\"" + s_OrderType + "\" />\n");
