@@ -301,10 +301,9 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         {
             model.KSP_BigUnits = this.BigUnits.Text + "/" + DropDownList1.SelectedItem.Text;
         }
-        else
-        {
-            model.ProductsUnits = ProductsUnits;
-        }
+       
+        model.ProductsUnits = ProductsUnits;
+        
        
         model.ProductsStockAlert = ProductsStockAlert;
         model.ProductsPic = ProductsPic;
@@ -863,7 +862,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
                 s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString()) + "</td>";
                 s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString()) + "</td>";
-                s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString()),"") + "</td>";
+                s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dtb_RCProducts.Rows[i]["XPD_FaterBarCode"].ToString())) + "</td>";
                 string s_Price = base.FormatNumber1(Dtb_RCProducts.Rows[i]["XPD_Price"].ToString(), 3);
                 if (i > 0)
                 {

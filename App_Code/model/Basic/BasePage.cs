@@ -775,10 +775,10 @@ public class BasePage : System.Web.UI.Page
     /// </summary>
     /// <param name="aa"></param>
     /// <returns></returns>
-    protected string Base_GetUnitsName(string aa, string bb)
+    protected string Base_GetUnitsName(string aa)
     {
-        if (aa!="")
-        {
+        //if (aa!="")
+        //{
             using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
             {
                 conn.Open();
@@ -794,25 +794,25 @@ public class BasePage : System.Web.UI.Page
                     return "";
                 }
             }
-        }
-        else
-        {
-            using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
-            {
-                conn.Open();
-                string Dostr = "select KSP_BigUnits from KNet_Sys_Products where KSP_COde='" + bb + "'";
-                SqlCommand cmd = new SqlCommand(Dostr, conn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    return dr["KSP_BigUnits"].ToString().Substring(dr["KSP_BigUnits"].ToString().LastIndexOf("/") + 1);
-                }
-                else
-                {
-                    return "";
-                }
-            }
-        }
+       // }
+        ////else
+        ////{
+        //    using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        //    {
+        //        conn.Open();
+        //        string Dostr = "select KSP_BigUnits from KNet_Sys_Products where KSP_COde='" + bb + "'";
+        //        SqlCommand cmd = new SqlCommand(Dostr, conn);
+        //        SqlDataReader dr = cmd.ExecuteReader();
+        //        if (dr.Read())
+        //        {
+        //            return dr["KSP_BigUnits"].ToString().Substring(dr["KSP_BigUnits"].ToString().LastIndexOf("/") + 1);
+        //        }
+        //        else
+        //        {
+        //            return "";
+        //        }
+        //    }
+        //}
             
     }
     /// <summary>

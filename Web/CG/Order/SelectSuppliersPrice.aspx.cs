@@ -221,14 +221,16 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
                         }
                     }
                 }
+                string price = model.ProcureUnitPrice.ToString();
                 if (s_BigUnits.Length >0 )
                 {
                     string c = s_BigUnits.Remove(s_BigUnits.LastIndexOf("/"));
                     s_Number = s_Number/Convert.ToInt32(c);
                     ProductsUnits = s_BigUnits.Substring(s_BigUnits.LastIndexOf("/")+1);
+                    price=(decimal.Parse(price)* Convert.ToInt32(c)).ToString();
                 }
                 
-                s_Return += model.ProductsName + "," + model.ProductsBarCode + "," + model.ProductsPattern + "," + base.Base_GetProductsEdition(model.ProductsBarCode) + "," + s_Number.ToString() + "," + model.ProcureUnitPrice.ToString() + "," + Convert.ToString(s_Number * decimal.Parse(model.ProcureUnitPrice.ToString())) + ",";
+                s_Return += model.ProductsName + "," + model.ProductsBarCode + "," + model.ProductsPattern + "," + base.Base_GetProductsEdition(model.ProductsBarCode) + "," + s_Number.ToString() + "," + price + "," + Convert.ToString(s_Number * decimal.Parse(price)) + ",";
                 s_Return += model.HandPrice.ToString() + "," + Convert.ToString(s_Number * decimal.Parse(model.HandPrice.ToString())) + "," + s_Remarks + "," + s_SuppNo + "," + base.Base_GetSupplierName(s_SuppNo) + "," + s_WareHouseNo + "," + Model_Products.KSP_BZNumber.ToString() + "," + s_BZNumber+"," + s_BrandName + "," + s_BigUnits + "," + ProductsUnits + "|";
                 cal += GridView1.DataKeys[i].Value.ToString();
                 if (j > 0)
