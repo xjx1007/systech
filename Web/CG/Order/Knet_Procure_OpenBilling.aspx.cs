@@ -194,7 +194,8 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                     string s_BZNumber = Dts_Table.Tables[0].Rows[i]["KPOD_BZNumber"].ToString();
                     string s_OrderPrice = Dts_Table.Tables[0].Rows[i]["OrderUnitPrice"].ToString();
                     string s_OrderTotalNet = Dts_Table.Tables[0].Rows[i]["OrderTotalNet"].ToString();
-                    decimal BigUnits= Convert.ToDecimal(Dts_Table.Tables[0].Rows[i]["KPOD_BigUnits"]);
+                    //decimal BigUnits= Convert.ToDecimal(Dts_Table.Tables[0].Rows[i]["KPOD_BigUnits"]);
+                    string BigUnits =Dts_Table.Tables[0].Rows[i]["KPOD_BigUnits"].ToString();
                     string s_HandPrice =  FormatNumber(Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandPrice"].ToString(), 3) ;
                    string s_HandTotal = FormatNumber(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString(), 3);
                     string s_OrderCPBZNumber = "0", s_OrderBZNumber = "0";
