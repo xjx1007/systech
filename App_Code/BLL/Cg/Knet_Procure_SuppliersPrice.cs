@@ -91,7 +91,15 @@ namespace KNet.BLL
         {
             return dal.GetList(strWhere);
         }
-
+        /// <summary>
+        /// 获取供应商和单价
+        /// </summary>
+        /// <param name="ProductsBarCode"></param>
+        /// <returns></returns>
+        public DataSet GetSupAndPrice(string ProductsBarCode)
+        {
+            return dal.GetSupAndPrice(ProductsBarCode);
+        }
 
         /// <summary>
         /// 获得数据列表

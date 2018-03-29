@@ -37,6 +37,44 @@
                 }
             }
         }
+
+        function dpChange() {
+            var num = document.all('Tbx_Num').value;
+            for (var i = 0; i < num; i++) {
+                document.all("Ddl_Price_" + i).value = document.all("Ddl_SuppNo_" + i).value;
+                var obj = document.getElementById("Ddl_Price_" + i); //selectid
+
+                var index = obj.selectedIndex; // 选中索引
+
+                var text = obj.options[index].text; // 选中文本
+
+                var valu = obj.options[index].value; // 选中值
+                document.all("Pri_" + i).value = text;
+            }
+        }
+
+        //function dpriceChange(obj) {
+        //    var ths = obj;
+        //    ths.selectIndex = 0;
+        //    alert("不能选单价");
+            
+
+
+        //}
+
+        //function Checkd(obj) {
+        //    var ths = obj;
+        //    var strna = ths.value;
+        //    if (strna == "off") {
+        //        strna = "one";
+        //        ths.value = strna;
+        //    } else {
+        //        //strna = strna.substring(0, strna.lastIndexOf('#'));
+        //        //ths.name = strna;
+        //        strna = "off";
+        //        ths.value = strna;
+        //    }
+        //}
     </script>
     <style type="text/css">
         .auto-style1 {
@@ -316,8 +354,10 @@
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>序号</b></td>
                                                                                     <td class="ListHead" nowrap>
-                                                                                    <input type="CheckBox" onclick="selectAllPage(this)" checked>
-                                                                                        <b>类别</b></td>
+                                                                                        <%--onclick="selectAllPage(this)" checked--%>
+                                                                                    <input type="CheckBox">
+                                                                                        <b>类别</b>
+                                                                                    </td>
                                                                                     <td class="ListHead" nowrap>
                                                                                         <b>BOM序号</b></td>
                                                                                     <td class="ListHead" nowrap width="250px">
@@ -351,6 +391,7 @@
                                                                     </tr>
 
                                                                     <tr>
+                                                                     
                                                                         <td align="center" style="height: 30px" colspan="2">
                                                                             <asp:Button ID="Btn_Save" runat="server" Text="执行" AccessKey="S" title="执行 [Alt+S]"
                                                                                 class="crmbutton small save" OnClick="Btn_Click" Style="width: 55px; height: 30px;" />

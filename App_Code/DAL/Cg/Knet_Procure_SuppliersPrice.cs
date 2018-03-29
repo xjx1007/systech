@@ -505,7 +505,19 @@ namespace KNet.DAL
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
-
+        /// <summary>
+        /// 获取供应商和单价
+        /// </summary>
+        /// <param name="ProductsBarCode"></param>
+        /// <returns></returns>
+        public DataSet GetSupAndPrice(string ProductsBarCode)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(
+                "select  a.SuppNo, a.ProcureUpdateDateTime, a.ProcureUnitPrice, b.suppname FROM Knet_Procure_SuppliersPrice a  join Knet_Procure_Suppliers b  on a.SuppNo = b.SuppNo where  a.ProcureUpdateDateTime in(select max(ProcureUpdateDateTime)from Knet_Procure_SuppliersPrice a INNER JOIN Knet_Procure_Suppliers b on a.SuppNo = b.SuppNo where a.ProductsBarCode ='" + ProductsBarCode + "' group by a.SuppNo) and a.ProductsBarCode = '" + ProductsBarCode + "'");
+            //strSql.Append("where a.ProductsBarCode='" + ProductsBarCode + "'");
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         /// <summary>
         /// 获得数据列表
         /// </summary>

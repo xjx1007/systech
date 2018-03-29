@@ -116,7 +116,8 @@ namespace KNet.DAL
             parameters[32].Value = model.KPO_PreHouseNo;
             
             
-            DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+           int i= DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+
         }
 
         /// <summary>
