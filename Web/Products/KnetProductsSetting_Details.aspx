@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="KnetProductsSetting_Details.aspx.cs"
     Inherits="Knet_Web_System_KnetProductsSetting_Details" %>
+
 <%@ Register Src="../Control/UploadListForProducts.ascx" TagName="CommentList" TagPrefix="uc2" %>
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 
@@ -14,7 +15,7 @@
     <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
     <link rel="stylesheet" href="/Web/css/ihwy-2012.css" type="text/css" media="screen" charset="utf-8" />
-    <link rel="stylesheet" href="/Web/cssjquery.listnav-2.1.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="/Web/css/jquery.listnav-2.1.css" type="text/css" media="screen" charset="utf-8" />
     <script type="text/javascript" src="/Web/js/jquery-1.7.2.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="/Web/js/jquery.cookie.js" charset="utf-8"></script>
     <script type="text/javascript" src="/Web/js/jquery.idTabs.min.js" charset="utf-8"></script>
@@ -59,6 +60,15 @@
             }
         }
 
+        function renovate() {
+            if (document.all("checkbox").checked) {
+                //alert(document.all("checkbox").checked);
+                window.location = "/web/Products/KnetProductsSetting_Details.aspx?BarCode="+document.getElementById("Tbx_ID").innerText.trim()+"&&check=true"; 
+            } else {
+                //alert(document.all("checkbox").checked);
+                window.location = "/web/Products/KnetProductsSetting_Details.aspx?BarCode="+document.getElementById("Tbx_ID").innerText.trim()+"&&check=false";
+            }
+        }
     </script>
     <style type="text/css">
         .auto-style1 {
@@ -84,6 +94,7 @@
                     </td>
                     <td width="100%" nowrap>
                         <asp:Label ID="Tbx_ID" runat="server" Style="display: none"></asp:Label>
+                        <asp:Label ID="Lbl_ShowCheck" runat="server" Style="display: none"></asp:Label>
                         <asp:Label ID="Tbx_BomNumber" runat="server" Style="display: none"></asp:Label>
                     </td>
                 </tr>
@@ -124,7 +135,7 @@
                                     <table border="0" cellspacing="3" cellpadding="3" width="100%" class="dvtContentSpace">
                                         <tr>
                                             <td valign="top" align="left"></td>
-                                            <td width="22%" valign="top" style="border-left: 2px dashed #cccccc; padding: 13px"
+                                            <td width="15%" valign="top" style="border-left: 2px dashed #cccccc; padding: 13px"
                                                 rowspan="2">
                                                 <table width="100%" border="0" cellpadding="5" cellspacing="0">
                                                     <tr>
@@ -184,6 +195,12 @@
                                                             <asp:Label runat="server" ID="Lbl_Spce"></asp:Label>
                                                         </td>
                                                     </tr>
+                                                     <tr>
+                                                        <td align="left" style="padding-left: 10px;">
+                                                            <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                            <asp:Label runat="server" ID="UpdateBom"></asp:Label>
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </td>
                                         </tr>
@@ -217,23 +234,23 @@
                                                                                 <tr>
                                                                                     <td>
                                                                                         <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit"
-                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    ')"
-                                                                                            name="Edit" value="&nbsp;编辑&nbsp;" style="width: 55px; height: 26px;">&nbsp;
+                                                                                            onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    &Type=3')"
+                                                                                            name="Edit" value="&nbsp;编辑&nbsp;" style="width: 55px; height: 26px;" />&nbsp;
 
                                                         <input title="" class="crmbutton small edit" onclick="PageGo('KnetProductsSetting.aspx')"
                                                             type="button" name="ListView" value="&nbsp;返回列表&nbsp;" style="width: 70px; height: 26px;">
                                                                                         <input title="升级 [Alt+J]" type="button" accesskey="E" class="crmbutton small edit"
                                                                                             onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    &Type=2')"
-                                                                                            name="Edit" value="&nbsp;升级&nbsp;" style="width: 55px; height: 26px;">&nbsp;&nbsp;
+                                                                                            name="Edit" value="&nbsp;升级&nbsp;" style="width: 55px; height: 26px;" />&nbsp;&nbsp;
             <asp:Button ID="Button1" runat="server" Text="停用"
                 class="crmbutton small save" OnClick="Button1_Click" Style="width: 70px; height: 26px;" />
-                                                                                        <asp:Button runat="server" ID="Btn_Sh" Text="审批"  class="crmbutton small cancel"  OnClick="Btn_Sh_Click"  Style="width: 70px; height: 26px;"/>&nbsp;
+                                                                                        <asp:Button runat="server" ID="Btn_Sh" Text="审批" class="crmbutton small cancel" OnClick="Btn_Sh_Click" Style="width: 70px; height: 26px;" />&nbsp;
 
                                                                                     </td>
                                                                                     <td align="right">
                                                                                         <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create"
                                                                                             onclick="PageGo('KnetProductsSetting_Add.aspx?ID=<%= Request.QueryString["BarCode"].ToString() %>    &Type=1')"
-                                                                                            name="Duplicate" value="复制" style="width: 55px; height: 26px;">&nbsp;
+                                                                                            name="Duplicate" value="复制" style="width: 55px; height: 26px;" />&nbsp;
 
                                                                                     </td>
                                                                                 </tr>
@@ -361,21 +378,21 @@
                                                                             <asp:Label ID="CgType" runat="server" Text=""></asp:Label>
                                                                         </td>
                                                                     </tr>
-                                                                    
-                                                            <tr>
-                                                                <td height="25" align="right" class="dvtCellLabel">使用方式:
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
+
+                                                                    <tr>
+                                                                        <td height="25" align="right" class="dvtCellLabel">使用方式:
+                                                                        </td>
+                                                                        <td align="left" class="dvtCellInfo">
                                                                             <asp:Label ID="Ddl_UseType" runat="server" Text=""></asp:Label>
 
-                                                                </td>
-                                                                <td height="25" align="right" class="dvtCellLabel">损耗类别:
-                                                                </td>
-                                                                <td align="left" class="dvtCellInfo">
+                                                                        </td>
+                                                                        <td height="25" align="right" class="dvtCellLabel">损耗类别:
+                                                                        </td>
+                                                                        <td align="left" class="dvtCellInfo">
                                                                             <asp:Label ID="Lbl_Loss" runat="server" Text=""></asp:Label>
 
-                                                                </td>
-                                                            </tr>
+                                                                        </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td class="dvtCellLabel">添加操作员:
                                                                         </td>
@@ -405,26 +422,34 @@
                                                                     <tr>
                                                                         <td height="41" class="dvtCellLabel">停用说明:
                                                                         </td>
-                                                                        <td colspan="3" class="dvtCellInfo">&nbsp;
+                                                                        <td class="dvtCellInfo">&nbsp;
                                                                             <asp:TextBox ID="Tbx_DelRemarks" runat="server" CssClass="detailedViewTextBox"
                                                                                 OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                                                 TextMode="MultiLine" Width="440px" Height="50px"></asp:TextBox>
                                                                             <asp:Label ID="Lbl_DelRemarks" runat="server" Text=""></asp:Label>
                                                                         </td>
+                                                                        <td height="41" class="dvtCellLabel">备注:
+                                                                        </td>
+                                                                        <td class="dvtCellInfo">&nbsp;
+                                                                            <asp:TextBox ID="ProductRemark" runat="server" CssClass="detailedViewTextBox"
+                                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                                                TextMode="MultiLine" Width="440px" Height="50px"></asp:TextBox>
+                                                                            <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+                                                                        </td>
                                                                     </tr>
-                                                                    
+
                                                                     <tr>
                                                                         <td height="41" class="dvtCellLabel">详细说明:
                                                                         </td>
                                                                         <td colspan="3" class="dvtCellInfo">&nbsp;<asp:Label ID="ProductsDetailDescription" runat="server" Text=""></asp:Label>
                                                                         </td>
                                                                     </tr>
-                                                                       <tr runat="server" id="Time">
+                                                                    <tr runat="server" id="Time">
                                                                         <td height="50" class="dvtCellLabel">工时(秒):
                                                                         </td>
                                                                         <td colspan="3" class="dvtCellInfo">&nbsp;<asp:TextBox ID="WorkTime" runat="server"></asp:TextBox>
-                                                                             <%--<asp:Button runat="server" ID="SaveWorkTime" OnClick="SaveWorkTime" Text="保 存"  class="crmbutton small cancel"   Style="width: 70px; height: 26px;"/>--%>
-                                                                            <asp:Button ID="SaveWorkTime" runat="server" OnClick="SaveWorkTime_OnClick" class="crmbutton small cancel"   Style="width: 70px; height: 26px;" Text="保 存" />
+                                                                            <%--<asp:Button runat="server" ID="SaveWorkTime" OnClick="SaveWorkTime" Text="保 存"  class="crmbutton small cancel"   Style="width: 70px; height: 26px;"/>--%>
+                                                                            <asp:Button ID="SaveWorkTime" runat="server" OnClick="SaveWorkTime_OnClick" class="crmbutton small cancel" Style="width: 70px; height: 26px;" Text="保 存" />
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -459,6 +484,7 @@
                                                                         <tr>
                                                                             <td colspan="4" class="detailedViewHeader">
                                                                                 <b>BOM:</b>
+                                                                                <input type="checkbox" runat="server" id="checkbox" onclick="renovate()" />显示库存
                                                                                 <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                                                                             </td>
                                                                         </tr>
@@ -479,10 +505,15 @@
                                                                                         </td>
                                                                                         <td align="center" class="ListHead">数量
                                                                                         </td>
-                                                                                        <td align="center" class="ListHead"  width="40px" >位号
+                                                                                        <td align="center" class="ListHead" width="40px">位号
+                                                                                        </td>
+                                                                                        <%-- <td align="center" class="ListHead"  width="60px" >贴片/插件
+                                                                                        </td>--%>
+                                                                                        <td align="center" class="ListHead" width="40px">替换料
                                                                                         </td>
                                                                                         <td align="center" class="ListHead">是否可替代
                                                                                         </td>
+
                                                                                         <td align="center" class="ListHead">产品停用状态
                                                                                         </td>
                                                                                         <td align="center" class="ListHead">BOM停用状态
@@ -589,55 +620,55 @@
                                                             </div>
                                                             <div id="tab9" class="tab">
 
-                                                                
+
                                                                 <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
                                                                     <tr>
                                                                         <td colspan="3" class="detailedViewHeader">
                                                                             <b>导入BOM:</b>
                                                                             <asp:TextBox ID="TextBox6" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                                                                         </td>
-                                                                        
-                                                                                                <td class="detailedViewHeader" align="right" >
-                                                                                            <asp:Button ID="Button4" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Button3_Click" Style="width: 55px; height: 33px;" />
-                                                                                            
-                                                                                                </td>
+
+                                                                        <td class="detailedViewHeader" align="right">
+                                                                            <asp:Button ID="Button4" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Button3_Click" Style="width: 55px; height: 33px;" />
+
+                                                                        </td>
                                                                     </tr>
 
                                                                     <tr>
                                                                         <td colspan="4">
-                                                                                    <asp:TextBox ID="Tbx_ImportNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
-                                                                                    <asp:TextBox ID="Tbx_ImportID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                                                        <table id="Table5" width="100%" border="0" align="center" cellpadding="0"
-                                                                                            cellspacing="0" class="ListDetails">
-                                                                                            <tr id="tr6">
-                                                                                                <td align="center" class="ListHead">序号
-                                                                                                </td>
-                                                                                                <td align="center" class="ListHead">物料名称
-                                                                                                </td>
-                                                                                                <td align="center" class="ListHead">物料型号
-                                                                                                </td>
-                                                                                                <td align="center" class="ListHead">封装
-                                                                                                </td>
-                                                                                                <td align="center" class="ListHead">数量
-                                                                                                </td>
-                                                                                                <td align="center" class="ListHead">备注
-                                                                                                </td>
-                                                                                                <td align="center" class="ListHead" colspan="2">系统对应产品
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <asp:Label runat="server" ID="lbl_BomDetails"></asp:Label>
-                                                                                            
-                                                                                            <tr id="tr8">
-                                                                                                <td align="left" colspan="7">
-                                                                                            <asp:Button ID="Button3" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Button3_Click" Style="width: 55px; height: 33px;" />
-                                                                                            
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </table>
+                                                                            <asp:TextBox ID="Tbx_ImportNum" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
+                                                                            <asp:TextBox ID="Tbx_ImportID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                                            <table id="Table5" width="100%" border="0" align="center" cellpadding="0"
+                                                                                cellspacing="0" class="ListDetails">
+                                                                                <tr id="tr6">
+                                                                                    <td align="center" class="ListHead">序号
                                                                                     </td>
+                                                                                    <td align="center" class="ListHead">物料名称
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">物料型号
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">封装
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">数量
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead">备注
+                                                                                    </td>
+                                                                                    <td align="center" class="ListHead" colspan="2">系统对应产品
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <asp:Label runat="server" ID="lbl_BomDetails"></asp:Label>
+
+                                                                                <tr id="tr8">
+                                                                                    <td align="left" colspan="7">
+                                                                                        <asp:Button ID="Button3" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" class="crmbutton small save" OnClick="Button3_Click" Style="width: 55px; height: 33px;" />
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
                                                                     </tr>
-                                                                    </table>
-                                                                </div>
+                                                                </table>
+                                                            </div>
                                                             <div id="tab2" class="tab">
                                                                 <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
 
@@ -677,15 +708,52 @@
                                                                             <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True"
                                                                                 AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="10"
                                                                                 BorderColor="#4974C2"
-                                                                                EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"><Columns><asp:TemplateField HeaderText="生产问题名称" SortExpression="ZPP_Title" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="Left"><ItemTemplate><a href="/Web/Zl/Problem/Zl_Produce_Problem_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ZPP_ID") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "ZPP_Title") %></a></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="产品型号" SortExpression="ZPP_ProdutsBarCode" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="记录编号" DataField="ZPP_Code" SortExpression="ZPP_Code" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField HeaderText="日期" DataField="ZPP_STime" SortExpression="ZPP_STime"
-                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField HeaderText="希望完成日期" DataField="ZPP_HopeDate" SortExpression="ZPP_HopeDate"
-                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="生产阶段" SortExpression="ZPP_ScStage" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="类型" SortExpression="ZPP_Type" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="责任人" SortExpression="ZPP_DutyPerson" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="责任部门" SortExpression="ZPP_DutyDepart" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                                EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>">
+                                                                                <Columns>
+                                                                                    <asp:TemplateField HeaderText="生产问题名称" SortExpression="ZPP_Title" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="Left">
+                                                                                        <ItemTemplate><a href="/Web/Zl/Problem/Zl_Produce_Problem_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ZPP_ID") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "ZPP_Title") %></a></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="产品型号" SortExpression="ZPP_ProdutsBarCode" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="Left">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:BoundField HeaderText="记录编号" DataField="ZPP_Code" SortExpression="ZPP_Code" HtmlEncode="false">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:BoundField HeaderText="日期" DataField="ZPP_STime" SortExpression="ZPP_STime"
+                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:BoundField HeaderText="希望完成日期" DataField="ZPP_HopeDate" SortExpression="ZPP_HopeDate"
+                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:TemplateField HeaderText="生产阶段" SortExpression="ZPP_ScStage" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="类型" SortExpression="ZPP_Type" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="责任人" SortExpression="ZPP_DutyPerson" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="责任部门" SortExpression="ZPP_DutyDepart" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                </Columns>
+                                                                                <HeaderStyle CssClass='colHeader' />
+                                                                                <RowStyle CssClass='listTableRow' />
+                                                                                <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                                <PagerStyle CssClass='Custom_DgPage' />
+                                                                            </cc1:MyGridView>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -709,11 +777,35 @@
                                                                             <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
                                                                                 AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="10"
                                                                                 BorderColor="#4974C2"
-                                                                                EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"><Columns><asp:TemplateField HeaderText="作业指导书名称" SortExpression="ZTI_Name" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="Left"><ItemTemplate><a href="../Instruction/ZL_Task_Instruction_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ZTI_ID") %>"><%# DataBinder.Eval(Container.DataItem, "ZTI_Name") %></a></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="记录编号" DataField="ZTI_Code" SortExpression="ZTI_Code" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="产品型号" SortExpression="ZTI_ProductsBarCode" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="日期" DataField="ZTI_STime" SortExpression="ZTI_STime"
-                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="责任人" SortExpression="ZTI_DutyPerson" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                                EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>">
+                                                                                <Columns>
+                                                                                    <asp:TemplateField HeaderText="作业指导书名称" SortExpression="ZTI_Name" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="Left">
+                                                                                        <ItemTemplate><a href="../Instruction/ZL_Task_Instruction_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ZTI_ID") %>"><%# DataBinder.Eval(Container.DataItem, "ZTI_Name") %></a></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:BoundField HeaderText="记录编号" DataField="ZTI_Code" SortExpression="ZTI_Code" HtmlEncode="false">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:TemplateField HeaderText="产品型号" SortExpression="ZTI_ProductsBarCode" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="Left">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:BoundField HeaderText="日期" DataField="ZTI_STime" SortExpression="ZTI_STime"
+                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:TemplateField HeaderText="责任人" SortExpression="ZTI_DutyPerson" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                </Columns>
+                                                                                <HeaderStyle CssClass='colHeader' />
+                                                                                <RowStyle CssClass='listTableRow' />
+                                                                                <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                                <PagerStyle CssClass='Custom_DgPage' />
+                                                                            </cc1:MyGridView>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -735,17 +827,73 @@
                                                                         <td colspan="4">
                                                                             <cc1:MyGridView ID="MyGridView2" runat="server" AllowPaging="True" AllowSorting="True"
                                                                                 IsShowEmptyTemplate="true" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关客户记录</B><br/><br/></font></div>"
-                                                                                AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%"><Columns><asp:TemplateField><HeaderTemplate><input type="CheckBox" onclick="selectAll(this)"> </HeaderTemplate><ItemTemplate><asp:CheckBox ID="Chbk" runat="server" /></ItemTemplate><HeaderStyle HorizontalAlign="Left" /><ItemStyle Height="25px" HorizontalAlign="Left" /></asp:TemplateField><asp:TemplateField HeaderText="申请主题" SortExpression="PPS_Name" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate><a href="Pb_Products_Sample_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "PPS_ID") %>"></a></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="客户名称" SortExpression="PPS_CustomerValue" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="联系人" SortExpression="PPS_LinkMan" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="类型" SortExpression="PPS_LinkMan" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="需求日期" DataField="PPS_Needtime" SortExpression="PPS_Needtime"
-                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField HeaderText="数量" DataField="PPS_Number" SortExpression="PPS_Number"
-                                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="打烊情况跟踪" HeaderStyle-Font-Size="12px" ItemStyle-Width="230px"
-                                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="负责人" SortExpression="PPS_DutyPeson" ItemStyle-HorizontalAlign="Left"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="创建时间" DataField="PPS_CTime" SortExpression="PPS_CTime"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="状态" SortExpression="PPS_Dept" ItemStyle-HorizontalAlign="center"
-                                                                                        HeaderStyle-HorizontalAlign="center"><ItemTemplate></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center"><ItemTemplate><a href="Pb_Products_Sample_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "PPS_ID") %>"><asp:Image ID="Image1" runat="server" ImageUrl="../../images/Edit.gif" border="0"
-                                                                                                    ToolTip="修改" /></a></ItemTemplate></asp:TemplateField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                                AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%">
+                                                                                <Columns>
+                                                                                    <asp:TemplateField>
+                                                                                        <HeaderTemplate>
+                                                                                            <input type="CheckBox" onclick="selectAll(this)">
+                                                                                        </HeaderTemplate>
+                                                                                        <ItemTemplate>
+                                                                                            <asp:CheckBox ID="Chbk" runat="server" />
+                                                                                        </ItemTemplate>
+                                                                                        <HeaderStyle HorizontalAlign="Left" />
+                                                                                        <ItemStyle Height="25px" HorizontalAlign="Left" />
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="申请主题" SortExpression="PPS_Name" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate><a href="Pb_Products_Sample_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "PPS_ID") %>"></a></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="客户名称" SortExpression="PPS_CustomerValue" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="联系人" SortExpression="PPS_LinkMan" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="类型" SortExpression="PPS_LinkMan" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:BoundField HeaderText="需求日期" DataField="PPS_Needtime" SortExpression="PPS_Needtime"
+                                                                                        DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:BoundField HeaderText="数量" DataField="PPS_Number" SortExpression="PPS_Number"
+                                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:TemplateField HeaderText="打烊情况跟踪" HeaderStyle-Font-Size="12px" ItemStyle-Width="230px"
+                                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="负责人" SortExpression="PPS_DutyPeson" ItemStyle-HorizontalAlign="Left"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:BoundField HeaderText="创建时间" DataField="PPS_CTime" SortExpression="PPS_CTime">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:TemplateField HeaderText="状态" SortExpression="PPS_Dept" ItemStyle-HorizontalAlign="center"
+                                                                                        HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center">
+                                                                                        <ItemTemplate>
+                                                                                            <a href="Pb_Products_Sample_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "PPS_ID") %>">
+                                                                                                <asp:Image ID="Image1" runat="server" ImageUrl="../../images/Edit.gif" border="0"
+                                                                                                    ToolTip="修改" /></a>
+                                                                                        </ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                </Columns>
+                                                                                <HeaderStyle CssClass='colHeader' />
+                                                                                <RowStyle CssClass='listTableRow' />
+                                                                                <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                                <PagerStyle CssClass='Custom_DgPage' />
+                                                                            </cc1:MyGridView>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -755,7 +903,37 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="4">
-                                                                            <cc1:MyGridView ID="MyGridView3" runat="server" AllowPaging="true" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"><Columns><asp:BoundField DataField="ProductsName" HeaderText="产品名称" SortExpression="ProductsName"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="ProductsEdition" HeaderText="版本号" SortExpression="ProductsEdition"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="XPS_SpceCode" HeaderText="规格号" SortExpression="XPS_SpceCode"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="规格说明书" SortExpression="XPS_SpceName" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate><a href="<%# GetSpce(DataBinder.Eval(Container.DataItem, "XPS_ID").ToString())%>"><%# DataBinder.Eval(Container.DataItem, "XPS_SpceName").ToString()%></a></ItemTemplate></asp:TemplateField><asp:BoundField HeaderText="修改明细" DataField="XPS_Details" SortExpression="XPS_Details" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="70px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField HeaderText="添加时间" DataField="XPS_CTime" SortExpression="XPS_CTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="70px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                            <cc1:MyGridView ID="MyGridView3" runat="server" AllowPaging="true" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px">
+                                                                                <Columns>
+                                                                                    <asp:BoundField DataField="ProductsName" HeaderText="产品名称" SortExpression="ProductsName">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:BoundField DataField="ProductsEdition" HeaderText="版本号" SortExpression="ProductsEdition">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:BoundField DataField="XPS_SpceCode" HeaderText="规格号" SortExpression="XPS_SpceCode">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:TemplateField HeaderText="规格说明书" SortExpression="XPS_SpceName" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                                        <ItemTemplate><a href="<%# GetSpce(DataBinder.Eval(Container.DataItem, "XPS_ID").ToString())%>"><%# DataBinder.Eval(Container.DataItem, "XPS_SpceName").ToString()%></a></ItemTemplate>
+                                                                                    </asp:TemplateField>
+                                                                                    <asp:BoundField HeaderText="修改明细" DataField="XPS_Details" SortExpression="XPS_Details" HtmlEncode="false">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="70px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                    <asp:BoundField HeaderText="添加时间" DataField="XPS_CTime" SortExpression="XPS_CTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                                                                        <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="70px" />
+                                                                                        <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                                    </asp:BoundField>
+                                                                                </Columns>
+                                                                                <HeaderStyle CssClass='colHeader' />
+                                                                                <RowStyle CssClass='listTableRow' />
+                                                                                <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                                <PagerStyle CssClass='Custom_DgPage' />
+                                                                            </cc1:MyGridView>
                                                                         </td>
                                                                     </tr>
 
@@ -765,101 +943,141 @@
                                                             <div id="tab7" class="tab">
                                                                 <asp:Label runat="server" ID="Lbl_PriceLink"></asp:Label>
                                                                 <cc1:MyGridView ID="MyGridView4" runat="server" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
-                                                                    AllowPaging="true" PageSize="13"><Columns><asp:TemplateField HeaderText="供应商" SortExpression="SuppNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate><%# base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "SuppNo").ToString())%></ItemTemplate></asp:TemplateField><asp:TemplateField HeaderText="名称" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center"><ItemTemplate> <%# base.Base_GetProdutsName_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%></ItemTemplate></asp:TemplateField><asp:BoundField DataField="v_KSP_Code" HeaderText="料号" SortExpression="v_KSP_Code"><ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="v_ProductsEdition" HeaderText="版本号" SortExpression="v_ProductsEdition"><ItemStyle HorizontalAlign="left" Font-Size="12px" /><HeaderStyle HorizontalAlign="center" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="ProcureUnitPrice" ItemStyle-Font-Size="12px" HeaderText="单价" ItemStyle-Width="50px" HeaderStyle-Font-Size="12px" SortExpression="ProcureUnitPrice" DataFormatString="{0:F4}" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:BoundField DataField="HandPrice" ItemStyle-Font-Size="12px" HeaderText="加工费" ItemStyle-Width="40px" HeaderStyle-Font-Size="12px" SortExpression="HandPrice" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField><asp:TemplateField HeaderText="审核" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left"><ItemTemplate><%#GetShState(DataBinder.Eval(Container.DataItem, "KPP_State").ToString())%></ItemTemplate></asp:TemplateField><asp:BoundField DataField="ProcureUpdateDateTime" ItemStyle-Font-Size="12px" HeaderText="操作时间" HeaderStyle-Font-Size="12px" SortExpression="ProcureUpdateDateTime" HtmlEncode="false"><ItemStyle HorizontalAlign="Left" Font-Size="12px" /><HeaderStyle HorizontalAlign="Left" Font-Size="12px" /></asp:BoundField></Columns><HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                    AllowPaging="true" PageSize="13">
+                                                                    <Columns>
+                                                                        <asp:TemplateField HeaderText="供应商" SortExpression="SuppNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate><%# base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "SuppNo").ToString())%></ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="名称" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                                            <ItemTemplate><%# base.Base_GetProdutsName_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%></ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:BoundField DataField="v_KSP_Code" HeaderText="料号" SortExpression="v_KSP_Code">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                        <asp:BoundField DataField="v_ProductsEdition" HeaderText="版本号" SortExpression="v_ProductsEdition">
+                                                                            <ItemStyle HorizontalAlign="left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="center" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                        <asp:BoundField DataField="ProcureUnitPrice" ItemStyle-Font-Size="12px" HeaderText="单价" ItemStyle-Width="50px" HeaderStyle-Font-Size="12px" SortExpression="ProcureUnitPrice" DataFormatString="{0:F4}" HtmlEncode="false">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                        <asp:BoundField DataField="HandPrice" ItemStyle-Font-Size="12px" HeaderText="加工费" ItemStyle-Width="40px" HeaderStyle-Font-Size="12px" SortExpression="HandPrice" HtmlEncode="false">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                        <asp:TemplateField HeaderText="审核" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate><%#GetShState(DataBinder.Eval(Container.DataItem, "KPP_State").ToString())%></ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:BoundField DataField="ProcureUpdateDateTime" ItemStyle-Font-Size="12px" HeaderText="操作时间" HeaderStyle-Font-Size="12px" SortExpression="ProcureUpdateDateTime" HtmlEncode="false">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                    </Columns>
+                                                                    <HeaderStyle CssClass='colHeader' />
+                                                                    <RowStyle CssClass='listTableRow' />
+                                                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                    <PagerStyle CssClass='Custom_DgPage' />
+                                                                </cc1:MyGridView>
                                                             </div>
-                                                                           <div id="tab6" class="tab">
+                                                            <div id="tab6" class="tab">
                                                                 <cc1:MyGridView ID="Grid_Order" runat="server" AllowPaging="True" AllowSorting="True"
                                                                     AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="10"
                                                                     BorderColor="#4974C2"
                                                                     EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>">
-                                                                    
-                                                                    <Columns>
-                                                <asp:TemplateField HeaderText="采购单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <a href="/CG/Order/Knet_Procure_OpenBilling_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "OrderNo") %>" target="_blank">
-                                                            <%# DataBinder.Eval(Container.DataItem, "OrderNo") %></a>
-                                                      <asp:TextBox ID="Tbx_OrderNo" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "OrderNo").ToString() %>'></asp:TextBox>
-                                                    
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                                <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <a href="/CG/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %>" target="_blank">
-                                                            <%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %></a>
-                                                        <a href="/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ScNo=<%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %>&ScNo1=<%# DataBinder.Eval(Container.DataItem, "OrderNo") %>"><font color="green">相同</font></a>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
 
-                                                <asp:BoundField HeaderText="采购日期" DataField="OrderDateTime" SortExpression="OrderDateTime"
-                                                    DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
-                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                </asp:BoundField>
-                                                <asp:BoundField HeaderText="要求日期" DataField="ArrivalDate" SortExpression="ArrivalDate"
-                                                    DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
-                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                </asp:BoundField>
-                                                <asp:BoundField HeaderText="交期确认" DataField="OrderPreToDate" SortExpression="OrderPreToDate"
-                                                    DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
-                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                                </asp:BoundField>
-                                                
-                                                <asp:TemplateField HeaderText="供应商" SortExpression="SuppNo" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "SuppNo").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="产品类型" HeaderStyle-Font-Size="12px" ItemStyle-Width="150px" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetOrderDetailProductsPatten(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="30px" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetOrderDetailNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="未入库" HeaderStyle-Font-Size="12px" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetOrderDetailWrkNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                                <asp:TemplateField HeaderText="已入库" HeaderStyle-Font-Size="12px" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetOrderDetailrkNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-Width="48px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# CheckView(DataBinder.Eval(Container.DataItem, "ID").ToString(), DataBinder.Eval(Container.DataItem, "OrderType").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="发送"  HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <%# GetPrint(DataBinder.Eval(Container.DataItem, "OrderNo").ToString(), int.Parse(DataBinder.Eval(Container.DataItem, "KPO_IsSend").ToString()))%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="确认" SortExpression="KPO_PriceState" HeaderStyle-Font-Size="12px"
-                                                    ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                                    <ItemTemplate>
-                                                        <%# base.Base_GetBasicCodeName("771",DataBinder.Eval(Container.DataItem, "KPO_PriceState").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                                                    <HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' /><AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' /></cc1:MyGridView>
+                                                                    <Columns>
+                                                                        <asp:TemplateField HeaderText="采购单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                                                            HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <a href="/CG/Order/Knet_Procure_OpenBilling_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "OrderNo") %>" target="_blank">
+                                                                                    <%# DataBinder.Eval(Container.DataItem, "OrderNo") %></a>
+                                                                                <asp:TextBox ID="Tbx_OrderNo" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "OrderNo").ToString() %>'></asp:TextBox>
+
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+
+                                                                        <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                                                            HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <a href="/CG/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %>" target="_blank">
+                                                                                    <%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %></a>
+                                                                                <a href="/CG/Order/Knet_Procure_OpenBilling_Manage.aspx?ScNo=<%# DataBinder.Eval(Container.DataItem, "ParentOrderNo") %>&ScNo1=<%# DataBinder.Eval(Container.DataItem, "OrderNo") %>"><font color="green">相同</font></a>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+
+                                                                        <asp:BoundField HeaderText="采购日期" DataField="OrderDateTime" SortExpression="OrderDateTime"
+                                                                            DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                        <asp:BoundField HeaderText="要求日期" DataField="ArrivalDate" SortExpression="ArrivalDate"
+                                                                            DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+                                                                        <asp:BoundField HeaderText="交期确认" DataField="OrderPreToDate" SortExpression="OrderPreToDate"
+                                                                            DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                        </asp:BoundField>
+
+                                                                        <asp:TemplateField HeaderText="供应商" SortExpression="SuppNo" HeaderStyle-Font-Size="12px"
+                                                                            ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "SuppNo").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="产品类型" HeaderStyle-Font-Size="12px" ItemStyle-Width="150px" ItemStyle-HorizontalAlign="Left"
+                                                                            HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# base.Base_GetOrderDetailProductsPatten(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="30px" ItemStyle-HorizontalAlign="Left"
+                                                                            HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# base.Base_GetOrderDetailNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="未入库" HeaderStyle-Font-Size="12px" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Left"
+                                                                            HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# base.Base_GetOrderDetailWrkNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+
+                                                                        <asp:TemplateField HeaderText="已入库" HeaderStyle-Font-Size="12px" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Left"
+                                                                            HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# base.Base_GetOrderDetailrkNumber(DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px"
+                                                                            ItemStyle-Width="48px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# CheckView(DataBinder.Eval(Container.DataItem, "ID").ToString(), DataBinder.Eval(Container.DataItem, "OrderType").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="发送" HeaderStyle-Font-Size="12px"
+                                                                            ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                            <ItemTemplate>
+                                                                                <%# GetPrint(DataBinder.Eval(Container.DataItem, "OrderNo").ToString(), int.Parse(DataBinder.Eval(Container.DataItem, "KPO_IsSend").ToString()))%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderText="确认" SortExpression="KPO_PriceState" HeaderStyle-Font-Size="12px"
+                                                                            ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                                            <ItemTemplate>
+                                                                                <%# base.Base_GetBasicCodeName("771",DataBinder.Eval(Container.DataItem, "KPO_PriceState").ToString())%>
+                                                                            </ItemTemplate>
+                                                                        </asp:TemplateField>
+                                                                    </Columns>
+                                                                    <HeaderStyle CssClass='colHeader' />
+                                                                    <RowStyle CssClass='listTableRow' />
+                                                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                                    <PagerStyle CssClass='Custom_DgPage' />
+                                                                </cc1:MyGridView>
                                                             </div>
 
 

@@ -203,4 +203,19 @@ public partial class Web_Report_Xs_List_OrderList : BasePage
         }
         return s_Return;
     }
+
+    protected void Button2_OnServerClick(object sender, EventArgs e)
+    {
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("订单执行情况.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
+    }
 }

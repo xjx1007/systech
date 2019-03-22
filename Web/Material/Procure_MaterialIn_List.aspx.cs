@@ -35,7 +35,6 @@ public partial class Procure_MaterialIN_List : BasePage
                 this.Tbx_WhereID.Text = s_WhereID;
                 if (Tbx_WhereID.Text == "")
                 {
-
                     try
                     {
                         string s_Sql = "Select PBW_ID from PB_Basic_Where  where PBW_Del=0 and PBW_Type='101' and PBW_Table='Procure_MaterialIn'";

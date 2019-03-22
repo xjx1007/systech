@@ -113,7 +113,7 @@ public partial class Knet_Web_HR_KNet_AttenDance_OutManger : BasePage
             SqlWhere += Base_GetBasicWhere(this.Ddl_Batch.SelectedValue);
 
         }
-        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "邵剑慧"))
+        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "薛建新") || (AM.KNet_StaffName == "邵剑慧"))
         {
             SqlWhere += "";
         }

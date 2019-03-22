@@ -148,6 +148,9 @@
                                             <td class="dvtCellLabel">领用用途:</td>
                                             <td class="dvtCellInfo">
                                                 <asp:Label ID="Lbl_LyTYpe" runat="server"></asp:Label></td>
+                                            <td class="dvtCellLabel">附件:</td>
+                                            <td class="dvtCellInfo">
+                                                <asp:Label ID="KWD_Upload" runat="server"></asp:Label></td>
                                         </tr>
                                         <tr>
                                             <td class="dvtCellLabel">供应商承担:</td>
@@ -203,6 +206,8 @@
                                             <td class="ListHead" nowrap><b>出库数量</b></td>
                                             <td class="ListHead" nowrap><b>出库单价</b></td>
                                             <td class="ListHead" nowrap><b>出库金额</b></td>
+                                             <td class="ListHead" nowrap><b>出库报价</b></td>
+                                            <td class="ListHead" nowrap><b>真实金额</b></td>
                                             <td class="ListHead" nowrap><b>计算单价</b></td>
                                             <td class="ListHead" nowrap><b>计算金额</b></td>
                                             <td class="ListHead" nowrap><b>备注</b></td>

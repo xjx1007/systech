@@ -244,7 +244,7 @@ public partial class Web_KNet_Sales_ClientList_View : BasePage
                 SqlWhere += " and XSO_CustomerValue='" + CustomerValue + "' ";
                 if (AM.YNAuthority("销售机会仅自己查看") == true)
                 {
-                    if (AM.KNet_StaffName != "项洲")
+                    if (AM.KNet_StaffName != "薛建新")
                     {
                         SqlWhere += " and (XSO_Creator='" + AM.KNet_StaffNo + "' ";
                         //共享给自己的

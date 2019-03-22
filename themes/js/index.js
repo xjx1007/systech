@@ -1,4 +1,6 @@
 /// <reference path="jquery/jquery.min.js" />
+
+
 var timer_sms_mon = null;
 var monInterval = 1;
 var timer_online_tree_ref = null;
@@ -314,16 +316,16 @@ function initSmsbox() {
     });
 
     //回复事件
-    jQuery('.head > .operation > a.reply', msgBlocks).live('click','', function () {
+    jQuery('.head > .operation > a.reply', msgBlocks).live('click', '', function () {
         jQuery('#smsbox_textarea').trigger('focus');
     });
 
     //查看详情事件
-    jQuery('.head > .operation > a.detail', msgBlocks).live('click','', function () {
+    jQuery('.head > .operation > a.detail', msgBlocks).live('click', '', function () {
         var sms_id = jQuery(this).attr('sms_id');
         var url = jQuery(this).attr('url');
         RemoveSms(sms_id, '', 0);
-       //openURL('', '', url, '1');
+        //openURL('', '', url, '1');
     });
 
     function openURL(id, name, url, open_window) {
@@ -412,44 +414,61 @@ function HtmlDiscode(theString) {
 }
 var documentTitle = document.title;
 var blinkTitleInterval = null;
+var maxSendSmsId = 0;
+var newSmsArray = [];
 //短消息
 function sms_mon() {
+    debugger;
+    var randomCode = 0; var oldrandomCode = 0
+    randomCode = parseInt(Math.random() * 10000);
+    oldrandomCode = parseInt(Math.random() * 10000);
+    jQuery.ajax({
+        type: 'GET',
+        url: 'themes/js/attachment/MessageHandler.ashx?' + randomCode + '=' + oldrandomCode,
+        data: { 'now': new Date().getTime() },
+        success: function (data) {
+            //jQuery('new_sms').innerHTML = newSmsHtml;
+            if ((data!="1") && ($1('smsbox').className.indexOf('active') == -1)) {
+                jQuery('new_sms_sound').innerHTML = newSmsSoundHtml;
+                if (timer_sms_mon) window.clearTimeout(timer_sms_mon);
+                var wWidth = (window.innerWidth || (window.document.documentElement.clientWidth || window.document.body.clientWidth));
+                var wHeight = (window.innerHeight || (window.document.documentElement.clientHeight || window.document.body.clientHeight));
+                var left = Math.floor((wWidth - jQuery('#new_sms_panel').outerWidth()) / 2);
+                var top = Math.floor((wHeight - jQuery('#new_sms_panel').outerHeight()) / 2) - 100;
 
-        var randomCode = 0; var oldrandomCode = 0
-        randomCode = parseInt(Math.random() * 10000);
-        oldrandomCode = parseInt(Math.random() * 10000);
-        jQuery.ajax({
-            type: 'GET',
-            url: 'themes/js/attachment/MessageHandler.ashx?' + randomCode + '=' + oldrandomCode,
-            data: { 'now': new Date().getTime() },
-            success: function (data) {
-                //jQuery('new_sms').innerHTML = newSmsHtml;
-                if ((data == "1") && ($1('smsbox').className.indexOf('active') == -1)) {
-                    jQuery('new_sms_sound').innerHTML = newSmsSoundHtml;
-                    if (timer_sms_mon) window.clearTimeout(timer_sms_mon);
-                    var wWidth = (window.innerWidth || (window.document.documentElement.clientWidth || window.document.body.clientWidth));
-                    var wHeight = (window.innerHeight || (window.document.documentElement.clientHeight || window.document.body.clientHeight));
-                    var left = Math.floor((wWidth - jQuery('#new_sms_panel').outerWidth()) / 2);
-                    var top = Math.floor((wHeight - jQuery('#new_sms_panel').outerHeight()) / 2) - 100;
-
-                    jQuery('#new_sms_panel').css({ left: left, top: top });
-                    jQuery('#new_sms_mask').show();
-                    jQuery('#new_sms_panel').show();
-                    jQuery('#new_sms_panel').focus();
-
-                    blinkTitleInterval = window.setInterval(BlinkTitle, 1000);
-                }
-            },
-            error: function (msg) {
-                //alert(msg.responseText); //输出了出错的信息
+                //jQuery('#new_sms_panel').css({ left: left, top: top });
+                //jQuery('#new_sms_mask').show();
+                //jQuery('#new_sms_panel').show();
+                //jQuery('#smsbox_panel').show();              
+                //blinkTitleInterval = window.setInterval(BlinkTitle, 1000);
+               
+                //var dataJson = JSON.parse(\'+data+\');  
+                var dataJson = eval('(' + data + ')');
+                var html = '';
+                //console.log(dataJson);
+                //alert(dataJson.content);
+                html += CreateMsgBlock({ "sms_id": dataJson.sms_id, "class": "from", "user": dataJson.from_id, "name": dataJson.type_name, "time": dataJson.send_time, "content": dataJson.content, "url": dataJson.url });
+                jQuery('#con_html').html(html);
+                                 
+                jQuery('#winpop').show(1000);
+                blinkTitleInterval = window.setInterval(BlinkTitle1, 15000);
             }
-        });
-        timer_sms_mon = window.setTimeout(sms_mon, monInterval.sms * 1000);
+        },
+        error: function (msg) {
+            //alert(msg.responseText); //输出了出错的信息
+        }
+    });
+    timer_sms_mon = window.setTimeout(sms_mon, monInterval.sms * 1000);
 }
+
 function BlinkTitle() {
     document.title = document.title == "　　　　　　　　" ? "您有新的短消息！" : "　　　　　　　　";
 }
-
+function BlinkTitle1() {
+    jQuery('#winpop').hide(1000);
+    timer_sms_mon = window.setTimeout(sms_mon, monInterval.sms * 1000);
+    ResetTitle();
+}
 function ResetTitle() {
     window.clearInterval(blinkTitleInterval);
     document.title = documentTitle;
@@ -478,8 +497,7 @@ function online_mon() {
 }
 
 
-var maxSendSmsId = 0;
-var newSmsArray = [];
+
 var selectedRecvSmsIdStr = selectedSendSmsIdStr = "";
 function LoadSms(flag) {
     var randomCode = 0; var oldrandomCode = 0
@@ -532,6 +550,7 @@ function Text2Object(data) {
 }
 
 function FormatSms() {
+    debugger;
     var bGroupByName = jQuery('#group_by_name').attr('class').indexOf('active') >= 0;
     var array = new Array();
 
@@ -739,15 +758,30 @@ function ViewNewSms() {
     CloseRemind();
     ResetTitle();
 }
+function ViewNewSms1() {
+    var pannelActive = $1('smsbox').className.indexOf('active') >= 0;
+    if (!pannelActive)
+        jQuery('#smsbox').click();
+    else
+        LoadSms();
+
+    CloseRemind1();
+    ResetTitle();
+}
 function CloseRemind() {
     jQuery('#new_sms_mask').hide();
     jQuery('#new_sms_panel').hide();
     timer_sms_mon = window.setTimeout(sms_mon, monInterval.sms * 1000);
     ResetTitle();
 }
+function CloseRemind1() {
+    jQuery('#winpop').hide(1000);
+    timer_sms_mon = window.setTimeout(sms_mon, monInterval.sms * 1000);
+    ResetTitle();
+}
 function ResetTitle() {
     window.clearInterval(blinkTitleInterval);
-    document.title = documentTitle;
+    document.title = documentTitle;//2018/9/7周五改
 }
 function view_user(USER_ID) {
 
@@ -755,3 +789,4 @@ function view_user(USER_ID) {
     var myleft = (screen.availWidth - 780) / 2;
     window.open("Web/HR/KNet_HR_Manage_Details.aspx?StaffNo= " + USER_ID, "", "height=548,width=780,status=0,toolbar=no,menubar=yes,location=no,scrollbars=yes,top=" + mytop + ",left=" + myleft + ",resizable=yes");
 }
+

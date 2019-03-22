@@ -73,6 +73,7 @@ namespace KNet.Model
 
         private decimal _KSP_WorkTime;
         private string _KSP_BigUnits;
+        private string _KSP_Remark;
         public string[] s_BomIDs
         {
             set { _s_BomIDs = value; }
@@ -450,7 +451,14 @@ namespace KNet.Model
             set { _KSP_ShPerson = value; }
             get { return _KSP_ShPerson; }
         }
-        
+        /// <summary>
+        /// 物料备注
+        /// </summary>
+        public string KSP_Remark
+        {
+            set { _KSP_Remark = value; }
+            get { return _KSP_Remark; }
+        }
         #endregion Model
 
     }

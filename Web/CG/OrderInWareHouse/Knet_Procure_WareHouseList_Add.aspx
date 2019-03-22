@@ -424,6 +424,7 @@ function deleteRow(obj){
                                                     </tr>
                                                 </table>
                                                 <asp:TextBox ID="Xs_ProductsCode" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                 <asp:TextBox ID="TextBox1" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                                                 <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
                                                     class="crmTable" style="height: 28px">
                                                     <tr>

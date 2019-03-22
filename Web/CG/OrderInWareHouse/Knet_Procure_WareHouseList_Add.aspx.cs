@@ -24,6 +24,8 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
     protected void Page_Load(object sender, EventArgs e)
     {
         string s_OrderNo = Request.QueryString["OrderNo"] == null ? "" : Request.QueryString["OrderNo"].ToString();
+        string CodeString = Request.QueryString["SubCode"] == null ? "" : Request.QueryString["SubCode"].ToString();
+        string KSP_SID = Request.QueryString["KSP_SID"] == null ? "" : Request.QueryString["KSP_SID"].ToString();
         if (!Page.IsPostBack)
         {
             AdminloginMess AM = new AdminloginMess();
@@ -96,44 +98,113 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                             this.ReceivPaymentNotes.SelectedValue = Dtb_Result.Rows[0]["HouseNo"].ToString();
                         }
                     }
-                    
+
                     KNet.BLL.Knet_Procure_OrdersList_Details BLL_Details = new KNet.BLL.Knet_Procure_OrdersList_Details();
-                    DataSet Dts_Details = BLL_Details.GetList(" a.OrderNo='" + s_OrderNo + "'");
+                    DataSet Dts_Details;
+                    //if (Model.KPO_Sampling=="1")
+                    //{
+                    //    Dts_Details = BLL_Details.GetList2(s_OrderNo);
+                    //}
+                    //else
+                    //{
+
+                    // }
+                    if (CodeString == "")
+                    {
+                        Dts_Details = BLL_Details.GetList(" a.OrderNo='" + s_OrderNo + "'");
+                    }
+                    else
+                    {
+                        Dts_Details = BLL_Details.GetList(" a.OrderNo='" + s_OrderNo + "' and a.ProductsBarCode in (" + CodeString + ")");
+                    }
                     KNet.BLL.KNet_Sys_Products kNetSysProducts = new KNet_Sys_Products();
-                   //DataSet ds= kNetSysProducts.GetModelB(Dts_Details.Tables[0].Rows[0]["ProductsBarCode"].ToString());
-                  
+                    //DataSet ds= kNetSysProducts.GetModelB(Dts_Details.Tables[0].Rows[0]["ProductsBarCode"].ToString());
+
                     if (Dts_Details.Tables[0].Rows.Count > 0)
                     {
                         for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                         {
-                            string BigUnits =
-                      base.Base_GetBigUnitsByProductCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
+                            string BigUnits = "";
+
+                            BigUnits =
+               base.Base_GetBigUnitsByProductCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString());
+
+
                             s_MyTable_Detail += "<tr>";
                             this.Xs_ProductsCode.Text += Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + ",";
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
+
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ID\" value='" + Dts_Details.Tables[0].Rows[i]["ID"].ToString() + "'>" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\"  Name=\"ProductsBarCode\" value='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "'>" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                            if (BigUnits.Length>0)
-                            {
-                                string c = BigUnits.Remove(BigUnits.LastIndexOf("/"));
-                                //s_Number = s_Number / Convert.ToInt32(c);
-                                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) * Convert.ToInt32(c) + "</td>";
 
-                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) * Convert.ToInt32(c) + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) * Convert.ToInt32(c) + "'></td>";
+
+                            if (KSP_SID != "")//如果是检验入库
+                            {
+                                string s_MainSql1 = "select * from Knet_Submitted_Product_Details where KPD_SID='" + KSP_SID + "' and KPD_Code='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "' ";
+                                this.BeginQuery(s_MainSql1);
+                                this.QueryForDataSet();
+                                DataSet Dts_MainDetails1 = Dts_Result;
+
+                                if (BigUnits == "")
+                                {
+                                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "</td>";
+
+                                }
+                                else
+                                {
+                                    string c = BigUnits.Remove(BigUnits.LastIndexOf("/"));
+                                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) / Convert.ToInt32(c) + "</td>";
+                                }
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Convert.ToInt32((int.Parse(Dts_MainDetails1.Tables[0].Rows[0]["KPD_Number"].ToString()) - int.Parse(Dts_MainDetails1.Tables[0].Rows[0]["KPD_BadNumber"].ToString()))) + "'></td>";
+
                                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BNumber\" value='0'></td>";
-                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price\" readOnly value='" +Convert.ToDecimal(Dts_Details.Tables[0].Rows[i]["OrderUnitPrice"].ToString())/ Convert.ToInt32(c) + "'></td>";
-                            }
-                            else
-                            {
-                                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "</td>";
 
-                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "'></td>";
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price\" readOnly value='" + Dts_Details.Tables[0].Rows[i]["OrderUnitPrice"].ToString() + "'></td>";
+
+
+                            }
+                            else//如果是采购退货
+                            {
+                                if (BigUnits == "")
+                                {
+                                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString() + "</td>";
+                                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) + "'></td>";
+
+                                }
+                                else
+                                {
+                                    string c = BigUnits.Remove(BigUnits.LastIndexOf("/"));
+                                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) / Convert.ToInt32(c) + "</td>";
+                                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"hidden\" Name=\"OldNumber\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) + "'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number\" value='" + Convert.ToInt32(Dts_Details.Tables[0].Rows[i]["thisNowAmount"].ToString()) / Convert.ToInt32(c) + "'></td>";
+                                }
+
+
                                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BNumber\" value='0'></td>";
                                 s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Price\" readOnly value='" + Dts_Details.Tables[0].Rows[i]["OrderUnitPrice"].ToString() + "'></td>";
                             }
-                           
-                            s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Money\" value='" + Dts_Details.Tables[0].Rows[i]["thistotalNet"].ToString() + "'></td>";
+
+                            //}
+                            //if (Dts_Details.Tables[0].Rows[i]["KPOD_BigUnits"].ToString().Trim()=="g")
+                            //{
+                            //    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Money\" value='" + decimal.Parse(Dts_Details.Tables[0].Rows[i]["thistotalNet"].ToString())/1000 + "'></td>";
+                            //}
+                            //else
+                            //{
+
+                            if (BigUnits == "")
+                            {
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Money\" value='" + Dts_Details.Tables[0].Rows[i]["thistotalNet"].ToString() + "'></td>";
+                            }
+                            else
+                            {
+                                string c = BigUnits.Remove(BigUnits.LastIndexOf("/"));
+                                s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Money\" value='" + Convert.ToDecimal(Dts_Details.Tables[0].Rows[i]["thistotalNet"].ToString()) / Convert.ToInt32(c) + "'></td>";
+                            }
+                            //}
+
                             s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Remarks\" value='" + Dts_Details.Tables[0].Rows[i]["OrderRemarks"].ToString() + "'></td>";
                             s_MyTable_Detail += "</tr>";
                         }
@@ -244,6 +315,10 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
 
                 for (int i = 0; i < s_ProductsBarCode.Length; i++)
                 {
+                    string Number = "";
+                    decimal d_Money = 0;
+                    decimal d_Price = 0;
+
                     KNet.Model.Knet_Procure_WareHouseList_Details Model_Details = new KNet.Model.Knet_Procure_WareHouseList_Details();
                     if (s_PIDs != "")
                     {
@@ -254,20 +329,34 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                         Model_Details.ID = GetNewID("Knet_Procure_WareHouseList_Details", 1);
                     }
                     Model_Details.ProductsBarCode = s_ProductsBarCode[i];
+                    string KSP_BigUnits = base.Base_GetBigUnitsByProductCode(s_ProductsBarCode[i]); //ds.Tables[0].Rows[0]["KSP_BigUnits"].ToString();
+                    if (KSP_BigUnits != "")//如果有大单位
+                    {
+                        string c = KSP_BigUnits.Remove(KSP_BigUnits.LastIndexOf("/"));
+                        Number = (Convert.ToInt32(c) * Convert.ToInt32(s_Number[i])).ToString();
+                        //d_Money = (int.Parse(s_Number[i]) * decimal.Parse(s_Price[i])) / Convert.ToInt32(Number);
+                        d_Price = decimal.Parse(s_Price[i]) / Convert.ToInt32(c);
+                    }
+                    else
+                    {
+                        Number = s_Number[i];
+                        //d_Money = int.Parse(s_Number[i]) * decimal.Parse(s_Price[i]);
+                        d_Price = decimal.Parse(s_Price[i]);
+                    }
                     Model_Details.WareHouseNo = model.WareHouseNo;
-                    Model_Details.WareHouseAmount = int.Parse(s_Number[i]);
-                    Model_Details.WareHouseUnitPrice = decimal.Parse(s_Price[i]);
-                    decimal d_Money = int.Parse(s_Number[i]) * decimal.Parse(s_Price[i]);
-                    if ((decimal.Parse(s_Money[i]) != 0)&&(Model_Details.WareHouseAmount==0))
+                    Model_Details.WareHouseAmount = int.Parse(Number);
+                    Model_Details.WareHouseUnitPrice = d_Price;
+
+                    if ((decimal.Parse(s_Money[i]) != 0) && (Model_Details.WareHouseAmount == 0))
                     {
                         d_Money = decimal.Parse(s_Money[i]);
                     }
-                    Model_Details.WareHouseTotalNet = d_Money;
+                    Model_Details.WareHouseTotalNet = decimal.Parse(s_Number[i]) * decimal.Parse(s_Price[i]);
                     Model_Details.WareHouseRemarks = s_Remarks[i];
                     Model_Details.ProductsUnits = s_ID[i];
                     Model_Details.WareHouseBAmount = int.Parse(s_BNumber[i]);
-                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.17")), 2));
-                    if ((Model_Details.WareHouseAmount != 0) ||(d_Money != 0))
+                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(decimal.Parse(s_Number[i]) * decimal.Parse(s_Price[i]) / Decimal.Parse("1.16")), 2));
+                    if ((Model_Details.WareHouseAmount != 0) || (d_Money != 0))
                     {
                         Arr_Products.Add(Model_Details);
                     }
@@ -278,7 +367,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
         }
         catch (Exception ex)
         {
-            return false;
+            throw ex;
         }
     }
 
@@ -289,7 +378,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
         bool b_True = true;
         try
         {
-            if ((this.Tbx_SuppNo.Text != "129682186266972172")&&(this.Tbx_SuppNo.Text != "131187205665612658"))
+            if ((this.Tbx_SuppNo.Text != "129682186266972172") && (this.Tbx_SuppNo.Text != "131187205665612658"))
             {
                 string[] s_ProductsBarCode = Request.Form["ProductsBarCode"].Split(',');
                 string[] s_Number = Request.Form["Number"].Split(',');

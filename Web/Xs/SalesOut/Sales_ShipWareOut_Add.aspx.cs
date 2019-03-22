@@ -88,6 +88,11 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 string s_ShipNo = Request.QueryString["ShipNo"] == null ? "" : Request.QueryString["ShipNo"].ToString();
                 base.Base_DropWareHouseBind(this.Ddl_HouseNo, "  KSW_Type='0' ");
                 base.Base_DropWareHouseBind(this.Ddl_RkHouseNo, "  KSW_Type='0' ");
+                if (this.Tbx_Type.Text == "2")
+                {
+                    this.Ddl_HouseNo.SelectedValue = "131429356506502002";
+
+                }
                 ShowShipDetails(s_ShipNo);
                 if (s_ID == "")
                 {
@@ -321,7 +326,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             KNet.BLL.KNet_WareHouse_DirectOutList bll = new KNet.BLL.KNet_WareHouse_DirectOutList();
             KNet.Model.KNet_WareHouse_DirectOutList model = bll.GetModelB(this.Tbx_ID.Text);
 
-            if ((AM.KNet_StaffName != "项洲") && (this.Pan_DirectOut.Enabled == true))
+            if ((AM.KNet_StaffName != "薛建新") && (this.Pan_DirectOut.Enabled == true))
             {
                 if (model.DirectOutCheckYN != 0)
                 {
@@ -385,7 +390,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     catch
                     { }
 
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"input\"  Name=\"KCNumber_" + i.ToString() + "\" style=\"width:70px;\" disabled=false  value='" + s_HouseNumber + "'></td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"input\" readonly=\"true\"  Name=\"KCNumber_" + i.ToString() + "\" style=\"width:70px;\"   value='" + s_HouseNumber + "'></td>";
 
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"Number_" + i.ToString() + "\" value=" + s_OutNumber + "></td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\"><input type=\"text\" class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:50px;\" Name=\"BNumber_" + i.ToString() + "\" value=" + s_OutBNumber + " ></td>";
@@ -518,6 +523,8 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
 
             molel.KWD_PayMent = this.Drop_Payment.SelectedValue;
             molel.KWD_KpType = this.Ddl_KpType.SelectedValue;
+
+
             try
             {
                 molel.KWD_ReceTime = DateTime.Parse(this.Tbx_ReceTime.Text);
@@ -539,7 +546,51 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     string s_Number = Request["Number_" + i] == null ? "" : Request["Number_" + i].ToString();
                     string s_BNumber = Request["BNumber_" + i] == null ? "" : Request["BNumber_" + i].ToString();
                     string s_Remarks = Request["Remarks_" + i] == null ? "" : Request["Remarks_" + i].ToString();
+                    string KCNumber = Request.Form["KCNumber_" + i] == null ? "" : Request.Form["KCNumber_" + i].ToString();
                     string s_RustomerProductsName = Request["CustomerProductsName_" + i] == null ? "" : Request["CustomerProductsName_" + i].ToString();
+                    //限制出库数量不能大于库存---- - 2018.5.8
+                    //string s_Sql ="Select isnull(Sum(DirectInAmount),0),a.HouseNo from v_Store a join KNet_Sys_WareHouse b on a.HouseNo=b.HouseNo  Where a.ProductsBarCode='" + s_ProductsBarCode + "' and a.HouseType='0' and a.HouseNo='" + HouseNo + "'  Group by a.HouseNo ";
+                    //this.BeginQuery(s_Sql);
+                    //this.QueryForDataTable();
+                    //DataTable Dtb_Table = this.Dtb_Result;//计算实际库存
+                    //if (Dtb_Table.Rows.Count>0)
+                    //{
+                    //    if (Convert.ToInt32(Dtb_Table.Rows[0][0].ToString()) <0&& Convert.ToInt32(s_Number)<0)
+                    //    {
+                    //        //Alert("此仓库库存不足，或者库存为负数不能出库，请重新选择");
+                    //        //return false;
+                    //    }
+                    //    else
+                    //    {
+                    //        if (Convert.ToInt32(Dtb_Table.Rows[0][0].ToString()) < Convert.ToInt32(s_Number))
+                    //        {
+                    //            Alert("出库数量不能大于库存数量，请重新选择仓库");
+                    //            return false;
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if (Convert.ToInt32(s_Number)>0)
+                    //    {
+                    //        Alert("出库数量不能大于库存数量，请重新选择仓库");
+                    //        return false;
+                    //    }
+
+                    //}
+                    if (Convert.ToInt32(KCNumber) < 0)
+                    {
+                        Alert("库存不足，或者库存为负数不能出库");
+                        return false;
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(KCNumber) < Convert.ToInt32(s_Number))
+                        {
+                            Alert("出库数量不能大于库存数量");
+                            return false;
+                        }
+                    }
                     string s_PlanNo = Request["PlanNo_" + i] == null ? "" : Request["PlanNo_" + i].ToString();
                     string s_OrderNo = Request["OrderNo_" + i] == null ? "" : Request["OrderNo_" + i].ToString();
                     string s_MaterNo = Request["MaterNo_" + i] == null ? "" : Request["MaterNo_" + i].ToString();
@@ -802,6 +853,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
 
             if (this.SetValue(molel) == false)
             {
+                this.Xs_ProductsCode.Text = "";
                 Alert("系统错误！");
                 return;
             }
@@ -812,8 +864,8 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                 if (BLL.Exists(this.Tbx_ID.Text) == false)
                 {
                     BLL.Add(molel);
-                    string JSD = "SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
-                    //base.HtmlToPdfNoWater(JSD, Server.MapPath("PDF"), molel.DirectOutNo);
+                    string JSD = "Xs/SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
+                    base.HtmlToPdfNoWater(JSD, Server.MapPath("PDF"), molel.DirectOutNo);
                     LogAM.Add_Logs("销售管理--->发货出库管理--->出库开单 添加 操作成功！出库单号：" + this.Tbx_ID.Text);
 
                     Response.Write("<script>alert('发货出库开单 添加  操作成功！');location.href='Sales_ShipWareOut_Manage.aspx';</script>");
@@ -865,7 +917,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
                     else
                     {
                         BLL.Update(molel);
-                        string JSD = "SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
+                        string JSD = "Xs/SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
                         base.HtmlToPdfNoWater(JSD, Server.MapPath("PDF"), molel.DirectOutNo);
                         LogAM.Add_Logs("销售管理--->修改发货出库 操作成功！订单编号：" + this.Tbx_ID.Text);
                         Response.Write("<script>alert('修改发货出库  操作成功 ！');location.href='Sales_ShipWareOut_Manage.aspx';</script>");
@@ -876,6 +928,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
         }
         catch (Exception ex)
         {
+            //throw ex;
             Response.Write("<script>alert('发货出库开单添加失败！');history.back(-1);</script>");
             Response.End();
         }

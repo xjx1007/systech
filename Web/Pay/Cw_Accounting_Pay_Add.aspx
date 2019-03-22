@@ -19,8 +19,9 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-
+            var temp = window.open("../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+        }
+        function SetReturnValueInOpenner_Suppliers1(temp) {
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
@@ -32,14 +33,16 @@
                 document.all('Tbx_SuppNo').value = "";
             }
         }
-
         function btnGetBill_onclick1() {
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
             v_newNum = $("BillNum").value;
-            var tempd = window.showModalDialog("SelectBill.aspx?ID=" + document.all("BillID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
-            if (tempd != undefined) {
+            var temp = window.open("SelectBill.aspx?ID=" + document.all("BillID").value + "&callback=SetReturnValueInOpenner_Suppliers2", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=600px");
+           
+        }
+        function SetReturnValueInOpenner_Suppliers2(temp) {
+            if (temp != undefined) {
                 var ss1, s_Value, s_Name, i_row, s_ID;
                 i_row = BillTable.rows.length;
                 s_ID = document.all("BillID").value + ",";
@@ -81,7 +84,6 @@
                 $("BillNum").value = parseInt(v_newNum) + 1;
             }
         }
-
         function deleteRow2(obj) {
             BillTable.deleteRow(obj.parentElement.parentElement.rowIndex);
         }
@@ -124,7 +126,7 @@
         <table border="0" cellspacing="0" cellpadding="0" width="100%" align="center">
             <tr>
                 <td valign="top">
-                    <img src="../../themes/softed/images/showPanelTopLeft.gif">
+                    <img src="../../themes/softed/images/showPanelTopLeft.gif"/>
                 </td>
                 <td>
                     <table border="0" cellspacing="0" cellpadding="0" width="98%" align="center">
@@ -303,7 +305,7 @@
                                                                             <asp:Label runat="server" ID="Lbl_Details1"></asp:Label>
                                                                         </table>
                                                                         <input id="Button4" runat="server" class="crmbutton small create" onclick="return btnGetBill_onclick1()" type="button"
-                                                                            value="选择票据" />
+                                                                               value="选择票据" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -332,8 +334,8 @@
                                                                         </table>
 
                                                                         <input title="添加 [Alt+E]" type="button" accesskey="E" class="crmbutton small create"
-                                                                            onclick="btnGetBill_onclick()" style="width: 80px; height: 25px"
-                                                                            name="Btn_AddDetails" id="Btn_AddDetails" value="&nbsp;添加&nbsp;">
+                                                                               onclick="btnGetBill_onclick()" style="width: 80px; height: 25px"
+                                                                               name="Btn_AddDetails" id="Btn_AddDetails" value="&nbsp;添加&nbsp;"/>
                                                                     </td>
                                                                 </tr>
                                                             </asp:Panel>
@@ -350,7 +352,7 @@
                                                                         <Columns>
                                                                             <asp:TemplateField>
                                                                                 <HeaderTemplate>
-                                                                                    <input type="CheckBox" onclick="selectAll(this)">
+                                                                                    <input type="CheckBox" onclick="selectAll(this)"/>
                                                                                 </HeaderTemplate>
                                                                                 <ItemTemplate>
                                                                                     <asp:CheckBox ID="Chbk" runat="server" Checked />
@@ -412,7 +414,7 @@
                                             <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
                                                 class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" />
                                             <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
-                                                type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
+                                                   type="button" name="button" value="取 消" style="width: 55px; height: 33px;"/>
                                         </td>
                                     </tr>
                                 </table>

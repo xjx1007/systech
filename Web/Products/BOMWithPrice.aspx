@@ -63,6 +63,8 @@
     <title>BOM报价信息</title>
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
+    <%--<asp:Button runat="server" ID="Btn_Excel" Text="导出Excel" OnClick="Btn_Excel_OnClick" />--%>
+    
     <form id="form1" runat="server">
         <div>
             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
@@ -93,14 +95,16 @@
                             <asp:Label runat="server" ID="Lbl_Title"></asp:Label></span>
                         <br>
                         <hr noshade size="1">
-
+                       
                         <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
 
                                 <tr>
                                     <td colspan="4" class="detailedViewHeader">
                                         <b>BOM:</b>
                                         <asp:TextBox ID="Products_BomID" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                        <%-- <input type="button" runat="server" value="导出Excel" id="button1" OnServerClick="button1_OnServerClick"/>--%>
                                     </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td align="left" class="dvtCellInfo" style="text-align: left" colspan="4">

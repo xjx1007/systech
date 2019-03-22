@@ -51,8 +51,8 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price : BasePage
             this.TreeView1.Nodes[0].Select();
             this.DataShows();
             this.RowOverYN();
-            //供应链平台经理 项洲 总经理
-            if (((AM.KNet_StaffDepart == "129652784259578018") && (AM.KNet_Position == "102")) || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffDepart == "129652783693249229")||(AM.YNAuthority("采购价格审批")==true))
+            //供应链平台经理 薛建新 总经理
+            if (((AM.KNet_StaffDepart == "129652784259578018") && (AM.KNet_Position == "102")) || (AM.KNet_StaffName == "薛建新") || (AM.KNet_StaffDepart == "129652783693249229")||(AM.YNAuthority("采购价格审批")==true))
             {
                 Btn_Sp.Visible = true;
                 Btn_Sp1.Visible = true;
@@ -81,6 +81,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price : BasePage
     /// </summary>
     protected void DataShows()
     {
+       
         KNet.BLL.Knet_Procure_SuppliersPrice bll = new KNet.BLL.Knet_Procure_SuppliersPrice();
 
         string SqlWhere = " 1=1 "; 
@@ -132,6 +133,18 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price : BasePage
         if (Ddl_Supp.SelectedValue != "")
         {
             SqlWhere += " and  suppNo='"+this.Ddl_Supp.SelectedValue+"'";
+        }
+        if (AM.YNAuthority("查看物料报价"))
+        {
+            SqlWhere += " and  b.v_KSP_Code like '02%'";
+        }
+        if (AM.YNAuthority("查看所有报价"))
+        {
+            
+        }
+        if (AM.YNAuthority("查看加工费报价"))
+        {
+            SqlWhere += " and  b.v_KSP_Code not like '02%'";
         }
         SqlWhere += "  order by ProcureUpdateDateTime desc ";
         DataSet ds = bll.GetList(SqlWhere);

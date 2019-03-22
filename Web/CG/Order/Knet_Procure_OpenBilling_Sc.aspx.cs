@@ -56,7 +56,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                 Pan_Order.Visible = true;
                 Table_Btn.Visible = true;
             }
-            if (AM.KNet_StaffName != "项洲")
+            if (AM.KNet_StaffName != "薛建新")
             {
                 this.BeginQuery("Select Sum(isnull(cast( OrderCheckYN as int),0)) from Knet_Procure_OrdersList where ParentOrderNo='" + this.Tbx_ID.Text + "'");
                 string s_Return = this.QueryForReturn();
@@ -74,7 +74,12 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                 Button4.Visible = true;
             }
             //模具和供应商
-            this.Button1.Attributes.Add("onclick", "return confirm('生成将清除原有生成的采购子订单，是否继续？')");
+           this.Button1.Attributes.Add("onclick", "return confirm('生成将清除原有生成的采购子订单，是否继续？')");
+           
+            //bool Resp("<script>alert(‘提示信息内容')</script>");
+            //this.ClientScript.RegisterStartupScript(GetType(), "", "alert('已有重复的相关信息，是否继续？'); ", true);
+
+
 
         }
 
@@ -359,7 +364,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                     s_ProductsName = base.Base_GetProductsEdition(s_ProductsCode);
                 }
             }
-            if (AM.KNet_StaffName == "项洲")
+            if (AM.KNet_StaffName == "薛建新")
             {
                 s_isNullSuppNo = "";
             }

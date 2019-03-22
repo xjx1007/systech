@@ -37,12 +37,28 @@ namespace KNet.Model
         private string _KWD_IsFollow;
         private decimal _KWD_WwPrice;
         private decimal _KWD_WwMoney;
-
-
+        private string _KWD_AllocateNo;
+        private decimal _KWD_BPrice;
+        private decimal _KWD_BMoney;
         public decimal KWD_WwMoney
         {
             set { _KWD_WwMoney = value; }
             get { return _KWD_WwMoney; }
+        }
+        public string KWD_AllocateNo
+        {
+            set { _KWD_AllocateNo = value; }
+            get { return _KWD_AllocateNo; }
+        }
+        public decimal KWD_BPrice
+        {
+            set { _KWD_BPrice = value; }
+            get { return _KWD_BPrice; }
+        }
+        public decimal KWD_BMoney
+        {
+            set { _KWD_BMoney = value; }
+            get { return _KWD_BMoney; }
         }
         /// <summary>
         /// 总仓库中的产品ID值

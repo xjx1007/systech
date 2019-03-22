@@ -130,16 +130,16 @@ public partial class Web_List_Details : BasePage
         {
             Regex reg = new Regex("^[0-9]+$");
             Match ma = reg.Match(s_ProductsEdition);
-            if (ma.Success)
-            {
-                //是数字  
-                s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where KSP_COde like '%" + s_ProductsEdition + "%') ";
-            }
-            else
-            {
+            //if (ma.Success)
+            //{
+            //    //是数字  
+                s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where KSP_COde like '%" + s_ProductsEdition + "%' or ProductsEdition like '%" + s_ProductsEdition + "%' or ProductsName like '%" + s_ProductsEdition + "%') ";
+            //}
+            //else
+            //{
                 //不是数字  
-                s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%') ";
-            }
+            //    s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%' or ProductsName like '%" + s_ProductsEdition + "%') ";
+            //}
           
             
         }

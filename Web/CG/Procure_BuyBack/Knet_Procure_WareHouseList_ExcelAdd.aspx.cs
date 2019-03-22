@@ -579,7 +579,7 @@ public partial class Knet_Procure_WareHouseList_ExcelAdd : BasePage
                                     Model_Details.WareHouseRemarks = "";
                                     Model_Details.ProductsUnits = s_ID;
                                     Model_Details.WareHouseBAmount = int.Parse(s_BNumber);
-                                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.17")), 2));
+                                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.16")), 2));
                                     Arr_Products.Add(Model_Details);
                                     model.Arr_Products = Arr_Products;
                                     Arr_WareHouseIn.Add(model);

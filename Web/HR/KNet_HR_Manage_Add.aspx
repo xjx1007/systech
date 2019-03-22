@@ -45,6 +45,49 @@
                 document.all('Tbx_ProductsTypeName').value = "";
             }
         }
+        function checkpassword() {
+            var numasc = 0;
+            var charasc = 0;
+            var otherasc = 0;
+            var v = document.all("StaffPassword1").value;
+            if (0 == v.length) {
+                alert("密码不能为空");
+                return false;
+            }
+            else if (document.all("StaffPassword1").value !== document.all("StaffPassword2").value) {
+                alert("密码不一致，请重新输入");
+                return false;
+            }
+            else if (v.length < 8 || v.length > 30) {
+                alert("密码至少8个字符,最多30个字符");
+                return false;
+            } else {
+                for (var i = 0; i < v.length; i++) {
+                    var asciiNumber = v.substr(i, 1).charCodeAt();
+                    if (asciiNumber >= 48 && asciiNumber <= 57) {
+                        numasc += 1;
+                    }
+                    if ((asciiNumber >= 65 && asciiNumber <= 90) || (asciiNumber >= 97 && asciiNumber <= 122)) {
+                        charasc += 1;
+                    }
+                    if ((asciiNumber >= 33 && asciiNumber <= 47) || (asciiNumber >= 58 && asciiNumber <= 64) || (asciiNumber >= 91 && asciiNumber <= 96) || (asciiNumber >= 123 && asciiNumber <= 126)) {
+                        otherasc += 1;
+                    }
+                }
+                if (0 == numasc) {
+                    alert("密码必须含有数字");
+                    return false;
+                } else if (0 == charasc) {
+                    alert("密码必须含有字母");
+                    return false;
+                } else if (0 == otherasc) {
+                    alert("密码必须含有特殊字符");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        };
     </script>
 </head>
 
@@ -130,9 +173,9 @@
 
                                                     <tr>
                                                         <td height="25" class="dvtCellLabel" align="left">登陆密码:</td>
-                                                        <td align="left" class="dvtCellInfo">&nbsp;
-          <asp:TextBox ID="StaffPassword1" TextMode="Password" runat="server" MaxLength="30" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:TextBox>(<font color="red">*</font>)<font color="gray">(如不修改,请留空)</font><asp:RegularExpressionValidator
-              ID="RegularExpressionValidator2" runat="server" ErrorMessage="密码长度在5-18之间的数字与字母组合！" ControlToValidate="StaffPassword1" ValidationExpression="^\w{5,17}$" Display="Dynamic"></asp:RegularExpressionValidator>
+                                                        <td align="left" class="dvtCellInfo">&nbsp;<%--^\w{5,17}[...]--%>
+          <asp:TextBox ID="StaffPassword1" TextMode="Password" runat="server" MaxLength="30" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:TextBox>(<font color="red">*</font>)<font color="gray">(如不修改,请留空)</font><%--<asp:RegularExpressionValidator
+  ID="RegularExpressionValidator2" runat="server" ErrorMessage="密码长度在8-30之间的数字字母与特殊字符(!@#$%^&*)组合！" ControlToValidate="StaffPassword1" ValidationExpression="\w{5,17}" isplay="Dynamic"></asp:RegularExpressionValidator>--%>
                                                         </td>
                                                         <td class="dvtCellLabel" align="left">确认密码:</td>
                                                         <td align="left" class="dvtCellInfo">
@@ -231,10 +274,11 @@
                                                     <tr>
                                                         <td colspan="4" align="center" style="height: 30px">
                                                             <asp:Button ID="Button3" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                                                class="crmbutton small save" OnClick="Button1_Click" Style="width: 55px; height: 33px;" />
+                                                                class="crmbutton small save"  OnClick="Button1_Click" Style="width: 55px; height: 33px;" />
                                                             <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                                                                 type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                                                         </td>
+                                                       <%-- OnClientClick="return checkpassword() "--%>
                                                     </tr>
                                                 </table>
                                             </td>

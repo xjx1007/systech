@@ -21,7 +21,7 @@ using System.Net;
 public partial class UpdatePassword : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
-    {   
+    {
         if (!IsPostBack)
         {
             AdminloginMess AM = new AdminloginMess();
@@ -169,51 +169,52 @@ public partial class UpdatePassword : BasePage
     //确定修改密码
     protected void Button4_Click(object sender, EventArgs e)
     {
-        AdminloginMess AM = new AdminloginMess();
-        if (AM.KNet_Soft_WebTest == true) //演示版
-        {
-            Response.Write("<script>alert('抱歉!在线演示用,不能操作此处!');history.back(-1);</script>");
-            Response.End();
-        }
 
-
-        if (AM.CheckLogin() == false)
-        {
-            Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '../Default.aspx';</script>");
-            Response.End();
-        }
-        else
-        {
-            try
+            AdminloginMess AM = new AdminloginMess();
+            if (AM.KNet_Soft_WebTest == true) //演示版
             {
-                string NewWspA = KNetPage.KNetMD5(NewWsp1.Text.Trim().ToUpper());
-                string NewWspB = KNetPage.KNetMD5(NewWsp2.Text.Trim().ToUpper());
+                Response.Write("<script>alert('抱歉!在线演示用,不能操作此处!');history.back(-1);</script>");
+                Response.End();
+            }
 
-                string StaffNos = AM.KNet_StaffNo;
-                string StaffNames = AM.KNet_StaffName;
-                if (NewWspA.CompareTo(NewWspB) == 0)
+
+           else if (AM.CheckLogin() == false)
+            {
+                Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '../Default.aspx';</script>");
+                Response.End();
+            }
+            else
+            {
+                try
                 {
+                    string NewWspA = KNetPage.KNetMD5(NewWsp1.Text.Trim().ToUpper());
+                    string NewWspB = KNetPage.KNetMD5(NewWsp2.Text.Trim().ToUpper());
+
+                    string StaffNos = AM.KNet_StaffNo;
+                    string StaffNames = AM.KNet_StaffName;
+                    if (NewWspA.CompareTo(NewWspB) == 0)
+                    {
 
 
-                    this.Update_Knet_Staff_UpdatePasswordSelf(StaffNos, StaffNames, NewWspB);
+                        this.Update_Knet_Staff_UpdatePasswordSelf(StaffNos, StaffNames, NewWspB);
 
-                    Response.Write("<script language=javascript>alert('新的密码修改成功，请重新登陆系统！');parent.location.href = '../Default.aspx';</script>");
-                    Response.End();
+                        Response.Write("<script language=javascript>alert('新的密码修改成功，请重新登陆系统！');parent.location.href = '../Default.aspx';</script>");
+                        //Response.End();
+                    }
+                    else
+                    {
+                        Response.Write("<script language=javascript>alert('密码改修错误,未知错误！请重新登陆系统！');parent.location.href = '../Default.aspx';</script>");
+                        Response.End();
+                    }
                 }
-                else
+                catch
                 {
+                    // throw;
                     Response.Write("<script language=javascript>alert('密码改修错误,未知错误！请重新登陆系统！');parent.location.href = '../Default.aspx';</script>");
                     Response.End();
                 }
             }
-            catch
-            {
-               // throw;
-               Response.Write("<script language=javascript>alert('密码改修错误,未知错误！请重新登陆系统！');parent.location.href = '../Default.aspx';</script>");
-               Response.End();
-            }
         }
-    }
     /// <summary>
     /// 自改密码
     /// </summary>
@@ -257,6 +258,6 @@ public partial class UpdatePassword : BasePage
         }
     }
 
-    
-    
+
+
 }

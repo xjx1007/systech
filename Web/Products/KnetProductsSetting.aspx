@@ -73,8 +73,9 @@
                                                             border="0">
                                                     </td>
                                                     <td style="padding-right: 10px">
-                                                        <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 产品" title="*导出 产品"
-                                                            border="0">
+                                                       <%-- <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 产品" title="*导出 产品"
+                                                            border="0">--%>
+                                                        <asp:ImageButton ImageUrl="../../themes/softed/images/tbarExport.gif"  alt="导出 物料" runat="server" ID="ImgB" OnClick="ImgB_OnClick" />
                                                     </td>
                                                 </tr>
                                             </table>

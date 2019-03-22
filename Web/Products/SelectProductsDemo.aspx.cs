@@ -37,15 +37,26 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
             {
                 string s_Details = Request.QueryString["Details"] == null ? "" : Request.QueryString["Details"].ToString();
 
-                string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
-                this.Tbx_ID.Text = s_ID;
+                //string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+                string Place = Request.QueryString["place"] == null ? "" : Request.QueryString["place"].ToString();
+                string code = Request.QueryString["code"] == null ? "" : Request.QueryString["code"].ToString();
+                string num = Request.QueryString["num"] == null ? "" : Request.QueryString["num"].ToString();
+                if (Place!=""&&code!=""&&num!="")
+                {
+                    Tbx_Place.Text = Place;
+                    this.code.Text = code;
+                    this.num.Text = num;
+                }
+                //this.Tbx_ID.Text = s_ID;
                 this.SeachKey.Text = s_Details;
 
                 BuildTree("1", null);
+                //this.TreeView1.SelectedNode.Value = "M160818111423567";
                 this.TreeView1.CollapseAll();
                 this.TreeView1.Nodes[0].Expand();
                 this.TreeView1.Nodes[0].Select();
                 this.DataShows();
+                //this.TreeView1.SelectedNode.Value = "M160818111423567";
             }
         }
     }
@@ -82,10 +93,10 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
 
         string s_CustomerValue = Request.QueryString["CustomerValue"] == null ? "" : Request.QueryString["CustomerValue"].ToString();
         string s_ID = this.Tbx_ID.Text;
-        s_ID = s_ID.Replace(",", "','");
-        if (s_ID != "")
+        //s_ID = s_ID.Replace(",", "','");
+        if (this.code.Text != "")
         {
-            SqlWhere += " and ProductsBarCode not in ('" + s_ID + "')";
+            SqlWhere += " and ProductsBarCode not in (select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo where XPD_FaterBarCode='"+ this.code.Text + "')";
         }
         if (s_CustomerValue != "")
         {
@@ -99,8 +110,15 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
 
         if (this.SeachKey.Text != "")
         {
+            string[] str = System.Text.RegularExpressions.Regex.Split(this.SeachKey.Text, @"\s+");
+            string st = "";
+            for (int i = 0; i < str.Length; i++)
+            {
+                st += str[i].Trim() + "%";
+            }
+            //string st = str[0].Trim() + "%" + str[1].Trim() + "%" + str[2].Trim();
             string KSeachKey = this.SeachKey.Text;
-            SqlWhere = SqlWhere + " and ( ProductsName like '%" + KSeachKey + "%' or ProductsBarCode  like '%" + KSeachKey + "%' or ProductsEdition  like '%" + KSeachKey + "%'  or ProductsPattern  like '%" + KSeachKey + "%' )";
+            SqlWhere = SqlWhere + " and ( ProductsName like '%" + st + "'  or ProductsEdition  like '%" + st + "'  or ProductsPattern  like '%" + st + "' )";
         }
 
         if (this.TreeView1.SelectedNode.Value != "1")
@@ -129,9 +147,22 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
     /// <param name="e"></param>
     protected void Button1_Click(object sender, EventArgs e)
     {
+        int a = 0;
+        if (this.code.Text!="")
+        {
+            string s_Sql = "Select count(*) as num from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode join PB_Basic_ProductsClass c on b.ProductsType = c.PBP_ID where 1 = 1 and XPD_FaterBarCode = '"+ this.code.Text + "' and XPD_Place = '"+this.Tbx_Place.Text + "'";
+            //s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1  ";
+            this.BeginQuery(s_Sql);
+            DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+            DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+             a = Convert.ToInt32(Dtb_DemoProducts.Rows[0][0]);
+        }
+       
+
         KNet.BLL.Knet_Procure_SuppliersPrice BLL = new KNet.BLL.Knet_Procure_SuppliersPrice();
         string cal = "";
         string s_Return = "";
+        
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
             CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
@@ -139,12 +170,24 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
             {
                 KNet.Model.Knet_Procure_SuppliersPrice model = BLL.GetModel(GridView1.DataKeys[i].Value.ToString());
                 string s_ProductsBarCode = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsBarCode")).Text;
-                string s_ProductsName = GridView1.Rows[i].Cells[1].Text;
-                string s_ProdctsEdition = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsEdition")).Text; ;
-
+                //string s_ProductsName = GridView1.Rows[i].Cells[1].Text;
+                string s_ProductsName= ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsName")).Text;
+                string s_ProdctsEdition = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsEdition")).Text; 
+                string s = "";
                 int s_Number = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text == "" ? 1 : int.Parse(((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
+                string ksp_code= ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Ksp_Code")).Text;
                 cal += s_ProductsBarCode;
-                s_Return += s_ProductsBarCode + "," + s_ProductsName + "," + s_Number.ToString() + "," + s_ProdctsEdition + "|";
+                
+                if (Tbx_Place.Text!="")
+                {
+                    a = a+1-1;
+                    s_Return += s_ProductsBarCode + "!" + s_ProductsName + "!" + s_Number.ToString() + "!" + s_ProdctsEdition +"!" + Tbx_Place.Text + "!" + num.Text + "!" + a + " ! "+ ksp_code+ " | ";
+                }
+                else
+                {
+                    s_Return += s_ProductsBarCode + "!" + s_ProductsName + "!" + s_Number.ToString() + "!" + s_ProdctsEdition + "!"+s+ "!" + a + "!" + ksp_code + " | ";
+                }
+                //s_Return += s_ProductsBarCode + "," + s_ProductsName + "," + s_Number.ToString() + "," + s_ProdctsEdition + "|";
             }
         }
 

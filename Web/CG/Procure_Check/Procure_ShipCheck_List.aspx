@@ -41,7 +41,7 @@
                                                     <td style="padding-right: 0px; padding-left: 10px;">
                                                         <a href="javascript:;" onclick="PageGo('Procure_ShipCheck_Add.aspx')">
                                                             <img src="/themes/softed/images/btnL3Add.gif" alt="创建 采购对账单..." title="创建 采购对账单..."
-                                                                border="0"></a>
+                                                                 border="0"/></a>
                                                     </td>
                                                     <td style="padding-right: 0px;">
                                                         <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="/themes/softed/images/btnL3Delete.gif"
@@ -50,19 +50,23 @@
                                                     <td style="padding-right: 10px">
                                                         <a href="javascript:;" onclick="ShowDiv();">
                                                             <img src="/themes/softed/images/btnL3Search.gif" alt="查找 采购对账单..." title="查找 采购对账单..."
-                                                                border="0"></a>
+                                                                 border="0"/></a>
                                                     </td>
                                                     <td style="padding-right: 0px; padding-left: 10px;">
                                                         <img src="/themes/softed/images/tbarImport.gif" alt="*导入 采购对账单" title="*导入 采购对账单"
-                                                            border="0">
+                                                             border="0"/>
                                                     </td>
                                                     <td style="padding-right: 10px">
                                                         <img src="/themes/softed/images/tbarExport.gif" alt="*导出 采购对账单" title="*导出 采购对账单"
-                                                            border="0">
+                                                             border="0"/>
                                                     </td>
                                                     <td style="padding-right: 10px">
                                                         <asp:Button ID="BtnSave" runat="server" Text="合并对账单" title="合并对账单 "
                                                             class="crmbutton small save" OnClick="BtnSave_Click" />
+                                                    </td>
+                                                     <td style="padding-right: 10px">
+                                                        <asp:Button ID="Button1" runat="server" Text="未对账的生产订单" title="未对账生产订单 "
+                                                            class="crmbutton small save" OnClick="Button1_OnClick"  />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -110,8 +114,8 @@
                                 <td class="small" nowrap width="40%">
                                     <asp:Button ID="btnBasicSearch" runat="server" Text="立即查找" AccessKey="F" title="立即查找 [Alt+F]"
                                         class="crmbutton small create" OnClick="btnBasicSearch_Click" />&nbsp;
-                                <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
-                                    value=" 取消查找 ">&nbsp;
+                                    <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
+                                           value=" 取消查找 "/>&nbsp;
                                 </td>
                                 <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">[x]
                                 </td>
@@ -127,11 +131,11 @@
                                 </td>
                                 <td nowrap class="small">
                                     <b>
-                                        <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all">&nbsp;匹配以下所有条件</b>
+                                        <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all"/>&nbsp;匹配以下所有条件</b>
                                 </td>
                                 <td nowrap width="60%" class="small">
                                     <b>
-                                        <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b>
+                                        <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked/>&nbsp;匹配以下任意条件</b>
                                 </td>
                                 <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]
                                 </td>
@@ -183,13 +187,13 @@
                             <tr>
                                 <td align="left" width="40%">
                                     <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Cg_Order_Checklist")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
-                                        class="crmbuttom small edit">
-                                    <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit">
+                                           class="crmbuttom small edit"/>
+                                    <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit"/>
                                 </td>
                                 <td align="left" class="small">
                                     <asp:Button ID="btnAdvancedSearch" runat="server" Text="立即查找" AccessKey="F" title="立即查找 [Alt+F]"
                                         class="crmbutton small create" OnClick="btnAdvancedSearch_Click" />&nbsp;
-                                <input type="button" class="crmbutton small edit" value=" 取消查找 " onclick="fnshow();">
+                                    <input type="button" class="crmbutton small edit" value=" 取消查找 " onclick="fnshow();"/>
                                 </td>
                             </tr>
                         </table>
@@ -207,7 +211,7 @@
                                     <Columns>
                                         <asp:TemplateField>
                                             <HeaderTemplate>
-                                                <input type="CheckBox" onclick="selectAll(this)">
+                                                <input type="CheckBox" onclick="selectAll(this)"/>
                                             </HeaderTemplate>
                                             <ItemTemplate>
                                                 <asp:CheckBox ID="Chbk" runat="server" />

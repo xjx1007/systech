@@ -12,6 +12,10 @@ using System.Text;
 using System.Data.SqlClient;
 using KNet.DBUtility;
 using KNet.Common;
+using NPOI.HSSF.UserModel;
+using System.IO;
+using NPOI.SS.UserModel;
+using NPOI.HSSF.Util;
 
 public partial class Web_Procure_ShipCheck_List : BasePage
 {
@@ -348,4 +352,60 @@ public partial class Web_Procure_ShipCheck_List : BasePage
         catch { }
         return b_Return;
     }
+    /// <summary>
+    /// 导出未对账的生产订单
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Button1_OnClick(object sender, EventArgs e)
+    {
+        string sql =
+            "select a.OrderNo as '订单号',a.OrderDateTime as '下单日期',d.KSP_COde as '料号',d.ProductsName as '产品名称', c.SuppName as '供应商', b.OrderAmount as '订单数量',b.HandPrice as '单价',(b.OrderAmount*b.HandPrice) as '金额'from Knet_Procure_OrdersList a join Knet_Procure_OrdersList_Details b on a.OrderNo=b.OrderNo join Knet_Procure_Suppliers c on a.SuppNo=c.SuppNo join KNet_Sys_Products d on b.ProductsBarCode=d.ProductsBarCode where a.OrderNo not in( select b.OrderNo from Cg_Order_Checklist_Details a join Knet_Procure_OrdersList b on a.COD_DirectOutID=b.OrderNo) and SystemDatetimes>='2018-06-01' and OrderType='128860698200781250' and KPO_Del!=1 and b.OrderNo  in (select OrderNo from Sc_Expend_Manage_RCDetails a join Knet_Procure_OrdersList_Details b on a.SER_OrderDetailID=b.ID ) order by SystemDatetimes ";
+        DataTable table = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        CreateExcel(table, "xls", "未对账的生产订单");
+    }
+    /// <summary>
+    /// DataTable导出到Excel
+    /// </summary>
+    /// <param name="dt">DataTable类型的数据源</param>
+    /// <param name="FileType">文件类型</param>
+    /// <param name="FileName">文件名</param>
+    public void CreateExcel(DataTable dt, string FileType, string FileName)
+    {
+        Response.Clear();
+        Response.Charset = "UTF-8";
+        Response.Buffer = true;
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.AppendHeader("Content-Disposition", "attachment;filename=\"" + System.Web.HttpUtility.UrlEncode(FileName, System.Text.Encoding.UTF8) + ".xls\"");
+        Response.ContentType = FileType;
+        string colHeaders = string.Empty;
+        string ls_item = string.Empty;
+        DataRow[] myRow = dt.Select();
+        int i = 0;
+        int cl = dt.Columns.Count;
+        for (int j = 0; j < dt.Columns.Count; j++)
+        {
+            ls_item += dt.Columns[j].ColumnName + "\t"; //栏位：自动跳到下一单元格
+        }
+        ls_item = ls_item.Substring(0, ls_item.Length - 1) + "\n";
+        foreach (DataRow row in myRow)
+        {
+            for (i = 0; i < cl; i++)
+            {
+                if (i == (cl - 1))
+                {
+                    ls_item += row[i].ToString() + "\n";
+                }
+                else
+                {
+                    ls_item += row[i].ToString() + "\t";
+                }
+            }
+            Response.Output.Write(ls_item);
+            ls_item = string.Empty;
+        }
+        Response.Output.Flush();
+        Response.End();
+    }
+
 }

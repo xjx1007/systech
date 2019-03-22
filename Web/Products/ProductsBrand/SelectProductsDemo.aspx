@@ -6,15 +6,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
-    <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-    <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
+    <script language="javascript" type="text/javascript" src="../../js/Global.js"></script>
+    <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/js/ListView.js"></script>
+    <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+    <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css" />
 <script>   
   function closeWindow()   
   {   
@@ -53,14 +53,14 @@ if(http_request.readyState==4){
 <style type="text/css">
 .Div11
 {
-  background-image:url(../images/midbottonA2.gif); 
+  background-image:url(../../images/midbottonA2.gif); 
   background-repeat:no-repeat;
   z-index:0px;
   padding-top:3px;
 }
 .Div22
 {
-  background-image:url(../images/midbottonB2.gif); 
+  background-image:url(../../images/midbottonB2.gif); 
   background-repeat:no-repeat;
   z-index:0px;
   padding-top:3px;

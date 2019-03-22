@@ -119,7 +119,8 @@ public partial class List_CkList3 : BasePage
             {
                 s_Sql += " and (ProductsBarCode='" + s_ProductsBarCode + "' )";
             }
-            s_Sql += " and AllocateNo not in(select AllocateNo from v_AllocateList where  OutHouseNo='131235104473261008' and inHoueNO='131187187069993664')  Order by AllocateDateTime,AllocateNo ";
+            //s_Sql += " and AllocateNo not in(select AllocateNo from v_AllocateList where  OutHouseNo='131235104473261008' and inHoueNO='131187187069993664')  Order by AllocateDateTime,AllocateNo ";
+            s_Sql += "  Order by AllocateDateTime desc";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table=this.Dtb_Result;

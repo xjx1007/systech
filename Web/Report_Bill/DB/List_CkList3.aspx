@@ -246,10 +246,10 @@ head:first-child+body tbody[class].scrollContent td + td + td {
             window.location.reload();
         }
     </script>
-    <link rel="stylesheet" href="../css/Report.css" type="text/css">
-    <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
-    <script language="JavaScript" src="../Js/Report.js" type="text/javascript"></script>
-    <script language="javascript" src="../Js/LodopFuncs.js"></script>
+    <link rel="stylesheet" href="../../css/Report.css" type="text/css">
+    <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
+    <script language="JavaScript" src="../../Js/Report.js" type="text/javascript"></script>
+    <script language="javascript" src="../../Js/LodopFuncs.js"></script>
     <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width="0"
         height="0">
         <embed id="LODOP_EM" type="application/x-print-lodop" width="0" height="0" pluginspage="install_lodop.exe"></embed>

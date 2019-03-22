@@ -37,6 +37,11 @@ namespace KNet.BLL
 
                     KNet.Model.Knet_Procure_WareHouseList_Details Model_Details = (KNet.Model.Knet_Procure_WareHouseList_Details)model.Arr_Products[i];
                     KNet.BLL.Knet_Procure_WareHouseList_Details Bll_Details = new Knet_Procure_WareHouseList_Details();
+                    //string[] str = Model_Details.ProductsBarCode.ToString().Split('+');
+                    //string DoSqlOrder = " update KNet_Sampling_List set  InState='1', AuditState='1' where ID in ('" + Model_Details.ProductsBarCode + "')";
+                    //DbHelperSQL.ExecuteSql(DoSqlOrder);
+
+
                     ////改变订单收货数
                     //KNet.BLL.Knet_Procure_OrdersList_Details BLL_Order = new KNet.BLL.Knet_Procure_OrdersList_Details();
                     //KNet.Model.Knet_Procure_OrdersList_Details Model_Order = new KNet.Model.Knet_Procure_OrdersList_Details();

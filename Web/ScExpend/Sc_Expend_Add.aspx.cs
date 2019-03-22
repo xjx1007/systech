@@ -25,6 +25,7 @@ public partial class Sc_Expend_Add : BasePage
     public string s_DivStyle = "";
     public string s_AdvShow = "";
     public string s_TotalPrice = "0";
+    public string s_Code = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -39,8 +40,34 @@ public partial class Sc_Expend_Add : BasePage
                 base.Base_DropDutyPerson(this.Ddl_Batch);
                 this.Ddl_Batch.SelectedValue = AM.KNet_StaffNo;
                 string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+               // string s_OrderNo = Request.QueryString["OrderNo"] == null ? "" : Request.QueryString["OrderNo"].ToString();
                 string s_OrderNo = Request.QueryString["OrderNo"] == null ? "" : Request.QueryString["OrderNo"].ToString();
+                KNet.BLL.Knet_Procure_OrdersList BLL1 = new KNet.BLL.Knet_Procure_OrdersList();
+                KNet.Model.Knet_Procure_OrdersList Model1 = BLL1.GetModelB(s_OrderNo);
+                if (s_OrderNo!="")
+                {
+                   
+                    if (Model1.SuppNo == "131187205665612658"|| Model1.OrderCheckYN == false)
+                    {
+                        Response.Write("<script language=javascript>alert('该订单未对加工费报价或者未审核，请联系生产部')</script>");
+                        Response.Write("<script>window.opener=null;window.close();</script>");
 
+                        // Response.End();
+                    }
+                    string sql = " select KPP_PCPrice from Knet_Procure_SuppliersPrice where ProductsBarCode in( select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo='" + s_OrderNo + "') and KPP_Del=0 and SuppNo='"+ Model1.SuppNo + "'";
+                    this.BeginQuery(sql);
+                    this.QueryForDataTable();
+                    DataTable Dtb_Table = this.Dtb_Result;
+                    for (int i = 0; i < Dtb_Table.Rows.Count; i++)
+                    {
+                        if (Dtb_Table.Rows[i][0].ToString()=="")
+                        {
+                            Response.Write("<script language=javascript>alert('该订单未对赔偿单价报价或者未审核，请联系生产部')</script>");
+                            Response.Write("<script>window.opener=null;window.close();</script>");
+                        }
+                    }
+                }
+              
                 this.Tbx_Order.Text = s_OrderNo;
                 if (this.Tbx_Order.Text != "")
                 {
@@ -176,6 +203,12 @@ public partial class Sc_Expend_Add : BasePage
             int i_Num = 0;
             for (int i = 0; i < this.GridView1.Rows.Count; i++)
             {
+                if (decimal.Parse(GridView1.Rows[i].Cells[9].Text)==0)
+                {
+                   //Alert("加工费不能为0，请通知生产部对此产品报价！");
+                    //Response.Write("<script>alert('加工费不能为0，请通知生产部对此产品报价！');history.back(-1);</script>");
+                    return false;
+                }
                 KNet.Model.Sc_Expend_Manage_RCDetails Mode_RkDetails = new KNet.Model.Sc_Expend_Manage_RCDetails();
                 Mode_RkDetails.SER_ID = base.GetNewID("Sc_Expend_Manage_RCDetails", 1);
                 TextBox Tbx_ProductsBarCode = (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode");
@@ -184,11 +217,9 @@ public partial class Sc_Expend_Add : BasePage
                 TextBox Tbx_number = (TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_number");
                 decimal d_Price = decimal.Parse(GridView1.Rows[i].Cells[8].Text);
                 decimal d_HandPrice = decimal.Parse(GridView1.Rows[i].Cells[9].Text);
-
                 CheckBox Chk_Chbk = (CheckBox)GridView1.Rows[i].Cells[0].FindControl("Chbk");
                 if (Chk_Chbk.Checked)
                 {
-
                     Mode_RkDetails.SER_ProductsBarCode = Tbx_ProductsBarCode.Text;
                     Mode_RkDetails.SER_OrderDetailID = Tbx_DID.Text;
                     Mode_RkDetails.SER_ScNumber = int.Parse(Tbx_number.Text);
@@ -209,7 +240,7 @@ public partial class Sc_Expend_Add : BasePage
                 return false;
             }
 
-            ///物料消耗
+            //物料消耗
             ArrayList arr_MaterDetails = new ArrayList();
             for (int i = 0; i < this.MyGridView2.Rows.Count; i++)
             {
@@ -228,7 +259,7 @@ public partial class Sc_Expend_Add : BasePage
                 KNet.Model.Sc_Expend_Manage_MaterDetails Mode_MaterDetails = new KNet.Model.Sc_Expend_Manage_MaterDetails();
 
                 CheckBox Chk_Chbk = (CheckBox)MyGridView2.Rows[i].Cells[0].FindControl("Chbk");
-                if (Chk_Chbk.Checked)
+                if (Chk_Chbk.Checked&& Tbx_Number.Text!="0")
                 {
                     //生产入库
                     KNet.Model.Sc_Expend_Manage_MaterDetails Mode_MaterDetails2 = new KNet.Model.Sc_Expend_Manage_MaterDetails();
@@ -297,7 +328,27 @@ public partial class Sc_Expend_Add : BasePage
         this.BeginQuery(s_Sql);
         this.QueryForDataSet();
         DataSet ds = Dts_Result;
+        if (ds.Tables[0].Rows.Count>0)
+        {
+            string productcode = "";
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                productcode +="'"+ ds.Tables[0].Rows[i]["ProductsBarCode"].ToString()+"'"+",";
+            }
+            string sql_code =
+                "select KSP_COde,KSP_Del from Xs_Products_Prodocts_Demo a join KNet_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode where XPD_FaterBarCode in("+productcode.Substring(0, productcode.Length-1) +")";
+            this.BeginQuery(sql_code);
+            this.QueryForDataSet();
+            DataTable ds_code = Dts_Result.Tables[0];
+            for (int i = 0; i < ds_code.Rows.Count; i++)
+            {
+                if (ds_code.Rows[i]["KSP_Del"].ToString()=="1")
+                {
+                    s_Code += ds_code.Rows[i]["KSP_COde"].ToString()+",";
+                }
+            }
 
+        }
         GridView1.DataSource = ds.Tables[0];
         GridView1.DataKeyNames = new string[] { "OrderNo" };
         GridView1.DataBind();
@@ -305,7 +356,7 @@ public partial class Sc_Expend_Add : BasePage
         //物料计划  
 
         //
-        string s_DSql = "Select  BomOrder,KSP_Code,ProductsName,ProductsEdition,XPD_ProductsBarCode  as ProductsBarCode,XPD_Number,ProductsType,XPD_ReplaceProductsBarCode,NeedNumber,FaterProductsName,PBC_Name,cast(LossPercent as decimal(18,2)) LossPercent,cast(TotalNumber as decimal(18,0))  TotalNumber,cast(LossNumber as decimal(18,0)) LossNumber,KSP_LossType from  v_Order_ProductsDemo_Details where 1=1 ";
+        string s_DSql = "Select  BomOrder,KSP_Code,ProductsName,ReplaceNum,PBP_Name,ProductsEdition,XPD_ProductsBarCode  as ProductsBarCode,XPD_Number,ProductsType,XPD_ReplaceProductsBarCode,NeedNumber,FaterProductsName,PBC_Name,cast(LossPercent as decimal(18,2)) LossPercent,cast(TotalNumber as decimal(18,0))  TotalNumber,cast(LossNumber as decimal(18,0)) LossNumber,KSP_LossType from  v_Order_ProductsDemo_Details where 1=1 ";
 
         if (this.Tbx_Order.Text != "")
         {
@@ -315,11 +366,11 @@ public partial class Sc_Expend_Add : BasePage
         {
             s_DSql += " and ID='" + this.DID.Text + "' ";
         }
-        s_DSql += " order by ProductsType ";
+        s_DSql += " order by PBP_Name,XPD_Place,ReplaceNum";
         this.BeginQuery(s_DSql);
         this.QueryForDataSet();
         DataSet ds1 = Dts_Result;
-
+        //Label1.Text= ds1.Tables[0].Rows.Count.ToString();
         this.MyGridView2.DataSource = ds1.Tables[0];
         MyGridView2.DataBind();
 
@@ -335,7 +386,8 @@ public partial class Sc_Expend_Add : BasePage
 
         if (this.SetValue(model) == false)
         {
-            Alert("系统错误！");
+            Alert("系统错误！请通知生产部对此产品进行报价");
+            //Response.Write("<script>alert('系统错误！加工费不能为0，请通知生产部对此产品报价！');history.back(-1);</script>");
             return;
         }
         if (s_ID == "")//新增
@@ -388,6 +440,21 @@ public partial class Sc_Expend_Add : BasePage
         }
         catch (Exception ex)
         { }
+        return s_Return;
+
+    }
+
+    public string ReplaceNum(string replaceNum)
+    {
+        string s_Return = "";
+        if (replaceNum=="0")
+        {
+            s_Return = "<font color=blue>主料</font>";
+        }
+        else
+        {
+            s_Return = "<font color=red>替料"+ replaceNum + "</font>";
+        }
         return s_Return;
 
     }
@@ -713,5 +780,65 @@ public partial class Sc_Expend_Add : BasePage
     protected void SuppNoSelectValue_SelectedIndexChanged(object sender, EventArgs e)
     {
         this.DataShows();
+    }
+    /// <summary>
+    /// 获取应该耗料数量
+    /// </summary>
+    /// <param name="ExpendNum">此料应该耗的总共数量</param>
+    /// <param name="productcode">产品编码</param>
+    public string GetExpendNum(string productcode,string ExpendNum)
+    {
+        string sql =
+            "select c.SED_ProductsBarCode,sum(c.SED_RkNumber)as num from Sc_Expend_Manage_RCDetails a join Knet_Procure_OrdersList_Details b on a.SER_OrderDetailID=b.ID join  Sc_Expend_Manage_MaterDetails c on a.SER_SEMID=c.SED_SEMID  where OrderNo='" +
+            this.Tbx_Order.Text + "' and  SED_ProductsBarCode='"+ productcode + "' group by  c.SED_ProductsBarCode";
+        DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        if (dataTable.Rows.Count > 0)
+        {
+          return (int.Parse(ExpendNum)-int.Parse(dataTable.Rows[0][1].ToString())).ToString();
+        }
+        else
+        {
+            return ExpendNum;
+        }
+    }
+    /// <summary>
+    /// 获取需求数量
+    /// </summary>
+    /// <param name="NeedNum">需求数量</param>
+    /// <param name="productcode">产品编码</param>
+    /// <returns></returns>
+    public string GetNeedNum(string NeedNum,string productcode)
+    {
+        string sql = "select  c.SED_ProductsBarCode, sum(c.SED_RkNumber) as rknum,sum(c.SED_LossNumber) as lossnum from Sc_Expend_Manage_RCDetails a join Knet_Procure_OrdersList_Details b on a.SER_OrderDetailID=b.ID join  Sc_Expend_Manage_MaterDetails c on a.SER_SEMID=c.SED_SEMID  where OrderNo='" +
+           this.Tbx_Order.Text + "' and  SED_ProductsBarCode='" + productcode + "' group by  c.SED_ProductsBarCode";
+        DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        if (dataTable.Rows.Count>0)
+        {
+            return (int.Parse(NeedNum) + int.Parse(dataTable.Rows[0][2].ToString()) - int.Parse(dataTable.Rows[0][1].ToString())).ToString();
+        }
+        else
+        {
+            return NeedNum;
+        }
+    }
+  /// <summary>
+  /// 损耗数量
+  /// </summary>
+  /// <param name="LossNumber"></param>
+  /// <param name="productcode"></param>
+  /// <returns></returns>
+    public string GetLossNum(string LossNumber,string productcode)
+    {
+        string sql = "select  c.SED_ProductsBarCode,sum(c.SED_LossNumber) as lossnum from Sc_Expend_Manage_RCDetails a join Knet_Procure_OrdersList_Details b on a.SER_OrderDetailID=b.ID join  Sc_Expend_Manage_MaterDetails c on a.SER_SEMID=c.SED_SEMID  where OrderNo='" +
+          this.Tbx_Order.Text + "' and  SED_ProductsBarCode='" + productcode + "' group by  c.SED_ProductsBarCode";
+        DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        if (dataTable.Rows.Count > 0)
+        {
+            return (int.Parse(LossNumber) - int.Parse(dataTable.Rows[0][1].ToString())).ToString();
+        }
+        else
+        {
+            return LossNumber;
+        }
     }
 }

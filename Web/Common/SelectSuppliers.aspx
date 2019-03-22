@@ -30,6 +30,22 @@
                 window.returnValue = returnValue;
             }
         }
+        function GetReturn1(Value1, Value2, Value3, Value4, Value5,Value6,Value7,Value8) {
+            debugger;
+            var returnValue = "";
+            returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5+ "|" + Value6+ "|" + Value7+ "|" + Value8;
+            if (window.opener != undefined) {
+                window.opener.returnValue = returnValue;
+                <% if(Request.QueryString["callback"] != null && Request.QueryString["callback"] != ""){%>
+                window.opener.<%=Request.QueryString["callback"]%>(returnValue);
+                <%}else{%>
+                window.opener.SetReturnValueInOpenner_Suppliers(returnValue);
+                <%}%>
+            }
+            else {
+                window.returnValue = returnValue;
+            }
+        }
     </script>
     <title>选择供应商</title>
 </head>

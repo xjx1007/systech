@@ -12,6 +12,7 @@ using KNet.DBUtility;
 using KNet.Common;
 using System.Data.SqlClient;
 using System.Text;
+using System.IO;
 
 public partial class OA_Person_Report_Month_Add : BasePage
 {
@@ -44,7 +45,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
             this.Lbl_Days.Text = "<font size='5'>" + DateTime.Today.AddDays(1 - DateTime.Now.Day).ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Today.AddDays(1 - DateTime.Now.Day)) + ")  ~" + DateTime.Today.AddDays(1 - DateTime.Now.Day).AddMonths(1).AddDays(-1).ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Today.AddDays(1 - DateTime.Now.Day).AddMonths(1).AddDays(-1)) + ")  " + AM.KNet_StaffName + "</font>";
             this.Lbl_Pre.Text = "<font size='5'><<</font>   ";
             this.Lbl_Next.Text = "<font size='5'>>></font>   ";
-            this.Button1.Attributes.Add("onclick", "return confirm('你确定提交报告?！')");
+            //this.Button1.Attributes.Add("onclick", "return confirm('你确定提交报告?！')");
             if (s_ID != "")
             {
                 this.Tbx_NID.Text = s_ID;
@@ -58,7 +59,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     this.Lbl_Title.Text = "修改月报";
                     this.Tbx_ID.Text = s_ID;
                 }
-                this.Btn_Save.Text = "暂 存";
+                this.Btn_Save.Text = "已提交";
                 ShowInfoByDateTime(this.Tbx_STime.Text);
             }
             else
@@ -66,9 +67,10 @@ public partial class OA_Person_Report_Month_Add : BasePage
                 this.Tbx_NID.Text = base.GetMainID();
                 this.Lbl_Title.Text = "新增月报";
 
-                this.CommentList2.CommentFID = this.Tbx_NID.Text;
-                this.CommentList2.CommentType = "TotayReport";
+                //this.CommentList2.CommentFID = this.Tbx_NID.Text;
+                //this.CommentList2.CommentType = "TotayReport";
                 ShowInfoByDateTime(this.Tbx_STime.Text);
+                AddUpload.Visible = false;
             }
         }
 
@@ -82,8 +84,8 @@ public partial class OA_Person_Report_Month_Add : BasePage
         {
             this.Tbx_ID.Text = model.OPR_ID.ToString();
             this.Tbx_NID.Text = model.OPR_ID.ToString();
-            this.CommentList2.CommentFID = this.Tbx_NID.Text;
-            this.CommentList2.CommentType = "TotayReport";
+            //this.CommentList2.CommentFID = this.Tbx_NID.Text;
+            //this.CommentList2.CommentType = "TotayReport";
             this.Tbx_STime.Text = DateTime.Parse(model.OPR_STime.ToString()).ToShortDateString();
             this.Tbx_ThisReport.Text = KNetPage.KHtmlDiscode(model.OPR_ThisReport.ToString());
             this.Tbx_NextReport.Text = KNetPage.KHtmlDiscode(model.OPR_NextReport.ToString());
@@ -114,20 +116,44 @@ public partial class OA_Person_Report_Month_Add : BasePage
     {
         if (i_State == 1)
         {
-            this.Tbx_ThisReport.Enabled = false;
-            this.Tbx_NextReport.Enabled = false;
-            this.Button1.Text = "已提交";
-            this.Button1.Enabled = false;
-            this.Btn_Save.Enabled = false;
+            this.Tbx_ThisReport.Enabled = true;
+            this.Tbx_NextReport.Enabled = true;
+            this.Btn_Save.Text = "已提交";
+            this.Button1.Enabled = true;
+            this.Btn_Save.Enabled = true;
 
         }
-        else
+        if (i_State == 2)
+        {
+            this.Tbx_ThisReport.Enabled = false;
+            this.Tbx_NextReport.Enabled = false;
+            this.Btn_Save.Text = "已提交";
+            this.Button1.Enabled = true;
+            this.Btn_Save.Enabled = true;
+        }
+        if (i_State == 3)
         {
             this.Tbx_ThisReport.Enabled = true;
             this.Tbx_NextReport.Enabled = true;
-            this.Button1.Text = "提交";
+            this.Btn_Save.Text = "提交";
+            this.Button1.Enabled = false;
+            this.Btn_Save.Enabled = false;
+        }
+        if (i_State == 4)
+        {
+            this.Tbx_ThisReport.Enabled = false;
+            this.Tbx_NextReport.Enabled = false;
+            this.Btn_Save.Text = "提交";
             this.Button1.Enabled = true;
             this.Btn_Save.Enabled = true;
+        }
+        if (i_State == 0)
+        {
+            this.Tbx_ThisReport.Enabled = true;
+            this.Tbx_NextReport.Enabled = true;
+            this.Btn_Save.Text = "提交";
+            this.Button1.Enabled = false;
+            this.Btn_Save.Enabled = false;
         }
     }
     private void ShowInfoByDateTime(string s_DataTime)
@@ -140,6 +166,10 @@ public partial class OA_Person_Report_Month_Add : BasePage
         int weekDay = (short)D_Time.DayOfWeek;
         int i_State = 0;
         AdminloginMess AM = new AdminloginMess();
+
+        KNet.BLL.PB_Basic_Attachment bllComment = new KNet.BLL.PB_Basic_Attachment();
+        string SqlWhere = "";
+
         KNet.BLL.OA_Person_Report bll = new KNet.BLL.OA_Person_Report();
         DataSet Dts_Table = bll.GetList(" OPR_Stime>='" + D_Time.AddDays(1 - D_Time.Day) + "' and OPR_Stime<='" + D_Time.AddDays(1 - D_Time.Day).AddMonths(1).AddDays(-1) + "' and OPR_Type='3' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "' ");
         if (Dts_Table.Tables[0].Rows.Count > 0)
@@ -147,13 +177,19 @@ public partial class OA_Person_Report_Month_Add : BasePage
 
             this.Tbx_ID.Text = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
             this.Tbx_NID.Text = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
-            this.CommentList2.CommentFID = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
-            this.CommentList2.CommentType = "TotayReport";
+            //this.CommentList2.CommentFID = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
+            //this.CommentList2.CommentType = "TotayReport";
             this.Tbx_STime.Text = DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_STime"].ToString()).ToShortDateString();
             this.Tbx_ThisReport.Text = KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[0]["OPR_ThisReport"].ToString());
             this.Tbx_NextReport.Text = KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString());
             this.Tbx_Type.Text = Dts_Table.Tables[0].Rows[0]["OPR_Type"].ToString();
             i_State = int.Parse(Dts_Table.Tables[0].Rows[0]["OPR_State"].ToString());
+
+
+            SqlWhere = " PBA_FID='" + this.Tbx_ID.Text + "' AND PBA_Type='MonthFile' and PBA_Creator='" + AM.KNet_StaffNo + "' order by PBA_CTime desc";
+            DataSet ds_Comment = bllComment.GetList(SqlWhere);
+            GridView_Comment.DataSource = ds_Comment.Tables[0];
+            GridView_Comment.DataBind();
 
             KNet.BLL.OA_Person_Report_Project Bll_Project = new KNet.BLL.OA_Person_Report_Project();
             DataSet Dts_Project = Bll_Project.GetList(" OPRP_FID='" + this.Tbx_ID.Text + "' and OPRP_Type=0 ");
@@ -173,7 +209,9 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap>\n");
                     Sb_Project.Append("<a href=\"#\" onclick=\"AddProject(this," + s_FID + ")\">添加</a>\n");
                     Sb_Project.Append("<input type=\"hidden\" name=\"Tbx_ID_" + i.ToString() + "\"  Id=\"Tbx_ID_" + i.ToString() + "\"  value=\"" + s_FID + "\" >\n");
-                    Sb_Project.Append("<input type=\"text\" name=\"Tbx_Project_" + i.ToString() + "\" id=\"Tbx_Project_" + i.ToString() + "\"  style=\"width: 70%\" value=\"" + s_Project + "\" />\n");
+                    //Sb_Project.Append("<input type=\"text\" name=\"Tbx_Project_" + i.ToString() + "\" id=\"Tbx_Project_" + i.ToString() + "\"  style=\"width: 70%\" value=\"" + s_Project + "\" />\n");
+                    Sb_Project.Append("<textarea name=\"Tbx_Project_" + i.ToString() + "\" id=\"Tbx_Project_" + i.ToString() + "\"   rows=\"5\" style=\"width: 70%;height:70px\" warp=\"virtual\">" + s_Project + "</textarea>\n");
+
                     Sb_Project.Append("</td>\n");
                     Sb_Project.Append("<td class=\"ListHeadDetails\" colspan=\"3\" width=\"72%\" nowrap>\n");
                     Sb_Project.Append("<table width=\"100%\" class=\"ListDetails\">\n");
@@ -192,10 +230,12 @@ public partial class OA_Person_Report_Month_Add : BasePage
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">\n");
                             Sb_Project.Append("<a href=\"#\" onclick=\"AddDetails(this," + s_FID + ")\">添加</a>\n");
                             Sb_Project.Append("<input type=\"hidden\" name=\"Tbx_FID_" + s_DNum + "\"  Id=\"Tbx_FID_" + s_DNum + "\"  value=\"" + s_FID + "\" >\n");
-                            Sb_Project.Append("<input type=\"text\" name=\"Tbx_ProjectDetails_" + s_DNum + "\" id=\"Tbx_ProjectDetails_" + s_DNum + "\"  style=\"width: 70%\" value=\"" + s_ProjectDetails + "\" />\n");
+                            //Sb_Project.Append("<input type=\"text\" name=\"Tbx_ProjectDetails_" + s_DNum + "\" id=\"Tbx_ProjectDetails_" + s_DNum + "\"  style=\"width: 70%\" value=\"" + s_ProjectDetails + "\" />\n");
+                            Sb_Project.Append("<textarea name=\"Tbx_ProjectDetails_" + s_DNum + "\" id=\"Tbx_ProjectDetails_" + s_DNum + "\"   rows=\"5\" style=\"width: 70%;height:70px\" warp=\"virtual\">" + s_ProjectDetails + "</textarea>\n");
+
                             Sb_Project.Append("</td>\n");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">\n");
-                            Sb_Project.Append("<input type=\"text\" name=\"Tbx_Person_" + s_DNum + "\" id=\"Tbx_Person_" + s_DNum + "\"  style=\"width: 80%\"  value=\"" + s_Person + "\" />\n");
+                            Sb_Project.Append("<input type=\"text\" name=\"Tbx_Person_" + s_DNum + "\" readonly=\"readonly\" id=\"Tbx_Person_" + s_DNum + "\"  style=\"width: 80%\"  value=\"" + s_Person + "\" />\n");
                             Sb_Project.Append("<img  src=\"../../../themes/softed/images/select.gif\"  onclick=\"return btnGetPerson_onclick('Tbx_Person_" + s_DNum + "')\" /></td>\n");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">");
                             Sb_Project.Append("<input type=\"text\" name=\"Tbx_Time_" + s_DNum + "\" id=\"Tbx_Time_" + s_DNum + "\"  style=\"width: 80%\" value=\"" + s_Time + "\" />");
@@ -238,7 +278,8 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap>\n");
                     Sb_Project.Append("<a href=\"#\" onclick=\"AddProject1(this," + s_FID + ")\">添加</a>\n");
                     Sb_Project.Append("<input type=\"hidden\" name=\"Tbx_ID1_" + i.ToString() + "\"  Id=\"Tbx_ID1_" + i.ToString() + "\"  value=\"" + s_FID + "\" >\n");
-                    Sb_Project.Append("<input type=\"text\" name=\"Tbx_Project1_" + i.ToString() + "\" id=\"Tbx_Project1_" + i.ToString() + "\"  style=\"width: 70%\" value=\"" + s_Project + "\" />\n");
+                    //Sb_Project.Append("<input type=\"text\" name=\"Tbx_Project1_" + i.ToString() + "\" id=\"Tbx_Project1_" + i.ToString() + "\"  style=\"width: 70%\" value=\"" + s_Project + "\" />\n");
+                    Sb_Project.Append("<textarea name=\"Tbx_Project1_" + i.ToString() + "\" id=\"Tbx_Project1_" + i.ToString() + "\"   rows=\"5\" style=\"width: 70%;height:70px\" warp=\"virtual\">" + s_Project + "</textarea>\n");
                     Sb_Project.Append("</td>\n");
                     Sb_Project.Append("<td class=\"ListHeadDetails\" colspan=\"3\" width=\"72%\" nowrap>\n");
                     Sb_Project.Append("<table width=\"100%\" class=\"ListDetails\">\n");
@@ -257,10 +298,12 @@ public partial class OA_Person_Report_Month_Add : BasePage
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">\n");
                             Sb_Project.Append("<a href=\"#\" onclick=\"AddDetails1(this," + s_FID + ")\">添加</a>\n");
                             Sb_Project.Append("<input type=\"hidden\" name=\"Tbx_FID1_" + s_DNum + "\"  Id=\"Tbx_FID1_" + s_DNum + "\"  value=\"" + s_FID + "\" >\n");
-                            Sb_Project.Append("<input type=\"text\" name=\"Tbx_ProjectDetails1_" + s_DNum + "\" id=\"Tbx_ProjectDetails1_" + s_DNum + "\"  style=\"width: 70%\" value=\"" + s_ProjectDetails + "\" />\n");
+                            //Sb_Project.Append("<input type=\"text\" name=\"Tbx_ProjectDetails1_" + s_DNum + "\" id=\"Tbx_ProjectDetails1_" + s_DNum + "\"  style=\"width: 70%\" value=\"" + s_ProjectDetails + "\" />\n");
+
+                            Sb_Project.Append("<textarea name=\"Tbx_ProjectDetails1_" + s_DNum + "\" id=\"Tbx_ProjectDetails1_" + s_DNum + "\"   rows=\"5\" style=\"width: 70%;height:70px\" warp=\"virtual\">" + s_ProjectDetails + "</textarea>\n");
                             Sb_Project.Append("</td>\n");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">\n");
-                            Sb_Project.Append("<input type=\"text\" name=\"Tbx_Person1_" + s_DNum + "\" id=\"Tbx_Person1_" + s_DNum + "\"  style=\"width: 80%\"  value=\"" + s_Person + "\" />\n");
+                            Sb_Project.Append("<input type=\"text\" name=\"Tbx_Person1_" + s_DNum + "\" readonly=\"readonly\" id=\"Tbx_Person1_" + s_DNum + "\"  style=\"width: 80%\"  value=\"" + s_Person + "\" />\n");
                             Sb_Project.Append("<img  src=\"../../../themes/softed/images/select.gif\"  onclick=\"return btnGetPerson_onclick('Tbx_Person1_" + s_DNum + "')\" /></td>\n");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">");
                             Sb_Project.Append("<input type=\"text\" name=\"Tbx_Time1_" + s_DNum + "\" id=\"Tbx_Time1_" + s_DNum + "\"  style=\"width: 80%\" value=\"" + s_Time + "\" />");
@@ -288,7 +331,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
         }
         else
         {
-            this.Tbx_ID.Text ="";
+            this.Tbx_ID.Text = "";
 
 
             this.Tbx_TNum.Text = "1";
@@ -305,14 +348,56 @@ public partial class OA_Person_Report_Month_Add : BasePage
 
             this.Tbx_NID.Text = base.GetMainID();
 
-            this.CommentList2.CommentFID = this.Tbx_NID.Text;
-            this.CommentList2.CommentType = "TotayReport";
+            //this.CommentList2.CommentFID = this.Tbx_NID.Text;
+            //this.CommentList2.CommentType = "TotayReport";
+            Tbx_Project_0.Value = "1.";
+            Tbx_ProjectDetails_0.Value = "1.";
+            Tbx_Person_0.Value = AM.KNet_StaffName;
+            Tbx_Time_0.Value = "";
+
+            Tbx_Project1_0.Value = "1.";
+            Tbx_ProjectDetails1_0.Value = "1.";
+            Tbx_Person1_0.Value = AM.KNet_StaffName;
+            Tbx_Time1_0.Value = "";
+
             this.Tbx_ThisReport.Text = "";
             this.Tbx_NextReport.Text = "";
-            this.Tbx_Type.Text ="3";
+            this.Tbx_Type.Text = "3";
+            SqlWhere = "1!=1";
+            DataSet ds_Comment = bllComment.GetList(SqlWhere);
+            GridView_Comment.DataSource = ds_Comment.Tables[0];
+            GridView_Comment.DataBind();
         }
 
-        ShowDetails(i_State);
+        if (Dts_Table.Tables[0].Rows.Count > 0)
+        {
+            string s = Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString();
+            if ((DateTime.Now - DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString())).TotalHours < 1)
+            {
+                ShowDetails(1);//当提交大于24小时，不可以编辑今日计划OPR_SubmitTime
+            }
+            //else if ((DateTime.Now.Month-DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_SubmitTime"].ToString()).Month)<=1)
+            //{
+            //    ShowDetails(2);//当提交大于24小时，不可以编辑今日计划
+            //}
+            // if ((DateTime.Now - DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString())).TotalHours < 1)
+            else
+            {
+                ShowDetails(3);//小于24小时，可编辑今日计划
+            }
+        }
+        else
+        {
+            if (DateTime.Now.Month == DateTime.Parse(s_DataTime).Month)
+            {
+                ShowDetails(4);//不是同一月
+            }
+            else
+            {
+                ShowDetails(0);
+            }
+
+        }
         DateTime Dtm_Time = DateTime.Parse(s_DataTime).AddDays(-1);
 
         DataSet Dts_Table1 = bll.GetList("  OPR_Stime>='" + D_Time.AddDays(1 - D_Time.Day).AddMonths(-1) + "' and OPR_Stime<='" + D_Time.AddDays(1 - D_Time.Day).AddDays(-1) + "' and  OPR_Type='3'  and OPR_State='1' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "'");
@@ -333,8 +418,11 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     string s_Project = Dts_Project1.Tables[0].Rows[i]["OPRP_Project"].ToString();
 
                     Sb_Project.Append("<tr>\n");
-                    Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap>" + s_Project + "\n");
+                    //Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap>" + s_Project + "\n");
+                    //Sb_Project.Append("</td>\n");
+                    Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap><textarea  rows=\"5\" style=\"width: 70%;height:70px\" readonly=\"readonly\" warp=\"virtual\">" + s_Project + "</textarea>\n");
                     Sb_Project.Append("</td>\n");
+                    //Sb_Project.Append("<textarea name=\"Tbx_Project_" + i.ToString() + "\" id=\"Tbx_Project_" + i.ToString() + "\"   rows=\"5\" style=\"width: 70%;height:70px\" warp=\"virtual\">" + s_Project + "</textarea>\n");
                     Sb_Project.Append("<td class=\"ListHeadDetails\" colspan=\"3\" width=\"72%\" nowrap>\n");
                     Sb_Project.Append("<table width=\"100%\" class=\"ListDetails\">\n");
                     KNet.BLL.OA_Person_Report_Details Bll_Details = new KNet.BLL.OA_Person_Report_Details();
@@ -349,7 +437,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                             string s_Time = Dts_Details.Tables[0].Rows[j]["OPRD_Time"].ToString();
                             string s_DNum = i_num.ToString();
                             Sb_Project.Append("<tr>\n");
-                            Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">" + s_ProjectDetails + "\n</td>");
+                            Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\"><textarea  rows=\"5\" style=\"width: 70%;height:70px\" readonly=\"readonly\" warp=\"virtual\">" + s_ProjectDetails + "</textarea>\n</td>");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">" + s_Person + "\n</td>");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">" + s_Time + "\n</td>");
                             Sb_Project.Append("</tr>");
@@ -362,6 +450,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     Sb_Project.Append("</tr>\n");
 
                 }
+                this.Lbl_ThisReport.Text = "";
                 this.Lbl_ThisReport.Text = Sb_Project.ToString();
             }
         }
@@ -409,9 +498,9 @@ public partial class OA_Person_Report_Month_Add : BasePage
         this.Lbl_Details.Text += "<td width=\"12%\"  class=\"colHeader\">\n";
         this.Lbl_Details.Text += "<b>星期日</b>\n";
         this.Lbl_Details.Text += "</td>\n";
-        this.Lbl_Details.Text += "<td width=\"12%\"  class=\"colHeader\">\n";
-        this.Lbl_Details.Text += "<b>周总结和计划</b>\n";
-        this.Lbl_Details.Text += "</td>\n";
+        //this.Lbl_Details.Text += "<td width=\"12%\"  class=\"colHeader\">\n";
+        //this.Lbl_Details.Text += "<b>周总结和计划</b>\n";
+        //this.Lbl_Details.Text += "</td>\n";
         this.Lbl_Details.Text += "</tr>\n";
 
         for (int i = 0; i <= Days; i++)
@@ -478,17 +567,17 @@ public partial class OA_Person_Report_Month_Add : BasePage
             }
 
 
-            if (i_WeekDay == 0)
-            {
-                this.Lbl_Details.Text += "<td width=\"12%\"  height=\"40px\" class=\"dvtCellInfo\">\n&nbsp;";
-                this.Lbl_Details.Text += GetDetails(Time_Now, 2);
-                this.Lbl_Details.Text += "</td>\n";
-                this.Lbl_Details.Text += "</tr>";
-            }
+            //if (i_WeekDay == 0)
+            //{
+            //    this.Lbl_Details.Text += "<td width=\"12%\"  height=\"40px\" class=\"dvtCellInfo\">\n&nbsp;";
+            //    this.Lbl_Details.Text += GetDetails(Time_Now, 2);
+            //    this.Lbl_Details.Text += "</td>\n";
+            //    this.Lbl_Details.Text += "</tr>";
+            //}
         }
         this.Lbl_Details.Text += "</Table>";
     }
-    public string GetDetails(DateTime D_Time,int i_Type)
+    public string GetDetails(DateTime D_Time, int i_Type)
     {
         string s_return = "";
         try
@@ -496,7 +585,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
 
             int weekDay = (short)D_Time.DayOfWeek;
             KNet.BLL.OA_Person_Report bll = new KNet.BLL.OA_Person_Report();
-            DataSet Dts_Table=new DataSet();
+            DataSet Dts_Table = new DataSet();
             if (i_Type == 1)
             {
                 Dts_Table = bll.GetList("  OPR_Stime='" + D_Time.ToShortDateString() + "' and  OPR_Type='" + i_Type.ToString() + "' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "' ");
@@ -508,10 +597,23 @@ public partial class OA_Person_Report_Month_Add : BasePage
             }
             if (Dts_Table.Tables[0].Rows.Count > 0)
             {
+                if (Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString() != "")
+                {
+                    if (i_Type == 1)
+                    {
+                        s_return += "<br><font color=\"blue\">当日计划:</font><br>";
+                    }
+                    else
+                    {
+
+                        s_return += "<br><font color=\"red\">下周计划:</font><br>";
+                    }
+                    s_return += KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString()) + "<br>";
+                }
                 if (Dts_Table.Tables[0].Rows[0]["OPR_ThisReport"].ToString() != "")
                 {
 
-                    if (i_Type== 1)
+                    if (i_Type == 1)
                     {
                         s_return += "<font color=\"blue\">当日总结:</font><br>";
                     }
@@ -520,21 +622,20 @@ public partial class OA_Person_Report_Month_Add : BasePage
 
                         s_return += "<font color=\"blue\">本周总结:</font><br>";
                     }
-                    s_return += KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[0]["OPR_ThisReport"].ToString());
+                    s_return += KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[0]["OPR_ThisReport"].ToString()) + "<br>";
                 }
-                if (Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString() != "")
+                KNet.BLL.PB_Basic_Comment bllComment = new KNet.BLL.PB_Basic_Comment();
+                string SqlWhere1 = "";
+                SqlWhere1 = " PBC_FID='" + Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString() + "' AND PBC_Type=24 order by PBC_CTime ";
+                DataSet ds_Comment1 = bllComment.GetList(SqlWhere1);
+                s_return += "<font color=\"red\">领导点评:</font><br>";
+                string s_re = "";
+                for (int i = 0; i < ds_Comment1.Tables[0].Rows.Count; i++)
                 {
-                    if (i_Type == 1)
-                    {
-                        s_return += "<br><font color=\"red\">次日计划:</font><br>";
-                    }
-                    else
-                    {
-
-                        s_return += "<br><font color=\"red\">下周计划:</font><br>";
-                    }
-                    s_return += KNetPage.KHtmlDiscode(Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString());
+                    s_re += "<font>点评人:</font>" + Base_GetUserName(ds_Comment1.Tables[0].Rows[i]["PBC_FromPerson"].ToString()) + "--<font color=\"red\">" + ds_Comment1.Tables[0].Rows[i]["PBC_Description"].ToString() +
+                            "</font><br>";
                 }
+                s_return += s_re;
 
             }
         }
@@ -563,7 +664,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
             model.OPR_NextReport = KNetPage.KHtmlEncode(this.Tbx_NextReport.Text.ToString());
             model.OPR_SubmitTime = DateTime.Now;
             model.OPR_Type = 3;
-            model.OPR_State = 0;
+            model.OPR_State = 1;
             model.OPR_CTime = DateTime.Now;
             model.OPR_Creator = AM.KNet_StaffNo;
             model.OPR_MTime = DateTime.Now;
@@ -582,7 +683,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                 KNet.Model.OA_Person_Report_Project Model = new KNet.Model.OA_Person_Report_Project();
                 string s_IDs = Request["Tbx_ID_" + i.ToString() + ""] == null ? "" : Request["Tbx_ID_" + i.ToString() + ""].ToString();
                 string s_Project = Request["Tbx_Project_" + i.ToString() + ""] == null ? "" : Request["Tbx_Project_" + i.ToString() + ""].ToString();
-
+              
                 if (s_IDs != "")
                 {
                     Model.OPRP_ProjectNum = int.Parse(s_IDs);
@@ -600,7 +701,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                 KNet.Model.OA_Person_Report_Project Model = new KNet.Model.OA_Person_Report_Project();
                 string s_IDs = Request["Tbx_ID1_" + i.ToString() + ""] == null ? "" : Request["Tbx_ID1_" + i.ToString() + ""].ToString();
                 string s_Project = Request["Tbx_Project1_" + i.ToString() + ""] == null ? "" : Request["Tbx_Project1_" + i.ToString() + ""].ToString();
-
+               
                 if (s_IDs != "")
                 {
                     Model.OPRP_ID = base.GetMainID(i + 100);
@@ -622,7 +723,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                 string s_ProjectDetails = Request["Tbx_ProjectDetails_" + i.ToString() + ""] == null ? "" : Request["Tbx_ProjectDetails_" + i.ToString() + ""].ToString();
                 string s_Person = Request["Tbx_Person_" + i.ToString() + ""] == null ? "" : Request["Tbx_Person_" + i.ToString() + ""].ToString();
                 string s_Time = Request["Tbx_Time_" + i.ToString() + ""] == null ? "" : Request["Tbx_Time_" + i.ToString() + ""].ToString();
-
+              
                 if (s_FIDs != "")
                 {
                     Model.OPRD_ID = base.GetMainID(i + 200);
@@ -632,7 +733,15 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     Model.OPRD_DetailsNum = i;
                     Model.OPRD_ProjectDetails = s_ProjectDetails;
                     Model.OPRD_Person = s_Person;
-                    Model.OPRD_Time = s_Time;
+                    if (s_Time == "")
+                    {
+                        Model.OPRD_Time = DateTime.Now.ToString();
+                    }
+                    else
+                    {
+                        Model.OPRD_Time = s_Time;
+                    }
+                    //Model.OPRD_Time = s_Time;
                     Model.OPRD_CTime = DateTime.Now;
                     Model.OPRD_Type = 0;
                     Model.OPRD_Creator = AM.KNet_StaffNo;
@@ -648,7 +757,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
                 string s_ProjectDetails = Request["Tbx_ProjectDetails1_" + i.ToString() + ""] == null ? "" : Request["Tbx_ProjectDetails1_" + i.ToString() + ""].ToString();
                 string s_Person = Request["Tbx_Person1_" + i.ToString() + ""] == null ? "" : Request["Tbx_Person1_" + i.ToString() + ""].ToString();
                 string s_Time = Request["Tbx_Time1_" + i.ToString() + ""] == null ? "" : Request["Tbx_Time1_" + i.ToString() + ""].ToString();
-
+               
                 if (s_FIDs != "")
                 {
                     Model.OPRD_ID = base.GetMainID(i + 300);
@@ -658,7 +767,15 @@ public partial class OA_Person_Report_Month_Add : BasePage
                     Model.OPRD_DetailsNum = i;
                     Model.OPRD_ProjectDetails = s_ProjectDetails;
                     Model.OPRD_Person = s_Person;
-                    Model.OPRD_Time = s_Time;
+                    //Model.OPRD_Time = s_Time;
+                    if (s_Time == "")
+                    {
+                        Model.OPRD_Time = DateTime.Now.ToString();
+                    }
+                    else
+                    {
+                        Model.OPRD_Time = s_Time;
+                    }
                     Model.OPRD_Type = 1;
                     Model.OPRD_CTime = DateTime.Now;
                     Model.OPRD_Creator = AM.KNet_StaffNo;
@@ -688,21 +805,39 @@ public partial class OA_Person_Report_Month_Add : BasePage
         }
         if (this.Tbx_ID.Text != "")//修改
         {
-            try
+            DataSet Dts_Table = bll.GetList(" OPR_ID='" + this.Tbx_ID.Text + "'  and OPR_Type='3' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "' ");
+            if ((DateTime.Now - DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString())).TotalHours > 1)
             {
-                if (bll.Update(model))
+                Alert("已经超过时限不可再次编辑");
+                return;
+            }
+            else
+            {
+                try
                 {
-                    AM.Add_Logs("月报修改" + this.Tbx_ID.Text);
-                    //base.Base_SendMessage(model.PBM_ID, "月报：<a href='Web/Notice/OA_Person_Report_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBM_ID + "</a> ");
-                    AlertAndRedirect("修改成功！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+
+
+                    if (bll.Update(model))
+                    {
+                        AM.Add_Logs("月报修改" + this.Tbx_ID.Text);
+                        //base.Base_SendMessage(model.PBM_ID, "月报：<a href='Web/Notice/OA_Person_Report_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBM_ID + "</a> ");
+                        AlertAndRedirect("修改成功！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+                    }
+                    else
+                    {
+                        AM.Add_Logs("月报修改失败" + this.Tbx_ID.Text);
+                        AlertAndRedirect("修改失败！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+                    }
+
+
                 }
-                else
+                catch
                 {
-                    AM.Add_Logs("月报修改失败" + this.Tbx_ID.Text);
-                    AlertAndRedirect("修改失败！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+                    Alert("月报修改失败");
+                    return;
                 }
             }
-            catch { }
+
         }
         else
         {
@@ -711,7 +846,7 @@ public partial class OA_Person_Report_Month_Add : BasePage
             {
                 bll.Add(model);
                 //base.Base_SendMessage(model.PBN_ReceiveID, "月报：<a href='Web/Notice/OA_Person_Report_View.aspx?ID=" + model.PBN_ID + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBN_Title + "</a> ");
-                AM.Add_Logs("月报增加" );
+                AM.Add_Logs("月报增加");
                 AlertAndRedirect("新增成功！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
             }
             catch { }
@@ -719,32 +854,33 @@ public partial class OA_Person_Report_Month_Add : BasePage
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        KNet.Model.OA_Person_Report model = new KNet.Model.OA_Person_Report();
-        KNet.BLL.OA_Person_Report bll = new KNet.BLL.OA_Person_Report();
-        AdminloginMess AM = new AdminloginMess();
-        
-        if (this.SetValue(model) == false)
-        {
-            Alert("系统错误！");
-            return;
-        }
+        //KNet.Model.OA_Person_Report model = new KNet.Model.OA_Person_Report();
+        //KNet.BLL.OA_Person_Report bll = new KNet.BLL.OA_Person_Report();
+        //AdminloginMess AM = new AdminloginMess();
 
-        try
-        {
-            model.OPR_State = 1;
-            if (bll.Update(model))
-            {
-                AM.Add_Logs("月报提交" + this.Tbx_ID.Text);
-                //base.Base_SendMessage(model.PBM_ID, "月报：<a href='Web/Notice/OA_Person_Report_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBM_ID + "</a> ");
-                AlertAndRedirect("月报提交成功！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
-            }
-            else
-            {
-                AM.Add_Logs("月报修改失败" + this.Tbx_ID.Text);
-                AlertAndRedirect("修改失败！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
-            }
-        }
-        catch { }
+        //if (this.SetValue(model) == false)
+        //{
+        //    Alert("系统错误！");
+        //    return;
+        //}
+
+        //try
+        //{
+        //    model.OPR_State = 1;
+        //    if (bll.Update(model))
+        //    {
+        //        AM.Add_Logs("月报提交" + this.Tbx_ID.Text);
+        //        //base.Base_SendMessage(model.PBM_ID, "月报：<a href='Web/Notice/OA_Person_Report_View.aspx?ID=" + this.Tbx_ID.Text + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBM_ID + "</a> ");
+        //        AlertAndRedirect("月报提交成功！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+        //    }
+        //    else
+        //    {
+        //        AM.Add_Logs("月报修改失败" + this.Tbx_ID.Text);
+        //        AlertAndRedirect("修改失败！", "OA_Person_Report_Month_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+        //    }
+        //}
+        //catch { }
+        Response.Write("<script language=javascript>location.href='/inc/NewDesk.aspx'</script>");
     }
     protected void Lbl_Pre_Click(object sender, EventArgs e)
     {
@@ -765,5 +901,104 @@ public partial class OA_Person_Report_Month_Add : BasePage
         int weekDay = (short)date.DayOfWeek;
         this.Lbl_Days.Text = "<font size='5'>" + date.AddDays(1 - date.Day).ToShortDateString() + "  (" + base.Get_Chinese_Week(date.AddDays(1 - date.Day)) + ")  ~" + date.AddDays(1 - date.Day).AddMonths(1).AddDays(-1).ToShortDateString() + "  (" + base.Get_Chinese_Week(date.AddDays(1 - date.Day).AddMonths(1).AddDays(-1)) + ")  " + AM.KNet_StaffName + "</font>";
         this.ShowInfoByDateTime(this.Tbx_STime.Text);
+    }
+    public string GetUserName(string FromPerson)
+    {
+        BasePage page = new BasePage();
+        return page.Base_GetUserName(FromPerson);
+    }
+    /// <summary>
+    /// 新增附件按钮
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Btn_Create_OnClick(object sender, EventArgs e)
+    {
+        this.AddUpload.Visible = true;
+    }
+    /// <summary>
+    /// 提交附件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Button2_OnClick(object sender, EventArgs e)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        KNet.Model.PB_Basic_Attachment model = new KNet.Model.PB_Basic_Attachment();
+        string FileType = FileUpload1.PostedFile.ContentType.ToString(); //文件类型
+        GetThumbnailImage1(model);
+        try
+        {
+            KNet.BLL.PB_Basic_Attachment BLL = new KNet.BLL.PB_Basic_Attachment();
+            BLL.Add(model);
+            AM.Add_Logs("附件上传成功：编号：" + model.PBA_ID);
+            AddUpload.Visible = false;
+            KNet.BLL.PB_Basic_Attachment bllComment = new KNet.BLL.PB_Basic_Attachment();
+            string SqlWhere = " PBA_FID='" + this.Tbx_NID.Text + "' AND PBA_Type='MonthFile' and PBA_Creator='" + AM.KNet_StaffNo + "' order by PBA_CTime desc";
+            DataSet ds_Comment = bllComment.GetList(SqlWhere);
+            GridView_Comment.DataSource = ds_Comment.Tables[0];
+            GridView_Comment.DataBind();
+            //ShowInfoByDateTime(this.Tbx_STime.Text);
+            //Tbx_Remarks.Text = "2";
+        }
+        catch (Exception ex)
+        {
+
+            throw ex;
+        }
+    }
+    /// <summary>
+    /// 取消
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Button3_OnClick(object sender, EventArgs e)
+    {
+        this.AddUpload.Visible = false;
+    }
+    #region 资料上传操作
+    /// <summary>
+    /// 图片上传
+    /// </summary>
+    protected void GetThumbnailImage1(KNet.Model.PB_Basic_Attachment model)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        //类别下面的
+        string UploadPath = "/UpFile/" + Tbx_NID.Text + "/MonthFile/";  //上传路径
+        string AutoPath = System.DateTime.Now.ToString().Replace("-", "").Replace(" ", "").Replace(":", "").Replace("/", "");
+        //string fileExt = Path.GetExtension(uploadFile1.PostedFile.FileName); //获扩展名
+        string FileType = FileUpload1.PostedFile.ContentType.ToString(); //文件类型
+        string FileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+        string filePath = UploadPath + AutoPath + "_" + FileName; //大文件名
+        if (!Directory.Exists(Server.MapPath(UploadPath)))
+        {
+            Directory.CreateDirectory(Server.MapPath(UploadPath));
+        }
+        FileUpload1.PostedFile.SaveAs(Server.MapPath(filePath)); //上传
+
+        model.PBA_FID = Tbx_NID.Text;
+        model.PBA_Type = "MonthFile";
+        model.PBA_ID = GetMainID();
+        model.PBA_Name = this.Tbx_Name.Text;
+        model.PBA_URL = filePath;
+        model.PBA_CTime = DateTime.Now;
+        model.PBA_EndTime = DateTime.Now;
+        model.PBA_Creator = AM.KNet_StaffNo;
+        model.PBA_Remarks = this.Tbx_Remarks.Text;
+    }
+    #endregion
+    public string GetCodeID()
+    {
+        string s_ID = "F";
+        try
+        {
+            string s_Date = DateTime.Now.ToString("yyMMddhhmmss");
+            Random rand = new Random();
+            int RandKey = int.Parse(rand.Next(1000000, 9999999).ToString().Substring(4, 3));
+            s_ID += s_Date + RandKey.ToString();
+        }
+        catch
+        { }
+        return s_ID;
     }
 }

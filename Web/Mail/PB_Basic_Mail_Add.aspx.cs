@@ -392,7 +392,7 @@ public partial class PB_Basic_Mail_Add : BasePage
                 s_DoSql += " where  PBA_FID in (Select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo='" + s_OrderNo + "') ";
                 //发送生产部门自己上传的文件
                // s_DoSql += " and PBA_Creator in (select StaffNo  from  KNet_Resource_Staff  where StaffDepart='131161769392290242') ";
-                s_DoSql += " AND PBA_Type='Products' and PBA_FID<>'0' Group by PBA_Name,PBA_ProductsType,PBA_Remarks,PBA_Creator,PBA_URL order by max(PBA_Ctime)";
+                s_DoSql += " AND PBA_Type='Products' and PBA_FID<>'0' and PBA_Del=0 and PBA_ProductsType!='2' Group by PBA_Name,PBA_ProductsType,PBA_Remarks,PBA_Creator,PBA_URL order by max(PBA_Ctime)";
                 this.BeginQuery(s_DoSql);
                 DataSet ds_Comment = (DataSet)this.QueryForDataSet();
                 GridView_Comment.DataSource = ds_Comment.Tables[0];
@@ -413,10 +413,12 @@ public partial class PB_Basic_Mail_Add : BasePage
                     this.Tbx_Title.Text = "士腾采购单：" + Model.OrderNo + " 请尽快回复交期；详细见明细";
 
                     this.Tbx_Text.Text = "尊敬的 " + base.Base_GetSupplierName(Model.SuppNo) + ":                             <br/>";
-                    this.Tbx_Text.Text += "<font size=4>1)第一时间确认订单收到<br/>";
+                    this.Tbx_Text.Text += "1)第一时间确认订单收到<br/>";
                     this.Tbx_Text.Text += "2)上午订单，当天下午<font Color=red size=5>3点</font>前务必确认交期并盖章回传<br/>";
                     this.Tbx_Text.Text += "3)下午订单，第二天中午<font Color=red size=5>11点</font>前务必确认交期并盖章回传<br/>";
-                    this.Tbx_Text.Text += "以上要求请务必严格执行！任何特殊情况请提前告知！谢谢合作！</font><br/><p></p><p></p><hr>";
+                    this.Tbx_Text.Text += "4)请务必核对订单送货地址，按订单上的地址发货！<br/>";
+                    this.Tbx_Text.Text += "5)发货后，请及时将送货单电子档发给士腾相关采购人员。<br/>";
+                    this.Tbx_Text.Text += "以上要求请务必严格执行！任何特殊情况请提前告知！谢谢合作！<br/><p></p><p></p><hr>";
                 }
                 if (Model.KPO_IsChange == 1)
                 {
@@ -560,21 +562,21 @@ public partial class PB_Basic_Mail_Add : BasePage
                 this.Tbx_FileUrl.Text = Server.MapPath("../CG/Procure_Check/Excel/" + Model.COC_Code + ".xls");
                 this.Tbx_Title.Text = "士腾采购对账单：" + Model.COC_Code + " 请尽快确认；详细见明细";
                 this.Tbx_Text.Text = "尊敬的 " + base.Base_GetSupplierName(s_SuppNo) + ":                             <br/>";
-                this.Tbx_Text.Text += "附件是本月截止今天已发货OEM厂已确认收货的对账单，请确认无误后按此开票，且注意以下3点：<br/>";
-                this.Tbx_Text.Text += "1.  确认时间需最晚不超过第二天<br/>";
-                this.Tbx_Text.Text += "2.  对账单打印1份让财务签字并盖贵司公章<br/>";
-                this.Tbx_Text.Text += "3.  签字盖章的对账单随发票一同寄到士腾<br/>";
-                this.Tbx_Text.Text += "4.  对账单和发票到士腾时间为最晚每月倒数第3天，晚于要求时间收到的，将做下月开票处理。<br/>";
+                this.Tbx_Text.Text += "附件是本月截止今天已发货并确认收货的对账单，请确认无误后按此开票，且注意以下4点：<br/>";
+                this.Tbx_Text.Text += "1.  确认时间最晚不超过第二天；<br/>";
+                this.Tbx_Text.Text += "2.  对账单请签字盖章，并以扫描件回复本邮件；<br/>";
+                this.Tbx_Text.Text += "3.  签字盖章的对账单随发票一同寄到士腾；<br/>";
+                this.Tbx_Text.Text += "4.  对账单和发票到士腾时间为最晚每月30号，晚于要求时间收到的，将做下月开票处理。<br/>";
                 this.Tbx_Text.Text += "谢谢合作！<br/>";
 
 
-                this.Tbx_Text.Text += "方华英<br/>";
+                this.Tbx_Text.Text += AM.KNet_StaffName +"<br/>";
                 this.Tbx_Text.Text += "采购部<br/>";
                 this.Tbx_Text.Text += "杭州士腾科技有限公司<br/>";
-                this.Tbx_Text.Text += "手机：159 6718 4387<br/>";
-                this.Tbx_Text.Text += "电话：0571 8821 0011 -8041<br/>";
-                this.Tbx_Text.Text += "E-mail: fanghy@bremax.com<br/>";
-                this.Tbx_Text.Text += "地址：杭州市西湖区黄姑山路4号1号楼<br/>";
+                //this.Tbx_Text.Text += "手机：159 6718 4387<br/>";
+                //this.Tbx_Text.Text += "电话：0571 8821 0011 -8041<br/>";
+                //this.Tbx_Text.Text += "E-mail: fanghy@bremax.com<br/>";
+                //this.Tbx_Text.Text += "地址：杭州市西湖区黄姑山路4号1号楼<br/>";
             }
         }
         catch { }
@@ -650,15 +652,29 @@ public partial class PB_Basic_Mail_Add : BasePage
                     //如果是订单
                     for (int i = 0; i < GridView_Comment.Rows.Count; i++)
                     {
+                        CheckBox cb = (CheckBox)GridView_Comment.Rows[i].Cells[0].FindControl("Chbk");
                         TextBox Tbx_Urls = (TextBox)GridView_Comment.Rows[i].FindControl("Tbx_UrlDetails");
-                        if (i == GridView_Comment.Rows.Count - 1)
+                        if (cb.Checked)
                         {
-                            s_URl += Tbx_Urls.Text ;
+                            if (i == GridView_Comment.Rows.Count - 1)
+                            {
+                                s_URl += Tbx_Urls.Text;
+                                if (this.Tbx_FileUrl.Text != "")
+                                {
+                                    this.Tbx_FileUrl.Text += "," + urlconvertor(Tbx_Urls.Text);
+                                }
+
+                            }
+                            else
+                            {
+                                s_URl += Tbx_Urls.Text + ",";
+                                if (this.Tbx_FileUrl.Text != "")
+                                {
+                                    this.Tbx_FileUrl.Text += "," + urlconvertor( Tbx_Urls.Text);
+                                }
+                            }
                         }
-                        else
-                        {
-                            s_URl += Tbx_Urls.Text + ",";
-                        }
+                       
                     }
                     model.PBM_File = KNetPage.KHtmlEncode(s_URl);
                 }
@@ -708,8 +724,9 @@ public partial class PB_Basic_Mail_Add : BasePage
             this.Tbx_UserPassWord.Text = Model_Mail.PMS_Password;
             return true;
         }
-        catch
+        catch(Exception ex)
         {
+            throw ex;
             return false;
         }
 
@@ -881,4 +898,11 @@ public partial class PB_Basic_Mail_Add : BasePage
         model.PBA_Remarks = "";
     }
     #endregion
+    private string urlconvertor(string imagesurl1)
+    {
+        string tmpRootDir = Server.MapPath(System.Web.HttpContext.Current.Request.ApplicationPath.ToString());//获取程序根目录
+        string imagesurl2 = tmpRootDir+ imagesurl1.Substring(1, imagesurl1.Length-1); //转换成相对路径
+        imagesurl2 = imagesurl2.Replace(@"/", @"\");
+        return imagesurl2;
+    }
 }

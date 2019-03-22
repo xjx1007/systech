@@ -325,7 +325,7 @@ namespace KNet.DBUtility
                             }
                             else
                             {
-                                if (StaffName == "项洲")
+                                if (StaffName == "薛建新")
                                 {
                                     return false;
                                 }
@@ -999,7 +999,6 @@ namespace KNet.DBUtility
                 {
                     BasePage base1 = new BasePage();
                     string s_Dosql = "insert into PB_Basic_Attachment_DownRecord values('" + base1.GetMainID() + "','" + s_FID + "',GetDate(),'" + StaffNoss + "','" + System.Web.HttpContext.Current.Request.UserHostAddress.ToString().Trim() + "')";
-
                     try
                     {
                         DbHelperSQL.ExecuteSql(s_Dosql);

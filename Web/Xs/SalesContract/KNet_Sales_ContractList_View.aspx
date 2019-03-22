@@ -24,6 +24,18 @@
             if (top.location.href.toLowerCase() == self.location.href.toLowerCase()) $('#docLink').show();
             $("#tabNav ul").idTabs("tab1");
         });
+
+        function aClick() {
+            var vr = document.all("TextBox1").value;
+            var gb = document.all("TextBox2").value;
+            if (vr == "False"||gb=="-1") {
+                alert("总经理未审核或者订单已关闭，不能创建生产订单");
+                return false;
+
+            } else {
+                return true;
+            }
+        }
     </script>
     <style type="text/css">
         .auto-style1 {
@@ -94,7 +106,7 @@
                                     <tr>
                                         <td align="left" style="padding-left: 10px;">
                                             <img src="/themes/softed/images/pointer.gif" hspace="5" align="middle" />
-                                            <a href="/Web/CG/Order/Knet_Procure_OpenBilling.aspx?ContractNo=<%=Request.QueryString["ID"].ToString()%>" class="webMnu">创建采购订单</a>
+                                            <a onclick="return aClick();" href="/Web/CG/Order/Knet_Procure_OpenBilling.aspx?Sampling=Sampling&&ContractNo=<%=Request.QueryString["ID"].ToString()%>" class="webMnu">创建采购订单</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -147,7 +159,7 @@
                                             value="&nbsp;查看&nbsp;">&nbsp;
                                         <asp:Button Text="审核" CssClass="crmbutton small edit" ID="Btn_Sh" runat="server" OnClick="Btn_Sh_Click"></asp:Button>
                                         <asp:Button Text="需消耗" CssClass="crmbutton small edit" ID="Btn_Sh1" runat="server" OnClick="Btn_Sh_Click1"></asp:Button>
-                                        <asp:Button Text="订单取消" CssClass="crmbutton small edit" ID="Btn_Sh2" runat="server" OnClick="Btn_Sh_Click2"></asp:Button>
+                                        <asp:Button Text="关闭订单" CssClass="crmbutton small edit" ID="Btn_Sh2" runat="server" OnClick="Btn_Sh_Click2"></asp:Button>
                                             <asp:Button ID="Button2" runat="server" CssClass="crmbutton small save" Text="更改为已采购" OnClick="Button1_Click1" Style="width: 100px; height: 33px;" /><asp:Button ID="Button3" runat="server" CssClass="crmbutton small create" Text="更改为未采购" OnClick="Button3_Click1" Style="width: 100px; height: 33px;" />
                                         </td>
                                         <td align="right">
@@ -164,6 +176,8 @@
                                                     <tr>
                                                         <td colspan="4" class="detailedViewHeader">
                                                             <b>基本信息</b>
+                                                            <asp:TextBox ID="TextBox1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                            <asp:TextBox ID="TextBox2" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                                             <asp:Label ID="Lbl_Code" runat="server" CssClass="Custom_Hidden"></asp:Label>&nbsp;
                                                         </td>
                                                     </tr>

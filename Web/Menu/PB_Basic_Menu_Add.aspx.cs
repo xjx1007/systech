@@ -77,6 +77,23 @@ public partial class PB_Basic_Menu_Add : BasePage
             {
                 model.PBM_ID = this.Tbx_ID.Text;
             }
+            model.PBM_FatherID = DDl_FatherID.SelectedValue;
+            model.PBM_Name = PBM_Name.Text;
+            model.PBM_Module = Tbx_Module.Text;
+            model.PBM_Parenttab = Tbx_ParentTab.Text;
+           
+            model.PBM_URL = Tbx_URL.Text;
+            model.PBM_Del = "0";
+            model.PBM_Order =int.Parse(Tbx_Order.Text) ;
+            model.PBM_ColSpan = int.Parse(Tbx_ColSpan.Text);
+            model.PBM_RowSpan = int.Parse(Tbx_RowSpan.Text);
+            model.PBM_Level = int.Parse(DDl_Level.SelectedValue);
+            model.PBM_IsChild = 0;
+            model.PBM_Icon = Tbx_Icon.Text;
+            model.PBM_CTime=DateTime.Now;
+            model.PBM_MTime=DateTime.Now;
+            ;
+
             return true;
         }
         catch
@@ -120,11 +137,14 @@ public partial class PB_Basic_Menu_Add : BasePage
             try
             {
                 bll.Add(model);
-               // base.Base_SendMessage(model.PBN_ReceiveID, "菜单： <a href='Web/Notice/PB_Basic_Menu_View.aspx?ID=" + model.PBN_ID + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBN_Title + "</a> ");
+                // base.Base_SendMessage(model.PBN_ReceiveID, "菜单： <a href='Web/Notice/PB_Basic_Menu_View.aspx?ID=" + model.PBN_ID + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBN_Title + "</a> ");
                 AM.Add_Logs("菜单增加" + model.PBM_ID);
                 AlertAndRedirect("新增成功！", "PB_Basic_Menu_List.aspx");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 

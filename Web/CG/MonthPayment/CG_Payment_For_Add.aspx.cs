@@ -69,7 +69,7 @@ public partial class Web_Sales_CG_Payment_For_Add : BasePage
         KNet.Model.CG_Payment_For model = bll.GetModel(s_ID);
         if (model != null)
         {
-            if ((model.CPF_State != 0)&&(AM.KNet_StaffName!="项洲"))
+            if ((model.CPF_State != 0)&&(AM.KNet_StaffName!="薛建新"))
             {
                 AlertAndGoBack("已审批不能修改！");
             }

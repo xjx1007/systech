@@ -139,6 +139,7 @@ public partial class Sales_ShipWareOut_Manage_BCw : BasePage
         SqlWhere += "Order by KWD_CwOutTime desc";
         this.BeginQuery(s_Sql+SqlWhere);
         DataSet ds =(DataSet)this.QueryForDataSet() ;
+        Session["Dts_RTable"] = ds;
         this.MyGridView1.DataSource = ds;
         this.MyGridView1.DataKeyNames = new string[] { "DirectOutNo" };
         this.MyGridView1.DataBind();
@@ -624,5 +625,74 @@ public partial class Sales_ShipWareOut_Manage_BCw : BasePage
             Alert("批量审批失败！");
             return;
         }
+    }
+
+    protected void ImgB_OnClick(object sender, ImageClickEventArgs e)
+    {
+        Excel export = new Excel();
+        string s_FileName = "成品领料单.xls";
+        if (this.Tbx_WhereID.Text != "")
+        {
+            this.BeginQuery("Select PBW_Name from PB_Basic_Where where PBW_ID='" + this.Tbx_WhereID.Text + "'");
+            s_FileName = this.QueryForReturn() + s_FileName;
+        }
+        if (this.Tbx_WhereID1.Text != "")
+        {
+            this.BeginQuery("Select PBW_Name from PB_Basic_Where where PBW_ID='" + this.Tbx_WhereID1.Text + "'");
+            s_FileName = this.QueryForReturn() + s_FileName;
+        }
+        //if (MyGridView1.AllowPaging == true)
+        //{
+        //    MyGridView1.AllowPaging = false;
+        //    this.DataBind();
+        //}
+        DataSet Dts_RTable = (DataSet)Session["Dts_RTable"];
+        export.ExcelExport(GetStringWriter(Dts_RTable.Tables[0]), s_FileName);
+    }
+    public StringWriter GetStringWriter(DataTable dt)
+    {
+        StringWriter sw = new StringWriter();
+
+        //先写列的表头，这样保证如果没有数据也能输出列表头 
+        sw.Write("编号  " + "\t ");
+        sw.Write("出库单号  " + "\t ");
+        sw.Write("日期 " + "\t ");
+        sw.Write("料号 " + "\t ");       
+        sw.Write("产品名称 " + "\t ");
+        sw.Write("产品版本号 " + "\t ");
+        sw.Write("领料数量 " + "\t ");
+       
+        sw.Write("出库厂库 " + "\t ");
+        sw.Write("领料人 " + "\t ");
+        //sw.Write("备注 " + "\t ");
+        sw.Write(sw.NewLine);
+
+        //如果包含数据 
+        if (dt != null)
+        {
+            //写数据 
+            int i = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                sw.Write(i.ToString() + "\t");
+               
+                sw.Write(dr["DirectOutNo"].ToString()+"\t ");
+                sw.Write(base.DateToString(dr["KWD_CWOutTime"].ToString()) + "\t ");
+                sw.Write(Base_GetProductsCode(dr["ProductsBarCode"].ToString()) + "\t ");
+                sw.Write(base.Base_GetProdutsName(dr["ProductsBarCode"].ToString()) + "\t ");
+                sw.Write(Base_GetProductsEdition_Link1(dr["ProductsBarCode"].ToString()) + "\t ");
+                sw.Write(dr["KWD_BNumber"].ToString() + "\t ");
+                
+                sw.Write(Base_GetHouseName(dr["HouseNo"].ToString()) + "\t ");
+                sw.Write(Base_GetUserName(dr["DirectOutStaffNo"].ToString()) + "\t ");
+                
+
+                //换行 
+                sw.Write(sw.NewLine);
+                i++;
+            }
+        }
+        sw.Close();
+        return sw;
     }
 }

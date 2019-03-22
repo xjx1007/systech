@@ -111,7 +111,7 @@ public partial class NewDesk : BasePage
                 //仅查看自己
                 if (AM.YNAuthority("收款单仅责任人查看") == true)
                 {
-                    if (AM.KNet_StaffName != "项洲")
+                    if (AM.KNet_StaffName != "薛建新")
                     {
                         s_Sql += " and b.KSC_DutyPerson='" + AM.KNet_StaffNo + "'  ";
                     }

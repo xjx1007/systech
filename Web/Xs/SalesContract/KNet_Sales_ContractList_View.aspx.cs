@@ -58,7 +58,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 Table_Btn.Visible = true;
             }
 
-            if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffName == "项洲"))
+            if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffDepart == "129652784446995911") || (AM.KNet_StaffName == "薛建新"))
             {
                 this.Button2.Visible = true;
                 this.Button3.Visible = true;
@@ -190,6 +190,8 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
         {
 
             this.ContractNo.Text = Model.ContractNo;
+            this.TextBox1.Text = Model.ContractCheckYN.ToString();
+            this.TextBox2.Text = Model.ContractState.ToString();
             this.DutyPerson.Text = base.Base_GetUserName(Model.DutyPerson);
             this.Stime.Text = DateTime.Parse(Model.ContractDateTime.ToString()).ToShortDateString();
             this.ContractPerson.Text = Model.ContentPerson;
@@ -317,6 +319,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                     i_Num = 10;//单价限制
                 }
                 s_MyTable_Detail += "  <tr valign=\"top\">\n";
+                s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>物料库存(采购)</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>产品名称</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>产品编码</b></td>\n";
                 s_MyTable_Detail += "  <td  class=\"ListHead\" nowrap><b>型号</b></td>\n";
@@ -341,6 +344,7 @@ public partial class Web_KNet_Sales_ContractList_View : BasePage
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                 {
                     s_MyTable_Detail += "<tr>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\"><a href=\"/Web/SC/XS_Product_HomeNum.aspx?ProductCode=" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "\"  target=\"_blank\">查看</a></td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";

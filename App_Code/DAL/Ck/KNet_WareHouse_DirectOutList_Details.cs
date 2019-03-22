@@ -49,9 +49,9 @@ namespace KNet.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_DirectOutList_Details(");
-            strSql.Append("DirectOutNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,DirectOutAmount,DirectOutUnitPrice,DirectOutDiscount,DirectOutTotalNet,DirectOutRemarks,OwnallPID,KWD_SalesUnitPrice,KWD_SalesTotalNet,KWD_BNumber,KWD_OutWareID,CustomerProductsName,PlanNo,OrderNo,MaterNo,KWD_IsFollow)");
+            strSql.Append("DirectOutNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,DirectOutAmount,DirectOutUnitPrice,DirectOutDiscount,DirectOutTotalNet,DirectOutRemarks,OwnallPID,KWD_SalesUnitPrice,KWD_SalesTotalNet,KWD_BNumber,KWD_OutWareID,CustomerProductsName,PlanNo,OrderNo,MaterNo,KWD_IsFollow,KWD_AllocateNo,KWD_BPrice,KWD_BMoney)");
             strSql.Append(" values (");
-            strSql.Append("@DirectOutNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@DirectOutAmount,@DirectOutUnitPrice,@DirectOutDiscount,@DirectOutTotalNet,@DirectOutRemarks,@OwnallPID,@KWD_SalesUnitPrice,@KWD_SalesTotalNet,@KWD_BNumber,@KWD_OutWareID,@CustomerProductsName,@PlanNo,@OrderNo,@MaterNo,@KWD_IsFollow)");
+            strSql.Append("@DirectOutNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@DirectOutAmount,@DirectOutUnitPrice,@DirectOutDiscount,@DirectOutTotalNet,@DirectOutRemarks,@OwnallPID,@KWD_SalesUnitPrice,@KWD_SalesTotalNet,@KWD_BNumber,@KWD_OutWareID,@CustomerProductsName,@PlanNo,@OrderNo,@MaterNo,@KWD_IsFollow,@KWD_AllocateNo,@KWD_BPrice,@KWD_BMoney)");
             SqlParameter[] parameters = {
 					new SqlParameter("@DirectOutNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -72,8 +72,12 @@ namespace KNet.DAL
 					new SqlParameter("@PlanNo", SqlDbType.NVarChar,100),
 					new SqlParameter("@OrderNo", SqlDbType.NVarChar,350),
 					new SqlParameter("@MaterNo", SqlDbType.NVarChar,350),
-					new SqlParameter("@KWD_IsFollow", SqlDbType.NVarChar,350)
-                    
+					new SqlParameter("@KWD_IsFollow", SqlDbType.NVarChar,350),
+                    new SqlParameter("@KWD_AllocateNo", SqlDbType.NVarChar,350),
+                     new SqlParameter("@KWD_BPrice", SqlDbType.Decimal,6),
+                      new SqlParameter("@KWD_BMoney", SqlDbType.Decimal,3)
+
+
                                         };
             parameters[0].Value = model.DirectOutNo;
             parameters[1].Value = model.ProductsName;
@@ -96,7 +100,9 @@ namespace KNet.DAL
             parameters[17].Value = model.OrderNo;
             parameters[18].Value = model.MaterNo;
             parameters[19].Value = model.KWD_IsFollow;
-            
+            parameters[20].Value = model.KWD_AllocateNo;
+            parameters[21].Value = model.KWD_BPrice;
+            parameters[22].Value = model.KWD_BMoney;
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 
         }
@@ -109,9 +115,9 @@ namespace KNet.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_DirectOutList_Details(");
-            strSql.Append("DirectOutNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,DirectOutAmount,DirectOutUnitPrice,DirectOutDiscount,DirectOutTotalNet,DirectOutRemarks,OwnallPID,KWD_SalesUnitPrice,KWD_SalesTotalNet,KWD_BNumber,ID)");
+            strSql.Append("DirectOutNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,DirectOutAmount,DirectOutUnitPrice,DirectOutDiscount,DirectOutTotalNet,DirectOutRemarks,OwnallPID,KWD_SalesUnitPrice,KWD_SalesTotalNet,KWD_BNumber,KWD_BPrice,KWD_BMoney,ID)");
             strSql.Append(" values (");
-            strSql.Append("@DirectOutNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@DirectOutAmount,@DirectOutUnitPrice,@DirectOutDiscount,@DirectOutTotalNet,@DirectOutRemarks,@OwnallPID,@KWD_SalesUnitPrice,@KWD_SalesTotalNet,@KWD_BNumber,@ID)");
+            strSql.Append("@DirectOutNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@DirectOutAmount,@DirectOutUnitPrice,@DirectOutDiscount,@DirectOutTotalNet,@DirectOutRemarks,@OwnallPID,@KWD_SalesUnitPrice,@KWD_SalesTotalNet,@KWD_BNumber,@KWD_BPrice,@KWD_BMoney,@ID)");
             SqlParameter[] parameters = {
 					new SqlParameter("@DirectOutNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -127,7 +133,9 @@ namespace KNet.DAL
 					new SqlParameter("@KWD_SalesUnitPrice", SqlDbType.Decimal,9),
 					new SqlParameter("@KWD_SalesTotalNet", SqlDbType.Decimal,9),
 					new SqlParameter("@KWD_BNumber", SqlDbType.Int,4),
-					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@KWD_BPrice", SqlDbType.Decimal,6),
+                    new SqlParameter("@KWD_BMoney", SqlDbType.Decimal,3),
+                    new SqlParameter("@ID", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.DirectOutNo;
             parameters[1].Value = model.ProductsName;
             parameters[2].Value = model.ProductsBarCode;
@@ -142,7 +150,9 @@ namespace KNet.DAL
             parameters[11].Value = model.KWD_SalesUnitPrice;
             parameters[12].Value = model.KWD_SalesTotalNet;
             parameters[13].Value = model.KWD_BNumber;
-            parameters[14].Value = model.ID;
+            parameters[14].Value = model.KWD_BPrice;
+            parameters[15].Value = model.KWD_BMoney;
+            parameters[16].Value = model.ID;
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 
         }
@@ -162,6 +172,8 @@ namespace KNet.DAL
             strSql.Append("KWD_SalesUnitPrice=@KWD_SalesUnitPrice,");
             strSql.Append("KWD_SalesTotalNet=@KWD_SalesTotalNet,");
             strSql.Append("KWD_BNumber=@KWD_BNumber");
+            strSql.Append("KWD_BPrice=@KWD_BPrice");
+            strSql.Append("KWD_BMoney=@KWD_BMoney");
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@DirectOutAmount", SqlDbType.Int,4),
@@ -172,7 +184,9 @@ namespace KNet.DAL
 					new SqlParameter("@KWD_SalesUnitPrice", SqlDbType.Decimal,9),
 					new SqlParameter("@KWD_SalesTotalNet", SqlDbType.Decimal,9),
 					new SqlParameter("@KWD_BNumber", SqlDbType.Int,4),
-					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@KWD_BPrice", SqlDbType.Decimal,6),
+                    new SqlParameter("@KWD_BMoney", SqlDbType.Decimal,3),
+                    new SqlParameter("@ID", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.DirectOutAmount;
             parameters[1].Value = model.DirectOutUnitPrice;
             parameters[2].Value = model.DirectOutTotalNet;
@@ -181,7 +195,9 @@ namespace KNet.DAL
             parameters[5].Value = model.KWD_SalesUnitPrice;
             parameters[6].Value = model.KWD_SalesTotalNet;
             parameters[7].Value = model.KWD_BNumber;
-            parameters[8].Value = model.ID;
+            parameters[8].Value = model.KWD_BPrice;
+            parameters[9].Value = model.KWD_BMoney;
+            parameters[10].Value = model.ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -343,6 +359,18 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["KWD_BNumber"] != null && ds.Tables[0].Rows[0]["KWD_BNumber"].ToString() != "")
                 {
                     model.KWD_BNumber = int.Parse(ds.Tables[0].Rows[0]["KWD_BNumber"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["KWD_AllocateNo"] != null && ds.Tables[0].Rows[0]["KWD_AllocateNo"].ToString() != "")
+                {
+                    model.KWD_AllocateNo = ds.Tables[0].Rows[0]["KWD_AllocateNo"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KWD_BPrice"] != null && ds.Tables[0].Rows[0]["KWD_BPrice"].ToString() != "")
+                {
+                    model.KWD_BPrice = decimal.Parse(ds.Tables[0].Rows[0]["KWD_BPrice"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["KWD_BMoney"] != null && ds.Tables[0].Rows[0]["KWD_BMoney"].ToString() != "")
+                {
+                    model.KWD_BMoney = decimal.Parse(ds.Tables[0].Rows[0]["KWD_BMoney"].ToString());
                 }
                 return model;
             }

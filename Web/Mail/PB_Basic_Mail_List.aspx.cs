@@ -74,7 +74,7 @@ public partial class PB_Basic_Mail_List : BasePage
         string s_Type = "";
 
         string s_Sql = "PBM_Del=0 ";
-        if (AM.KNet_StaffName != "项洲")
+        if (AM.KNet_StaffName != "薛建新")
         {
             s_Sql+=" and PBM_Creator='" + AM.KNet_StaffNo + "'";
         }

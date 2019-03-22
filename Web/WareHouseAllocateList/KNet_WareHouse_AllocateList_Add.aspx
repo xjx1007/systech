@@ -38,6 +38,7 @@
     <script language="JAVASCRIPT">
 
         function btnGetProducts_onclick() {
+            //alert('如果此次操作需要上传附件，请先上传附件再选择产品！如果不需要附件请继续操作！');
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
@@ -46,16 +47,35 @@
         }
 
         function Submitcheck() {
+            debugger;
             var v_Num = "";
+
             v_Num = document.all("Tbx_Num").value;
+            var type = document.all("Tbx_Type").value;
             if (v_Num != "") {
                 var v_Right = "";
-                for (var i = 0; i < parseInt(v_Num) ; i++) {
-                    if ($("KcNumber_" + i.toString() + "") != null) {
-                        var KcNumber = $("KcNumber_" + i.toString() + "").value;
-                        var Number = $("Number_" + i.toString() + "").value
-                        if (parseInt(KcNumber) < parseInt(Number)) {
-                            v_Right = "1"
+                if (type == "3") {
+                    for (var i = 0; i < parseInt(v_Num) ; i++) {
+
+                        if (document.all("KcNumber_" + i.toString()).value != null) {
+                            var KcNumber = document.all("KcNumber_" + i.toString()).value;
+                            var Number = document.all("Number_" + i.toString()).value;
+                            var ryNumber = document.all("YrkNumber_" + i.toString()).value;
+                            if ((parseInt(KcNumber) - parseInt(ryNumber)) < parseInt(Number)) {
+                                v_Right = "1"
+                            }
+                        }
+                    }
+                } else {
+                    for (var i = 0; i < parseInt(v_Num) ; i++) {
+
+                        if (document.all("KcNumber_" + i.toString()).value != null) {
+                            var KcNumber = document.all("KcNumber_" + i.toString()).value;
+                            var Number = document.all("Number_" + i.toString()).value;
+
+                            if (parseInt(KcNumber) < parseInt(Number)) {
+                                v_Right = "1"
+                            }
                         }
                     }
                 }
@@ -67,6 +87,7 @@
         }
         function SetReturnValueInOpenner_Products(tempd) {
             if (tempd != undefined) {
+                debugger;
                 var i_num1 = parseInt(document.all('Tbx_Num').value);
                 document.all('Tbx_Num').value = i_num1;
                 var ss, ss1, s_Value, i_row;
@@ -75,8 +96,9 @@
                 for (var i = 0; i < ss1.length - 1; i++) {
                     var ss = ss1[i].split(",");
                     i_row = myTable.rows.length;
-                    i_num1 = parseInt(i_num1) + i;
                     var objRow = myTable.insertRow(i_row);
+                    i_num1 = parseInt(i_num1) + parseInt(i);
+
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<A onclick=\"deleteRow(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
                     objCel.className = "ListHeadDetails";
@@ -94,13 +116,13 @@
                     objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[3] + ' >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Tbx_CPBZNumber_' + i_num1 + '\" value="0" >';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Price_' + i_num1 + '\"  value=' + ss[4] + ' >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Tbx_BZNumber_' + i_num1 + '\" value="0" >';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Money_' + i_num1 + '\"  >';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:100px;" Name=\"Number_' + i_num1 + '\" value=' + ss[3] + '  >';
                     objCel.className = "ListHeadDetails";
 
                     var objCel = objRow.insertCell();
@@ -108,7 +130,7 @@
                     objCel.className = "ListHeadDetails";
                     i_row = i_row + 1;
 
-                    document.all('Tbx_Num').value = parseInt(document.all('Tbx_Num').value) + 1;
+                    document.all('Tbx_Num').value = parseInt(document.all('Tbx_Num').value) + ss1.length - 1;
                     s_ID = s_ID + ss[0] + ",";
                 }
 
@@ -130,7 +152,7 @@
                 var v_MainProductsNumber = document.all("MainNumber_" + i_Num1 + "").value;
                 for (var i_Num = 0; i_Num < parseInt(v_TotalNum) ; i_Num++) {
                     //
-                    var v_FaterBarCode = document.all("FaterBarCode_" + i_Num.toString() + "").value
+                    var v_FaterBarCode = document.all("FaterBarCode_" + i_Num.toString() + "").value;
                     if (v_MainProductsBarCode == v_FaterBarCode) {
                         var v_BomNumber = document.all("BomNumber_" + i_Num.toString() + "").value;
                         document.all("Number_" + i_Num.toString() + "").value = parseInt(v_BomNumber) * parseInt(v_MainProductsNumber);
@@ -189,6 +211,9 @@
                     <asp:TextBox ID="Tbx_ID" runat="server" Style="display: none"></asp:TextBox>
                     <asp:TextBox ID="Tbx_Type" runat="server" Style="display: none"></asp:TextBox>
                     <asp:TextBox ID="Tbx_SuppNo" runat="server" Style="display: none"></asp:TextBox>
+                    <asp:TextBox ID="KSP_SID" runat="server" Style="display: none"></asp:TextBox>
+                    <asp:TextBox ID="SubCode" runat="server" Style="display: none"></asp:TextBox>
+                    <asp:TextBox ID="Sumb" runat="server" Style="display: none"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -206,7 +231,6 @@
                             <asp:Label runat="server" ID="Lbl_Title"></asp:Label></span>
                         <br>
                         <hr noshade size="1">
-
                         <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
                             <tr valign="bottom">
                                 <td style="height: 44px">
@@ -279,7 +303,7 @@
 
                                                 <asp:TextBox ID="Tbx_OrderNo" MaxLength="40" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                    Width="150px" Enabled="false"></asp:TextBox>
+                                                    Width="150px"></asp:TextBox><%--Enabled="false"--%>
                                             </td>
                                         </tr>
                                         <tr>
@@ -295,27 +319,47 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="dvtCellLabel">调拨原因:
+                                             <td class="dvtCellLabel">是否实物:
                                             </td>
-                                            <td class="dvtCellInfo" colspan="3">
+                                            <td class="dvtCellInfo">
+                                               <input type="checkbox" runat="server" id="IsEntity" checked="True"/>
+                                            </td>
+                                            <td class="dvtCellLabel">附件:
+                                            </td>
+                                            <td class="dvtCellInfo">
+                                                <asp:TextBox ID="KPS_InvoiceUrl1" runat="server" Text="" CssClass="Custom_Hidden"></asp:TextBox>
+                                                <asp:TextBox ID="KPS_Invoice1" runat="server" Text="" CssClass="Custom_Hidden"></asp:TextBox>
+                                                <asp:Label runat="server" ID="Lbl_Details1"></asp:Label><input id="uploadFile2"
+                                                    type="file" runat="server" class="detailedViewTextBox" style="width: 250px" />&nbsp;<input id="button2" type="button"
+                                                        value="上传" runat="server" class="crmbutton small save" onserverclick="button2_OnServerClick" causesvalidation="false" />
+                                                (<font color="red">*</font>)
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                             <td class="dvtCellLabel">调拨原因:
+                                            </td>
+                                            <td class="dvtCellInfo">
                                                 <asp:TextBox ID="AllocateCause" TextMode="MultiLine" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                     Width="400px" Height="40px"></asp:TextBox><asp:RegularExpressionValidator ID="RegularExpressionValidator1"
                                                         runat="server" ControlToValidate="AllocateCause" ValidationExpression="^(\s|\S){0,500}$"
                                                         ErrorMessage="调拨原因太多，限少于500个字." Display="dynamic"></asp:RegularExpressionValidator>
                                             </td>
-                                        </tr>
-
-                                        <tr>
                                             <td class="dvtCellLabel">备注说明:
                                             </td>
-                                            <td class="dvtCellInfo" colspan="3">
+                                            <td class="dvtCellInfo" >
                                                 <asp:TextBox ID="AllocateRemarks" TextMode="MultiLine" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                     Width="400px" Height="40px"></asp:TextBox><asp:RegularExpressionValidator ID="RegularExpressionValidator2"
                                                         runat="server" ControlToValidate="AllocateCause" ValidationExpression="^(\s|\S){0,500}$"
                                                         ErrorMessage="调拨原因太多，限少于500个字." Display="dynamic"></asp:RegularExpressionValidator>
                                             </td>
+                                            <%-- <td class="dvtCellLabel">送检级别:
+                                            </td>
+                                            <td class="dvtCellInfo">
+                                                <asp:CheckBox runat="server" ID="CheckBox1" AutoPostBack="true" OnCheckedChanged="Chk_Type_CheckedChanged" />
+                                            </td>--%>
                                         </tr>
                                         <tr runat="server" id="Tr_Order" visible="false">
                                             <td colspan="4" class="dvInnerHeader">
@@ -339,6 +383,8 @@
 
                                     </table>
                                     <asp:TextBox ID="Xs_ProductsCode" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                    <asp:TextBox ID="KWAD_DirectOutNo" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox1" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
                                     <asp:TextBox ID="Tbx_Num" runat="Server" Text="0" CssClass="Custom_Hidden"></asp:TextBox>
                                     <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
                                         class="crmTable" style="height: 28px">
@@ -351,6 +397,10 @@
                                             <input type="button" name="Button" class="crmbutton small create" value="添加产品" onclick="btnGetProducts_onclick();" />
                                             </td>
                                         </tr>
+                                       <%-- <tr colspan="2">
+                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                                            <input type="button" runat="server" id="Btn_Create" value="确   定" OnServerClick="Btn_Create_OnServerClick" class="crmbutton small create" />
+                                        </tr>--%>
                                     </table>
                                 </td>
                             </tr>
@@ -358,9 +408,9 @@
                                 <td colspan="4" align="center">&nbsp;
                                 <br />
                                     <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                        class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" OnClientClick="return Submitcheck();" />
+                                        class="crmbutton small save" OnClientClick="return Submitcheck();" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" />
                                     <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
-                                        type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
+                                        type="button" name="button" value="取 消" style="width: 55px; height: 33px;"><%--OnClientClick="return Submitcheck();"--%>
                                 </td>
                             </tr>
                         </table>

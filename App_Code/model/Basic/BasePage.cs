@@ -994,6 +994,43 @@ public class BasePage : System.Web.UI.Page
             }
         }
     }
+    protected string Base_GetProductsEdition_Link1(object aa)
+    {
+        string s_Return = "", s_Details = "";
+        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        {
+            conn.Open();
+            string Dostr = "select ProductsBarCode,ProductsEdition,ProductsPattern,KSP_Code,ProductsName from KNet_Sys_Products where ProductsBarCode='" + aa + "'";
+            SqlCommand cmd = new SqlCommand(Dostr, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                string s_ProductsBarCode = dr["ProductsBarCode"].ToString().Trim() == "" ? dr["ProductsBarCode"].ToString().Trim() : dr["ProductsBarCode"].ToString().Trim();
+                string s_Code = dr["KSP_Code"].ToString().Trim() == "" ? dr["KSP_Code"].ToString().Trim() : dr["KSP_Code"].ToString().Trim();
+                string s_ProductsName = dr["ProductsName"].ToString().Trim() == "" ? dr["ProductsName"].ToString().Trim() : dr["ProductsName"].ToString().Trim();
+
+                s_Details = dr["ProductsEdition"].ToString().Trim() == "" ? dr["ProductsPattern"].ToString().Trim() : dr["ProductsEdition"].ToString().Trim();
+                s_Return = s_Details;
+
+                /*
+                s_Return = "<a href=\"/Web/Products/KnetProductsSetting_Details.aspx?BarCode=" + s_ProductsBarCode + "\"  target=\"_self\" onMouseOver=\"fnDropDown1(this,'" + s_ProductsBarCode + "_sub');\" onMouseOut=\"fnHideDrop('" + s_ProductsBarCode + "_sub');\" >" + s_Details + "</a>";
+                s_Return += "<div class=\"Drop_Customer\" id=\"" + s_ProductsBarCode + "_sub\" onMouseOut=\"fnHideDrop('" + s_ProductsBarCode + "_sub')\" onMouseOver=\"fnShowDrop('" + s_ProductsBarCode + "_sub')\">\n";
+                s_Return += "<table width=\"80%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n";
+
+                s_Return += "<tr><td >料号：" + s_Code;
+                s_Return += "</td></tr>\n";
+                s_Return += "<tr><td >产品名称：" + s_ProductsName;
+                s_Return += "</td></tr>\n";
+                s_Return += "</table>\n</div>\n";
+                 */
+                return s_Return;
+            }
+            else
+            {
+                return "--";
+            }
+        }
+    }
     public string base_GetProductsDemoState(string s_ID)
     {
         string s_Return = "";
@@ -1093,6 +1130,24 @@ public class BasePage : System.Web.UI.Page
         }
     }
 
+    //protected string Base_GetHouseName(string HouseNo)
+    //{
+    //    using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+    //    {
+    //        conn.Open();
+    //        string Dostr = "select* from KNet_Sys_WareHouse where HouseNo = '"+ HouseNo + "'";
+    //        SqlCommand cmd = new SqlCommand(Dostr, conn);
+    //        SqlDataReader dr = cmd.ExecuteReader();
+    //        if (dr.Read())
+    //        {
+    //            return dr["HouseName"].ToString();
+    //        }
+    //        else
+    //        {
+    //            return "--";
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// 获取结算方式
@@ -1155,6 +1210,34 @@ public class BasePage : System.Web.UI.Page
             return "";
         }
     }
+
+    public string Base_GetEndTime(string id, string PBA_ProductsType, string endtime)
+    {
+        if (PBA_ProductsType!="15")
+        {
+            return "";
+        }
+        else
+        {
+            this.BeginQuery("Select * From PB_Basic_Attachment where PBA_ID='" + id + "' ");
+            this.QueryForDataTable();
+            DateTime dt1 = DateTime.Now;
+            DateTime dt2 = DateTime.Parse(Dtb_Result.Rows[0]["PBA_EndTime"].ToString());
+            TimeSpan ts = dt2 - dt1;
+            //if (int.Parse(ts.Days.ToString())<=7)
+            //{
+            //    string subject = "环保资料到期警报";
+            //    string body = "产品编号为" + Dtb_Result.Rows[0]["PBA_FID"].ToString() + "还有";
+            //    //Send();
+            //}
+            return "<font color = red>"+"还有" + ts.Days.ToString()+"天到期"+ "</font>";  
+        }
+    }
+
+   
+
+
+   
 
 
     /// <summary>
@@ -1266,6 +1349,24 @@ public class BasePage : System.Web.UI.Page
 
         }
     }
+    public void Base_StaffNo(DropDownList DDL)
+    {
+        try
+        {
+            KNet.BLL.KNet_Resource_Staff Bll_SupppStaffName = new KNet.BLL.KNet_Resource_Staff();
+            DataSet Dts_Table = Bll_SupppStaffName.GetList("1=1");
+            DDL.DataSource = Dts_Table;
+            DDL.DataTextField = "StaffName";
+            DDL.DataValueField = "StaffNo";
+            DDL.DataBind();
+            ListItem item = new ListItem("请选择", ""); //默认值
+            DDL.Items.Insert(0, item);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
 
 
 
@@ -1307,6 +1408,48 @@ public class BasePage : System.Web.UI.Page
             DDL.Items.Insert(0, item);
             AdminloginMess AM = new AdminloginMess();
             DDL.SelectedValue = AM.KNet_StaffNo;
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+    public void Base_DropDutyPersonByFidOrHR(DropDownList DDL, string s_FID)
+    {
+        try
+        {
+            KNet.BLL.KNet_Resource_Staff Bll = new KNet.BLL.KNet_Resource_Staff();
+            if (s_FID!= "129785817148286993")
+            {
+                string s_SonID = Bll.GetSonIDs(s_FID);
+                s_SonID = s_SonID.Replace(",", "','");
+                string SqlWhere = " and StaffNo in ('" + s_SonID + "') ";
+                DataSet Dts_Table = Bll.GetList(" StaffNo<>'admin' " + SqlWhere + " Order By StaffDepart ");
+                DDL.DataSource = Dts_Table;
+                DDL.DataTextField = "StaffName";
+                DDL.DataValueField = "StaffNo";
+                DDL.DataBind();
+                ListItem item = new ListItem("所有", ""); //默认值
+                DDL.Items.Insert(0, item);
+                AdminloginMess AM = new AdminloginMess();
+                DDL.SelectedValue = AM.KNet_StaffNo;
+            }
+            else
+            {
+                string s_SonID = Bll.GetSonIDs(s_FID);
+                s_SonID = s_SonID.Replace(",", "','");
+                string SqlWhere = " 1=1 ";
+                DataSet Dts_Table = Bll.GetList(SqlWhere);
+                DDL.DataSource = Dts_Table;
+                DDL.DataTextField = "StaffName";
+                DDL.DataValueField = "StaffNo";
+                DDL.DataBind();
+                ListItem item = new ListItem("所有", ""); //默认值
+                DDL.Items.Insert(0, item);
+                AdminloginMess AM = new AdminloginMess();
+                DDL.SelectedValue = AM.KNet_StaffNo;
+            }
+           
         }
         catch (Exception ex)
         {
@@ -1553,6 +1696,7 @@ public class BasePage : System.Web.UI.Page
     /// </summary> 
     protected void Base_DropBasicCodeBind(DropDownList DropBasicCode, string Code, bool bDefaultValue)
     {
+        string str = "Select * From PB_Basic_Code where PBC_ID = '" + Code + "' Order by PBC_Order,PBC_Code";
         this.BeginQuery("Select * From PB_Basic_Code where PBC_ID='" + Code + "' Order by PBC_Order,PBC_Code");
         this.QueryForDataSet();
         DropBasicCode.DataSource = Dts_Result;
@@ -1870,6 +2014,30 @@ public class BasePage : System.Web.UI.Page
             return "****";
         }
     }
+
+    protected string Base_GetCustomer(string s_Value)
+    {
+        using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
+        {
+            conn.Open();
+            string Dostr =
+                "select CustomerName from KNet_Sales_ClientList where CustomerValue='" +
+                s_Value + "'";
+            SqlCommand cmd = new SqlCommand(Dostr, conn);
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                string s_Return = dr["CustomerName"].ToString();
+                return s_Return;
+
+            }
+            else
+            {
+                return "--";
+            }
+        }
+    }
+
     /// <summary>
     /// 返回客户名称
     /// </summary>
@@ -1972,12 +2140,12 @@ public class BasePage : System.Web.UI.Page
         using (SqlConnection conn = DBClass.GetConnection("KNetERP"))
         {
             conn.Open();
-            string Dostr = "select * from KNet_Sys_Products where ProductsBarCode='" + s_Value + "'";
+            string Dostr = "Select * from KNET_Sys_Products  a join PB_Basic_ProductsClass b  on a.ProductsType=b.PBP_ID where a.ProductsBarCode='" + s_Value + "'";
             SqlCommand cmd = new SqlCommand(Dostr, conn);
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                return dr["ProductsName"].ToString().Trim();
+                return dr["PBP_Name"].ToString().Trim();
             }
             else
             {
@@ -2143,6 +2311,172 @@ public class BasePage : System.Web.UI.Page
             return "0";
         }
     }
+    /// <summary>
+    /// 未完结数量
+    /// </summary>
+    /// <param name="s_HouseNo"></param>
+    /// <param name="s_ProductsBarCode"></param>
+    /// <returns></returns>
+    public string Base_GetNotCloseNumber(string OrderCount, string OrderNo,string s_OutHouseNo,string productbarcode)
+    {
+        //try
+        //{
+        //    string s_Sql = "select isnull(sum( b.AllocateAmount),0)  from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo where HouseNo='"+ s_OutHouseNo + "' and HouseNo_int = '131235104473261008'   and KWA_OrderNo='" + OrderNo + "' and b.ProductsBarCode='"+ productbarcode + "'  ";
+        //    this.BeginQuery(s_Sql);
+        //    this.QueryForDataTable();
+        //    DataTable Dtb_Table = this.Dtb_Result;
+        //    if (Dtb_Table.Rows.Count > 0)
+        //    {
+        //        return (int.Parse(OrderCount) - int.Parse(Dtb_Table.Rows[0][0].ToString())).ToString();
+        //    }
+        //    else
+        //    {
+        //        return OrderCount;
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    throw;
+        //    return "0";
+        //}
+        decimal d_totalPrice = 0;
+
+        string sql = "  select SUM(AllocateAmount) as AllocateAmount from KNet_WareHouse_AllocateList a join  KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='" + OrderNo + "' and HouseNo_int='131187187069993664' and ProductsBarCode='" + productbarcode + "'";
+
+        this.BeginQuery(sql);
+        DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+
+        string sql1 = " select SUM(DirectOutAmount) from KNet_WareHouse_DirectOutList a join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo where a.KWD_Order='" + OrderNo + "' and b.ProductsBarCode='" + productbarcode + "'";
+
+        this.BeginQuery(sql1);
+        DataSet Dts_DemoProducts1 = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts1 = Dts_DemoProducts1.Tables[0];
+        string P = Dtb_DemoProducts.Rows[0][0].ToString();
+        string B = Dtb_DemoProducts1.Rows[0][0].ToString();
+        if (P == "")
+        {
+            P = "0";
+        }
+        if (B == "")
+        {
+            B = "0";
+        }
+        d_totalPrice = decimal.Parse(OrderCount)- (decimal.Parse(P) + decimal.Parse(B));
+        // }
+
+        return d_totalPrice.ToString();
+    }
+    /// <summary>
+    /// 可调拨数量
+    /// </summary>
+    /// <param name="s_HouseNo"></param>
+    /// <param name="s_ProductsBarCode"></param>
+    /// <returns></returns>
+    public string Base_GetCanDBNumber( string OrderNo,string s_OutHouseNo, string productbarcode)
+    {
+        try
+        {
+            string s_Sql = "select isnull(sum( b.AllocateAmount),0)  from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo where HouseNo='"+ s_OutHouseNo + "' and HouseNo_int = '131235104473261008'   and KWA_OrderNo='" + OrderNo + "' and b.ProductsBarCode='" + productbarcode + "'  ";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            DataTable Dtb_Table1 = this.Dtb_Result;//车间库的数量
+            int a = int.Parse(Dtb_Table1.Rows[0][0].ToString());
+            string s_Sql1 = "select isnull(Sum(AllocateAmount),0) as AllocateAmount from Knet_WareHouse_FuAllocateList_Details a join Knet_WareHouse_FuAllocateList b on a.AllocateNo =b.AllocateNo where b.KWA_OrderNo='" + OrderNo + "' and  a.ProductsBarCode='" + productbarcode + "' and b.KWA_OrderNo not in (select KWA_OrderNo from Knet_WareHouse_AllocateList where KWA_OrderNo='" + OrderNo + "') ";
+            this.BeginQuery(s_Sql1);
+            this.QueryForDataTable();
+            DataTable Dtb_Table = this.Dtb_Result;//预入库的数量
+            int b = int.Parse(Dtb_Table.Rows[0][0].ToString());
+            string s_Sql2 = "select isnull(sum( b.AllocateAmount),0)  from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo where  HouseNo='131235104473261008' and HouseNo_int = '131187187069993664'   and KWA_OrderNo='" + OrderNo + "' and b.ProductsBarCode='" + productbarcode + "'  ";
+            this.BeginQuery(s_Sql2);
+            this.QueryForDataTable();
+            DataTable Dtb_Table2 = this.Dtb_Result;//已经入成品库的数量
+            int c = int.Parse(Dtb_Table2.Rows[0][0].ToString());
+            if (Dtb_Table1.Rows.Count > 0)
+            {
+                if ((a-b-c)<0)
+                {
+                    return "0";
+                }
+                else
+                {
+                    return (a - b - c).ToString();
+                }
+                //return (int.Parse(Dtb_Table1.Rows[0][0].ToString()) - int.Parse(Dtb_Table.Rows[0][0].ToString())-int.Parse(Dtb_Table2.Rows[0][0].ToString())).ToString();
+            }
+            else
+            {
+                return "0";
+            }
+        }
+        catch (Exception ex)
+        {
+            throw;
+            return "0";
+        }
+    }
+    /// <summary>
+    /// 获取车间库不良的总数
+    /// </summary>
+    /// <returns></returns>
+    public string Base_GetBLHouseNum(string s_OrderNo, string s_ProductsBarCode)
+    {
+        try
+        {
+            string s_Sql = "select isnull(Sum(KWAD_BLNumber),0) as KWAD_BLNumber from Knet_WareHouse_FuAllocateList_Details a join Knet_WareHouse_FuAllocateList b on a.AllocateNo =b.AllocateNo where b.KWA_OrderNo='" + s_OrderNo + "' and  a.ProductsBarCode='" + s_ProductsBarCode + "' ";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            DataTable Dtb_Table = this.Dtb_Result;//车间库不良的
+            string s_Sql1 =
+                "select isnull(Sum(AllocateAmount),0) as AllocateAmount from Knet_WareHouse_AllocateList_Details a join Knet_WareHouse_AllocateList b on a.AllocateNo =b.AllocateNo where b.KWA_OrderNo='" +
+                s_OrderNo + "' and  a.ProductsBarCode='" + s_ProductsBarCode + "' and  b.HouseNo_int='131235104473261008' and AllocateAmount<0";
+            this.BeginQuery(s_Sql1);
+            this.QueryForDataTable();
+            DataTable Dtb_Table1 = this.Dtb_Result;
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                return (int.Parse(Dtb_Table.Rows[0][0].ToString())+int.Parse(Dtb_Table1.Rows[0][0].ToString())).ToString() ;
+            }
+            else
+            {
+                return "0";
+            }
+        }
+        catch (Exception ex)
+        {
+            throw;
+            return "0";
+        }
+    }
+    /// <summary>
+    /// 得到预入库数量
+    /// </summary>
+    /// <param name="s_HouseNo"></param>
+    /// <param name="s_ProductsBarCode"></param>
+    /// <returns></returns>
+    public string Base_GetYRHouseNum(string s_OrderNo, string s_ProductsBarCode)
+    {
+        try
+        {
+            string s_Sql = "select isnull(Sum(AllocateAmount),0) as AllocateAmount from Knet_WareHouse_FuAllocateList_Details a join Knet_WareHouse_FuAllocateList b on a.AllocateNo =b.AllocateNo where b.KWA_OrderNo='"+ s_OrderNo + "' and  a.ProductsBarCode='"+ s_ProductsBarCode + "' and b.KWA_OrderNo not in (select KWA_OrderNo from Knet_WareHouse_AllocateList where KWA_OrderNo='"+ s_OrderNo + "') ";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            DataTable Dtb_Table = this.Dtb_Result;
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                return Dtb_Table.Rows[0][0].ToString();
+            }
+            else
+            {
+                return "0";
+            }
+        }
+        catch (Exception ex)
+        {
+            throw;
+            return "0";
+        }
+    }
 
     /// <summary>
     /// 得到ck库存数量
@@ -2276,6 +2610,36 @@ public class BasePage : System.Web.UI.Page
                 {
 
                     s_Return += decimal.Parse(Dtb_Table.Rows[i]["ProcureUnitPrice"].ToString()) + decimal.Parse(Dtb_Table.Rows[i]["HandPrice"].ToString());
+                    // Dtb_Table.Rows[i]["KPS_SName"].ToString() + "(" + Dtb_Table.Rows[i]["ProcureUnitPrice"].ToString() + "|" + Dtb_Table.Rows[i]["HandPrice"].ToString() + ")<br/>";
+                }
+            }
+            else
+            {
+                s_Return = "0";
+            }
+        }
+        catch (Exception ex)
+        {
+            s_Return = "0";
+            throw;
+        }
+        return s_Return;
+    }
+    public string GetNewPriceAndHandPrice1(string s_ProductsBarCode)
+    {
+        string s_Return = "";
+        try
+        {
+            string s_Sql = "select top 1 KPS_SName,isnull(ProcureUnitPrice,0) ProcureUnitPrice,isnull(HandPrice,0) HandPrice from Knet_Procure_SuppliersPrice a join Knet_Procure_Suppliers b on a.SuppNo=b.SuppNo where KPP_Del=0 and KPP_State=1 and a.ProductsBarCode='" + s_ProductsBarCode + "' order by ProcureUpdateDateTime desc ";
+            this.BeginQuery(s_Sql);
+            this.QueryForDataTable();
+            DataTable Dtb_Table = this.Dtb_Result;
+            if (Dtb_Table.Rows.Count > 0)
+            {
+                for (int i = 0; i < Dtb_Table.Rows.Count; i++)
+                {
+
+                    s_Return += decimal.Parse(Dtb_Table.Rows[i]["ProcureUnitPrice"].ToString());
                     // Dtb_Table.Rows[i]["KPS_SName"].ToString() + "(" + Dtb_Table.Rows[i]["ProcureUnitPrice"].ToString() + "|" + Dtb_Table.Rows[i]["HandPrice"].ToString() + ")<br/>";
                 }
             }
@@ -3160,7 +3524,17 @@ public class BasePage : System.Web.UI.Page
         {
             for (int i = 0; i < Dtb_Result.Rows.Count; i++)
             {
-                s_Return += Dtb_Result.Rows[i]["OrderAmount"].ToString();
+                string KSP_BigUnits = Base_GetBigUnitsByProductCode(Dtb_Result.Rows[i]["ProductsBarCode"].ToString());
+                if (KSP_BigUnits!=""&& KSP_BigUnits != "--")
+                {
+                    string c = KSP_BigUnits.Remove(KSP_BigUnits.LastIndexOf("/"));
+                    s_Return +=(decimal.Parse(Dtb_Result.Rows[i]["OrderAmount"].ToString())/Convert.ToInt32(c)).ToString();
+                }
+                else
+                {
+                    s_Return += Dtb_Result.Rows[i]["OrderAmount"].ToString();
+                }
+              
 
                 s_Return += "<br/>";
             }
@@ -3189,6 +3563,9 @@ public class BasePage : System.Web.UI.Page
             }
         }
         return s_Return;
+
+
+
     }
 
     /// <summary>
@@ -3230,7 +3607,17 @@ public class BasePage : System.Web.UI.Page
         {
             for (int i = 0; i < Dtb_Result.Rows.Count; i++)
             {
-                s_Return += Dtb_Result.Rows[i]["RkNumber"].ToString();
+                string KSP_BigUnits = Base_GetBigUnitsByProductCode(Dtb_Result.Rows[i]["ProductsBarCode"].ToString());
+                if (KSP_BigUnits != ""&& KSP_BigUnits!="--")
+                {
+                    string c = KSP_BigUnits.Remove(KSP_BigUnits.LastIndexOf("/"));
+                    s_Return +=Convert.ToInt32(Dtb_Result.Rows[i]["RkNumber"].ToString())/Convert.ToInt32(c);
+                }
+                else
+                {
+                    s_Return += Dtb_Result.Rows[i]["RkNumber"].ToString();
+                }
+                   
 
                 s_Return += "<br/>";
             }
@@ -5595,7 +5982,7 @@ public class BasePage : System.Web.UI.Page
                     s_Return.Append("<b>" + Dts_Table.Tables[0].Rows[i][2].ToString() + "</b></td><td align=\"left\" width=\"50\">\n");
                     s_Return.Append("<input type=\"checkbox\" onclick='toggleSelect(this.checked,\"DetailView_" + Dts_Table.Tables[0].Rows[i][2].ToString() + "\")' name=\"shareselectall\" class=\"detailedViewTextBox\"></td></tr></table>\n");
                     KNet.BLL.KNet_Resource_Staff Bll_Staff = new KNet.BLL.KNet_Resource_Staff();
-                    DataSet Dts_Staff = Bll_Staff.GetList(" StaffDepart='" + Dts_Table.Tables[0].Rows[i][1].ToString() + "' "); ;
+                    DataSet Dts_Staff = Bll_Staff.GetList(" StaffDepart='" + Dts_Table.Tables[0].Rows[i][1].ToString() + "' "); 
                     if (Dts_Staff.Tables[0].Rows.Count > 0)
                     {
                         s_Return.Append("<table width=100% id=\"dept_" + Dts_Table.Tables[0].Rows[i][2].ToString() + "\" style=\"display:block;\">\n");
@@ -5641,6 +6028,7 @@ public class BasePage : System.Web.UI.Page
             Random rand = new Random();
             int RandKey = int.Parse(rand.Next(1000000, 9999999).ToString().Substring(4, 3));
             s_ID += s_Date + RandKey.ToString();
+
         }
         catch
         { }
@@ -5732,6 +6120,7 @@ public class BasePage : System.Web.UI.Page
     public string GetCwCode(int i_Num, string s_Table, string s_CodeColumn, string s_TimeColumn)
     {
         string s_Code = "";
+        string s = "-0";
         try
         {
             KNet.BLL.KNet_WareHouse_DirectOutList BLL = new KNet.BLL.KNet_WareHouse_DirectOutList();
@@ -5743,16 +6132,18 @@ public class BasePage : System.Web.UI.Page
             {
                 if (Dtb_Table.Rows[0][0].ToString() != "")
                 {
-                    s_Code = Dtb_Table.Rows[0][0].ToString().Substring(0, 6) + "-" + Convert.ToString(int.Parse("1" + Dtb_Table.Rows[0][0].ToString().Substring(7, 3)) + i_Num).Substring(1, 3);
+                    s_Code = Dtb_Table.Rows[0][0].ToString().Substring(0, 6) + "-0" +i_Num;
+                    //Convert.ToString(int.Parse("1" + Dtb_Table.Rows[0][0].ToString().Substring(7, 3)) + i_Num).Substring(1, 3)
                 }
                 else
                 {
-                    s_Code = DateTime.Today.ToString("yyyyMM") + "-001";
+                    
+                    s_Code = DateTime.Today.ToString("yyyyMM") +s+ string.Format("{0:mm}", DateTime.Now);
                 }
             }
             else
             {
-                s_Code = DateTime.Today.ToString("yyyyMM") + "-001";
+                s_Code = DateTime.Today.ToString("yyyyMM") + s + string.Format("{0:mm}", DateTime.Now);
             }
         }
         catch { }
@@ -5909,7 +6300,7 @@ public class BasePage : System.Web.UI.Page
             }
             if (s_ID != "")
             {
-                s_Path += s_ID + ".PDF";
+                s_Path += s_ID + "x" + ".PDF";
             }
             if (File.Exists(s_Path))
             {
@@ -5948,7 +6339,34 @@ public class BasePage : System.Web.UI.Page
                 return false;
             }
             p.WaitForExit();
+            try
+            {
+                //添加水印功能
+                var WaterFilePath = path + "\\" + s_ID + ".pdf";
+                //var image = path + "Content\\images\\logo2.png";     
+                var flag = setWatermark(s_Path, WaterFilePath, "士腾科技");
+                var exportFile = "";
+                if (flag)
+                    exportFile = WaterFilePath;
+                else
+                    exportFile = s_Path;
+                FileStream fs = new FileStream(exportFile, FileMode.Open);
 
+                byte[] file = new byte[fs.Length];
+
+                fs.Read(file, 0, file.Length);
+                fs.Close();
+                // if (flag)
+                //   System.IO.File.Delete(WaterFilePath);//删除文件                            
+                System.IO.File.Delete(s_Path);//删除文件
+            }
+
+            catch (Exception ee)
+            {
+
+                throw new Exception(ee.ToString());
+
+            }
             System.Threading.Thread.Sleep(500);
             if (p.ExitCode == 0)
             {
@@ -6071,9 +6489,9 @@ public class BasePage : System.Web.UI.Page
 
 
         }
-        catch (Exception ex)
+        catch 
         {
-            // HttpContext.Current.Response.Write(ex);
+           
         }
         return false;
     }
@@ -6663,13 +7081,142 @@ public class BasePage : System.Web.UI.Page
             {
                 s_ProductsType += "13" + ",";
             }
-            
+            if (AM.YNAuthority("物料说明书可见权限"))
+            {
+                s_ProductsType += "14" + ",";
+            }
+            if (AM.YNAuthority("环保资料可见权限"))
+            {
+                s_ProductsType += "15" + ",";
+            }
+            if (AM.YNAuthority("CDF表可见权限"))
+            {
+                s_ProductsType += "16" + ",";
+            }
+            if (AM.YNAuthority("GerBer文件可见权限"))
+            {
+                s_ProductsType += "17" + ",";
+            }
 
             if (s_ProductsType != "")
             {
                 s_ProductsType = s_ProductsType.Substring(0, s_ProductsType.Length - 1);
             }
         }
+        return s_ProductsType;
+    }
+    /// <summary>
+    /// 文档中心权限
+    /// </summary>
+    /// <returns></returns>
+    public string base_GetconsoleFile()
+    {
+        AdminloginMess AM = new AdminloginMess();
+
+        string s_ProductsType = "";
+        if (AM.YNAuthority("全部控制台文件可见权限") == false)
+        {
+            if (AM.YNAuthority("规章制度权限"))
+            {
+                s_ProductsType += "'101'" + ",";
+            }
+            if (AM.YNAuthority("工作计划权限"))
+            {
+                s_ProductsType += "'102'" + ",";
+            }
+            if (AM.YNAuthority("工作总结权限"))
+            {
+                s_ProductsType += "'103'" + ",";
+            }
+            if (AM.YNAuthority("客户资料权限"))
+            {
+                s_ProductsType += "'104'" + ",";
+            }
+            if (AM.YNAuthority("产品文档权限"))
+            {
+                s_ProductsType += "'105'" + ",";
+            }
+
+            if (AM.YNAuthority("报价文档权限"))
+            {
+                s_ProductsType += "'106'" + ",";
+            }
+
+            if (AM.YNAuthority("合同文档权限"))
+            {
+                s_ProductsType += "'107'" + ",";
+            }
+            if (AM.YNAuthority("其他资料权限"))
+            {
+                s_ProductsType += "'108'" + ",";
+            }
+            if (AM.YNAuthority("OEM合同/协议权限"))
+            {
+                s_ProductsType += "'109'" + ",";
+            }
+            if (AM.YNAuthority("专利文档权限"))
+            {
+                s_ProductsType += "'110'" + ",";
+            }
+            if (AM.YNAuthority("程序文件权限"))
+            {
+                s_ProductsType += "'111'" + ",";
+            }
+            if (AM.YNAuthority("IQC文件权限"))
+            {
+                s_ProductsType += "'112'" + ",";
+            }
+            if (AM.YNAuthority("OQC文件权限"))
+            {
+                s_ProductsType += "'113'" + ",";
+            }
+            if (AM.YNAuthority("TE文件权限"))
+            {
+                s_ProductsType += "'114'" + ",";
+            }
+            if (AM.YNAuthority("会议纪要"))
+            {
+                s_ProductsType += "'115'" + ",";
+            }
+            if (s_ProductsType != "")
+            {
+                s_ProductsType = s_ProductsType.Substring(0, s_ProductsType.Length - 1);
+            }
+        }
+        return s_ProductsType;
+    }
+    /// <summary>
+    /// 文档中心权限保密级别
+    /// </summary>
+    /// <returns></returns>
+    public string base_GetFileRant()
+    {
+        AdminloginMess AM = new AdminloginMess();
+
+        string s_ProductsType = "";
+       
+            if (AM.YNAuthority("一阶文件权限"))
+            {
+                s_ProductsType += "1" + ",";
+            }
+            if (AM.YNAuthority("二阶文件权限"))
+            {
+                s_ProductsType += "2" + ",";
+            }
+            if (AM.YNAuthority("三阶文件权限"))
+            {
+                s_ProductsType += "3" + ",";
+            }
+            if (AM.YNAuthority("四阶文件权限"))
+            {
+                s_ProductsType += "4" + ",";
+            }
+           
+            if (s_ProductsType != "")
+            {
+                s_ProductsType = s_ProductsType.Substring(0, s_ProductsType.Length - 1);
+            }
+        
         return s_ProductsType;
     }
     public string base_GetProductsFileUpdateType()
@@ -6698,6 +7245,10 @@ public class BasePage : System.Web.UI.Page
             {
                 s_Return += "9,";
             }
+            if (AM.YNAuthority("测试文件修改权限"))
+            {
+                s_Return += "7,";
+            }
             if (AM.YNAuthority("测试SOP修改权限"))
             {
                 s_Return += "10,";
@@ -6720,9 +7271,23 @@ public class BasePage : System.Web.UI.Page
             {
                 s_Return += "13,";
             }
-
-            
-
+             if (AM.YNAuthority("物料说明书权限"))
+            {
+                s_Return += "14,";
+            }
+            if (AM.YNAuthority("环保材料权限"))
+            {
+                s_Return += "15,";
+            }
+            if (AM.YNAuthority("CDF表权限"))
+            {
+                s_Return += "16,";
+            }
+            if (AM.YNAuthority("GerBer文件权限"))
+            {
+                s_Return += "17,";
+            }
+           
             if (s_Return != "")
             {
                 s_Return = s_Return.Replace(",", "','");
@@ -6776,7 +7341,13 @@ public class BasePage : System.Web.UI.Page
                     s_Return = true;
                 }
             }
-
+            else if (s_ID == "7")
+            {
+                if (AM.YNAuthority("测试文件修改权限"))
+                {
+                    s_Return = true;
+                }
+            }
             else if (s_ID == "9")
             {
                 if (AM.YNAuthority("生产SOP文件修改权限"))
@@ -6813,7 +7384,35 @@ public class BasePage : System.Web.UI.Page
                     s_Return = true;
                 }
             }
-            
+            else if (s_ID == "14")
+            {
+                if (AM.YNAuthority("修改物料说明书权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "15")
+            {
+                if (AM.YNAuthority("修改环保资料权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "16")
+            {
+                if (AM.YNAuthority("修改CDF表权限"))
+                {
+                    s_Return = true;
+                }
+            }
+            else if (s_ID == "17")
+            {
+                if (AM.YNAuthority("修改GerBer文件权限"))
+                {
+                    s_Return = true;
+                }
+            }
+           
         }
         catch
         { }

@@ -81,7 +81,9 @@
     <title>查看订单</title>
 </head>
 <body style="zoom: 1.1">
+    
     <form id="form1" runat="server">
+   <%-- <asp:Button ID="Button1" runat="server" Text="导出Word"  OnClick="Button1_OnClick" />--%>
         <div id="tMater">
             <table id="table6" align="center" border="0" cellpadding="0" cellspacing="0"
                 width="95%">
@@ -110,10 +112,17 @@
                     <td width="100%">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" class="ke-zeroborder"
                             width="95%">
+                              <tr>
+                                <td width="100%">
+                                    <div align="left">
+                                        <font size="3"><strong>P-QP-016-002</strong></font>
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td width="100%">
                                     <div align="center">
-                                        <font size="5"><strong>杭州士腾科技有限公司<br />
+                                        <font size="5"><strong>杭州士腾科技有限公司<br/>
                                             采购订单</strong></font>
                                     </div>
                                 </td>
@@ -137,6 +146,7 @@
             <b>
                 <table id="table2" align="center" border="0" cellpadding="0" cellspacing="0"
                     width="95%">
+               
                     <tr>
                         <td width="100%">
                             <table id="table_1" align="center" border="0" cellpadding="0" cellspacing="0" class="table_1 ke-zeroborder"
@@ -224,7 +234,7 @@
                                 width="95%">
                                 <tr>
                                     <td nowrap align="center">序号</td>
-                                    <td align="center" nowrap>名称</td>
+                                    <td align="center" nowrap>分类</td>
                                     <td nowrap align="center">料号</td>
                                     <td nowrap align="center">规格</td>
                                     <td nowrap align="center">版本号</td>
@@ -232,6 +242,7 @@
                                     <td nowrap align="center">单位</td>
                                     <td nowrap align="center">数量</td>
                                     <td nowrap align="center" width="50px">单价</td>
+                                    <td nowrap align="center" width="50px">赔偿单价</td>
                                     <td nowrap align="center" width="50px">加工费</td>
                                     <td nowrap align="center" width="50px">总金额</td>
                                     <td nowrap align="center">备注</td>
@@ -250,7 +261,7 @@
                                     <td colspan="8">
                                         <span style="text-align: right">
                                             <asp:Label runat="server" ID="Lbl_AllCount"></asp:Label>
-                                            (含17%增值税)</span>
+                                            </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -296,31 +307,32 @@
                                 width="95%">
                                 <tr>
                                     <td>为顺利执行采购双方协商达成如下条款：<br />
-                                        （一）:供方出货时务必将本订单号码在出货单、发票备注栏及所有文件上注明。
+                                        （一）、本订单需方在ERP邮件至供方指定邮箱，供方于24小时内确认，并盖章邮件回传；如无任何确认，将视同接受本单所载之内容。若有疑问，请与需方采购人员联络；
                         <br />
 
-                                        （二）:供方应随货附上产品检验报告及产品合格证明书。
+                                        （二）、交货期为到货日期，供方应充分预留物流时间；
                         <br />
 
-                                        （三）:若因品质不符或延迟交货致使需方蒙受损失者，供方应付一切之责任。又因潜在瑕疵而日后发生货品变质或损害亦同。逾期未交货者，需方视状况渐行取消本订单。
+                                        （三）、供方应随货附上出货单、产品检验报告及产品合格证明书；
                         <br />
 
-                                        （四）:需方所承认之货品，非经需方书面之许可，供方不得转包其他厂商；各项设计蓝图，稿件若有外泄，供方须承担一切责任并赔偿需方一切损失。
+                                        （四）、供方出货时务必将本订单号码、品名、料号在出货单上注明；
                         <br />
 
-                                        （五）:若有不良品，供方在接获通知单后，3日内须派员工至本厂处理，逾期本公司不负保管之责。
+                                        （五）、若因品质不符或延迟交货致使需方蒙受损失者，供方应付一切之责任。又因潜在瑕疵而日后发生货品变质或损害亦同。逾期未交货者，需方视状况渐行取消本订单
                         <br />
 
-                                        （六）:交货日期是指收货方收到货物的日期,若供方未按双方确认的交货日期及时将货物交付至此定单指定的地点，每延误一天按订单总额的0.2%计收罚金。
+                                        （六）、需方确认采购之货品，未经需方书面许可，供方不得转包其他厂商；各项设计蓝图，稿件若有外泄，供方须承担一切责任并赔偿需方一切损失。
                         <br />
 
-                                        （七）:本定单供方于24小时内确认，并传真签回；如无任何确认，将视同接受本单所载之内容。若有疑问，请与需方采购人员联络。 
+                                        （七）、若需方发现供方物料出现品质问题，供方在接获通知单后，2日内须派员工至本厂处理，应逾期造成的需方的损失，需方将追究供方责任。
                         <br />
 
-                                        （八）:交货期为到货日期，供方应充分预留物流时间。 
-                                 <br />
-
-                                        （九）:产品符合RoHS标准。
+                                        （八）、交货日期是指收货方收到货物的日期,若供方未按双方确认的交货日期及时将货物交付至此定单指定的地点，每延误一天按订单总额的0.2%计收罚金。 
+                               <%--  <br />
+                                        （九）:交货期为到货日期，供方应充分预留物流时间。 
+                                                                         <br />
+                                        （十）:在生产过程当中，如造成产品报废，需按照协议照价赔偿。--%>
                                         
                             
                                     </td>

@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../themes/softed/style.css" type="text/css" />
     <link rel="stylesheet" href="../themes/softed/index.css" type="text/css" />
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />--%>
     <script language="javascript" type="text/javascript" src="../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../include/scriptaculous/dom-drag.js"></script>
@@ -241,7 +242,7 @@
                                         style="padding-right: 0px; padding-left: 0px; padding-top: 0px;">
                                         <tr id="headerrow_Report">
                                             <td align="left" style="height: 20px;" nowrap width="60%">
-                                                <b>&nbsp;日/周/月/年报</b>
+                                                <b>&nbsp;日/周/月报</b>
                                             </td>
                                             <td align="right" style="height: 20px;" width="5%">
                                                 <span id="refresh_Report" style="position: relative;">&nbsp;&nbsp;</span>

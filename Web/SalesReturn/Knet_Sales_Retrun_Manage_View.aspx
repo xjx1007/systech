@@ -118,6 +118,12 @@
                                                         <a href="#" class="webMnu">创建入库单</a>
                                                     </td>
                                                 </tr>
+                                                 <tr>
+                                                    <td align="left" style="padding-left: 10px;">
+                                                        <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>

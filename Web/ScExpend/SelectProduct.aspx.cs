@@ -56,7 +56,7 @@ public partial class Web_ScExpend_SelectProduct : BasePage
     protected void DataShows()
     {
         KNet.BLL.KNet_Sys_Products bll = new KNet.BLL.KNet_Sys_Products();
-        string SqlWhere = " 1=1 and ksp_del=0 ";
+        string SqlWhere = " 1=1 ";//and ksp_del=0 
 
         if (this.SeachKey.Text != "")
         {

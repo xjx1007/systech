@@ -31,7 +31,9 @@ namespace KNet.Model
         private string _KWA_Type;
         private int _KWA_DBType;
         private int _KWA_IsSave;
-        
+        private string _KWA_UploadUrl;
+        private string _KWA_UploadName;
+        private int _KWA_IsEntity;
         /// <summary>
         /// 自动ID值
         /// </summary>
@@ -39,6 +41,30 @@ namespace KNet.Model
         {
             set { _id = value; }
             get { return _id; }
+        }
+        /// <summary>
+        /// 附件路径
+        /// </summary>
+        public string KWA_UploadUrl
+        {
+            set { _KWA_UploadUrl = value; }
+            get { return _KWA_UploadUrl; }
+        }
+        /// <summary>
+        /// 是否实物
+        /// </summary>
+        public int KWA_IsEntity
+        {
+            set { _KWA_IsEntity = value; }
+            get { return _KWA_IsEntity; }
+        }
+        /// <summary>
+        /// 附件名称
+        /// </summary>
+        public string KWA_UploadName
+        {
+            set { _KWA_UploadName = value; }
+            get { return _KWA_UploadName; }
         }
         /// <summary>
         /// 调拨单号（唯一值）

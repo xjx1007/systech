@@ -9,6 +9,7 @@
     <title>采购发票登记</title>
     <script type="text/javascript" src="/Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="/DatePicker/WdatePicker.js"></script>
+     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="/../include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="/../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="/../include/scriptaculous/scriptaculous.js"></script>
@@ -74,8 +75,7 @@
         var i_num1 = parseInt($('DetailsNum').value);
         var i_num2 = parseInt($('DetailsFPNum').value);
         for (var i = 0; i < i_num1; i++) {
-            if ($("Tbx_FPCode_" + v_Num + "_" + i + "") != undefined)
-            {
+            if ($("Tbx_FPCode_" + v_Num + "_" + i + "") != undefined) {
 
                 $("Tbx_FPCode_" + v_Num + "_" + i + "").value = FPCode;
             }
@@ -97,8 +97,7 @@
         var i_num1 = parseInt($('DetailsNum').value);
         var i_num2 = parseInt($('DetailsFPNum').value);
         for (var i = 0; i < i_num1; i++) {
-            for (j = 1; j <= i_num2; j++)
-            {
+            for (j = 1; j <= i_num2; j++) {
                 if ($("Tbx_FPCode_" + j + "_" + i + "") != undefined) {
 
                     $("Tbx_FPCode_" + j + "_" + i + "").value = FPCode;
@@ -106,7 +105,7 @@
             }
         }
     }
-    
+
     function btnGetSuppValue_onclick() {
         var today, seconds;
         today = new Date();
@@ -116,7 +115,7 @@
             return;
         }
         var temp = window.showModalDialog("/Common/SelectContractList.aspx?ID=" + intSeconds + "&CustomerValue=" + document.all('Tbx_CustomerValue').value + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1150px;dialogHeight=500px");
-       
+
         if (temp != undefined) {
             var ss;
             ss = temp.split("|");
@@ -322,9 +321,18 @@
                                                 <tr>
                                                     <td class="dvtCellLabel">开票日期:
                                                     </td>
-                                                    <td class="dvtCellInfo">
+                                                    <%--<td class="dvtCellInfo">
                                                         <asp:TextBox ID="Tbx_STime" runat="server" CssClass="Wdate" onFocus="WdatePicker();ChangePayMent()"></asp:TextBox>
                                                         (<font color="red">*</font>)
+                                                    </td>--%>
+                                                    <td class="dvtCellInfo">
+                                                <%--        <asp:TextBox ID="Tbx_STime" runat="server" CssClass="Wdate" onFocus="WdatePicker()"></asp:TextBox>(<font
+                                                            color="red">*</font>)<br />
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="出库日期非空"
+                                                            ControlToValidate="Tbx_STime" Display="Dynamic"></asp:RequiredFieldValidator>--%>
+                                                          <asp:TextBox ID="Tbx_STime" runat="server" CssClass="Wdate" onFocus="WdatePicker()"></asp:TextBox>
+                                                            (<font color="red">*</font>)<br />
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="Tbx_STime" Display="Dynamic" ErrorMessage="对账日期非空"></asp:RequiredFieldValidator>
                                                     </td>
                                                     <td class="dvtCellLabel">责任人:
                                                     </td>

@@ -72,7 +72,11 @@ public partial class BOM : BasePage
                 }
                 if (model.KSP_isModiy == 1)
                 {
-                    AlertAndClose("产品未通过审批不能查看BOM！请联系研发部。");
+                    if (AM.YNAuthority("未审BOOM可见权限") == false)
+                    {
+                        AlertAndClose("产品未通过审批不能查看BOM！请联系研发部。");
+                    }
+                       
                 }
                 GetBomDetails(model);
                 //适用成品1
@@ -151,8 +155,8 @@ public partial class BOM : BasePage
 
         string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
         s_Sql += " left join PB_Basic_Code d on b.KSP_LossType=d.PBC_Code  and d.PBC_ID='1136' ";
-        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 and  b.KSP_Del=0  ";
-        this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1  ";
+        this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition,XPD_Place");
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
         StringBuilder Sb_BomDetails = new StringBuilder();
@@ -163,6 +167,9 @@ public partial class BOM : BasePage
             s_Name = base.Base_GetProdutsName(this.Tbx_ID.Text) + "(" + base.Base_GetProductsPattern(this.Tbx_ID.Text) + ")";
         }
         catch { }
+        string sql= "select KSP_Remark from KNet_Sys_Products where ProductsBarCode='" + this.Tbx_ID.Text +"'";
+        DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        string remarker = dataTable.Rows[0][0].ToString();
         string s_FileName = s_Name + "_BOM";
         this.Lbl_BomTitle.Text = s_FileName;
         Lbl_BomTitle.Text = s_FileName;
@@ -201,10 +208,17 @@ public partial class BOM : BasePage
         Sb_BomDetails.Append("<table id=\"ProductsBomTable\" width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" class=\"ListDetails\"");
         Sb_BomDetails.Append("cellspacing=\"0\">");
         Sb_BomDetails.Append("<tr>");
-        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\" colspan=\"9\" height=\"40px\"><h2>");
+        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\" colspan=\"11\" height=\"40px\"><h2>");
         Sb_BomDetails.Append(Lbl_BomTitle.Text);
         Sb_BomDetails.Append("</h2></td>");
         Sb_BomDetails.Append("</tr>");
+
+        Sb_BomDetails.Append("<tr>");
+        Sb_BomDetails.Append("<td  class=\"ListHead\" colspan=\"11\" height=\"40px\">");
+        Sb_BomDetails.Append("备注说明:"+ remarker);
+        Sb_BomDetails.Append("</td>");
+        Sb_BomDetails.Append("</tr>");
+
         Sb_BomDetails.Append("<tr id=\"tr3\">");
         Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">序号");
         Sb_BomDetails.Append("</td>");
@@ -213,6 +227,10 @@ public partial class BOM : BasePage
         Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">产品名称");
         Sb_BomDetails.Append("</td>");
         Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">版本号");
+        Sb_BomDetails.Append("</td>");
+        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">替换料");
+        Sb_BomDetails.Append("</td>");
+        Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">状态");
         Sb_BomDetails.Append("</td>");
         Sb_BomDetails.Append("<td align=\"center\" class=\"ListHead\">料号");
         Sb_BomDetails.Append("</td>");
@@ -242,7 +260,23 @@ public partial class BOM : BasePage
 
                 //Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "</td>");
                 string s_ProductsCode = "";
-
+                if (Dtb_DemoProducts.Rows[i]["ReplaceNum"].ToString() == "0")
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\" style=\"max-width:100px; word-break: break-all;word-wrap:break-word;\">主料</td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\" style=\"max-width:100px;color:red;word-break: break-all;word-wrap:break-word;\">替料" + Dtb_DemoProducts.Rows[i]["ReplaceNum"].ToString() + "</td>");
+                }
+                string s_Del = Dtb_DemoProducts.Rows[i]["KSP_Del"].ToString();
+                if (s_Del == "1")
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=red>已停用</font></td>");
+                }
+                else
+                {
+                    Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><font color=green>启用</font></td>");
+                }
                 Sb_BomDetails.Append("<td class=\"ListHeadDetails\">&nbsp;" + Dtb_DemoProducts.Rows[i]["KSP_Code"].ToString() + "</td>");
                 Sb_BomDetails.Append("<td class=\"ListHeadDetails\"><input type=\"hidden\" input Name=\"DemoNumber\" value='" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "'>" + Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString() + "</td>");
                 // Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition_Link(Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString()) + "</td>");

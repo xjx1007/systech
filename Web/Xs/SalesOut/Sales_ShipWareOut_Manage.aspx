@@ -321,7 +321,7 @@
                                         </div>
                                         <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
                                             IsShowEmptyTemplate="true" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关的出库单</B><br/><br/></font></div>"
-                                            AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%" OnRowDataBound="GridView1_DataRowBinding">
+                                            AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%"  OnRowDataBound="GridView1_DataRowBinding">
                                             <Columns>
                                                 <asp:TemplateField>
                                                     <HeaderTemplate>

@@ -135,7 +135,7 @@ public partial class List_CkList3 : BasePage
             {
                 s_Sql += " and (ProductsBarCode='" + s_ProductsBarCode + "' )";
             }
-            s_Sql += "Order by AllocateDateTime,AllocateNo ";
+            s_Sql += " Order by AllocateDateTime desc";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             DataTable Dtb_Table = this.Dtb_Result;

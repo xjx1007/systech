@@ -137,7 +137,7 @@ public partial class Web_Sales_Sales_ShipWareOut_Add : BasePage
             KNet.BLL.KNet_WareHouse_DirectOutList bll=new KNet.BLL.KNet_WareHouse_DirectOutList();
             KNet.Model.KNet_WareHouse_DirectOutList model = bll.GetModelB(this.Tbx_ID.Text);
 
-            if (AM.KNet_StaffName != "项洲")
+            if (AM.KNet_StaffName != "薛建新")
             {
                 if (model.DirectOutCheckYN != 0)
                 {

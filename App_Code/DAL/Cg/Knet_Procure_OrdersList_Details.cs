@@ -304,7 +304,22 @@ namespace KNet.DAL
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
-
+        /// <summary>
+        /// 如果是样品申请
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet GetList2(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select a.*,b.OrderDateTime,b.KPO_Sampling,b.OrderPreToDate,b.OrderType,b.SuppNo,b.KPO_RkState,b.OrderCheckStaffNo,b.SystemDateTimes,b.OrderStaffNo,c.WrkNumber as thisNowAmount,c.WrkNumber*OrderUnitPrice as thistotalNet,c.RkNumber,c.WrkNumber,KPOD_CPBZNumber,KPOD_BZNumber FROM Knet_Procure_OrdersList_Details a join KNet_Procure_OrdersList b on a.OrderNo = b.OrderNo left join v_OrderRkDetails c on  c.KPO_ID=a.ID where a.OrderNo = '" + strWhere + "' ");
+            //strSql.Append(" FROM Knet_Procure_OrdersList_Details a join KNet_Procure_OrdersList b on a.OrderNo=b.OrderNo left join v_OrderRkDetails c on c.KPO_ID=a.ID left join Xs_Products_Prodocts_Demo e on e.XPD_ProductsBarCode=a.ProductsBarCode and e.XPD_FaterBarCode=a.KPO_FaterBarCode join KNET_Sys_Products f on f.ProductsBarCode=a.ProductsBarCode ");
+            //if (strWhere.Trim() != "")
+            //{
+            //    strSql.Append(" where " + strWhere);
+            //}
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
         /// <summary>
         /// 获得数据列表

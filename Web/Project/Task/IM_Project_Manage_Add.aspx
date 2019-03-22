@@ -263,7 +263,7 @@
                                                 var s = "no";
                                                 var l = Math.ceil((window.screen.width - 530) / 3);
                                                 var t = Math.ceil((window.screen.height - 800) / 3); //确定网页的坐标 
-                                                window.open("Details/IM_Project_Manage_Details_Add.aspx?FID=" + v_ID + "", "_blank", "left=" + l + ",top=" + t + ",height=530,width=800,toolbar=no,status=no,resizable=yes,location=no,scrollbars=" + s);
+                                                window.open("IM_Project_Manage_Details_Add.aspx?FID=" + v_ID + "", "_blank", "left=" + l + ",top=" + t + ",height=530,width=800,toolbar=no,status=no,resizable=yes,location=no,scrollbars=" + s);
                                             }
                                         </script>
                                         <script type="text/javascript">

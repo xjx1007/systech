@@ -94,7 +94,6 @@ public partial class Knet_Common_SelectProducts :BasePage
         {
             SqlWhere = SqlWhere + " and ( ProductsName like '%" + this.SeachKey.Text + "%'  or ProductsPattern  like '%" + this.SeachKey.Text + "%' )";
         }
-
         if (this.TreeView1.SelectedNode.Value != "1")
         {
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
@@ -102,7 +101,6 @@ public partial class Knet_Common_SelectProducts :BasePage
             s_SonID = s_SonID.Replace(",", "','");
             SqlWhere += " and ProductsType in ('" + s_SonID + "') ";
         }
-
         DataSet ds = bll.GetList(SqlWhere);
         GridView1.DataSource = ds;
         GridView1.DataKeyNames = new string[] { "ID" };

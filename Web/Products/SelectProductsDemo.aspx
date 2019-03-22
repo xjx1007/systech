@@ -115,19 +115,34 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
-                                <asp:BoundField DataField="ProductsName" HeaderText="产品名称" SortExpression="ProductsName">
-                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                </asp:BoundField>
+                                <asp:TemplateField HeaderText="产品名称" SortExpression="ProductsName" ItemStyle-HorizontalAlign="Left"
+                                    HeaderStyle-HorizontalAlign="center">
+                                    <ItemTemplate>
+                                        <a href="KnetProductsSetting_Details.aspx?BarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode") %>" target="_blank">
+                                            <%# DataBinder.Eval(Container.DataItem, "ProductsName").ToString()%></a>
+                                        <asp:TextBox runat="server" ID="Tbx_ProductsBarCode" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>'></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="料号" SortExpression="ProductsUnits" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <%# DataBinder.Eval(Container.DataItem, "KSP_COde").ToString()%>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="产品型号" SortExpression="ProductsUnits" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                    <ItemTemplate>
+                                        <%# DataBinder.Eval(Container.DataItem, "ProductsPattern").ToString()%>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:BoundField DataField="ProductsEdition" HeaderText="版本号" SortExpression="ProductsEdition">
                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                 </asp:BoundField>
-                                <asp:TemplateField HeaderText="大类名称" SortExpression="ProductsType" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                               <%-- <asp:TemplateField HeaderText="大类名称" SortExpression="ProductsType" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <%# base.Base_GetProductsType(DataBinder.Eval(Container.DataItem, "ProductsType").ToString())%>
                                     </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
 
                                 <asp:TemplateField HeaderText="单位" SortExpression="ProductsUnits" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
@@ -139,6 +154,8 @@
                                         <asp:TextBox ID="Tbx_Number" Width="60px" runat="server" CssClass="Boxx" value="1"></asp:TextBox>
                                         <asp:TextBox ID="ProductsBarCode" Width="0px" runat="server" CssClass="Custom_Hidden" value='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>'></asp:TextBox>
                                         <asp:TextBox ID="ProductsEdition" Width="0px" runat="server" CssClass="Custom_Hidden" value='<%# DataBinder.Eval(Container.DataItem, "ProductsEdition").ToString() %>'></asp:TextBox>
+                                        <asp:TextBox ID="Ksp_Code" Width="0px" runat="server" CssClass="Custom_Hidden" value=' <%# DataBinder.Eval(Container.DataItem, "KSP_COde").ToString()%>'></asp:TextBox>
+                                         <asp:TextBox ID="ProductsName" Width="0px" runat="server" CssClass="Custom_Hidden" value='<%# DataBinder.Eval(Container.DataItem, "ProductsName").ToString() %>'></asp:TextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -154,6 +171,9 @@
                             <tr>
                                 <td width="25%" style="height: 29px">
                                     <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                      <asp:TextBox ID="Tbx_Place" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                     <asp:TextBox ID="code" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                    <asp:TextBox ID="num" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                     <asp:Button ID="Button2" runat="server" CssClass="crmbutton small save" Text="确定选择" OnClick="Button1_Click" Style="width: 70px; height: 33px;" />
                                     关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="Boxx" Width="300px"></asp:TextBox>&nbsp;<asp:Button ID="Button1" runat="server" Text="产品筛选" CssClass="crmButton small create" OnClick="Button1_Click1" Style="width: 70px; height: 33px;" /></td>
                             </tr>

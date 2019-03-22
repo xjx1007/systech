@@ -29,19 +29,32 @@ public partial class Report_Today_View : BasePage
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
             }
-
-            DateTime D_Time = DateTime.Now;
-            DateTime FirstDayTime = new DateTime(D_Time.Year, D_Time.Month, 1);
+            string StartTime = Request.QueryString["StartDate"].ToString();
+            string EndTime = Request.QueryString["EndDate"].ToString();
+            string Preson = Request.QueryString["Preson"].ToString();
+            //DateTime D_Time = DateTime.Now;
+            DateTime FirstDayTime = new DateTime(DateTime.Parse(StartTime).Year, DateTime.Parse(StartTime).Month, 1);
             DateTime EndDayTime = FirstDayTime.AddMonths(1).AddDays(-1);
             TimeSpan TS = EndDayTime - FirstDayTime;
             int i_Days = TS.Days;
-            int weekDay = (short)D_Time.DayOfWeek;
+            int weekDay = (short)DateTime.Parse(StartTime).DayOfWeek;
             string s_Head = "";
             KNet.BLL.KNet_Resource_Staff Bll_Staff = new KNet.BLL.KNet_Resource_Staff();
-            string s_SonIDs = Bll_Staff.GetSonIDs(AM.KNet_StaffNo);
-
-            s_SonIDs = s_SonIDs.Replace(",", "','");
-            string SqlWhere = " 1=1 and StaffNo in ('" + s_SonIDs + "') ";
+            string SqlWhere = "";
+            if (Preson != "")
+            {
+                SqlWhere = " 1=1 and StaffNo in ('" + Preson + "') ";
+            }
+            if (Preson == "" && AM.KNet_StaffNo == "129785817148286993")
+            {
+                SqlWhere = " 1=1";
+            }
+            if (Preson == "" && AM.KNet_StaffNo != "129785817148286993")
+            {
+                string s_SonIDs = Bll_Staff.GetSonIDs(AM.KNet_StaffNo);
+                s_SonIDs = s_SonIDs.Replace(",", "','");
+                SqlWhere = " 1=1 and StaffNo in ('" + s_SonIDs + "') ";
+            }
             DataSet Dts_Table = Bll_Staff.GetList(SqlWhere);
             if (Dts_Table.Tables[0].Rows.Count > 0)
             {
@@ -49,7 +62,7 @@ public partial class Report_Today_View : BasePage
                 {
                     string s_StaffNo= Dts_Table.Tables[0].Rows[i]["StaffNo"].ToString();
                     s_Details += " <tr>";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right noWrap>&nbsp;" + Dts_Table.Tables[0].Rows[i]["StaffName"].ToString() + "</td>\n";//money
+                    s_Details += "<td  class='thstyleLeftDetails' align=center >&nbsp;" + Dts_Table.Tables[0].Rows[i]["StaffName"].ToString() + "</td>\n";//money
                     for (int j = 1; j <= i_Days + 1; j++)
                     {
                         DateTime d_NewTime = FirstDayTime.AddDays(j - 1);
@@ -65,16 +78,16 @@ public partial class Report_Today_View : BasePage
             //表头
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n";
             s_Head += "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<thead class=\"fixedHeader\" > \n";
-            s_Head += "<tr>\n<th colspan=\"" + i_Days + 1 + "\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>日报  " + D_Time.Year + "-" + D_Time.Month + " 月度状态</th></tr>\n";
+            s_Head += "<tr>\n<th colspan=\"" + i_Days + 1 + "\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>日报  " + DateTime.Parse(StartTime).Year + "-" + DateTime.Parse(StartTime).Month + " 月度状态</th></tr>\n";
             s_Head += "<tr>\n<th colspan=\"" + i_Days + 1 + "\" class=\"MaterTitle\" style='height:14.25pt'>状态说明：空白：未交日报;+N:N天后上交报告;√:当日交报告</th></tr>\n";
-            s_Head += "<tr><th class=\"thstyle\" rowspan=2>姓名</th>\n";
+            s_Head += "<tr><th class=\"thstyle\">姓名</th>\n";
             for (int i = 1; i <= i_Days + 1; i++)
             {
                 s_Head += "<th class=\"thstyle\" align=center>" + i.ToString() + "</th>";
 
             }
             s_Head += "</tr>";
-            s_Head += "<tr>";
+            s_Head += "<tr><th class=\"thstyle\">星期</th>\n";//rowspan=2
             for (int i = 1; i <= i_Days + 1; i++)
             {
                 DateTime d_NewTime = FirstDayTime.AddDays(i - 1);
@@ -120,5 +133,20 @@ public partial class Report_Today_View : BasePage
         catch
         { }
         return s_Return;
+    }
+
+    protected void Button2_OnServerClick(object sender, EventArgs e)
+    {
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("日报-月度状态.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
     }
 }

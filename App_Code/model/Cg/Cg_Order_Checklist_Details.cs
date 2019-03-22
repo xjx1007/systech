@@ -32,6 +32,11 @@ namespace KNet.Model
         private decimal? _COD_NoTaxMoney;
         private int? _COD_NoTaxLag;
         private decimal? _COD_RealMoney;
+        private int? _COD_BFNumber;//报废数量
+        private decimal? _COD_BFPrice;//报废单价
+        private int? _COD_RKNumber;//入成品库的数量
+        private decimal? _COD_EWMoney;//额外扣款
+        private decimal? _COD_EWFMoney;//额外付款
         /// <summary>
         /// 
         /// </summary>
@@ -39,6 +44,46 @@ namespace KNet.Model
         {
             set { _cod_code = value; }
             get { return _cod_code; }
+        }
+        /// <summary>
+        /// 报废数量
+        /// </summary>
+        public int? COD_BFNumber
+        {
+            set { _COD_BFNumber = value; }
+            get { return _COD_BFNumber; }
+        }
+        /// <summary>
+        /// 额外扣除金额
+        /// </summary>
+        public decimal? COD_EWMoney
+        {
+            set { _COD_EWMoney = value; }
+            get { return _COD_EWMoney; }
+        }
+        /// <summary>
+        /// 额外付款金额
+        /// </summary>
+        public decimal? COD_EWFMoney
+        {
+            set { _COD_EWFMoney = value; }
+            get { return _COD_EWFMoney; }
+        }
+        /// <summary>
+        /// 入成品库的数量
+        /// </summary>
+        public int? COD_RKNumber
+        {
+            set { _COD_RKNumber = value; }
+            get { return _COD_RKNumber; }
+        }
+        /// <summary>
+        /// 报废单价
+        /// </summary>
+        public decimal? COD_BFPrice
+        {
+            set { _COD_BFPrice = value; }
+            get { return _COD_BFPrice; }
         }
         /// <summary>
         /// 

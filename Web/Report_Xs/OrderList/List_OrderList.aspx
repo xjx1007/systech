@@ -198,7 +198,8 @@ function OutToFileMoreSheet() {
     <form id="form1" runat="server">
     <div >
     <input type="button" value="打印预览" onclick="javascript:prn1_preview()" id="Button1" />
-    <input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
+    <%--<input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />--%>
+        <input type="button" value="导出Excel" runat="server" id="Button2"  OnServerClick="Button2_OnServerClick"/>
     <table  width=100% cellspacing=0 cellpadding=0 ID=tMater class=pTable>
     	<tr> 
     		<td align="center"></td>

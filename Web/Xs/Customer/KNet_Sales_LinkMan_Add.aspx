@@ -452,7 +452,7 @@
                                     <tr>
                                         <td width="15%" height="25" align="left" class="dvtCellInfo" colspan="4"><font
                                                     color="gray">
-                                        电话、EMail、QQ等多个以"/"区分连续添加。例如：项洲的手机 18958017483/13456709576<br />
+                                        电话、EMail、QQ等多个以"/"区分连续添加。例如：薛建新的手机 18694583780<br />
                                         </font>
                                                  </td>
                                     </tr>

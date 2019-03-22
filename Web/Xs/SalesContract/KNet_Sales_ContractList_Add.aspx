@@ -7,22 +7,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="/Web/js/ajax_func.js"></script>
-    <script language="JavaScript" src="/Web/Js/Global.js" type="text/javascript"></script>
-    <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>
-    <script language="javascript" type="text/javascript" src="/include/scriptaculous/prototype.js"></script>
+   <script language="JavaScript" src="/Web/Js/Global.js" type="text/javascript"></script>
+  <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
+   <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>
+   <script language="javascript" type="text/javascript" src="/include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/scriptaculous.js"></script>
-    <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
+   <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
+
+    <%--<script src="../../Js/ajax_func.js"></script>
+    <script src="../../Js/Global.js"></script>
+    <script src="../../DatePicker/WdatePicker.js"></script>
+    <script src="../../../include/js/general.js"></script>
+    <script src="../../../include/scriptaculous/prototype.js"></script>
+    <script src="../../../include/scriptaculous/scriptaculous.js"></script>
+    <script src="../../../include/scriptaculous/dom-drag.js"></script>--%>
     <title>新增订单评审</title>
     <base target="_self" />
-    <script language="JAVASCRIPT">
+       <script language="JAVASCRIPT">
         function btnGetReturnValue_onclick() {
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
             var tempd = window.showModalDialog("SelectSalesClientList.aspx?sID=" + intSeconds + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
+           
             if (tempd != undefined) {
                 var ss, fh;
+                debugger;
                 ss = tempd.split("|");
                 document.all('CustomerValue').value = ss[0];
                 document.all('CustomerValueName').value = ss[1];
@@ -244,6 +254,7 @@
     </script>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"
         defer="defer"></script>
+
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0" onload="detail_info_click('Details1');">
     <form id="form1" runat="server">

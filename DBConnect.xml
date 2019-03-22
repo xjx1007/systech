@@ -2,5 +2,5 @@
   <ServerName>.</ServerName>
   <DataBaseName>KNet_System</DataBaseName>
   <LogId>sa</LogId>
-  <LogPass>Bremax@123</LogPass>
+  <LogPass>123</LogPass>
 </NewDataSet>

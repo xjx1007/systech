@@ -37,6 +37,9 @@ namespace KNet.BLL
                     KNet.Model.Cg_Order_Checklist_Details Model_Details = (KNet.Model.Cg_Order_Checklist_Details)arr_Details[i];
                     KNet.BLL.Cg_Order_Checklist_Details BLL_Details = new Cg_Order_Checklist_Details();
                     BLL_Details.Add(Model_Details);
+                    //string sql = "update KNet_WareHouse_AllocateList set KWA_DZState=1 where AllocateNo='" +
+                    //             Model_Details.COD_DirectOutID + "'";
+                    //DbHelperSQL.ExecuteSql(sql);
                     /*
                     if (model.COC_Type == "1")
                     {

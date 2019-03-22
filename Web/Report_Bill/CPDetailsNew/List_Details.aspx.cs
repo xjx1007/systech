@@ -94,7 +94,7 @@ public partial class Web_List_Details : BasePage
         }
         if (s_ProductsEdition != "")
         {
-            s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%') ";
+            s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%' or ProductsName like '%" + s_ProductsEdition + "%' or KSP_COde like '%" + s_ProductsEdition + "%') ";
         }
 
         s_Sql += " Group by b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType ";
@@ -177,6 +177,7 @@ public partial class Web_List_Details : BasePage
         Sb_Details.Append("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\" >\n");
         // Sb_Details.Append("<tdead class=\"fixedHeader\"> \n");
         Sb_Details.Append("<tr class=\"tr_Head\"><td class=\"thstyle\"  align=center  rowspan=\"2\" colspan=\"1\">序号</td>\n");
+        Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">类别</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">品名</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">规格</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">料号</td>\n");
@@ -257,6 +258,7 @@ public partial class Web_List_Details : BasePage
                 }
                 Sb_Details.Append(" <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n");
                 Sb_Details.Append("<td class='thstyleLeftDetails'align=center noWrap>" + (i + 1).ToString() + "</td>\n");
+                Sb_Details.Append("<td class='thstyleLeftDetails'align=center noWrap>" + productclass(Dtb_Table.Rows[i]["KSP_Code"].ToString()) + "</td>\n");
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap><a href='/web/WareHouseStore/KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "' target=\"_blank\">" + Dtb_Table.Rows[i]["ProductsName"].ToString() + "</td>\n");
                 string s_ProductsEdition1 = Dtb_Table.Rows[i]["ProductsEdition"].ToString();
                 if (Dtb_Table.Rows[i]["ProductsType"].ToString() == "M130703044953260")
@@ -596,7 +598,6 @@ public partial class Web_List_Details : BasePage
                     {
                         string s_Sql = "update KNet_Sys_Products set KSP_ProdutsType=" + s_radio0 + ",KSP_CwReamrks='" + s_Remarks + "' where ProductsBarCode='" + s_ProductsBarCode + "' ";
                         DbHelperSQL.ExecuteSql(s_Sql);
-
                         AM.Add_Logs("产品状态修改:" + s_ProductsBarCode);
                     }
                     else
@@ -627,5 +628,19 @@ public partial class Web_List_Details : BasePage
         }
         this.Show();
 
+    }
+    /// <summary>
+    /// 获取产品类别
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    public string productclass(string code)
+    {
+        string s_return = "";
+        this.BeginQuery("select PBP_Name from PB_Basic_ProductsClass  where PBP_ID in (select ProductsType from KNet_Sys_Products where KSP_COde='" + code + "' )");
+        this.QueryForDataTable();
+        DataTable Dtb_Re = Dtb_Result;
+        s_return = Dtb_Re.Rows[0][0].ToString();
+        return s_return;
     }
 }

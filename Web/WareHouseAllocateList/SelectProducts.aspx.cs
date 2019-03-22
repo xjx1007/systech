@@ -69,7 +69,7 @@ public partial class Knet_Common_SelectProducts : BasePage
         
         if (this.SeachKey.Text != "")
         {
-            s_Sql += " and (b.ProductsEdition like '%" + this.SeachKey.Text + "%' or  b.ProductsName like '%" + this.SeachKey.Text + "%' or  b.KSP_Code like '%" + this.SeachKey.Text + "%' )";
+            s_Sql += " and (b.ProductsEdition like '%" + this.SeachKey.Text + "%' or  b.ProductsName like '%" + this.SeachKey.Text + "%' or  b.KSP_Code like '%" + this.SeachKey.Text + "%' or b.ProductsPattern like '%"+ this.SeachKey.Text + "%' )";
         }
         this.BeginQuery(s_Sql);
         this.QueryForDataSet();

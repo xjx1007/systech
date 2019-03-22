@@ -21,6 +21,7 @@
         }
 
         function set_return_Customer(Customer_id) {
+            debugger;
             if (window.opener != undefined) {
                 window.opener.returnValue = Customer_id;
             }

@@ -20,6 +20,7 @@ public partial class Web_List_Details : BasePage
     public string s_Time = "";
     public string s_HouseName = "";
     public string s_Details = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -27,13 +28,15 @@ public partial class Web_List_Details : BasePage
             Show();
         }
     }
+
     private void Show()
     {
 
         AdminloginMess AM = new AdminloginMess();
         if (AM.CheckLogin() == false)
         {
-            Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
+            Response.Write(
+                "<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
             Response.End();
         }
         string s_StartDate = Request.QueryString["StartDate"] == null ? "" : Request.QueryString["StartDate"].ToString();
@@ -42,47 +45,80 @@ public partial class Web_List_Details : BasePage
         string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
 
         string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
-        string s_ProductsEdition = Request.QueryString["ProductsEdtion"] == null ? "" : Request.QueryString["ProductsEdtion"].ToString();
+        string s_ProductsEdition = Request.QueryString["ProductsEdtion"] == null
+            ? ""
+            : Request.QueryString["ProductsEdtion"].ToString();
 
         string s_Ly = Request.QueryString["Ly"] == null ? "" : Request.QueryString["Ly"].ToString();
 
-        string s_ProductsType = Request.QueryString["ProductsType"] == null ? "" : Request.QueryString["ProductsType"].ToString();
-        string s_Sql = "select b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType,Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInAmount else 0 end)  as QCAmount  ";
+        string s_ProductsType = Request.QueryString["ProductsType"] == null
+            ? ""
+            : Request.QueryString["ProductsType"].ToString();
+        string s_Sql =
+            "select b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName, a.HouseNo,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType,Sum(case when DirectinDateTime<'" +
+            s_StartDate + "' then DirectInAmount else 0 end)  as QCAmount  ";
 
         if (Button3.Text == "隐藏仓库")
         {
             s_Sql += ",c.HouseName";
         }
         s_Sql += ",Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInTotalNet else 0 end)  as QCMoney ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='102'  then DirectInAmount else 0 end)  as CgAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='102'  then DirectInTotalNet else 0 end)  as CgMoney ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='106'  then DirectInAmount else 0 end)  as DbinAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='106'  then DirectInTotalNet else 0 end)  as DbinMoney ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='105'  then -DirectInAmount else 0 end)  as DboutAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type='105'  then -DirectInTotalNet else 0 end)  as DboutMoney ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108') and TypeName<>'材料调整'  then -DirectInAmount else 0 end)  as XhAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108') and TypeName<>'材料调整'  then -DirectInTotalNet else 0 end)  as XhMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type='102'  then DirectInAmount else 0 end)  as CgAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type='102'  then DirectInTotalNet else 0 end)  as CgMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type='106'  then DirectInAmount else 0 end)  as DbinAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type='106'  then DirectInTotalNet else 0 end)  as DbinMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type='105'  then -DirectInAmount else 0 end)  as DboutAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type='105'  then -DirectInTotalNet else 0 end)  as DboutMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('108') and TypeName<>'材料调整'  then -DirectInAmount else 0 end)  as XhAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('108') and TypeName<>'材料调整'  then -DirectInTotalNet else 0 end)  as XhMoney ";
 
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and (a.ProductsType<>'M130704050932527' ) then -DirectInAmount else 0 end)+Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and ((a.ProductsType='M130704050932527' and  typeName='部门领用') ) then -DirectInAmount else 0 end)   as YFDbrAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and (a.ProductsType<>'M130704050932527' ) then -DirectInTotalNet else 0 end) +Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and ((a.ProductsType='M130704050932527' and  typeName='部门领用')  ) then -DirectInTotalNet else 0 end)  as YFDbrMoney ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and (a.ProductsType<>'M130704050932527' ) then -DirectInAmount else 0 end)+Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and ((a.ProductsType='M130704050932527' and  typeName='部门领用') ) then -DirectInAmount else 0 end)   as DbrAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and (a.ProductsType<>'M130704050932527' ) then -DirectInTotalNet else 0 end) +Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and ((a.ProductsType='M130704050932527' and  typeName='部门领用')  ) then -DirectInTotalNet else 0 end)  as DbrMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')   and (a.ProductsType<>'M130704050932527' ) then -DirectInAmount else 0 end)+Sum(case when DirectinDateTime>='" +
+                 s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')   and ((a.ProductsType='M130704050932527' and  typeName='部门领用') ) then -DirectInAmount else 0 end)   as YFDbrAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  and (a.ProductsType<>'M130704050932527' ) then -DirectInTotalNet else 0 end) +Sum(case when DirectinDateTime>='" +
+                 s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  and ((a.ProductsType='M130704050932527' and  typeName='部门领用')  ) then -DirectInTotalNet else 0 end)  as YFDbrMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')   and (a.ProductsType<>'M130704050932527' ) then -DirectInAmount else 0 end)+Sum(case when DirectinDateTime>='" +
+                 s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')   and ((a.ProductsType='M130704050932527' and  typeName='部门领用') ) then -DirectInAmount else 0 end)   as DbrAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  and (a.ProductsType<>'M130704050932527' ) then -DirectInTotalNet else 0 end) +Sum(case when DirectinDateTime>='" +
+                 s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  and ((a.ProductsType='M130704050932527' and  typeName='部门领用')  ) then -DirectInTotalNet else 0 end)  as DbrMoney ";
 
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and a.ProductsType='M130704050932527' and typeName<>'销售出库' and typeName<>'部门领用' then -DirectInAmount else 0 end)  as DbrDCLlAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and a.ProductsType='M130704050932527' and typeName<>'销售出库' and typeName<>'部门领用' then -DirectInTotalNet else 0 end)  as DbrDCLlMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')   and a.ProductsType='M130704050932527' and typeName<>'销售出库' and typeName<>'部门领用' then -DirectInAmount else 0 end)  as DbrDCLlAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  and a.ProductsType='M130704050932527' and typeName<>'销售出库' and typeName<>'部门领用' then -DirectInTotalNet else 0 end)  as DbrDCLlMoney ";
 
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')   and a.ProductsType='M130704050932527' and typeName='销售出库' then -DirectInAmount else 0 end)  as DbrDCXsAmount ";
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  and a.ProductsType='M130704050932527' and typeName='销售出库' then -DirectInTotalNet else 0 end)  as DbrDCXsMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')   and a.ProductsType='M130704050932527' and typeName='销售出库' then -DirectInAmount else 0 end)  as DbrDCXsAmount ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  and a.ProductsType='M130704050932527' and typeName='销售出库' then -DirectInTotalNet else 0 end)  as DbrDCXsMoney ";
 
         s_Sql += ",Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)  as QMAmount ";
-        s_Sql += ",Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)  as QMMoney ";
+        s_Sql += ",Sum(case when  DirectinDateTime<='" + s_EndDate +
+                 "'   then DirectInTotalNet else 0 end)  as QMMoney ";
 
-        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108') and TypeName='材料调整'  then -DirectInTotalNet else 0 end)  as TZMoney ";
+        s_Sql += ",Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('108') and TypeName='材料调整'  then -DirectInTotalNet else 0 end)  as TZMoney ";
         s_Sql += " from V_Store a join KNet_Sys_Products b on a.ProductsBarCode=b.ProductsBarCode ";
         s_Sql += " join KNet_Sys_WareHouse c on a.HouseNo=c.HouseNo ";
 
         s_Sql += " where 1=1 ";
-        Lbl_Link.Text = "<a target=\"_blank\" href=\"List_Details1.aspx?EndDate=" + s_EndDate + "&StartDate=" + s_StartDate + "\" >期末金额调整</a>";
+        Lbl_Link.Text = "<a target=\"_blank\" href=\"List_Details1.aspx?EndDate=" + s_EndDate + "&StartDate=" +
+                        s_StartDate + "\" >期末金额调整</a>";
 
         if (s_HouseNo != "")
         {
@@ -103,10 +139,13 @@ public partial class Web_List_Details : BasePage
         }
         if (s_ProductsEdition != "")
         {
-            s_Sql += " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" + s_ProductsEdition + "%') ";
+            s_Sql +=
+                " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" +
+                s_ProductsEdition + "%') ";
         }
 
-        s_Sql += " Group by b.KSP_CwReamrks,b.ksp_Code,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType ";
+        s_Sql +=
+            " Group by b.KSP_CwReamrks,b.ksp_Code,a.HouseNo,a.ProductsBarCode,b.ProductsName,b.ProductsEdition,b.ProductsUnits,b.ProductsType,b.KSP_ProdutsType ";
 
         if (Button3.Text == "隐藏仓库")
         {
@@ -114,11 +153,16 @@ public partial class Web_List_Details : BasePage
         }
 
         s_Sql += " HAVING (Sum(case when DirectinDateTime<'" + s_StartDate + "' then DirectInTotalNet else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('102')  then DirectInAmount else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('105')  then DirectInAmount else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('106')  then DirectInAmount else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('108')  then DirectInAmount else 0 end)<>0 ";
-        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate + "' and Type in ('104')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('102')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('105')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('106')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('108')  then DirectInAmount else 0 end)<>0 ";
+        s_Sql += " or Sum(case when DirectinDateTime>='" + s_StartDate + "' and  DirectinDateTime<='" + s_EndDate +
+                 "' and Type in ('104')  then DirectInAmount else 0 end)<>0 ";
         s_Sql += " or Sum(case when DirectinDateTime<='" + s_EndDate + "' then DirectInAmount else 0 end)<>0 ";
 
         s_Sql += " or Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInTotalNet else 0 end)<>0 ) ";
@@ -126,15 +170,18 @@ public partial class Web_List_Details : BasePage
         {
             if (s_Number == "0")
             {
-                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)>0 ";
+                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate +
+                         "'   then DirectInAmount else 0 end)>0 ";
             }
             else if (s_Number == "1")
             {
-                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)=0 ";
+                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate +
+                         "'   then DirectInAmount else 0 end)=0 ";
             }
             else if (s_Number == "2")
             {
-                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate + "'   then DirectInAmount else 0 end)<0 ";
+                s_Sql += " and  Sum(case when  DirectinDateTime<='" + s_EndDate +
+                         "'   then DirectInAmount else 0 end)<0 ";
             }
         }
         else
@@ -175,9 +222,12 @@ public partial class Web_List_Details : BasePage
          * */
         Sb_Details.Append("<div class=\"tableContainer\" id=\"tableContainer\" >\n");
 
-        Sb_Details.Append("<table id=\"ListDetail\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\" >\n");
+        Sb_Details.Append(
+            "<table id=\"ListDetail\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\" >\n");
         // Sb_Details.Append("<tdead class=\"fixedHeader\"> \n");
-        Sb_Details.Append("<tr class=\"tr_Head\"><td class=\"thstyle\"  align=center  rowspan=\"2\" colspan=\"1\">序号</td>\n");
+        Sb_Details.Append(
+            "<tr class=\"tr_Head\"><td class=\"thstyle\"  align=center  rowspan=\"2\" colspan=\"1\">序号</td>\n");
+        Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">类别</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">品名</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">规格</td>\n");
         Sb_Details.Append("<td class=\"thstyle\"  align=center rowspan=\"2\" colspan=\"1\">料号</td>\n");
@@ -194,7 +244,8 @@ public partial class Web_List_Details : BasePage
         Sb_Details.Append("<td class=\"thstyle\" align=center colspan=\"3\">调拨出库</td>\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center colspan=\"3\">数量为零金额不为零</td>\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center colspan=\"3\">期末</td>\n");
-        Sb_Details.Append("<td class=\"thstyle\" align=center colspan=\"3\">产品状态</td>\n");
+        Sb_Details.Append("<td class=\"thstyle\" align=center colspan=\"5\">产品状态</td>\n");
+
         Sb_Details.Append("<td class=\"thstyle\" align=center rowspan=\"2\">备注</td>\n</tr>\n");
         Sb_Details.Append("<tr class=\"tr_Head\">\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center >数量</td>\n");
@@ -221,6 +272,10 @@ public partial class Web_List_Details : BasePage
         Sb_Details.Append("<td class=\"thstyle\" align=center >数量</td>\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center >单价</td>\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center >金额</td>\n");
+
+        Sb_Details.Append("<td class=\"thstyle\" align=center >最近采购</td>\n");
+        Sb_Details.Append("<td class=\"thstyle\" align=center >最近耗料</td>\n");
+
         Sb_Details.Append("<td class=\"thstyle\" align=center >正常</td>\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center >滞销</td>\n");
         Sb_Details.Append("<td class=\"thstyle\" align=center >呆滞</td>\n");
@@ -229,7 +284,7 @@ public partial class Web_List_Details : BasePage
         {
             for (int i = 0; i < Dtb_Table.Rows.Count; i++)
             {
-                if (i % 2 == 0)
+                if (i%2 == 0)
                 {
                     s_Style = "class='gg'";
                 }
@@ -250,10 +305,15 @@ public partial class Web_List_Details : BasePage
                 }
                 Sb_Details.Append(" <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n");
                 Sb_Details.Append("<td class='thstyleLeftDetails'align=center noWrap>" + (i + 1).ToString() + "</td>\n");
+                Sb_Details.Append("<td class='thstyleLeftDetails'align=center noWrap>" +
+                                  productclass(Dtb_Table.Rows[i]["KSP_Code"].ToString()) + "</td>\n");
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>");
                 if (s_Ly == "0")
                 {
-                    Sb_Details.Append("<a href='/web/WareHouseStore/KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&startDate=" + s_StartDate + "&endDate=" + s_EndDate + "'  target=\"_blank\">");
+                    Sb_Details.Append(
+                        "<a href='/web/WareHouseStore/KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=" +
+                        Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&startDate=" +
+                        s_StartDate + "&endDate=" + s_EndDate + "'  target=\"_blank\">");
                 }
                 Sb_Details.Append(Dtb_Table.Rows[i]["ProductsName"].ToString());
                 if (s_Ly == "0")
@@ -264,35 +324,49 @@ public partial class Web_List_Details : BasePage
                 string s_ProductsEdition1 = Dtb_Table.Rows[i]["ProductsEdition"].ToString();
                 if (Dtb_Table.Rows[i]["ProductsType"].ToString() == "M130703044953260")
                 {
-                    s_ProductsEdition1 = base.Base_GetProductsPattern(Dtb_Table.Rows[i]["ProductsBarCode"].ToString()) + "_" + s_ProductsEdition1;
+                    s_ProductsEdition1 = base.Base_GetProductsPattern(Dtb_Table.Rows[i]["ProductsBarCode"].ToString()) +
+                                         "_" + s_ProductsEdition1;
                 }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" + s_ProductsEdition1 + "&nbsp;</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "&nbsp;</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" + base.Base_GetUnitsName(Dtb_Table.Rows[i]["ProductsUnits"].ToString()) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" + s_ProductsEdition1 +
+                                  "&nbsp;</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" +
+                                  Dtb_Table.Rows[i]["KSP_Code"].ToString() + "&nbsp;</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" +
+                                  base.Base_GetUnitsName(Dtb_Table.Rows[i]["ProductsUnits"].ToString()) + "</td>\n");
 
                 if (Button3.Text == "隐藏仓库")
                 {
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" + Dtb_Table.Rows[i]["HouseName"].ToString() + "</td>\n");
+                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=left  noWrap>" +
+                                      Dtb_Table.Rows[i]["HouseName"].ToString() + "</td>\n");
                 }
                 //期初
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["QCAmount"].ToString(), 0) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["QCAmount"].ToString(), 0) + "</td>\n");
                 decimal d_QcPrice = 0;
                 try
                 {
                     d_QCTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["QCAmount"].ToString());
                     d_QCTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["QCMoney"].ToString());
-                    d_QcPrice = decimal.Parse(Dtb_Table.Rows[i]["QCMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["QCAmount"].ToString());
+                    d_QcPrice = decimal.Parse(Dtb_Table.Rows[i]["QCMoney"].ToString())/
+                                decimal.Parse(Dtb_Table.Rows[i]["QCAmount"].ToString());
 
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_QcPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["QCMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_QcPrice.ToString(), 5) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["QCMoney"].ToString(), 2) + "</td>\n");
 
                 //采购
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
                 if (s_Ly == "0")
                 {
-                    Sb_Details.Append("<a href='/Web/Report_Bill/Rk/Procure_MaterIn_View.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&Type=0&State=&HouseNo=" + s_HouseNo + "'  target=\"_blank\">");
+                    Sb_Details.Append("<a href='/Web/Report_Bill/Rk/Procure_MaterIn_View.aspx?StartDate=" + s_StartDate +
+                                      "&EndDate=" + s_EndDate + "&ProductsBarCode=" +
+                                      Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&Type=0&State=&HouseNo=" +
+                                      s_HouseNo + "'  target=\"_blank\">");
                 }
                 Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["CgAmount"].ToString(), 0));
                 if (s_Ly == "0")
@@ -305,19 +379,27 @@ public partial class Web_List_Details : BasePage
                 {
                     d_CgTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["CgAmount"].ToString());
                     d_CgTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["CgMoney"].ToString());
-                    d_CgPrice = decimal.Parse(Dtb_Table.Rows[i]["CgMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["CgAmount"].ToString());
+                    d_CgPrice = decimal.Parse(Dtb_Table.Rows[i]["CgMoney"].ToString())/
+                                decimal.Parse(Dtb_Table.Rows[i]["CgAmount"].ToString());
 
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_CgPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["CgMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_CgPrice.ToString(), 5) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["CgMoney"].ToString(), 2) + "</td>\n");
 
                 //调拨入
 
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
                 if (s_Ly == "0")
                 {
-                    Sb_Details.Append("<a href='/Web/Report_Bill/Db/List_CkList3.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&InHouseNo=" + s_HouseNo + "&OutHouseNo='  target=\"_blank\">");
+                    Sb_Details.Append("<a href='/Web/Report_Bill/Db/List_CkList3.aspx?StartDate=" + s_StartDate +
+                                      "&EndDate=" + s_EndDate + "&ProductsBarCode=" +
+                                      Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&InHouseNo=" + s_HouseNo +
+                                      "&OutHouseNo='  target=\"_blank\">");
                 }
                 Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["DbinAmount"].ToString(), 0));
                 if (s_Ly == "0")
@@ -330,12 +412,17 @@ public partial class Web_List_Details : BasePage
                 {
                     d_WwTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["DbinAmount"].ToString());
                     d_WwTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["DbinMoney"].ToString());
-                    d_WwPrice = decimal.Parse(Dtb_Table.Rows[i]["DbinMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["DbinAmount"].ToString());
+                    d_WwPrice = decimal.Parse(Dtb_Table.Rows[i]["DbinMoney"].ToString())/
+                                decimal.Parse(Dtb_Table.Rows[i]["DbinAmount"].ToString());
 
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_WwPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbinMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_WwPrice.ToString(), 5) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["DbinMoney"].ToString(), 2) + "</td>\n");
 
 
                 //生产出库
@@ -343,7 +430,10 @@ public partial class Web_List_Details : BasePage
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
                 if (s_Ly == "0")
                 {
-                    Sb_Details.Append("<a href='/Web/Report_Bill/ScDetails/Procure_Xh_View.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&type=0'  target=\"_blank\">");
+                    Sb_Details.Append("<a href='/Web/Report_Bill/ScDetails/Procure_Xh_View.aspx?StartDate=" +
+                                      s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" +
+                                      Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo +
+                                      "&type=0'  target=\"_blank\">");
                 }
                 Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["XhAmount"].ToString(), 0));
                 if (s_Ly == "0")
@@ -357,19 +447,27 @@ public partial class Web_List_Details : BasePage
                 {
                     d_XhTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["XhAmount"].ToString());
                     d_XhTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["XhMoney"].ToString());
-                    d_XhPrice = decimal.Parse(Dtb_Table.Rows[i]["XhMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["XhAmount"].ToString());
+                    d_XhPrice = decimal.Parse(Dtb_Table.Rows[i]["XhMoney"].ToString())/
+                                decimal.Parse(Dtb_Table.Rows[i]["XhAmount"].ToString());
 
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_XhPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["XhMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_XhPrice.ToString(), 5) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["XhMoney"].ToString(), 2) + "</td>\n");
 
                 //部门领料
 
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
                 if (s_Ly == "0")
                 {
-                    Sb_Details.Append("<a href='/Web/Report_Bill/ScLl/List_CkList2.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo + "&type=0'  target=\"_blank\">");
+                    Sb_Details.Append("<a href='/Web/Report_Bill/ScLl/List_CkList2.aspx?StartDate=" + s_StartDate +
+                                      "&EndDate=" + s_EndDate + "&ProductsBarCode=" +
+                                      Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&HouseNo=" + s_HouseNo +
+                                      "&type=0'  target=\"_blank\">");
                 }
                 Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["DbrAmount"].ToString(), 0));
                 if (s_Ly == "0")
@@ -383,69 +481,109 @@ public partial class Web_List_Details : BasePage
                 {
                     d_DbrTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["DbrAmount"].ToString());
                     d_DbrTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["DbrMoney"].ToString());
-                    d_DbrPrice = decimal.Parse(Dtb_Table.Rows[i]["DbrMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["DbrAmount"].ToString());
+                    d_DbrPrice = decimal.Parse(Dtb_Table.Rows[i]["DbrMoney"].ToString())/
+                                 decimal.Parse(Dtb_Table.Rows[i]["DbrAmount"].ToString());
 
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_DbrPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DbrMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_DbrPrice.ToString(), 5) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["DbrMoney"].ToString(), 2) + "</td>\n");
 
                 //调出
 
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>");
                 if (s_Ly == "0")
                 {
-                    Sb_Details.Append("<a href='/Web/Report_Bill/Db/List_CkList3.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&ProductsBarCode=" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&InHouseNo=&OutHouseNo=" + s_HouseNo + "'  target=\"_blank\">");
+                    Sb_Details.Append("<a href='/Web/Report_Bill/Db/List_CkList3.aspx?StartDate=" + s_StartDate +
+                                      "&EndDate=" + s_EndDate + "&ProductsBarCode=" +
+                                      Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "&InHouseNo=&OutHouseNo=" +
+                                      s_HouseNo + "'  target=\"_blank\">");
                 }
                 Sb_Details.Append(base.FormatNumber1(Dtb_Table.Rows[i]["DboutAmount"].ToString(), 0));
                 if (s_Ly == "0")
                 {
                     Sb_Details.Append("</a>");
                 }
-               // Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DboutAmount"].ToString(), 0) + "</td>\n");
+                // Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DboutAmount"].ToString(), 0) + "</td>\n");
                 decimal d_outPrice = 0;
                 try
                 {
                     d_outTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["DboutAmount"].ToString());
                     d_outTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["DboutMoney"].ToString());
-                    d_outPrice = decimal.Parse(Dtb_Table.Rows[i]["DboutMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["DboutAmount"].ToString());
+                    d_outPrice = decimal.Parse(Dtb_Table.Rows[i]["DboutMoney"].ToString())/
+                                 decimal.Parse(Dtb_Table.Rows[i]["DboutAmount"].ToString());
 
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_outPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["DboutMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_outPrice.ToString(), 5) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["DboutMoney"].ToString(), 2) + "</td>\n");
 
 
                 try
                 {
                     d_TotalTZMoney += decimal.Parse(Dtb_Table.Rows[i]["TZMoney"].ToString());
                 }
-                catch { }
+                catch
+                {
+                }
 
 
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>0</td>\n");
                 Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>0</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["TZMoney"].ToString(), 2) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["TZMoney"].ToString(), 2) + "</td>\n");
 
 
                 //期末
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["QMAmount"].ToString(), 0) + "</td>\n");
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["QMAmount"].ToString(), 0) + "</td>\n");
                 decimal d_QMPrice = 0;
                 try
                 {
                     d_QMTotalNumber += decimal.Parse(Dtb_Table.Rows[i]["QMAmount"].ToString());
                     d_QMTotalMoney += decimal.Parse(Dtb_Table.Rows[i]["QMMoney"].ToString());
-                    d_QMPrice = decimal.Parse(Dtb_Table.Rows[i]["QMMoney"].ToString()) / decimal.Parse(Dtb_Table.Rows[i]["QMAmount"].ToString());
+                    //if (decimal.Parse(Dtb_Table.Rows[i]["QMMoney"].ToString())<0)
+                    //{
+                    //    d_QMPrice = d_QcPrice;
+                    //}
+                    //else
+                    //{
+                    d_QMPrice = decimal.Parse(Dtb_Table.Rows[i]["QMMoney"].ToString())/
+                                decimal.Parse(Dtb_Table.Rows[i]["QMAmount"].ToString());
+                    // }
+
                 }
-                catch { }
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d_QMPrice.ToString(), 5) + "</td>\n");
-                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i]["QMMoney"].ToString(), 2) + "</td>\n");
+                catch
+                {
+                }
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(d_QMPrice.ToString(), 5) + "</td>\n");
+                //if (d_QMPrice < 0)
+                //{
+                //    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + decimal.Parse(Dtb_Table.Rows[i]["QMAmount"].ToString())* d_QMPrice + "</td>\n");
+                //}
+                //else
+                //{
+                Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" +
+                                  base.FormatNumber1(Dtb_Table.Rows[i]["QMMoney"].ToString(), 2) + "</td>\n");
+                // }
+                //decimal d = d_QMPrice*decimal.Parse(Dtb_Table.Rows[i]["QMAmount"].ToString());
+                //Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber1(d.ToString(),2) + "</td>\n");
 
                 try
                 {
                 }
                 catch
-                { }
+                {
+                }
 
                 if (Btn_Save.Text == "修改")
                 {
@@ -462,10 +600,19 @@ public partial class Web_List_Details : BasePage
                     {
                         s_Chekck2 = "√";
                     }
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + s_Chekck0 + "&nbsp; </td>\n");
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + s_Chekck1 + "&nbsp;</td>\n");
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + s_Chekck2 + "&nbsp;</td>\n");
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + Dtb_Table.Rows[i]["KSP_CwReamrks"].ToString() + "</td>\n");
+                    Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                                      GetStratTime(Dtb_Table.Rows[i]["ProductsBarCode"].ToString(),Dtb_Table.Rows[i]["HouseNo"].ToString()) + "</td>\n");
+                    Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                                      GetEndHlTime(Dtb_Table.Rows[i]["ProductsBarCode"].ToString(), Dtb_Table.Rows[i]["HouseNo"].ToString()) + "</td>\n");
+
+                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + s_Chekck0 +
+                                      "&nbsp; </td>\n");
+                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + s_Chekck1 +
+                                      "&nbsp;</td>\n");
+                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>" + s_Chekck2 +
+                                      "&nbsp;</td>\n");
+                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" +
+                                      Dtb_Table.Rows[i]["KSP_CwReamrks"].ToString() + "</td>\n");
 
                 }
                 else
@@ -483,35 +630,64 @@ public partial class Web_List_Details : BasePage
                     {
                         s_Chekck2 = "checked";
                     }
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"radio\" name=\"radiogroup" + i.ToString() + "\" value=\"0\"  id=\"radiogroup1_0_" + i.ToString() + "\" " + s_Chekck0 + "> </td>\n");
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"hidden\" name=\"Tbx_ProductsBarCode_" + i.ToString() + "\"  value=\"" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() + "\"><input type=\"radio\" name=\"radiogroup" + i.ToString() + "\" value=\"1\" id=\"radiogroup1_1_" + i.ToString() + "\" " + s_Chekck1 + "></td>\n");
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"radio\" name=\"radiogroup" + i.ToString() + "\" value=\"2\" id=\"radiogroup1_2_" + i.ToString() + "\" " + s_Chekck2 + "></td>\n");
-                    Sb_Details.Append("<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"input\" name=\"Remarks_" + i.ToString() + "\" id=\"Remarks_" + i.ToString() + "\"  value=\"" + Dtb_Table.Rows[i]["KSP_CwReamrks"].ToString() + "\"></td>\n");
+                    Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                                       GetStratTime(Dtb_Table.Rows[i]["ProductsBarCode"].ToString(), Dtb_Table.Rows[i]["HouseNo"].ToString()) + "</td>\n");
+                    Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                                      GetEndHlTime(Dtb_Table.Rows[i]["ProductsBarCode"].ToString(), Dtb_Table.Rows[i]["HouseNo"].ToString()) + "</td>\n");
 
-                } Sb_Details.Append(" </tr>\n");
+                    Sb_Details.Append(
+                        "<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"radio\" name=\"radiogroup" +
+                        i.ToString() + "\" value=\"0\"  id=\"radiogroup1_0_" + i.ToString() + "\" " + s_Chekck0 +
+                        "> </td>\n");
+                    Sb_Details.Append(
+                        "<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"hidden\" name=\"Tbx_ProductsBarCode_" +
+                        i.ToString() + "\"  value=\"" + Dtb_Table.Rows[i]["ProductsBarCode"].ToString() +
+                        "\"><input type=\"radio\" name=\"radiogroup" + i.ToString() +
+                        "\" value=\"1\" id=\"radiogroup1_1_" + i.ToString() + "\" " + s_Chekck1 + "></td>\n");
+                    Sb_Details.Append(
+                        "<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"radio\" name=\"radiogroup" +
+                        i.ToString() + "\" value=\"2\" id=\"radiogroup1_2_" + i.ToString() + "\" " + s_Chekck2 +
+                        "></td>\n");
+                    Sb_Details.Append(
+                        "<td  class='thstyleLeftDetails' align=right  noWrap><input type=\"input\" name=\"Remarks_" +
+                        i.ToString() + "\" id=\"Remarks_" + i.ToString() + "\"  value=\"" +
+                        Dtb_Table.Rows[i]["KSP_CwReamrks"].ToString() + "\"></td>\n");
+
+                }
+                Sb_Details.Append(" </tr>\n");
             }
             this.Tbx_Num.Text = Dtb_Table.Rows.Count.ToString();
             Sb_Details.Append(" <tr >\n");
             Sb_Details.Append("<td class=\"thstyle\"align=center noWrap colspan='5'>合计:</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QCTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QCTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_QCTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_QCTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_CgTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_CgTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_CgTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_CgTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_WwTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_WwTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_WwTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_WwTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_XhTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_XhTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_XhTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_XhTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_DbrTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_DbrTotalMoney.ToString(), 2) + "</td>\n");
             /*
             Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrDCLlTotalNumber.ToString(), 0) + "</td>\n");
             Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
@@ -521,20 +697,25 @@ public partial class Web_List_Details : BasePage
             Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
             Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_DbrDCXsTotalMoney.ToString(), 2) + "</td>\n");
                */
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_outTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_outTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_outTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_outTotalMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >0</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >0</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_TotalTZMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >0</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >0</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_TotalTZMoney.ToString(), 2) + "</td>\n");
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QMTotalNumber.ToString(), 0) + "</td>\n");
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n");//money
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" + base.FormatNumber1(d_QMTotalMoney.ToString(), 2) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_QMTotalNumber.ToString(), 0) + "</td>\n");
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap >&nbsp;</td>\n"); //money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right  noWrap>&nbsp;" +
+                              base.FormatNumber1(d_QMTotalMoney.ToString(), 2) + "</td>\n");
 
 
-            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap colspan=3 >&nbsp;</td>\n");//money
+            Sb_Details.Append("<td  class=\"thstyle\"' align=right noWrap colspan=3 >&nbsp;</td>\n"); //money
 
 
             Sb_Details.Append(" </tr>\n");
@@ -567,22 +748,30 @@ public partial class Web_List_Details : BasePage
                 int i_Num = int.Parse(this.Tbx_Num.Text);
                 for (int i = 0; i < i_Num; i++)
                 {
-                    string s_ProductsBarCode = Request["Tbx_ProductsBarCode_" + i.ToString() + ""] == null ? "" : Request["Tbx_ProductsBarCode_" + i.ToString() + ""].ToString();
+                    string s_ProductsBarCode = Request["Tbx_ProductsBarCode_" + i.ToString() + ""] == null
+                        ? ""
+                        : Request["Tbx_ProductsBarCode_" + i.ToString() + ""].ToString();
                     //更新委外价格
-                    string s_radio0 = Request["radiogroup" + i.ToString() + ""] == null ? "" : Request["radiogroup" + i.ToString() + ""].ToString();
-                    string s_Remarks = Request["Remarks_" + i.ToString() + ""] == null ? "" : Request["Remarks_" + i.ToString() + ""].ToString();
+                    string s_radio0 = Request["radiogroup" + i.ToString() + ""] == null
+                        ? ""
+                        : Request["radiogroup" + i.ToString() + ""].ToString();
+                    string s_Remarks = Request["Remarks_" + i.ToString() + ""] == null
+                        ? ""
+                        : Request["Remarks_" + i.ToString() + ""].ToString();
 
 
                     if ((s_radio0 == "1") || (s_radio0 == "2"))
                     {
-                        string s_Sql = "update KNet_Sys_Products set KSP_ProdutsType=" + s_radio0 + ",KSP_CwReamrks='" + s_Remarks + "' where ProductsBarCode='" + s_ProductsBarCode + "' ";
+                        string s_Sql = "update KNet_Sys_Products set KSP_ProdutsType=" + s_radio0 + ",KSP_CwReamrks='" +
+                                       s_Remarks + "' where ProductsBarCode='" + s_ProductsBarCode + "' ";
                         DbHelperSQL.ExecuteSql(s_Sql);
 
                         AM.Add_Logs("产品状态修改:" + s_ProductsBarCode);
                     }
                     else
                     {
-                        string s_Sql = "update KNet_Sys_Products set KSP_ProdutsType=" + s_radio0 + ",KSP_CwReamrks='" + s_Remarks + "' where ProductsBarCode='" + s_ProductsBarCode + "' ";
+                        string s_Sql = "update KNet_Sys_Products set KSP_ProdutsType=" + s_radio0 + ",KSP_CwReamrks='" +
+                                       s_Remarks + "' where ProductsBarCode='" + s_ProductsBarCode + "' ";
                         DbHelperSQL.ExecuteSql(s_Sql);
                     }
                     AlertAndClose("保存成功！");
@@ -596,6 +785,7 @@ public partial class Web_List_Details : BasePage
         }
         this.Show();
     }
+
     protected void Btn_SaveOnClick1(object sender, EventArgs e)
     {
         if (Button3.Text == "显示仓库")
@@ -608,6 +798,23 @@ public partial class Web_List_Details : BasePage
         }
         this.Show();
 
+    }
+
+    /// <summary>
+    /// 获取产品类别
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    public string productclass(string code)
+    {
+        string s_return = "";
+        this.BeginQuery(
+            "select PBP_Name from PB_Basic_ProductsClass  where PBP_ID in (select ProductsType from KNet_Sys_Products where KSP_COde='" +
+            code + "' )");
+        this.QueryForDataTable();
+        DataTable Dtb_Re = Dtb_Result;
+        s_return = Dtb_Re.Rows[0][0].ToString();
+        return s_return;
     }
 
     protected void Btn_Excel_Click(object sender, EventArgs e)
@@ -632,7 +839,8 @@ public partial class Web_List_Details : BasePage
         Response.Buffer = true;
         Response.Clear();
         Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("收发存.xls", System.Text.Encoding.UTF8).ToString());
+        Response.AddHeader("content-disposition",
+            "attachment; filename=" + HttpUtility.UrlEncode("收发存.xls", System.Text.Encoding.UTF8).ToString());
         //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
         Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
 
@@ -640,5 +848,60 @@ public partial class Web_List_Details : BasePage
         Response.Write(this.Lbl_Details.Text);
         Response.Flush();
         Response.End();
+    }
+
+    /// <summary>
+    /// 获取此物料第一次采购入库的日期
+    /// </summary>
+    /// <param name="productcode">产品编码</param>
+    /// <returns></returns>
+    public string GetStratTime(string productcode,string HouseNo)
+    {
+        try
+        {
+            string sql = "select top 1 Add_DateTime from Knet_Procure_WareHouseList_Details a join Knet_Procure_WareHouseList b on a.WareHouseNo=b.WareHouseNo  where ProductsBarCode='"+productcode+"' and HouseNo='"+HouseNo+"' order by Add_DateTime desc";
+            DataTable table = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+            if (table.Rows.Count > 0)
+            {
+                return DateTime.Parse(table.Rows[0][0].ToString()).ToShortDateString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+        catch
+        {            
+            return "";
+        }
+       
+    }
+
+    /// <summary>
+    /// 获取物料最后一次的耗料的时间
+    /// </summary>
+    /// <param name="productcode"></param>
+    /// <returns></returns>
+    public string GetEndHlTime(string productcode,string HouseNo)
+    {
+        try
+        {
+            string sql = "select top 1 SED_RkTime from Sc_Expend_Manage_MaterDetails where SED_ProductsBarCode='" +
+                               productcode + "' and SED_HouseNo='"+HouseNo+"' order by SED_RkTime desc";
+            DataTable table = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+            if (table.Rows.Count > 0)
+            {
+                return DateTime.Parse(table.Rows[0][0].ToString()).ToShortDateString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+        catch 
+        {
+            return "";
+        }
+      
     }
 }

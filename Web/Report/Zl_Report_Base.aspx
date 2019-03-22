@@ -80,6 +80,33 @@
                                                 </table>
                                             </td>
                                         </tr>
+                                         <tr>
+                                            <td colspan="4" align="left">
+
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <font color="red" size="4">报表</font>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <ul>
+                                                                <li><a href="../Report_Zl/IQC_OQC/Submitted_IQC.aspx">IQC报表</a></li>
+                                                                <li><a href="../Report_Zl/IQC_OQC/Submitted_OQC.aspx">OQC报表</a></li>
+                                                                <%--<li><a href="../Report_Zl/IQC_OQC/Products_Type.aspx">物料报表</a></li>--%>
+                                                            </ul>
+                                                        </td>
+                                                        <td valign="top">
+                                                            <ul>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>

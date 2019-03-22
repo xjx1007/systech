@@ -23,17 +23,17 @@
                 document.all('Tbx_GProductsEdition').value = ss[1];
                 if (ss[2]=="0") {
                     document.all('TXB_Genre').value = "A类"
-                    document.all('Consume').value = ss[2];
+                    document.all('Consume').value = "0";
                     document.all('TXB_Genre_Value').value=0
                 }
-                if (ss[2]=="0.3") {
+                if (ss[2]=="1") {
                     document.all('TXB_Genre').value = "B类";
-                    document.all('Consume').value = ss[2];
+                    document.all('Consume').value = "0.3";
                     document.all('TXB_Genre_Value').value=1
                 }
-                if (ss[2]=="0.5") {
+                if (ss[2]=="2") {
                     document.all('TXB_Genre').value = "C类";
-                    document.all('Consume').value = ss[2];
+                    document.all('Consume').value ="0.5";
                     document.all('TXB_Genre_Value').value=2
                 }
                 document.all('SED_ProductsBarCode').value = ss[4];
@@ -215,7 +215,6 @@
                                                     <tr>
                                                         <td colspan="4" class="detailedViewHeader">
                                                             <b>添加物料</b>
-
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -246,6 +245,7 @@
                                                            <%-- <asp:DropDownList ID="GenreDropDownList" runat="server" OnSelectedIndexChanged="GenreDropDownList_SelectedIndexChanged"></asp:DropDownList>--%>
                                                             <asp:TextBox ID="TXB_Genre" runat="server"></asp:TextBox>
                                                             <asp:TextBox ID="TXB_Genre_Value" CssClass="Custom_Hidden" runat="server" Text=""></asp:TextBox>
+                                                            <asp:TextBox ID="TextBox1" CssClass="Custom_Hidden" runat="server" Text=""></asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -267,9 +267,7 @@
                                                             <asp:Button ID="Button2" runat="server" Text="保 存"  class="crmbutton small edit" style="width: 80px; height: 33px;"  OnClick="Button2_Click" />
                                                         </td>
                                                         
-                                                    </tr>
-                                                        
-                                                   
+                                                    </tr>                                                                                                           
                                                     
                                                 </div>
                                                 <tr>
@@ -325,7 +323,7 @@
 
                                                 <tr>
                                                     <td colspan="4" class="detailedViewHeader">
-                                                        <b>原材料信息</b>
+                                                        <b>原材料信息</b> <b style="color: red">实际消耗数量:</b><asp:Label ID="Label1" runat="server" Text=""></asp:Label> <b style="color: red">理论消耗数量:</b><asp:Label ID="Label2" runat="server" Text=""></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -340,6 +338,9 @@
                                                                 </td>
                                                                 <td class="ListHead" runat="server" id="CZ_Done" nowrap>
                                                                     <b>操作</b>
+                                                                </td>
+                                                                 <td class="ListHead" runat="server" id="Td1" nowrap>
+                                                                    <b>替换料</b>
                                                                 </td>
                                                                 <td class="ListHead" nowrap>
                                                                     <b>产品名称</b>
@@ -383,6 +384,9 @@
                                                                 </td>
                                                                 <td class="ListHead" nowrap>
                                                                     <b>计算金额</b>
+                                                                </td>
+                                                                <td class="ListHead" nowrap>
+                                                                    <b>备注</b>
                                                                 </td>
                                                             </tr>
                                                             <%=s_MyTable_Detail1 %>

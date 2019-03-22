@@ -105,7 +105,7 @@ public partial class Web_Report_CG_List_Order : BasePage
                     {
                         int i_Num = i_Month + 1;
                         d_Total[i_Month] += decimal.Parse(Dtb_Table.Rows[i]["OrderAmount" + i_Num + ""].ToString());
-                        d_TotalNumber[i_Month] = decimal.Parse(Dtb_Table.Rows[i]["Money" + i_Num + ""].ToString());
+                        d_TotalNumber[i_Month] += decimal.Parse(Dtb_Table.Rows[i]["Money" + i_Num + ""].ToString());
                     }
                 }
             }

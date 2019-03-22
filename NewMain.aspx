@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="themes/softed/style.css" type="text/css" />
     <link rel="stylesheet" href="themes/softed/index.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <script type="text/javascript" src="themes/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery-ui.custom.min.js"></script>
     <script type="text/javascript" src="themes/js/jquery/jquery.ui.autocomplete.min.js"></script>
@@ -23,6 +24,9 @@
         //var shortcutArray = Array(1,4,147,8,130,5,131,9,16,15,76,62);
         //var logoutText = "轻轻的您走了，正如您轻轻的来……";
         //var ispirit = "";
+        
+  
+
         var monInterval = 1;
         var show_ip = 1;
         var loginUser = <%=loginUser %>;
@@ -34,15 +38,94 @@
         var orgTree = new Tree("orgTree", 'themes/js/attachment/AllUserXML.ashx');
         var newSmsSoundHtml = "<object id='sms_sound' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='themes/swflash.cab' width='0' height='0'><param name='movie' value='themes/wav/1.swf'><param name=quality value=high><embed id='sms_sound' src='themes/wav/1.swf' width='0' height='0' quality='autohigh' wmode='opaque' type='application/x-shockwave-flash' plugspace='http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash'></embed></object>";
     </script>
+    <style type="text/css">
+       
+
+        #winpop {
+            width: 270px;
+            height: 150px;
+            position: absolute;
+            right: 20px;
+            bottom: 30px;
+            border: 1px solid #999999;
+            margin: 0;
+            padding: 1px;
+            overflow: hidden;
+            display: none;
+            background: #FFFFFF;
+        }
+
+            #winpop .title {
+                width: 100%;
+                height: 20px;
+                line-height: 20px;
+                background: #FFCC00;
+                font-weight: bold;
+                text-align: center;
+                font-size: 12px;
+            }
+
+            #winpop .con1 {
+                /*width: 100%;
+                height: 80px;
+                line-height: 80px;
+                font-weight: bold;
+                font-size: 12px;
+                color: #FF0000;
+                text-decoration: underline;
+                text-align: center;*/
+                padding: 5px;
+                padding-bottom: 0px;
+                width: 250px !important;
+                height: 295px !important;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+        #silu {
+            font-size: 13px;
+            color: #999999;
+            position: absolute;
+            right: 0;
+            bottom: 0px;
+            text-align: right;
+            text-decoration: underline;
+            line-height: 22px;
+        }
+
+        .close {
+            position: absolute;
+            left: 210px;
+            color: #000000;
+            font-size: 12px;
+            cursor: pointer;
+        }
+         .close1 {
+            position: absolute;
+             padding-left: 20px;
+            color: #000000;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript"> 
+        function show_pop(){//显示窗口 
+            jQuery('#winpop').show(1000);
+        } 
+        function hid_pop(){//隐藏窗口 
+            jQuery('#winpop').hide(1000);
+        } 
+       
+      
+    </script>
 </head>
 <body leftmargin="0" topmargin="0" rightmargin="0">
     <form id="form1" runat="server">
         <div>
             <table border="0" cellspacing="0" cellpadding="0" width="100%" class="hdrNameBg">
                 <tr>
-                    <td valign="top"  height="30">
-                        <a href="http://www.systech.com.cn/" target="_blank">
-                          </a>
+                    <td valign="top" height="30">
+                        <a href="http://www.systech.com.cn/" target="_blank"></a>
                     </td>
                     <td width="100%" align="center"></td>
                     <td class="small" nowrap>
@@ -191,8 +274,9 @@
         </div>
         <div id="overlay_startmenu">
         </div>
-        <!-- 短信提醒 -->        '
-        <div id="new_sms_mask">   
+        <!-- 短信提醒 2018/9/7周五改-->
+        '
+        <div id="new_sms_mask">
         </div>
         <div id="new_sms_panel">
             <div id="new_sms_container">
@@ -268,6 +352,13 @@
             </div>
             <div class="corner">
             </div>
+        </div>
+        <!-- 新短信提示 -->
+         
+        <div id="winpop">
+            <div class="title">您有新的消息</div>
+            <div style="height: 20px"><a class="close1" onclick="ViewNewSms1();">查收</a><a class="close" onclick="CloseRemind1();">关闭</a></div>
+            <div class="con1" id="con_html"></div>
         </div>
         <!-- 组织机构 -->
         <div id="org_panel" class="ipanel">

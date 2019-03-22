@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
 using System.Data.SqlClient;
+using KNet.BLL;
 using KNet.DBUtility;
 using KNet.Common;
 
@@ -609,6 +610,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
         try
         {
             KNet.BLL.KNet_WareHouse_AllocateList bll = new KNet.BLL.KNet_WareHouse_AllocateList();
+            KNet.BLL.KNet_WareHouse_DirectOutList kwd=new KNet_WareHouse_DirectOutList();
             KNet.Model.KNet_WareHouse_AllocateList model = bll.GetModelB(s_ID);
             this.Tbx_ID.Text = s_ID;
             this.Lbl_Code.Text = model.AllocateNo;
@@ -619,7 +621,15 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             this.Lbl_OrderNo.Text = model.KWA_OrderNo;
             this.Lbl_Remarks.Text = model.AllocateRemarks;
             this.Lbl_Case.Text = model.AllocateCause;
-
+            this.KWA_UploadUrl.Text = "<a href=\"" + model.KWA_UploadUrl + "\" >" + model.KWA_UploadName + "</a>"; ;
+            if (model.KWA_IsEntity.ToString()=="1")
+            {
+                KWA_IsEntity.Checked = true;
+            }
+            else
+            {
+                KWA_IsEntity.Checked = false;
+            }
             try
             {
                 string SqlWhere = " AllocateNo='" + s_ID + "'";
@@ -632,6 +642,14 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
                 GridView1.DataSource = ds;
                 GridView1.DataKeyNames = new string[] { "AllocateNo" };
                 GridView1.DataBind();
+                //string s_Sql = "select* from KNet_WareHouse_DirectOutList_Details a join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo where KWD_AllocateNo='" + s_ID + "';";
+                //this.BeginQuery(s_Sql);
+                //this.QueryForDataTable();
+                string SqlWhere1 = " KWD_AllocateNo='" + s_ID + "'";
+                DataSet ds1 = kwd.GetList1(SqlWhere1);
+                MyGridView1.DataSource = ds1;
+                MyGridView1.DataKeyNames = new string[] { "DirectOutNo" };
+                MyGridView1.DataBind();
             }
             catch
             { }
@@ -642,7 +660,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
             {
                 btn_Chcek.Text = "反审批";
                 btn_Chcek1.Visible = false;
-                if (AM.KNet_StaffName != "项洲")
+                if (AM.KNet_StaffName != "薛建新")
                 {
                     if (AM.YNAuthority("单据财务审批"))
                     {
@@ -695,6 +713,7 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
 
                 Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>士腾不良品</b></td>");
                 Sb_Details.Append("<td class=\"ListHead\" nowrap><b>加工厂不良品</b></td>");
+                Sb_Details.Append("<td class=\"ListHead\" nowrap><b>报废数量</b></td>");
             }
             Sb_Details.Append("<td class=\"ListHead\" nowrap><b>确认数量</b></td>");
             Sb_Details.Append("<td class=\"ListHead\" nowrap><b>缺料数量</b></td>");
@@ -739,14 +758,16 @@ public partial class Web_KNet_WareHouse_WareCheck_View : BasePage
 
                     string s_BadNumber = Dts_Details.Tables[0].Rows[i]["KWAD_BadNumber"].ToString() == "" ? "0" : Dts_Details.Tables[0].Rows[i]["KWAD_BadNumber"].ToString();
                     string s_AddBadNumber = Dts_Details.Tables[0].Rows[i]["KWAD_AddBadNumber"].ToString() == "" ? "0" : Dts_Details.Tables[0].Rows[i]["KWAD_AddBadNumber"].ToString();
+                    string s_BFNumber = Dts_Details.Tables[0].Rows[i]["KWAD_BFNumber"].ToString() == "" ? "0" : Dts_Details.Tables[0].Rows[i]["KWAD_BFNumber"].ToString();
 
-                    if ((model.AllocateCheckYN == 0) )
+                    if ((model.AllocateCheckYN == 0))
                     {
                         if (Chk_Type.Text != "原材料调拨")
                         {
 
                             Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BadNumber_" + i.ToString() + "\" value='" + s_BadNumber + "'></td>");
                             Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"AddBadNumber_" + i.ToString() + "\" value='" + s_AddBadNumber + "'></td>");
+                            Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"BFNumber_" + i.ToString() + "\" value='" + s_BFNumber + "'></td>");
                         }
                         Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" value='" + s_Number + "'></td>");
 

@@ -234,7 +234,7 @@ public partial class Web_Procure_Xh_View : BasePage
             else
             {
                 //明细
-                s_Sql = "Select a.SED_HouseNo,a.SED_RkTime,a.SED_ProductsBarCode,a.SED_RkNumber,a.SED_FromHouseNo,isnull(SED_WwPrice,0) SED_WwPrice,isnull(SED_WwMoney,0) SED_WwMoney";
+                s_Sql = "Select a.SED_HouseNo,a.SED_RkTime,a.SED_ProductsBarCode,a.SED_RkNumber,a.SED_FromHouseNo,isnull(SED_WwPrice,0) SED_WwPrice,isnull(SED_WwMoney,0) SED_WwMoney,a.SED_ID";
                 s_Sql += " ";
                 s_Sql += " from v_Sc_Expend_Manage_MaterDetails_1  a ";
                 s_Sql += "  Where 1=1 ";
@@ -286,7 +286,7 @@ public partial class Web_Procure_Xh_View : BasePage
                         }
                         s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
                         s_Details += "<td class='thstyleLeftDetails'align=center noWrap>" + (i + 1).ToString() + "</td>\n";
-
+                        s_Details += "<td class='thstyleLeftDetails'align=center noWrap>" +Get_SED_SEMID(Dtb_Table.Rows[i]["SED_ID"].ToString()) + "</td>\n";
                         if (s_ID == "")
                         {
                             try
@@ -382,9 +382,10 @@ public partial class Web_Procure_Xh_View : BasePage
             s_HouseName = "委外厂商:" + base.Base_GetHouseName(s_House);
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n";
             s_Head += "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<thead class=\"fixedHeader\" > \n";
-            s_Head += "<tr>\n<th colspan=\"9\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>生产领料明细单</th></tr>\n";
+            s_Head += "<tr>\n<th colspan=\"10\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>生产领料明细单</th></tr>\n";
             s_Head += "<tr>\n<th colspan=\"4\" class=\"thstyleleft\"  >" + s_HouseName + "</th><th colspan=\"5\" class=\"thstyleRight\" >" + s_Time + "</th></tr>\n";
             s_Head += "<th class=\"thstyle\" >项次</th>\n";
+            s_Head += "<th class=\"thstyle\" >耗料单号</th>\n";
             if (s_ID == "")
             {
                 if (s_Type == "0")
@@ -404,5 +405,12 @@ public partial class Web_Procure_Xh_View : BasePage
 
             this.Lbl_Details.Text = s_Head + s_Details;
         }
+    }
+
+    public string Get_SED_SEMID(string SED_ID)
+    {
+        string sql = "select top 1 SED_SEMID from  Sc_Expend_Manage_MaterDetails where SED_ID='" + SED_ID + "'";
+        DataTable table = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        return table.Rows[0][0].ToString();
     }
 }

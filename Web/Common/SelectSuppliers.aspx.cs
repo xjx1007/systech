@@ -33,6 +33,7 @@ public partial class Knet_Common_SelectSuppliers : BasePage
             }
             else
             {
+                
                 string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
                 base.Base_DropSheng(this.SuppProvinceDDL);
                 KNet_Sys_ProcureTypebind();
@@ -68,6 +69,9 @@ public partial class Knet_Common_SelectSuppliers : BasePage
             SqlWhere = SqlWhere + " and KPS_Type = '" + this.Ddl_Type.SelectedValue + "' ";
  
         }
+        SqlWhere = SqlWhere +
+                   " and ID not in(select ID from Knet_Procure_Suppliers where (GETDATE()-AddDateTime)>20 and KPS_FiveUrl is null and KPS_ContractUrl is null and AddDateTime>'2018-08-01'and KPS_Type!='128860698200781250')";
+        
         DataSet ds = bll.GetList(SqlWhere);
         GridView1.DataSource = ds;
         GridView1.DataKeyNames = new string[] { "SuppNo" };
@@ -183,22 +187,38 @@ public partial class Knet_Common_SelectSuppliers : BasePage
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public string GetSuppNoAddress(string SuppNoVale)
+    public string GetSuppNoAddress(string SuppNoVale,string select)
     {
         StringBuilder Sb_Return = new StringBuilder();
-        this.BeginQuery("Select SuppAddress,SuppName,SuppPeople,SuppMobiTel,SuppPhone From Knet_Procure_Suppliers Where SuppNo='" + SuppNoVale + "'");
+        this.BeginQuery("Select SuppAddress,SuppName,SuppPeople,SuppMobiTel,SuppPhone,KPS_WareHouse,KPS_WareHousePho From Knet_Procure_Suppliers Where SuppNo='" + SuppNoVale + "'");
         this.QueryForDataTable();
         Sb_Return.Append("地址: "+this.Dtb_Result.Rows[0][0].ToString() + "$");
         Sb_Return.Append(this.Dtb_Result.Rows[0][1].ToString() + "$");
-        Sb_Return.Append("收货人: " + this.Dtb_Result.Rows[0][2].ToString() + "$");
-        if (this.Dtb_Result.Rows[0][3].ToString() != "")
+        if (select == "129652784259578018")
         {
-            Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][3].ToString() + "$");
+            Sb_Return.Append("收货人: " + this.Dtb_Result.Rows[0][5].ToString() + "$");
+            if (this.Dtb_Result.Rows[0][6].ToString() != "")
+            {
+                Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][6].ToString() + "$");
+            }
+            //if (this.Dtb_Result.Rows[0][4].ToString() != "")
+            //{
+            //    Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
+            //}
         }
-        if (this.Dtb_Result.Rows[0][4].ToString() != "")
+        else
         {
-            Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
+            Sb_Return.Append("收货人: " + this.Dtb_Result.Rows[0][2].ToString() + "$");
+            if (this.Dtb_Result.Rows[0][3].ToString() != "")
+            {
+                Sb_Return.Append("联系手机:" + this.Dtb_Result.Rows[0][3].ToString() + "$");
+            }
+            if (this.Dtb_Result.Rows[0][4].ToString() != "")
+            {
+                Sb_Return.Append("联系电话:" + this.Dtb_Result.Rows[0][4].ToString() + "$");
+            }
         }
+       
 
         //this.BeginQuery("Select * from Knet_Procure_OrdersList Where receiveSuppNo='" + SuppNoVale + "' Order by OrderDateTime desc");
         //this.QueryForDataTable();
@@ -214,20 +234,57 @@ public partial class Knet_Common_SelectSuppliers : BasePage
     public string GetSupp(string s_ID)
     {
         string s_Return = "";
+        string Tbx_ID = Request.QueryString["Tbx_ID"] == null ? "" : Request.QueryString["Tbx_ID"].ToString();
+        string select = Request.QueryString["selectValue"] == null ? "" : Request.QueryString["selectValue"].ToString();
         try
         {
-            //仓库
-            string s_WareHouseNo = "";
-            try
+            if (Tbx_ID=="")
             {
-                KNet.BLL.KNet_Sys_WareHouse Bll = new KNet.BLL.KNet_Sys_WareHouse();
-                KNet.Model.KNet_Sys_WareHouse Model = Bll.GetModelBySuppNo(s_ID);
-                s_WareHouseNo = Model.HouseNo;
-            }
-            catch
-            { }
+                //仓库
+                string s_WareHouseNo = "";
+                try
+                {
+                    KNet.BLL.KNet_Sys_WareHouse Bll = new KNet.BLL.KNet_Sys_WareHouse();
+                    KNet.Model.KNet_Sys_WareHouse Model = Bll.GetModelBySuppNo(s_ID);
+                    s_WareHouseNo = Model.HouseNo;
+                }
+                catch
+                { }
 
-            s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + this.KNetOddNumbers(s_ID) + "\", \"" + GetSuppNoAddress(s_ID) + "\", \"" + s_WareHouseNo + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
+                s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + this.KNetOddNumbers(s_ID) + "\", \"" + GetSuppNoAddress(s_ID,select) + "\", \"" + s_WareHouseNo + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
+            }
+            else
+            {
+                string s_WareHouseNo = "";
+                try
+                {
+                    KNet.BLL.KNet_Sys_WareHouse Bll = new KNet.BLL.KNet_Sys_WareHouse();
+                    KNet.Model.KNet_Sys_WareHouse Model = Bll.GetModelBySuppNo(s_ID);
+                    s_WareHouseNo = Model.HouseNo;
+                }
+                catch
+                { }
+
+
+
+                this.BeginQuery("select HandPrice,ProductsBarCode from Knet_Procure_SuppliersPrice where ProductsBarCode in  (select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo = '" +
+                    Tbx_ID +
+                    "') and KPP_Del = '0' and SuppNo='" +
+                    s_ID + "' order by ProductsBarCode ");//order by ProcureUpdateDateTime desc
+                this.QueryForDataTable();
+                int count = Dtb_Result.Rows.Count;
+                string str = "";
+                string str1 = "";
+                for (int i = 0; i < count; i++)
+                {
+                    str += Dtb_Result.Rows[i][0] + ",";
+                    str1+= Dtb_Result.Rows[i][1] + ",";
+                }
+               
+                s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn1(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + Tbx_ID + "\", \"" + GetSuppNoAddress(s_ID,select) + "\", \"" + s_WareHouseNo + "\",\"" + count + "\",\"" + str + "\" ,\"" + str1 + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
+
+            }
+
         }
         catch { }
         return s_Return;

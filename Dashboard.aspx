@@ -23,7 +23,7 @@
     <div class="page-header">
         <div class="page-title">
             <h3>Dashboard</h3>
-            <span>欢迎, xiangz！</span>
+            <span>欢迎, xuejx！</span>
         </div>
     </div>
     <div class="row">

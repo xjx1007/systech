@@ -133,7 +133,7 @@ public partial class Cw_Accounting_Payment_Add : BasePage
         {
             if (Model != null)
             {
-                if (AM.KNet_StaffName != "项洲")
+                if (AM.KNet_StaffName != "薛建新")
                 {
 
                     if (Model.CAP_SKState == 2)

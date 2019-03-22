@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=1500px, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+   <%-- <meta name="viewport" content="width=device-width,initial-scale=1,target-densitydpi=device-dpi,minimum-scale=1,maximum-scale=1,user-scalable=1" />--%>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
@@ -14,8 +15,8 @@
     
     <link rel="stylesheet" href="themes/softed/style.css" type="text/css" />
     <link rel="stylesheet" href="themes/softed/index.css" type="text/css" />
-    <link rel="stylesheet" href="assets/css/fontawesome/font-awesome.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/fontawesome/font-awesome.min.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'/>
     <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -232,14 +233,14 @@
         <div id="overlay_startmenu">
         </div>
         <!-- 短信提醒 -->
-        <div id="new_sms_mask">
+       <%-- <div id="new_sms_mask">
         </div>
         <div id="new_sms_panel">
             <div class="buttonMsn">
                 <a class="btn-white-big" href="javascript:;" onclick="ViewNewSms();" hidefocus="hidefocus">打开</a>&nbsp;&nbsp; <a class="btn-white-big" href="javascript:;" onclick="CloseRemind();"
                     hidefocus="hidefocus">关闭</a>
             </div>
-        </div>
+        </div>--%>
         <!-- 短信箱 -->
         <div id="smsbox_panel" class="dialog">
             <div class="head">

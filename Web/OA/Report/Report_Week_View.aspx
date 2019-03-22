@@ -210,7 +210,7 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 	};	
 	function CreateOneFormPage(){
 		LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
-		LODOP.PRINT_INIT("周报-年度状态");
+		LODOP.PRINT_INIT("周报-月度状态");
 		LODOP.SET_PRINT_STYLE("FontSize",18);
 		LODOP.SET_PRINT_STYLE("Bold",1);
 		var strBodyStyle = "<style>" + document.getElementById("style1").innerHTML + "</style>";
@@ -231,9 +231,9 @@ head:first-child+body tbody[class].scrollContent td + td + td {
 		LODOP.SET_SAVE_MODE("PAGE_TYPE",1);
 		LODOP.SET_SAVE_MODE("centerHeader","页眉");
 		LODOP.SET_SAVE_MODE("centerFooter","第&P页");
-		LODOP.SET_SAVE_MODE("Caption", "周报-年度状态");
+		LODOP.SET_SAVE_MODE("Caption", "周报-月度状态");
 		LODOP.SET_SAVE_MODE("RETURN_FILE_NAME",1);
-		LODOP.SAVE_TO_FILE("周报-年度状态.xls");
+		LODOP.SAVE_TO_FILE("周报-月度状态.xls");
 	};	       
     </script>
     <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
@@ -248,7 +248,8 @@ head:first-child+body tbody[class].scrollContent td + td + td {
     <form id="form1" runat="server">
     <div>
         <input type="button" value="打印预览" onclick="javascript:prn1_preview()" id="Button1" />
-        <input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
+       <%-- <input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />--%>
+         <input type="button" value="导出Excel"  id="Button2" runat="server" OnServerClick="Button2_OnServerClick" />
         <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
     </div>
     <asp:TextBox  runat="server" ID="Tbx_Title" CssClass="Custom_Hidden"></asp:TextBox>

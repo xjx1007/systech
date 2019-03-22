@@ -91,7 +91,14 @@ namespace KNet.BLL
         /// </summary>
         public DataSet GetList(string strWhere)
         {
-            return dal.GetList(strWhere);
+            return dal.GetList1(strWhere);
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public DataSet GetList1(string strWhere)
+        {
+            return dal.GetList1(strWhere);
         }
         /// <summary>
         /// 获得前几行数据
@@ -171,9 +178,7 @@ namespace KNet.BLL
             return GetList("");
         }
 
-        /// <summary>
-        /// 分页获取数据列表
-        /// </summary>
+       
         //public DataSet GetList(int PageSize,int PageIndex,string strWhere)
         //{
         //return dal.GetList(PageSize,PageIndex,strWhere);

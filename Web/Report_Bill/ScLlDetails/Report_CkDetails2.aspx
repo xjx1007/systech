@@ -35,6 +35,7 @@
             var StartDate = document.all('StartDate').value;
             var EndDate = document.all('EndDate').value;
             var State = document.all('Ddl_State').value;
+            var id = document.all('TextBox1').value;
             var CustomerName = document.all('Tbx_CustomerName').value;
             var ProductsType = document.all('Tbx_ProductsTypeNo').value;
             var CustomerTypes = document.all('Tbx_CustomerTypes').value;
@@ -47,6 +48,7 @@
             s_URL += '&CustomerTypes=' + CustomerTypes + '';
             s_URL += '&ProductsEidition=' + ProductsEidition + '';
             s_URL += '&Ck=' + Ck + '';
+            s_URL += '&ID=' + id + '';
             window.open(s_URL, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=850,height=450');
 
         }
@@ -63,7 +65,8 @@
             </tr>
             <tr>
                 <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                    单据报表 > <a class="hdrLink" href="Report_CkDetails2.aspx">成品领料明细</a>
+                    单据报表 > <a class="hdrLink" href="Report_CkDetails2.aspx">
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></a>
                 </td>
                 <td width="100%" nowrap>
                 </td>
@@ -107,6 +110,7 @@
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                     MaxLength="48" Width="200px"></asp:TextBox>
                                                 <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                                 <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
                                             </td>
                                             <td align="right" class="dvtCellLabel">

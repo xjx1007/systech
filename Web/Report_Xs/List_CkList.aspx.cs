@@ -138,9 +138,9 @@ public partial class Web_Report_Xs_List_CkList : BasePage
                     }
                     catch { }
                     s_Details += "<td align=right  class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(d_TotalNet.ToString(), 2) + "</td>\n";//金额
-                    string s_RantTotal = base.FormatNumber1(Convert.ToString(d_TotalNet - decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.17")), 2))), 2);
+                    string s_RantTotal = base.FormatNumber1(Convert.ToString(d_TotalNet - decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.16")), 2))), 2);
                     string s_LeftTotal="0";
-                    decimal d_LeftTotal = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.17")),2));
+                    decimal d_LeftTotal = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.16")),2));
                    
                     s_LeftTotal= base.FormatNumber1(d_LeftTotal.ToString(),2);
                     s_Details += "<td align=right  class='thstyleLeftDetails' noWrap>" + s_RantTotal + "</td>\n";//税额
@@ -262,5 +262,20 @@ public partial class Web_Report_Xs_List_CkList : BasePage
 
         }
            
+    }
+
+    protected void Button2_OnServerClick(object sender, EventArgs e)
+    {
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("销售出库明细.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
     }
 }

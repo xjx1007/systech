@@ -43,6 +43,11 @@ public partial class UploadListForProducts : UserControl
         return page.Base_GetBasicCodeName(s_ID, CodeName);
     }
 
+    public string GetEndTime(string id, string PBA_ProductsType,string endtime)
+    {
+        BasePage page = new BasePage();
+        return page.Base_GetEndTime(id,PBA_ProductsType,endtime);
+    }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
@@ -72,7 +77,7 @@ public partial class UploadListForProducts : UserControl
         {
             SqlWhere = " PBA_FID='" + this.hidCommentFID.Value + "' AND PBA_Type='" + this.hidCommentType.Value + "' and PBA_FID<>'0' ";
 
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "薛建新")
             {
                 if (Chk_Details.Checked == false)
                 {
@@ -101,7 +106,7 @@ public partial class UploadListForProducts : UserControl
         else
         {
             SqlWhere = " PBA_FID='" + CommentFID + "' AND PBA_Type='" + CommentType + "' ";
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "薛建新")
             {
 
                 if (Chk_Details.Checked == false)
@@ -137,17 +142,35 @@ public partial class UploadListForProducts : UserControl
         {
 
             LinkButton btnDownload = (LinkButton)e.Row.Cells[1].FindControl("btnDownload");
+            //Label Label1 = (Label)e.Row.Cells[1].FindControl("Label1");
             string Id = this.GridView_Comment.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
             KNet.BLL.PB_Basic_Attachment bllComment = new KNet.BLL.PB_Basic_Attachment();
             KNet.Model.PB_Basic_Attachment Model = bllComment.GetModel(Id);
             if ((Model.PBA_State == 0) || (Model.PBA_Del == 1) || (AM.YNAuthority("产品资料下载权限") == false))
             {
+
                 btnDownload.Visible = false;
+                //Label1.Visible = false;
             }
             else
             {
-                btnDownload.Visible = true;
+                if (Model.PBA_ProductsType == "2")
+                {
+                    if (AM.YNAuthority("制板文件下载权限"))
+                    {
+                        btnDownload.Visible = true;
+                    }
+                    else
+                    {
+                        btnDownload.Visible = false;
+                    }
+                }
+                else
+                {
+                    btnDownload.Visible = true;
+                }
             }
+          
         }
     }
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -163,7 +186,7 @@ public partial class UploadListForProducts : UserControl
         {
             //if (am.KNet_StaffNo == Model.PBA_Creator)
             //
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "薛建新")
             {
                 bllComment.Delete(Id);
                 am.Add_Logs("删除附件：" + Id);
@@ -221,8 +244,10 @@ public partial class UploadListForProducts : UserControl
                         filePath = Server.MapPath(Model.PBA_URL);
                     }
                     string fileName = System.IO.Path.GetFileName(filePath);
+                   
                     am.Add_DownRecord(Id);
-                    Response.AddHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8));
+                    //Response.AddHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8));
+                    Response.AddHeader("Content-Disposition", "attachment;filename*=utf-8'zh_cn'" + HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8));
                     Response.Flush();
                     Response.WriteFile(filePath);
                 }
@@ -232,7 +257,7 @@ public partial class UploadListForProducts : UserControl
         {
             //if (am.KNet_StaffNo == Model.PBA_Creator)
             //
-            if (am.KNet_Position == "103" || am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || (am.YNAuthority("停用产品资料")))
+            if (am.KNet_Position == "103" || am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "薛建新" || (am.YNAuthority("停用产品资料")))
             {
                 // bllComment.Delete(Id);
                 if (Model.PBA_Del == 0)
@@ -252,7 +277,7 @@ public partial class UploadListForProducts : UserControl
         else if (cmd == "Sp")
         {
             //如果是审批
-            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "项洲" || am.KNet_Position == "103")
+            if (am.KNet_StaffNo == "129785817148286974" || am.KNet_StaffName == "薛建新" || am.KNet_Position == "103")
             {
                 if (Model.PBA_State == 1)
                 {
@@ -284,5 +309,12 @@ public partial class UploadListForProducts : UserControl
     {
         BasePage base1 = new BasePage();
         return base1.Base_GetBasicCodeName("1133", s_ProductsID);
+    }
+
+
+
+    protected void OnServerClick(object sender, EventArgs e)
+    {
+       
     }
 }

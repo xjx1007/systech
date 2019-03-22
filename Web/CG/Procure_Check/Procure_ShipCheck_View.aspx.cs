@@ -31,7 +31,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
             KNet.Model.Cg_Order_Checklist Model = Bll.GetModel(s_ID);
             if (Model.COC_Type == "0")//成品采购
             {
-                string s_Sql = "Select b.COD_ProductsBarCode,isnull(e.CustomerValue,d.KWD_Custmoer),d.DirectOutDateTime,isnull(e.KSO_PlanOutWareDateTime,d.DirectOutDateTime),b.COD_Dznumber,b.COD_wuliu,b.COd_Price,b.COD_HandPrice, ";
+                string s_Sql = "Select  b.COD_ProductsBarCode,isnull(e.CustomerValue,d.KWD_Custmoer),d.DirectOutDateTime,isnull(e.KSO_PlanOutWareDateTime,d.DirectOutDateTime),b.COD_Dznumber,b.COD_wuliu,b.COd_Price,b.COD_HandPrice, ";
                 s_Sql += "b.COD_Money,b.COD_IC,B.COD_ICNumber,a.COC_Stime,a.COC_HouseNo,b.COD_BNumber,COD_DirectOutID  from Cg_Order_Checklist a join Cg_Order_Checklist_Details b on a.COC_Code=b.COD_CheckNo join KNet_WareHouse_DirectOutList_Details c on c.ID=b.COD_DirectOutID join KNet_WareHouse_DirectOutList d on d.DirectOutNo=c.DirectOutNo left join KNet_Sales_OutWareList e on e.OutWareNo=d.KWD_ShipNo  Where 1=1 and a.COC_Code='" + s_ID + "' Order by d.DirectOutDateTime";
                 string s_Date = "", s_House = "", s_Style = "";
                 string s_Head = "";
@@ -99,8 +99,8 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
 
                 s_ExcelName = base.Base_GetHouseName(s_House) + "(" + DateTime.Parse(s_Date).Year.ToString() + "." + DateTime.Parse(s_Date).Month.ToString() + ").xls";
                 s_Head += "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"ListDetails\" >\n \n";
-                s_Head += "<tr >\n<td colspan=\"15\" class=\"ListHead\"><font size=\"6\"><b>士腾与供应商对账确认单</b></font></td></tr>\n<tr >\n<td colspan=\"15\" class=\"ListHead\" align=\"center\">1.发货对账单</td></tr>\n";
-                s_Head += "<tr >\n<td colspan=\"11\"   class=\"ListHead\"  align=\"left\">" + s_HouseName + "</td><td colspan=\"4\" class=\"ListHead\" align=\"right\">" + s_Time + "</td></tr>\n";
+                s_Head += "<tr >\n<td colspan=\"13\" class=\"ListHead\"><font size=\"6\"><b>士腾与供应商对账确认单("+ s_ID + ")</b></font></td></tr>\n<tr >\n<td colspan=\"15\" class=\"ListHead\" align=\"center\">1.发货对账单</td></tr>\n";
+                s_Head += "<tr >\n<td colspan=\"8\"   class=\"ListHead\"  align=\"left\">" + s_HouseName + "</td><td colspan=\"4\" class=\"ListHead\" align=\"right\">" + s_Time + "</td></tr>\n";
                 s_Head += "<tr ><td  class=\"ListHead\" colspan=13 align=\"center\">供应商填写</td><td class=\"ListHead\" align=\"center\" colspan=2>士腾采购填写</td></tr><tr >\n<td class=\"ListHead\" rowspan=2>序号</td>\n";
                 s_Head += "<td class=\"ListHead\" align=center  rowspan=2>产品版本</td>\n";
                 s_Head += "<td class=\"ListHead\" align=center  rowspan=2>收货单位</td>\n";
@@ -120,139 +120,15 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 s_Head += "<td class=\"ListHead\">数量</td>\n</tr>\n";
 
 
-                //s_Details += "<tr>\n<td colspan=\"17\" class=\"ListHead\"  width=\"100%\" align=\"center\">2.不良品返修对账单</td></tr>";
-                //s_Details += "<tr ><td  class=\"ListHead\" colspan=10 align=\"center\">供应商填写</td><td class=\"ListHead\" align=\"center\" colspan=7>士腾采购填写</td></tr>";
-                //s_Details += "<tr >\n<td class=\"ListHead\">序号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >产品型号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >退货日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >退货数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >返回日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >返还数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >物流名称和单号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >维修记录（原因）</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >签收日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >签收人</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >确认人</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >确认时间</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >实收数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >确认状况</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" colspan=\"3\" >备注</td>\n</tr>";
-
-                //s_Details += "<tr>\n<td colspan=\"17\" class=\"ListHead\"  align=\"center\">3.备品对账单</td></tr>";
-                //s_Details += "<tr ><td class=\"ListHead\" colspan=9 align=\"center\">供应商填写</td><td class=\"ListHead\" align=\"center\" colspan=8>士腾采购填写</td></tr>";
-                //s_Details += "<tr >\n<td class=\"ListHead\" >序号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >产品型号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >发货日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >收货单位</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >发货数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >物流名称和单号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >备品记录（原因）</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >签收日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >签收人</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >确认人</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >确认时间</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >实收数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >确认状况</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" colspan=\"4\" >备注</td>\n</tr>";
-
-
-                //s_Details += "<tr>\n<td colspan=\"17\" class=\"ListHead\" align=\"center\">4. IC对账单</td></tr>";
-                //s_Details += "<tr ><td  class=\"ListHead\" colspan=5 align=\"center\">士腾发货人员填写</td><td class=\"ListHead\" align=\"center\" colspan=7>供应商填写</td><td class=\"ListHead\" align=\"center\" colspan=5 >士腾填写</td></tr>";
-                //s_Details += "<tr >\n<td class=\"ListHead\" >序号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >对应成品型号名称</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >IC型号</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >发货日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >发货数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >签收日期</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >实收数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >成品出库数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >IC不良数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >不良原因 不良品数量超过规定损耗率时填写</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >退回数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >前期库存</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >订单未出数量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" >IC库存量</td>\n";
-                //s_Details += "\n<td class=\"ListHead\" colspan=3 >确认人</td>\n</tr>";
-
-                /*
-                s_Details += "<tr>\n<td colspan=\"15\" class=\"ListHead\" align=\"center\">2.其他项目对账单</td></tr>";
-                s_Details += "<tr ><td  class=\"ListHead\"  colspan=10 align=\"center\">供应商填写</td><td class=\"ListHead\"  align=\"center\" colspan=5>士腾相关部门填写</td></tr>";
-                s_Details += "<tr >\n<td class=\"ListHead\">序号</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >项目</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >发生日期</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >客户</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >发生原因</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >数量</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >总额</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >供应商承担金额</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >士腾承担金额</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >备注</td>\n";
-                s_Details += "\n<td class=\"ListHead\" colspan=5 >士腾确认</td>\n</tr>";
-                string s_FreightSql = "select * from Xs_Sales_Freight a join KNet_WareHouse_DirectOutList b on a.XSF_FID=b.DirectOutNo ";
-                s_FreightSql += " where a.XSF_Customervalue in (select SuppNo from KNet_Sys_WareHouse where HouseNo='" + s_House + "') ";
-                try
-                {
-                    if (Model.COC_BeginDate.ToString() != "")
-                    {
-                        s_FreightSql += " and a.XSF_Stime >='" + Model.COC_BeginDate.ToString() + "'";
-                    }
-                    if (Model.COC_EndDate.ToString() != "")
-                    {
-                        s_FreightSql += " and a.XSF_Stime <='" + Model.COC_EndDate.ToString() + "'";
-                    }
-                }
-                catch{}
-                s_FreightSql += " order by a.XSF_Stime ";
-                this.BeginQuery(s_FreightSql);
-                this.QueryForDataTable();
-                DataTable Dtb_Freight = Dtb_Result;
-                decimal d_FAmount = 0, d_FAmount1 = 0, d_FAmount2 = 0, d_FAmount3 = 0;
-                for (int i = 0; i < Dtb_Freight.Rows.Count; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        s_Style = "class='gg'";
-                    }
-                    else
-                    {
-                        s_Style = "class='rr'";
-                    }
-                    s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + (i + 1).ToString() + "</td>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.Base_GetShipDetailProductsPatten(Dtb_Freight.Rows[i]["DirectOutNo"].ToString()) + "</td>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + DateTime.Parse(Dtb_Freight.Rows[i]["XSF_Stime"].ToString()).ToShortDateString() + "</td>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + base.Base_GetCustomerName(Dtb_Freight.Rows[i]["KWD_Custmoer"].ToString()) + "</td>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + Dtb_Freight.Rows[i]["XSF_Description"].ToString() + "&nbsp;</td>\n";
-                    s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(Dtb_Freight.Rows[i]["XSF_TotalNumber"].ToString(), 2) + "</td>\n";
-                    s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(Dtb_Freight.Rows[i]["XSF_TotalMoney"].ToString(), 2) + "</td>\n";
-                    s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(Dtb_Freight.Rows[i]["XSF_FMoney"].ToString(), 2) + "</td>\n";
-                    s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(Dtb_Freight.Rows[i]["XSF_Money"].ToString(), 2) + "</td>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' noWrap>" + Dtb_Freight.Rows[i]["XSF_Remarks"].ToString() + "&nbsp;</td>\n";
-                    s_Details += "<td align=center class='ListHeadDetails' colspan=6 noWrap>&nbsp;</td>\n";//money
-                    s_Details += " </tr>";
-                    d_FAmount += decimal.Parse(Dtb_Freight.Rows[i]["XSF_TotalNumber"].ToString());
-                    d_FAmount1 += decimal.Parse(Dtb_Freight.Rows[i]["XSF_TotalMoney"].ToString());
-                    d_FAmount2 += decimal.Parse(Dtb_Freight.Rows[i]["XSF_FMoney"].ToString());
-                    d_FAmount3 += decimal.Parse(Dtb_Freight.Rows[i]["XSF_Money"].ToString());
-                }
-                s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
-                s_Details += "<td align=center class='ListHeadDetails' noWrap colspan='5'>合计：</td>\n";
-                s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_FAmount.ToString(), 2) + "</td>\n";
-                s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_FAmount1.ToString(), 2) + "</td>\n";
-                s_Details += "<td  align=right  class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_FAmount2.ToString(), 2) + "</td>\n";
-                s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(d_FAmount3.ToString(), 2) + "</td>\n";
-                s_Details += "<td align=center class='ListHeadDetails' noWrap colspan=7>&nbsp;</td>\n";//money
-                s_Details += " </tr>";
-                
-                */
+               
                 s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>供应商审核结果:</td><td class=\"ListHeadDetails\" >&nbsp;</td>";
                 s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
                 s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>总经理确认:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td></tr>";
-                s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>士腾审核结果:</td><td class=\"ListHeadDetails\">&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\"  colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\"  colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>总经理确认:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td></tr>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=2>财务确认:</td><td class=\"ListHeadDetails\">&nbsp;</td></tr>";
+                //s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>士腾审核结果:</td><td class=\"ListHeadDetails\">&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\"  colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\"  colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>总经理确认:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td></tr>";
 
                 s_Details += "</table>";
 
@@ -262,7 +138,120 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 this.Lbl_Details.Text += ShowInfo(s_ID);
                 this.Lbl_Details.Text += "</table>";
             }
-            else//原材料对账单
+            if (Model.COC_Type == "2")//加工费对账单
+            {
+                string s_Sql = "Select b.COD_ProductsBarCode,a.COC_SuppNo,a.COC_Stime,b.COD_Dznumber,b.COD_wuliu,b.COd_Price,b.COD_Money,b.COD_CustomerValue,a.COC_Details,a.COC_Stime,b.COD_DirectOutID, b.COD_BNumber,b.COD_BFNumber,b.COD_BFPrice,b.COD_EWMoney,b.COD_EWFMoney  from Cg_Order_Checklist a join Cg_Order_Checklist_Details b on a.COC_Code = b.COD_CheckNo  Where 1=1 and a.COC_Code='" + s_ID + "'  ";
+                //s_Sql += "b.COD_Money,b.COD_CustomerValue,a.COC_Details,a.COC_Stime,e.OrderNo,b.COD_BNumber,d.KPO_CheckTime,b.COD_BFNumber,b.COD_BFPrice from Cg_Order_Checklist a join Cg_Order_Checklist_Details b on a.COC_Code=b.COD_CheckNo join Knet_Procure_WareHouseList_Details c on c.ID=b.COD_DirectOutID join Knet_Procure_WareHouseList d on d.WareHouseNo=c.WareHouseNo left join Knet_Procure_OrdersList e on  e.OrderNO=d.OrderNo Where 1=1 and a.COC_Code='" + s_ID + "' Order by d.WareHouseDateTime";
+                string s_Date = "", s_House = "", s_Style = "";
+                string s_Head = "";
+                this.BeginQuery(s_Sql);
+                this.QueryForDataTable();
+                DataTable Dtb_Table = this.Dtb_Result;
+                if (Dtb_Table.Rows.Count > 0)
+                {
+                    for (int i = 0; i < Dtb_Table.Rows.Count; i++)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            s_Style = "class='gg'";
+                        }
+                        else
+                        {
+                            s_Style = "class='rr'";
+                        }
+                        s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
+                        s_Details += "<td align=center class='ListHeadDetails' noWrap>" + (i + 1).ToString() + "</td>\n";
+                        s_Details += "<td align=left class='ListHeadDetails' noWrap>" + base.Base_GetProdutsName(Dtb_Table.Rows[i][0].ToString()) + "</td>\n";
+                        s_Details += "<td align=left class='ListHeadDetails' noWrap>" + base.Base_GetProductsEdition(Dtb_Table.Rows[i][0].ToString()) + "</td>\n";
+                        s_Details += "<td align=left class='ListHeadDetails' noWrap>" + base.Base_GetHouseName(Dtb_Table.Rows[i][7].ToString()) + "</td>\n";
+                        try
+                        {
+                            s_Details += "<td align=left class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][10].ToString() + "</td>\n";
+                        }
+                        catch { s_Details += "<td align=left class='ListHeadDetails' noWrap>&nbsp;</td>\n"; }
+                        /*s_Details += "<td align=left class='ListHeadDetails' noWrap>" + DateTime.Parse(Dtb_Table.Rows[i]["KPO_CheckTime"].ToString()).ToShortDateString() + "</td>\n";
+                        */
+                        s_Details += "<td align=left class='ListHeadDetails' noWrap>" + DateTime.Parse(Dtb_Table.Rows[i][2].ToString()).ToShortDateString() + "</td>\n";
+
+
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i][3].ToString(), 0) + "</td>\n";
+                        int BFNumber = 0;
+                        if (Dtb_Table.Rows[i][12].ToString()=="")
+                        {
+                             BFNumber = 0;
+                        }
+                        else
+                        {
+                            BFNumber = int.Parse(Dtb_Table.Rows[i][12].ToString());
+                        }
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + (int.Parse(base.FormatNumber1(Dtb_Table.Rows[i][3].ToString(), 0))-BFNumber) + "</td>\n";//实发数量
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][11].ToString() + "</td>\n";
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i][4].ToString() + "</td>\n";//handprice
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][5].ToString() + "</td>\n";//money
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][12].ToString() + "</td>\n";//报废数量
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][13].ToString() + "</td>\n";//报废单价
+                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i][14].ToString() + "</td>\n";
+                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i][15].ToString() + "</td>\n";
+                        s_Details += "<td align=right class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][6].ToString() + "</td>\n";//money
+                       
+                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
+                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        //s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        //s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        //s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        s_Details += " </tr>";
+                    }
+                    s_Date = DateTime.Parse(Dtb_Table.Rows[0][9].ToString()).ToShortDateString();
+                    s_House = Dtb_Table.Rows[0][1].ToString();
+                }
+
+                s_Time = "对账月份:" + DateTime.Parse(s_Date).Year.ToString() + "-" + DateTime.Parse(s_Date).Month.ToString();
+                //s_Time = "";
+                s_HouseName = "供应商名称:" + base.Base_GetSupplierName(s_House);
+                s_ExcelName = base.Base_GetSupplierName(s_House) + "(" + DateTime.Parse(s_Date).Year.ToString() + "." + DateTime.Parse(s_Date).Month.ToString() + ").xls";
+
+                s_Head += "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<tdead class=\"fixedHeader\"> \n";
+                s_Head += "<tr >\n<td  class=\"ListHead\" colspan=\"20\"><font size=\"6\"><b>士腾与供应商对账确认单("+ s_ID + ")</b></font></td></tr>\n<tr >\n<td colspan=\"17\"  class=\"ListHead\" align=\"center\">1.发货对账单</td></tr>\n";
+                s_Head += "<tr >\n<td colspan=\"10\"  class=\"ListHead\" >" + s_HouseName + "</td><td colspan=\"8\" class=\"ListHead\">" + s_Time + "</td></tr>\n";
+                s_Head += "<td class=\"ListHead\">序号</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center  >产品名称</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center  >产品型号</td>\n";
+                s_Head += "<td class=\"ListHead\">收货单位</td>\n";
+                s_Head += "<td class=\"ListHead\"> 采购单号</td>\n";
+                s_Head += "<td class=\"ListHead\" >入库日期</td>\n";
+                s_Head += "<td class=\"ListHead\" >订单数量</td>\n";
+                s_Head += "<td class=\"ListHead\" >送货数量</td>\n";
+
+                s_Head += "<td class=\"ListHead\" >备料数量</td>\n";
+                s_Head += "<td class=\"ListHead\" >物流及单号</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center >单价</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center >报废数量</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center >赔偿单价</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center >额外扣除￥</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center >额外金额￥</td>\n";
+                s_Head += "<td class=\"ListHead\" align=center>应付总额</td>\n";
+                s_Head += "<td class=\"ListHead\">备注</td>\n";
+                //s_Head += "<td class=\"ListHead\" >确认人</td>\n";
+                //s_Head += "<td class=\"ListHead\" >确认时间</td>\n";
+                //s_Head += "<td class=\"ListHead\" >确认方法</td>\n";
+                s_Head += "</thead><tbody class=\"scrollContent\">";
+
+                s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>供应商审核结果:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=2>供应商签字:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=2>供应商盖章:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=6>财务确认:</td><td class=\"ListHeadDetails\" colspan=1>&nbsp;</td></tr>";
+                //s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>士腾审核结果:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=7>总经理确认:</td><td class=\"ListHeadDetails\" colspan=1>&nbsp;</td></tr>";
+                s_Details += "</table>";
+                this.Lbl_Details.Text = s_Head + s_Details;
+                this.Lbl_Details.Text += "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"ListDetails\" >\n \n";
+                this.Lbl_Details.Text += "<tr><td class=\"ListHeadLeft\" colspan=15>需开发票</td></tr>";
+                this.Lbl_Details.Text += ShowInfo(s_ID);
+                this.Lbl_Details.Text += "</table>";
+            }
+            if (Model.COC_Type == "1")//原材料对账单
             {
                 string s_Sql = "Select b.COD_ProductsBarCode,a.COC_SuppNo,d.WareHouseDateTime,b.COD_Dznumber,b.COD_wuliu,b.COd_Price, ";
                 s_Sql += "b.COD_Money,b.COD_CustomerValue,a.COC_Details,a.COC_Stime,e.OrderNo,b.COD_BNumber,d.KPO_CheckTime from Cg_Order_Checklist a join Cg_Order_Checklist_Details b on a.COC_Code=b.COD_CheckNo join Knet_Procure_WareHouseList_Details c on c.ID=b.COD_DirectOutID join Knet_Procure_WareHouseList d on d.WareHouseNo=c.WareHouseNo left join Knet_Procure_OrdersList e on  e.OrderNO=d.OrderNo Where 1=1 and a.COC_Code='" + s_ID + "' Order by d.WareHouseDateTime";
@@ -305,9 +294,9 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                         s_Details += "<td align=right class='ListHeadDetails' noWrap>" + Dtb_Table.Rows[i][6].ToString() + "</td>\n";//money
                         s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
 
-                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
-                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
-                        s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        //s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        //s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
+                        //s_Details += "<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>\n";//money
                         s_Details += " </tr>";
                     }
                     s_Date = DateTime.Parse(Dtb_Table.Rows[0][9].ToString()).ToShortDateString();
@@ -319,8 +308,8 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 s_ExcelName = base.Base_GetSupplierName(s_House) + "(" + DateTime.Parse(s_Date).Year.ToString() + "." + DateTime.Parse(s_Date).Month.ToString() + ").xls";
 
                 s_Head += "<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<tdead class=\"fixedHeader\"> \n";
-                s_Head += "<tr >\n<td  class=\"ListHead\" colspan=\"15\"><font size=\"6\"><b>士腾与供应商对账确认单</b></font></td></tr>\n<tr >\n<td colspan=\"15\"  class=\"ListHead\" align=\"center\">1.发货对账单</td></tr>\n";
-                s_Head += "<tr >\n<td colspan=\"9\"  class=\"ListHead\" >" + s_HouseName + "</td><td colspan=\"6\" class=\"ListHead\">" + s_Time + "</td></tr>\n";
+                s_Head += "<tr >\n<td  class=\"ListHead\" colspan=\"12\"><font size=\"6\"><b>士腾与供应商对账确认单</b></font></td></tr>\n<tr >\n<td colspan=\"12\"  class=\"ListHead\" align=\"center\">1.发货对账单</td></tr>\n";
+                s_Head += "<tr >\n<td colspan=\"6\"  class=\"ListHead\" >" + s_HouseName + "</td><td colspan=\"6\" class=\"ListHead\">" + s_Time + "</td></tr>\n";
                 s_Head += "<td class=\"ListHead\">序号</td>\n";
                 s_Head += "<td class=\"ListHead\" align=center  >产品名称</td>\n";
                 s_Head += "<td class=\"ListHead\" align=center  >产品型号</td>\n";
@@ -331,57 +320,22 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 s_Head += "<td class=\"ListHead\" >备料数量</td>\n";
                 s_Head += "<td class=\"ListHead\" >物流及单号</td>\n";
                 s_Head += "<td class=\"ListHead\" align=center >单价</td>\n";
+               
                 s_Head += "<td class=\"ListHead\" align=center>总额</td>\n";
                 s_Head += "<td class=\"ListHead\">备注</td>\n";
-                s_Head += "<td class=\"ListHead\" >确认人</td>\n";
-                s_Head += "<td class=\"ListHead\" >确认时间</td>\n";
-                s_Head += "<td class=\"ListHead\" >确认方法</td>\n";
+                //s_Head += "<td class=\"ListHead\" >确认人</td>\n";
+                //s_Head += "<td class=\"ListHead\" >确认时间</td>\n";
+                //s_Head += "<td class=\"ListHead\" >确认方法</td>\n";
                 s_Head += "</thead><tbody class=\"scrollContent\">";
-                /*
-                s_Details += "<tr>\n<td colspan=\"15\" class=\"ListHead\" align=\"center\">2.不良品返修对账单</td></tr>";
-                s_Details += "<tr ><td  class=\"ListHead\"colspan=10 align=\"center\">供应商填写</td>\n ";
-                s_Details += "<td class=\"ListHead\" align=\"center\" colspan=5>士腾采购填写</td></tr>";
-                s_Details += "<tr >\n<td class=\"ListHead\" >序号</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >产品型号</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >退货日期</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >退货数量</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >返回日期</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >返还数量</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >物流名称和单号</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >维修记录（原因）</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >签收日期</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >签收人</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >确认人</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >确认时间</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >实收数量</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >确认状况</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >备注</td>\n</tr>";
-
-
-
-                s_Details += "<tr>\n<td colspan=\"15\"  class=\"ListHead\" align=\"center\">3.其他项目对账单</td></tr>";
-                s_Details += "<tr ><td  class=\"ListHead\" colspan=9 align=\"center\">供应商填写</td><td class=\"ListHead\" colspan=6>士腾相关部门填写</td></tr>";
-                s_Details += "<tr >\n<td class=\"ListHead\">序号</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >项目</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >发生日期</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >发生原因</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >数量</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >单价</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >总额</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >承担单位</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >承担数量</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >承担金额</td>\n";
-                s_Details += "\n<td class=\"ListHead\" >确认时间</td>\n";
-                s_Details += "\n<td class=\"ListHead\" colspan=\"4\" >备注</td>\n</tr>";
-                 */
+               
                 s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>供应商审核结果:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>总经理确认:</td><td class=\"ListHeadDetails\" colspan=1>&nbsp;</td></tr>";
-                s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>士腾审核结果:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
-                s_Details += "<td class=\"ListHeadDetails\" colspan=2>总经理确认:</td><td class=\"ListHeadDetails\" colspan=1>&nbsp;</td></tr>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=2>供应商签字:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=1>供应商盖章:</td><td class=\"ListHeadDetails\" colspan=1>&nbsp;</td>";
+                s_Details += "<td class=\"ListHeadDetails\" colspan=1>财务确认:</td><td class=\"ListHeadDetails\">&nbsp;</td></tr>";
+                //s_Details += "<br><tr>\n<td class=\"ListHeadDetails\" colspan=2>士腾审核结果:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>制表人及日期:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>核准人及时间:</td><td class=\"ListHeadDetails\" colspan=2>&nbsp;</td>";
+                //s_Details += "<td class=\"ListHeadDetails\" colspan=2>总经理确认:</td><td class=\"ListHeadDetails\" colspan=1>&nbsp;</td></tr>";
                 s_Details += "</table>";
                 this.Lbl_Details.Text = s_Head + s_Details;
 
@@ -484,9 +438,9 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
         }
         // this.Lbl_KpDetails.Text = "  最大开票金额：<font color=red>" + d_MaxMoney.ToString() + "</font>";
         //this.Lbl_KpDetails.Text += "   单张最大开票行数：<font color=red>" + i_MaxRow.ToString() + "</font>";
-        decimal d_Total = 0, d_Total1 = 0, d_Total2 = 0, d_Total3 = 0, d_TotalPrice = 0, d_TotalHandPrice = 0, d_FPNumber = 0;
-        decimal dd_Total = 0, dd_Total1 = 0, dd_Total2 = 0, dd_Total3 = 0, dd_Total4 = 0, dd_TotalPrice = 0, dd_TotalHandPrice = 0, dd_TotalTotal = 0;
-        decimal ddd_Total = 0, ddd_Total1 = 0, ddd_Total2 = 0;
+        decimal d_Total = 0, d_Total1 = 0, d_Total2 = 0, d_Total3 = 0, d_Total4=0,  d_TotalPrice = 0, d_TotalHandPrice = 0, d_FPNumber = 0;
+        decimal dd_Total = 0, dd_Total1 = 0, dd_Total2 = 0, dd_Total3 = 0, dd_Total4 = 0, dd_Total5 = 0, dd_Total6=0, dd_TotalPrice = 0, dd_TotalHandPrice = 0, dd_TotalTotal = 0;
+        decimal ddd_Total = 0, ddd_Total1 = 0, ddd_Total2 = 0, ddd_Total3 = 0;
 
         int i_Row = 1;
         int i_FPNum = 1;
@@ -494,7 +448,7 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
 
         if (Model.COC_Type == "0")//成品对账
         {
-            s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"11\"><b>加工费发票1</b></td>\n</tr>";
+            s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"11\"><b>成品发票1</b></td>\n</tr>";
             s_Return += " <tr ><td class=\"ListHeadDetials\" align=left colspan=\"11\"><b><font color=red>发票号码：</font></b>___________________</td></tr>";
             s_Return += " <tr ><td class=\"ListHead\" >项次</td>\n";
             s_Return += "<td class=\"ListHead\" align=center>料号</td>\n";
@@ -507,7 +461,26 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
             s_Return += "<td class=\"ListHead\">税率</td>\n";
             s_Return += "<td class=\"ListHead\"  colspan=2>税额</td>\n</tr >";
         }
-        else
+        if (Model.COC_Type == "2")//加工费对账
+        {
+            s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"16\"><b>加工费发票</b></td>\n</tr>";
+            s_Return += " <tr ><td class=\"ListHead\" >项次</td>\n";
+            s_Return += "<td class=\"ListHead\" align=center>料号</td>\n";
+            s_Return += "<td class=\"ListHead\" align=center>货物名称</td>\n";
+            s_Return += "<td class=\"ListHead\" align=center>规格型号</td>\n";
+            s_Return += "<td class=\"ListHead\" align=center>单位</td>\n";
+            s_Return += "<td class=\"ListHead\">订单数量</td>\n";
+            s_Return += "<td class=\"ListHead\">送货数量</td>\n";
+            s_Return += "<td class=\"ListHead\">报废数量</td>\n";
+            s_Return += "<td class=\"ListHead\">报废单价</td>\n";
+            s_Return += "<td class=\"ListHead\">加工单价</td>\n";
+            s_Return += "<td class=\"ListHead\">额外扣除￥</td>\n";
+            s_Return += "<td class=\"ListHead\">额外金额￥</td>\n";
+            s_Return += "<td class=\"ListHead\">应付金额</td>\n";
+            s_Return += "<td class=\"ListHead\">税率</td>\n";
+            s_Return += "<td class=\"ListHead\"  colspan=2>税额</td>\n</tr >";
+        }
+        if (Model.COC_Type == "1")
         {
 
             s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"11\"><b>原材料发票1</b></td>\n</tr>";
@@ -530,6 +503,8 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 decimal d_HandPrice = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_HandPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_HandPrice"].ToString());
                 decimal d_Number = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString());
                 decimal d_BNumber = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString());
+                decimal d_BFNumber = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BFNumber"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_BFNumber"].ToString());//报废数量
+                decimal d_BFPrice = decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BFPrice"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["COD_BFPrice"].ToString());//报废单价
                 if (Model.COC_Type == "0")//成品对账
                 {
                     KNet.BLL.KNet_WareHouse_DirectOutList_Details Bll_DirectOutDetails = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
@@ -562,22 +537,33 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                     d_Total1 += decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_DzNumber"].ToString());
                     d_Total2 += decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString());
                     d_Total3 += decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_Money"].ToString());
+                    d_Total4+= d_BFNumber;//报废数量
                     d_TotalPrice += (d_Number + d_BNumber) * d_Price;
                     d_TotalHandPrice += (d_Number + d_BNumber) * d_HandPrice;
 
                     dd_Total += decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_CkNumber"].ToString());
                     if (Model.COC_Type == "0")
                     {
+                        dd_Total5+= (d_Number + d_BNumber);
                         dd_Total1 += (d_Number + d_BNumber);
+                    }
+                    if (Model.COC_Type == "2")
+                    {
+                        dd_Total6= (d_Number + d_BNumber);
+                        dd_Total5 += (d_Number + d_BNumber);
+                        dd_Total1 += (d_Number + d_BNumber- d_BFNumber);
                     }
                     else
                     {
+                        dd_Total5 += d_Number;
                         dd_Total1 += d_Number;
                     }
                     dd_Total2 += decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_BNumber"].ToString());
                     dd_Total3 += decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_Money"].ToString());
                     dd_TotalPrice += (d_Number + d_BNumber) * d_Price;
-                    dd_TotalHandPrice += (d_Number + d_BNumber) * d_HandPrice;
+                   
+                        dd_TotalHandPrice += (d_Number + d_BNumber- d_BFNumber) * d_HandPrice;
+                   
                     dd_TotalTotal = dd_TotalPrice + dd_TotalHandPrice;
                     if (d_Price != 0)
                     {
@@ -594,15 +580,24 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 {
                     d_NowPrice = d_HandPrice;
                     d_NowMoney = (dd_Total1 * d_HandPrice);
-                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / decimal.Parse("1.17")), 10));
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / decimal.Parse("1.16")), 10));
                     d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
                     d_TaxMoney = dd_TotalHandPrice - d_FPMoney;
                 }
-                else
+                if (Model.COC_Type == "2")
+                {
+                    d_NowPrice = d_HandPrice;
+                    //d_NowMoney = (dd_Total1 * d_HandPrice);
+                    d_NowMoney= decimal.Parse(Dts_Table.Tables[0].Rows[i]["COD_Money"].ToString());
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / decimal.Parse("1.16")), 10));
+                    d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
+                    d_TaxMoney = dd_TotalHandPrice - d_FPMoney;
+                }
+                 if (Model.COC_Type == "1")
                 {
                     d_NowMoney = dd_Total3;
                     d_NowPrice = d_Price;
-                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Price / decimal.Parse("1.17")), 10));
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Price / decimal.Parse("1.16")), 10));
                     d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
                     d_TaxMoney = dd_Total3 - d_FPMoney;
                 }
@@ -614,38 +609,74 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                     string s_NextHandPrice = Dts_Table.Tables[0].Rows[i + 1]["COD_HandPrice"].ToString();
                     if ((Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString() != Dts_Table.Tables[0].Rows[i + 1]["COD_ProductsBarCode"].ToString()) || (s_Price != s_NextPrice) || (s_HandPrice != s_NextHandPrice))
                     {
-
-                        //发票信息
-                        s_Return += "<tr >";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
-                        s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
-
-                        if (Model.COC_Type == "0")//成品对账
+                        if (Model.COC_Type == "2")
                         {
-                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
+                            //发票信息
+                            s_Return += "<tr >";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
+                            s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
+
+                            if (Model.COC_Type == "0")//成品对账
+                            {
+                                s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
+                            }
+                            else
+                            {
+                                s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProdutsName(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                            }
+
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
+
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total6.ToString(), 0) + "</td>";//应发数量
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";//实发数量
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_Total4.ToString(), 0) + "</td>";//报废数量
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_BFPrice.ToString(), 0) + "</td>";//报废单价
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["COD_EWMoney"].ToString(), 4) + "</td>";//额外扣除金额
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["COD_EWFMoney"].ToString(), 4) + "</td>";//额外付款金额
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"center\">16%</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
+                            s_Return += "</tr>";
                         }
                         else
                         {
-                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProdutsName(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                            s_Return += "<tr >";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
+                            s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
+                            if (Model.COC_Type == "0")//成品对账
+                            {
+                                s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
+                            }
+                            else
+                            {
+                                s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProdutsName(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                            }
+
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
+
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
+
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
+
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"center\">16%</td>";
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
+
+                            s_Return += "</tr>";
                         }
-
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
-
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"center\">17%</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
-                        s_Return += "</tr>";
                         ddd_Total += dd_Total1;
                         ddd_Total1 += d_NowMoney;
                         ddd_Total2 += d_TaxMoney;
+                        ddd_Total3 += dd_Total5;
                         dd_Total = 0;
                         dd_Total1 = 0;
                         dd_Total2 = 0;
                         dd_Total3 = 0;
                         dd_Total4 = 0;
+                        d_Total4 = 0;
                         dd_TotalPrice = 0;
                         dd_TotalHandPrice = 0;
 
@@ -678,7 +709,38 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                                 s_Return += "<td class=\"ListHead\">税率</td>\n";
                                 s_Return += "<td class=\"ListHead\"  colspan=2>税额</td>\n</tr >";
                             }
-                            else
+                            if (Model.COC_Type == "2")//加工费
+                            {
+                                s_Return += " <tr >\n";
+                                s_Return += "<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>\n";
+                                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total3.ToString(), 0) + "</td>\n";//应发数量总和
+                                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total.ToString(), 0) + "</td>\n";//实发数量总和
+                                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total1.ToString(), 2) + "</td>\n";
+                                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                                s_Return += "<td class='ListHeadDetails' align=right  colspan=4>&nbsp;" + base.FormatNumber1(ddd_Total2.ToString(), 2) + "</td>\n";
+                                s_Return += " </tr>";
+                                ddd_Total = 0;
+                                ddd_Total1 = 0;
+                                ddd_Total2 = 0;
+                                s_Return += " <tr ><td class=\"ListHeadLeft\" align=left colspan=\"13\"><b>加工费发票" + i_FPNum + "</b></td>\n</tr>";
+                                s_Return += " <tr ><td class=\"ListHead\" >项次</td>\n";
+                                s_Return += "<td class=\"ListHead\" align=center>料号</td>\n";
+                                s_Return += "<td class=\"ListHead\" align=center>货物名称</td>\n";
+                                s_Return += "<td class=\"ListHead\" align=center>规格型号</td>\n";
+                                s_Return += "<td class=\"ListHead\" align=center>单位</td>\n";
+                                s_Return += "<td class=\"ListHead\">应发数量</td>\n";
+                                s_Return += "<td class=\"ListHead\">实发数量</td>\n";
+                                s_Return += "<td class=\"ListHead\">报废数量</td>\n";
+                                s_Return += "<td class=\"ListHead\">报废单价</td>\n";
+                                s_Return += "<td class=\"ListHead\">加工单价</td>\n";
+                                s_Return += "<td class=\"ListHead\">额外扣除￥</td>\n";
+                                s_Return += "<td class=\"ListHead\">额外付款￥</td>\n";
+                                s_Return += "<td class=\"ListHead\">应付金额</td>\n";
+                                s_Return += "<td class=\"ListHead\">税率</td>\n";
+                                s_Return += "<td class=\"ListHead\"  colspan=2>税额</td>\n</tr >";
+                            }
+                            if (Model.COC_Type == "1")//原材料
                             {
 
                                 s_Return += " <tr >\n";
@@ -710,33 +772,67 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                 }
                 else if (i == Dts_Table.Tables[0].Rows.Count - 1)
                 {
-
-
-                    //发票信息
-                    s_Return += "<tr >";
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
-                    s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
-                    if (Model.COC_Type == "0")//成品对账
+                    if (Model.COC_Type == "2")
                     {
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
+                        s_Return += "<tr >";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
+                        s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
+                        if (Model.COC_Type == "0")//成品对账
+                        {
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
+                        }
+                        else
+                        {
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProdutsName(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                        }
+
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
+
+                        //s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total6.ToString(), 0) + "</td>";//应发数量
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";//实发数量
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_Total4.ToString(), 0) + "</td>";//报废数量
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_BFPrice.ToString(), 0) + "</td>";//报废单价
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["COD_EWMoney"].ToString(), 4) + "</td>";//额外扣除金额
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["COD_EWFMoney"].ToString(), 4) + "</td>";//额外付款金额
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
+
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"center\">16%</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
+
+                        s_Return += "</tr>";
                     }
                     else
                     {
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProdutsName(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                        s_Return += "<tr >";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\" >" + i_Row.ToString() + "</td>";
+                        s_Return += "<td class='ListHeadDetails'align=center >" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>\n";
+                        if (Model.COC_Type == "0")//成品对账
+                        {
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\"> 成品加工费</td>";
+                        }
+                        else
+                        {
+                            s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProdutsName(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                        }
+
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
+
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
+                       
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
+
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"center\">16%</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
+
+                        s_Return += "</tr>";
                     }
-
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString()) + "</td>";
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"left\">" + base.Base_GetUnitsName(base.Base_GetProductsUnits(Dts_Table.Tables[0].Rows[i]["COD_ProductsBarCode"].ToString())) + "</td>";
-
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
-
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 4) + "</td>";
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
-
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"center\">17%</td>";
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
-
-                    s_Return += "</tr>";
+                    //发票信息
+                   
 
                     i_Row++;
                     ddd_Total += dd_Total1;
@@ -747,17 +843,37 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                     dd_Total2 = 0;
                     dd_Total3 = 0;
                     dd_Total4 = 0;
+                    d_Total4 = 0;
                 }
             }
-
-            s_Return += " <tr >\n";
-            s_Return += "<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>\n";
-            s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total.ToString(), 0) + "</td>\n";
-            s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
-            s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total1.ToString(), 2) + "</td>\n";
-            s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
-            s_Return += "<td class='ListHeadDetails' align=right  colspan=2>&nbsp;" + base.FormatNumber1(ddd_Total2.ToString(), 2) + "</td>\n";
-            s_Return += " </tr>";
+            if (Model.COC_Type == "2")
+            {
+                s_Return += " <tr >\n";
+                s_Return += "<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>\n";
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";
+                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total.ToString(), 0) + "</td>\n";
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total1.ToString(), 2) + "</td>\n";
+                
+                s_Return += "<td class='ListHeadDetails' align=right  colspan=4>&nbsp;" + base.FormatNumber1(ddd_Total2.ToString(), 2) + "</td>\n";
+                s_Return += " </tr>";
+            }
+            else
+            {
+                s_Return += " <tr >\n";
+                s_Return += "<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>\n";
+                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total.ToString(), 0) + "</td>\n";
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(ddd_Total1.ToString(), 2) + "</td>\n";
+                s_Return += "<td class='ListHeadDetails' align=right >&nbsp;</td>\n";//money
+                s_Return += "<td class='ListHeadDetails' align=right  colspan=4>&nbsp;" + base.FormatNumber1(ddd_Total2.ToString(), 2) + "</td>\n";
+                s_Return += " </tr>";
+            }
+            
             if ((d_FPNumber != 0) && (Model.COC_Type == "0"))
             {
                 decimal d_TotalFPNumber = 0, d_TotalFPNet = 0, d_TotalFPPrice = 0, d_TotalTaxPrice = 0;
@@ -807,9 +923,9 @@ public partial class Web_Sales_Xs_ShipWareOut_View : BasePage
                         s_Return += "<td  class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(d_ProductsCostPrice.ToString(), 2) + "</td>\n";
                         decimal d_TotalMoney = d_Number1 * d_ProductsCostPrice;
                         s_Return += "<td  class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(d_TotalMoney.ToString(), 2) + "</td>\n";
-                        s_Return += "<td  class='ListHeadDetails' align=right >&nbsp;17%</td>\n";
+                        s_Return += "<td  class='ListHeadDetails' align=right >&nbsp;16%</td>\n";
 
-                        decimal d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_ProductsCostPrice / decimal.Parse("1.17")), 10));
+                        decimal d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_ProductsCostPrice / decimal.Parse("1.16")), 10));
                         decimal d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * d_Number1), 2));
                         decimal d_TaxMoney = d_TotalMoney - d_FPMoney;
 

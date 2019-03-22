@@ -1,8 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="CommentList.ascx.cs" Inherits="Web_Control_CommentList" %>
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
-<SCRIPT LANGUAGE=JAVASCRIPT >
-    function btnGetPLReturnValue_onclick() {
 
+<head>
+    
+    <link href="../../themes/softed/style.css" rel="stylesheet" />
+    <SCRIPT LANGUAGE=JAVASCRIPT >
+    function btnGetPLReturnValue_onclick() {
+        debugger;
         var webroot = document.location.href;
         webroot = webroot.substring(webroot.indexOf('//') + 2, webroot.length);
         webroot = webroot.substring(0, webroot.indexOf('/') + 1) + webroot.substring(webroot.indexOf('/') + 1, webroot.length);
@@ -10,14 +14,17 @@
         rootpath = "http://" + webroot + "";
 
         rootpath += "/Web";
-        var tempd = window.showModalDialog(rootpath + "/Common/AddComments.aspx?PBC_FID=" + document.getElementById("<%=hidCommentFID.ClientID %>").value + "&PBC_Type=" + document.getElementById("<%=hidCommentType.ClientID %>").value + "", "Add Comments", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=500px;dialogHeight=280px");
-        if (tempd != undefined) {
-            window.location.reload() ;
-        }        
+        var tempd = window.open(rootpath + "/Common/AddComments.aspx?PBC_FID=" + document.getElementById("<%=hidCommentFID.ClientID %>").value + "&PBC_Type=" + document.getElementById("<%=hidCommentType.ClientID %>").value + "", "Add Comments", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=500px;dialogHeight=280px");
+        //if (tempd != undefined) {
+        //    window.location.reload() ;
+        //}        
     }
+        function SetReturnValueInOpenner_UploadForProducts(tempd) {
+            if (tempd != undefined) {
+                window.location.reload();
+            }
+        }
     </SCRIPT>
-<head>
-    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
 </head>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>

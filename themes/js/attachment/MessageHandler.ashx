@@ -1,4 +1,4 @@
-﻿m
+﻿
 <%@ WebHandler Language="C#" Class="MessageHandler" %>
 using System.Web;
 using System.Web.SessionState;
@@ -27,26 +27,110 @@ public class MessageHandler : IHttpHandler, IRequiresSessionState
         context.Response.Buffer = true;
         int i_IsMessage = 0;
         string strReceivedID = Convert.ToString(context.Session["KNet_Admin_StaffNo"]);
-        if (this.getIsMessageExists())
-        {
-            i_IsMessage = 1;
-        }
+        //if (this.getIsMessageExists(context))
+        //{
+        //    i_IsMessage = 1;
+        //}
+        getIsMessageExists(context);
         SendMail();
-        context.Response.Write(i_IsMessage);
-        context.Response.Flush();
-        context.Response.End();
+        //context.Response.Write(i_IsMessage);
+        //context.Response.Flush();
+        //context.Response.End();
     }
 
-    public bool getIsMessageExists()
+    public void getIsMessageExists(HttpContext context)
     {
         KNet.DBUtility.AdminloginMess adminLogin = new KNet.DBUtility.AdminloginMess();
         KNet.BLL.System_Message_Manage Message = new KNet.BLL.System_Message_Manage();
         KNet.Model.System_Message_Manage Model = new KNet.Model.System_Message_Manage();
-        Model.SMM_State = 0;
-        Model.SMM_Del = 0;
-        Model.SMM_UnRead = 1;
-        Model.SMM_ReceiveID = adminLogin.KNet_StaffNo;
-        return Message.Exists(Model);
+        StringBuilder s_Return = new StringBuilder();
+        StringBuilder s_Return1 = new StringBuilder();
+        StringBuilder s_Return2 = new StringBuilder();
+        BasePage Page = new BasePage();
+        //Model.SMM_State = 0;
+        //Model.SMM_Del = 0;
+        //Model.SMM_UnRead = 1;
+        //Model.SMM_ReceiveID = adminLogin.KNet_StaffNo;
+        //return Message.Exists(Model);
+        string sql = " SMM_State=0 and SMM_Del=0 and SMM_UnRead=1 and SMM_ReceiveID='" + adminLogin.KNet_StaffNo + "' order by SMM_SendTime desc";
+        DataSet Smm_Table = Message.GetList1(sql);
+        if (Smm_Table.Tables[0].Rows.Count > 0)
+        {
+            if (context.Application.Get(adminLogin.KNet_StaffCard.ToString()) == null)
+            {
+                context.Application.Lock();
+                context.Application.Add(adminLogin.KNet_StaffCard.ToString(), Smm_Table.Tables[0].Rows[0]["SMM_SendTime"]);
+                context.Application.UnLock();
+
+                s_Return.Append("{");
+                s_Return.Append("sms_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_ID"].ToString() + "\",");
+                s_Return.Append("to_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_ReceiveID"].ToString() + "\",");
+                s_Return.Append("from_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_SenderID"].ToString() + "\",");
+                s_Return.Append("from_name:\"" + Page.Base_GetUserName(Smm_Table.Tables[0].Rows[0]["SMM_SenderID"].ToString()) + "\",");
+                s_Return.Append("type_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_Type"].ToString() + "\",");
+                s_Return.Append("type_name:\"" + Page.Base_GetBasicCodeName("147", Smm_Table.Tables[0].Rows[0]["SMM_Type"].ToString()) + "\",");
+                s_Return.Append("send_time:\"" + DateTime.Parse(Smm_Table.Tables[0].Rows[0]["SMM_SendTime"].ToString()).Hour + ":" + DateTime.Parse(Smm_Table.Tables[0].Rows[0]["SMM_SendTime"].ToString()).Minute + "\",");
+                s_Return.Append("unread:\"" + Smm_Table.Tables[0].Rows[0]["SMM_UnRead"].ToString() + "\",");
+                s_Return.Append("content:\"" + KHtmlDiscode1(KNetPage.KHtmlDiscode(Smm_Table.Tables[0].Rows[0]["SMM_Detail"].ToString())) + "\",");
+                s_Return.Append("url:\"Web/Message/System_Message_List.aspx?Type=inbox\",");
+                s_Return.Append("receive:\"" + Smm_Table.Tables[0].Rows[0]["SMM_Receive"].ToString() + "\"");
+                s_Return.Append("},");
+                s_Return1.Append(s_Return.ToString().Substring(0, s_Return.ToString().Length - 1));
+                s_Return2.Append(s_Return1.ToString() + "]");
+                context.Response.Write(s_Return1);
+                context.Response.Flush();
+                context.Response.End();
+            }
+            else
+            {
+                if (DateTime.Parse(context.Application.Get(adminLogin.KNet_StaffCard.ToString()).ToString()) < DateTime.Parse(Smm_Table.Tables[0].Rows[0]["SMM_SendTime"].ToString()))
+                {
+                    context.Application.Lock();
+                    context.Application.Set(adminLogin.KNet_StaffCard.ToString(), Smm_Table.Tables[0].Rows[0]["SMM_SendTime"]);
+                    context.Application.UnLock();
+                    s_Return.Append("{");
+                    s_Return.Append("sms_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_ID"].ToString() + "\",");
+                    s_Return.Append("to_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_ReceiveID"].ToString() + "\",");
+                    s_Return.Append("from_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_SenderID"].ToString() + "\",");
+                    s_Return.Append("from_name:\"" + Page.Base_GetUserName(Smm_Table.Tables[0].Rows[0]["SMM_SenderID"].ToString()) + "\",");
+                    s_Return.Append("type_id:\"" + Smm_Table.Tables[0].Rows[0]["SMM_Type"].ToString() + "\",");
+                    s_Return.Append("type_name:\"" + Page.Base_GetBasicCodeName("147", Smm_Table.Tables[0].Rows[0]["SMM_Type"].ToString()) + "\",");
+                    s_Return.Append("send_time:\"" + DateTime.Parse(Smm_Table.Tables[0].Rows[0]["SMM_SendTime"].ToString()).Hour + ":" + DateTime.Parse(Smm_Table.Tables[0].Rows[0]["SMM_SendTime"].ToString()).Minute + "\",");
+                    s_Return.Append("unread:\"" + Smm_Table.Tables[0].Rows[0]["SMM_UnRead"].ToString() + "\",");
+                    s_Return.Append("content:\"" + KHtmlDiscode1(KNetPage.KHtmlDiscode(Smm_Table.Tables[0].Rows[0]["SMM_Detail"].ToString())) + "\",");
+                    s_Return.Append("url:\"Web/Message/System_Message_List.aspx?Type=inbox\",");
+                    s_Return.Append("receive:\"" + Smm_Table.Tables[0].Rows[0]["SMM_Receive"].ToString() + "\"");
+                    s_Return.Append("},");
+                    s_Return1.Append(s_Return.ToString().Substring(0, s_Return.ToString().Length - 1));
+                    s_Return2.Append(s_Return1.ToString() + "]");
+                    context.Response.Write(s_Return1);
+                    context.Response.Flush();
+                    context.Response.End();
+                }
+                else
+                {
+                    context.Response.Write("1");
+                    context.Response.Flush();
+                    context.Response.End();
+                }
+
+            }
+        }
+        else
+        {
+             context.Response.Write("1");
+        }
+
+    }
+    public string KHtmlDiscode1(string theString)
+    {
+        if (theString != null)
+        {
+            theString = theString.Replace("\"", "\\\"");
+
+        }
+        return theString;
+
     }
     //发送待发送的邮件
     public bool SendMail()
@@ -94,7 +178,7 @@ public class MessageHandler : IHttpHandler, IRequiresSessionState
                             s_message = SendEmail1.Base_SendEmail(s_ReceiveMail, s_Text, s_File, s_Title, s_PBM_SendSettingID, s_Cc, s_Ms);
 
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         { }
                         if (s_message == "邮件发送成功")
                         {

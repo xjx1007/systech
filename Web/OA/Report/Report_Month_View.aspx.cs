@@ -22,7 +22,6 @@ public partial class Report_Month_View : BasePage
     {
         if (!IsPostBack)
         {
-
             AdminloginMess AM = new AdminloginMess();
             if (AM.CheckLogin() == false)
             {
@@ -31,10 +30,10 @@ public partial class Report_Month_View : BasePage
             }
 
             DateTime D_Time = DateTime.Now;
-            DateTime FirstDayTime = new DateTime(D_Time.Year,1, 1);
+            DateTime FirstDayTime = new DateTime(D_Time.Year, 1, 1);
             DateTime EndDayTime = FirstDayTime.AddYears(1).AddDays(-1);
             TimeSpan TS = EndDayTime - FirstDayTime;
-            int i_Days = TS.Days ;
+            int i_Days = TS.Days;
             int i_Month = 12;
             int weekDay = (short)D_Time.DayOfWeek;
             string s_Head = "";
@@ -48,14 +47,14 @@ public partial class Report_Month_View : BasePage
             {
                 for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
                 {
-                    string s_StaffNo= Dts_Table.Tables[0].Rows[i]["StaffNo"].ToString();
+                    string s_StaffNo = Dts_Table.Tables[0].Rows[i]["StaffNo"].ToString();
                     s_Details += " <tr>";
                     s_Details += "<td  class='thstyleLeftDetails' align=right noWrap>&nbsp;" + Dts_Table.Tables[0].Rows[i]["StaffName"].ToString() + "</td>\n";//money
                     for (int j = 1; j < i_Month + 1; j++)
                     {
                         DateTime d_NewTime = FirstDayTime.AddMonths(j - 1);
-                            string s_State = GetDetails(s_StaffNo, d_NewTime);
-                            s_Details += "<td class=\"thstyleLeftDetails\" align=center>&nbsp;" + s_State + "</td>";
+                        string s_State = GetDetails(s_StaffNo, d_NewTime);
+                        s_Details += "<td class=\"thstyleLeftDetails\" align=center>&nbsp;" + s_State + "</td>";
                     }
                     s_Details += " </tr>";
                 }
@@ -69,7 +68,7 @@ public partial class Report_Month_View : BasePage
             s_Head += "<tr>\n<th colspan=\"" + i_Month + 1 + "\" class=\"MaterTitle\"  style='height:14.25pt'>状态说明：空白：未交月报;+N:N天后上交报告;√:当日交报告</th></tr>\n";
             s_Head += "<tr><th class=\"thstyle\" rowspan=2 nowrap>姓名</th>\n";
 
-            for (int i = 1; i < i_Month+1; i++)
+            for (int i = 1; i < i_Month + 1; i++)
             {
                 s_Head += "<th class=\"thstyle\" align=center nowrap>" + i.ToString() + "月</th>";
             }
@@ -99,20 +98,35 @@ public partial class Report_Month_View : BasePage
                 DateTime OPR_MTime = DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_MTime"].ToString());
                 TimeSpan TS = OPR_MTime - D_Time;
                 int i_Days = 0;
-                i_Days=TS.Days;
-                if (i_Days <= 0)
+                i_Days = TS.Days;
+                if (i_Days <= 31)
                 {
                     s_Return = "<font color=green>√</font>";
                 }
                 else
                 {
                     s_Return = "<font color=red>" + i_Days + "</font>";
- 
+
                 }
             }
         }
         catch
         { }
         return s_Return;
+    }
+
+    protected void Button2_OnServerClick(object sender, EventArgs e)
+    {
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("月报-年度状态.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
     }
 }

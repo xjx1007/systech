@@ -117,7 +117,7 @@
                                             <tr>
                                                 <td align="left" style="padding-left: 10px;">
                                                     <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
-                                                    <a href="../Order/Knet_Procure_OpenBilling.aspx" class="webMnu">创建采购单</a>
+                                                    <a href="../CG/Order/Knet_Procure_OpenBilling.aspx" class="webMnu">创建采购单</a>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -84,7 +84,13 @@
                                                     <td align="left" class="genHeaderSmall">操作</td>
                                                 </tr>
                                                 <!-- Module based actions starts -->
+                                                <tr>
+                                                    <td align="left" style="padding-left: 10px;">
+                                                        <img src="../../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
+                                                        <asp:Label runat="server" ID="Lbl_Submitted"></asp:Label>&nbsp;
 
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td align="left" style="padding-left: 10px;">
                                                         <img src="../../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
@@ -92,6 +98,7 @@
 
                                                     </td>
                                                 </tr>
+                                                 
                                                 <tr>
                                                     <td align="left" style="padding-left: 10px;">
                                                         <img src="../../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
@@ -126,9 +133,9 @@
                                                                         <table border="0" cellspacing="0" cellpadding="0" width="100%" id="Table_Btn" runat="server">
                                                                             <tr>
                                                                                 <td colspan="3">
-                                                                                    <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit" onclick="PageGo('Knet_Procure_OpenBilling.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    ')" name="Edit" value="&nbsp;编辑&nbsp;" style="height: 26px; width: 60px">
-                                                                                    <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share" value="&nbsp;共享&nbsp;" style="height: 26px; width: 60px">
-                                                                                    <input title="" class="crmbutton small edit" onclick="PageGo('Knet_Procure_OpenBilling_Manage.aspx')" type="button" name="ListView" value="&nbsp;返回列表&nbsp;" style="height: 26px; width: 80px">
+                                                                                    <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit" onclick="PageGo('Knet_Procure_OpenBilling.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    ')" name="Edit" value="&nbsp;编辑&nbsp;" style="height: 26px; width: 60px"/>
+                                                                                    <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share" value="&nbsp;共享&nbsp;" style="height: 26px; width: 60px"/>
+                                                                                    <input title="" class="crmbutton small edit" onclick="PageGo('Knet_Procure_OpenBilling_Manage.aspx')" type="button" name="ListView" value="&nbsp;返回列表&nbsp;" style="height: 26px; width: 80px"/>
                                                                                     <asp:Button ID="Button1" runat="server" class="crmbutton small edit" Text="生成" OnClick="Button1_Click" Style="height: 26px; width: 60px" />
                                                                                     &nbsp;<asp:Button ID="Button3" runat="server" class="crmbutton small edit" Text="订单关闭" OnClick="Button3_Click" Style="height: 26px; width: 80px" />
                                                                                     &nbsp;
@@ -139,7 +146,7 @@
 
                                                                                 </td>
                                                                                 <td align="right">
-                                                                                    <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create" onclick="PageGo('Knet_Procure_OpenBilling.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    &Type=1')" name="Duplicate" value="复制" style="height: 26px; width: 60px">&nbsp;
+                                                                                    <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create" onclick="PageGo('Knet_Procure_OpenBilling.aspx?ID=<%= Request.QueryString["ID"].ToString() %>    &Types=1')" name="Duplicate" value="复制" style="height: 26px; width: 60px"/>&nbsp;
                                     <input title="刪除 [Alt+D]" type="button" accesskey="D" class="crmbutton small delete" onclick=" return confirm('确定要删除这个记录吗?')" name="Delete" value="删除" style="height: 26px; width: 60px">&nbsp;
                                                                                 </td>
                                                                             </tr>

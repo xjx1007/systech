@@ -45,6 +45,7 @@ public partial class Knet_Web_System_Knet_Document_Add : BasePage
             {
                 base.Base_DropDutyPerson(this.Ddl_DutyPerson);
                 base.Base_DropBasicCodeBind(this.Ddl_Type, "111");
+                base.Base_DropBasicCodeBind(this.Ddl_Rank, "1145");
                 this.Tbx_Code.Text = base.GetNewID("PB_Basic_Document", 0);
                 if (s_ID != "")
                 {

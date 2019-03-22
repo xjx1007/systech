@@ -138,7 +138,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
         KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
         string s_Where1 = " and XPD_FaterBarCode='" + model.ProductsBarCode + "' ";
         string s_Sql = "Select * from Xs_Products_Prodocts_Demo a join KNET_Sys_Products b on a.XPD_ProductsBarCode=b.ProductsBarCode";
-        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1 and  b.KSP_Del=0 ";
+        s_Sql += " join PB_Basic_ProductsClass c on b.ProductsType=c.PBP_ID where 1=1  ";
         this.BeginQuery(s_Sql + s_Where1 + "  order by c.PBP_Name,ProductsEdition");
         DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
         DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
@@ -274,7 +274,11 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                     { }
                     try
                     {
-                        d_totalPrice += d_PriceTotal;
+                        if (s_Del == "0")
+                        {
+                            d_totalPrice += d_PriceTotal;
+                        }
+
                     }
                     catch
                     { }
@@ -283,7 +287,11 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
 
                     decimal d_NewPrice = decimal.Parse(GetNewPriceAndHandPrice(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString())) * decimal.Parse(Dtb_DemoProducts.Rows[i]["XPD_Number"].ToString());
                     Sb_BomDetails.Append("<td class=\"ListHeadDetails\">" + d_NewPrice+ "</td>");
-                    d_NewtotalPrice += d_NewPrice;
+                    if (s_Del == "0")
+                    {
+                        d_NewtotalPrice += d_NewPrice;
+                    }
+
 
                 }
                 else
@@ -438,4 +446,32 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
             }
         }
     }
+
+    //protected void Btn_Excel_OnClick(object sender, EventArgs e)
+    //{
+      
+    //}
+
+    //protected void button1_OnServerClick(object sender, EventArgs e)
+    //{
+    //    AdminloginMess AM = new AdminloginMess();
+    //    if (AM.YNAuthority("BOM导出权限") == false)
+    //    {
+    //        Alert("没有BOM导出权限!");
+    //    }
+    //    else
+    //    {
+    //        Response.Buffer = true;
+    //        Response.Clear();
+    //        Response.ClearContent();
+    //        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("BOM报价表.xls", System.Text.Encoding.UTF8).ToString());
+    //        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+    //        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+    //        Response.ContentType = "application/ms-excel";
+    //        Response.Write(Lbl_BomDetails1.Text);
+    //        Response.Flush();
+    //        Response.End();
+    //    }
+    //}
 }

@@ -84,6 +84,10 @@ namespace KNet.BLL
         {
             return dal.GetList(strWhere);
         }
+        public DataSet GetList2(string strWhere)
+        {
+            return dal.GetList2(strWhere);
+        }
 
         /// <summary>
         /// 获得数据列表

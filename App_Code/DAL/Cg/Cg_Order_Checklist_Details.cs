@@ -37,9 +37,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Cg_Order_Checklist_Details(");
-            strSql.Append("COD_Code,COD_DirectOutID,COD_CustomerValue,COD_GetPerson,COD_Wuliu,COD_ProductsBarCode,COD_ProductsEdition,COD_CkNumber,COD_DZNumber,COD_Price,COD_HandPrice,COD_Money,COD_Details,COD_IC,COD_ICNumber,COD_CheckNo,COD_BNumber,COD_NoTaxMoney,COD_NoTaxLag,COD_RealMoney)");
+            strSql.Append("COD_Code,COD_DirectOutID,COD_CustomerValue,COD_GetPerson,COD_Wuliu,COD_ProductsBarCode,COD_ProductsEdition,COD_CkNumber,COD_DZNumber,COD_Price,COD_HandPrice,COD_Money,COD_Details,COD_IC,COD_ICNumber,COD_CheckNo,COD_BNumber,COD_NoTaxMoney,COD_NoTaxLag,COD_RealMoney,COD_BFNumber,COD_BFPrice,COD_RKNumber,COD_EWMoney,COD_EWFMoney)");
             strSql.Append(" values (");
-            strSql.Append("@COD_Code,@COD_DirectOutID,@COD_CustomerValue,@COD_GetPerson,@COD_Wuliu,@COD_ProductsBarCode,@COD_ProductsEdition,@COD_CkNumber,@COD_DZNumber,@COD_Price,@COD_HandPrice,@COD_Money,@COD_Details,@COD_IC,@COD_ICNumber,@COD_CheckNo,@COD_BNumber,@COD_NoTaxMoney,@COD_NoTaxLag,@COD_RealMoney)");
+            strSql.Append("@COD_Code,@COD_DirectOutID,@COD_CustomerValue,@COD_GetPerson,@COD_Wuliu,@COD_ProductsBarCode,@COD_ProductsEdition,@COD_CkNumber,@COD_DZNumber,@COD_Price,@COD_HandPrice,@COD_Money,@COD_Details,@COD_IC,@COD_ICNumber,@COD_CheckNo,@COD_BNumber,@COD_NoTaxMoney,@COD_NoTaxLag,@COD_RealMoney,@COD_BFNumber,@COD_BFPrice,@COD_RKNumber,@COD_EWMoney,@COD_EWFMoney)");
             SqlParameter[] parameters = {
 					new SqlParameter("@COD_Code", SqlDbType.VarChar,50),
 					new SqlParameter("@COD_DirectOutID", SqlDbType.VarChar,50),
@@ -47,7 +47,7 @@ namespace KNet.DAL
 					new SqlParameter("@COD_GetPerson", SqlDbType.VarChar,50),
 					new SqlParameter("@COD_Wuliu", SqlDbType.VarChar,50),
 					new SqlParameter("@COD_ProductsBarCode", SqlDbType.VarChar,50),
-					new SqlParameter("@COD_ProductsEdition", SqlDbType.VarChar,50),
+					new SqlParameter("@COD_ProductsEdition", SqlDbType.VarChar,100),
 					new SqlParameter("@COD_CkNumber", SqlDbType.Decimal,9),
 					new SqlParameter("@COD_DZNumber", SqlDbType.Decimal,9),
 					new SqlParameter("@COD_Price", SqlDbType.Decimal,9),
@@ -60,7 +60,13 @@ namespace KNet.DAL
 					new SqlParameter("@COD_BNumber", SqlDbType.Decimal,9),
 					new SqlParameter("@COD_NoTaxMoney", SqlDbType.Decimal,9),
 					new SqlParameter("@COD_NoTaxLag", SqlDbType.Decimal,9),
-					new SqlParameter("@COD_RealMoney", SqlDbType.Decimal,9)
+					new SqlParameter("@COD_RealMoney", SqlDbType.Decimal,9),
+                    new SqlParameter("@COD_BFNumber", SqlDbType.Int),
+                    new SqlParameter("@COD_BFPrice", SqlDbType.Decimal,9),
+                     new SqlParameter("@COD_RKNumber", SqlDbType.Int),
+                      new SqlParameter("@COD_EWMoney", SqlDbType.Decimal,9),
+                      new SqlParameter("@COD_EWFMoney", SqlDbType.Decimal,9)
+
             };
             parameters[0].Value = model.COD_Code;
             parameters[1].Value = model.COD_DirectOutID;
@@ -82,8 +88,11 @@ namespace KNet.DAL
             parameters[17].Value = model.COD_NoTaxMoney;
             parameters[18].Value = model.COD_NoTaxLag;
             parameters[19].Value = model.COD_RealMoney;
-            
-
+            parameters[20].Value = model.COD_BFNumber;
+            parameters[21].Value = model.COD_BFPrice;
+            parameters[22].Value = model.COD_RKNumber;
+            parameters[23].Value = model.COD_EWMoney;
+            parameters[24].Value = model.COD_EWFMoney;
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -348,6 +357,22 @@ namespace KNet.DAL
                 {
                     model.COD_NoTaxLag = int.Parse(ds.Tables[0].Rows[0]["COD_NoTaxLag"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["COD_BFNumber"] != null && ds.Tables[0].Rows[0]["COD_BFNumber"].ToString() != "")
+                {
+                    model.COD_BFNumber = int.Parse(ds.Tables[0].Rows[0]["COD_BFNumber"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["COD_BFPrice"] != null && ds.Tables[0].Rows[0]["COD_BFPrice"].ToString() != "")
+                {
+                    model.COD_BFPrice = int.Parse(ds.Tables[0].Rows[0]["COD_BFPrice"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["COD_RKNumber"] != null && ds.Tables[0].Rows[0]["COD_RKNumber"].ToString() != "")
+                {
+                    model.COD_RKNumber = int.Parse(ds.Tables[0].Rows[0]["COD_RKNumber"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["COD_EWMoney"] != null && ds.Tables[0].Rows[0]["COD_EWMoney"].ToString() != "")
+                {
+                    model.COD_EWMoney = int.Parse(ds.Tables[0].Rows[0]["COD_EWMoney"].ToString());
+                }
                 return model;
             }
             else
@@ -397,7 +422,17 @@ namespace KNet.DAL
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
-        
+        public DataSet GetList1(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * ");
+            strSql.Append(" FROM Cg_Order_Checklist_Details a join Cg_Order_Checklist b on a.COD_Code=b.COC_Code  ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         /// <summary>
         /// 获得数据列表
         /// </summary>

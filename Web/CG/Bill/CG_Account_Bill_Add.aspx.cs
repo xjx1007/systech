@@ -60,7 +60,7 @@ public partial class CG_Account_Bill_Add : BasePage
             else
             {
                 this.Lbl_Title.Text = "新增发票管理";
-                this.Tbx_Code.Text = GetCwCode(1, "CG_Account_Bill", "CAB_Code", "CAB_Stime");
+                this.Tbx_Code.Text = GetCwCode(Convert.ToInt32(string.Format("{0:mm}", DateTime.Now)), "CG_Account_Bill", "CAB_Code", "CAB_Stime");
             }
             ShowCheckDetails(s_CheckNo);
         }
@@ -165,12 +165,19 @@ public partial class CG_Account_Bill_Add : BasePage
             {
                 s_SuppNo = Model.COC_SuppNo;
             }
-            else
+            else if (Model.COC_Type == "0")
             {
                 //成品对账
                 KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
                 KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll_WareHouse.GetModel(Model.COC_HouseNo);
                 s_SuppNo = Model_WareHouse.SuppNo;
+            }
+            else if (Model.COC_Type == "2")
+            {
+                //加工费对账
+                //KNet.BLL.KNet_Sys_WareHouse Bll_WareHouse = new KNet.BLL.KNet_Sys_WareHouse();
+                //KNet.Model.KNet_Sys_WareHouse Model_WareHouse = Bll_WareHouse.GetModel(Model.COC_SuppNo);
+                s_SuppNo = Model.COC_SuppNo;
             }
             KNet.BLL.Knet_Procure_Suppliers Bll_Supp = new KNet.BLL.Knet_Procure_Suppliers();
             KNet.Model.Knet_Procure_Suppliers Model_supp = Bll_Supp.GetModelB(s_SuppNo);
@@ -207,6 +214,13 @@ public partial class CG_Account_Bill_Add : BasePage
                 this.Lbl_Upload.Text = "<a href=\"" + Dtb_Table.Rows[0]["PBA_URL"].ToString() + "\">" + Dtb_Table.Rows[0]["PBA_Name"].ToString() + "</a><br/>";
                 this.Tbx_URL.Text = Dtb_Table.Rows[0]["PBA_URL"].ToString();
             }
+
+
+            //string sql =
+            //        " select b.ID,HouseNo_int as HouseNo_int,a.HouseNo  as HouseNo1,b.ProductsBarCode,allocateAmount,allocateunitPrice,allocateTotalNet,a.SystemDateTimes,AllocateStaffNo,a.AllocateNo,a.AllocateDateTime,a.KWA_OrderNo, a.HouseNo ,a.HouseNo_int ,Allocate_WwPrice,Allocate_WwMoney,AllocateCheckYN FROM KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo  join dbo.KNet_Sys_WareHouse AS c ON c.HouseNo = a.HouseNo_int  join dbo.KNet_Sys_WareHouse AS d ON d.HouseNo = a.HouseNo join KNET_sys_Products e on e.ProductsBarCode = b.ProductsBarCode where  AllocateCheckYN!='0' and a.HouseNo=(select  HouseNo from KNet_Sys_WareHouse where  SuppNo='" + Model.COC_SuppNo + "') and AllocateDateTime>='" + DateTime.Parse(Model.COC_BeginDate.ToString()).ToShortDateString() + "' and AllocateDateTime<='" + DateTime.Parse(Model.COC_EndDate.ToString()).ToShortDateString() + "'";
+            //this.BeginQuery(sql);
+            //DataTable Dtb_Table1 = this.QueryForDataTable();
+
             Excel excel = new Excel();
             DataTable myT = excel.ExcelToDataTable(this.Tbx_URL.Text, this.Tbx_Sheet.Text);
             this.BeginQuery("select * from Excel_In_Details where EID_FID='" + this.Tbx_Code.Text + "' ");
@@ -342,7 +356,7 @@ public partial class CG_Account_Bill_Add : BasePage
                             this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\">" + DateTime.Parse(Model_DirectOut.DirectOutDateTime.ToString()).ToShortDateString() + "</td>";
                         }
                     }
-                    else
+                    else if(Model.COC_Type == "1")
                     {
                         KNet.BLL.Knet_Procure_WareHouseList_Details Bll_WareHouseDetails = new KNet.BLL.Knet_Procure_WareHouseList_Details();
                         KNet.Model.Knet_Procure_WareHouseList_Details Model_WareHouseDetails = Bll_WareHouseDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());
@@ -377,6 +391,52 @@ public partial class CG_Account_Bill_Add : BasePage
                             this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\"><input name=\"Tbx_DirectOutID_" + i.ToString() + "\" type=\"text\" id=\"Tbx_DirectOutID_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString() + " style=\"display: none\" />" + Model_WareHouse.OrderNo + "</td>";
                             this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\">" + DateTime.Parse(Model_WareHouse.WareHouseDateTime.ToString()).ToShortDateString() + "</td>";
                         }
+                    }
+                    else if (Model.COC_Type == "2")
+                    {
+                        //KNet.BLL.Knet_Procure_WareHouseList_Details Bll_WareHouseDetails = new KNet.BLL.Knet_Procure_WareHouseList_Details();
+                        //KNet.Model.Knet_Procure_WareHouseList_Details Model_WareHouseDetails = Bll_WareHouseDetails.GetModel(Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString());
+                        //if (Dtb_Table1.Rows.Count > 0)
+                        //{
+                        //    KNet.BLL.Knet_Procure_WareHouseList Bll_WareHouse = new KNet.BLL.Knet_Procure_WareHouseList();
+                        //    KNet.Model.Knet_Procure_WareHouseList Model_WareHouse = Bll_WareHouse.GetModelB(Model_WareHouseDetails.WareHouseNo);
+                        //    s_OrderNo = Model_WareHouse.OrderNo;
+                        //    string s_SqlWhere = " 1=1 ";
+                        //    if ((s_FName[0] != "") && (s_OrderNo != ""))
+                        //    {
+                        //        s_SqlWhere += " and " + s_FName[0] + "='" + s_OrderNo.Trim() + "' ";
+                        //    }
+                        //    if (myT != null)
+                        //    {
+
+                        //        DataRow[] arrayDR = myT.Select(s_SqlWhere);
+                        //        foreach (DataRow dr in arrayDR)
+                        //        {
+                        //            s_Check = "checked";
+                        //            s_FPCode = dr["" + s_FName[5] + ""].ToString();
+
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        //s_Check = "";
+                        //    }
+                            this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\"><input type=\"CheckBox\" ID=\"Chk_" + i.ToString() + "\"  Name=\"Chk_" + i.ToString() + "\" onclick=\"Sum(" + i.ToString() + ")\" " + s_Check + "><input name=\"Tbx_CODID_" + i.ToString() + "\" type=\"text\" id=\"Tbx_CODID_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["COD_Code"].ToString() + " style=\"display: none\" /></td>";
+
+                        //this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\"  nowrap><a href='../OrderInWareHouse/Knet_Procure_WareHouseList_View.aspx?ID=" + Model_WareHouseDetails.WareHouseNo + "' target=\"_blank\">" + Model_WareHouseDetails.WareHouseNo + "</td>";
+                        //this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\"><input name=\"Tbx_DirectOutID_" + i.ToString() + "\" type=\"text\" id=\"Tbx_DirectOutID_" + i.ToString() + "\" value=" + Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString() + " style=\"display: none\" />" + Model_WareHouse.OrderNo + "</td>";
+                        //this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\">" + DateTime.Parse(Model_WareHouse.WareHouseDateTime.ToString()).ToShortDateString() + "</td>";
+
+                        //if (Dtb_Table1.Rows.Count > 0)
+                        //{
+                        //KNet.BLL.Knet_Procure_WareHouseList Bll_WareHouse = new KNet.BLL.Knet_Procure_WareHouseList();
+                        //KNet.Model.Knet_Procure_WareHouseList Model_WareHouse = Bll_WareHouse.GetModelB(Model_WareHouseDetails.WareHouseNo);
+                        this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["COD_Code"].ToString() + "</td>";
+                        this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\"  nowrap><a href='/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=" + Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString() + " ' target=\"_blank\">" + Dts_Table.Tables[0].Rows[i]["COD_DirectOutID"].ToString() + "</td>";
+
+                        this.Lbl_Detail.Text += "<td class=\"ListHeadDetails\" align=\"center\">" + DateTime.Now.ToShortDateString() + "</td>";
+                        //}
+                        //}
                     }
                     string s_CustomerValue = base.Base_GetHouseName(Dts_Table.Tables[0].Rows[i]["COD_CustomerValue"].ToString());
                     if (s_CustomerValue == "")
@@ -947,6 +1007,10 @@ public partial class CG_Account_Bill_Add : BasePage
             model.Arr_Detail = arr_Details;
 
             ArrayList arr_Details1 = new ArrayList();
+            if (this.i_Num.Text=="")
+            {
+                this.i_Num.Text = "0";
+            }
             int i_Num1 = int.Parse(this.i_Num.Text);
             for (int i = 0; i < i_Num1; i++)
             {
@@ -970,9 +1034,10 @@ public partial class CG_Account_Bill_Add : BasePage
             model.arr_OutTimes = arr_Details1;
             return true;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return false;
+            //return false;
+            throw ex;
         }
 
     }
@@ -1231,7 +1296,7 @@ public partial class CG_Account_Bill_Add : BasePage
                 {
                     d_NowPrice = d_HandPrice;
                     d_NowMoney = (dd_Total1 * d_HandPrice);
-                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / decimal.Parse("1.17")), 10));
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / decimal.Parse("1.16")), 10));
                     d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
                     d_TaxMoney = dd_TotalHandPrice - d_FPMoney;
                 }
@@ -1239,7 +1304,7 @@ public partial class CG_Account_Bill_Add : BasePage
                 {
                     d_NowMoney = dd_Total3;
                     d_NowPrice = d_Price;
-                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Price / decimal.Parse("1.17")), 10));
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Price / decimal.Parse("1.16")), 10));
                     d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
                     d_TaxMoney = dd_Total3 - d_FPMoney;
                 }
@@ -1433,7 +1498,7 @@ public partial class CG_Account_Bill_Add : BasePage
                         s_Return += "<td  class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(d_TotalMoney.ToString(), 2) + "</td>\n";
                         s_Return += "<td  class='ListHeadDetails' align=right >&nbsp;17%</td>\n";
 
-                        decimal d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_ProductsCostPrice / decimal.Parse("1.17")), 10));
+                        decimal d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_ProductsCostPrice / decimal.Parse("1.16")), 10));
                         decimal d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * d_Number1), 2));
                         decimal d_TaxMoney = d_TotalMoney - d_FPMoney;
 

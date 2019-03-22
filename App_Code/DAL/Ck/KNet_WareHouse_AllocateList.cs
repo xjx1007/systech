@@ -42,9 +42,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_AllocateList(");
-            strSql.Append("AllocateNo,AllocateTopic,AllocateCause,AllocateDateTime,HouseNo,HouseNo_int,AllocateStaffBranch,AllocateStaffDepart,AllocateStaffNo,AllocateRemarks,AllocateCheckYN,KWA_OrderNo,KWA_Type,KWA_DBType)");
+            strSql.Append("AllocateNo,AllocateTopic,AllocateCause,AllocateDateTime,HouseNo,HouseNo_int,AllocateStaffBranch,AllocateStaffDepart,AllocateStaffNo,AllocateRemarks,AllocateCheckYN,KWA_OrderNo,KWA_Type,KWA_DBType,KWA_UploadUrl,KWA_UploadName,KWA_IsEntity)");
             strSql.Append(" values (");
-            strSql.Append("@AllocateNo,@AllocateTopic,@AllocateCause,@AllocateDateTime,@HouseNo,@HouseNo_int,@AllocateStaffBranch,@AllocateStaffDepart,@AllocateStaffNo,@AllocateRemarks,@AllocateCheckYN,@KWA_OrderNo,@KWA_Type,@KWA_DBType)");
+            strSql.Append("@AllocateNo,@AllocateTopic,@AllocateCause,@AllocateDateTime,@HouseNo,@HouseNo_int,@AllocateStaffBranch,@AllocateStaffDepart,@AllocateStaffNo,@AllocateRemarks,@AllocateCheckYN,@KWA_OrderNo,@KWA_Type,@KWA_DBType,@KWA_UploadUrl,@KWA_UploadName,@KWA_IsEntity)");
             SqlParameter[] parameters = {
 					new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@AllocateTopic", SqlDbType.NVarChar,50),
@@ -59,8 +59,10 @@ namespace KNet.DAL
 					new SqlParameter("@AllocateCheckYN", SqlDbType.Bit,1),
 					new SqlParameter("@KWA_OrderNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@KWA_Type", SqlDbType.NVarChar,50),
-					new SqlParameter("@KWA_DBType", SqlDbType.Int,4)
-                    
+					new SqlParameter("@KWA_DBType", SqlDbType.Int,4),
+                    new SqlParameter("@KWA_UploadUrl", SqlDbType.NVarChar,200),
+                    new SqlParameter("@KWA_UploadName", SqlDbType.NVarChar,100),
+                    new SqlParameter("@KWA_IsEntity", SqlDbType.Int)
                                         };
             parameters[0].Value = model.AllocateNo;
             parameters[1].Value = model.AllocateTopic;
@@ -76,8 +78,10 @@ namespace KNet.DAL
             parameters[11].Value = model.KWA_OrderNo;
             parameters[12].Value = model.KWA_Type;
             parameters[13].Value = model.KWA_DBType;
-            
-            
+            parameters[14].Value = model.KWA_UploadUrl;
+            parameters[15].Value = model.KWA_UploadName;
+            parameters[16].Value = model.KWA_IsEntity;
+
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -219,7 +223,18 @@ namespace KNet.DAL
                 {
                     model.KWA_Type = ds.Tables[0].Rows[0]["KWA_Type"].ToString();
                 }
-                
+                if (ds.Tables[0].Rows[0]["KWA_UploadUrl"] != null && ds.Tables[0].Rows[0]["KWA_UploadUrl"].ToString() != "")
+                {
+                    model.KWA_UploadUrl = ds.Tables[0].Rows[0]["KWA_UploadUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KWA_UploadName"] != null && ds.Tables[0].Rows[0]["KWA_UploadName"].ToString() != "")
+                {
+                    model.KWA_UploadName = ds.Tables[0].Rows[0]["KWA_UploadName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KWA_IsEntity"] != null && ds.Tables[0].Rows[0]["KWA_IsEntity"].ToString() != "")
+                {
+                    model.KWA_IsEntity =int.Parse(ds.Tables[0].Rows[0]["KWA_IsEntity"].ToString()) ;
+                }
                 return model;
             }
             else
@@ -311,6 +326,18 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["KWA_IsSave"] != null && ds.Tables[0].Rows[0]["KWA_IsSave"].ToString() != "")
                 {
                     model.KWA_IsSave = int.Parse(ds.Tables[0].Rows[0]["KWA_IsSave"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["KWA_UploadUrl"] != null && ds.Tables[0].Rows[0]["KWA_UploadUrl"].ToString() != "")
+                {
+                    model.KWA_UploadUrl = ds.Tables[0].Rows[0]["KWA_UploadUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KWA_UploadName"] != null && ds.Tables[0].Rows[0]["KWA_UploadName"].ToString() != "")
+                {
+                    model.KWA_UploadName = ds.Tables[0].Rows[0]["KWA_UploadName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KWA_IsEntity"] != null && ds.Tables[0].Rows[0]["KWA_IsEntity"].ToString() != "")
+                {
+                    model.KWA_IsEntity = int.Parse(ds.Tables[0].Rows[0]["KWA_IsEntity"].ToString());
                 }
                 return model;
             }

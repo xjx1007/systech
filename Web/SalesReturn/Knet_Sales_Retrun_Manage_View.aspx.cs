@@ -27,6 +27,7 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
             this.Lbl_Title.Text = "查看退货单信息";
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
+           
             if (s_Type == "1")
             {
                 s_OrderStyle = "class=\"dvtUnSelectedCell\"";
@@ -55,6 +56,7 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
 
         KNet.BLL.KNet_Sales_ReturnList BLL = new KNet.BLL.KNet_Sales_ReturnList();
         KNet.Model.KNet_Sales_ReturnList Model = BLL.GetModelB(s_ID);
+       
 
         if (s_ID != "")
         {
@@ -65,8 +67,11 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
             }
             catch
             { }
-            this.CustomerName.Text = base.Base_GetCustomerName_Link(Model.CustomerValue);
+            KNet.BLL.KNet_Sales_OutWareList BLL1 = new KNet.BLL.KNet_Sales_OutWareList();
+            KNet.Model.KNet_Sales_OutWareList Model1 = BLL1.GetModelB(Model.OutWareNo);
 
+            this.CustomerName.Text = base.Base_GetCustomerName_Link(Model.CustomerValue);
+          
             this.Ddl_ReturnType.Text = base.Base_GetBasicCodeName("110", Model.ReturnType);
             KNet.BLL.KNet_Sales_ReturnList_Details BLL_Details = new KNet.BLL.KNet_Sales_ReturnList_Details();
             DataSet Dts_Details = BLL_Details.GetList(" ReturnNo='" + Model.ReturnNo + "'");
@@ -77,11 +82,13 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
 
 
            this.BeginQuery("select Client_Name from KNet_Sales_ClientAppseting where ClientKings='7' and ClientValue='" + Model.ReturnClass + "'");
+            string ProductCode = "";
             this.ReturnClass.Text = this.QueryForReturn();
             if (Dts_Details.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
                 {
+                    ProductCode += "'"+Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()+"'" + ",";
                     s_MyTable_Detail += "<tr>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
                     s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "</td>";
@@ -91,7 +98,9 @@ public partial class Web_Knet_Sales_Retrun_Manage_View : BasePage
                     s_MyTable_Detail += "</tr>";
                 }
             }
-
+            ProductCode = ProductCode.Substring(0, ProductCode.Length - 1);
+            this.Label1.Text =
+             "<a href=\"/Web/SalesReturn/Knet_Sales_Retrun_Maintain.aspx?Type=1&&SuppNo=" + Model.CustomerValue + "&&ContractNo=" + Model1.ContractNo + "&&ProductCode=" + ProductCode+"&&ReturnNo="+ Model.ReturnNo + "\" class='webMnu'>创建维修记录</a>";
         }
         else
         {

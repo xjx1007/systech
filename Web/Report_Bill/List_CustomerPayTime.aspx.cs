@@ -31,7 +31,7 @@ public partial class Web_List_CustomerPayTime : BasePage
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
             }
-            string s_CustomerName = Request.QueryString["CustomerName"] == null ? "" : Request.QueryString["CustomerName"].ToString();
+            string s_CustomerName = Request.QueryString["Tbx_Time"] == null ? "" : Request.QueryString["Tbx_Time"].ToString();
             //原材料委外耗料
             string s_Sql = "Select distinct PayMent,CustomerName,a.CustomerValue ";
             s_Sql += " from Knet_Sales_ContractList a join KNet_Sales_ClientList b on a.CustomerValue=b.CustomerValue where PayMent<>''  ";

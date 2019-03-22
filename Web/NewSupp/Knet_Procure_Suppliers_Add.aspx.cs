@@ -215,7 +215,7 @@ public partial class Web_Sales_Knet_Procure_Suppliers_Add : BasePage
             Model_Compy_LinkMan.XOL_Address = SuppAddress;
             Model_Compy_LinkMan.XOL_Mail = SuppEmail;
             Model_Compy_LinkMan.XOL_Mail = SuppEmail;
-            Model_Compy_LinkMan.XOL_Del = 0;
+            Model_Compy_LinkMan.XOL_Del = 1;
             Model_Compy_LinkMan.XOL_Code = "CP" + SuppCode + KNetOddNumbers1(this.SuppNo.Text);
             Model_Compy_LinkMan.XOL_Type = "102";
             Model_Compy_LinkMan.XOL_DutyPerson = this.Ddl_DutyPerson.SelectedValue;

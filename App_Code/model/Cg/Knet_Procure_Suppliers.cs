@@ -43,11 +43,156 @@ namespace KNet.Model
         private int _KPS_ScNumber;
         private int _KPS_Flow;
         private int _KPS_State;
+        private int _KPS_Nature;
         private string _KPS_SuppCode;
         private decimal _KPS_KPMaxMoney;
         private int _KPS_MaxRow;
         private int _KPS_GiveDays;
-        
+        private string _KPS_BusinessUrl;
+        private string _KPS_Business;
+        private string _KPS_InvoiceUrl;
+        private string _KPS_Invoice;
+        private string _KPS_ContractUrl;
+        private string _KPS_Contract;
+        private string _KPS_FiveUrl;
+        private string _KPS_FiveName;
+        private string _KSP_SQEUrl;
+        private string _KPS_SQEName;
+        private string _KPS_Production;
+        private string _KPS_ProductionPho;
+        private string _KPS_WareHouse;
+        private string _KPS_WareHousePho;
+        private string _KPS_CdBankName;
+        private string _KPS_CdBankNum;
+        private string _KPS_Check;
+
+
+        public string KPS_CdBankName
+        {
+            set { _KPS_CdBankName = value; }
+            get { return _KPS_CdBankName; }
+        }
+        public string KPS_Check
+        {
+            set { _KPS_Check = value; }
+            get { return _KPS_Check; }
+        }
+        public string KPS_CdBankNum
+        {
+            set { _KPS_CdBankNum = value; }
+            get { return _KPS_CdBankNum; }
+        }
+        public string KPS_BusinessUrl
+        {
+            set { _KPS_BusinessUrl = value; }
+            get { return _KPS_BusinessUrl; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_Business
+        {
+            set { _KPS_Business = value; }
+            get { return _KPS_Business; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_InvoiceUrl
+        {
+            set { _KPS_InvoiceUrl = value; }
+            get { return _KPS_InvoiceUrl; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_Invoice
+        {
+            set { _KPS_Invoice = value; }
+            get { return _KPS_Invoice; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_ContractUrl
+        {
+            set { _KPS_ContractUrl = value; }
+            get { return _KPS_ContractUrl; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_Contract
+        {
+            set { _KPS_Contract = value; }
+            get { return _KPS_Contract; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_FiveUrl
+        {
+            set { _KPS_FiveUrl = value; }
+            get { return _KPS_FiveUrl; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_FiveName
+        {
+            set { _KPS_FiveName = value; }
+            get { return _KPS_FiveName; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KSP_SQEUrl
+        {
+            set { _KSP_SQEUrl = value; }
+            get { return _KSP_SQEUrl; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_SQEName
+        {
+            set { _KPS_SQEName = value; }
+            get { return _KPS_SQEName; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_Production
+        {
+            set { _KPS_Production = value; }
+            get { return _KPS_Production; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_ProductionPho
+        {
+            set { _KPS_ProductionPho = value; }
+            get { return _KPS_ProductionPho; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_WareHouse
+        {
+            set { _KPS_WareHouse = value; }
+            get { return _KPS_WareHouse; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string KPS_WareHousePho
+        {
+            set { _KPS_WareHousePho = value; }
+            get { return _KPS_WareHousePho; }
+        }
+
+
         /// <summary>
         /// 自动编号
         /// </summary>
@@ -69,7 +214,14 @@ namespace KNet.Model
             set { _suppcode = value; }
             get { return _suppcode; }
         }
-
+        /// <summary>
+        /// 加工厂属性
+        /// </summary>
+        public int KPS_Nature
+        {
+            set { _KPS_Nature = value; }
+            get { return _KPS_Nature; }
+        }
 
         /// <summary>
         /// 供应商名称

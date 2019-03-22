@@ -264,10 +264,16 @@
                                             <%#Base_GetProductsPattern(DataBinder.Eval(Container.DataItem, "CAP_ID").ToString())%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="数量" SortExpression="CAP_CustomerValue" ItemStyle-HorizontalAlign="left"
+                                    <asp:TemplateField HeaderText="已开数量" SortExpression="CAP_CustomerValue" ItemStyle-HorizontalAlign="left"
                                         HeaderStyle-HorizontalAlign="center">
                                         <ItemTemplate>
                                             <%#Base_GetProductsPatternNumber(DataBinder.Eval(Container.DataItem, "CAP_ID").ToString())%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                     <asp:TemplateField HeaderText="未开数量" SortExpression="CAP_CustomerValue" ItemStyle-HorizontalAlign="left"
+                                        HeaderStyle-HorizontalAlign="center">
+                                        <ItemTemplate>
+                                            <%#Base_GetProductsNotPatternNumber(DataBinder.Eval(Container.DataItem, "CAP_ID").ToString())%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="应收日期" DataField="CAP_Stime" SortExpression="CAP_Stime"

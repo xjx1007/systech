@@ -91,7 +91,7 @@ public partial class Knet_Common_SelectSalesContractList : BasePage
 
         if (this.StartDate.Text != "")
         {
-            SqlWhere = SqlWhere + " and ContractDateTime >= '" + this.StartDate.Text + "";
+            SqlWhere = SqlWhere + " and ContractDateTime >= '" + this.StartDate.Text + "'";
         }
         if (this.EndDate.Text != "")
         {

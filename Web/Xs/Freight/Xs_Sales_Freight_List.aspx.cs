@@ -109,7 +109,7 @@ public partial class Xs_Sales_Freight_List : BasePage
         //仅查看自己
         if (AM.YNAuthority("快递仅自己查看") == true)
         {
-            if (AM.KNet_StaffName != "项洲")
+            if (AM.KNet_StaffName != "薛建新")
             {
                 SqlWhere += " and (XSF_Creator='" + AM.KNet_StaffNo + "' ";
                 //共享给自己的

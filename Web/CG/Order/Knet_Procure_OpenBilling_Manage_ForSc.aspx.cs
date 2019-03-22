@@ -615,7 +615,7 @@ public partial class Knet_Procure_OpenBilling_Manage_ForSc : BasePage
     protected void Btn_Del_Click(object sender, EventArgs e)
     {
         AdminloginMess LogAM = new AdminloginMess();
-        if (LogAM.KNet_StaffName == "项洲")
+        if (LogAM.KNet_StaffName == "薛建新")
         {
             string sql = "delete from Knet_Procure_OrdersList where"; //删除采购单
             string sql2 = "delete from Knet_Procure_OrdersList_Details where"; //采购单明细

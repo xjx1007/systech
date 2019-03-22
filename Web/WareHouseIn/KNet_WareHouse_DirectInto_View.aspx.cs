@@ -26,6 +26,10 @@ public partial class Web_KNet_WareHouse_DirectInto_View : BasePage
         {
             this.Lbl_Title.Text = "查看入库单信息";
             AdminloginMess AM = new AdminloginMess();
+            if (AM.KNet_StaffName=="蔡瑞琴")
+            {
+                btn_Chcek.Visible = false;
+            }
             if (AM.CheckLogin("查看直接入库") == false)
             {
                 Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");

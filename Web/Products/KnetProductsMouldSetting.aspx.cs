@@ -41,7 +41,7 @@ public partial class Knet_Web_KnetProductsMouldSetting : BasePage
             }
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             string s_Model = Request.QueryString["Model"] == null ? "" : Request.QueryString["Model"].ToString();
-            BuildTree("M130703044928726", null);
+            BuildTree("1", null);
             this.TreeView1.CollapseAll();
             this.TreeView1.Nodes[0].Expand();
             this.TreeView1.Nodes[0].Select();

@@ -25,8 +25,8 @@ public partial class Web_Report_Xs_Report_OrderList : BasePage
             base.Base_DropDutyPerson(this.Ddl_DutyPerson,false);
             base.Base_DropKClaaBind(this.Tbx_CustomerTypes, 2, "", "请选择客户类型");
             DateTime datetime = DateTime.Now;
-            ///this.StartDate.Text = datetime.AddDays(1 - datetime.Day).ToShortDateString();
-         ///   this.EndDate.Text = datetime.ToShortDateString();
+            //this.StartDate.Text = datetime.AddDays(1 - datetime.Day).ToShortDateString();
+         //   this.EndDate.Text = datetime.ToShortDateString();
         }
 
     }

@@ -199,7 +199,7 @@ namespace KNet.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 PBM_ID,PBM_FatherID,PBM_Name,PBM_Module,PBM_Parenttab,PBM_URL,PBM_Del from PB_Basic_Menu ");
+            strSql.Append("select  top 1 * from PB_Basic_Menu ");
             strSql.Append(" where PBM_ID=@PBM_ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBM_ID", SqlDbType.VarChar,50)};
@@ -238,10 +238,7 @@ namespace KNet.DAL
                     model.PBM_Del = ds.Tables[0].Rows[0]["PBM_Del"].ToString();
                 }
 
-                if (ds.Tables[0].Rows[0]["PBM_Order"] != null && ds.Tables[0].Rows[0]["PBM_Order"].ToString() != "")
-                {
-                    model.PBM_Order = Convert.ToInt32(ds.Tables[0].Rows[0]["PBM_Order"].ToString());
-                }
+         
                 if (ds.Tables[0].Rows[0]["PBM_CTime"] != null && ds.Tables[0].Rows[0]["PBM_CTime"].ToString() != "")
                 {
                     model.PBM_CTime = Convert.ToDateTime(ds.Tables[0].Rows[0]["PBM_CTime"].ToString());

@@ -23,6 +23,7 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
     public string s_LinkMan = "";
     public string s_OppID = "";
     public string s_MyTable_Detail = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -49,25 +50,28 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
             this.Lbl_Stime.Text = DateTime.Parse(model.DirectOutDateTime.ToString()).ToShortDateString();
             this.Lbl_House.Text = base.Base_GetHouseName(model.HouseNo);
             this.Lbl_Customer.Text = base.Base_GetCustomerName_Link(model.KWD_Custmoer);
-            this.Lbl_ContentPerson.Text = base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Name") + "（电话：" + base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Phone") + "地址：" + base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Address") + "）";
+            this.Lbl_ContentPerson.Text = base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Name") + "（电话：" +
+                                          base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Phone") + "地址：" +
+                                          base.Base_GetLinkManValue(model.KWD_ContentPerson, "XOL_Address") + "）";
             this.Lbl_Remarks.Text = model.DirectOutRemarks;
 
             this.Lbl_MailProducts.Text = base.Base_GetProductsEdition(model.KWD_MainProductsBarCode);
             this.Lbl_MailProductsNumber.Text = model.KWD_MainProductsNumber.ToString();
 
-          this.Lbl_Project.Text= base.Base_GetBasicCodeName("779",model.KWD_Project);
-          this.Lbl_LyTYpe.Text = base.Base_GetBasicCodeName("1135", model.KWD_LyType);
-            this.Lbl_OEM.Text=base.Base_GetSupplierName_Link(model.KWD_SuppNo);
-          if (model.KWD_IsSupp == 1)
-          {
+            this.Lbl_Project.Text = base.Base_GetBasicCodeName("779", model.KWD_Project);
+            this.Lbl_LyTYpe.Text = base.Base_GetBasicCodeName("1135", model.KWD_LyType);
+            this.Lbl_OEM.Text = base.Base_GetSupplierName_Link(model.KWD_SuppNo);
+            this.KWD_Upload.Text= "<a href=\"" + model.KWD_UploadUrl + "\" >" + model.KWD_UploadName + "</a>"; ;
+            if (model.KWD_IsSupp == 1)
+            {
 
-              Lbl_IsSuppNo.Text = "<font color=red>是</font>";
-          }
-          else
-          {
+                Lbl_IsSuppNo.Text = "<font color=red>是</font>";
+            }
+            else
+            {
 
-              Lbl_IsSuppNo.Text = "否";
-          }
+                Lbl_IsSuppNo.Text = "否";
+            }
             if (model.DirectOutCheckYN == 3)
             {
 
@@ -102,7 +106,11 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
 
             if (model.KWD_MainProductsBarCode != "")
             {
-                strSql.Append(" left join v_ProductsDemo_Details b on a.ProductsBarCode=b.XPD_ProductsBarCode and b.FaterBarCode in(select '" + model.KWD_MainProductsBarCode + "' union Select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo where XPD_FaterBarCode='" + model.KWD_MainProductsBarCode + "')  ");
+                strSql.Append(
+                    " left join v_ProductsDemo_Details b on a.ProductsBarCode=b.XPD_ProductsBarCode and b.FaterBarCode in(select '" +
+                    model.KWD_MainProductsBarCode +
+                    "' union Select XPD_ProductsBarCode from Xs_Products_Prodocts_Demo where XPD_FaterBarCode='" +
+                    model.KWD_MainProductsBarCode + "')  ");
             }
             strSql.Append(" where DirectOutNo='" + model.DirectOutNo + "' ");
 
@@ -112,8 +120,8 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
             }
 
             this.BeginQuery(strSql.ToString());
-            DataSet Dts_Details = (DataSet)this.QueryForDataSet();
-            decimal d_Money = 0, d_Amount = 0,d_Money1 = 0;
+            DataSet Dts_Details = (DataSet) this.QueryForDataSet();
+            decimal d_Money = 0, d_Amount = 0, d_Money1 = 0, d_Money2 = 0;
             if (Dts_Details.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < Dts_Details.Tables[0].Rows.Count; i++)
@@ -125,32 +133,62 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
 
                     if (model.KWD_MainProductsBarCode != "")
                     {
-                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["BomOrder"].ToString() + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                            Dts_Details.Tables[0].Rows[i]["BomOrder"].ToString() + "</td>";
                     }
                     else
                     {
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
                     }
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString() + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutTotalNet"].ToString() + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KWD_WwPrice"].ToString() + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["KWD_WwMoney"].ToString() + "</td>";
-                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + Dts_Details.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "&nbsp;</td>";
+                    string a = Dts_Details.Tables[0].Rows[i]["KWD_BPrice"].ToString();
+                    string b = Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString();
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        base.Base_GetProdutsName(
+                                            Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        base.Base_GetProductsCode(
+                                            Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        base.Base_GetProductsEdition(
+                                            Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["DirectOutUnitPrice"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["DirectOutTotalNet"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["KWD_BPrice"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["KWD_BMoney"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["KWD_WwPrice"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["KWD_WwMoney"].ToString() + "</td>";
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\">" +
+                                        Dts_Details.Tables[0].Rows[i]["DirectOutRemarks"].ToString() + "&nbsp;</td>";
 
                     s_MyTable_Detail += "</tr>";
                     d_Amount += int.Parse(Dts_Details.Tables[0].Rows[i]["DirectOutAmount"].ToString());
                     d_Money += decimal.Parse(Dts_Details.Tables[0].Rows[i]["DirectOutTotalNet"].ToString());
                     try
                     {
+                        d_Money2 += decimal.Parse(Dts_Details.Tables[0].Rows[i]["KWD_BMoney"].ToString());
+                    }
+                    catch
+                    {
+
+                        d_Money2 += 0;
+                    }
+                    try
+                    {
                         d_Money1 += decimal.Parse(Dts_Details.Tables[0].Rows[i]["KWD_WwMoney"].ToString());
+                       
                     }
                     catch
                     {
                         d_Money1 +=0;
+                       
                     }
                 }
                 s_MyTable_Detail += "<tr>";
@@ -159,7 +197,8 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Money.ToString(), 2) + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
-
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Money2.ToString(), 2) + "</td>";//
+                s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(d_Money1.ToString(), 2) + "</td>";
                 
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\">&nbsp;</td>";

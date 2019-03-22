@@ -38,13 +38,20 @@ public partial class Web_Sales_Knet_Procure_Suppliers_List : BasePage
                 }
                 if ((s_ID != "") && (s_Model == "IsDel"))
                 {
-                    KNet.BLL.Knet_Procure_Suppliers Bll = new KNet.BLL.Knet_Procure_Suppliers();
-                    KNet.Model.Knet_Procure_Suppliers Model = Bll.GetModelB(s_ID);
+                    if (AM.YNAuthority("供应商审核"))
+                    {
+                        KNet.BLL.Knet_Procure_Suppliers Bll = new KNet.BLL.Knet_Procure_Suppliers();
+                        KNet.Model.Knet_Procure_Suppliers Model = Bll.GetModelB(s_ID);
                         Model.SuppNo = s_ID;
                         int i_Del = Math.Abs(Model.KPS_Del - 1);
                         Model.KPS_Del = i_Del;
                         Bll.UpdateDel(Model);
                         AM.Add_Logs("供应商--->停用供应商编码：" + s_ID);
+                    }
+                    else
+                    {
+                        Alert("你没有审核的权限，请联系品质部");
+                    }
                 }
                 this.Btn_Del.Attributes.Add("onclick", "return confirm('您确定要把所选择的记录删除吗？')");
                 DataShows();

@@ -192,6 +192,8 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
                 string s_BrandName = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_BrandName")).Text;
                 string s_BigUnits = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("BigUnits")).Text; 
                 string ProductsUnits = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsUnits")).Text;
+                string ksp_code= ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Code")).Text;
+                string ProductsBarCode = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsBarCode")).Text;
                 string s_WareHouseNo = "";
                 try
                 {
@@ -221,21 +223,32 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
                         }
                     }
                 }
+
+               
                 string price = model.ProcureUnitPrice.ToString();
-                if (s_BigUnits.Length >0 )
+                if (s_BigUnits.Length > 0)
                 {
                     string c = s_BigUnits.Remove(s_BigUnits.LastIndexOf("/"));
-                    s_Number = s_Number/Convert.ToInt32(c);
-                    ProductsUnits = s_BigUnits.Substring(s_BigUnits.LastIndexOf("/")+1);
-                    price=(decimal.Parse(price)* Convert.ToInt32(c)).ToString();
+                    s_Number = s_Number / Convert.ToInt32(c);
+                    ProductsUnits = s_BigUnits.Substring(s_BigUnits.LastIndexOf("/") + 1);
+                    price = (decimal.Parse(price) * Convert.ToInt32(c)).ToString();
                 }
-                
-                s_Return += model.ProductsName + "," + model.ProductsBarCode + "," + model.ProductsPattern + "," + base.Base_GetProductsEdition(model.ProductsBarCode) + "," + s_Number.ToString() + "," + price + "," + Convert.ToString(s_Number * decimal.Parse(price)) + ",";
-                s_Return += model.HandPrice.ToString() + "," + Convert.ToString(s_Number * decimal.Parse(model.HandPrice.ToString())) + "," + s_Remarks + "," + s_SuppNo + "," + base.Base_GetSupplierName(s_SuppNo) + "," + s_WareHouseNo + "," + Model_Products.KSP_BZNumber.ToString() + "," + s_BZNumber+"," + s_BrandName + "," + s_BigUnits + "," + ProductsUnits + "|";
+                int sc = 0;
+                if (Request.QueryString["SuppNo"].ToString() == "")
+                {
+                    s_Return += model.ProductsName + "," + model.ProductsBarCode + "," + model.ProductsPattern + "," + base.Base_GetProductsEdition(model.ProductsBarCode) + "," + s_Number.ToString() + "," + price + "," + Convert.ToString(s_Number * decimal.Parse(price)) + ",";
+                    s_Return += 0 + "," + 0 + "," + s_Remarks + "," + s_SuppNo + "," + base.Base_GetSupplierName(s_SuppNo) + "," + s_WareHouseNo + "," + Model_Products.KSP_BZNumber.ToString() + "," + s_BZNumber + "," + s_BrandName + "," + s_BigUnits + "," + ProductsUnits + "|";
+                }
+                else
+                {
+                    s_Return += model.ProductsName + "," + model.ProductsBarCode + "," + model.ProductsPattern + "," + base.Base_GetProductsEdition(model.ProductsBarCode) + "," + s_Number.ToString() + "," + price + "," + Convert.ToString(s_Number * decimal.Parse(price)) + ",";
+                    s_Return += model.HandPrice.ToString() + "," + Convert.ToString(s_Number * decimal.Parse(model.HandPrice.ToString())) + "," + s_Remarks + "," + s_SuppNo + "," + base.Base_GetSupplierName(s_SuppNo) + "," + s_WareHouseNo + "," + Model_Products.KSP_BZNumber.ToString() + "," + s_BZNumber + "," + s_BrandName + "," + s_BigUnits + "," + ProductsUnits + "|";
+                }
+              
                 cal += GridView1.DataKeys[i].Value.ToString();
                 if (j > 0)
                 {
-                    s_SuppNo1 = ((TextBox)GridView1.Rows[j-1].Cells[0].FindControl("Tbx_SuppNo")).Text;
+                    s_SuppNo1 = ((TextBox)GridView1.Rows[j - 1].Cells[0].FindControl("Tbx_SuppNo")).Text;
                     if (s_SuppNo1 != s_SuppNo)
                     {
                         s_String = "供应商不同，请重新选择";

@@ -40,9 +40,15 @@ public partial class List_CkList2 : BasePage
             string s_Ck = Request.QueryString["Ck"] == null ? "" : Request.QueryString["Ck"].ToString();
             string s_ProductsBarCode = Request.QueryString["ProductsBarCode"] == null ? "" : Request.QueryString["ProductsBarCode"].ToString();
             string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
-
-
-     
+            string id = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
+            if (id=="01")
+            {
+                s_Sql += " and d.KSP_COde like '01%' ";
+            }
+            if (id == "02")
+            {
+                s_Sql += " and d.KSP_COde like '02%' ";
+            }
             string s_Details="",s_Style="";
             string s_Head = "";
             Decimal DTotalNum = 0;
@@ -101,17 +107,17 @@ public partial class List_CkList2 : BasePage
             KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
             string s_SonID = Bll_ProductsDetails.GetSonIDs("M130703042640846");
             s_SonID = s_SonID.Replace(",", "','");
-            s_Sql += " and ProductsType not in ('" + s_SonID + "') ";
-            if(s_ProductsType!="")
-            {
-                    s_SonID = Bll_ProductsDetails.GetSonIDs(s_ProductsType);
-                    s_SonID = s_SonID.Replace(",", "','");
-                    s_Sql += " and ProductsType  in ('" + s_SonID + "') ";
-            }
-            if(s_CustomerTypes!="")
-            {
-                s_Sql += " and a.KWD_Custmoer in (select CustomerValue from KNet_Sales_ClientList where CustomerTypes='" + s_CustomerTypes + "' ) ";
-            }
+            //s_Sql += " and ProductsType not in ('" + s_SonID + "') ";
+            //if(s_ProductsType!="")
+            //{
+            //        s_SonID = Bll_ProductsDetails.GetSonIDs(s_ProductsType);
+            //        s_SonID = s_SonID.Replace(",", "','");
+            //        s_Sql += " and ProductsType  in ('" + s_SonID + "') ";
+            //}
+            //if(s_CustomerTypes!="")
+            //{
+            //    s_Sql += " and a.KWD_Custmoer in (select CustomerValue from KNet_Sales_ClientList where CustomerTypes='" + s_CustomerTypes + "' ) ";
+            //}
             if (s_Ck != "")
             {
                 s_Sql += " and c.HouseName like '%"+s_Ck+"%' ";

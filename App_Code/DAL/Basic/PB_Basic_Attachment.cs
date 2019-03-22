@@ -37,9 +37,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into PB_Basic_Attachment(");
-            strSql.Append("PBA_ID,PBA_FID,PBA_Name,PBA_Type,PBA_URL,PBA_Creator,PBA_CTime,PBA_Remarks,PBA_ProductsType,PBA_FileType,PBA_Del,PBA_State,PBA_UpdateFID,PBA_Edition)");
+            strSql.Append("PBA_ID,PBA_FID,PBA_Name,PBA_Type,PBA_URL,PBA_Creator,PBA_CTime,PBA_Remarks,PBA_ProductsType,PBA_FileType,PBA_Del,PBA_State,PBA_UpdateFID,PBA_Edition,PBA_EndTime)");
             strSql.Append(" values (");
-            strSql.Append("@PBA_ID,@PBA_FID,@PBA_Name,@PBA_Type,@PBA_URL,@PBA_Creator,@PBA_CTime,@PBA_Remarks,@PBA_ProductsType,@PBA_FileType,@PBA_Del,@PBA_State,@PBA_UpdateFID,@PBA_Edition)");
+            strSql.Append("@PBA_ID,@PBA_FID,@PBA_Name,@PBA_Type,@PBA_URL,@PBA_Creator,@PBA_CTime,@PBA_Remarks,@PBA_ProductsType,@PBA_FileType,@PBA_Del,@PBA_State,@PBA_UpdateFID,@PBA_Edition,@PBA_EndTime)");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@PBA_FID", SqlDbType.VarChar,50),
@@ -54,7 +54,8 @@ namespace KNet.DAL
 					new SqlParameter("@PBA_Del", SqlDbType.Int,4),
 					new SqlParameter("@PBA_State", SqlDbType.Int,4),
 					new SqlParameter("@PBA_UpdateFID", SqlDbType.VarChar,50),
-					new SqlParameter("@PBA_Edition", SqlDbType.VarChar,50)
+					new SqlParameter("@PBA_Edition", SqlDbType.VarChar,50),
+                    new SqlParameter("@PBA_EndTime", SqlDbType.DateTime)
         };
             parameters[0].Value = model.PBA_ID;
             parameters[1].Value = model.PBA_FID;
@@ -70,7 +71,7 @@ namespace KNet.DAL
             parameters[11].Value = model.PBA_State;
             parameters[12].Value = model.PBA_UpdateFID;
             parameters[13].Value = model.PBA_Edition;
-            
+            parameters[14].Value = model.PBA_EndTime;
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -85,6 +86,7 @@ namespace KNet.DAL
             strSql.Append("PBA_Type=@PBA_Type,");
             strSql.Append("PBA_URL=@PBA_URL,");
             strSql.Append("PBA_Remarks=@PBA_Remarks");
+            strSql.Append("PBA_Remarks=@PBA_EndTime");
             strSql.Append(" where PBA_ID=@PBA_ID ");
             SqlParameter[] parameters = {
 					new SqlParameter("@PBA_FID", SqlDbType.VarChar,50),
@@ -92,13 +94,15 @@ namespace KNet.DAL
 					new SqlParameter("@PBA_Type", SqlDbType.Int,4),
 					new SqlParameter("@PBA_URL", SqlDbType.VarChar,350),
 					new SqlParameter("@PBA_Remarks", SqlDbType.VarChar,50),
-					new SqlParameter("@PBA_ID", SqlDbType.VarChar,50)};
+                    new SqlParameter("@PBA_EndTime", SqlDbType.DateTime),
+                    new SqlParameter("@PBA_ID", SqlDbType.VarChar,50)};
             parameters[0].Value = model.PBA_FID;
             parameters[1].Value = model.PBA_Name;
             parameters[2].Value = model.PBA_Type;
             parameters[3].Value = model.PBA_URL;
             parameters[4].Value = model.PBA_Remarks;
-            parameters[5].Value = model.PBA_ID;
+            parameters[5].Value = model.PBA_EndTime;
+            parameters[6].Value = model.PBA_ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -311,6 +315,10 @@ namespace KNet.DAL
                     {
                         model.PBA_UpdateFID = ds.Tables[0].Rows[0]["PBA_UpdateFID"].ToString();
                     }
+                    if (ds.Tables[0].Rows[0]["PBA_EndTime"] != null && ds.Tables[0].Rows[0]["PBA_EndTime"].ToString() != "")
+                    {
+                        model.PBA_EndTime =DateTime.Parse(ds.Tables[0].Rows[0]["PBA_EndTime"].ToString()); ;
+                    }
 
 
                     return model;
@@ -359,6 +367,22 @@ namespace KNet.DAL
                 strSql.Append(" where " + strWhere);
             }
             strSql.Append(" order by " + filedOrder);
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+        /// <summary>
+        /// 获取烧录文件添加人的邮箱
+        /// </summary>
+        /// <param name="Top"></param>
+        /// <param name="strWhere"></param>
+        /// <param name="filedOrder"></param>
+        /// <returns></returns>
+        public DataSet GetEmialList(string productlist)
+        {
+            StringBuilder strSql = new StringBuilder();
+           
+            strSql.Append(" select StaffEmail from KNet_Resource_Staff where StaffNo in (select distinct PBA_Creator from PB_Basic_Attachment where PBA_FID in ("+ productlist + ") and PBA_ProductsType=6) ");
+           
+            //strSql.Append(" order by " + filedOrder);
             return DbHelperSQL.Query(strSql.ToString());
         }
 

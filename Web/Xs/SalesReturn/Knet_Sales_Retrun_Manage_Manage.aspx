@@ -124,11 +124,11 @@
                                 </td>
                                 <td nowrap class="small">
                                     <b>
-                                        <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all">&nbsp;匹配以下所有条件</b>
+                                        <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all"/>&nbsp;匹配以下所有条件</b>
                                 </td>
                                 <td nowrap width="60%" class="small">
                                     <b>
-                                        <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b>
+                                        <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked/>&nbsp;匹配以下任意条件</b>
                                 </td>
                                 <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]
                                 </td>
@@ -180,13 +180,13 @@
                             <tr>
                                 <td align="left" width="40%">
                                     <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("KNet_Sales_ReturnList")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
-                                        class="crmbuttom small edit">
-                                    <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit">
+                                           class="crmbuttom small edit"/>
+                                    <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit"/>
                                 </td>
                                 <td align="left" class="small">
                                     <asp:Button ID="btnAdvancedSearch" runat="server" Text="立即查找" AccessKey="F" title="立即查找 [Alt+F]"
                                         class="crmbutton small create" OnClick="btnAdvancedSearch_Click" />&nbsp;
-                                <input type="button" class="crmbutton small edit" value=" 取消查找 " onclick="fnshow();">
+                                    <input type="button" class="crmbutton small edit" value=" 取消查找 " onclick="fnshow();"/>
                                 </td>
                             </tr>
                         </table>
@@ -208,7 +208,7 @@
                                             </td>
                                             <td align="right" width="40%">
                                                 <img onclick="fninvsh('changeowner');" title="关闭" alt="关闭" style="cursor: pointer;"
-                                                    src="/themes/softed/images/close.gif" align="absmiddle" border="0">
+                                                     src="/themes/softed/images/close.gif" align="absmiddle" border="0"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -233,8 +233,8 @@
                                     <table border="0" cellspacing="0" cellpadding="5" width="100%" class="layerPopupTransport">
                                         <tr>
                                             <td align="center">
-                                                <input type="button" name="button" class="crmbutton small edit" value="更新负责人" onclick="ajaxChangeStatus('owner')">
-                                                <input type="button" name="button" class="crmbutton small cancel" value="取消" onclick="fninvsh('changeowner')">
+                                                <input type="button" name="button" class="crmbutton small edit" value="更新负责人" onclick="ajaxChangeStatus('owner')"/>
+                                                <input type="button" name="button" class="crmbutton small cancel" value="取消" onclick="fninvsh('changeowner')"/>
                                             </td>
                                         </tr>
                                     </table>

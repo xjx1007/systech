@@ -153,7 +153,7 @@ public partial class Knet_Web_Salese_KNet_Sales_ContractList_Add : BasePage
         AdminloginMess AM = new AdminloginMess();
         KNet.BLL.KNet_Sales_ContractList Bll = new KNet.BLL.KNet_Sales_ContractList();
         KNet.Model.KNet_Sales_ContractList Model = Bll.GetModelB(s_ID);
-        if (AM.KNet_StaffName != "项洲")
+        if (AM.KNet_StaffName != "薛建新")
         {
             if (this.Tbx_Type.Text != "1")
             {

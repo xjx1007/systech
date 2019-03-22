@@ -20,6 +20,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
 {
     private int i_TotalNum = 0, i_TotalNum_Excel = 0;
     private decimal d_TotalNet = 0, d_TotalNet_Excel = 0;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -27,14 +28,17 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             AdminloginMess AM = new AdminloginMess();
             if (AM.CheckLogin("新增采购对账") == false)
             {
-                Response.Write("<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
+                Response.Write(
+                    "<script language=javascript>alert('您未登陆系统或已超过，请重新登陆系统!');parent.location.href = '/Default.aspx';</script>");
                 Response.End();
             }
             else
             {
-                base.Base_DropWareHouseBind(this.Ddl_HouseNo, " HouseNo in (select Distinct HouseNo from KNet_WareHouse_DirectOutList where KWD_Type='101') ");
+                base.Base_DropWareHouseBind(this.Ddl_HouseNo,
+                    " HouseNo in (select Distinct HouseNo from KNet_WareHouse_DirectOutList where KWD_Type='101') ");
 
                 //编号生成  按月
+                this.Lbl_Upload.Text = "";
                 this.Tbx_CheckCode.Text = base.GetNewID("Cg_Order_Checklist", 0);
                 this.Tbx_RkCode.Text = GetIDByMonth();
                 this.Tbx_Stime.Text = DateTime.Now.ToShortDateString();
@@ -90,7 +94,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             string s_Price = Tbx_Price.Text;
             string s_HandPrice = Tbx_HandPrice.Text;
             //回签单
-            string s_Sql = "Select * from PB_Basic_Attachment where PBA_Type='SalesOut' and PBA_FID='" + Tbx_DirectOutNo.Text + "'";
+            string s_Sql = "Select * from PB_Basic_Attachment where PBA_Type='SalesOut' and PBA_FID='" +
+                           Tbx_DirectOutNo.Text + "'";
             this.BeginQuery(s_Sql);
             DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
             if (Dtb_Table.Rows.Count > 0)
@@ -102,7 +107,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 cb.Checked = false;
             }
             Excel excel = new Excel();
-            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text," 1=1 ");
+            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text, " 1=1 ");
             this.BeginQuery("select * from Excel_In_Details where EID_FID='" + this.Tbx_CheckCode.Text + "' ");
             DataTable Dtb_Excel = this.QueryForDataTable();
             string[] s_FName = new string[7];
@@ -159,15 +164,21 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     if (dr[1].ToString() != "")
                     {
                         string s_ExcelNum = dr["" + s_FName[1] + ""] == null ? "0" : dr["" + s_FName[1] + ""].ToString();
-                        string s_ExcelPrice = dr["" + s_FName[4] + ""] == null ? "0" : dr["" + s_FName[4] + ""].ToString();
-                        string s_ExcelHandPrice = dr["" + s_FName[5] + ""] == null ? "0" : dr["" + s_FName[5] + ""].ToString();
+                        string s_ExcelPrice = dr["" + s_FName[4] + ""] == null
+                            ? "0"
+                            : dr["" + s_FName[4] + ""].ToString();
+                        string s_ExcelHandPrice = dr["" + s_FName[5] + ""] == null
+                            ? "0"
+                            : dr["" + s_FName[5] + ""].ToString();
                         try
                         {
                             i_ExcelNum += int.Parse(s_ExcelNum == "" ? "0" : s_ExcelNum);
                             d_ExcelPrice = decimal.Parse(s_ExcelPrice == "" ? "0" : s_ExcelPrice);
                             d_ExcelHandPrice = decimal.Parse(s_ExcelHandPrice == "" ? "0" : s_ExcelHandPrice);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
                 if (cb.Checked)
@@ -187,7 +198,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     }
                 }
                 catch
-                { }
+                {
+                }
                 try
                 {
                     if ((d_ExcelPrice != decimal.Parse(s_Price)) && (d_ExcelPrice != 0))
@@ -200,7 +212,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     }
                 }
                 catch
-                { }
+                {
+                }
 
             }
             this.Tbx_TotalNet.Text = d_TotalNet.ToString();
@@ -210,6 +223,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             //查找这个单子是否在系统中如果是就打钩 否就加入到另外一个DataTab里面
         }
     }
+
     protected void GridView2_DataRowBinding(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
@@ -228,7 +242,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             string s_Price = Tbx_Price.Text;
             try
             {
-                KNet.BLL.Knet_Procure_WareHouseList_Details Bll_Details = new KNet.BLL.Knet_Procure_WareHouseList_Details();
+                KNet.BLL.Knet_Procure_WareHouseList_Details Bll_Details =
+                    new KNet.BLL.Knet_Procure_WareHouseList_Details();
                 KNet.Model.Knet_Procure_WareHouseList_Details model_Details = Bll_Details.GetModel(ID);
                 KNet.BLL.Knet_Procure_WareHouseList Bll = new KNet.BLL.Knet_Procure_WareHouseList();
                 KNet.Model.Knet_Procure_WareHouseList model = Bll.GetModelB(model_Details.WareHouseNo);
@@ -243,9 +258,10 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 }
             }
             catch
-            { }
+            {
+            }
             Excel excel = new Excel();
-            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text," 1=1 ");
+            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text, " 1=1 ");
             this.BeginQuery("select * from Excel_In_Details where EID_FID='" + this.Tbx_CheckCode.Text + "' ");
             DataTable Dtb_Excel = this.QueryForDataTable();
             string[] s_FName = new string[5];
@@ -302,13 +318,17 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     if (dr[1].ToString() != "")
                     {
                         string s_ExcelNum = dr["" + s_FName[1] + ""] == null ? "0" : dr["" + s_FName[1] + ""].ToString();
-                        string s_ExcelPrice = dr["" + s_FName[4] + ""] == null ? "0" : dr["" + s_FName[4] + ""].ToString();
+                        string s_ExcelPrice = dr["" + s_FName[4] + ""] == null
+                            ? "0"
+                            : dr["" + s_FName[4] + ""].ToString();
                         try
                         {
                             i_ExcelNum += int.Parse(s_ExcelNum == "" ? "0" : s_ExcelNum);
                             d_ExcelPrice = decimal.Parse(s_ExcelPrice == "" ? "0" : s_ExcelPrice);
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
                 }
                 if (cb.Checked)
@@ -328,7 +348,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     }
                 }
                 catch
-                { }
+                {
+                }
                 try
                 {
                     if ((d_ExcelPrice != decimal.Parse(s_Price)) && (d_ExcelPrice != 0))
@@ -337,7 +358,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     }
                 }
                 catch
-                { }
+                {
+                }
 
             }
             this.Tbx_TotalNet.Text = d_TotalNet.ToString();
@@ -347,6 +369,68 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             //查找这个单子是否在系统中如果是就打钩 否就加入到另外一个DataTab里面
         }
     }
+
+    protected void GridView3_DataRowBinding(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+
+            string AllocateNo = this.MyGridView3.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
+            CheckBox cb = (CheckBox)e.Row.Cells[1].FindControl("Chbk2");
+            KNet.BLL.KNet_WareHouse_AllocateList Bll = new KNet.BLL.KNet_WareHouse_AllocateList();
+            KNet.Model.KNet_WareHouse_AllocateList Model = Bll.GetModelB(AllocateNo);
+
+            //if (Model.AllocateCheckYN != 0)
+            //{
+            //    cb.Enabled = true;
+            //}
+            //else
+            //{
+            //    cb.Enabled = false;
+            //}
+        }
+    }
+
+    /// <summary>
+    /// 调拨数量
+    /// </summary>
+    /// <param name="s_Order"></param>
+    /// <returns></returns>
+    public string GetDirectInNumbers(string s_Order)
+    {
+        string s_Return = "";
+        this.BeginQuery(
+            "Select Sum(AllocateAmount) as AllocateAmount from KNet_WareHouse_AllocateList_Details Where AllocateNo='" +
+            s_Order + "'");
+        this.QueryForDataTable();
+        if (this.Dtb_Result.Rows.Count > 0)
+        {
+            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            {
+                s_Return = Dtb_Result.Rows[i]["AllocateAmount"].ToString();
+            }
+        }
+        return s_Return;
+    }
+
+    public string GetHandPrice(string productbarcode, string orderno)
+    {
+        string s_Return = "";
+        this.BeginQuery("select HandPrice from Knet_Procure_OrdersList_Details where OrderNo='"+ orderno + "' and ProductsBarCode='"+ productbarcode + "'");
+        this.QueryForDataTable();
+        if (this.Dtb_Result.Rows.Count > 0)
+        {
+            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            {
+                s_Return = Dtb_Result.Rows[i]["HandPrice"].ToString();
+            }
+        }
+        return s_Return;
+    }
+
+
+
+
     private void ShowMessage(string s_ID)
     {
         KNet.BLL.Cg_Order_Checklist Bll = new KNet.BLL.Cg_Order_Checklist();
@@ -385,14 +469,20 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 this.SuppNo.Text = base.Base_GetSupplierName(Model.COC_SuppNo);
                 this.DataShows();
             }
-            else
+            else if (Model.COC_Type == "0")
             {
                 this.Ddl_HouseNo.SelectedValue = Model.COC_HouseNo;
+                this.DataShows();
+            }
+            else if (Model.COC_Type == "2")
+            {
+                this.Ddl_SuppNo.Value = Model.COC_SuppNo;
                 this.DataShows();
             }
             Tbx_DirectInRemarks.Text = Model.COC_Details;
         }
     }
+
     private void ShowDiog()
     {
         this.BeginQuery("select * from Excel_In_Manage where EIM_FID='" + this.Tbx_CheckCode.Text + "'");
@@ -406,7 +496,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             if (s_Type == "原材料")
             {
                 this.Ddl_Type.SelectedValue = "1";
-                this.BeginQuery("Select SuppNo from Knet_Procure_Suppliers where suppName like '%" + s_SuppName1.Trim() + "%'");
+                this.BeginQuery("Select SuppNo from Knet_Procure_Suppliers where suppName like '%" + s_SuppName1.Trim() +
+                                "%'");
                 string s_SuppNo = this.QueryForReturn();
                 if (s_SuppNo != "")
                 {
@@ -417,8 +508,10 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             else if (s_Type == "成品")
             {
                 this.Ddl_Type.SelectedValue = "0";
-                string s_Sql1 = "select HouseNo from Knet_Procure_Suppliers a join KNet_Sys_WareHouse b on a.SuppNo=b.SuppNo where KSW_Type='0' and suppName like '%" + s_SuppName1.Trim() + "%' ";
-                this.BeginQuery(s_Sql1);//查找HouseNo
+                string s_Sql1 =
+                    "select HouseNo from Knet_Procure_Suppliers a join KNet_Sys_WareHouse b on a.SuppNo=b.SuppNo where KSW_Type='0' and suppName like '%" +
+                    s_SuppName1.Trim() + "%' ";
+                this.BeginQuery(s_Sql1); //查找HouseNo
                 string s_HouseNO = this.QueryForReturn();
                 if (s_HouseNO != "")
                 {
@@ -432,7 +525,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
         bool b_IsDetails = false;
         this.BeginQuery("select * from Excel_In_Details where EID_FID='" + this.Tbx_CheckCode.Text + "'");
         DataTable Dtb_TableDetails = this.QueryForDataTable();
-        if (Dtb_TableDetails.Rows.Count > 0)//如果有明细
+        if (Dtb_TableDetails.Rows.Count > 0) //如果有明细
         {
             b_IsDetails = true;
         }
@@ -441,17 +534,21 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             b_IsDetails = false;
         }
 
-        string s_Sql = "Select * from PB_Basic_Attachment where PBA_Type='CgCheck' and PBA_FID='" + this.Tbx_CheckCode.Text + "' order by PBA_CTime desc";
+        string s_Sql = "Select * from PB_Basic_Attachment where PBA_Type='CgCheck' and PBA_FID='" +
+                       this.Tbx_CheckCode.Text + "' order by PBA_CTime desc";
         this.BeginQuery(s_Sql);
         DataTable Dtb_Table = this.QueryForDataTable();
         if (Dtb_Table.Rows.Count > 0)
         {
-            this.Lbl_Upload.Text = "<a href=\"" + Dtb_Table.Rows[0]["PBA_URL"].ToString() + "\">" + Dtb_Table.Rows[0]["PBA_Name"].ToString() + "</a><br/>";
+            this.Lbl_Upload.Text = "<a href=\"" + Dtb_Table.Rows[0]["PBA_URL"].ToString() + "\">" +
+                                   Dtb_Table.Rows[0]["PBA_Name"].ToString() + "</a><br/>";
             this.Tbx_URL.Text = Dtb_Table.Rows[0]["PBA_URL"].ToString();
             string s_Name = this.Tbx_Sheet.Text;
             if (b_IsDetails == false)
             {
-                string s_Str = " var temp = window.showModalDialog(\"Procure_ShipCheck_Excel.aspx?ID=" + this.Tbx_CheckCode.Text + "&Table=" + Server.UrlEncode(s_Name) + "\", \"\", \"dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=700px\");";
+                string s_Str = " var temp = window.showModalDialog(\"Procure_ShipCheck_Excel.aspx?ID=" +
+                               this.Tbx_CheckCode.Text + "&Table=" + Server.UrlEncode(s_Name) +
+                               "\", \"\", \"dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=700px\");";
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
                 s.Append(s_Str + "\n");
@@ -482,16 +579,21 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
         }
         return s_Return;
     }
+
     private void ShowDiog(bool b_True)
     {
-        string s_Sql = "Select * from PB_Basic_Attachment where PBA_Type='CgCheck' and PBA_FID='" + this.Tbx_CheckCode.Text + "' order by PBA_CTime desc";
+        string s_Sql = "Select * from PB_Basic_Attachment where PBA_Type='CgCheck' and PBA_FID='" +
+                       this.Tbx_CheckCode.Text + "' order by PBA_CTime desc";
         this.BeginQuery(s_Sql);
         DataTable Dtb_Table = this.QueryForDataTable();
         if (Dtb_Table.Rows.Count > 0)
         {
-            this.Lbl_Upload.Text = "<a href=\"" + Dtb_Table.Rows[0]["PBA_URL"].ToString() + "\">" + Dtb_Table.Rows[0]["PBA_Name"].ToString() + "</a><br/>";
+            this.Lbl_Upload.Text = "<a href=\"" + Dtb_Table.Rows[0]["PBA_URL"].ToString() + "\">" +
+                                   Dtb_Table.Rows[0]["PBA_Name"].ToString() + "</a><br/>";
             string s_Name = this.Tbx_Sheet.Text;
-            string s_Str = " var temp = window.showModalDialog(\"Procure_ShipCheck_Excel.aspx?ID=" + this.Tbx_CheckCode.Text + "&Table=" + Server.UrlEncode(s_Name) + "\", \"\", \"dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=700px\");";
+            string s_Str = " var temp = window.showModalDialog(\"Procure_ShipCheck_Excel.aspx?ID=" +
+                           this.Tbx_CheckCode.Text + "&Table=" + Server.UrlEncode(s_Name) +
+                           "\", \"\", \"dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=700px\");";
             StringBuilder s = new StringBuilder();
             s.Append("<script language=javascript>" + "\n");
             s.Append(s_Str + "\n");
@@ -507,12 +609,15 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 cs.RegisterStartupScript(cstype, csname, s.ToString());
         }
     }
+
     private string GetIDByMonth()
     {
         string s_Return = "";
         try
         {
-            string s_Sql = "Select isnull(Max(COC_RKCode),'') from Cg_Order_Checklist Where Isnull(COC_Type,'0')='" + this.Ddl_Type.SelectedValue + "' and Year(COC_Stime)='" + DateTime.Now.Year.ToString() + "' and Month(COC_Stime)='" + DateTime.Now.Month.ToString() + "' ";
+            string s_Sql = "Select isnull(Max(COC_RKCode),'') from Cg_Order_Checklist Where Isnull(COC_Type,'0')='" +
+                           this.Ddl_Type.SelectedValue + "' and Year(COC_Stime)='" + DateTime.Now.Year.ToString() +
+                           "' and Month(COC_Stime)='" + DateTime.Now.Month.ToString() + "' ";
             this.BeginQuery(s_Sql);
             this.QueryForDataTable();
             if (Dtb_Result.Rows.Count > 0)
@@ -528,35 +633,46 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 s_Return = DateTime.Today.ToString("yyyyMM") + "001";
             }
         }
-        catch { }
+        catch
+        {
+        }
         return s_Return;
     }
+
     public void DataShows()
     {
         //成品对账
         if (this.Tr_HouseNo.Visible == true)
         {
-            string s_Sql = "select b.DirectOutNo,b.KWD_Custmoer,b.KWD_CwOutTime DirectOutDateTime,b.KWD_ContentPerson,b.HouseNo,a.DirectOutAmount+Isnull(a.KWD_BNumber,0) as DirectOutAmount,a.ProductsBarCode,";
+            string s_Sql =
+                "select b.DirectOutNo,b.KWD_Custmoer,b.KWD_CwOutTime DirectOutDateTime,b.KWD_ContentPerson,b.HouseNo,a.DirectOutAmount+Isnull(a.KWD_BNumber,0) as DirectOutAmount,a.ProductsBarCode,";
             if (this.Tbx_ID.Text == "")
             {
-                s_Sql += "isnull(c.ProcureunitPrice,0) ProcureunitPrice,isnull(c.HandPrice,0) HandPrice,a.DirectOutAmount-isnull(e.COD_Number,0) as yDirectOutAmount,isnull(e.COD_Number+e.COD_BNumber,0) dznumber,a.DirectOutAmount-isnull(e.COD_Number,0)+Isnull(a.KWD_BNumber,0)-e.COD_BNumber as LeftNumber,(isnull(c.ProcureunitPrice,0)+isnull(c.HandPrice,0))*(a.DirectOutAmount+Isnull(a.KWD_BNumber,0)-isnull(e.COD_Number,0)) as Money,Isnull(a.KWD_BNumber,0)-isnull(e.COD_BNumber,0) KWD_BNumber,";
+                s_Sql +=
+                    "isnull(c.ProcureunitPrice,0) ProcureunitPrice,isnull(c.HandPrice,0) HandPrice,a.DirectOutAmount-isnull(e.COD_Number,0) as yDirectOutAmount,isnull(e.COD_Number+e.COD_BNumber,0) dznumber,a.DirectOutAmount-isnull(e.COD_Number,0)+Isnull(a.KWD_BNumber,0)-e.COD_BNumber as LeftNumber,(isnull(c.ProcureunitPrice,0)+isnull(c.HandPrice,0))*(a.DirectOutAmount+Isnull(a.KWD_BNumber,0)-isnull(e.COD_Number,0)) as Money,Isnull(a.KWD_BNumber,0)-isnull(e.COD_BNumber,0) KWD_BNumber,";
             }
             else
             {
-                s_Sql += "isnull(f.COD_Price,0) ProcureunitPrice,isnull(f.COD_HandPrice,0) HandPrice,isnull(f.COD_DZNumber,0) as yDirectOutAmount,isnull(e.COD_Number,0)-isnull(f.COD_DZNumber,0) dznumber,a.DirectOutAmount-isnull(e.COD_Number,0)+Isnull(a.KWD_BNumber,0)-e.COD_BNumber+isnull(f.COD_DZNumber,0)+isnull(f.COD_BNumber,0) LeftNumber,(a.DirectOutAmount+Isnull(a.KWD_BNumber,0)-isnull(e.COD_Number,0)+isnull(f.COD_DZNumber,0))*(isnull(f.COD_Price,0)+isnull(f.COD_HandPrice,0)) as Money,isnull(f.COD_BNumber,0) KWD_BNumber,";
+                s_Sql +=
+                    "isnull(f.COD_Price,0) ProcureunitPrice,isnull(f.COD_HandPrice,0) HandPrice,isnull(f.COD_DZNumber,0) as yDirectOutAmount,isnull(e.COD_Number,0)-isnull(f.COD_DZNumber,0) dznumber,a.DirectOutAmount-isnull(e.COD_Number,0)+Isnull(a.KWD_BNumber,0)-e.COD_BNumber+isnull(f.COD_DZNumber,0)+isnull(f.COD_BNumber,0) LeftNumber,(a.DirectOutAmount+Isnull(a.KWD_BNumber,0)-isnull(e.COD_Number,0)+isnull(f.COD_DZNumber,0))*(isnull(f.COD_Price,0)+isnull(f.COD_HandPrice,0)) as Money,isnull(f.COD_BNumber,0) KWD_BNumber,";
             }
             s_Sql += "a.ID ";
-            s_Sql += "from KNet_WareHouse_DirectOutList_Details a join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo left join (select e.HouseNo,d.ProductsBarCode,d.ProcureunitPrice,d.HandPrice from Knet_Procure_SuppliersPrice d left join KNet_Sys_WareHouse e on d.SuppNo=e.SuppNo where KPP_Del='0' ) c  ";
-            s_Sql += "on c.HouseNo=b.HouseNo and c.ProductsBarCode=a.ProductsbarCode join KNet_Sys_Products g on g.ProductsBarCode=a.ProductsBarCode  left join Check_WareHouseDetails e on e.COD_DirectOutID=a.ID ";
+            s_Sql +=
+                "from KNet_WareHouse_DirectOutList_Details a join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo left join (select e.HouseNo,d.ProductsBarCode,d.ProcureunitPrice,d.HandPrice from Knet_Procure_SuppliersPrice d left join KNet_Sys_WareHouse e on d.SuppNo=e.SuppNo where KPP_Del='0' ) c  ";
+            s_Sql +=
+                "on c.HouseNo=b.HouseNo and c.ProductsBarCode=a.ProductsbarCode join KNet_Sys_Products g on g.ProductsBarCode=a.ProductsBarCode  left join Check_WareHouseDetails e on e.COD_DirectOutID=a.ID ";
             if (this.Tbx_ID.Text != "")
             {
-                s_Sql += " left join Cg_Order_Checklist_Details f on f.COD_DirectOutID=a.ID and f.COD_CheckNO='" + this.Tbx_ID.Text + "' ";
-                s_Sql += " where 1=1 and a.DirectOutAmount-isnull(e.COD_Number,0)+isnull(f.COD_DZNumber,0)+Isnull(a.KWD_BNumber,0)-e.COD_BNumber+isnull(f.COD_BNumber,0)>0  ";
+                s_Sql += " left join Cg_Order_Checklist_Details f on f.COD_DirectOutID=a.ID and f.COD_CheckNO='" +
+                         this.Tbx_ID.Text + "' ";
+                s_Sql +=
+                    " where 1=1 and a.DirectOutAmount-isnull(e.COD_Number,0)+isnull(f.COD_DZNumber,0)+Isnull(a.KWD_BNumber,0)-e.COD_BNumber+isnull(f.COD_BNumber,0)>0  ";
             }
             else
             {
                 s_Sql += " where 1=1  ";
-                s_Sql += " and (isnull(e.COD_Number,0)+isnull(e.COD_BNumber,0))<>(a.DirectOutAmount+Isnull(a.KWD_BNumber,0))  ";
+                s_Sql +=
+                    " and (isnull(e.COD_Number,0)+isnull(e.COD_BNumber,0))<>(a.DirectOutAmount+Isnull(a.KWD_BNumber,0))  ";
             }
             if (this.Ddl_HouseNo.SelectedValue != "")
             {
@@ -570,7 +686,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             {
                 s_Sql += " and b.KWD_CwOutTime<='" + this.EndDate.Text + "' ";
             }
-            s_Sql += " and g.ProductsType<>'M130704050932527' and KWD_SystemChange<>'1' and KWD_Type in ('101','DB') and isnull(DirectOutTopic,'')=''   Order by b.KWD_CwOutTime ";
+            s_Sql +=
+                " and g.ProductsType<>'M130704050932527' and KWD_SystemChange<>'1' and KWD_Type in ('101','DB') and isnull(DirectOutTopic,'')=''   Order by b.KWD_CwOutTime ";
             this.BeginQuery(s_Sql);
             DataTable Dtb_Table2 = (DataTable)this.QueryForDataTable();
             MyGridView1.DataSource = Dtb_Table2;
@@ -600,7 +717,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
 
             }
             Excel excel = new Excel();
-            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text," 1=1 ");
+            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text, " 1=1 ");
 
             string s_Where = " 1=1 and f2<>'' and f11<>'' and " + s_FName[0] + " like '%20%'  ";
             if (s_Sql2 != "")
@@ -614,7 +731,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 DataRow[] arrayDR = myT.Select(s_Where);
 
                 this.Lbl_Details.Text = "未找到的出库：<br/>";
-                this.Lbl_Details.Text += "<table id=\"myTable\" width=\"98%\" border=\"0\" align=\"center\" cellpadding=\"2\" cellspacing=\"0\" class=\"ListDetails\" style=\"height: 28px\">";
+                this.Lbl_Details.Text +=
+                    "<table id=\"myTable\" width=\"98%\" border=\"0\" align=\"center\" cellpadding=\"2\" cellspacing=\"0\" class=\"ListDetails\" style=\"height: 28px\">";
 
                 this.Lbl_Details.Text += "<tr valign=\"top\">";
                 this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
@@ -639,14 +757,22 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     if (dr[1].ToString() != "")
                     {
                         this.Lbl_Details.Text += "<tr>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[0].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[1].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[2].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[3].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[4].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[5].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[6].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[7].ToString() + "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[0].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[1].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[2].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[3].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[4].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[5].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[6].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[7].ToString() +
+                                                 "</td>";
                         this.Lbl_Details.Text += "</tr>";
                     }
                 }
@@ -654,24 +780,30 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             }
 
         }
-        else if (this.Tr_SuppNo.Visible == true)
+        else if (this.Tr_SuppNo.Visible == true && this.MyGridView3.Visible == false)
         {
-            string s_Sql1 = "select b.WareHouseNo,a.OrderNo,a.SuppNo,a.HouseNo,a.WareHouseDateTime,a.WareHouseNo,b.WareHouseAmount,";
+            string s_Sql1 =
+                "select b.WareHouseNo,a.OrderNo,a.SuppNo,a.HouseNo,a.WareHouseDateTime,a.WareHouseNo,b.WareHouseAmount,";
             if (this.Tbx_ID.Text == "")
             {
-                s_Sql1 += "b.WareHouseAmount-isnull(c.COD_Number,0) as yWareHouseAmount,isnull(c.COD_Number,0) COD_Number,(b.WareHouseAmount-isnull(c.COD_Number,0))*b.WareHouseUnitPrice as Money";
+                s_Sql1 +=
+                    "b.WareHouseAmount-isnull(c.COD_Number,0) as yWareHouseAmount,isnull(c.COD_Number,0) COD_Number,(b.WareHouseAmount-isnull(c.COD_Number,0))*b.WareHouseUnitPrice as Money";
             }
             else
             {
-                s_Sql1 += "b.WareHouseAmount-isnull(c.COD_Number,0)+isnull(e.COD_DZNumber,0) as yWareHouseAmount,isnull(c.COD_Number,0)-isnull(e.COD_DZNumber,0) COD_Number,(b.WareHouseAmount-isnull(c.COD_Number,0)+isnull(e.COD_DZNumber,0))*b.WareHouseUnitPrice as Money";
+                s_Sql1 +=
+                    "b.WareHouseAmount-isnull(c.COD_Number,0)+isnull(e.COD_DZNumber,0) as yWareHouseAmount,isnull(c.COD_Number,0)-isnull(e.COD_DZNumber,0) COD_Number,(b.WareHouseAmount-isnull(c.COD_Number,0)+isnull(e.COD_DZNumber,0))*b.WareHouseUnitPrice as Money";
             }
             s_Sql1 += ",b.ProductsBarCode,b.WareHouseUnitPrice,b.ID,b.WareHouseBAmount,KPO_QRState ";
-            s_Sql1 += "from Knet_Procure_WareHouseList a join Knet_Procure_WareHouseList_Details b on a.WareHouseNo=b.WareHouseNo left join Check_WareHouseDetails c on c.COD_DirectOutID=b.ID";
+            s_Sql1 +=
+                "from Knet_Procure_WareHouseList a join Knet_Procure_WareHouseList_Details b on a.WareHouseNo=b.WareHouseNo left join Check_WareHouseDetails c on c.COD_DirectOutID=b.ID";
 
             if (this.Tbx_ID.Text != "")
             {
-                s_Sql1 += " left join Cg_Order_Checklist_Details e on e.COD_DirectOutID=b.ID and e.COD_CheckNO='" + this.Tbx_ID.Text + "' ";
-                s_Sql1 += " where a.KPW_Del='0'  and a.WareHouseCheckYN<>'0' and (b.WareHouseAmount-isnull(c.COD_Number,0)+isnull(e.COD_DZNumber,0)>0  or b.WareHouseAmount<0) ";
+                s_Sql1 += " left join Cg_Order_Checklist_Details e on e.COD_DirectOutID=b.ID and e.COD_CheckNO='" +
+                          this.Tbx_ID.Text + "' ";
+                s_Sql1 +=
+                    " where a.KPW_Del='0'  and a.WareHouseCheckYN<>'0' and (b.WareHouseAmount-isnull(c.COD_Number,0)+isnull(e.COD_DZNumber,0)>0  or b.WareHouseAmount<0) ";
             }
             else
             {
@@ -720,7 +852,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
 
             }
             Excel excel = new Excel();
-            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text," 1=1 ");
+            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text, " 1=1 ");
 
             string s_Where = " 1=1 and f2<>'' and " + s_FName[0] + " like '%PO%'  ";
             if (s_Sql != "")
@@ -734,7 +866,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 DataRow[] arrayDR = myT.Select(s_Where);
 
                 this.Lbl_Details.Text = "未找到的采购单：<br/>";
-                this.Lbl_Details.Text += "<table id=\"myTable\" width=\"98%\" border=\"0\" align=\"center\" cellpadding=\"2\" cellspacing=\"0\" class=\"ListDetails\" style=\"height: 28px\">";
+                this.Lbl_Details.Text +=
+                    "<table id=\"myTable\" width=\"98%\" border=\"0\" align=\"center\" cellpadding=\"2\" cellspacing=\"0\" class=\"ListDetails\" style=\"height: 28px\">";
 
                 this.Lbl_Details.Text += "<tr valign=\"top\">";
                 this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
@@ -759,14 +892,156 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     if (dr[1].ToString() != "")
                     {
                         this.Lbl_Details.Text += "<tr>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[0].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[1].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[2].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[3].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[4].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[5].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[6].ToString() + "</td>";
-                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[7].ToString() + "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[0].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[1].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[2].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[3].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[4].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[5].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[6].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[7].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "</tr>";
+                    }
+                }
+                this.Lbl_Details.Text += "</table >";
+            }
+        }
+        else if (this.Tr_SuppNo.Visible == true && this.MyGridView3.Visible == true)
+        {
+
+            //string s_Sql1 =
+            //    " select b.ID,HouseNo_int as HouseNo_int,a.HouseNo  as HouseNo1,b.ProductsBarCode,b.KWAD_BFNumber,b.KWAD_SDNumber,(select  SuppNo from KNet_Sys_WareHouse where  SuppNo='" +
+            //    this.Ddl_SuppNo.Value +
+            //    "') as SuppNo ,allocateAmount,allocateunitPrice,allocateTotalNet,a.SystemDateTimes,AllocateStaffNo,a.AllocateNo,a.AllocateDateTime,a.KWA_OrderNo, a.HouseNo ,a.HouseNo_int ,Allocate_WwPrice,Allocate_WwMoney,AllocateCheckYN FROM KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo  join dbo.KNet_Sys_WareHouse AS c ON c.HouseNo = a.HouseNo_int  join dbo.KNet_Sys_WareHouse AS d ON d.HouseNo = a.HouseNo join KNET_sys_Products e on e.ProductsBarCode = b.ProductsBarCode where 1=1  and HouseNo_int='131235104473261008' and KWA_OrderNo!=''  and a.KWA_DZState is null ";
+            //KNet_WareHouse_AllocateList AllocateCheckYN!='0'
+
+            //string s_Sql1 = "   select distinct ProductsBarCode,a.KWA_OrderNo,HouseNo,HouseNo_int ,(select  SuppNo from KNet_Sys_WareHouse where SuppNo='" + this.Ddl_SuppNo.Value + "' ) as Supp,SUM(b.KWAD_BFNumber) as KWAD_BFNumber,SUM(b.KWAD_SDNumber) as KWAD_SDNumber from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo where HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" + this.Ddl_SuppNo.Value + "' ) and HouseNo_int = '131187187069993664'  ";
+            string s_Sql1 = "  select distinct ProductsBarCode, a.KWA_OrderNo,(select  HouseNo from KNet_Sys_WareHouse where SuppNo = '"+ this.Ddl_SuppNo.Value + "')as HouseNo,HouseNo_int ,'"+ this.Ddl_SuppNo.Value + "' as Supp,SUM(b.KWAD_BFNumber) as KWAD_BFNumber,SUM(b.KWAD_SDNumber) as KWAD_SDNumber from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo = b.AllocateNo where HouseNo_int = '131187187069993664' ";
+            //if (this.Tbx_ID.Text != "")
+            //{
+            //    s_Sql1 += " and a.AllocateNo='" + Tbx_ID.Text + "' ";
+
+            //}
+            //else
+            //{
+            //    //s_Sql1 += " where a.KPW_Del='0' and a.WareHouseCheckYN<>'0' ";
+            //    ////s_Sql1 += " and a.KPO_QrState='1' ";
+            //    //s_Sql1 += " and (ABS(isnull(c.COD_Number,0))<ABS(b.WareHouseAmount))";
+            //}
+            //if (this.Ddl_SuppNo.Value != "")
+            //{
+            //    //this.BeginQuery("select  * from KNet_Sys_WareHouse where  SuppNo='"+ this.Ddl_SuppNo.Value + "'  ");
+            //    //DataTable Dtb_SuppNo = this.QueryForDataTable();
+            //    s_Sql1 += " and a.HouseNo=(select  HouseNo from KNet_Sys_WareHouse where  SuppNo='" +
+            //              this.Ddl_SuppNo.Value + "')  ";
+            //}
+            if (this.TextBox1.Text != "")
+            {
+                //this.BeginQuery("select  * from KNet_Sys_WareHouse where  SuppNo='"+ this.Ddl_SuppNo.Value + "'  ");
+                //DataTable Dtb_SuppNo = this.QueryForDataTable();
+                s_Sql1 += " and KWA_OrderNo='" + TextBox1.Text + "'  ";
+            }
+            if (this.StartDate.Text != "")
+            {
+                s_Sql1 += " and a.AllocateDateTime >='" + this.StartDate.Text + "' ";
+            }
+            if (this.EndDate.Text != "")
+            {
+                s_Sql1 += " and a.AllocateDateTime <='" + this.EndDate.Text + "' ";
+            }
+            s_Sql1 += "  group by ProductsBarCode,a.KWA_OrderNo,HouseNo_int ";
+            this.BeginQuery(s_Sql1);
+            DataTable Dtb_Table1 = this.QueryForDataTable();
+            MyGridView3.DataSource = Dtb_Table1;
+            MyGridView3.DataKeyNames = new string[] { "ProductsBarCode" };
+            MyGridView3.DataBind();
+
+            //查未找到的采购单号和入库明细
+            string s_Sql = "";
+            for (int i = 0; i < Dtb_Table1.Rows.Count; i++)
+            {
+                s_Sql += Dtb_Table1.Rows[i]["ProductsBarCode"].ToString() + ",";
+            }
+            this.BeginQuery("select * from Excel_In_Details where EID_FID='" + this.Tbx_CheckCode.Text + "' ");
+            DataTable Dtb_Excel = this.QueryForDataTable();
+            string[] s_FName = new string[4];
+            if (Dtb_Excel.Rows.Count > 0)
+            {
+                for (int i = 0; i < Dtb_Excel.Rows.Count; i++)
+                {
+                    int i_Num = int.Parse(Dtb_Excel.Rows[i]["EID_YLine"].ToString()) + 1;
+                    if (Dtb_Excel.Rows[i]["EID_ColName"].ToString() == "ProductsBarCode")
+                    {
+                        s_FName[0] = "f" + i_Num.ToString();
+                    }
+                }
+
+            }
+            Excel excel = new Excel();
+            DataTable myT = excel.ExcelFirestToDataTable(this.Tbx_URL.Text, " 1=1 ");
+
+            string s_Where = " 1=1 and f2<>'' and " + s_FName[0] + " like '%PO%'  ";
+            if (s_Sql != "")
+            {
+                s_Sql = s_Sql.Substring(0, s_Sql.Length - 1).Replace(",", "','");
+                s_Where += "and " + s_FName[0] + " not in ('" + s_Sql + "') ";
+            }
+            if (myT != null)
+            {
+
+                DataRow[] arrayDR = myT.Select(s_Where);
+
+                this.Lbl_Details.Text = "未找到的采购单：<br/>";
+                this.Lbl_Details.Text +=
+                    "<table id=\"myTable\" width=\"98%\" border=\"0\" align=\"center\" cellpadding=\"2\" cellspacing=\"0\" class=\"ListDetails\" style=\"height: 28px\">";
+
+                this.Lbl_Details.Text += "<tr valign=\"top\">";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F1</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F2</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F3</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F4</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F5</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F6</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F7</b></td>";
+                this.Lbl_Details.Text += "<td class=\"ListHead\" nowrap>";
+                this.Lbl_Details.Text += "<b>F8</b></td>";
+                this.Lbl_Details.Text += "</tr >";
+                foreach (DataRow dr in arrayDR)
+                {
+                    if (dr[1].ToString() != "")
+                    {
+                        this.Lbl_Details.Text += "<tr>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[0].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[1].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[2].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[3].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[4].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[5].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[6].ToString() +
+                                                 "</td>";
+                        this.Lbl_Details.Text += "<td class=\"ListHeadDetails\" align=\"left\" >" + dr[7].ToString() +
+                                                 "</td>";
                         this.Lbl_Details.Text += "</tr>";
                     }
                 }
@@ -782,14 +1057,17 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             this.DataShows();
         }
     }
+
     public string GetWuliu(string s_DirectOutNo)
     {
         string s_Return = "";
-        this.BeginQuery("Select top 1 * from KNet_Sales_OutWareList_FlowList  where KDCode<>'' and OutWareNo in ('" + s_DirectOutNo + "') ");
+        this.BeginQuery("Select top 1 * from KNet_Sales_OutWareList_FlowList  where KDCode<>'' and OutWareNo in ('" +
+                        s_DirectOutNo + "') ");
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
         {
-            s_Return = Dtb_Result.Rows[0]["KDCodeName"].ToString() + "(" + Dtb_Result.Rows[0]["KDCode"].ToString() + "/" + Dtb_Result.Rows[0]["KSO_Phone"].ToString() + ")";
+            s_Return = Dtb_Result.Rows[0]["KDCodeName"].ToString() + "(" + Dtb_Result.Rows[0]["KDCode"].ToString() + "/" +
+                       Dtb_Result.Rows[0]["KSO_Phone"].ToString() + ")";
         }
         return s_Return;
     }
@@ -797,7 +1075,9 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
     public string GetIC(string s_ProductsBarCode)
     {
         string s_Return = "";
-        this.BeginQuery("select * from Xs_Products_Prodocts a  join KNet_Sys_Products b on a.XPP_ProductsBarCode=b.ProductsBarCode  where XPP_FaterBarCode='" + s_ProductsBarCode + "' and b.ProductsType='M130703044953260'");
+        this.BeginQuery(
+            "select * from Xs_Products_Prodocts a  join KNet_Sys_Products b on a.XPP_ProductsBarCode=b.ProductsBarCode  where XPP_FaterBarCode='" +
+            s_ProductsBarCode + "' and b.ProductsType='M130703044953260'");
         this.QueryForDataTable();
         if (this.Dtb_Result.Rows.Count > 0)
         {
@@ -812,17 +1092,23 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
         ShowDiog();
         this.DataShows();
     }
+
     protected void Btn_Serch_Click1(object sender, EventArgs e)
     {
         ShowDiog(true);
     }
+
     protected void Btn_Save_Click(object sender, EventArgs e)
     {
+
+
         try
         {
+
             AdminloginMess AM = new AdminloginMess();
             KNet.BLL.Cg_Order_Checklist Bll_Order_Checklist = new KNet.BLL.Cg_Order_Checklist();
-            KNet.BLL.Cg_Order_Checklist_Details Bll_Order_ChecklistDetails = new KNet.BLL.Cg_Order_Checklist_Details();
+            KNet.BLL.Cg_Order_Checklist_Details Bll_Order_ChecklistDetails =
+                new KNet.BLL.Cg_Order_Checklist_Details();
             KNet.Model.Cg_Order_Checklist Model_Order_Checklist = new KNet.Model.Cg_Order_Checklist();
             if (this.Tbx_ID.Text != "")
             {
@@ -851,24 +1137,32 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             Model_Order_Checklist.COC_RKCode = this.Tbx_RkCode.Text;
             Model_Order_Checklist.COC_Details = this.Tbx_DirectInRemarks.Text;
             ArrayList arr_Details = new ArrayList();
-            if (this.Tr_SuppNo.Visible == true)
+            if (this.Tr_SuppNo.Visible == true && this.MyGridView3.Visible == false)
             {
                 for (int i = 0; i < MyGridView2.Rows.Count; i++)
                 {
 
-                    KNet.Model.Cg_Order_Checklist_Details Model_Order_ChecklistDetails = new KNet.Model.Cg_Order_Checklist_Details();
+                    KNet.Model.Cg_Order_Checklist_Details Model_Order_ChecklistDetails =
+                        new KNet.Model.Cg_Order_Checklist_Details();
                     CheckBox chk = (CheckBox)MyGridView2.Rows[i].Cells[0].FindControl("Chbk");
                     if (chk.Checked)
                     {
-                        string s_DirectOutID = ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_DirectOutID")).Text;
-                        string s_CustomerValue = ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_HouseNo")).Text;
+                        string s_DirectOutID =
+                            ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_DirectOutID")).Text;
+                        string s_CustomerValue =
+                            ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_HouseNo")).Text;
                         string s_Wuliu = ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Wuliu")).Text;
-                        string s_ProductsBarCode = ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode")).Text;
+                        string s_ProductsBarCode =
+                            ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode")).Text;
                         Decimal d_CkNumber = Decimal.Parse(MyGridView2.Rows[i].Cells[8].Text);
-                        Decimal d_Number = decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
-                        Decimal d_Price = decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Price")).Text);
-                        Decimal d_Money = decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Money")).Text);
-                        Decimal d_BNumber = decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_BNumber")).Text);
+                        Decimal d_Number =
+                            decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
+                        Decimal d_Price =
+                            decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Price")).Text);
+                        Decimal d_Money =
+                            decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Money")).Text);
+                        Decimal d_BNumber =
+                            decimal.Parse(((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_BNumber")).Text);
                         string s_Details = ((TextBox)MyGridView2.Rows[i].Cells[0].FindControl("Tbx_Details")).Text;
                         Model_Order_ChecklistDetails.COD_Code = base.GetNewID("Cg_Order_Checklist_Details", 1);
                         Model_Order_ChecklistDetails.COD_CheckNo = Model_Order_Checklist.COC_Code;
@@ -876,14 +1170,16 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                         Model_Order_ChecklistDetails.COD_CustomerValue = s_CustomerValue;
                         Model_Order_ChecklistDetails.COD_Wuliu = s_Wuliu;
                         Model_Order_ChecklistDetails.COD_ProductsBarCode = s_ProductsBarCode;
-                        Model_Order_ChecklistDetails.COD_ProductsEdition = base.Base_GetProductsEdition(s_ProductsBarCode);
+                        Model_Order_ChecklistDetails.COD_ProductsEdition =
+                            base.Base_GetProductsEdition(s_ProductsBarCode);
                         Model_Order_ChecklistDetails.COD_CkNumber = d_CkNumber;
                         Model_Order_ChecklistDetails.COD_DZNumber = d_Number;
                         Model_Order_ChecklistDetails.COD_Price = d_Price;
                         Model_Order_ChecklistDetails.COD_Details = s_Details;
                         Model_Order_ChecklistDetails.COD_Money = d_Money;
                         Model_Order_ChecklistDetails.COD_NoTaxLag = 0;
-                        Model_Order_ChecklistDetails.COD_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.17")), 2));
+                        Model_Order_ChecklistDetails.COD_NoTaxMoney =
+                            decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.16")), 2));
                         Model_Order_ChecklistDetails.COD_BNumber = d_BNumber;
                         arr_Details.Add(Model_Order_ChecklistDetails);
                     }
@@ -894,24 +1190,35 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 for (int i = 0; i < MyGridView1.Rows.Count; i++)
                 {
 
-                    KNet.Model.Cg_Order_Checklist_Details Model_Order_ChecklistDetails = new KNet.Model.Cg_Order_Checklist_Details();
+                    KNet.Model.Cg_Order_Checklist_Details Model_Order_ChecklistDetails =
+                        new KNet.Model.Cg_Order_Checklist_Details();
                     CheckBox chk = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk1");
                     if (chk.Checked)
                     {
-                        string s_DirectOutID = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_DirectOutID")).Text;
-                        string s_CustomerValue = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_CustomerValue")).Text;
+                        string s_DirectOutID =
+                            ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_DirectOutID")).Text;
+                        string s_CustomerValue =
+                            ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_CustomerValue")).Text;
                         string s_GetPerson = MyGridView1.Rows[i].Cells[4].Text;
                         string s_Wuliu = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Wuliu")).Text;
-                        string s_ProductsBarCode = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode")).Text;
-                        Decimal d_CkNumber = Decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_CkNumber")).Text);
-                        Decimal d_Number = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
-                        Decimal d_Price = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Price")).Text);
-                        Decimal d_HandPrice = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_HandPrice")).Text);
-                        Decimal d_Money = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Money")).Text);
+                        string s_ProductsBarCode =
+                            ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode")).Text;
+                        Decimal d_CkNumber =
+                            Decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_CkNumber")).Text);
+                        Decimal d_Number =
+                            decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
+                        Decimal d_Price =
+                            decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Price")).Text);
+                        Decimal d_HandPrice =
+                            decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_HandPrice")).Text);
+                        Decimal d_Money =
+                            decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Money")).Text);
 
-                        Decimal d_BNumber = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_BNumber")).Text);
+                        Decimal d_BNumber =
+                            decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_BNumber")).Text);
                         string s_IC = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_IC")).Text;
-                        Decimal d_ICNumber = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_ICNumber")).Text);
+                        Decimal d_ICNumber =
+                            decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_ICNumber")).Text);
                         string s_Details = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_Details")).Text;
 
 
@@ -922,7 +1229,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                         Model_Order_ChecklistDetails.COD_GetPerson = s_GetPerson;
                         Model_Order_ChecklistDetails.COD_Wuliu = s_Wuliu;
                         Model_Order_ChecklistDetails.COD_ProductsBarCode = s_ProductsBarCode;
-                        Model_Order_ChecklistDetails.COD_ProductsEdition = base.Base_GetProductsEdition(s_ProductsBarCode);
+                        Model_Order_ChecklistDetails.COD_ProductsEdition =
+                            base.Base_GetProductsEdition(s_ProductsBarCode);
                         Model_Order_ChecklistDetails.COD_CkNumber = d_CkNumber;
                         Model_Order_ChecklistDetails.COD_DZNumber = d_Number;
                         Model_Order_ChecklistDetails.COD_Price = d_Price;
@@ -936,6 +1244,174 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                     }
                 }
             }
+
+            else if (this.Tr_SuppNo.Visible == true && this.MyGridView3.Visible == true)
+            {
+                decimal d = 0;
+                AdminloginMess AM1 = new AdminloginMess();
+                //string s_Sql = "select sum(OrderAmount) from Knet_Procure_OrdersList_Details where OrderNo='"+TextBox1.Text+"'";
+                //this.BeginQuery(s_Sql);
+                //DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
+                string order = "";
+                for (int i = 0; i < MyGridView3.Rows.Count; i++)
+                {
+
+                    KNet.Model.Cg_Order_Checklist_Details Model_Order_ChecklistDetails =
+                        new KNet.Model.Cg_Order_Checklist_Details();
+                    CheckBox chk = (CheckBox)MyGridView3.Rows[i].Cells[0].FindControl("Chbk2");
+                    if (chk.Checked)
+                    {
+                        //string s_DirectOutID =
+                        //    ((TextBox) MyGridView3.Rows[i].Cells[0].FindControl("Tbx_DirectOutID")).Text;
+                        string s_CustomerValue =
+                            ((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_HouseNo")).Text;
+                        //string s_GetPerson = MyGridView3.Rows[i].Cells[4].Text; Tbx_GetPreson
+                        string s_GetPerson = AM1.KNet_StaffNo;
+                        order += "'" + ((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_OrderNo")).Text +
+                                 "'" +
+                                 ",";
+                        //string s_Wuliu = ((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_Wuliu")).Text;
+                        string s_Wuliu = null;
+
+                        string s_ProductsBarCode =
+                            ((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_ProductsBarCode")).Text;
+                        //Decimal d_CkNumber = Decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_CkNumber")).Text);
+                        Decimal d_CkNumber = 0;
+                        Decimal d_Number =
+                            decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
+                        Decimal CE_Number = 0;
+                        int BF_Number = 0;
+                        int RK_Number = 0; //入库的数量
+                        try
+                        {
+                            CE_Number =
+                                decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("CE_Number")).Text);
+                        }
+                        catch
+                        {
+
+                            CE_Number = 0;
+
+                        }
+                        try
+                        {
+                            BF_Number =
+                                int.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("BFs_Number")).Text);
+                        }
+                        catch
+                        {
+
+                            BF_Number = 0;
+                        }
+                        try
+                        {
+                            RK_Number =
+                                int.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("RK_Number")).Text);
+                        }
+                        catch
+                        {
+
+                            RK_Number = 0;
+                        }
+
+                        d += RK_Number + BF_Number;
+                        //Decimal d_Price = decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_Price")).Text);
+                        Decimal d_HandPrice =
+                            decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_HandPrice")).Text);
+                        decimal BFPrice =
+                            decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("BFPrice")).Text);
+                        Decimal d_HandMoney =
+                            decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_HandMoney")).Text);
+                        decimal KC_Money =
+                                decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("KK_Money")).Text);//应扣金额
+                        //扣除金额
+                        //Decimal d_BNumber = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_BNumber")).Text);
+                        Decimal d_BNumber = 0;
+                        // string s_IC = ((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_IC")).Text;
+                        string s_IC = null;
+                        //Decimal d_ICNumber = decimal.Parse(((TextBox)MyGridView1.Rows[i].Cells[0].FindControl("Tbx_ICNumber")).Text);
+                        Decimal d_ICNumber = 0;
+                        string s_Details = ((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_Details")).Text;
+                        decimal d_EWMoney =
+                            decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("EW_Money")).Text);//额外扣除金额
+                        decimal d_EWFMoney =
+                           decimal.Parse(((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("EW_FMoney")).Text);
+                        Model_Order_ChecklistDetails.COD_Code = base.GetNewID("Cg_Order_Checklist_Details", 1);
+                        Model_Order_ChecklistDetails.COD_CheckNo = Model_Order_Checklist.COC_Code;
+                        Model_Order_ChecklistDetails.COD_DirectOutID =
+                            ((TextBox)MyGridView3.Rows[i].Cells[0].FindControl("Tbx_OrderNo")).Text;
+                        Model_Order_ChecklistDetails.COD_CustomerValue = s_CustomerValue;
+                        Model_Order_ChecklistDetails.COD_GetPerson = s_GetPerson;
+                        Model_Order_ChecklistDetails.COD_Wuliu = s_Wuliu;
+                        Model_Order_ChecklistDetails.COD_ProductsBarCode = s_ProductsBarCode;
+                        Model_Order_ChecklistDetails.COD_ProductsEdition =
+                            base.Base_GetProductsEdition(s_ProductsBarCode);
+                        Model_Order_ChecklistDetails.COD_CkNumber = d_CkNumber;
+                        Model_Order_ChecklistDetails.COD_DZNumber = d_Number;
+                        Model_Order_ChecklistDetails.COD_Price = d_HandPrice;
+                        Model_Order_ChecklistDetails.COD_HandPrice = d_HandPrice;
+                        Model_Order_ChecklistDetails.Cod_IC = s_IC;
+                        Model_Order_ChecklistDetails.COD_ICNumber = d_ICNumber;
+                        Model_Order_ChecklistDetails.COD_Details = s_Details;
+                        Model_Order_ChecklistDetails.COD_BFNumber = BF_Number;
+                        Model_Order_ChecklistDetails.COD_BFPrice = BFPrice;
+                        Model_Order_ChecklistDetails.COD_RKNumber = RK_Number;
+                        Model_Order_ChecklistDetails.COD_EWMoney = d_EWMoney;
+                        Model_Order_ChecklistDetails.COD_EWFMoney = d_EWFMoney;
+                        Model_Order_ChecklistDetails.COD_Money = d_HandMoney - d_EWMoney;//- KC_Money
+                        Model_Order_ChecklistDetails.COD_BNumber = d_BNumber;
+                        arr_Details.Add(Model_Order_ChecklistDetails);
+                    }
+                }
+                string sql = order.Substring(0, order.Length - 1);
+                string s_Sql = "select sum(OrderAmount) from Knet_Procure_OrdersList_Details where OrderNo in(" +
+                               sql +
+                               ")";
+                this.BeginQuery(s_Sql);
+                DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
+                if (Convert.ToInt32(Dtb_Table.Rows[0][0]) > d || Convert.ToInt32(Dtb_Table.Rows[0][0]) < d)
+                {
+                    //AlertAndRedirect("加工厂成品调回车间库未调拨完，不能对账！", "Procure_ShipCheck_List.aspx");
+                    Response.Write(
+                        "<script language=javascript>alert('对账数据不准确，报废数量加上入库数量必须等于订单数量，请重新对账！！')</script>");
+                    //;parent.location.href = 'Procure_ShipCheck_List.aspx';
+                    return;
+                    // Response.End();
+                }
+                //string sql2 = order.Substring(0, order.Length - 1);
+                string s_Sql2 = "select OrderDateTime from Knet_Procure_OrdersList where OrderNo in(" +
+                               sql +
+                               ")";
+                this.BeginQuery(s_Sql2);
+                DataTable Dtb_Table2 = (DataTable)this.QueryForDataTable();
+                for (int i = 0; i < Dtb_Table2.Rows.Count; i++)
+                {
+                    if (DateTime.Parse(Dtb_Table2.Rows[i][0].ToString())<DateTime.Parse("2018-05-01"))
+                    {
+                        if (this.Lbl_Upload.Text=="")
+                        {
+                            Response.Write(
+                        "<script language=javascript>alert('5月份以前的订单必须上传送货单')</script>");
+                            //;parent.location.href = 'Procure_ShipCheck_List.aspx';
+                            return;
+                        }
+                        
+                    }
+                }
+
+                string s_Sql1 = "select * from Cg_Order_Checklist_Details  where COD_DirectOutID  in(" + sql + ")";
+                this.BeginQuery(s_Sql1);
+                DataTable Dtb_Table1 = (DataTable)this.QueryForDataTable();
+                if (Dtb_Table1.Rows.Count > 0)
+                {
+                    //AlertAndRedirect("加工厂成品调回车间库未调拨完，不能对账！", "Procure_ShipCheck_List.aspx");
+                    Response.Write(
+                        "<script language=javascript>alert('此订单已经对过账，不能重复对账！！')</script>");
+                    //;parent.location.href = 'Procure_ShipCheck_List.aspx';
+                    return;
+                    // Response.End();
+                }
+            }
             Model_Order_Checklist.arr_Details = arr_Details;
             if (this.Tbx_ID.Text == "")
             {
@@ -943,45 +1419,56 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 AM.Add_Logs("采购对账增加！" + Model_Order_Checklist.COC_Code);
                 //生成pdf
 
-                string JSD = "CG/Procure_Check/Procure_ShipCheck_View.aspx?ID=" + Model_Order_Checklist.COC_Code + "";
+                string JSD = "CG/Procure_Check/Procure_ShipCheck_View.aspx?ID=" + Model_Order_Checklist.COC_Code +
+                             "";
                 try
                 {
                     base.HtmlToPdf1(JSD, Server.MapPath("PDF"), Model_Order_Checklist.COC_Code);
                 }
                 catch
-                { }
+                {
+                }
                 AlertAndRedirect("采购对账成功！", "Procure_ShipCheck_List.aspx");
             }
             else
             {
                 Bll_Order_Checklist.Update(Model_Order_Checklist);
                 AM.Add_Logs("采购对账修改！" + Model_Order_Checklist.COC_Code);
-                
-                string JSD = "CG/Procure_Check/Procure_ShipCheck_View.aspx?ID=" + Model_Order_Checklist.COC_Code + "";
+
+                string JSD = "CG/Procure_Check/Procure_ShipCheck_View.aspx?ID=" + Model_Order_Checklist.COC_Code +
+                             "";
 
                 try
                 {
                     base.HtmlToPdf1(JSD, Server.MapPath("PDF"), this.Tbx_ID.Text);
                 }
                 catch
-                { }
+                {
+                }
                 AlertAndRedirect("采购对账修改成功！", "Procure_ShipCheck_List.aspx");
             }
         }
-        catch (Exception ex)
+
+        catch
+        (Exception ex)
         {
+            throw ex;
             Alert(ex.Message);
         }
+
+
     }
+
     private void ShowTr()
     {
 
-        if (this.Ddl_Type.SelectedValue == "0")//成品采购
+        if (this.Ddl_Type.SelectedValue == "0") //成品采购
         {
             Tr_HouseNo.Visible = true;
             Tr_SuppNo.Visible = false;
             MyGridView1.Visible = true;
             MyGridView2.Visible = false;
+            MyGridView3.Visible = false;
         }
         else if (this.Ddl_Type.SelectedValue == "1")
         {
@@ -989,13 +1476,16 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
             Tr_SuppNo.Visible = true;
             MyGridView1.Visible = false;
             MyGridView2.Visible = true;
+            MyGridView3.Visible = false;
         }
         else
         {
             Tr_HouseNo.Visible = false;
-            Tr_SuppNo.Visible = false;
+            Tr_SuppNo.Visible = true;
             MyGridView1.Visible = false;
             MyGridView2.Visible = false;
+            MyGridView3.Visible = true;
+            Tr2.Visible = true;
 
         }
     }
@@ -1027,7 +1517,10 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                 this.Lbl_Upload.Text = "<a href=\"" + model.PBA_URL + "\">" + model.PBA_Name + "</a><br/>";
                 ShowDiog();
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 
@@ -1050,11 +1543,36 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
 
         }
         catch
-        { }
+        {
+        }
         return s_Return;
     }
+    /// <summary>
+    /// 获取报废的数据
+    /// </summary>
+    /// <param name="num"></param>
+    /// <param name="OrderNo"></param>
+    public string GetBFNumber(string num,string productcode)
+    {
+        string s_Sql = "select isnull(sum(KWAD_BFNumber),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='" + TextBox1.Text + "' and HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" +this.Ddl_SuppNo.Value+"' ) and HouseNo_int = '131235104473261008' and ProductsBarCode='"+ productcode + "'";
+        this.BeginQuery(s_Sql);
+        DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
 
+        //string s_yfSql = "select isnull(SUM(b.DirectOutAmount),0)from KNet_WareHouse_DirectOutList a join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo  where a.KWD_Order='"+ TextBox1.Text + "' and b.ProductsBarCode='"+ productcode + "'";
+        //this.BeginQuery(s_yfSql);
+        //DataTable Dtb_yfTable = (DataTable)this.QueryForDataTable();
+
+        if (Dtb_Table.Rows[0][0].ToString()=="")
+        {
+            return num;
+        }
+        else
+        {
+            return (int.Parse(num)+int.Parse(Dtb_Table.Rows[0][0].ToString())).ToString();//+ int.Parse(Dtb_yfTable.Rows[0][0].ToString())
+        }
+    }
     #region 资料上传操作
+
     /// <summary>
     /// 图片上传
     /// </summary>
@@ -1062,8 +1580,12 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
     {
         AdminloginMess AM = new AdminloginMess();
         //类别下面的
-        string UploadPath = "../../../UpFile/CGCheck/";  //上传路径
-        string AutoPath = System.DateTime.Now.ToString().Replace("-", "").Replace(" ", "").Replace(":", "").Replace("/", "");
+        string UploadPath = "../../../UpFile/CGCheck/"; //上传路径
+        string AutoPath = System.DateTime.Now.ToString()
+            .Replace("-", "")
+            .Replace(" ", "")
+            .Replace(":", "")
+            .Replace("/", "");
         //string fileExt = Path.GetExtension(uploadFile1.PostedFile.FileName); //获扩展名
         string FileType = uploadFile.PostedFile.ContentType.ToString(); //文件类型
         string FileName = Path.GetFileName(uploadFile.PostedFile.FileName);
@@ -1081,8 +1603,219 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
         model.PBA_URL = filePath;
         model.PBA_CTime = DateTime.Now;
         model.PBA_Creator = AM.KNet_StaffNo;
+        model.PBA_EndTime = DateTime.Now;
         model.PBA_Remarks = "";
     }
+
     #endregion
 
+    public string KK_Money(string number, string productbarcode, string OrderNum) //应扣款金额
+    {
+        double d_totalPrice = 0;
+        string s_Sql = "select isnull(sum(KWAD_BFNumber),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='"+TextBox1.Text+"' and HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" + this.Ddl_SuppNo.Value + "' ) and HouseNo_int = '131235104473261008' and ProductsBarCode='" + productbarcode + "'";//从加工厂调到车间库
+        this.BeginQuery(s_Sql);
+        DataTable Dtb_Table = (DataTable)this.QueryForDataTable();
+
+        //string s_yfSql = "select isnull(SUM(b.DirectOutAmount),0)from KNet_WareHouse_DirectOutList a join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo  where a.KWD_Order='"+ TextBox1.Text + "' and b.ProductsBarCode='"+ productbarcode + "'";//从加工厂调到车间库
+        //this.BeginQuery(s_yfSql);
+        //DataTable Dtb_yfTable = (DataTable)this.QueryForDataTable();
+
+        try
+        {
+            string sql = "select top 1 KPP_PCPrice from Knet_Procure_SuppliersPrice where ProductsBarCode='" + productbarcode + "' and KPP_State!=0 and  KPP_Del!=1 order by KPP_ShTime desc";
+            this.BeginQuery(sql);
+            DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+            DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+            string P = Dtb_DemoProducts.Rows[0][0].ToString();
+            if (number == "")
+            {
+                number = "0";
+            }
+            if (P == "")
+            {
+                P = "0";
+            }
+            if (OrderNum.ToString() == "")
+            {
+                OrderNum = "0";
+            }
+            double HlNumber = Math.Round(double.Parse(OrderNum) * 0.003, 0);
+            if (int.Parse(number)+int.Parse(Dtb_Table.Rows[0][0].ToString()) <= HlNumber)//+int.Parse(Dtb_yfTable.Rows[0][0].ToString())
+            {
+                d_totalPrice = 0;
+            }
+            else
+            {
+                d_totalPrice = double.Parse(P) * (int.Parse(number)+ int.Parse(Dtb_Table.Rows[0][0].ToString()) - HlNumber);//+ int.Parse(Dtb_yfTable.Rows[0][0].ToString()
+            }
+
+
+        }
+        catch (Exception)
+        {
+
+            //Response.Write("<script language=javascript>alert('本信息不存在返回');history.go(-2);</ script > ");
+            //Alert("有部分产品没有报价，或者报价已停用");
+            //Response.Write("<scripttype='text/javascript'>alert('你所查询的数据不存在！');</script>");
+            //Response.Redirect("Procure_ShipCheck_List.aspx");
+            Response.Write(
+                 "<script language=javascript>alert('有部分产品没有报价，或者报价已停用!');parent.location.href = 'Procure_ShipCheck_List.aspx';</script>");
+            Response.End();
+        }
+        return d_totalPrice.ToString();
+    }
+
+    public double GetHandMoney(string suppno, string orderno, string ProductsBarCode, string BFNumber)
+    {
+        double s_Return = 0;
+        double KPP_PCPrice = 0;
+        double HandPrice = 0;
+        string Num = "";
+        this.BeginQuery("select top 1 KPP_PCPrice from Knet_Procure_SuppliersPrice where SuppNo='" + suppno +
+                        "' and ProductsBarCode='" + ProductsBarCode + "'  order by ProcureUpdateDateTime desc");
+        DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];//获取赔偿单价
+        this.BeginQuery("select  OrderAmount,HandPrice from Knet_Procure_OrdersList_Details where OrderNo='" + orderno + "' and ProductsBarCode='" + ProductsBarCode + "'");
+        DataSet Dts_DemoOrder = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoOrder = Dts_DemoOrder.Tables[0];//订单数量
+
+        string s_Sql = "select isnull(sum(KWAD_BFNumber),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='"+orderno+"' and HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" + this.Ddl_SuppNo.Value + "' ) and HouseNo_int = '131235104473261008' and ProductsBarCode='" + ProductsBarCode + "'";
+        this.BeginQuery(s_Sql);
+        DataTable Dtb_Table = (DataTable)this.QueryForDataTable();//由于现在是直接从加工厂调到士腾仓库，以前的数据可能统计不过来，所以计算此订单是否以前从加工厂调到车间库过
+
+        //string s_yfSql = "select isnull(SUM(b.DirectOutAmount),0)from KNet_WareHouse_DirectOutList a join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo  where a.KWD_Order='"+ orderno + "' and b.ProductsBarCode='"+ ProductsBarCode + "'";
+        //this.BeginQuery(s_yfSql);
+        //DataTable Dtb_yfTable = (DataTable)this.QueryForDataTable();//计算直接研发领出的
+
+        if (this.Dtb_Result.Rows.Count > 0)
+        {
+            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            {
+                if (BFNumber.ToString() == "")
+                {
+                    BFNumber = "0";
+                }
+                if (Dtb_DemoProducts.Rows[i]["KPP_PCPrice"].ToString() == "")
+                {
+                    KPP_PCPrice = 0;
+                }
+                if (Dtb_DemoProducts.Rows[i]["KPP_PCPrice"].ToString() != "")
+                {
+                    KPP_PCPrice = double.Parse(Dtb_DemoProducts.Rows[i]["KPP_PCPrice"].ToString());
+                }
+                if (Dtb_DemoOrder.Rows[i]["HandPrice"].ToString() != "")
+                {
+                    HandPrice = double.Parse(Dtb_DemoOrder.Rows[i]["HandPrice"].ToString());
+                }
+                else
+                {
+                    HandPrice = 0;
+
+                }
+                if (Dtb_DemoOrder.Rows[i]["OrderAmount"].ToString() == "")
+                {
+                    Num = "0";
+                }
+                else
+                {
+                    Num = Dtb_DemoOrder.Rows[i]["OrderAmount"].ToString();
+                }
+                double HlNumber = Math.Floor(double.Parse(Num) * 0.003);
+                if ((int.Parse(BFNumber)+int.Parse(Dtb_Table.Rows[0][0].ToString())) == 0 || HlNumber > (int.Parse(BFNumber) + int.Parse(Dtb_Table.Rows[0][0].ToString())))//+int.Parse(Dtb_yfTable.Rows[0][0].ToString())
+                {
+                    s_Return = HandPrice *
+                               (Convert.ToDouble(Num) - double.Parse(BFNumber)- int.Parse(Dtb_Table.Rows[0][0].ToString()));
+                }
+                else
+                {
+                    s_Return = HandPrice *
+                          (Convert.ToDouble(Num) - double.Parse(BFNumber) -int.Parse(Dtb_Table.Rows[0][0].ToString())) -Convert.ToDouble(KPP_PCPrice) * (double.Parse(BFNumber) + int.Parse(Dtb_Table.Rows[0][0].ToString()) - HlNumber);
+                }
+
+            }
+        }
+        return s_Return;
+    }
+
+    public string OrderNoCount(string OrderNo, string productbarcode) //订单总数量
+    {
+        string sql = " select sum(OrderAmount)as OrderAmount from Knet_Procure_OrdersList_Details where ProductsBarCode='" + productbarcode + "' and OrderNo='" + OrderNo + "'";
+        this.BeginQuery(sql);
+        DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+        string P = Dtb_DemoProducts.Rows[0][0].ToString();
+        return P.ToString();
+    }
+
+    public string BFPrice(string productbarcode) //应扣除金额
+    {
+        decimal d_totalPrice = 0;
+
+        try
+        {
+            string sql = "select top 1 KPP_PCPrice from Knet_Procure_SuppliersPrice where ProductsBarCode='" + productbarcode + "' and KPP_State!=0 and  KPP_Del!=1 order by KPP_ShTime desc";
+
+            this.BeginQuery(sql);
+            DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+            DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+            string P = Dtb_DemoProducts.Rows[0][0].ToString();
+
+            if (P == "")
+            {
+                P = "0";
+            }
+            d_totalPrice = decimal.Parse(P);
+
+        }
+        catch (Exception)
+        {
+            Response.Write(
+                 "<script language=javascript>alert('有部分产品没有报价，或者报价已停用!');parent.location.href = 'Procure_ShipCheck_List.aspx';</script>");
+            Response.End();
+        }
+        return d_totalPrice.ToString();
+    }
+    public string RK_Number(string OrderNo, string productbarcode) //由于5月份的烂账比较多，所以，5月份以前的以入车间库为准，5月份以后的以入成品库为准
+    {
+        decimal d_totalPrice = 0;
+      
+        string sql = "  select SUM(AllocateAmount) as AllocateAmount from KNet_WareHouse_AllocateList a join  KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='" + OrderNo + "' and HouseNo_int='131187187069993664' and ProductsBarCode='" + productbarcode + "'";
+
+        this.BeginQuery(sql);
+        DataSet Dts_DemoProducts = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts = Dts_DemoProducts.Tables[0];
+
+        string sql1 = " select SUM(DirectOutAmount) from KNet_WareHouse_DirectOutList a join KNet_WareHouse_DirectOutList_Details b on a.DirectOutNo=b.DirectOutNo where a.KWD_Order='" + OrderNo + "' and b.ProductsBarCode='" + productbarcode + "'";
+        this.BeginQuery(sql1);
+        DataSet Dts_DemoProducts1 = (DataSet)this.QueryForDataSet();
+        DataTable Dtb_DemoProducts1 = Dts_DemoProducts1.Tables[0];
+        string P = Dtb_DemoProducts.Rows[0][0].ToString();
+        string B = Dtb_DemoProducts1.Rows[0][0].ToString();
+        if (P == "")
+        {
+            P = "0";
+        }
+        if (B == "")
+        {
+            B = "0";
+        }
+        d_totalPrice = decimal.Parse(P)+decimal.Parse(B);
+        // }
+
+        return d_totalPrice.ToString();
+    }
+    /// <summary>
+    /// 获取送货总数量
+    /// </summary>
+    /// <returns></returns>
+    public int GetSHNumber(string num, string OrderNo, string productbarcode)
+    {
+        string s_Sql = "select ISNULL(sum(b.AllocateAmount),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='" + OrderNo + "' and HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" + this.Ddl_SuppNo.Value + "' ) and HouseNo_int = '131235104473261008' and ProductsBarCode='" + productbarcode + "'";
+        this.BeginQuery(s_Sql);
+        DataTable Dtb_Table = (DataTable)this.QueryForDataTable();//加工厂到车间
+        string s_zSql = "select ISNULL(sum(b.AllocateAmount),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='" + OrderNo + "' and HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" + this.Ddl_SuppNo.Value + "' ) and HouseNo_int = '131187187069993664' and ProductsBarCode='" + productbarcode + "'";
+        this.BeginQuery(s_zSql);
+        DataTable Dtb_zTable = (DataTable)this.QueryForDataTable();//加工厂直接到成品仓
+        return int.Parse(Dtb_zTable.Rows[0][0].ToString()) + int.Parse(Dtb_Table.Rows[0][0].ToString());
+    }
 }

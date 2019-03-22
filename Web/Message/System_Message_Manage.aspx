@@ -21,29 +21,20 @@
             var v_Receive = document.all('Tbx_ReceiveID').value;
             var v_ReceiveName = document.all('Tbx_ReceiveName').value;
             intSeconds = today.getSeconds();
-            var temp = window.showModalDialog("../Common/SelectDeptPerson.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            if (temp == undefined) {
-                temp = window.returnValue;
-            }
+            var temp = window.open("../Common/SelectDeptPerson.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //if (temp == undefined) {
+            //    temp = window.returnValue;
+            //}
+           
+        }
+        function SetReturnValueInOpenner_SuppliersPrice(temp) {
+            debugger;
             if (temp != undefined) {
-                var ss,s_Receive;
+                var ss;
                 ss = temp.split("|");
-                s_Receive = ss[0].split(",");
-                s_ReceiveName = ss[1].split(",");
-                for (var i = 0; i < s_Receive.length; i++) {
-                    if (v_Receive.indexOf(s_Receive[i]) < 0) {
-                        v_Receive = v_Receive + "," + s_Receive[i];
-                        v_ReceiveName = v_ReceiveName + "," + s_ReceiveName[i];
-                    }
-                }
-                if (v_Receive.substring(0, 1) == ",") {
-                    document.all('Tbx_ReceiveID').value = v_Receive.substring(1, v_Receive.length);
-                    document.all('Tbx_ReceiveName').value = v_ReceiveName.substring(1, v_ReceiveName.length);
-                }
-                else {
-                    document.all('Tbx_ReceiveID').value = v_Receive;
-                    document.all('Tbx_ReceiveName').value = v_ReceiveName;
-                }
+                document.all('Tbx_ReceiveID').value = ss[0];
+                document.all('Tbx_ReceiveName').value = ss[1];
+
 
             }
             else {

@@ -72,7 +72,6 @@ public partial class Knet_Web_System_Knet_Document_List : BasePage
         KNet.BLL.PB_Basic_Document bll = new KNet.BLL.PB_Basic_Document();
 
         string SqlWhere = " PBM_Del='0' ";
-
         string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
         string s_Fields = Request["Fields"] == null ? "" : Request["Fields"].ToString();
         string s_Condition = Request["Condition"] == null ? "" : Request["Condition"].ToString();
@@ -104,6 +103,26 @@ public partial class Knet_Web_System_Knet_Document_List : BasePage
                 s_Type = "1";
             }
             SqlWhere += base.Base_GetAdvWhere(s_Fields, s_Condition, s_Text, s_Type);
+        }
+        string FileType = "",s_FileType="";
+        BasePage BasePage = new BasePage();
+        FileType = BasePage.base_GetconsoleFile();
+        s_FileType = BasePage.base_GetFileRant();
+        //if (s_FileType!="")
+        //{
+        //    SqlWhere += " and PBM_Rant in (" + s_FileType + ") ";
+        //}
+        //else
+        //{
+        //    SqlWhere += " and 1=1 ";
+        //}
+        if (FileType != "")
+        {
+            SqlWhere += " and PBM_Type in (" + FileType + ") ";
+        }
+        else
+        {
+            SqlWhere += " and 1=1 ";
         }
         SqlWhere += " order by PBM_CTime Desc";
         DataSet ds = bll.GetList(SqlWhere);

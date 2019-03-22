@@ -146,7 +146,7 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
     {
         AdminloginMess AM = new AdminloginMess();
 
-        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "项洲") || (AM.KNet_StaffName == "陈晓玲"))
+        if ((AM.KNet_StaffDepart == "129652783693249229") || (AM.KNet_StaffName == "薛建新") || (AM.KNet_StaffName == "陈晓玲"))
         {
 
             string sql = "delete from KNet_Sales_ContractList where"; //删除合同
@@ -316,9 +316,16 @@ public partial class Knet_Web_Sales_KNet_Sales_ContractList_List : BasePage
                     else
                     {
                         //等待总经理审批
-                        this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where (KSF_State='1' or KSF_State='3')   and KSF_ContractNo='" + aa.ToString() + "'  and b.StaffDepart='129652783693249229' and KSF_Del='0'");
+                        if (AM.KNet_StaffName == "薛建新")
+                        {
+                            this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where (KSF_State='1' or KSF_State='3')   and KSF_ContractNo='" + aa.ToString() + "'  and  b.StaffDepart='129652783965723459'  and KSF_Del='0'");
+                        }
+                        else
+                        {
+                            this.BeginQuery("select * from KNet_Sales_Flow a join KNet_Resource_Staff b on a.KSF_ShPerson=b.StaffNo Where (KSF_State='1' or KSF_State='3')   and KSF_ContractNo='" + aa.ToString() + "'  and b.StaffDepart='129652783693249229'   and KSF_Del='0'");
+                        }
                         this.QueryForDataTable();
-                        if ((this.Dtb_Result.Rows.Count <= 0) && (AM.KNet_StaffDepart == "129652783693249229"))
+                        if ((this.Dtb_Result.Rows.Count <= 0) && (AM.YNAuthority("订单评审审核权限")==true))
                         {
                             string JSD = "ContractListCheckYN.aspx?ContractNo=" + aa.ToString() + "";
                             string StrPop = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=150,left=200,toolbar=no, menubar=no,scrollbars=yes, resizable=yes, location=no, status=no, width=700,height=450');\"  title=\"点击进行审核操作\">审核</a><br/>等待 <font color=red>总经理</font> 审核";

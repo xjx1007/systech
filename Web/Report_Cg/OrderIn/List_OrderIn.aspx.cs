@@ -143,14 +143,14 @@ public partial class Web_List_OrderIn : BasePage
                     s_Details += "<td  class='thstyleLeftDetails'align=center noWrap>" + Dtb_Table.Rows[i]["KSP_Code"].ToString() + "</td>\n";
                     s_Details += "<td  class='thstyleLeftDetails'align=left noWrap>" + base.Base_GetProductsEdition(Dtb_Table.Rows[i][4].ToString()) + "</td>\n";
 
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber(Dtb_Table.Rows[i][5].ToString(), 0) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber(Dtb_Table.Rows[i][6].ToString(), 0) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber(Dtb_Table.Rows[i][7].ToString(), 0) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber(Dtb_Table.Rows[i][13].ToString(), 3) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber(Dtb_Table.Rows[i][12].ToString(), 3) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + base.FormatNumber(Dtb_Table.Rows[i][14].ToString(), 3) + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
-                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>&nbsp;" + Dtb_Table.Rows[i]["days"].ToString() + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber(Dtb_Table.Rows[i][5].ToString(),0) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber(Dtb_Table.Rows[i][6].ToString(),0) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber(Dtb_Table.Rows[i][7].ToString(),0) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber(Dtb_Table.Rows[i][13].ToString(),3) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber(Dtb_Table.Rows[i][12].ToString(),3) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + base.FormatNumber(Dtb_Table.Rows[i][14].ToString(),3) + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + Dtb_Table.Rows[i][8].ToString() + "</td>\n";
+                    s_Details += "<td  class='thstyleLeftDetails' align=right  noWrap>" + Dtb_Table.Rows[i]["days"].ToString() + "</td>\n";
 
                     s_Details += " </tr>";
                     try
@@ -205,5 +205,21 @@ public partial class Web_List_OrderIn : BasePage
             s_Details += "</div>";
             this.Lbl_Details.Text = s_Head + s_Details;
         }
+    }
+
+
+    protected void Button2_OnServerClick(object sender, EventArgs e)
+    {
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=" + HttpUtility.UrlEncode("采购入库明细.xls", System.Text.Encoding.UTF8).ToString());
+        //Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+        Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+
+        Response.ContentType = "application/ms-excel";
+        Response.Write(this.Lbl_Details.Text);
+        Response.Flush();
+        Response.End();
     }
 }

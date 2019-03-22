@@ -31,9 +31,13 @@ public partial class OA_Person_Report_Week_View : BasePage
             string s_Type = Request.QueryString["Type"] == null ? "" : Request.QueryString["Type"].ToString();
             this.Tbx_Type.Text = s_Type;
             this.Tbx_STime.Text = DateTime.Now.ToShortDateString();
-            base.Base_DropDutyPersonByFid(this.Ddl_DutyPerson, AM.KNet_StaffNo);
-
+            //base.Base_DropDutyPersonByFid(this.Ddl_DutyPerson, AM.KNet_StaffNo);
+            base.Base_DropBasicCodeBind(this.DdlPBC_Preset, "201", false);
             int weekDay = (short)DateTime.Today.DayOfWeek;
+            if (weekDay == 0)
+            {
+                weekDay = 7;
+            }
             this.Lbl_DDays.Text = "<font size='5'>" + DateTime.Today.AddDays(1 - weekDay).ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Today.AddDays(1 - weekDay)) + ")  ~" + DateTime.Today.AddDays(7 - weekDay).ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Today.AddDays(7 - weekDay)) + ")  周报 </font>";
             this.Lbl_Pre.Text = "<font size='5'><<</font>   ";
             this.Lbl_Next.Text = "<font size='5'>>></font>   ";
@@ -57,12 +61,13 @@ public partial class OA_Person_Report_Week_View : BasePage
                 this.Tbx_NID.Text = base.GetMainID();
                 this.Lbl_Title.Text = "查看周报";
 
-                this.CommentList2.CommentFID = this.Tbx_NID.Text;
-                this.CommentList2.CommentType = "TotayReport";
+                //this.CommentList2.CommentFID = this.Tbx_NID.Text;
+                //this.CommentList2.CommentType = "TotayReport";
 
-                this.CommentList1.CommentFID = this.Tbx_NID.Text;
-                this.CommentList1.CommentType = 7;
+                //this.CommentList1.CommentFID = this.Tbx_NID.Text;
+                //this.CommentList1.CommentType = 7;
                 ShowInfoByDateTime(this.Tbx_STime.Text);
+                AddComment.Visible = false;
             }
         }
 
@@ -71,25 +76,34 @@ public partial class OA_Person_Report_Week_View : BasePage
     private void ShowInfo(string s_ID)
     {
         KNet.BLL.OA_Person_Report bll = new KNet.BLL.OA_Person_Report();
+        AdminloginMess AM=new AdminloginMess();
         KNet.Model.OA_Person_Report model = bll.GetModel(s_ID);
         if (model != null)
         {
             this.Tbx_ID.Text = model.OPR_ID.ToString();
             this.Tbx_NID.Text = model.OPR_ID.ToString();
-            this.CommentList2.CommentFID = this.Tbx_NID.Text;
-            this.CommentList2.CommentType = "TotayReport";
+            //this.CommentList2.CommentFID = this.Tbx_NID.Text;
+            //this.CommentList2.CommentType = "TotayReport";
 
-            this.CommentList1.CommentFID = this.Tbx_NID.Text;
-            this.CommentList1.CommentType = 7;
+            //this.CommentList1.CommentFID = this.Tbx_NID.Text;
+            //this.CommentList1.CommentType = 7;
             this.Tbx_STime.Text = DateTime.Parse(model.OPR_STime.ToString()).ToShortDateString();
 
             this.Tbx_ThisReport.Text = GetDetails(model.OPR_ID.ToString(),0);
             this.Tbx_NextReport.Text = GetDetails(model.OPR_ID.ToString(), 1);
             this.Tbx_Type.Text = model.OPR_Type.ToString();
-
+            string staffno = "";
+            if (this.UC_ddlCategroy.SelectedValue == "")
+            {
+                staffno = AM.KNet_StaffNo;
+            }
+            else
+            {
+                staffno = this.UC_ddlCategroy.SelectedValue;
+            }
             DateTime Dtm_Time = DateTime.Parse(this.Tbx_STime.Text).AddDays(-1);
 
-            DataSet Dts_Table1 = bll.GetList(" OPR_Stime='" + Dtm_Time.ToShortDateString() + "' and  OPR_Type='2' and OPR_State='1' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "'");
+            DataSet Dts_Table1 = bll.GetList(" OPR_Stime='" + Dtm_Time.ToShortDateString() + "' and  OPR_Type='2' and OPR_State='1' and  OPR_DutyPerson='" + staffno + "'");
             if (Dts_Table1.Tables[0].Rows.Count > 0)
             {
                 string s_ID1 = Dts_Table1.Tables[0].Rows[0]["OPR_ID"].ToString();
@@ -108,36 +122,64 @@ public partial class OA_Person_Report_Week_View : BasePage
         {
             DateTime D_Time = DateTime.Parse(s_DataTime);
             int weekDay = (short)D_Time.DayOfWeek;
+            if (weekDay == 0)
+            {
+                weekDay = 7;
+            }
             int i_State = 0;
             AdminloginMess AM = new AdminloginMess();
             KNet.BLL.OA_Person_Report bll = new KNet.BLL.OA_Person_Report();
-            DataSet Dts_Table = bll.GetList(" OPR_Stime>='" + D_Time.AddDays(1 - weekDay) + "' and OPR_DutyPerson='"+this.Ddl_DutyPerson.SelectedValue+"' and OPR_Stime<='" + D_Time.AddDays(7 - weekDay) + "'  and OPR_Type='2' ");
+            string staffno = "";
+            if (this.UC_ddlCategroy.SelectedValue == "")
+            {
+                staffno = AM.KNet_StaffNo;
+            }
+            else
+            {
+                staffno = this.UC_ddlCategroy.SelectedValue;
+            }
+            DataSet Dts_Table = bll.GetList(" OPR_Stime>='" + D_Time.AddDays(1 - weekDay) + "' and OPR_DutyPerson='"+ staffno + "' and OPR_Stime<='" + D_Time.AddDays(7 - weekDay) + "'  and OPR_Type='2' ");
             if (Dts_Table.Tables[0].Rows.Count > 0)
             {
-                this.Lbl_Days.Text = "<font size='4' color=Blue>" + DateTime.Now.ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Now) + ")  " + this.Ddl_DutyPerson.SelectedItem.Text.ToString() + "  </font>";
+                this.Lbl_Days.Text = "<font size='4' color=Blue>" + DateTime.Parse(s_DataTime).ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Parse(s_DataTime)) + ")  " + GetUserName(staffno) + "  </font>";
                 this.Tbx_ID.Text = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
                 this.Tbx_NID.Text = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
-                this.CommentList2.CommentFID = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
-                this.CommentList2.CommentType = "TotayReport";
-                this.CommentList1.CommentFID = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
-                this.CommentList1.CommentType = 7;
+                //this.CommentList2.CommentFID = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
+                //this.CommentList2.CommentType = "TotayReport";
+                //this.CommentList1.CommentFID = Dts_Table.Tables[0].Rows[0]["OPR_ID"].ToString();
+                //this.CommentList1.CommentType = 7;
                 this.Tbx_STime.Text = DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_STime"].ToString()).ToShortDateString();
                 this.Tbx_ThisReport.Text = GetDetails(this.Tbx_ID.Text, 0);
                 this.Tbx_NextReport.Text = GetDetails(this.Tbx_ID.Text, 1); 
                 this.Tbx_Type.Text = Dts_Table.Tables[0].Rows[0]["OPR_Type"].ToString();
                 i_State = int.Parse(Dts_Table.Tables[0].Rows[0]["OPR_State"].ToString());
+                KNet.BLL.PB_Basic_Attachment bllFile = new KNet.BLL.PB_Basic_Attachment();
+                string SqlWhere = "";
+                SqlWhere = " PBA_FID='" + this.Tbx_ID.Text + "' AND PBA_Type='WeekFile' and PBA_Creator='" + this.UC_ddlCategroy.SelectedValue + "' order by PBA_CTime ";
+                DataSet ds_Comment = bllFile.GetList(SqlWhere);
+                GridView_Comment.DataSource = ds_Comment.Tables[0];
+                GridView_Comment.DataBind();
+
+                //查询点评
+                KNet.BLL.PB_Basic_Comment bllComment = new KNet.BLL.PB_Basic_Comment();
+                string SqlWhere1 = "";
+                SqlWhere1 = " PBC_FID='" + this.Tbx_ID.Text + "' AND PBC_Type=168 order by PBC_CTime ";
+                DataSet ds_Comment1 = bllComment.GetList(SqlWhere1);
+                MyGridView1.DataSource = ds_Comment1.Tables[0];
+                MyGridView1.DataBind();
+                //this.Btn_Create.Enabled = true;
             }
             else
             {
-                this.Lbl_Days.Text = "<font size='4' color=red>" + DateTime.Now.ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Now) + ")  " + this.Ddl_DutyPerson.SelectedItem.Text.ToString() + "  未写</font>";
+                this.Lbl_Days.Text = "<font size='4' color=red>" + DateTime.Parse(s_DataTime).ToShortDateString() + "  (" + base.Get_Chinese_Week(DateTime.Parse(s_DataTime)) + ")  " + GetUserName(staffno) + "  未写</font>";
 
                 this.Lbl_PersonDetails.Text = "<font ></font>";
                 this.Tbx_ID.Text = "";
                 this.Tbx_NID.Text = "";
-                this.CommentList2.CommentFID = this.Tbx_NID.Text;
-                this.CommentList2.CommentType = "TotayReport";
-                this.CommentList1.CommentFID = this.Tbx_NID.Text;
-                this.CommentList1.CommentType =7;
+                //this.CommentList2.CommentFID = this.Tbx_NID.Text;
+                //this.CommentList2.CommentType = "TotayReport";
+                //this.CommentList1.CommentFID = this.Tbx_NID.Text;
+                //this.CommentList1.CommentType =7;
                 this.Tbx_ThisReport.Text = "";
                 this.Tbx_NextReport.Text = "";
                 this.Tbx_Type.Text = "1";
@@ -145,7 +187,7 @@ public partial class OA_Person_Report_Week_View : BasePage
 
             DateTime Dtm_Time = DateTime.Parse(s_DataTime).AddDays(-1);
 
-            DataSet Dts_Table1 = bll.GetList("  OPR_Stime>='" + Dtm_Time.AddDays(-7).AddDays(1 - weekDay) + "' and OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "' and OPR_Stime<='" + Dtm_Time.AddDays(-7).AddDays(7 - weekDay) + "' and  OPR_Type='2'  and OPR_State='1' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "'");
+            DataSet Dts_Table1 = bll.GetList("  OPR_Stime>='" + Dtm_Time.AddDays(-7).AddDays(1 - weekDay+1) + "' and OPR_DutyPerson='" + this.UC_ddlCategroy.SelectedValue + "' and OPR_Stime<='" + Dtm_Time.AddDays(-7).AddDays(7 - weekDay+1) + "' and  OPR_Type='2'  and OPR_State='1' and  OPR_DutyPerson='" + staffno + "'");
             if (Dts_Table1.Tables[0].Rows.Count > 0)
             {
                 string s_IDs = Dts_Table1.Tables[0].Rows[0]["OPR_ID"].ToString();
@@ -160,24 +202,79 @@ public partial class OA_Person_Report_Week_View : BasePage
     }
     protected void Lbl_Pre_Click(object sender, EventArgs e)
     {
+        //清空查询附件数据
+        KNet.BLL.PB_Basic_Attachment bllFile = new KNet.BLL.PB_Basic_Attachment();
+        string SqlWhere = "";
+        SqlWhere = "1!=1";
+        DataSet ds_Comment = bllFile.GetList(SqlWhere);
+        GridView_Comment.DataSource = ds_Comment.Tables[0];
+        GridView_Comment.DataBind();
+
+        //清空查询点评数据
+        KNet.BLL.PB_Basic_Comment bllComment = new KNet.BLL.PB_Basic_Comment();
+        string SqlWhere1 = "";
+        SqlWhere1 = " 1!=1";
+        DataSet ds_Comment1 = bllComment.GetList(SqlWhere1);
+        MyGridView1.DataSource = ds_Comment1.Tables[0];
+        MyGridView1.DataBind();
+
         AdminloginMess AM = new AdminloginMess();
         this.Tbx_STime.Text = DateTime.Parse(this.Tbx_STime.Text).AddDays(-7).ToShortDateString();
         DateTime date = DateTime.Parse(this.Tbx_STime.Text);
         int weekDay = (short)date.DayOfWeek;
+        if (weekDay == 0)
+        {
+            weekDay = 7;
+        }
         this.Lbl_DDays.Text = "<font size='5'>" + date.AddDays(1 - weekDay).ToShortDateString() + "  (" + base.Get_Chinese_Week(date.AddDays(1 - weekDay)) + ")  ~" + date.AddDays(7 - weekDay).ToShortDateString() + "  (" + base.Get_Chinese_Week(date.AddDays(7 - weekDay)) + ")  " + AM.KNet_StaffName + "</font>";
-        this.ShowInfoByDateTime(this.Tbx_STime.Text);
+        this.ShowInfoByDateTime(date.AddDays(1 - weekDay).ToString());
     }
     protected void Lbl_Next_Click(object sender, EventArgs e)
     {
+        //清空查询附件数据
+        KNet.BLL.PB_Basic_Attachment bllFile = new KNet.BLL.PB_Basic_Attachment();
+        string SqlWhere = "";
+        SqlWhere = "1!=1";
+        DataSet ds_Comment = bllFile.GetList(SqlWhere);
+        GridView_Comment.DataSource = ds_Comment.Tables[0];
+        GridView_Comment.DataBind();
+
+        //清空查询点评数据
+        KNet.BLL.PB_Basic_Comment bllComment = new KNet.BLL.PB_Basic_Comment();
+        string SqlWhere1 = "";
+        SqlWhere1 = " 1!=1";
+        DataSet ds_Comment1 = bllComment.GetList(SqlWhere1);
+        MyGridView1.DataSource = ds_Comment1.Tables[0];
+        MyGridView1.DataBind();
+
         AdminloginMess AM = new AdminloginMess();
         this.Tbx_STime.Text = DateTime.Parse(this.Tbx_STime.Text).AddDays(7).ToShortDateString();
         DateTime date = DateTime.Parse(this.Tbx_STime.Text);
         int weekDay = (short)date.DayOfWeek;
+        if (weekDay == 0)
+        {
+            weekDay = 7;
+        }
         this.Lbl_DDays.Text = "<font size='5'>" + date.AddDays(1 - weekDay).ToShortDateString() + "  (" + base.Get_Chinese_Week(date.AddDays(1 - weekDay)) + ")  ~" + date.AddDays(7 - weekDay).ToShortDateString() + "  (" + base.Get_Chinese_Week(date.AddDays(7 - weekDay)) + ")  " + AM.KNet_StaffName + "</font>";
-        this.ShowInfoByDateTime(this.Tbx_STime.Text);
+        this.ShowInfoByDateTime(date.AddDays(1 - weekDay).ToString());
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
+        //清空查询附件数据
+        KNet.BLL.PB_Basic_Attachment bllFile = new KNet.BLL.PB_Basic_Attachment();
+        string SqlWhere = "";
+        SqlWhere = "1!=1";
+        DataSet ds_Comment = bllFile.GetList(SqlWhere);
+        GridView_Comment.DataSource = ds_Comment.Tables[0];
+        GridView_Comment.DataBind();
+
+        //清空查询点评数据
+        KNet.BLL.PB_Basic_Comment bllComment = new KNet.BLL.PB_Basic_Comment();
+        string SqlWhere1 = "";
+        SqlWhere1 = " 1!=1";
+        DataSet ds_Comment1 = bllComment.GetList(SqlWhere1);
+        MyGridView1.DataSource = ds_Comment1.Tables[0];
+        MyGridView1.DataBind();
         this.ShowInfoByDateTime(this.Tbx_STime.Text);
     }
     public string GetDetails(string s_ID,int i_Type)
@@ -197,7 +294,7 @@ public partial class OA_Person_Report_Week_View : BasePage
                     string s_Project = Dts_Project1.Tables[0].Rows[i]["OPRP_Project"].ToString();
 
                     Sb_Project.Append("<tr>\n");
-                    Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap>" + s_Project + "\n");
+                    Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"25%\" nowrap><textarea name=\"Tbx_ThisReport\" id=\"Tbx_ThisReport\"  rows=\"5\" style=\"width: 95% \" readonly=\"readonly\" warp=\"virtual\">" + s_Project + "</textarea>\n");
                     Sb_Project.Append("</td>\n");
                     Sb_Project.Append("<td class=\"ListHeadDetails\" colspan=\"3\" width=\"72%\" nowrap>\n");
                     Sb_Project.Append("<table width=\"100%\" class=\"ListDetails\">\n");
@@ -213,7 +310,7 @@ public partial class OA_Person_Report_Week_View : BasePage
                             string s_Time = Dts_Details.Tables[0].Rows[j]["OPRD_Time"].ToString();
                             string s_DNum = i_num.ToString();
                             Sb_Project.Append("<tr>\n");
-                            Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">" + s_ProjectDetails + "\n</td>");
+                            Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\"><textarea name=\"Tbx_ThisReport\" id=\"Tbx_ThisReport\"  rows=\"5\" style=\"width: 95% \" readonly=\"readonly\" warp=\"virtual\">" + s_ProjectDetails + "</textarea>\n</td>");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">" + s_Person + "\n</td>");
                             Sb_Project.Append("<td class=\"ListHeadDetails\" width=\"24%\">" + s_Time + "\n</td>");
                             Sb_Project.Append("</tr>");
@@ -232,5 +329,62 @@ public partial class OA_Person_Report_Week_View : BasePage
         catch
         { }
         return Sb_Project.ToString();
+    }
+    public string GetUserName(string FromPerson)
+    {
+        BasePage page = new BasePage();
+        return page.Base_GetUserName(FromPerson);
+    }
+    /// <summary>
+    /// 提交
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Button1_OnClick(object sender, EventArgs e)
+    {
+        AdminloginMess AM = new AdminloginMess();
+        KNet.BLL.PB_Basic_Comment BLL = new KNet.BLL.PB_Basic_Comment();
+        KNet.Model.PB_Basic_Comment model = new KNet.Model.PB_Basic_Comment();
+        model.PBC_FID = this.Tbx_NID.Text;
+        model.PBC_Type = 168;//24代表一天，查询的是日报，168代表一周，查询的是周报，744代表的是一月，查询的是月报
+        model.PBC_PresetCode = Convert.ToInt32(this.DdlPBC_Preset.SelectedValue);
+        model.PBC_Description = this.txtDescription.Text;
+        model.PBC_CTime = DateTime.Now;
+        model.PBC_FromPerson = AM.KNet_StaffNo;
+        try
+        {
+            BLL.Add(model);
+            AM.Add_Logs("评论增加成功：编号：" + model.PBC_FID);
+            AddComment.Visible = false;
+            ShowInfoByDateTime(this.Tbx_STime.Text);
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+    /// <summary>
+    /// 取消
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Button3_OnClick(object sender, EventArgs e)
+    {
+        this.AddComment.Visible = false;
+    }
+    /// <summary>
+    /// 新增评论按钮
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Btn_Create_OnClick(object sender, EventArgs e)
+    {
+        this.AddComment.Visible = true;
+    }
+
+    protected void DdlPBC_Preset_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtDescription.Text += DdlPBC_Preset.SelectedItem.Text;
     }
 }

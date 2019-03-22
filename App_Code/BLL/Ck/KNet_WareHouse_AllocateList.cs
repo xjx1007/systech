@@ -46,6 +46,8 @@ namespace KNet.BLL
                 }
             }
             dal.Add(model);
+            //string DoSqlOrder = " update KNet_WareHouse_FuAllocateList set  AllocateCheckYN=1 where AllocateNo='" + model.AllocateNo + "' ";
+            //DbHelperSQL.ExecuteSql(DoSqlOrder);
         }
 
         /// <summary>

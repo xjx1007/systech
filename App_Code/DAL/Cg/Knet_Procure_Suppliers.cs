@@ -20,7 +20,7 @@ namespace KNet.DAL
         {
             int rowsAffected;
             SqlParameter[] parameters = {
-					new SqlParameter("@SuppName", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppName", SqlDbType.NVarChar,50),
                     new SqlParameter("@SuppProvince", SqlDbType.NVarChar,50)};
             parameters[0].Value = SuppName;
             parameters[1].Value = SuppProvince;
@@ -44,43 +44,62 @@ namespace KNet.DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Knet_Procure_Suppliers(");
-            strSql.Append("SuppNo,SuppName,SuppPeople,SuppMobiTel,SuppFax,SuppPhone,SuppWeb,SuppEmail,SuppProvince,SuppCity,SuppAddress,SuppZipCode,SuppBankName,SuppBankAccount,SuppProducts,Remarks,SuppCode,KPS_DutyPerson,KPS_Level,KPS_Type,KPS_CTime,KPS_Creator,KPS_LinkManID,KPS_Sname,KPS_Code,KPS_Days,KPS_KDCode,KPS_ScNumber,KPS_KPMaxMoney,KPS_MaxRow,KPS_GiveDays)");
+            strSql.Append("SuppNo,SuppName,SuppPeople,SuppMobiTel,SuppFax,SuppPhone,SuppWeb,SuppEmail,SuppProvince,SuppCity,SuppAddress,SuppZipCode,SuppBankName,SuppBankAccount,SuppProducts,Remarks,SuppCode,KPS_DutyPerson,KPS_Level,KPS_Type,KPS_CTime,KPS_Creator,KPS_LinkManID,KPS_Sname,KPS_Code,KPS_Days,KPS_KDCode,KPS_ScNumber,KPS_KPMaxMoney,KPS_MaxRow,KPS_GiveDays,KPS_Nature,KPS_BusinessUrl,KPS_Business,KPS_InvoiceUrl,KPS_Invoice,KPS_ContractUrl,KPS_Contract,KPS_FiveUrl,KPS_FiveName,KSP_SQEUrl,KPS_SQEName,KPS_Production,KPS_ProductionPho,KPS_WareHouse,KPS_WareHousePho,KPS_CdBankName,KPS_CdBankNum,KPS_Check,KPS_Del)");
             strSql.Append(" values (");
-            strSql.Append("@SuppNo,@SuppName,@SuppPeople,@SuppMobiTel,@SuppFax,@SuppPhone,@SuppWeb,@SuppEmail,@SuppProvince,@SuppCity,@SuppAddress,@SuppZipCode,@SuppBankName,@SuppBankAccount,@SuppProducts,@Remarks,@SuppCode,@KPS_DutyPerson,@KPS_Level,@KPS_Type,@KPS_CTime,@KPS_Creator,@KPS_LinkManID,@KPS_Sname,@KPS_Code,@KPS_Days,@KPS_KDCode,@KPS_ScNumber,@KPS_KPMaxMoney,@KPS_MaxRow,@KPS_GiveDays)");
+            strSql.Append("@SuppNo,@SuppName,@SuppPeople,@SuppMobiTel,@SuppFax,@SuppPhone,@SuppWeb,@SuppEmail,@SuppProvince,@SuppCity,@SuppAddress,@SuppZipCode,@SuppBankName,@SuppBankAccount,@SuppProducts,@Remarks,@SuppCode,@KPS_DutyPerson,@KPS_Level,@KPS_Type,@KPS_CTime,@KPS_Creator,@KPS_LinkManID,@KPS_Sname,@KPS_Code,@KPS_Days,@KPS_KDCode,@KPS_ScNumber,@KPS_KPMaxMoney,@KPS_MaxRow,@KPS_GiveDays,@KPS_Nature,@KPS_BusinessUrl,@KPS_Business,@KPS_InvoiceUrl,@KPS_Invoice,@KPS_ContractUrl,@KPS_Contract,@KPS_FiveUrl,@KPS_FiveName,@KSP_SQEUrl,@KPS_SQEName,@KPS_Production,@KPS_ProductionPho,@KPS_WareHouse,@KPS_WareHousePho,@KPS_CdBankName,@KPS_CdBankNum,@KPS_Check,@KPS_Del)");
             SqlParameter[] parameters = {
-					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppName", SqlDbType.NVarChar,60),
-					new SqlParameter("@SuppPeople", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppMobiTel", SqlDbType.NVarChar,30),
-					new SqlParameter("@SuppFax", SqlDbType.NVarChar,30),
-					new SqlParameter("@SuppPhone", SqlDbType.NVarChar,30),
-					new SqlParameter("@SuppWeb", SqlDbType.NVarChar,100),
-					new SqlParameter("@SuppEmail", SqlDbType.NVarChar,60),
-					new SqlParameter("@SuppProvince", SqlDbType.NVarChar,20),
-					new SqlParameter("@SuppCity", SqlDbType.NVarChar,20),
-					new SqlParameter("@SuppAddress", SqlDbType.NVarChar,100),
-					new SqlParameter("@SuppZipCode", SqlDbType.NVarChar,10),
-					new SqlParameter("@SuppBankName", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppBankAccount", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppProducts", SqlDbType.NVarChar,500),
-					new SqlParameter("@Remarks", SqlDbType.NText),
-					new SqlParameter("@SuppCode", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_DutyPerson", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Level", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Type", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_CTime", SqlDbType.DateTime),
-					new SqlParameter("@KPS_Creator", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_LinkManID", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Sname", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Code", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Days", SqlDbType.Int,4),
-					new SqlParameter("@KPS_KDCode", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_ScNumber", SqlDbType.Int,4),
-					new SqlParameter("@KPS_KPMaxMoney", SqlDbType.Decimal,18),
-					new SqlParameter("@KPS_MaxRow", SqlDbType.Int,4),
-					new SqlParameter("@KPS_GiveDays", SqlDbType.Int,4)
-                    
-                                        };
+                    new SqlParameter("@SuppNo", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppName", SqlDbType.NVarChar,60),
+                    new SqlParameter("@SuppPeople", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppMobiTel", SqlDbType.NVarChar,30),
+                    new SqlParameter("@SuppFax", SqlDbType.NVarChar,30),
+                    new SqlParameter("@SuppPhone", SqlDbType.NVarChar,30),
+                    new SqlParameter("@SuppWeb", SqlDbType.NVarChar,100),
+                    new SqlParameter("@SuppEmail", SqlDbType.NVarChar,60),
+                    new SqlParameter("@SuppProvince", SqlDbType.NVarChar,20),
+                    new SqlParameter("@SuppCity", SqlDbType.NVarChar,20),
+                    new SqlParameter("@SuppAddress", SqlDbType.NVarChar,100),
+                    new SqlParameter("@SuppZipCode", SqlDbType.NVarChar,10),
+                    new SqlParameter("@SuppBankName", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppBankAccount", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppProducts", SqlDbType.NVarChar,500),
+                    new SqlParameter("@Remarks", SqlDbType.NText),
+                    new SqlParameter("@SuppCode", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_DutyPerson", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Level", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Type", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_CTime", SqlDbType.DateTime),
+                    new SqlParameter("@KPS_Creator", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_LinkManID", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Sname", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Code", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Days", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_KDCode", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_ScNumber", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_KPMaxMoney", SqlDbType.Decimal,18),
+                    new SqlParameter("@KPS_MaxRow", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_GiveDays", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_Nature", SqlDbType.Int,4),
+                     new SqlParameter("@KPS_BusinessUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Business", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_InvoiceUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Invoice", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_ContractUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Contract", SqlDbType.VarChar,200),
+                      new SqlParameter("@KPS_FiveUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_FiveName", SqlDbType.VarChar,200),
+                      new SqlParameter("@KSP_SQEUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_SQEName", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Production", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_ProductionPho", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_WareHouse", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_WareHousePho", SqlDbType.VarChar,50),
+                      new SqlParameter("@KPS_CdBankName", SqlDbType.VarChar,100),
+                     new SqlParameter("@KPS_CdBankNum", SqlDbType.VarChar,200),
+                      new SqlParameter("@KPS_Check", SqlDbType.VarChar,10),
+                       new SqlParameter("@KPS_Del", SqlDbType.Int)
+
+        };
             parameters[0].Value = model.SuppNo;
             parameters[1].Value = model.SuppName;
             parameters[2].Value = model.SuppPeople;
@@ -112,11 +131,31 @@ namespace KNet.DAL
             parameters[28].Value = model.KPS_KPMaxMoney;
             parameters[29].Value = model.KPS_MaxRow;
             parameters[30].Value = model.KPS_GiveDays;
-            
+            parameters[31].Value = model.KPS_Nature;
+            parameters[32].Value = model.KPS_BusinessUrl;
+            parameters[33].Value = model.KPS_Business;
+            parameters[34].Value = model.KPS_InvoiceUrl;
+            parameters[35].Value = model.KPS_Invoice;
+            parameters[36].Value = model.KPS_ContractUrl;
+            parameters[37].Value = model.KPS_Contract;
+
+            parameters[38].Value = model.KPS_FiveUrl;
+            parameters[39].Value = model.KPS_FiveName;
+            parameters[40].Value = model.KSP_SQEUrl;
+            parameters[41].Value = model.KPS_SQEName;
+
+            parameters[42].Value = model.KPS_Production;
+            parameters[43].Value = model.KPS_ProductionPho;
+            parameters[44].Value = model.KPS_WareHouse;
+            parameters[45].Value = model.KPS_WareHousePho;
+            parameters[46].Value = model.KPS_CdBankName;
+            parameters[47].Value = model.KPS_CdBankNum;
+            parameters[48].Value = model.KPS_Check;
+            parameters[49].Value = model.KPS_Del;
 
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
-        
+
         /// <summary>
         ///  更新一条数据
         /// </summary>
@@ -154,43 +193,86 @@ namespace KNet.DAL
             strSql.Append("KPS_ScNumber=@KPS_ScNumber, ");
             strSql.Append("KPS_KPMaxMoney=@KPS_KPMaxMoney,");
             strSql.Append("KPS_MaxRow=@KPS_MaxRow, ");
-            strSql.Append("KPS_GiveDays=@KPS_GiveDays ");
-            
+            strSql.Append("KPS_GiveDays=@KPS_GiveDays, ");
+            strSql.Append("KPS_Nature=@KPS_Nature, ");
+            strSql.Append("KPS_BusinessUrl=@KPS_BusinessUrl,");
+            strSql.Append("KPS_Business=@KPS_Business,");
+            strSql.Append("KPS_InvoiceUrl=@KPS_InvoiceUrl,");
+            strSql.Append("KPS_Invoice=@KPS_Invoice,");
+            strSql.Append("KPS_ContractUrl=@KPS_ContractUrl,");
+            strSql.Append("KPS_Contract=@KPS_Contract,");
+
+            strSql.Append("KPS_FiveUrl=@KPS_FiveUrl,");
+            strSql.Append("KPS_FiveName=@KPS_FiveName,");
+            strSql.Append("KSP_SQEUrl=@KSP_SQEUrl,");
+            strSql.Append("KPS_SQEName=@KPS_SQEName,");
+
+            strSql.Append("KPS_Production=@KPS_Production,");
+            strSql.Append("KPS_ProductionPho=@KPS_ProductionPho,");
+            strSql.Append("KPS_WareHouse=@KPS_WareHouse,");
+            strSql.Append("KPS_WareHousePho=@KPS_WareHousePho,");
+            strSql.Append("KPS_CdBankName=@KPS_CdBankName,");
+            strSql.Append("KPS_CdBankNum=@KPS_CdBankNum,");
+            strSql.Append("KPS_Del=@KPS_Del,");
+            strSql.Append("KPS_Check=@KPS_Check");
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
-					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppName", SqlDbType.NVarChar,60),
-					new SqlParameter("@SuppPeople", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppMobiTel", SqlDbType.NVarChar,30),
-					new SqlParameter("@SuppFax", SqlDbType.NVarChar,30),
-					new SqlParameter("@SuppPhone", SqlDbType.NVarChar,30),
-					new SqlParameter("@SuppWeb", SqlDbType.NVarChar,100),
-					new SqlParameter("@SuppEmail", SqlDbType.NVarChar,60),
-					new SqlParameter("@SuppProvince", SqlDbType.NVarChar,20),
-					new SqlParameter("@SuppCity", SqlDbType.NVarChar,20),
-					new SqlParameter("@SuppAddress", SqlDbType.NVarChar,100),
-					new SqlParameter("@SuppZipCode", SqlDbType.NVarChar,10),
-					new SqlParameter("@SuppBankName", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppBankAccount", SqlDbType.NVarChar,50),
-					new SqlParameter("@SuppProducts", SqlDbType.NVarChar,500),
-					new SqlParameter("@Remarks", SqlDbType.NText),
-					new SqlParameter("@SuppCode", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_DutyPerson", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Level", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Type", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_MTime", SqlDbType.DateTime),
-					new SqlParameter("@KPS_Mender", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_LinkManID", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Sname", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Code", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_Days", SqlDbType.Int,4),
-					new SqlParameter("@KPS_KDCode", SqlDbType.VarChar,50),
-					new SqlParameter("@KPS_ScNumber", SqlDbType.Int,4),
-					new SqlParameter("@KPS_KPMaxMoney", SqlDbType.Decimal,18),
-					new SqlParameter("@KPS_MaxRow", SqlDbType.Int,4),
-					new SqlParameter("@KPS_GiveDays", SqlDbType.Int,4),
-                    
-					new SqlParameter("@ID", SqlDbType.VarChar,50)};
+                    new SqlParameter("@SuppNo", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppName", SqlDbType.NVarChar,60),
+                    new SqlParameter("@SuppPeople", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppMobiTel", SqlDbType.NVarChar,30),
+                    new SqlParameter("@SuppFax", SqlDbType.NVarChar,30),
+                    new SqlParameter("@SuppPhone", SqlDbType.NVarChar,30),
+                    new SqlParameter("@SuppWeb", SqlDbType.NVarChar,100),
+                    new SqlParameter("@SuppEmail", SqlDbType.NVarChar,60),
+                    new SqlParameter("@SuppProvince", SqlDbType.NVarChar,20),
+                    new SqlParameter("@SuppCity", SqlDbType.NVarChar,20),
+                    new SqlParameter("@SuppAddress", SqlDbType.NVarChar,100),
+                    new SqlParameter("@SuppZipCode", SqlDbType.NVarChar,10),
+                    new SqlParameter("@SuppBankName", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppBankAccount", SqlDbType.NVarChar,50),
+                    new SqlParameter("@SuppProducts", SqlDbType.NVarChar,500),
+                    new SqlParameter("@Remarks", SqlDbType.NText),
+                    new SqlParameter("@SuppCode", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_DutyPerson", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Level", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Type", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_MTime", SqlDbType.DateTime),
+                    new SqlParameter("@KPS_Mender", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_LinkManID", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Sname", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Code", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_Days", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_KDCode", SqlDbType.VarChar,50),
+                    new SqlParameter("@KPS_ScNumber", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_KPMaxMoney", SqlDbType.Decimal,18),
+                    new SqlParameter("@KPS_MaxRow", SqlDbType.Int,4),
+                    new SqlParameter("@KPS_GiveDays", SqlDbType.Int,4),
+
+                    new SqlParameter("@KPS_Nature", SqlDbType.Int,4),
+
+                     new SqlParameter("@KPS_BusinessUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Business", SqlDbType.VarChar,100),
+                     new SqlParameter("@KPS_InvoiceUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Invoice", SqlDbType.VarChar,100),
+                     new SqlParameter("@KPS_ContractUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_Contract", SqlDbType.VarChar,100),
+
+                       new SqlParameter("@KPS_FiveUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_FiveName", SqlDbType.VarChar,100),
+                       new SqlParameter("@KSP_SQEUrl", SqlDbType.VarChar,200),
+                     new SqlParameter("@KPS_SQEName", SqlDbType.VarChar,100),
+
+                     new SqlParameter("@KPS_Production", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_ProductionPho", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_WareHouse", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_WareHousePho", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_CdBankName", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPS_CdBankNum", SqlDbType.VarChar,50),
+                      new SqlParameter("@KPS_Del", SqlDbType.Int),
+                     new SqlParameter("@KPS_Check", SqlDbType.VarChar,10),
+
+                    new SqlParameter("@ID", SqlDbType.VarChar,50)};
             parameters[0].Value = model.SuppNo;
             parameters[1].Value = model.SuppName;
             parameters[2].Value = model.SuppPeople;
@@ -224,11 +306,35 @@ namespace KNet.DAL
 
             parameters[29].Value = model.KPS_MaxRow;
             parameters[30].Value = model.KPS_GiveDays;
-            parameters[31].Value = model.ID;
 
+            parameters[31].Value = model.KPS_Nature;
+
+
+            parameters[32].Value = model.KPS_BusinessUrl;
+            parameters[33].Value = model.KPS_Business;
+            parameters[34].Value = model.KPS_InvoiceUrl;
+            parameters[35].Value = model.KPS_Invoice;
+            parameters[36].Value = model.KPS_ContractUrl;
+            parameters[37].Value = model.KPS_Contract;
+
+            parameters[38].Value = model.KPS_FiveUrl;
+            parameters[39].Value = model.KPS_FiveName;
+            parameters[40].Value = model.KSP_SQEUrl;
+            parameters[41].Value = model.KPS_SQEName;
+
+            parameters[42].Value = model.KPS_Production;
+            parameters[43].Value = model.KPS_ProductionPho;
+            parameters[44].Value = model.KPS_WareHouse;
+            parameters[45].Value = model.KPS_WareHousePho;
+            parameters[46].Value = model.KPS_CdBankName;
+            parameters[47].Value = model.KPS_CdBankNum;
+            parameters[48].Value = model.KPS_Check;
+            parameters[49].Value = 1;
+            parameters[50].Value = model.ID;
+            //strSql;
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
-        
+
         /// </summary>
         public void UpdateDel(KNet.Model.Knet_Procure_Suppliers model)
         {
@@ -238,8 +344,8 @@ namespace KNet.DAL
 
             strSql.Append(" where SuppNo=@SuppNo ");
             SqlParameter[] parameters = {
-					new SqlParameter("@KPS_Del", SqlDbType.Int,4),
-					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@KPS_Del", SqlDbType.Int,4),
+                    new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.KPS_Del;
             parameters[1].Value = model.SuppNo;
 
@@ -253,7 +359,7 @@ namespace KNet.DAL
         {
             int rowsAffected;
             SqlParameter[] parameters = {
-					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
             parameters[0].Value = SuppNo;
 
             DbHelperSQL.RunProcedure("Proc_Knet_Procure_Suppliers_Delete", parameters, out rowsAffected);
@@ -269,7 +375,7 @@ namespace KNet.DAL
             strSql.Append("select  top 1 * from Knet_Procure_Suppliers ");
             strSql.Append(" where ID=@ID ");
             SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@ID", SqlDbType.NVarChar,50)};
             parameters[0].Value = ID;
 
             KNet.Model.Knet_Procure_Suppliers model = new KNet.Model.Knet_Procure_Suppliers();
@@ -419,8 +525,81 @@ namespace KNet.DAL
                 {
                     model.KPS_GiveDays = int.Parse(ds.Tables[0].Rows[0]["KPS_GiveDays"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["KPS_Nature"] != null && ds.Tables[0].Rows[0]["KPS_Nature"].ToString() != "")
+                {
+                    model.KPS_Nature = int.Parse(ds.Tables[0].Rows[0]["KPS_Nature"].ToString());
+                }
+                if (ds.Tables[0].Rows[0]["KPS_BusinessUrl"] != null && ds.Tables[0].Rows[0]["KPS_BusinessUrl"].ToString() != "")
+                {
+                    model.KPS_BusinessUrl = ds.Tables[0].Rows[0]["KPS_BusinessUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Business"] != null && ds.Tables[0].Rows[0]["KPS_Business"].ToString() != "")
+                {
+                    model.KPS_Business = ds.Tables[0].Rows[0]["KPS_Business"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_InvoiceUrl"] != null && ds.Tables[0].Rows[0]["KPS_InvoiceUrl"].ToString() != "")
+                {
+                    model.KPS_InvoiceUrl = ds.Tables[0].Rows[0]["KPS_InvoiceUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Invoice"] != null && ds.Tables[0].Rows[0]["KPS_Invoice"].ToString() != "")
+                {
+                    model.KPS_Invoice = ds.Tables[0].Rows[0]["KPS_Invoice"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_ContractUrl"] != null && ds.Tables[0].Rows[0]["KPS_ContractUrl"].ToString() != "")
+                {
+                    model.KPS_ContractUrl = ds.Tables[0].Rows[0]["KPS_ContractUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Contract"] != null && ds.Tables[0].Rows[0]["KPS_Contract"].ToString() != "")
+                {
+                    model.KPS_Contract = ds.Tables[0].Rows[0]["KPS_Contract"].ToString();
+                }
 
-                
+                if (ds.Tables[0].Rows[0]["KPS_FiveUrl"] != null && ds.Tables[0].Rows[0]["KPS_FiveUrl"].ToString() != "")
+                {
+                    model.KPS_FiveUrl = ds.Tables[0].Rows[0]["KPS_FiveUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_FiveName"] != null && ds.Tables[0].Rows[0]["KPS_FiveName"].ToString() != "")
+                {
+                    model.KPS_FiveName = ds.Tables[0].Rows[0]["KPS_FiveName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KSP_SQEUrl"] != null && ds.Tables[0].Rows[0]["KSP_SQEUrl"].ToString() != "")
+                {
+                    model.KSP_SQEUrl = ds.Tables[0].Rows[0]["KSP_SQEUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_SQEName"] != null && ds.Tables[0].Rows[0]["KPS_SQEName"].ToString() != "")
+                {
+                    model.KPS_SQEName = ds.Tables[0].Rows[0]["KPS_SQEName"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KPS_Production"] != null && ds.Tables[0].Rows[0]["KPS_Production"].ToString() != "")
+                {
+                    model.KPS_Production = ds.Tables[0].Rows[0]["KPS_Production"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_ProductionPho"] != null && ds.Tables[0].Rows[0]["KPS_ProductionPho"].ToString() != "")
+                {
+                    model.KPS_ProductionPho = ds.Tables[0].Rows[0]["KPS_ProductionPho"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_WareHouse"] != null && ds.Tables[0].Rows[0]["KPS_WareHouse"].ToString() != "")
+                {
+                    model.KPS_WareHouse = ds.Tables[0].Rows[0]["KPS_WareHouse"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_WareHousePho"] != null && ds.Tables[0].Rows[0]["KPS_WareHousePho"].ToString() != "")
+                {
+                    model.KPS_WareHousePho = ds.Tables[0].Rows[0]["KPS_WareHousePho"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_CdBankName"] != null && ds.Tables[0].Rows[0]["KPS_CdBankName"].ToString() != "")
+                {
+                    model.KPS_CdBankName = ds.Tables[0].Rows[0]["KPS_CdBankName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_CdBankNum"] != null && ds.Tables[0].Rows[0]["KPS_CdBankNum"].ToString() != "")
+                {
+                    model.KPS_CdBankNum = ds.Tables[0].Rows[0]["KPS_CdBankNum"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Check"] != null && ds.Tables[0].Rows[0]["KPS_Check"].ToString() != "")
+                {
+                    model.KPS_Check = ds.Tables[0].Rows[0]["KPS_Check"].ToString();
+                }
+
                 return model;
             }
             else
@@ -439,7 +618,7 @@ namespace KNet.DAL
             strSql.Append("select  top 1 * from Knet_Procure_Suppliers ");
             strSql.Append(" where SuppNo=@SuppNo ");
             SqlParameter[] parameters = {
-					new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
+                    new SqlParameter("@SuppNo", SqlDbType.NVarChar,50)};
             parameters[0].Value = SuppNo;
 
             KNet.Model.Knet_Procure_Suppliers model = new KNet.Model.Knet_Procure_Suppliers();
@@ -583,6 +762,83 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["KPS_GiveDays"] != null && ds.Tables[0].Rows[0]["KPS_GiveDays"].ToString() != "")
                 {
                     model.KPS_GiveDays = int.Parse(ds.Tables[0].Rows[0]["KPS_GiveDays"].ToString());
+                }
+
+                if (ds.Tables[0].Rows[0]["KPS_Nature"] != null && ds.Tables[0].Rows[0]["KPS_Nature"].ToString() != "")
+                {
+                    model.KPS_Nature = int.Parse(ds.Tables[0].Rows[0]["KPS_Nature"].ToString());
+                }
+
+                if (ds.Tables[0].Rows[0]["KPS_BusinessUrl"] != null && ds.Tables[0].Rows[0]["KPS_BusinessUrl"].ToString() != "")
+                {
+                    model.KPS_BusinessUrl = ds.Tables[0].Rows[0]["KPS_BusinessUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Business"] != null && ds.Tables[0].Rows[0]["KPS_Business"].ToString() != "")
+                {
+                    model.KPS_Business = ds.Tables[0].Rows[0]["KPS_Business"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_InvoiceUrl"] != null && ds.Tables[0].Rows[0]["KPS_InvoiceUrl"].ToString() != "")
+                {
+                    model.KPS_InvoiceUrl = ds.Tables[0].Rows[0]["KPS_InvoiceUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Invoice"] != null && ds.Tables[0].Rows[0]["KPS_Invoice"].ToString() != "")
+                {
+                    model.KPS_Invoice = ds.Tables[0].Rows[0]["KPS_Invoice"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_ContractUrl"] != null && ds.Tables[0].Rows[0]["KPS_ContractUrl"].ToString() != "")
+                {
+                    model.KPS_ContractUrl = ds.Tables[0].Rows[0]["KPS_ContractUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Contract"] != null && ds.Tables[0].Rows[0]["KPS_Contract"].ToString() != "")
+                {
+                    model.KPS_Contract = ds.Tables[0].Rows[0]["KPS_Contract"].ToString();
+                }
+
+                if (ds.Tables[0].Rows[0]["KPS_FiveUrl"] != null && ds.Tables[0].Rows[0]["KPS_FiveUrl"].ToString() != "")
+                {
+                    model.KPS_FiveUrl = ds.Tables[0].Rows[0]["KPS_FiveUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_FiveName"] != null && ds.Tables[0].Rows[0]["KPS_FiveName"].ToString() != "")
+                {
+                    model.KPS_FiveName = ds.Tables[0].Rows[0]["KPS_FiveName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KSP_SQEUrl"] != null && ds.Tables[0].Rows[0]["KSP_SQEUrl"].ToString() != "")
+                {
+                    model.KSP_SQEUrl = ds.Tables[0].Rows[0]["KSP_SQEUrl"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_SQEName"] != null && ds.Tables[0].Rows[0]["KPS_SQEName"].ToString() != "")
+                {
+                    model.KPS_SQEName = ds.Tables[0].Rows[0]["KPS_SQEName"].ToString();
+                }
+
+
+                if (ds.Tables[0].Rows[0]["KPS_Production"] != null && ds.Tables[0].Rows[0]["KPS_Production"].ToString() != "")
+                {
+                    model.KPS_Production = ds.Tables[0].Rows[0]["KPS_Production"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_ProductionPho"] != null && ds.Tables[0].Rows[0]["KPS_ProductionPho"].ToString() != "")
+                {
+                    model.KPS_ProductionPho = ds.Tables[0].Rows[0]["KPS_ProductionPho"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_WareHouse"] != null && ds.Tables[0].Rows[0]["KPS_WareHouse"].ToString() != "")
+                {
+                    model.KPS_WareHouse = ds.Tables[0].Rows[0]["KPS_WareHouse"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_WareHousePho"] != null && ds.Tables[0].Rows[0]["KPS_WareHousePho"].ToString() != "")
+                {
+                    model.KPS_WareHousePho = ds.Tables[0].Rows[0]["KPS_WareHousePho"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_CdBankName"] != null && ds.Tables[0].Rows[0]["KPS_CdBankName"].ToString() != "")
+                {
+                    model.KPS_CdBankName = ds.Tables[0].Rows[0]["KPS_CdBankName"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_CdBankNum"] != null && ds.Tables[0].Rows[0]["KPS_CdBankNum"].ToString() != "")
+                {
+                    model.KPS_CdBankNum = ds.Tables[0].Rows[0]["KPS_CdBankNum"].ToString();
+                }
+                if (ds.Tables[0].Rows[0]["KPS_Check"] != null && ds.Tables[0].Rows[0]["KPS_Check"].ToString() != "")
+                {
+                    model.KPS_Check = ds.Tables[0].Rows[0]["KPS_Check"].ToString();
                 }
 
                 return model;

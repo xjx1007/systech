@@ -33,6 +33,9 @@ namespace KNet.Model
         private int _KWAD_BadNumber;
         private string _KWAD_Reason;
         private int _KWAD_AddBadNumber;
+        private int _KWAD_SDNumber;
+        private int _KWAD_BFNumber;
+        //private string _KWAD_DirectOutNo;
 
         /// <summary>
         /// 总仓库产品ID
@@ -42,6 +45,21 @@ namespace KNet.Model
             set { _OwnallPID = value; }
             get { return _OwnallPID; }
         }
+        public int KWAD_SDNumber
+        {
+            set { _KWAD_SDNumber = value; }
+            get { return _KWAD_SDNumber; }
+        }
+        public int KWAD_BFNumber
+        {
+            set { _KWAD_BFNumber = value; }
+            get { return _KWAD_BFNumber; }
+        }
+        //public string KWAD_DirectOutNo
+        //{
+        //    set { _KWAD_DirectOutNo = value; }
+        //    get { return _KWAD_DirectOutNo; }
+        //}
         /// <summary>
         /// 自动ID值
         /// </summary>

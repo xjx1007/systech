@@ -19,8 +19,7 @@ public partial class top_Newtop : System.Web.UI.Page
         string s_module = Request.QueryString["Module"] == null ? "" : Request.QueryString["Module"].ToString();
         string s_parenttab = Request.QueryString["Parenttab"] == null ? "" : Request.QueryString["Parenttab"].ToString();
         KNet.Model.PB_Basic_Menu Model_Menu = new KNet.Model.PB_Basic_Menu();
-        KNet.BLL.PB_Basic_Menu BLL_Menu = new KNet.BLL.PB_Basic_Menu();
-        
+        KNet.BLL.PB_Basic_Menu BLL_Menu = new KNet.BLL.PB_Basic_Menu();        
         string s_Sql = "";
         if (s_ID != "")
         {
@@ -40,7 +39,6 @@ public partial class top_Newtop : System.Web.UI.Page
                 if ((s_module == Ds_SeMenu.Tables[0].Rows[i]["PBM_Module"].ToString()) && (s_module == Ds_SeMenu.Tables[0].Rows[i]["PBM_Module"].ToString()))
                 {
                     s_SenMenu += "\"level2SelTab\"";
-
                 }
                 else
                 {

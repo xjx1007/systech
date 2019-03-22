@@ -177,7 +177,7 @@ public partial class Web_Procure_Xh_View : BasePage
             this.Lbl_Details.Text = s_Head + s_Details;
             if (this.Tbx_View.Text== "")
             {
-                if (AM.KNet_StaffName != "项洲")
+                if (AM.KNet_StaffName != "薛建新")
                 {
                     string s_Sql1 = "Update KNet_WareHouse_AllocateList set KWA_PrintsNums=KWA_PrintsNums+1 where AllocateNo='" + s_ID + "' ";
                     DbHelperSQL.ExecuteSql(s_Sql1);

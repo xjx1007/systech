@@ -64,7 +64,7 @@ public partial class Web_Sc_Expend_View : BasePage
             DbHelperSQL.ExecuteSql(DoSql);
             btn_Chcek.Text = "反审批";
         }
-            
+
         else if (btn_Chcek.Text == "财务审批")
         {
             string DoSql = "update Sc_Expend_Manage  set SEM_CheckYN=2,SEM_CwCheckStaffNo='" + AM.KNet_StaffNo + "',SEM_CwCheckTime='" + DateTime.Now.ToString() + "'  where  SEM_ID='" + this.Tbx_ID.Text + "' ";
@@ -123,7 +123,7 @@ public partial class Web_Sc_Expend_View : BasePage
             }
             this.Lbl_CustomerName.Text = model.SEM_CustomerName;
             this.Lbl_SuppNo.Text = base.Base_GetSupplierName_Link(model.SEM_SuppNo);
-            Session["SED_HouseNo"] = model.SEM_SuppNo;
+            //Session["SED_HouseNo"] = model.SEM_SuppNo;
             this.Lbl_DutyPerson.Text = base.Base_GetUserName(model.SEM_DutyPerson);
             Session["SED_RkPerson"] = model.SEM_DutyPerson;
             this.Lbl_ProductsEdition.Text = model.SEM_ProductsEdition;
@@ -152,14 +152,18 @@ public partial class Web_Sc_Expend_View : BasePage
                     s_MyTable_Detail += "</tr>";
                 }
             }
+            decimal HS_Number = 0;//实际耗损
+            decimal LL_Number = 0;//理论消耗数量
             if (Dts_Mater.Tables[0].Rows.Count > 0)
             {
-                if (Request.QueryString["SEM_CheckYN"].ToString() == "0")
+                if (Request.QueryString["SEM_CheckYN"].ToString() == "0"|| Request.QueryString["SEM_CheckYN"].ToString() == "1")
                 {
                     this.Button1.Visible = true;
                     this.CZ_Done.Visible = true;
+                   
                     for (int i = 0; i < Dts_Mater.Tables[0].Rows.Count; i++)
                     {
+                        this.TextBox1.Text = Dts_Mater.Tables[0].Rows[i]["SED_HouseNo"].ToString();
                         s_MyTable_Detail1 += "<tr>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Convert.ToString(i + 1) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + "</td>";
@@ -170,7 +174,7 @@ public partial class Web_Sc_Expend_View : BasePage
                         "<td class='ListHeadDetails'><A class='deleteExpend' id=" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + " href='javascript:void(0);'><img id=\"deleteExpend\" src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
                         //  s_MyTable_Detail1 +=
                         //"<td class='ListHeadDetails'><A onclick=\"{if(confirm('确定要删除这个物料吗 ? ')) {deleteCurrentRow(this); }else {}}\" href=\"#\"><img id=\"deleteExpend\" src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>";
-
+                        s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + GetReplace(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
@@ -179,16 +183,21 @@ public partial class Web_Sc_Expend_View : BasePage
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetUserName(Dts_Mater.Tables[0].Rows[i]["SED_RkPerson"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + DateTime.Parse(Dts_Mater.Tables[0].Rows[i]["SED_RkTime"].ToString()).ToShortDateString() + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_RkNumber"].ToString() + "</td>";
+                        HS_Number += decimal.Parse(Dts_Mater.Tables[0].Rows[i]["SED_RkNumber"].ToString());//实际实际耗损
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetBasicCodeName("1136", Dts_Mater.Tables[0].Rows[i]["SED_LossType"].ToString()) + "</td>";
 
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_Mater.Tables[0].Rows[i]["SED_LossPercent"].ToString(), 2) + "</td>";
 
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_LossNumber"].ToString() + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_NeedNumber"].ToString() + "</td>";
+                        LL_Number += decimal.Parse(Dts_Mater.Tables[0].Rows[i]["SED_NeedNumber"].ToString());//理论消耗数量
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_WwPrice"].ToString() + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_WwMoney"].ToString() + "</td>";
+                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_Remarks"].ToString() + "</td>";
                         s_MyTable_Detail1 += "</tr>";
                     }
+                    Label1.Text = HS_Number.ToString();
+                    Label2.Text = LL_Number.ToString();
                 }
                 else
                 {
@@ -196,6 +205,7 @@ public partial class Web_Sc_Expend_View : BasePage
                     this.CZ_Done.Visible =false;
                     for (int i = 0; i < Dts_Mater.Tables[0].Rows.Count; i++)
                     {
+                        this.TextBox1.Text = Dts_Mater.Tables[0].Rows[i]["SED_HouseNo"].ToString();
                         s_MyTable_Detail1 += "<tr>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Convert.ToString(i + 1) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + "</td>";
@@ -207,16 +217,21 @@ public partial class Web_Sc_Expend_View : BasePage
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetUserName(Dts_Mater.Tables[0].Rows[i]["SED_RkPerson"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + DateTime.Parse(Dts_Mater.Tables[0].Rows[i]["SED_RkTime"].ToString()).ToShortDateString() + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_RkNumber"].ToString() + "</td>";
+                        HS_Number += decimal.Parse(Dts_Mater.Tables[0].Rows[i]["SED_RkNumber"].ToString());//实际实际耗损
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetBasicCodeName("1136", Dts_Mater.Tables[0].Rows[i]["SED_LossType"].ToString()) + "</td>";
 
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.FormatNumber1(Dts_Mater.Tables[0].Rows[i]["SED_LossPercent"].ToString(), 2) + "</td>";
 
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_LossNumber"].ToString() + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_NeedNumber"].ToString() + "</td>";
+                        LL_Number += decimal.Parse(Dts_Mater.Tables[0].Rows[i]["SED_NeedNumber"].ToString());//理论消耗数量
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_WwPrice"].ToString() + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_WwMoney"].ToString() + "</td>";
+                        s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_Remarks"].ToString() + "</td>";
                         s_MyTable_Detail1 += "</tr>";
                     }
+                    Label1.Text = HS_Number.ToString();
+                    Label2.Text = LL_Number.ToString();
                 }
             }
             
@@ -269,7 +284,30 @@ public partial class Web_Sc_Expend_View : BasePage
         {}
     }
 
-
+    public string GetReplace(string productbarcode)
+    {
+        string s_Return = "";
+        this.BeginQuery("select ReplaceNum from Xs_Products_Prodocts_Demo where XPD_ProductsBarCode='"+ productbarcode + "'");
+        this.QueryForDataTable();
+        DataTable Dtb_Re = Dtb_Result;
+        if (Dtb_Re.Rows.Count>0)
+        {
+            if (Dtb_Re.Rows[0][0].ToString() == "0")
+            {
+                s_Return = "<font color=blue>主料</font>";
+            }
+            else
+            {
+                s_Return = "<font color=red>替料" + Dtb_Re.Rows[0][0].ToString() + "</font>";
+            }
+            return s_Return;
+        }
+        else
+        {
+            return s_Return= "<font color=blue>主料</font>"; ;
+        }
+       
+    }
 
 
     protected void Button1_Click(object sender, EventArgs e)
@@ -277,7 +315,7 @@ public partial class Web_Sc_Expend_View : BasePage
         //base.Base_DropBasicCodeBind(this.GenreDropDownList, "1136");
 
         KNet.BLL.Sc_Expend_Manage_MaterDetails bll_Mater = new KNet.BLL.Sc_Expend_Manage_MaterDetails();
-        DataSet Dts_Mater = bll_Mater.GetList(" SED_SEMID='" + s_ID + "' and SED_Type='2' order by SED_ID desc");
+        DataSet Dts_Mater = bll_Mater.GetList(" SED_Type='2' order by SED_ID desc");
         this.OddNumbers.Text =(Convert.ToInt64(Dts_Mater.Tables[0].Rows[0]["SED_ID"].ToString())+1).ToString() ;
         this.AddExpend.Visible = true;
     }
@@ -289,16 +327,21 @@ public partial class Web_Sc_Expend_View : BasePage
         KNet.Model.Sc_Expend_Manage_MaterDetails modelDetails=new KNet.Model.Sc_Expend_Manage_MaterDetails();
         modelDetails.SED_ID = this.OddNumbers.Text;
         modelDetails.SED_ProductsBarCode = this.SED_ProductsBarCode.Text;
-        modelDetails.SED_HouseNo = Session["SED_HouseNo"].ToString();
-        modelDetails.SED_RkNumber =Convert.ToInt32(this.Amount.Text) ;
-        modelDetails.SED_RkTime=DateTime.Now;
+        modelDetails.SED_NeedNumber = Convert.ToInt32(this.Amount.Text);
+        modelDetails.SED_HouseNo = this.TextBox1.Text;
+        decimal a =
+            Math.Round(
+                Convert.ToInt32(this.Amount.Text) + Convert.ToInt32(this.Amount.Text)*(Convert.ToDecimal(Consume.Text)/100), 0);
+        modelDetails.SED_RkNumber =Convert.ToInt32(a) ;
+        modelDetails.SED_RkTime=Convert.ToDateTime(Lbl_Stime.Text) ;
         modelDetails.SED_RkPerson = Session["SED_RkPerson"].ToString();
         modelDetails.SED_SEMID = Session["SED_SEMID"].ToString();
         modelDetails.SED_Type = 2;
         modelDetails.SED_LossType = this.TXB_Genre_Value.Text;
+        modelDetails.SED_LossPercent = Convert.ToDecimal(Consume.Text);
         KNet.BLL.Sc_Expend_Manage_MaterDetails BLL=new KNet.BLL.Sc_Expend_Manage_MaterDetails();
         BLL.Add(modelDetails);
-        ShowInfo(Session["SED_SEMID"].ToString());
+        //ShowInfo(Session["SED_SEMID"].ToString());
 
     }
 }

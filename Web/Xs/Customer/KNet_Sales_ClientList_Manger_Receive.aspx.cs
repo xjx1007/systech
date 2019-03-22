@@ -110,7 +110,7 @@ public partial class KNet_Sales_ClientList_Manger_Receive : BasePage
         //仅查看自己
         if (AM.YNAuthority("收款单仅责任人查看") == true)
         {
-            if (AM.KNet_StaffName != "项洲")
+            if (AM.KNet_StaffName != "薛建新")
             {
                 s_Sql += " and b.KSC_DutyPerson='" + AM.KNet_StaffNo + "'  ";
             }
@@ -145,7 +145,7 @@ public partial class KNet_Sales_ClientList_Manger_Receive : BasePage
         }
 
         //仅查看自己
-        if ((AM.YNAuthority("客户仅自己查看") == true)&&(AM.KNet_StaffName!="项洲"))
+        if ((AM.YNAuthority("客户仅自己查看") == true)&&(AM.KNet_StaffName!= "薛建新"))
         {
             //负责人
             SqlWhere += " and (KSC_DutyPerson='" + AM.KNet_StaffNo + "'";

@@ -138,7 +138,7 @@ public partial class Web_Sales_KNet_Reports_Submit_Add : BasePage
         {
             this.Tbx_NoticeTitle.Text = Model_Notice.PBN_Title;
         }
-        if (AM.KNet_StaffName != "项洲")
+        if (AM.KNet_StaffName != "薛建新")
         {
             if (model.KRS_State.ToString() != "0")
             {

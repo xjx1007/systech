@@ -304,37 +304,113 @@
                                                         </td>
                                                         <td class="dvtCellLabel">供应商类型:</td>
                                                         <td class="dvtCellInfo">
-                                                            <asp:DropDownList runat="server" ID="Ddl_Type"></asp:DropDownList>
+                                                            <asp:DropDownList runat="server" ID="Ddl_Type"></asp:DropDownList>(<font color="red">*</font>)
                                                         </td>
                                                     </tr>
 
                                                     <tr>
                                                         <td class="dvtCellLabel">快递查询关联:</td>
-                                                        <td class="dvtCellInfo" colspan="3">
+                                                        <td class="dvtCellInfo">
                                                             <asp:DropDownList runat="server" ID="Drop_KD"></asp:DropDownList>
                                                             <input type="text" id="span" onkeyup='searchFromSelect(this.value)'
                                                                 onkeydown='window.event.cancelBubble = true;if(event.keyCode==13){return false;}' class="detailedViewTextBox"
                                                                 style="width: 103px; height: 20; border: 1 solid #0000FF; overflow-y: auto"></input>
                                                         </td>
+
+                                                        <td class="dvtCellLabel">供应商属性:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:DropDownList runat="server" ID="Ddl_Nature"></asp:DropDownList>(<font color="red">*</font>)
+                                                        </td>
                                                     </tr>
+                                                    <tr>
+
+                                                        <td class="dvtCellLabel" align="right">五证合一或营业执照：
+                                                        </td>
+                                                        <asp:TextBox ID="KPS_BusinessUrl" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Business" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_InvoiceUrl" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Invoice" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_ContractUrl" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Contract" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_FiveUrl" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Five" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KSP_SQEUrl" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KSP_SQE" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+
+                                                          <asp:TextBox ID="KPS_BusinessUrl1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Business1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_InvoiceUrl1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Invoice1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_ContractUrl1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Contract1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_FiveUrl1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KPS_Five1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KSP_SQEUrl1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <asp:TextBox ID="KSP_SQE1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Label runat="server" ID="Lbl_Details"></asp:Label><input id="uploadFile1"
+                                                                type="file" runat="server" class="detailedViewTextBox" style="width: 250px" />&nbsp;<input id="button1" type="button"
+                                                                    value="上传" runat="server" class="crmbutton small save" onserverclick="button1_ServerClick1" causesvalidation="false" />(<font color="red">*</font>)
+                                                        </td>
+                                                        <td class="dvtCellLabel" align="right">发票信息：
+                                                        </td>
+
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Label runat="server" ID="Lbl_Details1"></asp:Label><input id="uploadFile2"
+                                                                type="file" runat="server" class="detailedViewTextBox" style="width: 250px" />&nbsp;<input id="button2" type="button"
+                                                                    value="上传" runat="server" class="crmbutton small save" onserverclick="button2_ServerClick2" causesvalidation="false" />
+                                                            (<font color="red">*</font>)
+                                                        </td>
+
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td class="dvtCellLabel" align="right">生产/采购合同：
+                                                        </td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Label runat="server" ID="Lbl_Details2"></asp:Label><input id="uploadFile3"
+                                                                type="file" runat="server" class="detailedViewTextBox" style="width: 250px" />&nbsp;<input id="button3" type="button"
+                                                                    value="上传" runat="server" class="crmbutton small save" onserverclick="button3_ServerClick3" causesvalidation="false" />
+                                                        </td>
+                                                        <td class="dvtCellLabel" align="right">质量保证协议：
+                                                        </td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Label runat="server" ID="Lbl_Five"></asp:Label><input id="File_Five"
+                                                                type="file" runat="server" class="detailedViewTextBox" style="width: 250px" />&nbsp;<input id="Btn_Five" type="button"
+                                                                    value="上传" runat="server" class="crmbutton small save" onserverclick="Btn_Five_OnServerClick" causesvalidation="false" />
+                                                            (<font color="red">*</font>)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="dvtCellLabel" align="right">SQE上传审厂及整改报告：
+                                                        </td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Label runat="server" ID="Lbl_SQE"></asp:Label><input id="File_SQE"
+                                                                type="file" runat="server" class="detailedViewTextBox" style="width: 250px" />&nbsp;<input id="Btn_SQE" type="button"
+                                                                    value="上传" runat="server" class="crmbutton small save" onserverclick="Btn_SQE_OnServerClick" causesvalidation="false" />
+                                                        </td>
+                                                    </tr>
+
+
                                                     <tr>
                                                         <td colspan="4" class="detailedViewHeader"><b>账户信息</b>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="dvtCellLabel" colspan="3">付款周期:</td>
-                                                        <td class="dvtCellInfo" >
+                                                        <td class="dvtCellInfo">
                                                             <asp:DropDownList runat="server" ID="Tbx_Days" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></asp:DropDownList>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="dvtCellLabel">开户行账号:</td>
+                                                        <td class="dvtCellLabel">转账开户行账号:</td>
                                                         <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="SuppBankAccount" AllowEmpty="true" ValidError="开户行账号不能为空" Csslass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
                                                             (<font color="red">*</font>)
 
                                                         </td>
-                                                        <td class="dvtCellLabel">开户行名称:</td>
+                                                        <td class="dvtCellLabel">转账开户行名称:</td>
                                                         <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="SuppBankName" AllowEmpty="true" ValidError="开户行名称不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
                                                             (<font color="red">*</font>)
@@ -342,14 +418,36 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <td class="dvtCellLabel">承兑开户行账号:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_CdBankNum" AllowEmpty="true" ValidError="承兑开户行账号" Csslass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+
+                                                        </td>
+                                                        <td class="dvtCellLabel">承兑开户行名称:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_CdBankName" AllowEmpty="true" ValidError="承兑开户行名称" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td class="dvtCellLabel">单张最大开票金额:</td>
-                                                        <td class="dvtCellInfo" >
+                                                        <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="Tbx_MaxMoney" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px" Text="100000"></pc:PTextBox>
 
                                                         </td>
                                                         <td class="dvtCellLabel">单张最大行数:</td>
-                                                        <td class="dvtCellInfo" >
+                                                        <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="Tbx_MaxRow" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px" Text="8"></pc:PTextBox>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td class="dvtCellLabel">是否银行承兑汇票:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <input type="checkbox" runat="server" id="check" />
 
                                                         </td>
                                                     </tr>
@@ -358,28 +456,77 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="dvtCellLabel">联系人:</td>
+                                                        <td class="dvtCellLabel">供应商联系人:</td>
                                                         <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="SuppPeople" AllowEmpty="true" ValidError="联系人不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
                                                             (<font color="red">*</font>)
                                                         </td>
-                                                        <td class="dvtCellLabel">联系手机:</td>
+                                                        <td class="dvtCellLabel">供应商联系电话:</td>
                                                         <td class="dvtCellInfo">
-                                                            <pc:PTextBox runat="server" ID="SuppMobiTel" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
-
+                                                            <pc:PTextBox runat="server" ID="SuppMobiTel" AllowEmpty="true" ValidError="供应商联系电话不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="dvtCellLabel">联系电话:</td>
+                                                        <td class="dvtCellLabel">供应商联系手机:</td>
                                                         <td class="dvtCellInfo">
-                                                            <pc:PTextBox runat="server" ID="SuppPhone" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            <pc:PTextBox runat="server" ID="SuppPhone" AllowEmpty="true" ValidError="供应商联系手机不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
                                                         </td>
                                                         <td class="dvtCellLabel">传真号码:</td>
                                                         <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="SuppFax" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="dvtCellLabel">仓库联系人:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_WareHouse" AllowEmpty="true" ValidError="供应商联系电话不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+                                                        </td>
+                                                        <td class="dvtCellLabel">仓库联系手机:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_WareHousePho" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+                                                        </td>
+                                                    </tr>
 
+                                                    <%--  <tr>
+                                                        <td colspan="4" class="detailedViewHeader"><b>对接人信息</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="dvtCellLabel">生产联系人:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_Production" AllowEmpty="true" ValidError="联系人不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+                                                        </td>
+                                                        <td class="dvtCellLabel">生产联系手机:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_ProductionPho" AllowEmpty="true" ValidError="厂库人联系手机不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+                                                        </td>
+
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="dvtCellLabel">仓库联系人:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_WareHouse" AllowEmpty="true" ValidError="供应商联系电话不能为空" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            (<font color="red">*</font>)
+                                                        </td>
+                                                        <td class="dvtCellLabel">仓库联系手机:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="KPS_WareHousePho" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                             (<font color="red">*</font>)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="dvtCellLabel">传真号码:</td>
+                                                        <td class="dvtCellInfo">
+                                                            <pc:PTextBox runat="server" ID="SuppFax" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                        </td>
+                                                    </tr>--%>
                                                     <tr>
                                                         <td colspan="4" class="detailedViewHeader"><b>地址信息</b>
                                                         </td>
@@ -387,7 +534,7 @@
                                                     <tr>
                                                         <td class="dvtCellLabel">电子邮箱:</td>
                                                         <td class="dvtCellInfo">
-                                                            <pc:PTextBox runat="server" ID="SuppEmail" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            <pc:PTextBox runat="server" ID="SuppEmail" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>(<font color="red">*</font>)
                                                         </td>
                                                         <td class="dvtCellLabel">所在地区:</td>
                                                         <td class="dvtCellInfo">
@@ -398,7 +545,7 @@
                                                     <tr>
                                                         <td class="dvtCellLabel">通信地址:</td>
                                                         <td class="dvtCellInfo">
-                                                            <pc:PTextBox runat="server" ID="SuppAddress" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>
+                                                            <pc:PTextBox runat="server" ID="SuppAddress" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px"></pc:PTextBox>(<font color="red">*</font>)
                                                         </td>
                                                         <td class="dvtCellLabel">邮政编码:</td>
                                                         <td class="dvtCellInfo">
@@ -412,11 +559,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="dvtCellLabel">日产能:</td>
-                                                        <td valign="top" class="dvtCellInfo" >
+                                                        <td valign="top" class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="Tbx_ScNumber" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px" Text="0"></pc:PTextBox>
                                                         </td>
                                                         <td class="dvtCellLabel">交货周期:</td>
-                                                        <td class="dvtCellInfo" >
+                                                        <td class="dvtCellInfo">
                                                             <pc:PTextBox runat="server" ID="Tbx_GiveDays" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="150px" Text="100000"></pc:PTextBox>
                                                         </td>
                                                     </tr>

@@ -18,6 +18,7 @@ using KNet.Common;
 
 public partial class UpLoad_AddForProducts : BasePage
 {
+    public string s_ProductsTable_BomDetail = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -33,10 +34,16 @@ public partial class UpLoad_AddForProducts : BasePage
             if (model != null)
             {
                 this.Tbx_UpdateName.Text = model.PBA_Name;
-                this.Ddl_Type.SelectedValue = model.PBA_ProductsType;
+                this.Ddl_Type.SelectedValue = model.PBA_ProductsType;              
                 if (base_GetProductsFileUpdateType(model.PBA_ProductsType)==false)
                 {
                     AlertAndClose("没有 更新" + base.Base_GetBasicCodeName("780", model.PBA_ProductsType) + " 权限!");
+                }
+                else
+                {
+                    string type = Request.QueryString["Type"].ToString();
+                    string productcode = Request.QueryString["PBC_FID"].ToString();
+                    SyProduct(s_ID,type, productcode);
                 }
             }
 
@@ -44,8 +51,50 @@ public partial class UpLoad_AddForProducts : BasePage
         }
 
     }
+
+    public void SyProduct(string id,string type,string productcode)
+    {
+        
+        tr9.Visible = false;
+        string s_ProductsRC = "";
+        string sql = "select(case when PBA_FID = '" + productcode + "' then 0 else 1 end) as productcode, a.* from PB_Basic_Attachment a where PBA_URL in(select PBA_URL from PB_Basic_Attachment where PBA_ID = '" + id + "') order by productcode asc";
+        DataTable Dtb_RCProducts = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        if (Dtb_RCProducts.Rows.Count > 0)
+        {
+
+            for (int i = 0; i < Dtb_RCProducts.Rows.Count; i++)
+            {
+                int a = i + 1;
+                s_ProductsRC += "<tr>";
+                s_ProductsRC += "<td class=\"ListHeadDetails\">" + a + "</td>";                
+                if (type=="Update")
+                {
+                    s_ProductsRC += "<td class=\"ListHeadDetails\">";
+                    s_ProductsRC += "<input type=\"hidden\"  Name=\"ProductBarCode_" + i.ToString() + "\" value='" + Dtb_RCProducts.Rows[i]["PBA_FID"].ToString() + "'><input type=\"hidden\"  Name=\"PBA_ID_" + i.ToString() + "\" value='" + Dtb_RCProducts.Rows[i]["PBA_ID"].ToString() + "'><input type=\"radio\" ID=\"Chk_IsReplace_" + i.ToString() + "\" name=\"groupname_" + i.ToString() + "\" value=1>更新<br/>";
+                    s_ProductsRC += "<input type=\"radio\" ID=\"Chk_IsDelete_" + i.ToString() + "\"  name=\"groupname_" + i.ToString() + "\" value=2 checked>不更新<br/>";
+                    s_ProductsRC += "</td>";
+                }
+                else
+                {
+                    s_ProductsRC += "<td class=\"ListHeadDetails\">";
+                    s_ProductsRC += "<input type=\"hidden\"  Name=\"ProductBarCode_" + i.ToString() + "\" value='" + Dtb_RCProducts.Rows[i]["PBA_FID"].ToString() + "'><input type=\"hidden\"  Name=\"PBA_ID_" + i.ToString() + "\" value='" + Dtb_RCProducts.Rows[i]["PBA_ID"].ToString() + "'><input type=\"radio\" ID=\"Chk_IsReplace_" + i.ToString() + "\" name=\"groupname_" + i.ToString() + "\" value=1>停用<br/>";
+                    s_ProductsRC += "<input type=\"radio\" ID=\"Chk_IsDelete_" + i.ToString() + "\"  name=\"groupname_" + i.ToString() + "\" value=2 checked>启用<br/>";
+                    s_ProductsRC += "</td>";
+                }
+                s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dtb_RCProducts.Rows[i]["PBA_FID"].ToString()) + "</td>";
+
+                s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dtb_RCProducts.Rows[i]["PBA_FID"].ToString()) + "</td>";
+                s_ProductsRC += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dtb_RCProducts.Rows[i]["PBA_FID"].ToString()) + "</td>";
+
+                s_ProductsRC += "</tr>";
+            }
+            this.Products_BomNum.Text = Dtb_RCProducts.Rows.Count.ToString();
+        }
+        s_ProductsTable_BomDetail = s_ProductsRC;
+    }
     protected void save_Click(object sender, EventArgs e)
     {
+        //Alert(Request.Form["DemoProdoctsBarCode_1"]);
 
         if (!(uploadFile.PostedFile.ContentLength > 0))
         {
@@ -60,25 +109,84 @@ public partial class UpLoad_AddForProducts : BasePage
             try
             {
                 //停用老附近
-                
+
                 KNet.BLL.PB_Basic_Attachment BLL = new KNet.BLL.PB_Basic_Attachment();
-                
+
                 if (model.PBA_UpdateFID != "")
                 {
-                    KNet.Model.PB_Basic_Attachment Mode_att = BLL.GetModel(model.PBA_UpdateFID);
-                    if (Mode_att != null)
+                    for (int i = 0; i < int.Parse(Products_BomNum.Text); i++)
                     {
-                        Mode_att.PBA_Del = 1;
-                        BLL.UpdateByDel(Mode_att);
-                        AM.Add_Logs("停用附件：" + Mode_att.PBA_ID);
+                        string s_ProdoctsBarCode = Request.Form["ProductBarCode_" + i.ToString() + ""] == null
+                               ? ""
+                               : Request.Form["ProductBarCode_" + i.ToString() + ""].ToString();
+                        string s_IsModiy = Request.Form["groupname_" + i.ToString() + ""] == null ? "0" : Request.Form["groupname_" + i.ToString() + ""].ToString();
+                        string s_PBAID = Request.Form["PBA_ID_" + i.ToString() + ""] == null ? "0" : Request.Form["PBA_ID_" + i.ToString() + ""].ToString();
+
+                        if (s_ProdoctsBarCode!=""&& s_PBAID!="")
+                        {
+                            //Alert(s_ProdoctsBarCode+"状态："+ s_IsModiy);
+                            KNet.Model.PB_Basic_Attachment Mode_att = BLL.GetModel(s_PBAID);
+                            if (Mode_att != null && s_IsModiy == "1")
+                            {
+                                Mode_att.PBA_Del = 1;
+                                BLL.UpdateByDel(Mode_att);
+                                AM.Add_Logs("停用附件：" + Mode_att.PBA_ID);
+                                if (AM.KNet_StaffName == "李文立")
+                                {
+                                    model.PBA_State = 1;
+                                }
+                                model.PBA_ID=GetMainIDFile(s_ProdoctsBarCode);
+                                model.PBA_FID = s_ProdoctsBarCode;
+                                BLL.Add(model);
+                            }
+                        }
+                       
+                    }
+                    
+                }
+                else
+                {
+
+                    if (Tbx_ProductsTypeNo.Text != "")
+                    {
+                        //BLL.Add(model);
+                        string sql = "select * from KNet_Sys_Products  where ProductsType='" + Tbx_ProductsTypeNo.Text + "' and ProductsBarCode  not in(select PBA_FID from PB_Basic_Attachment where PBA_ProductsType='"+ Ddl_Type.SelectedValue+ "')";
+                        DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            model.PBA_FID = dataTable.Rows[i]["ProductsBarCode"].ToString();
+                            model.PBA_ID = GetMainIDFile(model.PBA_FID);
+                            if (AM.KNet_StaffName == "李文立")
+                            {
+                                model.PBA_State = 1;
+                            }
+                            BLL.Add(model);
+                        }
+                    }
+                    else
+                    {
+                        BLL.Add(model);
+                        for (int i = 1; i <= int.Parse(Products_BomNum.Text); i++)
+                        {
+                            string s_ProdoctsBarCode = Request.Form["DemoProdoctsBarCode_" + i.ToString() + ""] == null
+                                ? ""
+                                : Request.Form["DemoProdoctsBarCode_" + i.ToString() + ""].ToString();
+                            model.PBA_FID = s_ProdoctsBarCode;
+                            model.PBA_ID = GetMainIDFile(s_ProdoctsBarCode);
+                            if (AM.KNet_StaffName == "李文立")
+                            {
+                                model.PBA_State = 1;
+                            }
+                            BLL.Add(model);
+                        }
                     }
                 }
-                BLL.Add(model);
+
                 AM.Add_Logs("附件上传成功：编号：" + model.PBA_ID);
                 string s_Return = "1";
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
-                s.Append("alert('添加成功！');" + "\n");
+                s.Append("alert('操作成功！');" + "\n");
                 s.Append("if(window.opener != undefined)");
                 s.Append("{\n");
                 s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
@@ -97,11 +205,25 @@ public partial class UpLoad_AddForProducts : BasePage
                 if (!cs.IsStartupScriptRegistered(cstype, csname))
                     cs.RegisterStartupScript(cstype, csname, s.ToString());
             }
-            catch(Exception ex) { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 
-
+    public string GetMainIDFile(string str)
+    {
+        string s_ID = "M";
+        try
+        {
+            string s_Date = DateTime.Now.ToString("yyMMddhhmmss");
+            s_ID += s_Date + str.Substring(1,str.Length-1);
+        }
+        catch
+        { }
+        return s_ID;
+    }
 
     #region 资料上传操作
     /// <summary>
@@ -127,7 +249,7 @@ public partial class UpLoad_AddForProducts : BasePage
 
         model.PBA_FID = Request.QueryString["PBC_FID"];
         model.PBA_Type = Request.QueryString["PBC_Type"];
-        model.PBA_ID = GetMainID();
+        model.PBA_ID = GetMainIDFile(Request.QueryString["PBC_FID"]);
         model.PBA_Name = this.Tbx_Name.Text;
         model.PBA_URL = filePath;
         model.PBA_CTime = DateTime.Now;
@@ -137,6 +259,15 @@ public partial class UpLoad_AddForProducts : BasePage
         model.PBA_FileType = fileExt;
         model.PBA_Edition = this.Tbx_Version.Text;
         model.PBA_UpdateFID = this.Tbx_UpdateID.Text;
+        if (PBA_EndTime.Text=="")
+        {
+            model.PBA_EndTime=DateTime.Now;
+        }
+        else
+        {
+            model.PBA_EndTime = DateTime.Parse(this.PBA_EndTime.Text);
+        }
+       
     }
     #endregion
 

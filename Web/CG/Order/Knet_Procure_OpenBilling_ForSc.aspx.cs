@@ -45,7 +45,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
             string s_IsChange = Request.QueryString["IsChange"] == null ? "" : Request.QueryString["IsChange"].ToString();
 
             base.Base_DropWareHouseBind(this.Ddl_HouseNo, "  KSW_Type=1 ");
-            if ((AM.KNet_StaffDepart == "131161769392290242")||(AM.KNet_StaffName =="项洲"))//如果是生产部
+            if ((AM.KNet_StaffDepart == "131161769392290242")||(AM.KNet_StaffName =="薛建新"))//如果是生产部
             {
                 this.OrderType.SelectedValue = "128860698200781250";
                 this.OrderType.Enabled = false;

@@ -95,27 +95,28 @@ public partial class Web_Report_Xs_List_KCList : BasePage
                         s_Style = "class='rr'";
                     }
                     s_Details += " <tr " + s_Style + " onmouseover='setActiveBG(this)'>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + (i + 1).ToString() + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetHouseName(Dtb_Table.Rows[i][0].ToString()) + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][2].ToString() + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetProductsCode(Dtb_Table.Rows[i][1].ToString()) + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetProductsPattern(Dtb_Table.Rows[i][1].ToString()) + "</td>\n";
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][3].ToString().ToString() + "</td>\n";
-                    string s_URL = "../CkDetails/List_CkList.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&HouseNo=" + Dtb_Table.Rows[i][0].ToString() + "&ProductsType=" + s_ProductsType + "&ProductsEdition=" + s_ProductsEdition + "&Number=";
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + (i + 1).ToString() + "</td>\n";//序号
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetHouseName(Dtb_Table.Rows[i][0].ToString()) + "</td>\n";//仓库名称
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][2].ToString() + "</td>\n";//产品名称
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetProductsCode(Dtb_Table.Rows[i][1].ToString()) + "</td>\n";//获取产品的料号
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + base.Base_GetProductsPattern(Dtb_Table.Rows[i][1].ToString()) + "</td>\n";//获取产品的型号
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + Dtb_Table.Rows[i][3].ToString().ToString() + "</td>\n";//版本号
+                    string s_URL = "../CkDetails/List_CkList.aspx?StartDate=" + s_StartDate + "&EndDate=" + s_EndDate + "&HouseNo=" + Dtb_Table.Rows[i][0].ToString() + "&ProductsType=" + s_ProductsType + "&ProductsEdition=" + s_ProductsEdition + "&Number=&ProductCode="+ Dtb_Table.Rows[i][1].ToString();
                     string s_Number1=Dtb_Table.Rows[i][4].ToString();
                     s_Details += "<td align=right class='thstyleLeftDetails' noWrap><a href=" + s_URL + " target=\"_blank\">" + base.FormatNumber1(Dtb_Table.Rows[i][4].ToString().ToString(), 0) + "</a></td>\n";//数量
-                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i][5].ToString().ToString(), 6) + "</td>\n";//数量
-                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i][6].ToString().ToString(), 2) + "</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + Get_IsEntityNum(s_StartDate,s_EndDate,Dtb_Table.Rows[i][0].ToString(),s_ProductsType, s_ProductsEdition, Dtb_Table.Rows[i][1].ToString(), base.FormatNumber1(Dtb_Table.Rows[i][4].ToString().ToString(), 0)) + "</td>\n";//线上数据
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i][5].ToString().ToString(), 6) + "</td>\n";//单价
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(Dtb_Table.Rows[i][6].ToString().ToString(), 2) + "</td>\n";//金额
                     string s_Price1 = GetLastPriceOrTime(Dtb_Table.Rows[i]["HouseNo"].ToString().ToString(), Dtb_Table.Rows[i]["ProductsBarCode"].ToString().ToString(), 0);
                     s_Price1 = s_Price1 == "" ? "0" : s_Price1;
-                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + s_Price1 + "</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + s_Price1 + "</td>\n";//参考单价
                     decimal d_Money1 = decimal.Parse(s_Number1) * decimal.Parse(s_Price1);
-                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(d_Money1.ToString(), 2) + "</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(d_Money1.ToString(), 2) + "</td>\n";//参考金额
 
-                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + GetLastPriceOrTime(Dtb_Table.Rows[i]["HouseNo"].ToString().ToString(), Dtb_Table.Rows[i]["ProductsBarCode"].ToString().ToString(), 1) + "&nbsp;</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + GetLastPriceOrTime(Dtb_Table.Rows[i]["HouseNo"].ToString().ToString(), Dtb_Table.Rows[i]["ProductsBarCode"].ToString().ToString(), 1) + "&nbsp;</td>\n";//最后入库时间
 
-                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.DateToString(Dtb_Table.Rows[i]["LastHlTime"].ToString().ToString()) + "&nbsp;</td>\n";//数量
-                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + GetRC(Dtb_Table.Rows[i][1].ToString()) + "&nbsp;</td>\n";//数量
+                    s_Details += "<td align=right class='thstyleLeftDetails' noWrap>" + base.DateToString(Dtb_Table.Rows[i]["LastHlTime"].ToString().ToString()) + "&nbsp;</td>\n";//最后消耗时间
+                    s_Details += "<td align=left class='thstyleLeftDetails' noWrap>" + GetRC(Dtb_Table.Rows[i][1].ToString()) + "&nbsp;</td>\n";//适用成品
 
                     s_Details += " </tr>";
                     DTotalNum += Decimal.Parse(Dtb_Table.Rows[i][4].ToString() == "" ? "0" : Dtb_Table.Rows[i][4].ToString());
@@ -145,8 +146,8 @@ public partial class Web_Report_Xs_List_KCList : BasePage
             string s_Preson = "制表人:" + Am.KNet_StaffName;
             s_Head += "<div class=\"tableContainer\" id=\"tableContainer\" >\n";
             s_Head += "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" class=\"scrollTable\">\n<thead class=\"fixedHeader\"> \n";
-            s_Head += "<tr>\n<th colspan=\"14\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>库存报表</th></tr>\n";
-            s_Head += "<tr>\n<th colspan=\"6\" class=\"thstyleleft\"  >" + s_Time + "</th><th colspan=\"8\" class=\"thstyleRight\" >" + s_Preson + "</th></tr>\n";
+            s_Head += "<tr>\n<th colspan=\"15\" class=\"MaterTitle\" style='height:14.25pt'>杭州士腾科技有限公司<br/>库存报表</th></tr>\n";
+            s_Head += "<tr>\n<th colspan=\"7\" class=\"thstyleleft\"  >" + s_Time + "</th><th colspan=\"9\" class=\"thstyleRight\" >" + s_Preson + "</th></tr>\n";
             s_Head += "<tr >\n<th class=\"thstyle\">序号</th>\n";
             s_Head += "<th class=\"thstyle\">仓库</th>\n";
             s_Head += "<th class=\"thstyle\">产品</th>\n";
@@ -154,6 +155,7 @@ public partial class Web_Report_Xs_List_KCList : BasePage
             s_Head += "<th class=\"thstyle\">型号</th>\n";
             s_Head += "<th class=\"thstyle\">版本号</th>\n";
             s_Head += "<th class=\"thstyle\">数量</th>\n";
+            s_Head += "<th class=\"thstyle\">线上数据</th>\n";
             s_Head += "<th class=\"thstyle\">单价</th>\n";
             s_Head += "<th class=\"thstyle\">金额</th>\n";
             s_Head += "<th class=\"thstyle\">参考单价</th>\n";
@@ -231,5 +233,53 @@ public partial class Web_Report_Xs_List_KCList : BasePage
             d_Price = Decimal.Parse(Dtb_Result.Rows[0]["OrderUnitPrice"].ToString()) + Decimal.Parse(Dtb_Result.Rows[0]["HandPrice"].ToString());
         }
         return d_Price;
+    }
+    /// <summary>
+    /// 判断是否为实物并获取线上数据
+    /// </summary>
+    /// <returns></returns>
+    public string Get_IsEntityNum(string s_StartDate,string s_EndDate, string HouseNo,string s_ProductsType,string s_ProductsEdition,string ProductCode,string number)
+    {
+        try
+        {
+            //string sql = "select KWA_IsEntity from KNet_WareHouse_AllocateList where AllocateNo='" + code + "'";
+            string sql =
+                "Select Code from v_store Where  HouseType='0'   and HouseNo='"+ HouseNo + "' and ProductsBarCode='"+ ProductCode + "'";
+            if (s_ProductsType != "")
+            {
+                KNet.BLL.PB_Basic_ProductsClass Bll_ProductsDetails = new KNet.BLL.PB_Basic_ProductsClass();
+                string s_SonID = Bll_ProductsDetails.GetSonIDs(s_ProductsType);
+                s_SonID = s_SonID.Replace(",", "','");
+                sql += " and ProductsType in ('" + s_SonID + "') ";
+            }
+            if (s_ProductsEdition!="")
+            {
+                sql += " and ProductsEdition like '%" + s_ProductsEdition + "%' ";
+            }
+            string s_Sql =
+               "select isnull(SUM(b.AllocateAmount),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where a.AllocateNo in("+sql+") and a.KWA_IsEntity!=1 ";
+            
+            this.BeginQuery(s_Sql);
+            DataTable Dtb_Table = (DataTable)this.QueryForDataTable();          
+            //return Dtb_Table.Rows[0][0].ToString();
+            if (int.Parse(number)==0)
+            {
+                return "0";
+            }
+           else if (int.Parse(number)<int.Parse(Dtb_Table.Rows[0][0].ToString()))
+            {
+                return number;
+            }
+            else
+            {
+                return Dtb_Table.Rows[0][0].ToString();
+            }
+          
+        }
+        catch
+        {
+            return "0";
+        }
+
     }
 }

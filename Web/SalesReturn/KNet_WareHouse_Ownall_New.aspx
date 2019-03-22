@@ -1,36 +1,34 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  EnableEventValidation="false"  CodeFile="KNet_WareHouse_Ownall_New.aspx.cs" Inherits="Knet_Web_WareHouse_KNet_WareHouse_Ownall" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="KNet_WareHouse_Ownall_New.aspx.cs" Inherits="Knet_Web_WareHouse_KNet_WareHouse_Ownall" %>
+
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-<title></title>
+    <title></title>
 </head>
 
 <body topmargin="0" leftmargin="0" rightmargin="0">
 
- <form id="form2" runat="server">
-        
+    <form id="form2" runat="server">
+
         <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
             <tr>
-                <td style="height: 2px">
-                </td>
+                <td style="height: 2px"></td>
             </tr>
             <tr>
-                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                    售后库存总账 > <a class="hdrLink" href="KNet_WareHouse_Ownall_New.aspx">售后库存总账</a>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>售后库存总账 > <a class="hdrLink" href="KNet_WareHouse_Ownall_New.aspx">售后库存总账</a>
                 </td>
                 <td width="100%" nowrap>
                     <table border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td class="sep1" style="width: 1px;">
-                            </td>
+                            <td class="sep1" style="width: 1px;"></td>
                             <td class="small">
                                 <!-- Add and Search -->
                                 <table border="0" cellspacing="0" cellpadding="0">
@@ -59,8 +57,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="height: 2px">
-                </td>
+                <td style="height: 2px"></td>
             </tr>
         </table>
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -95,8 +92,7 @@
                                     <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
                                         value=" 取消查找 ">&nbsp;
                                 </td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">[x]</td>
                             </tr>
                         </table>
                     </div>
@@ -113,16 +109,15 @@
                                 <td nowrap width="60%" class="small">
                                     <b>
                                         <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b></td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]</td>
                             </tr>
                         </table>
                         <table cellpadding="2" cellspacing="0" width="80%" align="center" class="searchUIAdv2 small"
                             border="0">
                             <tr>
                                 <td align="center" class="small" width="90%">
-                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px;
-                                        overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff" class="small">
+                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px; overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff"
+                                        class="small">
                                         <table border="0" width="95%">
                                             <tr>
                                                 <td align="left">
@@ -162,7 +157,7 @@
                             align="center">
                             <tr>
                                 <td align="left" width="40%">
-                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("V_Store")%>','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
+                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("V_Store")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
                                         class="crmbuttom small edit">
                                     <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit">
                                 </td>
@@ -181,9 +176,8 @@
                     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
                         <tr>
                             <!-- Buttons -->
-                            <td style="padding-right: 20px" align="left" nowrap>
-                                查看范围:<asp:DropDownList ID="HouseNoDataList" runat="server" Width="150px" OnSelectedIndexChanged="HouseNoDataList_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
-                                
+                            <td style="padding-right: 20px" align="left" nowrap>查看范围:<asp:DropDownList ID="HouseNoDataList" runat="server" Width="150px" OnSelectedIndexChanged="HouseNoDataList_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+
                             </td>
                         </tr>
                         <tr>
@@ -191,10 +185,8 @@
                                 <div id="changeowner" class="layerPopup" style="display: none; width: 325px;">
                                     <table width="100%" border="0" cellpadding="3" cellspacing="0" class="layerHeadingULine">
                                         <tr>
-                                            <td class="layerPopupHeading" align="left" width="60%">
-                                                修改负责人</td>
-                                            <td>
-                                                &nbsp;</td>
+                                            <td class="layerPopupHeading" align="left" width="60%">修改负责人</td>
+                                            <td>&nbsp;</td>
                                             <td align="right" width="40%">
                                                 <img onclick="fninvsh('changeowner');" title="关闭" alt="关闭" style="cursor: pointer;"
                                                     src="../../themes/softed/images/close.gif" align="absmiddle" border="0"></td>
@@ -204,16 +196,16 @@
                                         <tr>
                                             <td class="small">
                                                 <!-- popup specific content fill in starts -->
-                                                    <table border="0" celspacing="0" cellpadding="5" width="100%" align="center" bgcolor="white">
-                                                        <tr>
-                                                            <td width="50%" align="right">
-                                                                <b>转移拥有关系:</b></td>
-                                                            <td width="50%">
-                                                                <asp:DropDownList ID="Ddl_DutyPerson" runat="server" class="detailedViewTextBox">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                <table border="0" celspacing="0" cellpadding="5" width="100%" align="center" bgcolor="white">
+                                                    <tr>
+                                                        <td width="50%" align="right">
+                                                            <b>转移拥有关系:</b></td>
+                                                        <td width="50%">
+                                                            <asp:DropDownList ID="Ddl_DutyPerson" runat="server" class="detailedViewTextBox">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
                                         </tr>
                                     </table>
@@ -226,100 +218,101 @@
                                         </tr>
                                     </table>
                                 </div>
-                                
-        <cc1:MyGridView ID="GridView1" PageSize="10" runat="server"  AllowSorting="True" AllowPaging="true"  EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>"  GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"  ShowHeader="true"  HeaderStyle-Height="25px"
-          >
-        <Columns>
-        
 
-        <asp:TemplateField   HeaderImageUrl="../../images/icon_list_over.gif" ItemStyle-Height="25px"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                 <ItemTemplate>
-                   <a href="KNet_WareHouse_Ownall_New.aspx?BarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode") %>"><asp:Image ID="Image1" runat="server"  ImageUrl="../../images/Deitail.gif"  ToolTip="查看产品库存明细" /></a>
-                 </ItemTemplate>
-        </asp:TemplateField>
-        
-        
-        <asp:TemplateField SortExpression="HouseNo" HeaderText="仓库名称" ItemStyle-Height="25px"  HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <ItemTemplate>
-                   <%# base.Base_GetHouseName(Eval("HouseNo").ToString()) %>
-                 </ItemTemplate>
-        </asp:TemplateField>
-        
-        <asp:TemplateField SortExpression="ProductsName" HeaderText="产品名称" ItemStyle-Height="25px"  HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <ItemTemplate>
-                   <%# base.Base_GetProdutsName_Link(Eval("ProductsBarCode").ToString())%>
-                 </ItemTemplate>
-        </asp:TemplateField>
-        
-        <asp:TemplateField SortExpression="ProductsBarCode" HeaderText="产品型号" ItemStyle-Height="25px"  HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <ItemTemplate>
-                   <%# base.Base_GetProductsPattern(Eval("ProductsBarCode").ToString())%>
-                 </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField SortExpression="ProductsEdition" HeaderText="版本号" ItemStyle-Height="25px"  HeaderStyle-Font-Size="12px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <ItemTemplate>
-                   <%# base.Base_GetProductsEdition(Eval("ProductsBarCode").ToString())%>
-                 </ItemTemplate>
-        </asp:TemplateField>
-       <asp:BoundField  DataField="WareHouseAmount"   HeaderText="库存"  SortExpression="WareHouseAmount" >
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="60px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-       </asp:BoundField>
-       
-        <asp:BoundField  DataField="StorageVolume"   HeaderText="入库数"  SortExpression="StorageVolume" >
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="60px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-       </asp:BoundField>
-       
-        <asp:BoundField  DataField="ScQuantity"   HeaderText="生产入库"  SortExpression="ScQuantity" >
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="60px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-       </asp:BoundField>
-       
-        <asp:BoundField  DataField="ShippedQuantity"   HeaderText="出库数"  SortExpression="ShippedQuantity" >
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="60px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-       </asp:BoundField>
-       
-        <asp:BoundField  DataField="XhQuantity"   HeaderText="生产消耗"  SortExpression="XhQuantity" >
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="60px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-       </asp:BoundField>
-       
-        <asp:BoundField  DataField="PdQuantity"   HeaderText="盘点数"  SortExpression="PdQuantity" >
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  Width="60px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-       </asp:BoundField>
-       <asp:TemplateField HeaderText="库存均价"  SortExpression="WareHouseTotalNet" HeaderStyle-Font-Size="12px"  ItemStyle-Width="70px"   ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# GetPinPrice(DataBinder.Eval(Container.DataItem, "WareHouseTotalNet").ToString(),DataBinder.Eval(Container.DataItem, "WareHouseAmount").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
+                                <cc1:MyGridView ID="GridView1" PageSize="10" runat="server" AllowSorting="True" AllowPaging="true" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px">
+                                    <Columns>
 
-       <asp:BoundField  DataField="WareHouseTotalNet"  ItemStyle-Font-Size="12px"  SortExpression="WareHouseTotalNet"  HeaderText="库存净值" ItemStyle-Width="60px"   HeaderStyle-Font-Size="12px"  DataFormatString="{0:N}" HtmlEncode="false">
-            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-            <HeaderStyle  HorizontalAlign="Left" Font-Size="12px" />
-        </asp:BoundField> 
-        
+
+                                        <asp:TemplateField HeaderImageUrl="../../images/icon_list_over.gif" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="KNet_WareHouse_Ownall_New.aspx?BarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode") %>">
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl="../../images/Deitail.gif" ToolTip="查看产品库存明细" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+
+                                        <asp:TemplateField SortExpression="HouseNo" HeaderText="仓库名称" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetHouseName(Eval("HouseNo").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField SortExpression="ProductsName" HeaderText="产品名称" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetProdutsName_Link(Eval("ProductsBarCode").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField SortExpression="ProductsBarCode" HeaderText="产品型号" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetProductsPattern(Eval("ProductsBarCode").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField SortExpression="ProductsEdition" HeaderText="版本号" ItemStyle-Height="25px" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetProductsEdition(Eval("ProductsBarCode").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="WareHouseAmount" HeaderText="库存" SortExpression="WareHouseAmount">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="StorageVolume" HeaderText="入库数" SortExpression="StorageVolume">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="ScQuantity" HeaderText="生产入库" SortExpression="ScQuantity">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="ShippedQuantity" HeaderText="出库数" SortExpression="ShippedQuantity">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="XhQuantity" HeaderText="生产消耗" SortExpression="XhQuantity">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="PdQuantity" HeaderText="盘点数" SortExpression="PdQuantity">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="60px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="库存均价" SortExpression="WareHouseTotalNet" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetPinPrice(DataBinder.Eval(Container.DataItem, "WareHouseTotalNet").ToString(),DataBinder.Eval(Container.DataItem, "WareHouseAmount").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:BoundField DataField="WareHouseTotalNet" ItemStyle-Font-Size="12px" SortExpression="WareHouseTotalNet" HeaderText="库存净值" ItemStyle-Width="60px" HeaderStyle-Font-Size="12px" DataFormatString="{0:N}" HtmlEncode="false">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+
                                         <asp:TemplateField HeaderText="明细" SortExpression="OutWareNo" HeaderStyle-Font-Size="12px"
                                             ItemStyle-Width="28px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                            <itemtemplate>
-             <a href="KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode")%>&HouseNo=<%# DataBinder.Eval(Container.DataItem, "HouseNo")%>" target="_self">明细</a>
-          </itemtemplate>
+                                            <ItemTemplate>
+                                                <a href="KNet_WareHouse_Ownall_Water_New.aspx?ProductsBarCode=<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode")%>&HouseNo=<%# DataBinder.Eval(Container.DataItem, "HouseNo")%>" target="_self">明细</a>
+                                            </ItemTemplate>
                                         </asp:TemplateField>
-        
-        </Columns>
-         
+
+                                    </Columns>
+
                                     <HeaderStyle CssClass='colHeader' />
                                     <RowStyle CssClass='listTableRow' />
                                     <AlternatingRowStyle BackColor="#E3EAF2" />
                                     <PagerStyle CssClass='Custom_DgPage' />
-             </cc1:MyGridView>
-             <asp:Label ID="HeXinQ" runat="server"  Font-Size="13px"></asp:Label>
+                                </cc1:MyGridView>
+                                <asp:Label ID="HeXinQ" runat="server" Font-Size="13px"></asp:Label>
                             </td>
                         </tr>
                     </table>
-                    <!--分页--></td>
+                    <!--分页-->
+                </td>
             </tr>
         </table>
     </form>

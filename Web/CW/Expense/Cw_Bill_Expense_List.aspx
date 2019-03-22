@@ -45,19 +45,19 @@
                                         <td>
                                             <table border="0" cellspacing="0" cellpadding="5">
                                                 <tr>
-                                                    <td style="padding-right: 0px; padding-left: 10px;"><a href="javascript:;" onclick="PageGo('CG_Payment_For_Add.aspx')">
-                                                        <img src="/themes/softed/images/btnL3Add.gif" alt="创建 费用报销..." title="创建 费用报销..." border="0"></a></td>
+                                                    <td style="padding-right: 0px; padding-left: 10px;"><a href="javascript:;" onclick="PageGo('Web/CG/Payment/CG_Payment_For_Add.aspx')">
+                                                        <img src="/themes/softed/images/btnL3Add.gif" alt="创建 费用报销..." title="创建 费用报销..." border="0"/></a></td>
                                                     <td style="padding-right: 0px;">
                                                         
                                                     <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="/themes/softed/images/btnL3Delete.gif"
                                                         OnClick="Btn_Del_Click" />
                                                         </td>
                                                     <td style="padding-right: 10px"><a href="javascript:;" onclick="ShowDiv()">
-                                                        <img src="/themes/softed/images/btnL3Search.gif" alt="查找 费用报销..." title="查找 费用报销..." border="0"></a></td>
+                                                        <img src="/themes/softed/images/btnL3Search.gif" alt="查找 费用报销..." title="查找 费用报销..." border="0"/></a></td>
                                                     <td style="padding-right: 0px; padding-left: 10px;">
-                                                        <img src="/themes/softed/images/tbarImport.gif" alt="*导入 费用报销" title="*导入 费用报销" border="0"></td>
+                                                        <img src="/themes/softed/images/tbarImport.gif" alt="*导入 费用报销" title="*导入 费用报销" border="0"/></td>
                                                     <td style="padding-right: 10px">
-                                                        <img src="/themes/softed/images/tbarExport.gif" alt="*导出 费用报销" title="*导出 费用报销" border="0"></td>
+                                                        <img src="/themes/softed/images/tbarExport.gif" alt="*导出 费用报销" title="*导出 费用报销" border="0"/></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -124,11 +124,11 @@
                                         </td>
                                         <td nowrap class="small">
                                             <b>
-                                                <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all">&nbsp;匹配以下所有条件</b>
+                                                <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all"/>&nbsp;匹配以下所有条件</b>
                                         </td>
                                         <td nowrap width="60%" class="small">
                                             <b>
-                                                <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b>
+                                                <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked/>&nbsp;匹配以下任意条件</b>
                                         </td>
                                         <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]
                                         </td>

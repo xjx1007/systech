@@ -50,7 +50,11 @@ namespace KNet.BLL
                     Bll_Freight.Add(Model);
                 }
             }
-            dal.Add(model);
+            if (model.Arr_Details != null)
+            {
+                dal.Add(model);
+            }
+            //dal.Add(model);
             if (model.KWD_IsSupp == 1)
             {
                 SetPrice(model.DirectOutNo);
@@ -190,6 +194,15 @@ namespace KNet.BLL
         public DataSet GetList(string strWhere)
         {
             return dal.GetList(strWhere);
+        }
+        /// <summary>
+        /// 查询车间库报废领用数据
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public DataSet GetList1(string strWhere)
+        {
+            return dal.GetList1(strWhere);
         }
         /// <summary>
         /// 获得数据列表

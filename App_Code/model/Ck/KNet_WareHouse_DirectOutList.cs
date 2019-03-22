@@ -57,12 +57,30 @@ namespace KNet.Model
         private int _KWD_IsSupp = 0;
         private string _KWD_SuppNo="";
         private string _KWD_LyType = "";
+        private string _KWD_Order = "";
+        private string _KWD_UploadUrl = "";
+        private string _KWD_UploadName = "";
 
 
         public string KWD_SuppNo
         {
             set { _KWD_SuppNo = value; }
             get { return _KWD_SuppNo; }
+        }
+        public string KWD_Order
+        {
+            set { _KWD_Order = value; }
+            get { return _KWD_Order; }
+        }
+        public string KWD_UploadUrl
+        {
+            set { _KWD_UploadUrl = value; }
+            get { return _KWD_UploadUrl; }
+        }
+        public string KWD_UploadName
+        {
+            set { _KWD_UploadName = value; }
+            get { return _KWD_UploadName; }
         }
 
         public string KWD_LyType

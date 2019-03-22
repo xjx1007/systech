@@ -199,7 +199,7 @@
                                                                             <input type="CheckBox" onclick="selectAll(this)" />
                                                                         </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:CheckBox ID="Chbk" runat="server" Checked />
+                                                                            <asp:CheckBox ID="Chbk" runat="server" />
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:BoundField HeaderText="名称" DataField="PBA_Name" SortExpression="PBA_Name"
@@ -210,7 +210,7 @@
                                                                     <asp:TemplateField HeaderText="类别" SortExpression="PBA_ProductsType" HeaderStyle-Font-Size="12px"
                                                                         ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>
-                                                                            <%# base.Base_GetBasicCodeName("778", DataBinder.Eval(Container.DataItem, "PBA_ProductsType").ToString())%>
+                                                                            <%# base.Base_GetBasicCodeName("780", DataBinder.Eval(Container.DataItem, "PBA_ProductsType").ToString())%>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:TemplateField HeaderText="附件" SortExpression="PBA_URL" HeaderStyle-Font-Size="12px"

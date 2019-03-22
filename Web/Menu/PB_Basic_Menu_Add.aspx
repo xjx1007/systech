@@ -6,8 +6,8 @@
 <head>
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-    <link rel="stylesheet" href="../../assets/css/fontawesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css"/>
+    <link rel="stylesheet" href="../../assets/css/fontawesome/css/font-awesome.min.css" type="text/css"/>
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -98,6 +98,16 @@
                                                     <asp:DropDownList runat="server" ID="DDl_FatherID"></asp:DropDownList>
                                                     </td>
                                                 </tr>
+                                                 <tr>
+                                                    <td width="16%" align="right" class="dvtCellLabel">
+                                                        菜单名称：
+                                                    </td>
+                                                    <td class="dvtCellInfo" align="left">
+                                                        <pc:PTextBox ID="PBM_Name" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="400px" ValidType="String"></pc:PTextBox>
+
+                                                    </td>
+                                                </tr> 
                                                 <tr>
                                                     <td width="16%" align="right" class="dvtCellLabel">
                                                         英文名称：
@@ -122,7 +132,7 @@
                                                         Rowspan：</td>
                                                     <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_RowSpan" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String"></pc:PTextBox>
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String" Text="1"></pc:PTextBox>
 
                                                     </td>
                                                 </tr> 
@@ -131,7 +141,7 @@
                                                         Colspan：</td>
                                                     <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_ColSpan" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String"></pc:PTextBox>
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String" Text="1"></pc:PTextBox>
 
                                                     </td>
                                                 </tr> 
@@ -154,7 +164,7 @@
                                                         序号：</td>
                                                     <td class="dvtCellInfo" align="left">
                                                         <pc:PTextBox ID="Tbx_Order" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String"></pc:PTextBox>
+                                                            OnBlur="this.className='detailedViewTextBox'" Width="100px" ValidType="String" Text="0"></pc:PTextBox>
 
                                                     </td>
                                                 </tr> 

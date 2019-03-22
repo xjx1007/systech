@@ -21,12 +21,18 @@ namespace KNet.Model
         private string _XPD_ReplaceProductsBarCode;
         private int? _XPD_Order;
         private int? _XPD_Only;
-
+        private int? _ReplaceNum;
         private DateTime _XPD_AddDateTime;
         public DateTime XPD_AddDateTime
         {
             set { _XPD_AddDateTime = value; }
             get { return _XPD_AddDateTime; }
+        }
+
+        public int? ReplaceNum
+        {
+            set { _ReplaceNum = value; }
+            get { return _ReplaceNum; }
         }
         private int _XPD_Del;
         public int XPD_Del

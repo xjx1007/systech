@@ -84,21 +84,21 @@
                                         <table border="0" cellspacing="0" cellpadding="0" width="100%" id="Table_Btn" runat="server">
                                             <tr>
                                                 <td>
-                                                    <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit"
-                                                        onclick="PageGo('KNet_AttenDance_OutManger_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>')"
-                                                        name="Edit" value="&nbsp;编辑&nbsp;">&nbsp;
-                                                    <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share"
-                                                        value="&nbsp;共享&nbsp;">&nbsp;
-                                                    <input title="" class="crmbutton small edit" onclick="PageGo('KNet_AttenDance_OutManger.aspx')"
-                                                        type="button" name="ListView" value="&nbsp;返回列表&nbsp;">&nbsp;
-                                                    <input title="" class="crmbutton small edit" onclick="PageGo('inc/KNet_AttenDance_OutManger_Do.aspx')"
-                                                        type="button" name="ListView" value="&nbsp;审核&nbsp;">&nbsp;
+                                                <input title="编辑 [Alt+E]" type="button" accesskey="E" class="crmbutton small edit"
+                                                       onclick="PageGo('KNet_AttenDance_OutManger_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>')"
+                                                       name="Edit" value="&nbsp;编辑&nbsp;"/>&nbsp;
+                                                <input title="共享" class="crmbutton small edit" onclick="" type="button" name="Share"
+                                                       value="&nbsp;共享&nbsp;"/>&nbsp;
+                                                <input title="" class="crmbutton small edit" onclick="PageGo('KNet_AttenDance_OutManger.aspx')"
+                                                       type="button" name="ListView" value="&nbsp;返回列表&nbsp;"/>&nbsp;
+                                                <input title="" class="crmbutton small edit" onclick="PageGo('inc/KNet_AttenDance_OutManger_Do.aspx?ID=<%= Request.QueryString["ID"].ToString() %>')"
+                                                       type="button" name="ListView" value="&nbsp;审核&nbsp;"/>&nbsp;
                                                     <td align="right">
                                                         <input title="复制 [Alt+U]" type="button" accesskey="U" class="crmbutton small create"
-                                                            onclick="PageGo('KNet_AttenDance_OutManger_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>&Type=1')"
-                                                            name="Duplicate" value="复制">&nbsp;
+                                                               onclick="PageGo('KNet_AttenDance_OutManger_Add.aspx?ID=<%= Request.QueryString["ID"].ToString() %>&Type=1')"
+                                                               name="Duplicate" value="复制"/>&nbsp;
                                                         <input title="刪除 [Alt+D]" type="button" accesskey="D" class="crmbutton small delete"
-                                                            onclick=" return confirm('确定要删除这个记录吗?')" name="Delete" value="删除">&nbsp;
+                                                               onclick=" return confirm('确定要删除这个记录吗?')" name="Delete" value="删除"/>&nbsp;
                                                     </td>
                                             </tr>
                                         </table>

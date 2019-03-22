@@ -12,23 +12,92 @@
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
-    <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js"></script>
+    
+    <script src="../../../assets/js/libs/jquery-1.10.2.min.js"></script>
     <title>采购管理</title>
     <script language="JAVASCRIPT">
         function btnGetReturnValue_onclick() {
+            debugger;
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
+             if(document.all('Tbx_OrderNo').value=="") {
+           var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
             //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-            var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+             else {
+                // alert("dfd")
+                 var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Tbx_ID=" + document.all('Tbx_OrderNo').value + "&callback=SetReturnValueInOpenner_Suppliers12", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
         }
         function SetReturnValueInOpenner_Suppliers1(temp) {
+            debugger;
             if (temp != undefined) {
                 var ss;
                 ss = temp.split("|");
                 document.all('SuppNoSelectValue').value = ss[0];
                 document.all('SuppNo').value = ss[1];
                 document.all('OrderNo').value = ss[2];
+               
+
+            }
+            else {
+                document.all('SuppNoSelectValue').value = "";
+                document.all('SuppNo').value = "";
+                document.all('OrderNo').value = "";
+            }
+        }
+        function SetReturnValueInOpenner_Suppliers12(temp) {
+            debugger;
+            if (temp != undefined) {
+              
+                var ss;
+                ss = temp.split("|");
+                if (ss[5] == 0) {
+               alert("所选加工厂对应的产品的加工费还没有报价或者还没审核")
+                } else {
+                    document.all('SuppNoSelectValue').value = ss[0];
+                    document.all('SuppNo').value = ss[1];
+                    document.all('OrderNo').value = ss[2];
+                    //alert(ss[5])
+                    //if (ss[5] != "") {
+                    //for (var s = 0; s < ss[5]; i++) {
+                        
+                    //}
+                    var g = 1;
+                    var aa = ss[6].split(",");
+                    var bb = ss[7].split(",");
+                        for (var i = 1; i <=ss[5]; i++) {
+                            var vr=document.all('ProductsBarCode_' + (i-1)).value
+                           // if (vr !== bb[i-1]) {
+                                // if ((i + 1) >= ss[5]) {
+                               
+                                    document.all('HandPrice_' + (i-1)).value = aa[i-1];
+                                    //alert(aa[i-1]* document.all('Number_' + (i - 1)).value);
+                                document
+                                    .all('HandMoney_' + (i - 1))
+                                    .value = aa[i-1] * document.all('Number_' + (i - 1)).value;
+                                g = g - 1;
+                                //}
+                                //else {
+                                //document.all('HandPrice_' + (i + 1 )).value = aa[i];
+                                ////alert(aa[i-1]* document.all('Number_' + (i - 1)).value);
+                                //document
+                                //    .all('HandMoney_' + (i + 1))
+                                //    .value = aa[i] * document.all('Number_' + (i - 1)).value
+                                //}
+
+                           // }
+                            //document.getElementsByName("HandPrice_" + i - 1).value = aa[i - 1]
+                            //else {
+                            //    document.all('HandPrice_' + (i - 1)).value = aa[i-1];
+                            //    //alert(aa[i-1]* document.all('Number_' + (i - 1)).value);
+                            //    document .all('HandMoney_' + (i - 1)) .value = aa[i-1] * document.all('Number_' + (i - 1)).value
+                            //}
+                       }
+                    //}
+                }
+               
 
             }
             else {
@@ -80,6 +149,7 @@
                 document.all('SuppNoSelectValue2').value = ss[0];
                 document.all('SuppNo2').value = ss[1];
                 document.all('OrderNo2').value = ss[2];
+               
             }
             else {
                 document.all('SuppNoSelectValue2').value = "";
@@ -92,9 +162,10 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
+            var vr = document.all("OrderStaffDepart").value;
             //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=780px;dialogHeight=550px");
-            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Type=128860698200781250&callback=SetReturnValueInOpenner_Suppliers3", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
-        }
+            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&selectValue="+vr+"&Type=128860698200781250&callback=SetReturnValueInOpenner_Suppliers3", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }//129652784259578018
         function SetReturnValueInOpenner_Suppliers3(temp) {
             if (temp != undefined) {
                 var ss;
@@ -102,7 +173,8 @@
                 document.getElementById("Tbx_SuppNo").value = ss[0];
                 document.getElementById("Tbx_SuppName").value = ss[1];
                 document.all('OrderAddress').value = ss[3].replace(/\$/g, "\n");
-                objSelect = document.getElementById("Ddl_HouseNo")
+                objSelect = document.getElementById("Ddl_HouseNo");
+               
                 for (var i = 0; i < objSelect.options.length; i++) {
                     if (objSelect.options[i].value == ss[4]) {
                         objSelect.options[i].selected = true;
@@ -134,6 +206,7 @@
                 document.all('OrderRemarks').value = ss[3];
                 var response = Knet_Web_Procure_Knet_Procure_OrderList.GetScDetails(ss[1]);
                 document.all('Tbx_ScDetails').value = response.value;
+               
             }
             else {
                 document.all('SalesOrderNoSelectValue').value = "";
@@ -147,8 +220,14 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
+            var TxbSuppNo = document.all('SuppNo').value;
+            if (document.all('SamplingID').value=="") {
+                var tempd = window.open("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ScNo=" + document.all("OrderFaterNo").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "选择供应商", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            } else {
+                var tempd = window.open("SelectSampling.aspx?SamplingID="+document.all('SamplingID').value+"", "选择样品申请", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            }
             //var tempd = window.showModalDialog("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-            var tempd = window.open("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ScNo=" + document.all("OrderFaterNo").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "选择供应商", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+           
         }
         function SetReturnValueInOpenner_SuppliersPrice(tempd) {
             if (tempd != undefined) {
@@ -190,7 +269,7 @@
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Number_' + v_NumInt + '\" value=' + s_Value[4] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" readonly style="width:70px;"   Name=\"Price_' + v_NumInt + '\" value=' + s_Value[5] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Price_' + v_NumInt + '\" value=' + s_Value[5] + '>';
                     objCel.className = "ListHeadDetails";
                     ///添加一个单位
                     var objCel = objRow.insertCell();
@@ -224,11 +303,12 @@
                 if (v_SuppNo != "")
                 {
 
-                    document.all('SuppNoSelectValue').value = v_SuppNo;
-                    document.all('SuppNo').value = v_SuppName;
+                    //document.all('SuppNoSelectValue').value = v_SuppNo;
+                    //document.all('SuppNo').value = v_SuppName;
                     var response = Knet_Web_Procure_Knet_Procure_OrderList.KNetOddNumbers(v_SuppNo, document.all('Tbx_Title').value, document.all('OrderNo').value);
                     document.all('OrderNo').value = response.value;
                 }
+                //alert(document.all("Tbx_Num").value)
             }
         }
 
@@ -253,9 +333,9 @@
                     //    document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
                     //}
                 }
-                TextisNaN(CPBZNumber);
-                TextisNaN(BZNumber);
-                TextisNaN(document.all("Number_" + i).value);
+                //TextisNaN(CPBZNumber);
+                //TextisNaN(BZNumber);
+                //TextisNaN(document.all("Number_" + i).value);
             }
         }
         function deleteRow(obj) {
@@ -267,7 +347,14 @@
             }
             document.all("Xs_ProductsCode").value = bm_num;
         }
-        
+
+        function Submitcheck() {
+            var suppno = document.all('SuppNoSelectValue').value;
+            if (suppno=="") {
+                alert('供应商不能为空，请选择供应商');
+                return false;
+            }
+        }
     </script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
 </head>
@@ -367,12 +454,11 @@
                                             <td width="17%" height="25" align="right" class="dvtCellLabel">供应商:
                                             </td>
                                             <td align="left" class="dvtCellInfo">
-                                                <input type="hidden" name="SuppNoSelectValue" id="SuppNoSelectValue" runat="server" />
+                                                <input type="hidden" name="SuppNoSelectValue" id="SuppNoSelectValue" runat="server" value="" />
                                                 <asp:TextBox ID="SuppNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                     OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48" Enabled="false"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" id="Img_SelectSuppNo" runat="server" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />(<font
-                                                    color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
-                                                        ErrorMessage="供应商不能为空" ControlToValidate="SuppNo" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                <img src="../../../themes/softed/images/select.gif" id="Img_SelectSuppNo" runat="server" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />
+                                                    
                                             </td>
                                             <td align="right" class="dvtCellLabel">成品订单:
                                             </td>
@@ -539,6 +625,9 @@
                                                        <%--  <td class="ListHead" nowrap>
                                                             <b>大单位</b>
                                                         </td>--%>
+                                                         <%--<td class="ListHead" runat="server" id="selectSupp" style="display: none" nowrap>
+                                                            <b>供应商</b>
+                                                        </td>--%>
                                                         <td class="ListHead" nowrap>
                                                             <b>加工费单价</b>
                                                         </td>
@@ -566,7 +655,7 @@
                             <tr>
                                 <td colspan="4" align="center" style="height: 30px">
                                     <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                        class="crmbutton small save" OnClick="Button1_Click" Style="width: 55px; height: 30px;" />
+                                        class="crmbutton small save" OnClientClick="return Submitcheck();" OnClick="Button1_Click" Style="width: 55px; height: 30px;" />
                                     <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                                         type="button" name="button" value="取 消" style="width: 55px; height: 30px">
                                 </td>
@@ -576,10 +665,15 @@
             </tr>
         </table>
         <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="NumCount" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="TextBox1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="Tbx_OrderNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
         <asp:TextBox ID="Tbx_Title" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
         <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
         <asp:TextBox ID="Tbx_Change" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
         <asp:TextBox ID="Tbx_OldID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="Sampling" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+        <asp:TextBox ID="SamplingID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
         </td> </tr> </table> </td>
     <td align="right" valign="top">
         <img src="../../../themes/softed/images/showPanelTopRight.gif" />

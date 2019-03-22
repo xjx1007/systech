@@ -248,7 +248,21 @@
                                                                             <asp:TextBox ID="ProductsBarCode" runat="server" CssClass="Custom_Hidden" Text=<%#DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>></asp:TextBox>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
-                                                                    
+                                                                     <asp:TemplateField HeaderText="赔偿单价" HeaderStyle-ForeColor="red" HeaderStyle-Font-Size="12px"
+                                                                        ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left" ItemStyle-Width="80px">
+                                                                        <ItemTemplate>
+                                                                            <asp:TextBox ID="PCPrice" runat="server" CssClass="detailedViewTextBox" Width="80px" Text='<%#GetProductsPrice(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),2)%>'
+                                                                                MaxLength="9"></asp:TextBox><br />
+                                                                            <asp:RegularExpressionValidator ID="HandPrice33dc" runat="server" ErrorMessage="正货币形式!"
+                                                                                ControlToValidate="Salesprice" ValidationExpression="^(\d+|,\d{4})+(\.\d{0,6})?$"
+                                                                                Display="Dynamic"></asp:RegularExpressionValidator>
+                                                                            <asp:RequiredFieldValidator ID="HandPrice333" runat="server" ErrorMessage="非空值" ControlToValidate="PCPrice"
+                                                                                Display="Dynamic"></asp:RequiredFieldValidator>
+
+                                                                            <asp:TextBox ID="ProductsBarCode1" runat="server" CssClass="Custom_Hidden" Text=<%#DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>></asp:TextBox>
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
+
                                                                     <asp:TemplateField HeaderText="品牌"  HeaderStyle-Font-Size="12px"
                                                                         ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>

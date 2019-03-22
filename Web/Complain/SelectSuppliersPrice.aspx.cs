@@ -18,7 +18,7 @@ using KNet.Common;
 /// <summary>
 /// 选择供应商采购报价
 /// </summary>
-public partial class Knet_Common_SelectSuppliersPrice : BasePage
+public partial class Knet_Complain_SelectSuppliersPrice : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -90,9 +90,9 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
         string isModiy = Request.QueryString["isModiy"] == null ? "" : Request.QueryString["isModiy"].ToString();
         string s_ProductsID = Request.QueryString["sID"] == null ? "" : Request.QueryString["sID"].ToString();
         string s_ContractNo = Request.QueryString["Contract"] == null ? "" : Request.QueryString["Contract"].ToString();
-        string s_Sql = "select distinct b.*,e.ProductsType from Knet_Procure_SuppliersPrice b  join KNet_Sys_Products e on e.ProductsBarCode=b.ProductsBarCode ";
-        s_Sql += "left join KNet_Sales_ContractList_Details a on a.ProductsBarCode=b.ProductsBarCode  and b.ProcureState=1 and isnull(KPP_Del,'0')='0' ";
-        string SqlWhere = " where 1=1 and b.KPP_Del=0 ";
+        string s_Sql = "select  b.*,e.KSP_BigUnits,e.ProductsType,isnull(cc.PPB_BrandName,'') PPB_BrandName,e.ksp_Code from Knet_Procure_SuppliersPrice b  join KNet_Sys_Products e on e.ProductsBarCode=b.ProductsBarCode left join PB_Products_Brand cc on cc.PPB_ID=b.KPP_Brand left join KNet_Sales_ContractList_Details a on a.ProductsBarCode=b.ProductsBarCode  and b.ProcureState=1 and isnull(KPP_Del,'0')='0' ";
+        //s_Sql += "left join KNet_Sales_ContractList_Details a on a.ProductsBarCode=b.ProductsBarCode  and b.ProcureState=1 and isnull(KPP_Del,'0')='0' ";
+        string SqlWhere = " where 1=1 and b.KPP_Del=0  and b.KPP_State=1  and e.KSP_Del=0 ";
 
         if (Request["SuppNo"] != null && Request["SuppNo"] != "")
         {
@@ -181,14 +181,14 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
                 s_Return += model.HandPrice.ToString() + "," + Convert.ToString(s_Number * decimal.Parse(model.HandPrice.ToString())) + "," + s_Remarks + "," + s_SuppNo + "," + base.Base_GetSupplierName(s_SuppNo) + "|";
 
                 cal += GridView1.DataKeys[i].Value.ToString();
-                if (j > 0)
-                {
-                    s_SuppNo1 = ((TextBox)GridView1.Rows[j-1].Cells[0].FindControl("Tbx_SuppNo")).Text;
-                    if (s_SuppNo1 != s_SuppNo)
-                    {
-                        s_String = "供应商不同，请重新选择";
-                    }
-                }
+                //if (j > 0)
+                //{
+                //    s_SuppNo1 = ((TextBox)GridView1.Rows[j-1].Cells[0].FindControl("Tbx_SuppNo")).Text;
+                //    if (s_SuppNo1 != s_SuppNo)
+                //    {
+                //        s_String = "供应商不同，请重新选择";
+                //    }
+                //}
                 j++;
             }
         }
@@ -205,9 +205,36 @@ public partial class Knet_Common_SelectSuppliersPrice : BasePage
             }
             else
             {
+                //StringBuilder s = new StringBuilder();
+                //s.Append("<script language=javascript>" + "\n");
+                //s.Append("if(window.opener != undefined) {window.opener.returnValue='" + s_Return + "';window.opener.SetReturnValueInOpenner_SuppliersPrice('" + s_Return + "')} ");
+                //s.Append("else{window.returnValue='" + s_Return + "';}" + "\n");
+                //s.Append("window.close();" + "\n");
+                //s.Append("</script>");
+                //Type cstype = this.GetType();
+                //ClientScriptManager cs = Page.ClientScript;
+                //string csname = "ltype";
+                //if (!cs.IsStartupScriptRegistered(cstype, csname))
+                //    cs.RegisterStartupScript(cstype, csname, s.ToString());
                 StringBuilder s = new StringBuilder();
                 s.Append("<script language=javascript>" + "\n");
-                s.Append("if(window.opener != undefined) {window.opener.returnValue='" + s_Return + "';} else{window.returnValue='" + s_Return + "';}" + "\n");
+                //s.Append("window.returnValue='" + s_Return + "';" + "\n");
+                s.Append("if (window.opener != undefined)\n");
+                s.Append("{\n");
+                s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+                if (Request.QueryString["callBack"] != null && Request.QueryString["callBack"] != "")
+                {
+                    s.Append("    window.opener." + Request.QueryString["callBack"] + "('" + s_Return + "');\n");
+                }
+                else
+                {
+                    s.Append("    window.opener.SetReturnValueInOpenner_SuppliersPrice('" + s_Return + "');\n");
+                }
+                s.Append("}\n");
+                s.Append("else\n");
+                s.Append("{\n");
+                s.Append("    window.returnValue = '" + s_Return + "';\n");
+                s.Append("}\n");
                 s.Append("window.close();" + "\n");
                 s.Append("</script>");
                 Type cstype = this.GetType();

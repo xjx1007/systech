@@ -16,7 +16,7 @@ using KNet.DBUtility;
 using KNet.Common;
 using System.Drawing;
 using System.Net;
-
+using System.Net.Mail;
 
 public partial class NewDesk : BasePage
 {
@@ -93,7 +93,7 @@ public partial class NewDesk : BasePage
                 //仅查看自己
                 if (AM.YNAuthority("收款单仅责任人查看") == true)
                 {
-                    if (AM.KNet_StaffName != "项洲")
+                    if (AM.KNet_StaffName != "薛建新")
                     {
                         s_Sql += " and b.KSC_DutyPerson='" + AM.KNet_StaffNo + "'  ";
                     }
@@ -216,21 +216,120 @@ public partial class NewDesk : BasePage
             this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/OA_Person_Report_Month_View.aspx\">查看</a></td>";
             this.Lbl_ReportDetails.Text += "</tr>";
             this.Lbl_ReportDetails.Text += "<tr>";
-            this.Lbl_ReportDetails.Text += "<td  class=\"settingsTabHeader\">提交情况</td>";
-            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/Report_Today_View.aspx\" target=\"_blank\">查看</a></td>";
-            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/Report_Week_View.aspx\" target=\"_blank\">查看</a></td>";
+            this.Lbl_ReportDetails.Text += "<td  class=\"settingsTabHeader\">报表考勤</td>";
+            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/Report_DayTime_Detail.aspx\" target=\"_blank\">查看</a></td>";
+            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/Report_WeekTime_Detail.aspx\" target=\"_blank\">查看</a></td>";
             this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/Report_Month_View.aspx\" target=\"_blank\">查看</a></td>";
             this.Lbl_ReportDetails.Text += "</tr>";
-            this.Lbl_ReportDetails.Text += "<tr>";
-            this.Lbl_ReportDetails.Text += "<td  class=\"settingsTabHeader\">汇总</td>";
-            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/TotalReport_Today_View.aspx\">查看</a></td>";
-            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/TotalReport_Week_View.aspx\">查看</a></td>";
-            this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/TotalReport_Month_View.aspx\">查看</a></td>";
-            this.Lbl_ReportDetails.Text += "</tr>";
+            //this.Lbl_ReportDetails.Text += "<tr>";
+            //this.Lbl_ReportDetails.Text += "<td  class=\"settingsTabHeader\">汇总</td>";
+            //this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/TotalReport_Today_View.aspx\">查看</a></td>";
+            //this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/TotalReport_Week_View.aspx\">查看</a></td>";
+            //this.Lbl_ReportDetails.Text += "<td class=\"settingsTabList\"><a href=\"../Web/OA/Report/TotalReport_Month_View.aspx\">查看</a></td>";
+            //this.Lbl_ReportDetails.Text += "</tr>";
             this.Lbl_ReportDetails.Text += "</table>";
+            if (AM.KNet_StaffName=="薛建新"|| AM.KNet_StaffName =="李文立")
+            {
+                this.BeginQuery("Select * From PB_Basic_Attachment where PBA_Del=0 and PBA_ProductsType='15' ");
+                this.QueryForDataTable();
+                string ProCode_list = "";
+                string subject = "环保资料到期警报";
 
+                if (Dtb_Result.Rows.Count > 0)
+                {
+                    for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+                    {
+                        DateTime dt1 = DateTime.Now;
+                        DateTime dt2 = DateTime.Parse(Dtb_Result.Rows[i]["PBA_EndTime"].ToString());
+                        TimeSpan ts = dt2 - dt1;
+                        if (int.Parse(ts.Days.ToString()) <= 7)
+                        {
+                            ProCode_list += Dtb_Result.Rows[i]["PBA_FID"].ToString() + ",";
+                        }
+                    }
+                    if (ProCode_list!="")
+                    {
+                        string body = "产品编号为" + ProCode_list + "的环保资料即将到期,请在一周内及时更新，并且停用过期资料";
+                        string email_list = "zb@systech.com.cn" + "|" + "xb@systech.com.cn" + "|" + "zxc@systech.com.cn" +"|" + "hyy@systech.com.cn" + "|" + "xjx@systech.com.cn" + "|";
+                        string File_Path = "";
+                        //"zb@systech.com.cn" + "|" + "xb@systech.com.cn" + "|" + "lwl@systech.com.cn" + "|" + "hyy@systech.com.cn" + "|";
+                        //Send(subject, body, email_list, File_Path);
+                    }
+                   
+                }
+            }
+           
+            
         }
     }
+    #region 环保资料到期，发送邮件
+    public static void Send(string subject, string body, string email_list, string File_Path)
+    {
+        string MailUser = "xjx@systech.com.cn";//我测试的是qq邮箱，其他邮箱一样的道理
+        string MailPwd = "systech#88888888";//邮箱密码
+        string MailName = "ERP系统";
+        string MailHost = "smtp.mxhichina.com";//根据自己选择的邮箱来查询smtp的地址
+
+        MailAddress from = new MailAddress(MailUser, MailName); //邮件的发件人  
+        MailMessage mail = new MailMessage();
+
+        //设置邮件的标题  
+        mail.Subject = subject;
+
+        //设置邮件的发件人  
+        //Pass:如果不想显示自己的邮箱地址，这里可以填符合mail格式的任意名称，真正发mail的用户不在这里设定，这个仅仅只做显示用  
+        mail.From = from;
+
+        //设置邮件的收件人  
+        string address = "";
+
+        //传入多个邮箱，用“|”分割开，可以自己自定义，再通过mail.To.Add（）添加到列表
+        string[] email = email_list.Split('|');
+        foreach (string name in email)
+        {
+            if (name != string.Empty)
+            {
+                address = name;
+                mail.To.Add(new MailAddress(address));
+            }
+        }
+
+        //设置邮件的抄送收件人  
+        //这个就简单多了，如果不想快点下岗重要文件还是CC一份给领导比较好  
+        //mail.CC.Add(new MailAddress("Manage@hotmail.com", "尊敬的领导");  
+
+        //设置邮件的内容  
+        mail.Body = body;
+        //设置邮件的格式  
+        mail.BodyEncoding = System.Text.Encoding.UTF8;
+        mail.IsBodyHtml = true;
+        //设置邮件的发送级别  
+        mail.Priority = MailPriority.Normal;
+
+        //设置邮件的附件，将在客户端选择的附件先上传到服务器保存一个，然后加入到mail中  
+        if (File_Path != "")
+        {
+            mail.Attachments.Add(new Attachment(File_Path));
+            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+        }
+        SmtpClient client = new SmtpClient();
+        //设置用于 SMTP 事务的主机的名称，填IP地址也可以了  
+        client.Host = MailHost;
+        //设置用于 SMTP 事务的端口，默认的是 25  
+        client.Port = 587;
+        client.UseDefaultCredentials = false;
+        //这里才是真正的邮箱登陆名和密码， 我的用户名为 MailUser ，我的密码是 MailPwd  
+        client.Credentials = new System.Net.NetworkCredential(MailUser, MailPwd);
+        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+        ////如果发送失败，SMTP 服务器将发送 失败邮件告诉我  
+        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+        //都定义完了，正式发送了，很是简单吧！  
+        client.Send(mail);
+
+    }
+    #endregion
     private string ShowDetails(string s_ID, string s_Name, string s_Title)
     {
         StringBuilder s_Return = new StringBuilder();

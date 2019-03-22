@@ -13,10 +13,12 @@ using System.Text;
 
 using KNet.DBUtility;
 using KNet.Common;
+using System.Data.SqlClient;
 
 public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
 {
     public string s_AdvShow = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -36,19 +38,20 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
                 {
                     this.Btn_Del.Enabled = false;
                 }
+                base.Base_DropBasicCodeBind(this.Ddl_Type, "213"); //类型
                 this.Btn_Del.Attributes.Add("onclick", "return confirm('你确信要删除所选记录吗?！')");
-                base.Base_DropBindSearch(this.bas_searchfield, "ZL_Complain_Manage");
-                base.Base_DropBindSearch(this.Fields, "ZL_Complain_Manage");
-                base.Base_DropBatchBindBySql(this.Ddl_Batch, "ZL_Complain_Manage", "ZCM_DutyPerson", "  and StaffNo in (select StaffNo from KNet_Resource_Staff where IsSale='1' and StaffYN='0')");
-                string s_Batch = Request["Batch"] == null ? "" : Request["Batch"].ToString();
-                if (s_Batch != "")
-                {
-                    this.Ddl_Batch.SelectedValue = s_Batch;
-                }
+                base.Base_DropBindSearch(this.bas_searchfield, "Knet_Sales_Retrun_Maintain");
+                base.Base_DropBindSearch(this.Fields, "Knet_Sales_Retrun_Maintain");
+                //base.Base_DropBatchBindBySql(this.Ddl_Batch, "Knet_Sales_Retrun_Maintain", "ZCM_DutyPerson", "  and StaffNo in (select StaffNo from KNet_Resource_Staff where IsSale='1' and StaffYN='0')");
+                //string s_Batch = Request["Batch"] == null ? "" : Request["Batch"].ToString();
+                //if (s_Batch != "")
+                //{
+                //    this.Ddl_Batch.SelectedValue = s_Batch;
+                //}
                 DataShows();
             }
         }
-        
+
     }
 
     /// <summary>
@@ -56,8 +59,8 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
     /// </summary>
     protected void DataShows()
     {
-        string SqlWhere = "  ZCM_Del='0' ";
-        AdminloginMess AM = new AdminloginMess(); 
+        string SqlWhere = "  1=1 ";
+        AdminloginMess AM = new AdminloginMess();
         string s_WhereID = Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString();
         string s_Fields = Request["Fields"] == null ? "" : Request["Fields"].ToString();
         string s_Condition = Request["Condition"] == null ? "" : Request["Condition"].ToString();
@@ -68,9 +71,9 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
             SqlWhere += Base_GetBasicWhere(s_WhereID);
         }
 
-        if (this.Ddl_Batch.SelectedValue != "")
+        if (this.Ddl_Type.SelectedValue != "")
         {
-            SqlWhere += Base_GetBasicWhere(this.Ddl_Batch.SelectedValue);
+            SqlWhere += " and KSM_Type='" + this.Ddl_Type.SelectedValue + "' ";
         }
         if ((this.bas_searchfield.SelectedValue != "") && (search_text.Text != ""))
         {
@@ -78,7 +81,7 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
         }
         if (s_Text != "")
         {
-            if (this.matchtype1.Checked == true)//and
+            if (this.matchtype1.Checked == true) //and
             {
                 s_Type = "0";
             }
@@ -88,23 +91,12 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
             }
             SqlWhere += base.Base_GetAdvWhere(s_Fields, s_Condition, s_Text, s_Type);
         }
-        //仅查看自己
-        if (AM.YNAuthority("客户抱怨仅自己查看") == true)
-        {
-            if (AM.KNet_StaffName != "项洲")
-            {
-                SqlWhere += " and (ZCM_Creator='" + AM.KNet_StaffNo + "' ";
-                //共享给自己的
-                SqlWhere += " or ZCM_DID in (Select PBS_FromID From PB_Basic_Share where PBS_ToPersonID='" + AM.KNet_StaffNo + "')";
-                //辅助人员
-                SqlWhere += " or ZCM_FDutyPerson='" + AM.KNet_StaffNo + "') ";
-            }
-        }
-        SqlWhere += " Order by ZCM_CTime desc";
-        KNet.BLL.ZL_Complain_Manage bll = new KNet.BLL.ZL_Complain_Manage();
+
+        SqlWhere += " Order by KSM_Time desc";
+        KNet.BLL.Knet_Sales_Retrun_Maintain bll = new KNet.BLL.Knet_Sales_Retrun_Maintain();
         DataSet ds = bll.GetList(SqlWhere);
         this.MyGridView1.DataSource = ds;
-        MyGridView1.DataKeyNames = new string[] { "ZCM_ID" };
+        MyGridView1.DataKeyNames = new string[] {"KSM_ID"};
         MyGridView1.DataBind();
     }
 
@@ -114,6 +106,7 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
 
 
     }
+
     protected void Btn_Del_Click(object sender, EventArgs e)
     {
         AdminloginMess AM = new AdminloginMess();
@@ -123,17 +116,17 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
         {
             for (int i = 0; i < MyGridView1.Rows.Count; i++)
             {
-                CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+                CheckBox Ckb = (CheckBox) MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
                 if (Ckb.Checked)
                 {
                     string s_ID = MyGridView1.DataKeys[i].Value.ToString();
-                    s_Sql.Append(" Update   ZL_Complain_Manage set ZCM_Del='1' Where ZCM_ID='" + s_ID + "' ");
-                    s_Log.Append(s_ID+",");
+                    s_Sql.Append(" delete Knet_Sales_Retrun_Maintain where KSM_ID='"+s_ID+ "' ");
+                    s_Log.Append(s_ID + ",");
                 }
             }
             DbHelperSQL.ExecuteSql(s_Sql.ToString());
             this.DataShows();
-            AM.Add_Logs("ZL_Complain_Manage 删除 编号：" + s_Log + "");
+            AM.Add_Logs("Knet_Sales_Retrun_Maintain 删除 编号：" + s_Log + "");
             Alert("删除成功！");
         }
         catch (Exception ex)
@@ -142,7 +135,28 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
             return;
         }
     }
+    protected void GridView1_DataRowBinding(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            KNet.BLL.Knet_Sales_Retrun_Maintain Bll = new KNet.BLL.Knet_Sales_Retrun_Maintain();
 
+            string DirectInNo = MyGridView1.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
+            CheckBox cb = (CheckBox)e.Row.Cells[1].FindControl("Chbk");
+            this.BeginQuery("select KSM_State from Knet_Sales_Retrun_Maintain where KSM_ID='" + DirectInNo + "'");
+            this.QueryForDataTable();
+            DataTable Dtb_Re = Dtb_Result;
+            //KNet.Model.KNet_Sampling_List Model = Bll.GetModel(DirectInNo);
+            if (Dtb_Re.Rows[0][0].ToString()!="0" )
+            {
+                cb.Enabled = false;
+            }
+            else
+            {
+                cb.Enabled = true;
+            }
+        }
+    }
     public void btnBasicSearch_Click(object sender, EventArgs e)
     {
         this.advSearch.Style["display"] = "none";
@@ -167,10 +181,12 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
         s_AdvShow = Base_GetAdvShowHtml(arr_Fields, arr_Condition, arr_Text);
         this.DataShows();
     }
+
     protected void Ddl_Batch_TextChanged(object sender, EventArgs e)
     {
         this.DataShows();
     }
+
     protected void Btn_Save_Click(object sender, EventArgs e)
     {
         int i_Type = 1;
@@ -180,7 +196,7 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
         string s_FromID = "";
         for (int i = 0; i < this.MyGridView1.Rows.Count; i++)
         {
-            CheckBox cb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
+            CheckBox cb = (CheckBox) MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
             if (cb.Checked == true)
             {
                 s_FromID += "" + MyGridView1.DataKeys[i].Value.ToString() + ",";
@@ -196,13 +212,18 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
             s_FromID = s_FromID.Substring(0, s_FromID.Length - 1);
         }
         string s_CheckBoxAll = "";
-        KNet.BLL.KNet_Resource_OrganizationalStructure Bll_Organizational = new KNet.BLL.KNet_Resource_OrganizationalStructure();
-        DataSet Dts_Table = Bll_Organizational.GetList("  STRucPID<>'0'  and StrucValue in ('129652783822281241','129652783965723459','129652783693249229') ");
+        KNet.BLL.KNet_Resource_OrganizationalStructure Bll_Organizational =
+            new KNet.BLL.KNet_Resource_OrganizationalStructure();
+        DataSet Dts_Table =
+            Bll_Organizational.GetList(
+                "  STRucPID<>'0'  and StrucValue in ('129652783822281241','129652783965723459','129652783693249229') ");
         if (Dts_Table.Tables[0].Rows.Count > 0)
         {
             for (int i = 0; i < Dts_Table.Tables[0].Rows.Count; i++)
             {
-                string s_Details = Request["DetailView_" + Dts_Table.Tables[0].Rows[i][2].ToString() + ""] == null ? "" : Request["DetailView_" + Dts_Table.Tables[0].Rows[i][2].ToString() + ""].ToString();
+                string s_Details = Request["DetailView_" + Dts_Table.Tables[0].Rows[i][2].ToString() + ""] == null
+                    ? ""
+                    : Request["DetailView_" + Dts_Table.Tables[0].Rows[i][2].ToString() + ""].ToString();
                 if (s_Details != "")
                 {
                     s_CheckBoxAll += s_Details + ",";
@@ -242,30 +263,68 @@ public partial class Web_Sales_ZL_Complain_Manage_List : BasePage
             if (Bll_Share.Add(Arr_Details) == true)
             {
                 AlertAndRedirect("共享成功！", "ZL_Complain_Manage_List.aspx");
-                base.Base_SendMessage(s_CheckBoxAll, KNetPage.KHtmlEncode("有 来自" + AM.KNet_StaffName + " 共享的<a href='Web/SalesOpp/ZL_Complain_Manage_List.aspx?Batch=163'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'>销售计划</a>  ，敬请关注！"));
+                base.Base_SendMessage(s_CheckBoxAll,
+                    KNetPage.KHtmlEncode("有 来自" + AM.KNet_StaffName +
+                                         " 共享的<a href='Web/SalesOpp/ZL_Complain_Manage_List.aspx?Batch=163'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'>销售计划</a>  ，敬请关注！"));
             }
 
         }
 
     }
-    public string GetDState(object s_DPerson,string s_ID,string s_DName)
+
+    public string GetDState(string s_DPerson)
     {
-        string s_URL="";
+
+        string s_URL = "";
+        if (s_DPerson=="0")
+        {
+            s_URL = "<font color=red>未审核</font>";
+        }
+        else
+        {
+            s_URL = "<font color=blue>已审核</font>";
+        }
+        return s_URL;
+    }
+
+    public string GetProductsEdition(string KSD_ID,string KSD_Type,string KSD_Product)
+    {
+
+        string s_Return = "";
+       
+        this.BeginQuery(
+            "select ProductsBarCode,ProductsEdition,ProductsPattern,KSP_Code,ProductsName from KNet_Sys_Products where ProductsBarCode in(SELECT KSD_ProductCode FROM  Knet_Sales_Retrun_Maintain_Details where KSD_ID='"+ KSD_ID + "')");
+        this.QueryForDataTable();
         try
         {
-            s_DPerson=s_DPerson==null?"":s_DPerson.ToString();
-            KNet.BLL.ZL_Complain_Manage Bll= new KNet.BLL.ZL_Complain_Manage();
-            KNet.Model.ZL_Complain_Manage Model=Bll.GetModel(s_ID);
-            if (s_DPerson .ToString()== "")
+            if (this.Dtb_Result.Rows.Count > 0)
             {
-                s_URL = "<a href=\"ZL_Complain_Manage_Add.aspx?ID=" + s_ID + "&Type=" + s_DName + "\"><font color=red>未处理 " + s_DName + "</font></a>";
+                for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+                {
+                    //s_Return += Dtb_Result.Rows[i][1].ToString();
+                    s_Return += "<a href=\"/Web/Products/KnetProductsSetting_Details.aspx?BarCode=" + Dtb_Result.Rows[i][0].ToString() + "\"  target=\"_blank\">" + Dtb_Result.Rows[i][1].ToString() + "</a>" + "<br>";
+                }
+                return s_Return;
             }
             else
             {
-                s_URL = "<a href=\"ZL_Complain_Manage_Add.aspx?ID=" + s_ID + "&Type=" + s_DName + "\">" + s_DName + "</a>";
+                return "--";
             }
         }
-        catch { }
-        return s_URL;
+        catch
+        {
+            return "--";
+
+        }
+       
+    }
+    /// <summary>
+    /// 根据客户筛选
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Ddl_Supp_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+        DataShows();
     }
 }

@@ -139,7 +139,7 @@ public partial class Knet_Common_SelectProductsDemo : BasePage
                 string s_ProductsName = GridView1.Rows[i].Cells[1].Text;
                 string s_ProdctsEdition = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsEdition")).Text;
                 string s_ProductsCode = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("ProductsCode")).Text;
-             
+                //string ksp_Code= GridView1.Rows[i].Cells[2].Text;
                 int s_Number = ((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text == "" ? 1 : int.Parse(((TextBox)GridView1.Rows[i].Cells[0].FindControl("Tbx_Number")).Text);
                 cal += s_ProductsBarCode;
                 s_Return += s_ProductsBarCode + "," + s_ProductsName + "," + s_Number.ToString() + "," + s_ProdctsEdition + "," + s_ProductsCode + "|";

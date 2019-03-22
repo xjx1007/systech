@@ -148,6 +148,7 @@
                                 <asp:TemplateField HeaderText="备注" SortExpression="ProductsUnits" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                     <ItemTemplate>
                                         <asp:TextBox ID="Tbx_Remark" runat="server" Width="70px" Text=""></asp:TextBox>
+                                          <asp:TextBox ID="Number" runat="server" CssClass="Custom_Hidden"  Text='<%# DataBinder.Eval(Container.DataItem, "Number").ToString()%>' ></asp:TextBox>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

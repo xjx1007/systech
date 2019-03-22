@@ -57,6 +57,25 @@ public partial class Web_Knet_Procure_Suppliers_View : BasePage
             this.SuppPeopletxt.Text = model.SuppPeople;
             this.SuppMobiTeltxt.Text = model.SuppMobiTel;
             this.SuppPhonetxt.Text = model.SuppPhone;
+            //this.KPS_Production.Text = model.KPS_Production;
+            //this.KPS_ProductionPho.Text = model.KPS_ProductionPho;
+            this.KPS_WareHouse.Text = model.KPS_WareHouse;
+            this.KPS_WareHousePho.Text = model.KPS_WareHousePho;
+            this.KPS_BusinessUrl.Text = "<input Name=\"KPS_BusinessUrl\"  type=\"hidden\"  value=" + model.KPS_BusinessUrl +
+                                        "><input Name=\"KPS_Business\"  type=\"hidden\"  value=" + model.KPS_Business +
+                                        "><a href=\"" + model.KPS_BusinessUrl + "\" >" + model.KPS_Business + "</a>";
+            this.KPS_InvoiceUrl.Text = "<input Name=\"KPS_InvoiceUrl\"  type=\"hidden\"  value=" + model.KPS_InvoiceUrl +
+                                       "><input Name=\"KPS_Invoice\"  type=\"hidden\"  value=" + model.KPS_Invoice +
+                                       "><a href=\"" + model.KPS_InvoiceUrl + "\" >" + model.KPS_Invoice + "</a>";
+            this.KPS_ContractUrl.Text = "<input Name=\"KPS_ContractUrl\"  type=\"hidden\"  value=" + model.KPS_ContractUrl +
+                                       "><input Name=\"KPS_Contract\"  type=\"hidden\"  value=" + model.KPS_Contract +
+                                       "><a href=\"" + model.KPS_ContractUrl + "\" >" + model.KPS_Contract + "</a>";
+            this.Lbl_Five.Text= "<input Name=\"KPS_FiveUrl\"  type=\"hidden\"  value=" + model.KPS_FiveUrl +
+                                       "><input Name=\"KPS_FiveName\"  type=\"hidden\"  value=" + model.KPS_FiveName +
+                                       "><a href=\"" + model.KPS_FiveUrl + "\" >" + model.KPS_FiveName + "</a>";
+            this.Lbl_SQE.Text = "<input Name=\"KPS_SQEUrl\"  type=\"hidden\"  value=" + model.KSP_SQEUrl +
+                                       "><input Name=\"KPS_SQEName\"  type=\"hidden\"  value=" + model.KPS_SQEName +
+                                       "><a href=\"" + model.KSP_SQEUrl + "\" >" + model.KPS_SQEName + "</a>";
             this.SuppFaxtxt.Text = model.SuppFax;
             this.SuppEmailtxt.Text = model.SuppEmail;
             this.Lbl_DutyPerson.Text = base.Base_GetUserName(model.KPS_DutyPerson);
@@ -67,7 +86,33 @@ public partial class Web_Knet_Procure_Suppliers_View : BasePage
             this.SuppZipCodetxt.Text = model.SuppZipCode;
             this.SuppBankNametxt.Text = model.SuppBankName;
             this.SuppBankAccounttxt.Text = model.SuppBankAccount;
+            this.KPS_CdBankName.Text = model.KPS_CdBankName;
+            this.KPS_CdBankNum.Text = model.KPS_CdBankNum;
             this.SuppProductstxt.Text = model.SuppProducts;
+            if (model.KPS_Check=="1")
+            {
+                Label2.Text = "是";
+            }
+            else
+            {
+                Label2.Text = "否";
+            }
+            if (model.KPS_Nature.ToString()=="0")
+            {
+                Lbl_Nature.Text = "";
+            }
+            else if (model.KPS_Nature.ToString()=="1")
+            {
+                Lbl_Nature.Text = "自营";
+            }
+            else if (model.KPS_Nature.ToString() == "2")
+            {
+                Lbl_Nature.Text = "店铺";
+            }
+            else if (model.KPS_Nature.ToString() == "3")
+            {
+                Lbl_Nature.Text = "加工厂";
+            }
             this.Remarkstxt.Text = model.Remarks;
             this.Lbl_Level.Text = base.Base_GetBasicCodeName("112", model.KPS_Level);
             this.Lbl_Days.Text = base.Base_GetBasicCodeName("300", model.KPS_Days.ToString());

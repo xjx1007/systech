@@ -22,6 +22,11 @@
         var temp = window.showModalDialog("Procure_Xh_View.aspx?ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
        // window.location.reload(); 
     }
+    function GPrint2(ID,Sampling) {
+        //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')
+        var temp = window.showModalDialog("Procure_Sampling_View.aspx?sampling="+Sampling+"&&ID=" + ID + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+        // window.location.reload(); 
+    }
 </script>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
@@ -317,7 +322,7 @@
                                     <asp:TemplateField HeaderText="确认" SortExpression="KPO_QRState" HeaderStyle-Font-Size="12px"
                                         ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
-                                            <%# GetPrint(DataBinder.Eval(Container.DataItem, "WareHouseNo").ToString())%>
+                                            <%# GetPrint(DataBinder.Eval(Container.DataItem, "WareHouseNo").ToString(),DataBinder.Eval(Container.DataItem, "OrderNo").ToString())%>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="对账" HeaderStyle-Font-Size="12px"

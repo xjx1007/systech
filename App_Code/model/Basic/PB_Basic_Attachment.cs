@@ -24,6 +24,7 @@ namespace KNet.Model
         private string _PBA_FileType;
         private string _PBA_Edition;
         private string _PBA_UpdateFID;
+        private DateTime _PBA_EndTime;
         /// <summary>
         /// 
         /// </summary>
@@ -31,6 +32,11 @@ namespace KNet.Model
         {
             set { _pba_id = value; }
             get { return _pba_id; }
+        }
+        public DateTime PBA_EndTime
+        {
+            set { _PBA_EndTime = value; }
+            get { return _PBA_EndTime; }
         }
         /// <summary>
         /// 

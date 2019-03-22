@@ -314,6 +314,20 @@ namespace KNet.DAL
         /// <summary>
         /// 获得数据列表
         /// </summary>
+        public DataSet GetList1(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * ");
+            strSql.Append(" FROM System_Message_Manage ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();

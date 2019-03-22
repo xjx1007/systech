@@ -32,10 +32,31 @@ public partial class Web_Common_AddComments : BasePage
         {
             BLL.Add(model);
             AM.Add_Logs("评论增加成功：编号：" + model.PBC_FID);
+            //StringBuilder s = new StringBuilder();
+            //s.Append("<script language=javascript>" + "\n");
+            //s.Append("alert('添加成功！');" + "\n");
+            //s.Append("if(window.opener != undefined) {window.opener.returnValue='1';} else{window.returnValue='1';}" + "\n");
+            //s.Append("window.close();" + "\n");
+            //s.Append("</script>");
+            //Type cstype = this.GetType();
+            //ClientScriptManager cs = Page.ClientScript;
+            //string csname = "ltype";
+            //if (!cs.IsStartupScriptRegistered(cstype, csname))
+            //    cs.RegisterStartupScript(cstype, csname, s.ToString());
+            string s_Return = "1";
             StringBuilder s = new StringBuilder();
             s.Append("<script language=javascript>" + "\n");
             s.Append("alert('添加成功！');" + "\n");
-            s.Append("if(window.opener != undefined) {window.opener.returnValue='1';} else{window.returnValue='1';}" + "\n");
+            s.Append("if(window.opener != undefined)");
+            s.Append("{\n");
+            s.Append("    window.opener.returnValue = '" + s_Return + "';\n");
+            s.Append("    window.opener.SetReturnValueInOpenner_UploadForProducts('" + s_Return + "');\n");
+            s.Append("}\n");
+            s.Append("else\n");
+            s.Append("{\n");
+            s.Append("    window.returnValue = '" + s_Return + "';\n");
+            s.Append("}\n");
+            //s.Append("if(window.opener != undefined) {window.opener.returnValue='1';} else{window.returnValue='1';}" + "\n");
             s.Append("window.close();" + "\n");
             s.Append("</script>");
             Type cstype = this.GetType();

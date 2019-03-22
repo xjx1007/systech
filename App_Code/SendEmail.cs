@@ -33,11 +33,14 @@ public class SendEmail
         AdminloginMess AM = new AdminloginMess();
         KNet.BLL.PB_Mail_Setting Bll_Seting = new KNet.BLL.PB_Mail_Setting();
         KNet.Model.PB_Mail_Setting Model_Seting = Bll_Seting.GetModel(s_SettingID);
-        SmtpClient client = new SmtpClient();
+        SmtpClient client = new SmtpClient("smtp.mxhichina.com",587);
+        //client.UseDefaultCredentials = true;
+        //string[] str = Model_Seting.PMS_SendPerson.ToString().Split('@');
         client.Credentials = new System.Net.NetworkCredential(Model_Seting.PMS_SendPerson, Model_Seting.PMS_Password);
         client.Host = Model_Seting.PMS_Sever;
         client.Port = int.Parse(Model_Seting.PMS_Port);
         client.EnableSsl = false;
+       
         client.DeliveryMethod = SmtpDeliveryMethod.Network;
         MailMessage newMessage = new MailMessage();
         newMessage.From = new MailAddress(Model_Seting.PMS_SendEmail);

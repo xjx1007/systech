@@ -42,9 +42,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Knet_Procure_OrdersList(");
-            strSql.Append("OrderTopic,OrderNo,OrderDateTime,OrderPreToDate,SuppNo,OrderPaymentNotes,OrderStaffBranch,OrderStaffDepart,OrderStaffNo,OrderCheckStaffNo,OrderTransShare,OrderType,OrderRemarks,AdvancesPrice,paykings,ContractNo,ContractAddress,InvoRate,ReceiveSuppNo,Chk_IsChip,Chk_Battery,ParentOrderNo,ContractNos,KPO_CTime,KPO_Creator,KPO_MTime,KPO_Mender,ID,ArrivalDate,KPO_ScDetails,OrderCheckYN,KPO_PriceState,KPO_PreHouseNo)");
+            strSql.Append("OrderTopic,OrderNo,OrderDateTime,OrderPreToDate,SuppNo,OrderPaymentNotes,OrderStaffBranch,OrderStaffDepart,OrderStaffNo,OrderCheckStaffNo,OrderTransShare,OrderType,OrderRemarks,AdvancesPrice,paykings,ContractNo,ContractAddress,InvoRate,ReceiveSuppNo,Chk_IsChip,Chk_Battery,ParentOrderNo,ContractNos,KPO_CTime,KPO_Creator,KPO_MTime,KPO_Mender,ID,ArrivalDate,KPO_ScDetails,OrderCheckYN,KPO_PriceState,KPO_PreHouseNo,KPO_Sampling)");
             strSql.Append(" values (");
-            strSql.Append("@OrderTopic,@OrderNo,@OrderDateTime,@OrderPreToDate,@SuppNo,@OrderPaymentNotes,@OrderStaffBranch,@OrderStaffDepart,@OrderStaffNo,@OrderCheckStaffNo,@OrderTransShare,@OrderType,@OrderRemarks,@AdvancesPrice,@paykings,@ContractNo,@ContractAddress,@InvoRate,@ReceiveSuppNo,@Chk_IsChip,@Chk_Battery,@ParentOrderNo,@ContractNos,@KPO_CTime,@KPO_Creator,@KPO_MTime,@KPO_Mender,@ID,@ArrivalDate,@KPO_ScDetails,@OrderCheckYN,@KPO_PriceState,@KPO_PreHouseNo)");
+            strSql.Append("@OrderTopic,@OrderNo,@OrderDateTime,@OrderPreToDate,@SuppNo,@OrderPaymentNotes,@OrderStaffBranch,@OrderStaffDepart,@OrderStaffNo,@OrderCheckStaffNo,@OrderTransShare,@OrderType,@OrderRemarks,@AdvancesPrice,@paykings,@ContractNo,@ContractAddress,@InvoRate,@ReceiveSuppNo,@Chk_IsChip,@Chk_Battery,@ParentOrderNo,@ContractNos,@KPO_CTime,@KPO_Creator,@KPO_MTime,@KPO_Mender,@ID,@ArrivalDate,@KPO_ScDetails,@OrderCheckYN,@KPO_PriceState,@KPO_PreHouseNo,@KPO_Sampling)");
             SqlParameter[] parameters = {
 					new SqlParameter("@OrderTopic", SqlDbType.NVarChar,50),
 					new SqlParameter("@OrderNo", SqlDbType.NVarChar,50),
@@ -78,8 +78,9 @@ namespace KNet.DAL
                      new SqlParameter("@KPO_ScDetails", SqlDbType.Text),
                      new SqlParameter("@OrderCheckYN", SqlDbType.Bit),
                      new SqlParameter("@KPO_PriceState", SqlDbType.Int),
-                     new SqlParameter("@KPO_PreHouseNo", SqlDbType.VarChar,50)
-                     
+                     new SqlParameter("@KPO_PreHouseNo", SqlDbType.VarChar,50),
+                     new SqlParameter("@KPO_Sampling", SqlDbType.VarChar,50)
+
                                         };
             parameters[0].Value = model.OrderTopic;
             parameters[1].Value = model.OrderNo;
@@ -114,8 +115,9 @@ namespace KNet.DAL
             parameters[30].Value = model.OrderCheckYN;
             parameters[31].Value = model.KPO_PriceState;
             parameters[32].Value = model.KPO_PreHouseNo;
-            
-            
+            parameters[33].Value = model.KPO_Sampling;
+
+
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
 
@@ -586,7 +588,10 @@ namespace KNet.DAL
                 {
                     model.KPO_PriceState = int.Parse(ds.Tables[0].Rows[0]["KPO_PriceState"].ToString());
                 }
-
+                if (ds.Tables[0].Rows[0]["KPO_Sampling"] != null && ds.Tables[0].Rows[0]["KPO_Sampling"].ToString() != "")
+                {
+                    model.KPO_Sampling = ds.Tables[0].Rows[0]["KPO_Sampling"].ToString();
+                }
 
                 if (ds.Tables[0].Rows[0]["KPO_PreHouseNo"] != null && ds.Tables[0].Rows[0]["KPO_PreHouseNo"].ToString() != "")
                 {
@@ -870,6 +875,10 @@ namespace KNet.DAL
                 {
                     model.KPO_IsChange = int.Parse(ds.Tables[0].Rows[0]["KPO_IsChange"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["KPO_Sampling"] != null && ds.Tables[0].Rows[0]["KPO_Sampling"].ToString() != "")
+                {
+                    model.KPO_Sampling = ds.Tables[0].Rows[0]["KPO_Sampling"].ToString();
+                }
 
                 if (ds.Tables[0].Rows[0]["KPO_PreHouseNo"] != null && ds.Tables[0].Rows[0]["KPO_PreHouseNo"].ToString() != "")
                 {
@@ -899,11 +908,22 @@ namespace KNet.DAL
 
             if (strWhere.Trim() != "")
             {
-                strSql.Append(" where " + strWhere);
+                strSql.Append(" where  " + strWhere);//KPO_Del=1  and orderType!='128860698200781250' and
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
+        public DataSet GetList1(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 * from Knet_Procure_OrdersList a  join v_OrderRKWithNoDel b on a.OrderNO=b.V_OrderNo  ");
+           
 
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where  OrderNo=@OrderNo " + strWhere);//KPO_Del=1  and orderType!='128860698200781250' and
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         #endregion  成员方法
     }
 }

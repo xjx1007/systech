@@ -34,6 +34,7 @@ namespace KNet.BLL
         /// </summary>
         public void Update(KNet.Model.Knet_Procure_Suppliers model)
         {
+            model.KPS_Del = 1;
             dal.Update(model);
         }
         

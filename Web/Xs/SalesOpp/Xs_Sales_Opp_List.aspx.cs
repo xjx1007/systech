@@ -91,7 +91,7 @@ public partial class Web_Sales_Xs_Sales_Opp_List : BasePage
         //仅查看自己
         if (AM.YNAuthority("销售机会仅自己查看") == true)
         {
-            if (AM.KNet_StaffName != "项洲")
+            if (AM.KNet_StaffName != "薛建新")
             {
                 SqlWhere += " and (XSO_Creator='" + AM.KNet_StaffNo + "' ";
                 //共享给自己的

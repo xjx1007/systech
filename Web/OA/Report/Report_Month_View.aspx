@@ -248,7 +248,8 @@ head:first-child+body tbody[class].scrollContent td + td + td {
     <form id="form1" runat="server">
     <div>
         <input type="button" value="打印预览" onclick="javascript:prn1_preview()" id="Button1" />
-        <input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />
+       <%-- <input type="button" value="导出Excel" onclick="javascript:OutToFileMoreSheet()" id="Button2" />--%>
+        <input type="button" value="导出Excel"  id="Button2" runat="server" OnServerClick="Button2_OnServerClick" />
         <asp:Label runat="server" ID="Lbl_Details"></asp:Label>
     </div>
     <asp:TextBox  runat="server" ID="Tbx_Title" CssClass="Custom_Hidden"></asp:TextBox>

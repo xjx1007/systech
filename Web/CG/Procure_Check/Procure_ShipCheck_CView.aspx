@@ -257,12 +257,22 @@
                                                                             <b>对账</b></td>
                                                                         <td class="ListHead" nowrap>
                                                                             <b>备品</b></td>
+                                                                         <td class="ListHead" nowrap>
+                                                                            <b>入库数量</b></td>
+                                                                          <td class="ListHead" nowrap>
+                                                                            <b>报废数量</b></td>
+                                                                         <td class="ListHead" nowrap>
+                                                                            <b>报废单价</b></td>
                                                                         <td class="ListHead" nowrap>
                                                                             <b>单价</b></td>
                                                                         <td class="ListHead" nowrap>
                                                                             <b>加单</b></td>
+                                                                         <td class="ListHead" nowrap>
+                                                                            <b>额外扣除</b></td>
+                                                                         <td class="ListHead" nowrap>
+                                                                            <b>额外金额</b></td>
                                                                         <td class="ListHead" nowrap>
-                                                                            <b>总金额</b></td>
+                                                                            <b>应付金额</b></td>
                                                                         <td class="ListHead" nowrap>
                                                                             <b>备注</b></td>
                                                                         <td class="ListHead" nowrap>
@@ -274,6 +284,7 @@
                                                                 </table>
                                                             </td>
                                                         </tr>
+                                                       
                                                         <tr>
                                                             <td colspan="4" class="dvInnerHeader">
                                                                 <b>需开票明细</b>
@@ -345,7 +356,7 @@
                                                             </td>
                                                         </tr>
 
-                                                        <tr>
+                                                       <%-- <tr>
                                                             <td colspan="4">
                                                                 <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
                                                             </td>
@@ -355,7 +366,7 @@
                                                     <td colspan="4">
                                                         <uc3:CommentList ID="CommentList1" runat="server" CommentFID="0" CommentType="-1" />
                                                     </td>
-                                                </tr>
+                                                </tr>--%>
                                                     <tr>
                                                         <td colspan="4">
                                                             

@@ -35,8 +35,8 @@
 			<tr>
 			<td>
 				<table border=0 cellspacing=0 cellpadding=5>
-				<tr>
-				<td style="padding-right:0px;padding-left:10px;"><a href="javascript:;"  onclick="PageGo('Knet_Procure_Suppliers_Add.aspx')"><img src="../../themes/softed/images/btnL3Add.gif" alt="创建 供应商..." title="创建 供应商..." border=0></a></td>
+				<tr><%--onclick="PageGo('Knet_Procure_Suppliers_Add.aspx')"--%>
+				<td style="padding-right:0px;padding-left:10px;"><a href="javascript:;"  ><img src="../../themes/softed/images/btnL3Add.gif" alt="创建 供应商..." title="创建 供应商..." border=0></a></td>
 				<td style="padding-right:0px;"><asp:ImageButton ImageUrl="../../themes/softed/images/btnL3Delete.gif" runat="server" ID="Btn_Del" OnClick="Btn_Del_Click" /></td>
 				<td style="padding-right:10px"><a href="javascript:;" onClick="ShowDiv()" ><img src="../../themes/softed/images/btnL3Search.gif" alt="查找 供应商..." title="查找 供应商..." border=0></a></td>
 				<td style="padding-right:0px;padding-left:10px;"><img src="../../themes/softed/images/tbarImport.gif" alt="*导入 供应商" title="*导入 供应商" border="0"></td>	

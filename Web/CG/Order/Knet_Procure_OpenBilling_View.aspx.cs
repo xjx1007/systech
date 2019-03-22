@@ -72,9 +72,10 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                 GridView1.DataBind();
             }
             //s_Details1 = "<iframe  runat=\"server\"  style=\"width: 100%; height: 800px\" id=\"Iframe1\" name=\"top\" marginheight=\"0\" src=\"/Web/Sc/Sc_Plan_Material.aspx?OrderNo=" + s_FID + "\" frameborder=\"0\"></iframe>";
-      
 
-            this.Lbl_Link.Text = "<a href=\"/Web/CG/OrderInWareHouse/Knet_Procure_WareHouseList_Add.aspx?OrderNo=" + s_ID + "\" class=\"webMnu\">创建入库单</a> ";
+
+            this.Lbl_Link.Text = "<a href=\"/Web/CG/OrderInWareHouse/Knet_Procure_WareHouseList_Add.aspx?OrderNo=" + s_ID + "\" class=\"webMnu\">创建退货单</a> ";
+            Lbl_Submitted.Text = "<a href=\"/Web/ProductSubmitted/Knet_Submitted_Insert_Product.aspx?OrderNo=" + s_ID + "\" class=\"webMnu\">创建送检单</a> ";
             this.Lbl_Link1.Text = "<a href=\"/Web/CG/Payment/CG_Payment_For_Add.aspx?OrderNo=" + s_ID + "\" class=\"webMnu\">创建用款申请</a> ";
 
             
@@ -88,7 +89,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
             GridView1.DataKeyNames = new string[] { "OrderNo" };
             GridView1.DataBind();
             s_Details1 = "<iframe  runat=\"server\"  style=\"width: 100%; height: 800px\" id=\"Iframe1\" name=\"top\" marginheight=\"0\" src=\"/Web/Sc/Sc_Plan_Material.aspx?OrderNo=" + s_ID + "\" frameborder=\"0\"></iframe>";
-            this.Lbl_Link.Text = "<a href=\"/Web/ScExpend/Sc_Expend_Add.aspx?OrderNo=" + s_ID + "\" class=\"webMnu\">创建入库单</a> ";
+            //this.Lbl_Link.Text = "<a href=\"/Web/ScExpend/Sc_Expend_Add.aspx?OrderNo=" + s_ID + "\" class=\"webMnu\">创建入库单</a> ";
         }
         this.BeginQuery("Select Sum(isnull(cast( OrderCheckYN as int),0)) from Knet_Procure_OrdersList where ParentOrderNo='" + this.Tbx_ID.Text + "'");
         string s_Return = this.QueryForReturn();
@@ -195,7 +196,16 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
         this.Lbl_IsPayMent.Text = base.Base_GetBasicCodeName("127", Model.KPO_PayState);
         this.Lbl_PDF.Text = "<a href=\"PDF/" + Model.OrderNo + ".PDF\" target=\"_blank\">" + Model.OrderNo + ".PDF</a>";
         KNet.BLL.Knet_Procure_OrdersList_Details Bll_Details = new KNet.BLL.Knet_Procure_OrdersList_Details();
-        DataSet Dts_Table = Bll_Details.GetList(" a.OrderNo='" + s_ID + "' order by isnull(e.XPD_Order,0)");
+        DataSet Dts_Table;
+        if (Model.KPO_Sampling=="1")
+        {
+             Dts_Table = Bll_Details.GetList2(s_ID);
+        }
+        else
+        {
+             Dts_Table = Bll_Details.GetList(" a.OrderNo='" + s_ID + "' order by isnull(e.XPD_Order,0)");
+        }
+        
 
         decimal d_All_OrderTotal = 0, d_All_HandTotal = 0, d_All_Total = 0, d_All_TotalNeNum = 0, d_All_WrkTotalNeNum = 0; ;
         bool b_boll = false;
@@ -209,11 +219,40 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
                 d_All_Total += d_Amount;
                 s_MyTable_Detail += " <tr>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" +Convert.ToString(i+1)+ "</td>";
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["XPD_Order"].ToString() + "</td>";
+                if (Model.KPO_Sampling == "1")
+                {
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">0</td>";
+                }
+                else
+                {
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["XPD_Order"].ToString() + "</td>";
+                }
+                if (Model.KPO_Sampling == "1")
+                {
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["ProductsName"].ToString() + "</td>";
+                }
+                else
+                {
+                    s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProdutsName_Link(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                }
+                if (Model.KPO_Sampling == "1")
+                {
+                    s_MyTable_Detail += "<td  class=\"ListHeadDetails\" align=\"center\">0</td>";
+                }
+                else
+                {
+                    s_MyTable_Detail += "<td  class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                }
+                if (Model.KPO_Sampling == "1")
+                {
+                    s_MyTable_Detail += "<td  class=\"ListHeadDetails\" align=\"center\"></td>";
+                }
+                else
+                {
+                    s_MyTable_Detail += "<td  class=\"ListHeadDetails\" nowrap align=\"center\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+                }
 
-                s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProdutsName_Link(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                s_MyTable_Detail += "<td  class=\"ListHeadDetails\" align=\"center\">" + base.Base_GetProductsCode(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
-                s_MyTable_Detail += "<td  class=\"ListHeadDetails\" nowrap align=\"center\">" + base.Base_GetProductsEdition(Dts_Table.Tables[0].Rows[i]["ProductsBarCode"].ToString()) + "</td>";
+              
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["KPOD_CPBZNumber"].ToString(), 0) + "</td>";
                 s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(Dts_Table.Tables[0].Rows[i]["KPOD_BZNumber"].ToString(), 0) + "</td>";
 
@@ -1316,7 +1355,10 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_View : BasePage
             AM.Add_Logs("采购订单审批：" + this.Tbx_ID.Text);
             Alert("审批成功！");
         }
-        catch { }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 
 

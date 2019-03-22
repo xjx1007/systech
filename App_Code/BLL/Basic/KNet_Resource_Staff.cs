@@ -105,7 +105,11 @@ namespace KNet.BLL
         {
             return dal.GetSonIDs(ID);
         }
-       
+        public string GetSonIDs1(string ID)
+        {
+            return dal.GetSonIDs1(ID);
+        }
+
         /// <summary>
         /// 获得数据列表
         /// </summary>

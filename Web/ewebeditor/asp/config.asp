@@ -1,6 +1,6 @@
 ﻿<%
 Dim sLicense
-sLicense = "3:2323:2:2:1::173.36.45.169:c4828092ad389b22fcdd568e3dd11a06"
+sLicense = "3:2323:2:2:1::erp.systech.com.cn:c4828092ad389b22fcdd568e3dd11a06"
 
 Dim sUsername, sPassword
 sUsername = "admin"

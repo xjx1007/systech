@@ -108,34 +108,41 @@
                                                         ID="RequiredFieldValidator2" runat="server" ErrorMessage="文档名称非空！" ControlToValidate="Tbx_Name" Display="Dynamic"></asp:RequiredFieldValidator></td>
                                         </tr>
                                         <tr id="Tr1" runat="server">
+                                            
+
                                             <td height="25" align="right" class="dvtCellLabel">文档类型:</td>
                                             <td align="left" class="dvtCellInfo">
-                                                <asp:DropDownList runat="Server" ID="Ddl_Type"></asp:DropDownList>
+                                                <asp:DropDownList runat="Server" ID="Ddl_Type"></asp:DropDownList>(<font color="red">*</font>)
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Ddl_Type"
                                                     Display="Dynamic" ErrorMessage="文档类型非空"></asp:RequiredFieldValidator></td>
+                                            <td height="25" align="right" class="dvtCellLabel">保密级别:</td>
+                                            <td align="left" class="dvtCellInfo">
+                                                <asp:DropDownList runat="Server" ID="Ddl_Rank"></asp:DropDownList>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="Ddl_Rank"
+                                                    Display="Dynamic" ErrorMessage="保密级别非空"></asp:RequiredFieldValidator></td>
+                                        </tr>
+
+                                        <tr id="Tr3" runat="server">
                                             <td height="25" align="right" class="dvtCellLabel">负责人:</td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:DropDownList runat="Server" ID="Ddl_DutyPerson"></asp:DropDownList>
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Ddl_DutyPerson"
                                                     Display="Dynamic" ErrorMessage="负责人"></asp:RequiredFieldValidator></td>
-                                        </tr>
-
-                                        <tr id="Tr3" runat="server">
                                             <td height="25" align="right" class="dvtCellLabel">版本号:</td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:TextBox ID="Tbx_Visio" runat="server" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="200px"></asp:TextBox></td>
 
+                                        </tr>
+
+                                        <tr id="AddPic" runat="server">
                                             <td height="25" align="right" class="dvtCellLabel">上级文档:</td>
                                             <td align="left" class="dvtCellInfo">
                                                 <asp:TextBox ID="tbx_FaterId" runat="server" CssClass="Custom_Hidden" Width="200px"></asp:TextBox>
                                                 <asp:TextBox ID="Tbx_FaterName" runat="server" Enabled="false" CssClass="detailedViewTextBox"
                                                     OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="200px"></asp:TextBox>
-                                                <img tabindex="8" src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />(<font color="red">*</font>)<br />
+                                                <img tabindex="8" src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" /><br />
                                             </td>
-
-                                        </tr>
-                                        <tr id="AddPic" runat="server">
                                             <td height="25" align="right" class="dvtCellLabel">文档路径:</td>
                                             <td align="left" class="dvtCellInfo" colspan="3">
                                                 <asp:LinkButton ID="Lbl_Spce" runat="server" OnClick="Lbl_Spce_Click"></asp:LinkButton><input id="uploadFile" type="file" runat="server" class="Boxx" size="30" />&nbsp;

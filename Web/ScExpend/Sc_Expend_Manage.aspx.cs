@@ -98,7 +98,7 @@ public partial class Sc_Expend_Manage : BasePage
 
             KNet.BLL.Sc_Expend_Manage bll = new KNet.BLL.Sc_Expend_Manage();
             KNet.Model.Sc_Expend_Manage Model = bll.GetModel(SEMID);
-            if (Model.SEM_CheckYN != 0)
+            if (Model.SEM_CheckYN != 0&& Model.SEM_CheckYN != 1)
             {
                 cb.Enabled = false;
             }

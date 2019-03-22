@@ -282,6 +282,11 @@
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>
+                                        
+                                         <asp:BoundField DataField="KPP_PCPrice" ItemStyle-Font-Size="12px" HeaderText="赔偿费" ItemStyle-Width="40px" HeaderStyle-Font-Size="12px" SortExpression="KPP_PCPrice" HtmlEncode="false">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
 
                                         <asp:BoundField DataField="HandPrice" ItemStyle-Font-Size="12px" HeaderText="加工费" ItemStyle-Width="40px" HeaderStyle-Font-Size="12px" SortExpression="HandPrice" HtmlEncode="false">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />

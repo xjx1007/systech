@@ -39,7 +39,17 @@ namespace KNet.Model
         private string _KPP_Creator;
         private string _KPP_AllRemarks;
         private string _KPP_Brand;
+        private decimal? _KPP_PCPrice;
 
+
+        /// <summary>
+        /// 赔偿单价
+        /// </summary>
+        public decimal? KPP_PCPrice
+        {
+            set { _KPP_PCPrice = value; }
+            get { return _KPP_PCPrice; }
+        }
         /// <summary>
         /// 建议销售价格
         /// </summary>

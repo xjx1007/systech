@@ -158,16 +158,21 @@
                             </tr>
                             <tr>
                                 <td class="dvtCellLabel">调出仓库:</td>
-                                <td class="dvtCellInfo" colspan="3">
+                                <td class="dvtCellInfo">
                                     <asp:Label ID="Lbl_HouseNo" runat="server" Style="display: none"></asp:Label>
                                     <asp:Label ID="Lbl_House_Out" runat="server"></asp:Label></td>
+                                <td class="dvtCellLabel">送货单附件:</td>
+                                <td class="dvtCellInfo">
+                                    <asp:Label ID="KWA_UploadUrl" runat="server"></asp:Label>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="dvtCellLabel">调入仓库:</td>
-                                <td class="dvtCellInfo" colspan="3">
+                                <td class="dvtCellInfo">
                                     <asp:Label ID="Lbl_House_int" runat="server"></asp:Label>
                                     <asp:Label ID="Lbl_House_int0" runat="server" CssClass="Custom_Hidden"></asp:Label></td>
-
+                                 <td class="dvtCellLabel">是否实物:</td>
+                                <td class="dvtCellInfo">
+                                    <input type="checkbox" runat="server" id="KWA_IsEntity"/>
                             </tr>
 
                             <tr>
@@ -207,93 +212,181 @@
                                     </table>
                                 </td>
                             </tr>
-                            
+
                             <tr>
                                 <td colspan="4" class="dvInnerHeader">
                                     <b>维修品调拨</b>
                                 </td>
                             </tr>
-                            
+
                             <tr>
                                 <td colspan="4">
-                              <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px">
-                                    <Columns>
+                                    <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" PageSize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px">
+                                        <Columns>
 
-                                        <asp:TemplateField HeaderText="调拨单号" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                            <ItemTemplate>
-                                                <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>"  target="_blank"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
-                                            HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <a href="/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %>" target="_blank">
-                                                    <%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %></a>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        
-                                        <asp:TemplateField HeaderText="调拨维修品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),0)%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="维修品数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),1)%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField HeaderText="调拨日期" DataField="AllocateDateTime" SortExpression="AllocateDateTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
-                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
-                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
-                                        </asp:BoundField>
-                                        <asp:TemplateField HeaderText="调出仓库" SortExpression="HouseNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo_int").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="调出入库" SortExpression="HouseNo_int" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# base.Base_GetHouseName("131429356506502002")%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="调拨单号" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+                                                    <a href="KNet_WareHouse_WareCheck_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "AllocateNo") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "AllocateNo").ToString()%></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                                HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <a href="/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %>" target="_blank">
+                                                        <%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="调拨产品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# GetDirectInProductsPatten(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="调拨维修品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),0)%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="维修品数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),1)%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField HeaderText="调拨日期" DataField="AllocateDateTime" SortExpression="AllocateDateTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                                <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            </asp:BoundField>
+                                            <asp:TemplateField HeaderText="调出仓库" SortExpression="HouseNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo_int").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="调出入库" SortExpression="HouseNo_int" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetHouseName("131714487416967158")%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="调拨产品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# GetDirectInProductsPatten(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
 
-                                        <asp:TemplateField HeaderText="调拨总数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# GetDirectInNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="经手人" SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-                                            <ItemTemplate>
-                                                <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        
-                                        <asp:TemplateField HeaderText="仓库确认" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                            <ItemTemplate>
+                                            <asp:TemplateField HeaderText="调拨总数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# GetDirectInNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="经手人" SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
 
-                                                <%# GetCheck(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="审核" SortExpression="AllocateCheckYN" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-                                            <ItemTemplate>
-                                                <%# GetOrderCheckYN(DataBinder.Eval(Container.DataItem, "AllocateNo"))%>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                    <HeaderStyle CssClass='colHeader' />
-                                    <RowStyle CssClass='listTableRow' />
-                                    <AlternatingRowStyle BackColor="#E3EAF2" />
-                                    <PagerStyle CssClass='Custom_DgPage' />
-                                </cc1:MyGridView>
+                                            <asp:TemplateField HeaderText="仓库确认" SortExpression="AllocateNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+
+                                                    <%# GetCheck(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="审核" SortExpression="AllocateCheckYN" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+                                                    <%# GetOrderCheckYN(DataBinder.Eval(Container.DataItem, "AllocateNo"))%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <HeaderStyle CssClass='colHeader' />
+                                        <RowStyle CssClass='listTableRow' />
+                                        <AlternatingRowStyle BackColor="#E3EAF2" />
+                                        <PagerStyle CssClass='Custom_DgPage' />
+                                    </cc1:MyGridView>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="4" class="dvInnerHeader">
+                                    <b>报废品研发领用明细</b>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="4">
+                                    <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="true" PageSize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px">
+                                        <Columns>
+
+                                            <asp:TemplateField HeaderText="领用单号" SortExpression="DirectOutNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+                                                    <a href="web/WareHouseOut/KNet_WareHouse_DirectOut_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "DirectOutNo") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "DirectOutNo").ToString()%></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <%-- <asp:TemplateField HeaderText="生产单号" SortExpression="OrderNo" ItemStyle-HorizontalAlign="Left"
+                                                HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <a href="/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %>" target="_blank">
+                                                        <%# DataBinder.Eval(Container.DataItem, "KWA_OrderNo") %></a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
+
+                                            <%-- <asp:TemplateField HeaderText="调拨维修品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),0)%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
+                                            <%--<asp:TemplateField HeaderText="维修品数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# GetDbState(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString(),1)%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
+                                            <asp:BoundField HeaderText="领用日期" DataField="Add_DateTime" SortExpression="Add_DateTime" DataFormatString="{0:yyyy-MM-dd}" HtmlEncode="false">
+                                                <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            </asp:BoundField>
+                                            <asp:TemplateField HeaderText="领出仓库" SortExpression="HouseNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetHouseName(DataBinder.Eval(Container.DataItem, "HouseNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <%-- <asp:TemplateField HeaderText="调出入库" SortExpression="HouseNo_int" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetHouseName("131714487416967158")%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
+
+                                            <asp:TemplateField HeaderText="调拨产品" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetProdutsName(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+
+                                            <asp:TemplateField HeaderText="领出数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# DataBinder.Eval(Container.DataItem, "DirectOutAmount").ToString()%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="经手人" SortExpression="DirectOutStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "DirectOutStaffNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+
+                                            <%--  <asp:TemplateField HeaderText="仓库确认" SortExpression="HouseNo" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+
+                                                    <%# GetCheck(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="审核" SortExpression="AllocateCheckYN" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                                <ItemTemplate>
+                                                    <%# GetOrderCheckYN(DataBinder.Eval(Container.DataItem, "AllocateNo"))%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
+                                        </Columns>
+                                        <HeaderStyle CssClass='colHeader' />
+                                        <RowStyle CssClass='listTableRow' />
+                                        <AlternatingRowStyle BackColor="#E3EAF2" />
+                                        <PagerStyle CssClass='Custom_DgPage' />
+                                    </cc1:MyGridView>
+
+                                </td>
+                            </tr>
+
                         </table>
                     </asp:Panel>
 

@@ -166,6 +166,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
             TextBox TboxxPrice = (TextBox)GridView1.Rows[i].Cells[8].FindControl("ProcureUnitPrice");
             TextBox Salespricess = (TextBox)GridView1.Rows[i].Cells[8].FindControl("Salesprice");
             TextBox HandPrice = (TextBox)GridView1.Rows[i].Cells[9].FindControl("HandPrice");
+            TextBox PCPrice = (TextBox)GridView1.Rows[i].Cells[9].FindControl("PCPrice");
             TextBox KPP_Remarks = (TextBox)GridView1.Rows[i].Cells[9].FindControl("Tbx_Remarks");
             TextBox Tbx_SuppNo = (TextBox)GridView1.Rows[i].Cells[9].FindControl("Tbx_SuppNo");
             DropDownList Ddl_Brand = (DropDownList)GridView1.Rows[i].Cells[9].FindControl("Ddl_Brand");
@@ -178,6 +179,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
                 decimal ProcureUnitPrice = decimal.Parse(TboxxPrice.Text.ToString());
                 decimal Salespricess77 = decimal.Parse(Salespricess.Text.ToString());
                 decimal d_HandPrice = decimal.Parse(HandPrice.Text.ToString());
+                decimal d_PCPrice = decimal.Parse(PCPrice.Text.ToString());
                 string s_KPP_Remarks = KPP_Remarks.Text.ToString();
                 KNet.BLL.KNet_Sys_Products BLL = new KNet.BLL.KNet_Sys_Products();
                 SuppNoStr = Tbx_SuppNo.Text;
@@ -188,7 +190,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
 
                     if (GetSuppliersPriceYN(SuppNoStr, model.ProductsBarCode, Ddl_Brand.SelectedValue) == false)
                     {
-                        if (this.AddToSuppliersPrice(SuppNoStr, model.ProductsName, model.ProductsBarCode, model.ProductsPattern, model.ProductsMainCategory, model.ProductsSmallCategory, model.ProductsUnits, ProcureMinShu, ProcureUnitPrice, Salespricess77, d_HandPrice, s_KPP_Remarks, false,Ddl_Brand.SelectedValue))
+                        if (this.AddToSuppliersPrice(SuppNoStr, model.ProductsName, model.ProductsBarCode, model.ProductsPattern, model.ProductsMainCategory, model.ProductsSmallCategory, model.ProductsUnits, ProcureMinShu, ProcureUnitPrice, Salespricess77, d_HandPrice, s_KPP_Remarks, false,Ddl_Brand.SelectedValue, d_PCPrice))
                         {
 
                             cal += " ID='" + GridView1.DataKeys[i].Value.ToString() + "' ";
@@ -207,7 +209,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
                             model1.KPP_Brand = Ddl_Brand.SelectedValue;
                             BLL1.DeleteBYModel(model1);
                         }
-                        if (this.AddToSuppliersPrice(SuppNoStr, model.ProductsName, model.ProductsBarCode, model.ProductsPattern, model.ProductsMainCategory, model.ProductsSmallCategory, model.ProductsUnits, ProcureMinShu, ProcureUnitPrice, Salespricess77, d_HandPrice, s_KPP_Remarks, false, Ddl_Brand.SelectedValue))
+                        if (this.AddToSuppliersPrice(SuppNoStr, model.ProductsName, model.ProductsBarCode, model.ProductsPattern, model.ProductsMainCategory, model.ProductsSmallCategory, model.ProductsUnits, ProcureMinShu, ProcureUnitPrice, Salespricess77, d_HandPrice, s_KPP_Remarks, false, Ddl_Brand.SelectedValue,d_PCPrice))
                         {
                             cal += " ID='" + GridView1.DataKeys[i].Value.ToString() + "' ";
                         }
@@ -268,7 +270,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
     /// <param name="ProductsUnits"></param>
     /// <param name="ProcureMinShu"></param>
     /// <param name="ProcureUnitPrice"></param>
-    protected bool AddToSuppliersPrice(string SuppNo, string ProductsName, string ProductsBarCode, string ProductsPattern, string ProductsMainCategory, string ProductsSmallCategory, string ProductsUnits, int ProcureMinShu, decimal ProcureUnitPrice, decimal Salesprice, decimal d_HandPrice, string s_KPP_Remarks, bool IsChanage,string s_Brand)
+    protected bool AddToSuppliersPrice(string SuppNo, string ProductsName, string ProductsBarCode, string ProductsPattern, string ProductsMainCategory, string ProductsSmallCategory, string ProductsUnits, int ProcureMinShu, decimal ProcureUnitPrice, decimal Salesprice, decimal d_HandPrice, string s_KPP_Remarks, bool IsChanage,string s_Brand,decimal s_PCPrice)
     {
         KNet.BLL.Knet_Procure_SuppliersPrice BLL = new KNet.BLL.Knet_Procure_SuppliersPrice();
         KNet.Model.Knet_Procure_SuppliersPrice model = new KNet.Model.Knet_Procure_SuppliersPrice();
@@ -295,7 +297,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
         model.KPP_ShPerson = "";
 
         model.KPP_Brand = s_Brand;
-        
+        model.KPP_PCPrice = s_PCPrice;
         try
         {
             BLL.Add(model);
@@ -322,6 +324,11 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
             else if (i_Type == 1)//加工费
             {
                 s_Price = model.HandPrice.ToString();
+
+            }
+            else if (i_Type == 2)//加工费
+            {
+                s_Price = model.KPP_PCPrice.ToString();
 
             }
             else

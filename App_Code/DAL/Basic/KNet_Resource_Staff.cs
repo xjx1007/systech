@@ -871,6 +871,46 @@ namespace KNet.DAL
             }
         }
         #endregion  成员方法
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public string GetSonIDs1(string KRS_DepartPerson)
+        {
+            string s_ID = "";
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select   * from KNet_Resource_Staff ");
+            strSql.Append(" where StaffYN='0' and KRS_DepartPerson=@KRS_DepartPerson ");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@KRS_DepartPerson", SqlDbType.VarChar,50)};
+            parameters[0].Value = KRS_DepartPerson;
+
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+
+                    if (ds.Tables[0].Rows[i]["StaffNo"] != null && ds.Tables[0].Rows[i]["StaffNo"].ToString() != "")
+                    {
+                        //s_ID += ds.Tables[0].Rows[i]["PBP_ID"].ToString() + ",";
+                        //s_ID += GetSonIDs(ds.Tables[0].Rows[i]["StaffNo"].ToString()) + ",";
+                        s_ID += ds.Tables[0].Rows[i]["StaffNo"] + ",";
+                    }
+                    else
+                    {
+                        s_ID += "";
+                    }
+                }
+                s_ID = s_ID.Substring(0, s_ID.Length - 1);
+
+                return s_ID;
+            }
+            else
+            {
+                return KRS_DepartPerson;
+            }
+        }
+
     }
 }
 

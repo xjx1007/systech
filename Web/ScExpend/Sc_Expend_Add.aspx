@@ -43,11 +43,12 @@
         var tb = document.getElementById("MyGridView2");
         var rows = tb.rows;
         for (var i = 1; i < rows.length; i++) {
-            var Tbx_number = rows[i].cells[8].childNodes[0];
-            var Tbx_LossPercent = rows[i].cells[10].childNodes[0];
-            var Tbx_LossNumber = rows[i].cells[11].childNodes[0];
-            var Tbx_NeedNumber = rows[i].cells[12].childNodes[0];
-            var v_Number = rows[i].cells[5].innerText;
+            var Tbx_number = rows[i].cells[9].childNodes[1];
+            //alert(Tbx_number);
+            var Tbx_LossPercent = rows[i].cells[11].childNodes[1];
+            var Tbx_LossNumber = rows[i].cells[12].childNodes[1];
+            var Tbx_NeedNumber = rows[i].cells[13].childNodes[1];
+            var v_Number = rows[i].cells[6].innerText;
             var v_LossNumber = parseInt(v_Number) * parseInt(s_Value) * parseFloat(Tbx_LossPercent.value) / 100.0
             Tbx_LossNumber.value = Math.round(v_LossNumber);
             Tbx_NeedNumber.value = parseInt(v_Number) * parseInt(s_Value);
@@ -74,7 +75,7 @@
                     var Tbx_KcNumber = document.getElementById("MyGridView2_ctl" + v_Index + "_Tbx_KcNumber");
 
                     if (parseInt(Tbx_KcNumber.value) < parseInt(Tbx_Number.value)) {
-                        v_Right = "1"
+                        v_Right = "1";
                     }
                 }
 
@@ -191,7 +192,6 @@
                                                             BorderColor="#4974C2" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关生产入库记录</B><br/><br/></font></div>">
                                                             <Columns>
                                                                 <asp:TemplateField ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-
                                                                     <ItemTemplate>
                                                                         <asp:CheckBox ID="Chbk" runat="server" Checked></asp:CheckBox>
                                                                     </ItemTemplate>
@@ -257,8 +257,9 @@
                                                                 <asp:TemplateField HeaderText="生产数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                                                     HeaderStyle-HorizontalAlign="Left">
                                                                     <ItemTemplate>
-                                                                        <asp:TextBox ID="Tbx_Number" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                            OnBlur="ChangPrice(this.value);this.className='detailedViewTextBox'" Width="60px" Text='<%# DataBinder.Eval(Container.DataItem, "LeftNumber").ToString()%>'></asp:TextBox>
+                                                                        <%--OnBlur="ChangPrice(this.value);this.className='detailedViewTextBox'"--%>
+                                                                        <asp:TextBox ID="Tbx_Number" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="ChangPrice(this.value);this.className='detailedViewTextBox'"
+                                                                             Width="60px" Text='<%# DataBinder.Eval(Container.DataItem, "LeftNumber").ToString()%>'></asp:TextBox>
                                                                         <asp:TextBox ID="Tbx_ProductsBarCode" runat="server" CssClass="Custom_Hidden" Text='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()%>'></asp:TextBox>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
@@ -303,9 +304,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td runat="server" id="Td1" class="dvtCellInfo" colspan="4">消耗明细： 总单价：<font color="red"><%=s_TotalPrice%></font>
+                                                        <td runat="server" id="Td1" class="dvtCellInfo" colspan="4"><input type="CheckBox" onclick="" />消耗明细： 总单价：<font color="red"><%=s_TotalPrice%></font>停用物料：<font color="red"><%=s_Code%></font>
                                                             <cc1:MyGridView ID="MyGridView2" runat="server" AllowPaging="True" AllowSorting="True"
-                                                                AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="100"
+                                                                AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="300"
                                                                 BorderColor="#4974C2" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关消耗明细记录</B><br/><br/></font></div>"
                                                                 OnRowDataBound="GridView1_DataRowBinding">
                                                                 <Columns>
@@ -330,6 +331,12 @@
                                                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                                     </asp:BoundField>
+                                                                    <asp:TemplateField HeaderText="替换料" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
+                                                                        HeaderStyle-HorizontalAlign="Left">
+                                                                        <ItemTemplate>
+                                                                           <%# ReplaceNum(DataBinder.Eval(Container.DataItem, "ReplaceNum").ToString()) %>
+                                                                        </ItemTemplate>
+                                                                    </asp:TemplateField>
                                                                     <asp:BoundField HeaderText="版本号" DataField="ProductsEdition" SortExpression="ProductsName" HtmlEncode="false">
                                                                         <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                                         <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
@@ -359,7 +366,7 @@
                                                                         HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>
                                                                             <asp:TextBox ID="Tbx_Number" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                                OnBlur="this.className='detailedViewTextBox'" Width="100px" Text='<%#DataBinder.Eval(Container.DataItem, "TotalNumber").ToString() %>'></asp:TextBox>
+                                                                                OnBlur="this.className='detailedViewTextBox'" Width="100px" Text='<%#GetExpendNum(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString(),DataBinder.Eval(Container.DataItem, "TotalNumber").ToString()) %>'></asp:TextBox>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:BoundField HeaderText="损耗类型" DataField="PBC_Name" SortExpression="PBC_Name"
@@ -378,14 +385,14 @@
                                                                         HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>
                                                                             <asp:TextBox ID="Tbx_ShNumber" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                                OnBlur="this.className='detailedViewTextBox'" Width="50px" Text='<%#DataBinder.Eval(Container.DataItem, "LossNumber").ToString() %>'></asp:TextBox>
+                                                                                OnBlur="this.className='detailedViewTextBox'" Width="50px" Text='<%#GetLossNum(DataBinder.Eval(Container.DataItem, "LossNumber").ToString(),DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) %>'></asp:TextBox>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:TemplateField HeaderText="需求数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left"
                                                                         HeaderStyle-HorizontalAlign="Left">
                                                                         <ItemTemplate>
                                                                             <asp:TextBox ID="Tbx_XqNumber" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                                                OnBlur="this.className='detailedViewTextBox'" Width="50px" Text='<%#DataBinder.Eval(Container.DataItem, "NeedNumber").ToString() %>'></asp:TextBox>
+                                                                                OnBlur="this.className='detailedViewTextBox'" Width="50px" Text='<%#GetNeedNum(DataBinder.Eval(Container.DataItem, "NeedNumber").ToString(),DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString()) %>'></asp:TextBox>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
 
@@ -400,7 +407,6 @@
                                                                                 OnBlur="this.className='detailedViewTextBox'" Width="100px"></asp:TextBox>
                                                                             <asp:TextBox ID="Tbx_KcNumber" runat="server" Width="100px" CssClass="Custom_Hidden" Text='<%# GetKC(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>'></asp:TextBox>
                                                                             <asp:TextBox ID="Tbx_LossType" runat="server" CssClass="Custom_Hidden" Width="100px" Text='<%# DataBinder.Eval(Container.DataItem, "KSP_LossType").ToString()%>'></asp:TextBox>
-
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                 </Columns>

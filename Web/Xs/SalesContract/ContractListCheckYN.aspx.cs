@@ -407,7 +407,7 @@ public partial class Knet_Web_Sales_pop_ContractListCheckYN : BasePage
                     //    //}
                     //}
                     //总经理审批算通过
-                    if ((AM.KNet_StaffDepart == "129652783693249229") && (AM.KNet_Position == "102"))
+                    if ((AM.KNet_StaffDepart == "129652783693249229"|| AM.KNet_StaffDepart == "129652783965723459") && (AM.KNet_Position == "102"|| AM.KNet_Position == "101"))
                     {
                         string DoSql = "update KNet_Sales_ContractList  set ContractCheckYN=" + AA + " , ContractState=1  where  ContractNo='" + OrderNotxt + "' ";
                         DbHelperSQL.ExecuteSql(DoSql);

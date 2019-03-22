@@ -3,20 +3,24 @@
 
 <%@ Register Src="../../Control/CommentList.ascx" TagName="CommentList" TagPrefix="uc1" %>
 <%@ Register Src="../../Control/UploadList.ascx" TagName="CommentList" TagPrefix="uc2" %>
+<%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
+<%@ Register Src="~/Web/OA/Report/UC_ddlCategroy.ascx" TagPrefix="uc1" TagName="UC_ddlCategroy" %>
+
+<%--<uc1:UC_ddlCategroy runat="server" id="UC_ddlCategroy" />--%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/../themes/softed/style.css" type="text/css">
-    <script type="text/javascript" src="/Js/ajax_func.js"></script>
-    <script language="javascript" type="text/javascript" src="/DatePicker/WdatePicker.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/../include/js/general.js"></script>
-    <script language="javascript" type="text/javascript" src="/../include/scriptaculous/prototype.js"></script>
-    <script language="javascript" type="text/javascript" src="/../include/scriptaculous/scriptaculous.js"></script>
-    <script language="javascript" type="text/javascript" src="/../include/scriptaculous/dom-drag.js"></script>
+    <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+    <script type="text/javascript" src="../../Js/ajax_func.js"></script>
+    <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
     <title>日报查看</title>
-    <script language="javascript" type="text/javascript" src="/DatePicker/WdatePicker.js"></script>
+    <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form2" runat="server">
@@ -37,7 +41,8 @@
         <table border="0" cellspacing="0" cellpadding="0" width="98%" align="center">
             <tr>
                 <td valign="top">
-                    <img src="/../themes/softed/images/showPanelTopLeft.gif">
+
+                    <img src="../../../themes/softed/images/showPanelTopLeft.gif" />
                 </td>
                 <td class="showPanelBg" valign="top" width="100%">
                     <div class="small" style="padding: 20px">
@@ -58,12 +63,20 @@
                                                 日报日期：
                                                   <pc:PTextBox ID="Tbx_STime" runat="server" onFocus="WdatePicker()"
                                                       AllowEmpty="false"></pc:PTextBox>
-                                                负责人：<asp:DropDownList runat="server" ID="Ddl_DutyPerson"></asp:DropDownList>
+                                                负责人：<%--<asp:DropDownList runat="server" ID="Ddl_DutyPerson"></asp:DropDownList>--%><uc1:UC_ddlCategroy runat="server" id="UC_ddlCategroy" />
                                                 &nbsp;
                                                 <asp:Button ID="Button2" runat="server" Text="搜索" AccessKey="S" title="搜索 [Alt+S]"
                                                     class="crmbutton small create" OnClick="Button2_Click" />
                                             </td>
                                         </tr>
+
+
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="dvtContentSpace">
                                         <tr>
                                             <td class="dvtTabCache" nowrap>&nbsp;
                                                 
@@ -73,71 +86,193 @@
                                             <td class="dvtTabCache">&nbsp;
                                             </td>
                                         </tr>
-
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="dvtContentSpace">
                                         <tr>
-                                            <td colspan="4" class="detailedViewHeader">
+                                            <td colspan="8" class="detailedViewHeader">
                                                 <b>1.查看计划，撰写今日工作总结</b>
-
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="16%" height="25" align="right" class="dvtCellLabel">今日总结：
+                                             <td width="6%" height="25" align="right" class="dvtCellLabel">今日计划：
+                                               <br/><asp:Label ID="Sub_Time" runat="server" Text="Label"></asp:Label>                                                
+                                            </td>
+                                            <td class="dvtCellInfo" width="40%" align="left">
+                                               <%-- <asp:Label runat="server" ID="Tbx_NextReport"></asp:Label>--%>
+                                                 <textarea name="Tbx_NextReport" id="Tbx_NextReport" runat="server"  rows="5" style="width: 95%;height: 200px" readonly="readonly" warp="virtual"></textarea>
+                                                 <%-- <pc:PTextBox ID="Tbx_NextReport" runat="server" TextMode="MultiLine"
+                                                    CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="95%" Height="100px" ValidType="String"></pc:PTextBox>--%>
+                                            </td>
+                                            <td width="12%" height="25" align="right" class="dvtCellLabel">今日总结：
+                                                <br/> <asp:Label ID="M_Time" runat="server" Text="Label"></asp:Label>  
                                             </td>
                                             <td class="dvtCellInfo" width="44%" align="left">
-                                                <asp:Label ID="Tbx_ThisReport" runat="server"></asp:Label>
+                                              <%--  <asp:Label ID="Tbx_ThisReport" runat="server"></asp:Label>--%>
+                                                <textarea name="Tbx_ThisReport" id="Tbx_ThisReport" runat="server"  rows="5" style="width: 95%;height: 200px" readonly="readonly" warp="virtual"></textarea>
+                                                <%-- <pc:PTextBox ID="Tbx_ThisReport" runat="server" TextMode="MultiLine"
+                                                    CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="95%" Height="100px" ValidType="String"></pc:PTextBox>--%>
                                             </td>
-                                            <td width="16%" height="25" align="right" class="dvtCellLabel">今日计划：<br>
-                                                (昨日计划)
-                                            </td>
-                                            <td class="dvtCellInfo" width="24%" align="left">
-                                                <asp:Label runat="server" ID="Lbl_ThisReport"></asp:Label>
-                                            </td>
+                                           
 
                                         </tr>
-                                        <tr>
-                                            <td colspan="4" class="detailedViewHeader">
+                                       <%-- <tr>
+                                            <td colspan="8" class="detailedViewHeader">
                                                 <b>2.撰写明日计划</b>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td width="16%" height="25" align="right" class="dvtCellLabel">明日计划：
+                                            <td width="16%" colspan="2" height="25" align="right" class="dvtCellLabel">明日计划：
                                             </td>
-                                            <td class="dvtCellInfo" width="44%" align="left">
+                                            <td class="dvtCellInfo" colspan="2" width="44%" align="left">
                                                 <asp:Label ID="Tbx_NextReport" runat="server"></asp:Label>
                                             </td>
-                                            <td width="16%" height="25" align="right" class="dvtCellInfo"></td>
-                                            <td class="dvtCellInfo" width="24%" align="left"></td>
-                                        </tr>
+                                            <td width="16%" colspan="2" height="25" align="right" class="dvtCellInfo"></td>
+                                            <td class="dvtCellInfo" colspan="2" width="24%" align="left"></td>
+                                        </tr>--%>
+
+                                    </table>
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="dvtContentSpace">
                                         <tr>
-                                            <td colspan="4" class="detailedViewHeader">
+                                            <td colspan="8" class="detailedViewHeader">
                                                 <b>3.附件</b>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="4">
-                                                <uc2:CommentList ID="CommentList2" runat="server" CommentFID="" CommentType="-1" />
+                                            <td colspan="8" class="dvtCellInfo">
+                                                <cc1:MyGridView ID="GridView_Comment" runat="server" AllowPaging="True" AllowSorting="True"
+                                                    IsShowEmptyTemplate="true" AutoGenerateColumns="False" CssClass="Custom_DgMain"
+                                                    PageSize="10" Width="100%">
+                                                    <Columns>
+                                                        <asp:BoundField HeaderText="名称" DataField="PBA_Name" SortExpression="PBA_Name"
+                                                            HtmlEncode="false">
+                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="附件" SortExpression="PBA_URL" HeaderStyle-Font-Size="12px"
+                                                            ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                            <ItemTemplate>
+                                                                <a target="_blank" href="<%#DataBinder.Eval(Container.DataItem, "PBA_URL").ToString()%>"><%# DataBinder.Eval(Container.DataItem, "PBA_Name").ToString()%></a>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField HeaderText="描述" DataField="PBA_Remarks" SortExpression="PBA_Remarks"
+                                                            HtmlEncode="false">
+                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" Width="200px" />
+                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="创建人" SortExpression="PBA_Creator" HeaderStyle-Font-Size="12px"
+                                                            ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                            <ItemTemplate>
+                                                                <%# GetUserName(DataBinder.Eval(Container.DataItem, "PBA_Creator").ToString())%>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField HeaderText="上传时间" DataField="PBA_Ctime" SortExpression="PBA_Ctime"
+                                                            HtmlEncode="false">
+                                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                        </asp:BoundField>
+                                                    </Columns>
+                                                    <HeaderStyle CssClass='colHeader' />
+                                                    <RowStyle CssClass='listTableRow' />
+                                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                    <PagerStyle CssClass='Custom_DgPage' />
+                                                </cc1:MyGridView>
                                             </td>
                                         </tr>
                                         <tr>
 
-                                            <td colspan="4" class="detailedViewHeader">
+                                            <td colspan="8" class="detailedViewHeader">
                                                 <b>4.批示和点评</b>
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td colspan="4">
-                                                <uc1:CommentList ID="CommentList1" runat="server" CommentFID="" CommentType="-1" />
+                                            <td colspan="8">
+
+                                                <tr>
+                                                    <td colspan="4" align="left">
+                                                        <b>新增批示点评</b>：
+                                                    </td>
+                                                    <td colspan="4" align="right">
+                                                        <%-- OnClientClick="return btnGetFJReturnValue_onclick()"--%>
+                                                        <asp:Button runat="server" ID="Btn_Create" Text="新增点评" OnClick="Btn_Create_OnClick" class="crmbutton small create" />
+                                                    </td>
+
+                                                </tr>
+
+                                                <div runat="server" id="AddComment">
+                                                    <tr>
+                                                        <td colspan="8" class="detailedViewHeader">
+                                                            <b>添加附件</b>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="dvtCellLabel">标题:
+                                                        </td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:DropDownList ID="DdlPBC_Preset" name="DdlPBC_Preset" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DdlPBC_Preset_OnSelectedIndexChanged"></asp:DropDownList>
+                                                        </td>
+                                                        <td class="dvtCellLabel">点评内容:
+                                                        </td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:TextBox ID="txtDescription" runat="server" CssClass="txtBox" TextMode="MultiLine" Columns="50" Rows="5"></asp:TextBox>
+                                                        </td>
+                                                        <td class="dvtCellLabel">操作:
+                                                        </td>
+                                                        <td class="dvtCellInfo">
+                                                            <asp:Button ID="Button1" runat="server" OnClick="Button1_OnClick" Text="提 交" AccessKey="S" title="保存 [Alt+S]"
+                                                                class="crmbutton small save" Style="height: 20px; width: 50px" />
+                                                            <asp:Button ID="Button3" runat="server" OnClick="Button3_OnClick" Text="取 消" AccessKey="T" title="取消 [Alt+T]"
+                                                                class="crmbutton small save" Style="height: 20px; width: 50px" />
+
+                                                        </td>
+                                                    </tr>
+
+                                                </div>
+
+                                                <tr>
+                                                    <td colspan="8" class="dvtCellInfo">
+                                                        <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
+                                                            IsShowEmptyTemplate="true" AutoGenerateColumns="False" CssClass="Custom_DgMain"
+                                                            PageSize="10" Width="100%">
+                                                            <Columns>
+                                                                <asp:BoundField HeaderText="点评内容" DataField="PBC_Description" SortExpression="PBC_Description"
+                                                                    HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField HeaderText="点评时间" DataField="PBC_CTime" SortExpression="PBC_CTime"
+                                                                    HtmlEncode="false">
+                                                                    <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                    <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                                </asp:BoundField>
+                                                                <asp:TemplateField HeaderText="点评人" SortExpression="PBC_FromPerson" HeaderStyle-Font-Size="12px"
+                                                                    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                                    <ItemTemplate>
+                                                                        <%# GetUserName(DataBinder.Eval(Container.DataItem, "PBC_FromPerson").ToString())%>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                            <HeaderStyle CssClass='colHeader' />
+                                                            <RowStyle CssClass='listTableRow' />
+                                                            <AlternatingRowStyle BackColor="#E3EAF2" />
+                                                            <PagerStyle CssClass='Custom_DgPage' />
+                                                        </cc1:MyGridView>
+                                                        <asp:HiddenField ID="hidCommentFID" runat="server" />
+                                                        <asp:HiddenField ID="hidCommentType" runat="server" />
+                                                    </td>
+                                                </tr>
+
                                             </td>
+
                                         </tr>
+
                                     </table>
                                 </td>
                             </tr>
@@ -145,10 +280,12 @@
                         <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                         <asp:TextBox ID="Tbx_NID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                         <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                    </div>
                 </td>
 
                 <td align="right" valign="top">
-                    <img src="/../themes/softed/images/showPanelTopRight.gif" />
+
+                    <img src="../../../themes/softed/images/showPanelTopRight.gif" />
                 </td>
             </tr>
         </table>

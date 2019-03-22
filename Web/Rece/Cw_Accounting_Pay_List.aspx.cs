@@ -84,7 +84,7 @@ public partial class Cw_Accounting_Pay_List : BasePage
         //仅查看自己
         if (AM.YNAuthority("收款单仅责任人查看") == true)
         {
-            if (AM.KNet_StaffName != "项洲")
+            if (AM.KNet_StaffName != "薛建新")
             {
                 s_SqlWhere += " and CAA_CustomerValue in (Select CustomerValue from KNet_Sales_ClientList where KSC_DutyPerson='" + AM.KNet_StaffNo + "' ) ";
             }

@@ -21,10 +21,12 @@ public partial class Knetwork_Admin_NewMain : BasePage
     public string s_Person = "", loginUser = "";
     protected void Page_Load(object sender, EventArgs e)
     {
+       
         Ajax.Utility.RegisterTypeForAjax(typeof(Knetwork_Admin_NewMain));
         try
         {
             AdminloginMess AM = new AdminloginMess();
+           
             loginUser = "{uid:\"" + AM.KNet_StaffNo + "\", user_id:\"" + AM.KNet_StaffNo + "\", user_name:\"" + AM.KNet_StaffName + "\"}";
             string s_ID = Request.QueryString["ID"] == null ? "" : Request.QueryString["ID"].ToString();
             string s_module = Request.QueryString["Module"] == null ? "" : Request.QueryString["Module"].ToString();

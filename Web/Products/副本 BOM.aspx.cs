@@ -131,7 +131,7 @@ public partial class BOM : BasePage
         string s_DemoProductsID = "";
         KNet.BLL.Xs_Products_Prodocts_Demo BLL_DemoProducts_Products = new KNet.BLL.Xs_Products_Prodocts_Demo();
         string s_Where1 = " and XPD_FaterBarCode='" + model.ProductsBarCode + "' ";
-        if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffName == "项洲"))//如果是
+        if ((AM.KNet_StaffDepart == "129652784259578018") || (AM.KNet_StaffName == "薛建新"))//如果是
         {
             s_Where1 += " and  b.KSP_Del=0 ";
         }

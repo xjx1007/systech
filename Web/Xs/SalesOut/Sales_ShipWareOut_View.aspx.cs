@@ -699,7 +699,7 @@ public partial class Web_Sales_ShipWareOut_View : BasePage
         KNet.BLL.KNet_WareHouse_DirectOutList BLL = new KNet.BLL.KNet_WareHouse_DirectOutList();
         KNet.Model.KNet_WareHouse_DirectOutList molel = BLL.GetModelB(this.Tbx_ID.Text);
 
-        string JSD = "SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
+        string JSD = "Xs/SalesOut/Sales_ShipWareOut_Print.aspx?ID=" + molel.KWD_ShipNo + "&DID=" + molel.DirectOutNo + "";
         if (base.HtmlToPdfNoWater(JSD, Server.MapPath("PDF"), molel.DirectOutNo))
         {
             Alert("生成成功！");

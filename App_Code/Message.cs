@@ -35,8 +35,8 @@ public class Message
     }
     public string SendMessage(string s_PhoneNumber, string s_Text)
     {
-        string s_UID = "bremax";
-        string s_Key = "4334982f7bdcb568e7ae";
+        string s_UID = "xjx阿圣";
+        string s_Key = "d41d8cd98f00b204e980";
         string s_URL = "http://utf8.sms.webchinese.cn/?Uid=" + s_UID + "&Key=" + s_Key + "&smsMob=" + s_PhoneNumber + "&smsText=" + s_Text + "";
         string s_Return = "";
         try

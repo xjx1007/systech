@@ -40,7 +40,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
                 {
                     ShowDetails(s_ID);
                     //供应链平台经理
-                    if (((AM.KNet_StaffDepart == "129652784259578018") && (AM.KNet_Position == "102")) || (AM.KNet_StaffName == "项洲") || (AM.YNAuthority("采购价格审批") == true))
+                    if (((AM.KNet_StaffDepart == "129652784259578018") && (AM.KNet_Position == "102")) || (AM.KNet_StaffName == "薛建新")|| (AM.YNAuthority("采购价格审批") == true))
                     {
                         Btn_Sp.Visible = true;
                         Btn_Sp1.Visible = true;
@@ -84,6 +84,7 @@ public partial class Knet_Web_Procure_Knet_Procure_Suppliers_Price_Add : BasePag
     protected void Btn_SpSave(object sender, EventArgs e)
     {
         AdminloginMess AM = new AdminloginMess();
+    
         //批量审批
         KNet.BLL.Knet_Procure_SuppliersPrice Bll = new KNet.BLL.Knet_Procure_SuppliersPrice();
         try

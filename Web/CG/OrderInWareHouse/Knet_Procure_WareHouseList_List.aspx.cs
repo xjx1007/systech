@@ -18,6 +18,7 @@ using System.Data.SqlClient;
 public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
 {
     public string s_AdvShow = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -46,7 +47,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
                     }
                     else
                     {
-                        Model.WareHouseDateTime =null;
+                        Model.WareHouseDateTime = null;
                     }
                     Model.KPW_CheckPerson = AM.KNet_StaffNo;
                     Bll.UpdateQRState(Model);
@@ -71,11 +72,14 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             string WareHouseNo = this.MyGridView1.DataKeys[e.Row.RowIndex].Value.ToString(); //获取ID值
-            CheckBox cb = (CheckBox)e.Row.Cells[1].FindControl("Chbk");
+            CheckBox cb = (CheckBox) e.Row.Cells[1].FindControl("Chbk");
 
             //已对账
             KNet.BLL.Cg_Order_Checklist_Details Cg_Details = new KNet.BLL.Cg_Order_Checklist_Details();
-            DataSet dts_Cg = Cg_Details.GetList(" COD_DirectOutID in (select ID from Knet_Procure_WareHouseList_Details where WareHouseNo='" + WareHouseNo + "') ");
+            DataSet dts_Cg =
+                Cg_Details.GetList(
+                    " COD_DirectOutID in (select ID from Knet_Procure_WareHouseList_Details where WareHouseNo='" +
+                    WareHouseNo + "') ");
             if (dts_Cg.Tables[0].Rows.Count > 0)
             {
                 cb.Enabled = false;
@@ -96,6 +100,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
             }
         }
     }
+
     /// <summary>
     /// 绑定数据源
     /// </summary>
@@ -118,7 +123,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
         }
         if (s_Text != "")
         {
-            if (this.matchtype1.Checked == true)//and
+            if (this.matchtype1.Checked == true) //and
             {
                 s_Type = "0";
             }
@@ -136,7 +141,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
         KNet.BLL.Knet_Procure_WareHouseList bll = new KNet.BLL.Knet_Procure_WareHouseList();
         DataSet ds = bll.GetList(s_SqlWhere);
         this.MyGridView1.DataSource = ds;
-        MyGridView1.DataKeyNames = new string[] { "WareHouseNo" };
+        MyGridView1.DataKeyNames = new string[] {"WareHouseNo"};
         MyGridView1.DataBind();
     }
 
@@ -145,29 +150,54 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
         this.DataShows();
     }
 
-    protected string GetPrint(string s_OrderNo)
+    protected string GetPrint(string s_OrderNo, string OrderNo)
     {
         KNet.BLL.Knet_Procure_WareHouseList Bll = new KNet.BLL.Knet_Procure_WareHouseList();
         KNet.Model.Knet_Procure_WareHouseList Model = Bll.GetModelB(s_OrderNo);
         string s_Return = "";
         int i_IsSend = Model.KPO_QRState;
         int i_WareHouseCheck = Model.WareHouseCheckYN;
-        if (i_IsSend == 0)
+        string str = OrderNo.Substring(0, 2);
+        if (str != "YP") //判断是不是样品申请的采购单号
         {
-            string JSD = "Knet_Procure_WareHouseList_List.aspx?ID=" + s_OrderNo + "&Model=IsQr";
-            s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  ><font color=red>未确认</font></a>";
-        }
-        else
-        {
-            if (i_WareHouseCheck == 2)
+            if (i_IsSend == 0)
             {
-                s_Return = "已确认";
+                string JSD = "Knet_Procure_WareHouseList_List.aspx?ID=" + s_OrderNo + "&Model=IsQr";
+                s_Return = "<a href=\"" + JSD + "\" onclick=\"\"  ><font color=red>未确认</font></a>";
             }
             else
             {
+                if (i_WareHouseCheck == 2)
+                {
+                    s_Return = "已确认";
+                }
+                else
+                {
 
-                string JSD = "Knet_Procure_WareHouseList_List.aspx?ID=" + s_OrderNo + "&Model=IsQr";
-                s_Return = "<a href=\"" + JSD + "\" onclick=\"\" >已确认</a>";
+                    string JSD = "Knet_Procure_WareHouseList_List.aspx?ID=" + s_OrderNo + "&Model=IsQr";
+                    s_Return = "<a href=\"" + JSD + "\" onclick=\"\" >已确认</a>";
+                }
+            }
+        }
+        else
+        {
+            if (i_IsSend == 0)
+            {
+                //string JSD = "Knet_Procure_WareHouseList_List.aspx?ID=" + s_OrderNo + "&Model=IsQr";
+                s_Return = "<a ><font color=red>未确认</font></a>";
+            }
+            else
+            {
+                if (i_WareHouseCheck == 2)
+                {
+                    s_Return = "已确认";
+                }
+                else
+                {
+
+                    //string JSD = "Knet_Procure_WareHouseList_List.aspx?ID=" + s_OrderNo + "&Model=IsQr";
+                    s_Return = "<a >已确认</a>";
+                }
             }
         }
         return s_Return;
@@ -178,11 +208,26 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
         KNet.BLL.Knet_Procure_WareHouseList Bll = new KNet.BLL.Knet_Procure_WareHouseList();
         KNet.Model.Knet_Procure_WareHouseList Model = Bll.GetModel(s_ID);
         string s_Return = "";
-        if (Model.KPO_QRState == 1)
+        this.BeginQuery("select KPO_Sampling from Knet_Procure_OrdersList where OrderNo='" + Model.ReceivNo + "' ");
+        this.QueryForDataTable();
+        try
         {
+            if (Dtb_Result.Rows[0][0].ToString() == "1")//&& Model.KPO_QRState == 1
+            {
+                s_Return = "<a href=\"#\"  onclick=\"GPrint2('" + s_ID + "','" + Dtb_Result.Rows[0][0].ToString() + "')\"><Image ID=\"Image4\" src=\"../../../images/Print1.gif\" border=0   /></a>(" + Model.KPW_PrintNums + ")";
+            }
+            else //if (Model.KPO_QRState == 1)
+            {
 
-            s_Return = "<a href=\"#\"  onclick=\"GPrint('" + s_ID + "')\"><Image ID=\"Image4\" src=\"../../../images/Print1.gif\" border=0   /></a>(" + Model.KPW_PrintNums + ")";
+                s_Return = "<a href=\"#\"  onclick=\"GPrint('" + s_ID + "')\"><Image ID=\"Image4\" src=\"../../../images/Print1.gif\" border=0   /></a>(" + Model.KPW_PrintNums + ")";
+            }
         }
+        catch
+        {
+            return s_Return;
+
+        }
+       
         return s_Return;
     }
 

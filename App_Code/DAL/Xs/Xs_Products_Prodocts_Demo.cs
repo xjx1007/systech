@@ -44,9 +44,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Xs_Products_Prodocts_Demo(");
-            strSql.Append("XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address,XPD_ReplaceProductsBarCode,XPD_Order,XPD_Only,XPD_Place,XPD_Del)");
+            strSql.Append("XPD_ID,XPD_ProductsBarCode,XPD_SuppNo,XPD_Price,XPD_Number,XPD_FaterBarCode,XPD_IsOrder,XPD_Address,XPD_ReplaceProductsBarCode,XPD_Order,XPD_Only,XPD_Place,XPD_Del,ReplaceNum)");
             strSql.Append(" values (");
-            strSql.Append("@XPD_ID,@XPD_ProductsBarCode,@XPD_SuppNo,@XPD_Price,@XPD_Number,@XPD_FaterBarCode,@XPD_IsOrder,@XPD_Address,@XPD_ReplaceProductsBarCode,@XPD_Order,@XPD_Only,@XPD_Place,@XPD_Del)");
+            strSql.Append("@XPD_ID,@XPD_ProductsBarCode,@XPD_SuppNo,@XPD_Price,@XPD_Number,@XPD_FaterBarCode,@XPD_IsOrder,@XPD_Address,@XPD_ReplaceProductsBarCode,@XPD_Order,@XPD_Only,@XPD_Place,@XPD_Del,@ReplaceNum)");
             SqlParameter[] parameters = {
 					new SqlParameter("@XPD_ID", SqlDbType.VarChar,50),
 					new SqlParameter("@XPD_ProductsBarCode", SqlDbType.VarChar,50),
@@ -60,8 +60,9 @@ namespace KNet.DAL
 					new SqlParameter("@XPD_Order", SqlDbType.Int),
 					new SqlParameter("@XPD_Only", SqlDbType.Int),
 					new SqlParameter("@XPD_Place", SqlDbType.VarChar,550),
-					new SqlParameter("@XPD_Del", SqlDbType.Int)
-                    
+					new SqlParameter("@XPD_Del", SqlDbType.Int),
+                    new SqlParameter("@ReplaceNum", SqlDbType.Int)
+
                                         };
             parameters[0].Value = model.XPD_ID;
             parameters[1].Value = model.XPD_ProductsBarCode;
@@ -76,9 +77,10 @@ namespace KNet.DAL
             parameters[10].Value = model.XPD_Only;
             parameters[11].Value = model.XPD_Place;
             parameters[12].Value = model.XPD_Del;
-            
-            
-            
+            parameters[13].Value = model.ReplaceNum;
+
+
+
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
         /// <summary>
@@ -267,6 +269,10 @@ namespace KNet.DAL
                 {
                     model.XPD_AddDateTime = DateTime.Parse(ds.Tables[0].Rows[0]["XPD_AddDateTime"].ToString());
                 }
+                if (ds.Tables[0].Rows[0]["ReplaceNum"] != null && ds.Tables[0].Rows[0]["ReplaceNum"].ToString() != "")
+                {
+                    model.ReplaceNum = int.Parse(ds.Tables[0].Rows[0]["ReplaceNum"].ToString());
+                }
                 return model;
             }
             else
@@ -314,6 +320,10 @@ namespace KNet.DAL
                 if (ds.Tables[0].Rows[0]["XPD_Number"] != null && ds.Tables[0].Rows[0]["XPD_Number"].ToString() != "")
                 {
                     model.XPD_Number = decimal.Parse(ds.Tables[0].Rows[0]["XPD_Number"].ToString());
+                }
+                 if (ds.Tables[0].Rows[0]["ReplaceNum"] != null && ds.Tables[0].Rows[0]["ReplaceNum"].ToString() != "")
+                {
+                    model.ReplaceNum = int.Parse(ds.Tables[0].Rows[0]["ReplaceNum"].ToString());
                 }
                 return model;
             }

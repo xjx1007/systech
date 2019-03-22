@@ -70,6 +70,7 @@
                                                         <td valign="top" width="33%">
                                                             <ul>
                                                                 <li><a href="../Report_Xs/OrderList/Report_OrderList.aspx">订单执行情况表</a></li>
+                                                                 <li><a href="../Report_Xs/OrderList/Accounting_Payment_List.aspx">开票情况表</a></li>
                                                                 <li><a href="../Report_Xs/Report_CustomerOrderDetails.aspx">客户合同出货明细表</a></li>
                                                                 <li><a href="../Report_Xs/OrderDetails/Report_OrderIn.aspx">订单评审明细</a></li>
                                                                 <li><a href="../Report_Xs/Report_XsDetails.aspx">销售发货明细</a></li>

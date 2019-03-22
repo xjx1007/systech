@@ -165,6 +165,7 @@
             function Submitcheck() {
                 var v_Num = "";
                 v_Num = document.all("Tbx_Num").value;
+                debugger;
                 if (v_Num != "") {
                     var v_Right = "";
                     for (var i = 0; i < parseInt(v_Num) ; i++) {
@@ -174,7 +175,9 @@
                             var Number = $("Number_" + i.toString() + "").value
                             var BNumber = $("BNumber_" + i.toString() + "").value;
                             if (parseInt(KcNumber) < parseInt(Number) + parseInt(BNumber)) {
-                                v_Right = "1"
+                                //v_Right = "1"
+                                alert("不能小于库存数，请先补足库存！");
+                                return false;
                             }
                         }
                     }
@@ -211,7 +214,7 @@
                         var v_HouseNo=$('Ddl_HouseNo').value;
                         var response = Web_Sales_Sales_ShipWareOut_Add.GetKCNumber(s_Value[1] ,v_HouseNo);
                         var objCel = objRow.insertCell();
-                        objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"KCNumber_' + parseInt(v_Num + i) + '\" disabled=false  value=\"' + response.value + '\">' ;
+                        objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style="width:70px;"  Name=\"KCNumber_' + parseInt(v_Num + i) + '\" readonly=\"true\"  value=\"' + response.value + '\">';
 
                         objCel.className = "ListHeadDetails";
                         var objCel = objRow.insertCell();
@@ -640,7 +643,7 @@
     </script>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
 </head>
-<body topmargin="0" leftmargin="0" rightmargin="0" onload="Onload();">
+<body topmargin="0" leftmargin="0" rightmargin="0" onload="Onload();" ><%--onload="Onload();"--%>
     <form id="form1" runat="server">
         <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
             <tr>
@@ -1272,7 +1275,7 @@
                                             <td colspan="4" align="center">&nbsp;
                                 <br />
                                                 <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                                    class="crmbutton small save" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;" OnClientClick="return Submitcheck();" />
+                                                    class="crmbutton small save" OnClientClick="return Submitcheck();" OnClick="Btn_SaveOnClick" Style="width: 55px; height: 33px;"  />
                                                 <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
                                                     type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
                                             </td>

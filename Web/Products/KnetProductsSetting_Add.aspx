@@ -177,16 +177,29 @@
             intSeconds = today.getSeconds();
             v_newNum = $("Products_BomNum").value;
             //var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-            var tempd = window.open("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&callBack=SetReturnValueInOpenner_ProductsDemo1", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            var tempd = window.open("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "&callBack=SetReturnValueInOpenner_ProductsDemo3", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+        }
+        function btnGetBomProducts_onclick2(temp, code, nume) {
+            var today, seconds;
+            today = new Date();
+            intSeconds = today.getSeconds();
+            v_newNum = $("Products_BomNum").value;
+            //var tempd = window.showModalDialog("SelectProductsDemo.aspx?ID=" + document.all("Products_BomID").value + "", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
+            //ID=" + document.all("Products_BomID").value + "&&
+            var tempd = window.open("SelectProductsDemo.aspx?place=" + temp + "&&code=" + code + "&&num=" + nume + "&&callBack=SetReturnValueInOpenner_ProductsDemo1", "选择产品", "width=1000px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }
         function SetReturnValueInOpenner_ProductsDemo1(tempd) {
+            debugger;
             if (tempd != undefined) {
                 var ss, s_Value, s_Name, i_row, s_ID;
                 i_row = ProductsBomTable.rows.length;
                 s_ID = document.all("Products_BomID").value + ",";
                 ss = tempd.split("|");
                 for (var i = 0; i < ss.length - 1; i++) {
-                    s_Value = ss[i].split(",");
+                    //alert(ss);
+
+                    s_Value = ss[i].split("!");
+                    //var place = s_Value[4];
                     var objRow = ProductsBomTable.insertRow(i_row);
                     v_newNum = parseInt(v_newNum) + i + 1;
 
@@ -211,11 +224,21 @@
 
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
-                    objCel.innerHTML = '<input type=input Name=\"Place_' + v_newNum.toString() + '\"  ID=\"Place_' + v_newNum.toString() + '\"  style=\"detailedViewTextBox;width:300px\"  onblur=\"onPlaceblur()\"  value="" >'
+                    objCel.innerHTML = '<input type=input Name=\"Place_' +
+                        v_newNum.toString() +
+                        '\"  ID=\"Place_' +
+                        v_newNum.toString() +
+                        '\"  style=\"detailedViewTextBox;width:300px\"  onblur=\"onPlaceblur()\"  value=' +
+                         s_Value[4] +
+                        ' >';
 
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
-                    objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;width:50px\" value=' + s_Value[2] + '  >'
+                    objCel.innerHTML = '<input type=input Name=\"ReplaceNum_' + v_newNum.toString() + '\"  ID=\"ReplaceNum_' + v_newNum.toString() + '\"  style=\"detailedViewTextBox;width:300px\" value=1 >'
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;width:50px\" onblur=\"onPlaceblur()\" value=' + s_Value[5] + '  >'
 
                     var objCel = objRow.insertCell();
                     objCel.className = "ListHeadDetails";
@@ -233,6 +256,70 @@
                 }
                 $("Products_BomID").value = s_ID;
                 $("Products_BomNum").value = v_newNum;
+            }
+        }
+
+        function SetReturnValueInOpenner_ProductsDemo3(tempd) {
+            if (tempd != undefined) {
+                var df = "";
+                var ss, s_Value, s_Name, i_row, s_ID;
+                i_row = ProductsBomTable.rows.length;
+                s_ID = document.all("Products_BomID").value + ",";
+                ss = tempd.split("|");
+                for (var i = 0; i < ss.length - 1; i++) {
+                    s_Value = ss[i].split("!");
+                    var objRow = ProductsBomTable.insertRow(i_row);
+                    v_newNum = parseInt(v_newNum) + i;
+                    //alert(v_newNum);
+                    df = v_newNum + 1;
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"DemoOrder_' + v_newNum + '\" style=\"detailedViewTextBox;width:50px\" value=' + df + ' >';
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '&nbsp;';
+
+                    var objCel = objRow.insertCell();
+                    objCel.innerHTML = '&nbsp;<A onclick=\"deleteRow2(this)\" href=\"#\"><img src="/themes/softed/images/delete.gif" alt="CRMone" title="CRMone" border=0></a>';
+                    objCel.className = "ListHeadDetails";
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"DemoProdoctsBarCode_' + v_newNum + '\" style=\"display:none;\" value=' + s_Value[0] + ' ><input type=\"input\"  readonly=\"true\"  Name=\"ProductsName_' + v_newNum + '\" value=' + s_Value[1] + '>';
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=\"input\"  readonly=\"true\" style=\"width:300px\"  Name=\"ProductsEdition_' + v_newNum + '\" value=' + s_Value[3] + '>';
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"Place_' + v_newNum.toString() + '\"  ID=\"Place_' + v_newNum.toString() + '\"  style=\"detailedViewTextBox;width:300px\"  onblur=\"onPlaceblur()\"  value="" >'
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"ReplaceNum_' + v_newNum.toString() + '\"  ID=\"ReplaceNum_' + v_newNum.toString() + '\"  style=\"detailedViewTextBox;width:300px\"    value="0" >';
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;width:50px\" style=\"detailedViewTextBox;width:300px\"  onblur=\"onPlaceblur()\" value=' + s_Value[2] + '  >'
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=\"checkbox\" Name=\"DemoDel_' + v_newNum.toString() + '\" > '
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '<input type=\"checkbox\" Name=\"DemoOnly_' + v_newNum.toString() + '\" checked> '
+
+                    var objCel = objRow.insertCell();
+                    objCel.className = "ListHeadDetails";
+                    objCel.innerHTML = '&nbsp;'
+                    i_row = i_row + 1;
+                    s_ID = s_ID + s_Value[0] + ",";
+                }
+                $("Products_BomID").value = s_ID;
+                $("Products_BomNum").value = df;
             }
         }
         function btnGetBomProducts_onclick(ProductsTypeID, Rowi) {
@@ -317,15 +404,47 @@
             }
         }
         function check1() {
+            if ($("TextBox4").value != "3") {
+                debugger;
+                var ProductsName = $("ProductsName").value;
+                var ProductsPattern = $("ProductsPattern").value;
+                var Edition = $("Tbx_Edition").value;
+                var Type = $("Tbx_Type").value;
+                var Response = Knet_Web_System_KnetProductsSetting_Add.CheckProductsEdition(ProductsName, Edition, Type);
+                if (Response.value == "1") {
+                    alert("产品版本号已存在！");
+                    return false;
+                }
+                var Tbx_Num = $("TextBox2").value;
+                if (Tbx_Num != "") {
+                    //var vr = msgbox("", 3);
+                    if (confirm("有订单在进行中，此次升级是否用于此生产？点击取消则不用于此次生产，直接升级！！点击确认或取消数据都无法恢复！！慎重！！！！")) {
+                        if (confirm("有订单在进行中,你真的要用于此次升级么")) {
+                            $("TextBox3").value = "true";
+                        }
+                        else {
+                            $("TextBox3").value = "false";
+                        }
 
-            var ProductsName = $("ProductsName").value;
-            var ProductsPattern = $("ProductsPattern").value;
-            var Edition = $("Tbx_Edition").value;
-            var Type = $("Tbx_Type").value;
-            var Response = Knet_Web_System_KnetProductsSetting_Add.CheckProductsEdition(ProductsName, Edition, Type);
-            if (Response.value == "1") {
-                alert("产品版本号已存在！");
-                return false;
+                    }
+                    else {
+                        if (confirm("有订单在进行中,你真的不用于此次生产，直接升级么")) {
+                            $("TextBox3").value = "false";
+                        } else {
+                            $("TextBox3").value = "true";
+                        }
+
+                    }
+
+                }
+                
+            }
+            if ($("TextBox4").value != "") {
+                if ($("ProductRemark").value=="") {
+                    alert("备注不能为空！请在备注处输入你修改的内容！");
+                    return false;
+                }
+               
             }
 
         }
@@ -333,12 +452,12 @@
 
             var v_Num = "";
             v_Num = document.all("Products_BomNum").value;
+            debugger;
             if (v_Num != "") {
                 var v_Have = "";
                 var v_ErrorText = "";
+
                 for (var i = 0; i < parseInt(v_Num) + 1 ; i++) {
-
-
                     var place = "";
                     if (document.all("Place_" + i + "") != null) {
                         place = document.all("Place_" + i + "").value;
@@ -346,18 +465,15 @@
                         ProductsEdition = document.all("ProductsEdition_" + i + "").value;
                         var DemoNumber = "";
                         DemoNumber = document.all("DemoNumber_" + i + "").value;
-
                         var DemoOrder = "";
                         DemoOrder = document.all("DemoOrder_" + i + "").value;
                         var ProductsName = document.all("ProductsName_" + i + "").value;
-
                         if (place != "") {
                             var ss = place.split(",");
                             var v_length = ss.length;
 
                             if (ProductsName != "辅料") {
                                 if (parseInt(v_length) != parseInt(DemoNumber))
-
                                     v_ErrorText += "<font color=red>行号：" + DemoOrder + "的" + ProductsEdition + " 的位号个数和BOM个数不一致！</font><br/>";
                             }
                         }
@@ -370,24 +486,31 @@
                                 }
                             }
                         }
-                        for (var j = 0; j < parseInt(v_Num) + 1 ; j++) {
+                        for (var j = 0; j < parseInt(v_Num) + 1; j++) {
                             if (j != i) {
                                 var place1 = "";
-                                if (v_havebool == 0)
-                                {
+                                if (v_havebool == 0) {
                                     if (document.all("Place_" + j + "") != null) {
                                         place1 = document.all("Place_" + j + "").value;
                                         var ProductsEdition1 = document.all("ProductsEdition_" + j + "").value;
                                         var DemoOrder1 = "";
                                         DemoOrder1 = document.all("DemoOrder_" + j + "").value;
-                                        if (place1 != "") {
-                                            if (place1 == place) {
-                                                v_ErrorText += "<font color=red>位号已经存在！序号：" + DemoOrder + " 的 " + ProductsEdition + "和 序号：" + DemoOrder1 + " 的 " + ProductsEdition1 + " 位号相同！</font><br/>";
-                                                v_Have += j + ",";
-                                                //alert(place1 + " 位号已经存在！序号："+DemoOrder+" 的 " + ProductsEdition + "和 序号："+DemoOrder1+" 的 " + ProductsEdition1 + " 位号相同！");
-                                                //   document.all("Place_" + i + "").focus();
-                                                // return false;
+                                        if (place1 != "" && place != "") {
+                                            var pp = place1 + "," + place;
+                                            //var arr = pp.split(",");
+                                            var strs = new Array(); //定义一数组 
+                                            strs = pp.split(","); //字符分割 
+                                            var nary = strs.sort();
+                                            for (var f = 0; f < nary.length; f++) {
+                                                if (nary[f] == nary[f + 1]) {
+                                                    //alert("数组重复内容：" + nary[i]);
+                                                    v_ErrorText += "<font color=red>位号已经存在！序号：" + DemoOrder + " 的 " + ProductsEdition + "和 序号：" + DemoOrder1 + " 的 " + ProductsEdition1 + " 位号相同！</font><br/>";
+                                                    v_Have += j + ",";
+                                                }
+
                                             }
+
+
                                         }
                                     }
                                 }
@@ -465,6 +588,9 @@
 
 
         function btnGetProductsTypeValue_onclick() {
+            if (document.all('TextBox4').value == "3") {
+                return false;
+            }//02210268判断是否为编辑，如果为编辑，不能选择产品分类和更改料号
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
@@ -533,6 +659,7 @@
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0" onload="detail_info_click('Div1');">
     <form id="form1" runat="server">
+
         <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
             <tr>
                 <td style="height: 2px"></td>
@@ -619,6 +746,7 @@
                                                                         OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
                                                                         MaxLength="48" Width="200px"></asp:TextBox>
                                                                     <asp:TextBox ID="Tbx_ProductsTypeNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                                    <asp:TextBox ID="TextBox4" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                                                                     <img src="/themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetProductsTypeValue_onclick()" />
                                                                     (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator7"
                                                                         runat="server" ErrorMessage="产品分类非空" ControlToValidate="Tbx_ProductsTypeNo" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -691,7 +819,7 @@
                                                                     (<font color="red">*</font>)<asp:RequiredFieldValidator ID="RequiredFieldValidator8"
                                                                         runat="server" ErrorMessage="单位非空" ControlToValidate="ProductsUnits" Display="Dynamic"></asp:RequiredFieldValidator>
                                                                     <asp:TextBox ID="BigUnits" Width="40px" runat="server" Text=""></asp:TextBox><%--<asp:Label ID="WLweight" runat="server" Text="物料重量"></asp:Label>--%>
-                                                                     <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" CssClass="detailedViewTextBox">
+                                                                    <asp:DropDownList ID="DropDownList1" runat="server" Width="100px" CssClass="detailedViewTextBox">
                                                                     </asp:DropDownList>
                                                                 </td>
                                                                 <td align="right" class="dvtCellLabel">库存预警：
@@ -795,26 +923,32 @@
                                                             <tr>
                                                                 <td align="right" class="dvtCellLabel">参数描述:
                                                                 </td>
-                                                                <td colspan="2" align="left" class="dvtCellInfo">
+                                                                <td align="left" class="dvtCellInfo">
                                                                     <asp:TextBox ID="ProductsDescription" runat="server" CssClass="detailedViewTextBox"
                                                                         OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                                        TextMode="MultiLine" Width="440px" Height="50px"></asp:TextBox>
-                                                                </td>
-                                                                <td align="left" class="dvtCellLabel">
+                                                                        TextMode="MultiLine" Width="370px" Height="50px"></asp:TextBox>
                                                                     <font color="gray">1000字内.如体积大小,品牌,产地等.</font><br />
                                                                     &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server"
                                                                         ControlToValidate="ProductsDescription" ValidationExpression="^(\s|\S){0,1000}$"
                                                                         ErrorMessage="简单描述字太多" Display="dynamic"></asp:RegularExpressionValidator>
                                                                 </td>
-                                                                
-                                                                
-                                                            </tr>
-                                                             
-                                                            <tr>
-                                                                <td colspan="4">
-
-                                                                    <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
+                                                                <td align="right" class="dvtCellLabel">备注:
                                                                 </td>
+                                                                <td align="left" class="dvtCellInfo">
+                                                                    <asp:TextBox ID="ProductRemark" runat="server" CssClass="detailedViewTextBox"
+                                                                        OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                                        TextMode="MultiLine" Width="380px" Height="50px"></asp:TextBox>
+                                                                </td>
+
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <div runat="server" id="Attachment">
+                                                                    <td colspan="4">
+                                                                        <uc2:CommentList ID="CommentList2" runat="server" CommentFID="0" CommentType="-1" />
+                                                                    </td>
+                                                                </div>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -962,11 +1096,15 @@
                                                                         </td>
                                                                         <td align="center" class="ListHead">位号
                                                                         </td>
+                                                                        <td align="center" class="ListHead">替换编号
+                                                                        </td>
                                                                         <td align="center" class="ListHead">数量
                                                                         </td>
                                                                         <td align="center" class="ListHead">停用
                                                                         </td>
                                                                         <td align="center" class="ListHead">可替代
+                                                                        </td>
+                                                                        <td align="center" class="ListHead">添加
                                                                         </td>
                                                                     </tr>
                                                                     <%=s_ProductsTable_BomDetail %>
@@ -975,15 +1113,24 @@
 
                                                                 </table>
                                                             </td>
+
                                                         </tr>
 
-                                                        <tr id="tr9">
+                                                        <tr>
                                                             <td colspan="4">
+                                                                <div style="float: left">
                                                                     <asp:Label runat="server" ID="Lbl_Error"></asp:Label>
-                                                                <input id="Button4" runat="server" class="crmbutton small create" onclick="return btnGetBomProducts_onclick1()" type="button" value="选择材料" />
-
+                                                                    <input id="Button4" runat="server" class="crmbutton small create" onclick="return btnGetBomProducts_onclick1()" type="button" value="选择材料" />
+                                                                </div>
+                                                                <div style="float: right">
+                                                                    <asp:FileUpload ID="FileUpload1" runat="server" />
+                                                                    <input type="button" runat="server" id="Btn_Create" value="确   定" onserverclick="Btn_Create_OnServerClick" class="crmbutton small create" />
+                                                                </div>
+                                                                <div class="clearfloat" style="clear: both"></div>
                                                             </td>
+
                                                         </tr>
+
                                                     </table>
                                                 </div>
                                             </td>
@@ -1115,13 +1262,19 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="center">
+                                                <input id="hidden1" runat="server" type="hidden" name="hidden1" />
                                                 <asp:TextBox runat="server" ID="Tbx_SampleID" CssClass="Custom_Hidden"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="TextBox2" CssClass="Custom_Hidden"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="TextBox3" CssClass="Custom_Hidden"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="truenum" CssClass="Custom_Hidden"></asp:TextBox>
                                                 <asp:TextBox runat="server" ID="Tbx_ID" CssClass="Custom_Hidden"></asp:TextBox>
                                                 <asp:TextBox runat="server" ID="Tbx_Type" CssClass="Custom_Hidden"></asp:TextBox>
-                                                <asp:Button ID="Button1" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]" OnClientClick="return check1();"
+                                                <asp:Button ID="Button1" runat="server" Visible="False" Text="保 存" AccessKey="S" title="保存 [Alt+S]" OnClientClick="return check1();"
                                                     class="crmbutton small save" OnClick="Button1_Click" Style="width: 55px; height: 33px;" />
+                                                <asp:Button ID="Button2" runat="server" Text="保 存" Visible="False" AccessKey="S" title="保存 [Alt+S]" OnClientClick="return check1();"
+                                                    class="crmbutton small save" OnClick="Button2_OnClick" Style="width: 55px; height: 33px;" />
                                                 <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
-                                                    type="button" name="button" value="取 消" style="width: 55px; height: 33px;">
+                                                       type="button" name="button" value="取 消" style="width: 55px; height: 33px;"/>
                                             </td>
                                         </tr>
                                     </table>

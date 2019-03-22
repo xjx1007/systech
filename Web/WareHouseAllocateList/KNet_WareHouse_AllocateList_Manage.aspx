@@ -222,7 +222,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="5" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
+                                <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="true" pagesize="10" AllowSorting="True" EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录，或没有受权使用相关仓库</B><br/><br/></font></div>" GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false" ShowHeader="true" HeaderStyle-Height="25px"
                                     OnRowDataBound="GridView1_DataRowBinding">
                                     <Columns>
                                         <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">

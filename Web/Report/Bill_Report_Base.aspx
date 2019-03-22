@@ -77,7 +77,7 @@
                                                             <ul>
                                                                 <li><a href="../Report_Bill/Rk/Report_Order.aspx">原材料入库明细和汇总</a></li>
                                                                 <li><a href="../Report_SC/ScDetails/Report_Xh.aspx">原材料耗料明细和汇总</a></li>
-                                                                <li><a href="../Report_Bill/ScLl/Report_CkDetails2.aspx">原材料部门领料明细</a></li>
+                                                                <li><a href="../Report_Bill/ScLlDetails/Report_CkDetails2.aspx?ID=02">原材料部门领料明细</a></li>
                                                                 <li><a href="../Report_Bill/ScDetails/Report_Xh.aspx">原材料生产领料明细</a></li>
                                                                 <li><a href="../Report_Bill/Db/Report_CkDetails3.aspx">原材料调拨明细</a></li>
                                                                 <li><a href="../Reprot_KC/KC/Report_Kc.aspx?Type=1">库存报表</a></li>
@@ -88,12 +88,16 @@
                                                             <ul>
                                                                 <li><a href="../Report_Bill/ScIn/Report_OrderIn.aspx">成品直接入库明细</a></li>
                                                                 <li><a href="../Report_Bill/ScInD/Report_OrderIn.aspx">成品生产入库明细</a></li>
-                                                                <li><a href="../Report_Bill/ScLlDetails/Report_CkDetails2.aspx">成品领料明细</a></li>
+                                                                <li><a href="../Report_Bill/ScLlDetails/Report_CkDetails2.aspx?ID=01">成品领料明细</a></li>
                                                                 <li><a href="../Report_Bill/XsOut/Report_CkDetails.aspx">销售出库明细</a></li>
                                                                 <li><a href="../Report_Bill/DBCP/Report_CkDetails3.aspx">成品调拨明细</a></li>
                                                                 <li><a href="../Report_Bill/DBCPWw/Report_CkDetails3.aspx">成品委外明细</a></li>
 
                                                                 <li><a href="../Report_Bill/CPDetailsNew/Report_Details.aspx">存货收发结存表(成品)</a></li>
+                                                                <li><a href="../Report_Bill/Products_MakeMoney.aspx">成品制造费用</a></li>
+                                                                <li><a href="../Report_Bill/Products_HandMoney.aspx">成品人工费用</a></li>
+                                                                <li><a href="../Report_Bill/Products_ElseMateMoney.aspx">成品其他材料费用</a></li>
+                                                                <li><a href="../Report_Bill/Product_CostsMoney.aspx">成本费用（成品入库）</a></li>
 
                                                                <!--      <li><a href="../Report_Bill/CPDetails/Report_Details.aspx">存货收发结存表(成品)</a></li>-->
 
@@ -105,6 +109,7 @@
                                                         <td valign="top" width="33%">
                                                             <ul>
                                                                 <li><a href="../Report_Bill/Report_CustomerPayTime.aspx">客户帐期统计</a></li>
+                                                              
                                                                 
                                                             </ul>
                                                         </td>
