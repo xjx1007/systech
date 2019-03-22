@@ -1,0 +1,91 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="18"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="16"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="10"  class="ListHead" >供应商名称:苏州欧利勤电子科技有限公司</td><td colspan="8" class="ListHead">对账月份:2018-7</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >订单数量</td>
+<td class="ListHead" >送货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center >报废数量</td>
+<td class="ListHead" align=center >赔偿单价</td>
+<td class="ListHead" align=center >额外扣除￥</td>
+<td class="ListHead" align=center>应付总额</td>
+<td class="ListHead">备注</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>低压电动工具18V</td>
+<td align=left class='ListHeadDetails' noWrap>宝时得电钻主板(BSD_DZ18_1_ZB_V2.0)</td>
+<td align=left class='ListHeadDetails' noWrap>欧利勤</td>
+<td align=left class='ListHeadDetails' noWrap>POOUIGN180019</td>
+<td align=left class='ListHeadDetails' noWrap>2018/7/11</td>
+<td align=right class='ListHeadDetails' noWrap>4400</td>
+<td align=right class='ListHeadDetails' noWrap>4400</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>7.000000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>39.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>30800.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>低压电动工具18V</td>
+<td align=left class='ListHeadDetails' noWrap>宝时得电钻灯板(BSD_DZ18_LED_V2.0)</td>
+<td align=left class='ListHeadDetails' noWrap>欧利勤</td>
+<td align=left class='ListHeadDetails' noWrap>POOUIGN180019</td>
+<td align=left class='ListHeadDetails' noWrap>2018/7/11</td>
+<td align=right class='ListHeadDetails' noWrap>4400</td>
+<td align=right class='ListHeadDetails' noWrap>4400</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.300000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>1.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>1320.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商签字:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商盖章:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=6>财务确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=14>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="14"><b>加工费发票</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">订单数量</td>
+<td class="ListHead">送货数量</td>
+<td class="ListHead">报废数量</td>
+<td class="ListHead">报废单价</td>
+<td class="ListHead">加工单价</td>
+<td class="ListHead">额外扣除￥</td>
+<td class="ListHead">应付金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0102010025</td>
+<td class="ListHeadDetails" align="left">低压电动工具18V</td><td class="ListHeadDetails" align="left">宝时得电钻主板(BSD_DZ18_1_ZB_V2.0)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">4400</td><td class="ListHeadDetails" align="right">4400</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">39</td><td class="ListHeadDetails" align="right">7.0000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">30800.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>4248.28</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0102010030</td>
+<td class="ListHeadDetails" align="left">低压电动工具18V</td><td class="ListHeadDetails" align="left">宝时得电钻灯板(BSD_DZ18_LED_V2.0)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">4400</td><td class="ListHeadDetails" align="right">4400</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">1</td><td class="ListHeadDetails" align="right">0.3000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">1320.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>182.07</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;8800</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;32120.00</td>
+<td class='ListHeadDetails' align=right  colspan=4>&nbsp;4430.35</td>
+ </tr></table>

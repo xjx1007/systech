@@ -1,0 +1,82 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="12"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="12"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="6"  class="ListHead" >供应商名称:深圳市元极科技有限公司</td><td colspan="6" class="ListHead">对账月份:2018-7</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >发货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center>总额</td>
+<td class="ListHead">备注</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>RU7570L(TO-252)</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POSSYJ180001</td>
+<td align=left class='ListHeadDetails' noWrap>2018/6/15</td>
+<td align=right class='ListHeadDetails' noWrap>70000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.300000</td>
+<td align=right class='ListHeadDetails' noWrap>91000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>RU7570L(TO-252)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POSSYJ180001</td>
+<td align=left class='ListHeadDetails' noWrap>2018/6/26</td>
+<td align=right class='ListHeadDetails' noWrap>70000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.300000</td>
+<td align=right class='ListHeadDetails' noWrap>91000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>RU7570L(TO-252)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POSSYJ180001</td>
+<td align=left class='ListHeadDetails' noWrap>2018/6/28</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.300000</td>
+<td align=right class='ListHeadDetails' noWrap>13000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商签字:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=1>供应商盖章:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td><td class="ListHeadDetails" colspan=1>财务确认:</td><td class="ListHeadDetails">&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >02050068</td>
+<td class="ListHeadDetails" align="left">MOS</td><td class="ListHeadDetails" align="left">RU7570L(TO-252)</td><td class="ListHeadDetails" align="left">pcs</td><td class="ListHeadDetails" align="right">150000</td><td class="ListHeadDetails" align="right">1.3000</td><td class="ListHeadDetails" align="right">195000.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>26896.55</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;150000</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;195000.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=4>&nbsp;26896.55</td>
+ </tr></table>

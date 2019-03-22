@@ -2175,6 +2175,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
 
     protected void button2_OnServerClick(object sender, EventArgs e)
     {
+        //sfsf
         if (!(uploadFile2.PostedFile.ContentLength > 0))
         {
             Alert("您没有选择文件!");
@@ -2247,6 +2248,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
         //设置邮件的发送级别  
         mail.Priority = MailPriority.Normal;
 
+        int a = 0;
         //设置邮件的附件，将在客户端选择的附件先上传到服务器保存一个，然后加入到mail中  你一
         if (File_Path != "")
         {

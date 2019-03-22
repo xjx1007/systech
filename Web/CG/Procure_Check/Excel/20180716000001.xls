@@ -1,0 +1,72 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="18"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="16"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="10"  class="ListHead" >供应商名称:杭州南淳电子科技有限公司</td><td colspan="8" class="ListHead">对账月份:2018-7</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >订单数量</td>
+<td class="ListHead" >送货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center >报废数量</td>
+<td class="ListHead" align=center >赔偿单价</td>
+<td class="ListHead" align=center >额外扣除￥</td>
+<td class="ListHead" align=center>应付总额</td>
+<td class="ListHead">备注</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>低压电动工具18V</td>
+<td align=left class='ListHeadDetails' noWrap>德创板手主板(DC48_BS18_1_ZB_V21)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州南淳电子科技有限公司</td>
+<td align=left class='ListHeadDetails' noWrap>PONCDZ180011</td>
+<td align=left class='ListHeadDetails' noWrap>2018/7/16</td>
+<td align=right class='ListHeadDetails' noWrap>7000</td>
+<td align=right class='ListHeadDetails' noWrap>6979</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>3.750000</td>
+<td align=right class='ListHeadDetails' noWrap>21</td>
+<td align=right class='ListHeadDetails' noWrap>0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>26250.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商签字:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商盖章:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=6>财务确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=14>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="14"><b>加工费发票</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">订单数量</td>
+<td class="ListHead">送货数量</td>
+<td class="ListHead">报废数量</td>
+<td class="ListHead">报废单价</td>
+<td class="ListHead">加工单价</td>
+<td class="ListHead">额外扣除￥</td>
+<td class="ListHead">应付金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0102010047</td>
+<td class="ListHeadDetails" align="left">低压电动工具18V</td><td class="ListHeadDetails" align="left">德创板手主板(DC48_BS18_1_ZB_V21)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">7000</td><td class="ListHeadDetails" align="right">6979</td><td class="ListHeadDetails" align="right">21</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">3.7500</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">26250.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>3609.83</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;6979</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;26250.00</td>
+<td class='ListHeadDetails' align=right  colspan=4>&nbsp;3609.83</td>
+ </tr></table>

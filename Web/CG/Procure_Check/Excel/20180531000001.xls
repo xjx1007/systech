@@ -1,0 +1,128 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="15"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="15"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="9"  class="ListHead" >供应商名称:无锡新洁能股份有限公司</td><td colspan="6" class="ListHead">对账月份:2018-5</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >发货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center>总额</td>
+<td class="ListHead">备注</td>
+<td class="ListHead" >确认人</td>
+<td class="ListHead" >确认时间</td>
+<td class="ListHead" >确认方法</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>NCE6020AK（TO-252）</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POWXXJN180011</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/9</td>
+<td align=right class='ListHeadDetails' noWrap>5000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.470000</td>
+<td align=right class='ListHeadDetails' noWrap>2350.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>NCE6020AK（TO-252）</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POWXXJN180012</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/9</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>0.470000</td>
+<td align=right class='ListHeadDetails' noWrap>4700.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>NCEP30T12G（DFN5*6）</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POWXXJN170012</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/10</td>
+<td align=right class='ListHeadDetails' noWrap>100000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.050000</td>
+<td align=right class='ListHeadDetails' noWrap>105000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>NCEP30T12G（DFN5*6）</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POWXXJN170012</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/15</td>
+<td align=right class='ListHeadDetails' noWrap>55000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.050000</td>
+<td align=right class='ListHeadDetails' noWrap>57750.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>MOS</td>
+<td align=left class='ListHeadDetails' noWrap>NCEP30T12G（DFN5*6）</td>
+<td align=left class='ListHeadDetails' noWrap>士腾仓库</td>
+<td align=left class='ListHeadDetails' noWrap>POWXXJN170012</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/15</td>
+<td align=right class='ListHeadDetails' noWrap>65000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.050000</td>
+<td align=right class='ListHeadDetails' noWrap>68250.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=11>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="11"><b>原材料发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">数量</td>
+<td class="ListHead">单价</td>
+<td class="ListHead">金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >02050044</td>
+<td class="ListHeadDetails" align="left">MOS</td><td class="ListHeadDetails" align="left">NCEP30T12G（DFN5*6）</td><td class="ListHeadDetails" align="left">片</td><td class="ListHeadDetails" align="right">220000</td><td class="ListHeadDetails" align="right">1.0500</td><td class="ListHeadDetails" align="right">231000.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>31862.07</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >02050054</td>
+<td class="ListHeadDetails" align="left">MOS</td><td class="ListHeadDetails" align="left">NCE6020AK（TO-252）</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">15000</td><td class="ListHeadDetails" align="right">0.4700</td><td class="ListHeadDetails" align="right">7050.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>972.41</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;235000</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;238050.00</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  colspan=4>&nbsp;32834.48</td>
+ </tr></table>

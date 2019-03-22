@@ -1,0 +1,101 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="18"><font size="6"><b>士腾与供应商对账确认单</b></font></td></tr>
+<tr >
+<td colspan="19"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="10"  class="ListHead" >供应商名称:杭州沃钛仕电子有限公司</td><td colspan="8" class="ListHead">对账月份:2018-5</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >订单数量</td>
+<td class="ListHead" >送货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center >报废数量</td>
+<td class="ListHead" align=center >赔偿单价</td>
+<td class="ListHead" align=center >额外扣除￥</td>
+<td class="ListHead" align=center>应付总额</td>
+<td class="ListHead">备注</td>
+<td class="ListHead" >确认人</td>
+<td class="ListHead" >确认时间</td>
+<td class="ListHead" >确认方法</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>园林工具54V</td>
+<td align=left class='ListHeadDetails' noWrap>中马吹风机面板(ZM_CFJ54_1_MB_V23)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州沃仕汰</td>
+<td align=left class='ListHeadDetails' noWrap>POWTS170001</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/31</td>
+<td align=right class='ListHeadDetails' noWrap>700</td>
+<td align=right class='ListHeadDetails' noWrap>700</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>1.000000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>700.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>园林工具54V</td>
+<td align=left class='ListHeadDetails' noWrap>中马吹风机主板(ZM_CFJ54_1_ZB_V23)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州沃仕汰</td>
+<td align=left class='ListHeadDetails' noWrap>POWTS170001</td>
+<td align=left class='ListHeadDetails' noWrap>2018/5/31</td>
+<td align=right class='ListHeadDetails' noWrap>700</td>
+<td align=right class='ListHeadDetails' noWrap>700</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>12.000000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>8400.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=7>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr><br><tr>
+<td class="ListHeadDetails" colspan=2>士腾审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>制表人及日期:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>核准人及时间:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=7>总经理确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=14>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="13"><b>加工费发票1</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">订单数量</td>
+<td class="ListHead">送货数量</td>
+<td class="ListHead">报废数量</td>
+<td class="ListHead">报废单价</td>
+<td class="ListHead">加工单价</td>
+<td class="ListHead">额外扣除￥</td>
+<td class="ListHead">应付金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0101020014</td>
+<td class="ListHeadDetails" align="left">园林工具54V</td><td class="ListHeadDetails" align="left">中马吹风机面板(ZM_CFJ54_1_MB_V23)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">700</td><td class="ListHeadDetails" align="right">700</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">1.0000</td><td class="ListHeadDetails" align="right">-</td><td class="ListHeadDetails" align="right">700.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>96.55</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0101020015</td>
+<td class="ListHeadDetails" align="left">园林工具54V</td><td class="ListHeadDetails" align="left">中马吹风机主板(ZM_CFJ54_1_ZB_V23)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1400</td><td class="ListHeadDetails" align="right">700</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">12.0000</td><td class="ListHeadDetails" align="right">-</td><td class="ListHeadDetails" align="right">8400.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>1158.62</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right  >&nbsp;1400</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;9100.00</td>
+<td class='ListHeadDetails' align=right  colspan=4>&nbsp;1255.17</td>
+ </tr></table>

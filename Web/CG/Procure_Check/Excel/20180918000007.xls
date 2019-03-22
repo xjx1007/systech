@@ -1,0 +1,195 @@
+﻿<table border="1" cellspacing="0" cellpadding="0" width="100%" class="scrollTable">
+<tdead class="fixedHeader"> 
+<tr >
+<td  class="ListHead" colspan="20"><font size="6"><b>士腾与供应商对账确认单(20180918000007)</b></font></td></tr>
+<tr >
+<td colspan="17"  class="ListHead" align="center">1.发货对账单</td></tr>
+<tr >
+<td colspan="10"  class="ListHead" >供应商名称:杭州敏坤电子有限公司</td><td colspan="8" class="ListHead">对账月份:2018-9</td></tr>
+<td class="ListHead">序号</td>
+<td class="ListHead" align=center  >产品名称</td>
+<td class="ListHead" align=center  >产品型号</td>
+<td class="ListHead">收货单位</td>
+<td class="ListHead"> 采购单号</td>
+<td class="ListHead" >入库日期</td>
+<td class="ListHead" >订单数量</td>
+<td class="ListHead" >送货数量</td>
+<td class="ListHead" >备料数量</td>
+<td class="ListHead" >物流及单号</td>
+<td class="ListHead" align=center >单价</td>
+<td class="ListHead" align=center >报废数量</td>
+<td class="ListHead" align=center >赔偿单价</td>
+<td class="ListHead" align=center >额外扣除￥</td>
+<td class="ListHead" align=center >额外金额￥</td>
+<td class="ListHead" align=center>应付总额</td>
+<td class="ListHead">备注</td>
+</thead><tbody class="scrollContent"> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>1</td>
+<td align=left class='ListHeadDetails' noWrap>园林工具36V</td>
+<td align=left class='ListHeadDetails' noWrap>大叶Grdena37cm割草机(DY_GCJ3625_5_ZB_V24)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>9200</td>
+<td align=right class='ListHeadDetails' noWrap>9176</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>13.500000</td>
+<td align=right class='ListHeadDetails' noWrap>24</td>
+<td align=right class='ListHeadDetails' noWrap>0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>123876.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>2</td>
+<td align=left class='ListHeadDetails' noWrap>园林工具36V</td>
+<td align=left class='ListHeadDetails' noWrap>大叶富世华主板(DY_GCJ3625_3_ZB_V24)</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180009</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>1000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>13.500000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>58.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>13500.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>3</td>
+<td align=left class='ListHeadDetails' noWrap>白色家电</td>
+<td align=left class='ListHeadDetails' noWrap>CZ_BX60_1_ZB_V23</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180026</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>4500</td>
+<td align=right class='ListHeadDetails' noWrap>4500</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>7.800000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>45.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>35100.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>4</td>
+<td align=left class='ListHeadDetails' noWrap>白色家电</td>
+<td align=left class='ListHeadDetails' noWrap>CZ_BX60_1_ZB_V23</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180029</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>7.500000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>45.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>75000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>5</td>
+<td align=left class='ListHeadDetails' noWrap>园林工具54V</td>
+<td align=left class='ListHeadDetails' noWrap>天佑15串链锯TY_LJ54_1_V2.3</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180032</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>1100</td>
+<td align=right class='ListHeadDetails' noWrap>1095</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>9.700000</td>
+<td align=right class='ListHeadDetails' noWrap>5</td>
+<td align=right class='ListHeadDetails' noWrap>60.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>10561.500</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='rr' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>6</td>
+<td align=left class='ListHeadDetails' noWrap>白色家电</td>
+<td align=left class='ListHeadDetails' noWrap>CZ_BX60_1_ZB_V23</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180034</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>7.000000</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>45.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>70000.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr> <tr class='gg' onmouseover='setActiveBG(this)'>
+<td align=center class='ListHeadDetails' noWrap>7</td>
+<td align=left class='ListHeadDetails' noWrap>白色家电</td>
+<td align=left class='ListHeadDetails' noWrap>CZ_BX60_1_ZB_V23</td>
+<td align=left class='ListHeadDetails' noWrap>杭州敏坤</td>
+<td align=left class='ListHeadDetails' noWrap>POMK180036</td>
+<td align=left class='ListHeadDetails' noWrap>2018/9/18</td>
+<td align=right class='ListHeadDetails' noWrap>10000</td>
+<td align=right class='ListHeadDetails' noWrap>9979</td>
+<td align=right class='ListHeadDetails' noWrap>0</td>
+<td align=right class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=right class='ListHeadDetails' noWrap>7.000000</td>
+<td align=right class='ListHeadDetails' noWrap>21</td>
+<td align=right class='ListHeadDetails' noWrap>45.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;0.0000</td>
+<td align=right class='ListHeadDetails' noWrap>69853.000</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+<td align=center class='ListHeadDetails' noWrap>&nbsp;</td>
+ </tr><br><tr>
+<td class="ListHeadDetails" colspan=2>供应商审核结果:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商签字:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=2>供应商盖章:</td><td class="ListHeadDetails" colspan=2>&nbsp;</td><td class="ListHeadDetails" colspan=6>财务确认:</td><td class="ListHeadDetails" colspan=1>&nbsp;</td></tr></table><table border="1" cellspacing="0" cellpadding="0" width="100%" class="ListDetails" >
+ 
+<tr><td class="ListHeadLeft" colspan=15>需开发票</td></tr> <tr ><td class="ListHeadLeft" align=left colspan="16"><b>加工费发票</b></td>
+</tr> <tr ><td class="ListHead" >项次</td>
+<td class="ListHead" align=center>料号</td>
+<td class="ListHead" align=center>货物名称</td>
+<td class="ListHead" align=center>规格型号</td>
+<td class="ListHead" align=center>单位</td>
+<td class="ListHead">订单数量</td>
+<td class="ListHead">送货数量</td>
+<td class="ListHead">报废数量</td>
+<td class="ListHead">报废单价</td>
+<td class="ListHead">加工单价</td>
+<td class="ListHead">额外扣除￥</td>
+<td class="ListHead">额外金额￥</td>
+<td class="ListHead">应付金额</td>
+<td class="ListHead">税率</td>
+<td class="ListHead"  colspan=2>税额</td>
+</tr ><tr ><td class="ListHeadDetails" align="left" >1</td><td class='ListHeadDetails'align=center >0101010121</td>
+<td class="ListHeadDetails" align="left">园林工具36V</td><td class="ListHeadDetails" align="left">大叶Grdena37cm割草机(DY_GCJ3625_5_ZB_V24)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">9200</td><td class="ListHeadDetails" align="right">9176</td><td class="ListHeadDetails" align="right">24</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">13.5000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">123876.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>17086.34</td></tr><tr ><td class="ListHeadDetails" align="left" >2</td><td class='ListHeadDetails'align=center >0101010134</td>
+<td class="ListHeadDetails" align="left">园林工具36V</td><td class="ListHeadDetails" align="left">大叶富世华主板(DY_GCJ3625_3_ZB_V24)</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">1000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">58</td><td class="ListHeadDetails" align="right">13.5000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">13500.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>1862.07</td></tr><tr ><td class="ListHeadDetails" align="left" >3</td><td class='ListHeadDetails'align=center >01040014</td>
+<td class="ListHeadDetails" align="left">白色家电</td><td class="ListHeadDetails" align="left">CZ_BX60_1_ZB_V23</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">10000</td><td class="ListHeadDetails" align="right">19979</td><td class="ListHeadDetails" align="right">21</td><td class="ListHeadDetails" align="right">45</td><td class="ListHeadDetails" align="right">7.0000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">69853.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>19290.07</td></tr><tr ><td class="ListHeadDetails" align="left" >4</td><td class='ListHeadDetails'align=center >01040014</td>
+<td class="ListHeadDetails" align="left">白色家电</td><td class="ListHeadDetails" align="left">CZ_BX60_1_ZB_V23</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">10000</td><td class="ListHeadDetails" align="right">10000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">45</td><td class="ListHeadDetails" align="right">7.5000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">75000.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>10344.83</td></tr><tr ><td class="ListHeadDetails" align="left" >5</td><td class='ListHeadDetails'align=center >01040014</td>
+<td class="ListHeadDetails" align="left">白色家电</td><td class="ListHeadDetails" align="left">CZ_BX60_1_ZB_V23</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">4500</td><td class="ListHeadDetails" align="right">4500</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">45</td><td class="ListHeadDetails" align="right">7.8000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">35100.00</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>4841.38</td></tr><tr ><td class="ListHeadDetails" align="left" >6</td><td class='ListHeadDetails'align=center >0101020044</td>
+<td class="ListHeadDetails" align="left">园林工具54V</td><td class="ListHeadDetails" align="left">天佑15串链锯TY_LJ54_1_V2.3</td><td class="ListHeadDetails" align="left">只</td><td class="ListHeadDetails" align="right">1100</td><td class="ListHeadDetails" align="right">1095</td><td class="ListHeadDetails" align="right">5</td><td class="ListHeadDetails" align="right">60</td><td class="ListHeadDetails" align="right">9.7000</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">0</td><td class="ListHeadDetails" align="right">10561.50</td><td class="ListHeadDetails" align="center">16%</td><td class="ListHeadDetails" align="right"  colspan=2>1465.03</td></tr> <tr >
+<td class='ListHeadDetails'align=center  colspan='5'>合计:</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;45750</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right >&nbsp;</td>
+<td class='ListHeadDetails' align=right  >&nbsp;327890.50</td>
+<td class='ListHeadDetails' align=right  colspan=4>&nbsp;54889.72</td>
+ </tr></table>

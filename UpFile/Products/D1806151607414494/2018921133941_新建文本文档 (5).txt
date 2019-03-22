@@ -1,0 +1,174 @@
+        if (this.Tbx_ID.Text != "")//修改
+        {
+            DataSet Dts_Table = bll.GetList(" OPR_ID='" + this.Tbx_ID.Text + "'  and OPR_Type='1' and  OPR_DutyPerson='" + this.Ddl_DutyPerson.SelectedValue + "' ");
+            if (((DateTime.Now - DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString())).TotalHours > 1) && (DateTime.Now.Date == DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString()).Date))
+            {
+                int a = 0,b=0;
+                try
+                {
+                    model.OPR_NextReport = Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString();
+                    model.OPR_SubmitTime=DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_SubmitTime"].ToString());//计划提交时间
+                    //判断计划
+                    if (Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString().Trim() == Tbx_NextReport.Text.Trim())
+                    {                      
+
+                    }
+                    else
+                    {
+                        a = 1;
+                        //Alert("今日计划已经超时无法更改");
+                    }
+                    //判断总结
+                    if (Dts_Table.Tables[0].Rows[0]["OPR_ThisReport"].ToString().Trim() == Tbx_ThisReport.Text.Trim())
+                    {
+                        if (a==1)
+                        {
+                            Alert("今日计划已经超时无法更改");
+                        }
+                    }
+                    else
+                    {
+                                              
+                        if (bll.Update(model))
+                        {
+                            if (a==1)
+                            {
+                                Alert("今日计划已经超时无法更改!今日总结操作成功！");
+                                AM.Add_Logs("日报修改" + this.Tbx_ID.Text);
+                                return;
+                            }
+                            else
+                            {
+                                Alert("今日总结操作成功！");
+                                AM.Add_Logs("日报修改" + this.Tbx_ID.Text);
+                                return;
+                            }
+                           
+                           
+                        }
+                        else
+                        {
+                            AM.Add_Logs("日报修改失败" + this.Tbx_ID.Text);
+                            AlertAndRedirect("修改失败！", "OA_Person_Report_Today_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+
+                        }
+                        //Alert("今日总结操作成功！但今日计划已经超过时限不可更改！");
+                        //return;
+                    }
+
+                    
+                }
+                catch
+                {
+                    AlertAndRedirect("系统错误！", "OA_Person_Report_Today_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+                }
+
+            }
+            else if (((DateTime.Now - DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString())).TotalHours < 1) && (DateTime.Now.Date == DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString()).Date))
+            {
+                int a = 0;       
+                try
+                {
+                    //model.OPR_NextReport = Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString();
+                    //判断计划
+                    if (Dts_Table.Tables[0].Rows[0]["OPR_NextReport"].ToString().Trim() == Tbx_NextReport.Text.Trim())
+                    {
+                        model.OPR_SubmitTime = DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_SubmitTime"].ToString());//计划提交时间
+                      
+                    }
+                    else
+                    {
+                        model.OPR_MTime= DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_MTime"].ToString());
+                        if (bll.Update(model))
+                        {
+                           
+                            a = 1;
+                            AM.Add_Logs("日报修改" + this.Tbx_ID.Text);
+                           
+                        }
+                        else
+                        {
+                            AM.Add_Logs("日报修改失败" + this.Tbx_ID.Text);
+                            AlertAndRedirect("修改失败！", "OA_Person_Report_Today_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+
+                        }
+                    }
+                    //判断总结
+                    if (Dts_Table.Tables[0].Rows[0]["OPR_ThisReport"].ToString().Trim() == Tbx_ThisReport.Text.Trim())
+                    {
+                        if (a==1)
+                        {
+                            Alert("今日计划操作成功！");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //model.OPR_CTime = DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_CTime"].ToString());
+                        //model.OPR_SubmitTime = DateTime.Parse(Dts_Table.Tables[0].Rows[0]["OPR_SubmitTime"].ToString());
+                        model.OPR_MTime=DateTime.Now;
+                        if (bll.Update(model))
+                        {
+                            if (a==1)
+                            {
+                                Alert("今日计划操作成功！今日总结操作成功！");
+                                AM.Add_Logs("日报修改" + this.Tbx_ID.Text);
+                                return;
+                            }
+                            else
+                            {
+                                Alert("今日总结操作成功！");
+                                AM.Add_Logs("日报修改" + this.Tbx_ID.Text);
+                                return;
+                            }
+                            
+                        }
+                        else
+                        {
+                            AM.Add_Logs("日报修改失败" + this.Tbx_ID.Text);
+                            AlertAndRedirect("修改失败！", "OA_Person_Report_Today_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+
+                        }
+                       
+                    }
+
+                    
+
+                }
+                catch
+                {
+                    AlertAndRedirect("系统错误！", "OA_Person_Report_Today_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+                }
+
+            }
+            else
+            {
+                Alert("已经超过时限不可再次编辑");
+                return;
+            }
+
+        }
+        else
+        {
+
+            try
+            {
+                if (this.Tbx_NextReport.Text=="")
+                {
+                    this.Tbx_NextReport.Text = "";
+                    this.Tbx_ThisReport.Text = "";
+                    Alert("今日计划没有书写，无法创建总结");
+                   
+                    return;
+                }
+                else
+                {
+                    bll.Add(model);
+                    //base.Base_SendMessage(model.PBN_ReceiveID, "日报：<a href='Web/Notice/OA_Person_Report_View.aspx?ID=" + model.PBN_ID + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + model.PBN_Title + "</a> ");
+                    AM.Add_Logs("日报增加");
+                    AlertAndRedirect("新增成功！", "OA_Person_Report_Today_Add.aspx?ID=" + this.Tbx_ID.Text + "");
+                }
+               
+            }
+            catch { }
+        }
