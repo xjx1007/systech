@@ -2175,7 +2175,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
 
     protected void button2_OnServerClick(object sender, EventArgs e)
     {
-        //sfsf
+        //sfsfgdgddgdg
         if (!(uploadFile2.PostedFile.ContentLength > 0))
         {
             Alert("您没有选择文件!");
