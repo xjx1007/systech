@@ -1810,7 +1810,7 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
     /// <returns></returns>
     public int GetSHNumber(string num, string OrderNo, string productbarcode)
     {
-        //你好，Demo;sf
+        //你好，Demo;sfsdsd
         string s_Sql = "select ISNULL(sum(b.AllocateAmount),0) from KNet_WareHouse_AllocateList a join KNet_WareHouse_AllocateList_Details b on a.AllocateNo=b.AllocateNo where KWA_OrderNo='" + OrderNo + "' and HouseNo in (select  HouseNo from KNet_Sys_WareHouse where SuppNo = '" + this.Ddl_SuppNo.Value + "' ) and HouseNo_int = '131235104473261008' and ProductsBarCode='" + productbarcode + "'";
         this.BeginQuery(s_Sql);
         DataTable Dtb_Table = (DataTable)this.QueryForDataTable();//加工厂到车间
