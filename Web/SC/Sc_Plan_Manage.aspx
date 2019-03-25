@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
     <title>生产计划</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script type="text/javascript" src="/Web/js/ajax_func.js"></script>
     <script language="JavaScript" src="/Web/Js/Global.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>

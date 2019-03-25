@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../../css/knetwork.css" type="text/css">
+<link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
 <script type="text/javascript">
      if(window != window.parent) 
      { var P = window.parent, D = P.loadinndlg(); }

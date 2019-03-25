@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <title>发货通知信息</title>
     <script type="text/javascript" src="../js/ajax_func.js"></script>
     <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>

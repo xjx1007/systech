@@ -6,9 +6,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="../css/knetwork.css" type="text/css">
+<link rel="stylesheet" href="../../css/knetwork.css" type="text/css">
 <title></title>
-<script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">

@@ -14,7 +14,9 @@ document.all("frmTitle").style.display=""
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
 <title></title>
-<link rel="shortcut icon" href="../images/favicon.ico" /> 
+<%--<link rel="shortcut icon" href="../images/favicon.ico" /> --%>
+<link rel="alternate icon" type="image/png" href="images/Ê¿ÌÚ.png"/>
+
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0" >
 <form id="form1" runat="server"> 

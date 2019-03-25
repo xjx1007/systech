@@ -5,12 +5,13 @@
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script type="text/javascript" src="../../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
-    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
     <script language="JAVASCRIPT">
         function OnClick() {
             var HouseNo = "";

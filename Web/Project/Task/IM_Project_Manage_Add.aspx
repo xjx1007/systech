@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script src="/Web/Js/jquery-1.4.2.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>

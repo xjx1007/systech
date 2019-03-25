@@ -5,6 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>进销存系统</title>
+    <link rel="alternate icon" type="image/png" href="images/士腾.png"/>
+
     <style>
  body,td{font-size: 12px;}
 .myput{BORDER-TOP-WIDTH:1px;BORDER-LEFT-WIDTH:1px;BORDER-BOTTOM-WIDTH:2px;BORDER-RIGHT-WIDTH:2px;height: 20px; color:#000000;font-size:15px;}

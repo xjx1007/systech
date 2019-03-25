@@ -6,6 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
     <title>生成采购订单</title>
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css" />
     <script type="text/javascript" src="/Web/Js/ajax_func.js"></script>

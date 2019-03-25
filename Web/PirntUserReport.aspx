@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../themes/softed/style.css" type="text/css">
     <script language="javascript" src="Js/LodopFuncs.js"></script>
     <title>用户报告</title>
+     <link rel="alternate icon" type="image/png" href="../images/士腾.png" />
     <style type="text/css" id="style1">
         .ListDetails {
             BORDER-COLLAPSE: collapse;

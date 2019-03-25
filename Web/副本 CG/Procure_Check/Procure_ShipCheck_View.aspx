@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
     <title>士腾与供应商对账确认单</title>
-    
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script language="javascript" type="text/javascript">
         var LODOP; //声明为全局变量 
         function prn1_preview() {

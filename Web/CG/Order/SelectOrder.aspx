@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>选择生产订单</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
     <base target="_self" />
 </head>
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">

@@ -7,6 +7,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>库存流水账</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css"/>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>

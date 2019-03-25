@@ -24,6 +24,7 @@
     <script type="text/javascript" src="plugins/uniform/jquery.uniform.min.js"></script>
     <script type="text/javascript" src="plugins/validation/jquery.validate.min.js"></script>
     <script type="text/javascript" src="plugins/nprogress/nprogress.js"></script>
+    <link rel="alternate icon" type="image/png" href="images/士腾.png"/>
 
     <script type="text/javascript">
 

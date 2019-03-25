@@ -5,6 +5,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <title>原材料入库明细和汇总</title>
     <style type="text/css" id="style1">
         body {

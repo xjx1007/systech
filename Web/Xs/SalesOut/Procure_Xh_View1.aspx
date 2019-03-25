@@ -5,6 +5,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>成品领料单</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <style type="text/css" id="style1">
 body {
  background: #FFF;

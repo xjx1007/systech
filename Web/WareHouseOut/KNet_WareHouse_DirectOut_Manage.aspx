@@ -15,7 +15,7 @@
 <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
 <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
 <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script type="text/javascript">
     function GPrint(ID) {
         //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')

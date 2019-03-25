@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
     <title>物料计划</title>
     <script type="text/javascript" src="/Web/Js/ajax_func.js"></script>
     <script language="JavaScript" src="/Web/js/Global.js" type="text/javascript"></script>

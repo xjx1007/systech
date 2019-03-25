@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="../css/knetwork.css" type="text/css">
 <title></title>
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 
 <body topmargin="0" leftmargin="0" rightmargin="0">

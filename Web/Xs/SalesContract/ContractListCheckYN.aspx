@@ -13,6 +13,7 @@
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
     <title>订单评审进展操作--审核</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script>
         function closeWindow() {
             window.opener = null;

@@ -1,184 +1,176 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"   CodeFile="SelectMouldProduct.aspx.cs" Inherits="Knet_Common_SelectMouldProduct" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SelectMouldProduct.aspx.cs" Inherits="Knet_Common_SelectMouldProduct" %>
+
 <%@ Register Assembly="Container" Namespace="HT.Control.WebControl" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-<script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-<script language="javascript" type="text/javascript" src="../js/Global.js"></script>
-<script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-<base target="_self" />
-<script>
-    function changsheng(va)
-    {
-    if(va!='0')
-        {
-        var SmallClass = document.getElementById("SmallClass");
-            SmallClass.disabled=false;
-            var url="../Web/Js/ProductClassHandler.ashx?type=BigClass&BigNo="+va;
-            send_request("GET",url,null,"text",populateClass3);
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
+    <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
+    <base target="_self" />
+    <script>
+        function changsheng(va) {
+            if (va != '0') {
+                var SmallClass = document.getElementById("SmallClass");
+                SmallClass.disabled = false;
+                var url = "../Web/Js/ProductClassHandler.ashx?type=BigClass&BigNo=" + va;
+                send_request("GET", url, null, "text", populateClass3);
+            }
         }
-    }
-function populateClass3(){
-var f=document.getElementById("SmallClass");
-if(http_request.readyState==4){
-        if(http_request.status==200){
-	        var list=http_request.responseText;
-	        var classList=list.split("|");
-	        f.options.length=1;
-	        for(var i=0;i<classList.length;i++){
-		        var tmp=classList[i].split(",");
-		        f.add(new Option(tmp[1],tmp[0]));
-	        }
-        }else{
-	        alert("您所请求的页面有异常.");
+        function populateClass3() {
+            var f = document.getElementById("SmallClass");
+            if (http_request.readyState == 4) {
+                if (http_request.status == 200) {
+                    var list = http_request.responseText;
+                    var classList = list.split("|");
+                    f.options.length = 1;
+                    for (var i = 0; i < classList.length; i++) {
+                        var tmp = classList[i].split(",");
+                        f.add(new Option(tmp[1], tmp[0]));
+                    }
+                } else {
+                    alert("您所请求的页面有异常.");
+                }
+            }
         }
-}
-}
-function set_return(ID, Name,Code) {
-    if (window.opener != undefined) {
-        window.opener.returnValue = ID + "," + Name + "," + Code;
-        window.opener.SetReturnValueInOpenner_MouldProduct(ID + "," + Name + "," + Code);
-    }
-    else {
-        window.returnValue = ID + "," + Name + "," + Code;
-    }
+        function set_return(ID, Name, Code) {
+            if (window.opener != undefined) {
+                window.opener.returnValue = ID + "," + Name + "," + Code;
+                window.opener.SetReturnValueInOpenner_MouldProduct(ID + "," + Name + "," + Code);
+            }
+            else {
+                window.returnValue = ID + "," + Name + "," + Code;
+            }
 
-}
-</script>
-<style type="text/css">
-.Div11
-{
-  background-image:url(../images/midbottonA2.gif); 
-  background-repeat:no-repeat;
-  z-index:0px;
-  padding-top:3px;
-}
-.Div22
-{
-  background-image:url(../images/midbottonB2.gif); 
-  background-repeat:no-repeat;
-  z-index:0px;
-  padding-top:3px;
-}
-</style>
+        }
+    </script>
+    <style type="text/css">
+        .Div11 {
+            background-image: url(../images/midbottonA2.gif);
+            background-repeat: no-repeat;
+            z-index: 0px;
+            padding-top: 3px;
+        }
 
-<title>选择产品</title>
+        .Div22 {
+            background-image: url(../images/midbottonB2.gif);
+            background-repeat: no-repeat;
+            z-index: 0px;
+            padding-top: 3px;
+        }
+    </style>
+
+    <title>选择产品</title>
 </head>
-<body >
+<body>
     <form id="form1" runat="server">
-    <div>
+        <div>
 
 
-    
-    <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
-        <tr>
-            <td style="height: 2px">
-            </td>
-        </tr>
-        <tr>
-            <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>
-                模具选择 > <a class="hdrLink" href="SelectMouldProduct.aspx">模具选择</a>
-            </td>
-            <td width="100%" nowrap>
-                <table border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td class="sep1" style="width: 1px;">
-                        </td>
-                        <td class="small">
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="height: 2px">
-            </td>
-        </tr>
-    </table>
-    
-    <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
-    
-        <tr>
-            <td>
-                <%=base.Base_BindView("KNet_WareHouse_DirectOutList", "Sales_ShipWareOut_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
-                    <tr>
-                        <!-- Buttons -->
-                        <td style="padding-right: 20px" align="left" nowrap>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                      
-        <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="True"  AllowSorting="True"
-          EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"  
-          GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"
-            ShowHeader="true"  HeaderStyle-Height="25px" >
-        <Columns>
 
-        
-        <asp:TemplateField HeaderText="产品名称" HeaderStyle-Font-Size="12px"  ItemStyle-Height="25px"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
-                 <ItemTemplate>
-                     
-               <%# GetLink(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
-                 </ItemTemplate>
-        </asp:TemplateField>
-        <asp:BoundField  DataField="ProductsName"  HeaderText="产品名称"  SortExpression="ProductsName">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px" />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-        <asp:TemplateField HeaderText="大类名称"  SortExpression="ProductsMainCategory" HeaderStyle-Font-Size="12px"    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# base.Base_GetBigCateNane(DataBinder.Eval(Container.DataItem, "ProductsMainCategory").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-        <asp:BoundField  DataField="ProductsBarCode"   HeaderText="编号(条码)"  SortExpression="ProductsBarCode">
-            <ItemStyle HorizontalAlign="Left"  Font-Size="12px"  />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-        <asp:TemplateField HeaderText="版本号"  SortExpression="ProductsEdition" HeaderStyle-Font-Size="12px"    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-               <%# base.Base_GetProductsEdition_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField HeaderText="数量"   HeaderStyle-Font-Size="12px"    ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
-          <ItemTemplate>
-          <asp:TextBox ID="Tbx_Number" Width="60px" runat="server"   CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" value="1"></asp:TextBox>
-          <asp:TextBox ID="ProductsBarCode" Width="0px" runat="server"  CssClass="Custom_Hidden"  value='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>'></asp:TextBox>
-         </ItemTemplate>
-        </asp:TemplateField>
-        </Columns>
-         <HeaderStyle CssClass='Custom_DgHead' />
-        <RowStyle CssClass='Custom_DgItem' />
-        <AlternatingRowStyle BackColor="#E3EAF2" />
-        <PagerStyle CssClass='Custom_DgPage' />
-        </cc1:MyGridView>
-                        </td>
-                    </tr>
-                </table>
-                <!--分页-->
-            </td>
-        </tr>
-    </table>
-    
-<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" style="border-top:1px solid #A3B2CC;">
-  <tr>
-    <td height="25" width="40%">
-</select>关健词:<asp:TextBox ID="SeachKey" runat="server"  CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"  Width="100px"></asp:TextBox>&nbsp;<asp:Button  ID="Button1" runat="server" Text="产品筛选" CssClass="Btt" OnClick="Button1_Click1" /></td>
-  </tr>
-</table>
+            <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+                <tr>
+                    <td style="height: 2px"></td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>模具选择 > <a class="hdrLink" href="SelectMouldProduct.aspx">模具选择</a>
+                    </td>
+                    <td width="100%" nowrap>
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="sep1" style="width: 1px;"></td>
+                                <td class="small"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 2px"></td>
+                </tr>
+            </table>
 
-    </div>
+            <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
+
+                <tr>
+                    <td>
+                        <%=base.Base_BindView("KNet_WareHouse_DirectOutList", "Sales_ShipWareOut_Manage.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
+                            <tr>
+                                <!-- Buttons -->
+                                <td style="padding-right: 20px" align="left" nowrap></td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <cc1:MyGridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True"
+                                        EmptyDataText="<div align=center><font color=red><br/><br/><B>没有找到相关记录</B><br/><br/></font></div>"
+                                        GridLines="None" Width="100%" HorizontalAlign="center" AutoGenerateColumns="false"
+                                        ShowHeader="true" HeaderStyle-Height="25px">
+                                        <Columns>
+
+
+                                            <asp:TemplateField HeaderText="产品名称" HeaderStyle-Font-Size="12px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="left">
+                                                <ItemTemplate>
+
+                                                    <%# GetLink(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="ProductsName" HeaderText="产品名称" SortExpression="ProductsName">
+                                                <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            </asp:BoundField>
+                                            <asp:TemplateField HeaderText="大类名称" SortExpression="ProductsMainCategory" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetBigCateNane(DataBinder.Eval(Container.DataItem, "ProductsMainCategory").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="ProductsBarCode" HeaderText="编号(条码)" SortExpression="ProductsBarCode">
+                                                <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                                <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            </asp:BoundField>
+                                            <asp:TemplateField HeaderText="版本号" SortExpression="ProductsEdition" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <%# base.Base_GetProductsEdition_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="Tbx_Number" Width="60px" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" value="1"></asp:TextBox>
+                                                    <asp:TextBox ID="ProductsBarCode" Width="0px" runat="server" CssClass="Custom_Hidden" value='<%# DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString() %>'></asp:TextBox>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <HeaderStyle CssClass='Custom_DgHead' />
+                                        <RowStyle CssClass='Custom_DgItem' />
+                                        <AlternatingRowStyle BackColor="#E3EAF2" />
+                                        <PagerStyle CssClass='Custom_DgPage' />
+                                    </cc1:MyGridView>
+                                </td>
+                            </tr>
+                        </table>
+                        <!--分页-->
+                    </td>
+                </tr>
+            </table>
+
+            <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" style="border-top: 1px solid #A3B2CC;">
+                <tr>
+                    <td height="25" width="40%"></select>关健词:<asp:TextBox ID="SeachKey" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="100px"></asp:TextBox>&nbsp;<asp:Button ID="Button1" runat="server" Text="产品筛选" CssClass="Btt" OnClick="Button1_Click1" /></td>
+                </tr>
+            </table>
+
+        </div>
     </form>
 </body>
 </html>

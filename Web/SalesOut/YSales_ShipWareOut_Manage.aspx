@@ -6,6 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>发货出库管理</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>

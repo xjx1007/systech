@@ -8,7 +8,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css"/>
     <script type="text/javascript" src="../../themes/js/jquery/jquery.min.js"></script>
-
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>

@@ -7,7 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>OQC送检</title>
 </head>
-<link rel="stylesheet" href="../../themes/softed/style.css" type="text/css"/>
+<link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
+<link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
 <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -40,7 +41,7 @@
                 </td>
                 <td width="100%" nowrap>
 
-                     <table border="0" cellspacing="0" cellpadding="0">
+                    <table border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td class="sep1" style="width: 1px;"></td>
                             <td class="small">
@@ -53,7 +54,7 @@
                                                     <td style="padding-right: 0px; padding-left: 10px;">
                                                         <a href="javascript:;" onclick="add()">
                                                             <img src="../../themes/softed/images/btnL3Add.gif" alt="*创建 样品领用" title="*创建 样品领用"
-                                                                 border="0"/></a>
+                                                                border="0" /></a>
                                                     </td>
                                                     <td style="padding-right: 0px;">
                                                         <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../themes/softed/images/btnL3Delete.gif"
@@ -62,15 +63,15 @@
                                                     <td style="padding-right: 10px">
                                                         <a href="javascript:;" onclick="ShowDiv();">
                                                             <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 样品领用..." title="查找 样品领用..."
-                                                                 border="0"/></a>
+                                                                border="0" /></a>
                                                     </td>
                                                     <td style="padding-right: 0px; padding-left: 10px;">
                                                         <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 样品领用" title="*导入 样品领用"
-                                                             border="0"/>
+                                                            border="0" />
                                                     </td>
                                                     <td style="padding-right: 10px">
                                                         <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 样品领用" title="*导出 样品领用"
-                                                             border="0"/>
+                                                            border="0" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -119,7 +120,7 @@
                                     <asp:Button ID="btnBasicSearch" runat="server" Text="立即查找" AccessKey="F" title="立即查找 [Alt+F]"
                                         class="crmbutton small create" OnClick="btnBasicSearch_Click" />&nbsp;
                                     <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
-                                           value=" 取消查找 "/>&nbsp;
+                                        value=" 取消查找 " />&nbsp;
                                 </td>
                                 <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">[x]
                                 </td>
@@ -136,11 +137,11 @@
                                 </td>
                                 <td nowrap class="small">
                                     <b>
-                                        <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all"/>&nbsp;匹配以下所有条件</b>
+                                        <input name="matchtype" id="matchtype1" type="radio" runat="server" value="all" />&nbsp;匹配以下所有条件</b>
                                 </td>
                                 <td nowrap width="60%" class="small">
                                     <b>
-                                        <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked/>&nbsp;匹配以下任意条件</b>
+                                        <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked />&nbsp;匹配以下任意条件</b>
                                 </td>
                                 <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]
                                 </td>
@@ -192,13 +193,13 @@
                             <tr>
                                 <td align="left" width="40%">
                                     <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Knet_OQCSubmitted_Product_List")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
-                                           class="crmbuttom small edit"/>
-                                    <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit"/>
+                                        class="crmbuttom small edit" />
+                                    <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit" />
                                 </td>
                                 <td align="left" class="small">
                                     <asp:Button ID="btnAdvancedSearch" runat="server" Text="立即查找" AccessKey="F" title="立即查找 [Alt+F]"
                                         class="crmbutton small create" OnClick="btnAdvancedSearch_Click" />&nbsp;
-                                    <input type="button" class="crmbutton small edit" value=" 取消查找 " onclick="fnshow();"/>
+                                    <input type="button" class="crmbutton small edit" value=" 取消查找 " onclick="fnshow();" />
                                 </td>
                             </tr>
                         </table>
@@ -239,130 +240,130 @@
                         </tr>--%>
                         <tr>
                             <td>
- 
-                                  <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
-                                            AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="8"
-                                            BorderColor="#4974C2"
-                                            EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"
-                                            OnRowDataBound="GridView1_DataRowBinding">
-                                            <Columns>
-                                                <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <HeaderTemplate>
-                                                        <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server" />
-                                                    </HeaderTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:CheckBox ID="Chbk" runat="server" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="送检单号" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>                                            
-                                                    <a href="Knet_OQCSubmitted_Update_Product.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KSP_SID") %>&&Type=<%# DataBinder.Eval(Container.DataItem, "KSP_Type") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()%></a>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="采购单号" SortExpression="KSP_OrderNo" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# DataBinder.Eval(Container.DataItem, "KSP_OrderNo").ToString() %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="送检日期" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# DataBinder.Eval(Container.DataItem, "KSP_Stime").ToString() %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="送检级别" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetRank(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                  <asp:TemplateField HeaderText="供应商" HeaderStyle-Font-Size="12px" ItemStyle-Width="120px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetSuppName(DataBinder.Eval(Container.DataItem, "KSP_SuppNo").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="物料名称" SortExpression="KSP_SID" HeaderStyle-Font-Size="12px" ItemStyle-Width="200px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                     <ItemTemplate>
-                                                      <%# Base_GetProductName(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
 
-                                                <asp:TemplateField HeaderText="送检数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetSamplingNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="抽检数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetCheckNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="不良数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetBadNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="不良率" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetRejectRatio(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                               <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetSamplingPrice(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                  <asp:TemplateField HeaderText="已调数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetDbNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="送检人" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# Base_GetProposer( DataBinder.Eval(Container.DataItem, "KSP_Proposer").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="审核人" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# Base_GetProposer( DataBinder.Eval(Container.DataItem, "KSP_Sproposer").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="检验结果" SortExpression="KSP_SID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" 
-                                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%#  Base_GetResult(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString())%>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                               
-                                                
-                                                <asp:TemplateField HeaderText="审核" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# GetInState(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                               
-                                              
-                                            </Columns>
-                                            <HeaderStyle CssClass='colHeader' />
-                                            <RowStyle CssClass='listTableRow' />
-                                            <AlternatingRowStyle BackColor="#E3EAF2" />
-                                            <PagerStyle CssClass='Custom_DgPage' />
-                                        </cc1:MyGridView>
-                         
+                                <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
+                                    AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="8"
+                                    BorderColor="#4974C2"
+                                    EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"
+                                    OnRowDataBound="GridView1_DataRowBinding">
+                                    <Columns>
+                                        <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server" />
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="Chbk" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="送检单号" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <a href="Knet_OQCSubmitted_Update_Product.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "KSP_SID") %>&&Type=<%# DataBinder.Eval(Container.DataItem, "KSP_Type") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()%></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="采购单号" SortExpression="KSP_OrderNo" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# DataBinder.Eval(Container.DataItem, "KSP_OrderNo").ToString() %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="送检日期" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# DataBinder.Eval(Container.DataItem, "KSP_Stime").ToString() %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="送检级别" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetRank(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="供应商" HeaderStyle-Font-Size="12px" ItemStyle-Width="120px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSuppName(DataBinder.Eval(Container.DataItem, "KSP_SuppNo").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="物料名称" SortExpression="KSP_SID" HeaderStyle-Font-Size="12px" ItemStyle-Width="200px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetProductName(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="送检数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSamplingNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="抽检数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetCheckNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="不良数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetBadNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="不良率" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetRejectRatio(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="查看" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSamplingPrice(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="已调数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetDbNumber(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="送检人" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetProposer( DataBinder.Eval(Container.DataItem, "KSP_Proposer").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="审核人" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetProposer( DataBinder.Eval(Container.DataItem, "KSP_Sproposer").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="检验结果" SortExpression="KSP_SID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%#  Base_GetResult(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+
+                                        <asp:TemplateField HeaderText="审核" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# GetInState(DataBinder.Eval(Container.DataItem, "KSP_SID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+
+                                    </Columns>
+                                    <HeaderStyle CssClass='colHeader' />
+                                    <RowStyle CssClass='listTableRow' />
+                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                    <PagerStyle CssClass='Custom_DgPage' />
+                                </cc1:MyGridView>
+
                             </td>
                         </tr>
                     </table>
@@ -371,6 +372,6 @@
             </tr>
         </table>
     </form>
-       
+
 </body>
 </html>

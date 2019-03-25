@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
-    <script language="JavaScript" type="text/javascript" src="../..//js/Global.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
+    <script language="JavaScript" type="text/javascript" src="../../js/Global.js"></script>
     <script type="text/javascript" src="../../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>

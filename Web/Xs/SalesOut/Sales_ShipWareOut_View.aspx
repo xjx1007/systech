@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>销售出库查看</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="/Web/Js/ajax_func.js"></script>
     <script language="JavaScript" src="/Web/Js/Global.js" type="text/javascript"></script>

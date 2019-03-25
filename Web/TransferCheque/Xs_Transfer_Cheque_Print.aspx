@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <link rel="stylesheet" href="../css/Report.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
     <script language="JavaScript" src="../Js/Report.js" type="text/javascript"></script>
     <script language="javascript" src="../Js/LodopFuncs.js"></script>

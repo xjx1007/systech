@@ -8,6 +8,7 @@
     <script language="JavaScript" src="/Web/Js/Report.js" type="text/javascript"></script>
     <script language="javascript" src="/Web/Js/LodopFuncs.js"></script>
     <title>成品领料单</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script language="javascript">
         function preview() {
             bdhtml = window.document.body.innerHTML;

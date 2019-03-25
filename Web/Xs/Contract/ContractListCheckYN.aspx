@@ -5,13 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="../Js/ajax_func.js"></script>
-    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-    <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
+    <script type="text/javascript" src="../../Js/ajax_func.js"></script>
+    <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
+    <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
 <title>合同进展操作--审核</title>
 <script>   
   function closeWindow()   

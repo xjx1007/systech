@@ -3,6 +3,7 @@
 <head runat="server">
     <title>仓库单据打印</title>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <style type="text/css" id="style1">
 body {
  background: #FFF;

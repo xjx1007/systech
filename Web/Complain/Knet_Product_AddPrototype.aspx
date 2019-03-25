@@ -13,7 +13,7 @@
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-
+     <link rel="alternate icon" type="image/png" href="../../images/士腾.png"/>
     <script src="../../assets/js/libs/jquery-1.10.2.min.js"></script>
     <title>治具管理</title>
     <script language="JAVASCRIPT">

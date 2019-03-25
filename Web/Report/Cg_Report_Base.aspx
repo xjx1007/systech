@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <title>采购报表</title>
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />

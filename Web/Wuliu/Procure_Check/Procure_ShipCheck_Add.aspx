@@ -15,6 +15,7 @@
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
     <title>物流对账管理</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script language="JAVASCRIPT">
         function btnGetSupp_onclick() {
             var today, seconds;

@@ -10,6 +10,7 @@
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
 <script type="text/javascript" src="../js/ajax_func.js"></script>
+<link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -18,7 +19,7 @@
 <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
-        
+
         <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
             <tr>
                 <td style="height: 2px"></td>
@@ -68,7 +69,7 @@
             </tr>
         </table>
 
-        
+
         <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
             <tr>
                 <td>

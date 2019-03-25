@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>销售导航</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 </head>
 <body>
     <form id="form1" runat="server">

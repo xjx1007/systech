@@ -15,6 +15,7 @@
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
     <title>合并订单</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <base target="_self" />
     <script language="JAVASCRIPT">
         function btnGetReturnValue_onclick() {

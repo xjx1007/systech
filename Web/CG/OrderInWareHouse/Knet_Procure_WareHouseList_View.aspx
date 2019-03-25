@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
 <title>采购入库查看</title>
 <script type="text/javascript" src="../../Js/ajax_func.js"></script>
+<link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
 <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
 <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>

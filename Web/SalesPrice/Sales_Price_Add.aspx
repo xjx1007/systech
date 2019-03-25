@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/knetwork.css" type="text/css">
     <title>销售价格设置</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <body>
 

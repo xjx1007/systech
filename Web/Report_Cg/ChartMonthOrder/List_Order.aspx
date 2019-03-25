@@ -4,6 +4,7 @@
 <head id="Head1" runat="server">
     <%@ Register Assembly="Container" Namespace="FanG" TagPrefix="cc1" %>
     <title>供应商月采购金额图表</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <style type="text/css" id="style1">
         body {
             background: #FFF;

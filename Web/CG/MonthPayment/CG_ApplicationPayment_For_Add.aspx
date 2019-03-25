@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="/Web/Js/jquery-1.4.2.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css">
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>
     <title>月度用款申请</title>

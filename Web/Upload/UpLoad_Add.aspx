@@ -5,6 +5,7 @@
 <head>
     <base target="_self" />
     <title>添加附件</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="../../themes/js/jquery/jquery.min.js"></script>

@@ -5,6 +5,7 @@
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>杭州士腾科技芯片订单</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <style type="text/css">
 body {
  background: #FFFFFF;

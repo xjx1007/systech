@@ -15,6 +15,7 @@
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="/include/js/ListView.js"></script>
     <title>权限注册列表</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 </head>
 <body>
     <form id="form1" runat="server">

@@ -7,16 +7,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>成品调拨单</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 </head>
-<link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-<script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-<script language="javascript" type="text/javascript" src="../js/Global.js"></script>
-<script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-<script type="text/javascript" src="../KDialog/lhgdialog.js"></script>
+<link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+<script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="../../js/Global.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/js/ListView.js"></script>
+<script type="text/javascript" src="../../KDialog/lhgdialog.js"></script>
 <script type="text/javascript">
     function Print(ID) {
         //window.open('Sales_ShipWareOut_Print_Cw.aspx?ID=' + ID, '查看详细', 'top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=780,height=500')

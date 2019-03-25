@@ -7,6 +7,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>采购报价列表</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
     <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../../../Web/DatePicker/WdatePicker.js"></script>

@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+     <link rel="alternate icon" type="image/png" href="../../../images/Ê¿ÌÚ.png"/>
     <link rel="stylesheet" type="text/css" href="../../../themes/images/style_cn.css">
     <style type="text/css">
 

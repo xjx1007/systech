@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>销售漏斗</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
  <body leftmargin=0 topmargin=0 marginheight=0 marginwidth=0 class=small>
     <form id="form1" runat="server">

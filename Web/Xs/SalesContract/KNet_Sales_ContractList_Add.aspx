@@ -13,7 +13,7 @@
    <script language="javascript" type="text/javascript" src="/include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/scriptaculous.js"></script>
    <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
-
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <%--<script src="../../Js/ajax_func.js"></script>
     <script src="../../Js/Global.js"></script>
     <script src="../../DatePicker/WdatePicker.js"></script>

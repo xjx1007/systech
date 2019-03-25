@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head runat="server">
     <title>出入库明细</title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 <style type="text/css">
 body {
  background: #FFF;

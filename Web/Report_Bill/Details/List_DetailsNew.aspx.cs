@@ -140,7 +140,7 @@ public partial class Web_List_Details : BasePage
         if (s_ProductsEdition != "")
         {
             s_Sql +=
-                " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where ProductsEdition like '%" +
+                " and a.ProductsBarCode in(Select ProductsBarCode from KNet_sys_Products where KSP_COde like '%" +
                 s_ProductsEdition + "%') ";
         }
 

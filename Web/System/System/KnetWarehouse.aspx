@@ -4,15 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-<script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-<script language="javascript" type="text/javascript" src="../js/Global.js"></script>
-<script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
-<script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
-<script type="text/javascript" src="../KDialog/lhgdialog.js"></script>
+<link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
+<script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="../../js/Global.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/js/ListView.js"></script>
+<script type="text/javascript" src="../../KDialog/lhgdialog.js"></script>
 <title>仓库设置管理</title>
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">

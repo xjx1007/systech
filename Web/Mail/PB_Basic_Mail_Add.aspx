@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+   
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png"/>
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
@@ -48,16 +50,22 @@
                 }
             }
             function btnGetContentPerson_onclick1() {
-                var s_Customer = "";
-                s_Customer = document.all('Tbx_SuppNo').value;
-                var temaap = window.showModalDialog("SelectContentPerson.aspx?ID=" + s_Customer, "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=850px;dialogHeight=500px");
-                if (temaap != undefined) {
-                    var sws;
-                    sws = temaap.split(",");
-                    document.all('Tbx_Cc').value = sws[3];
+                var today, seconds;
+                today = new Date();
+                intSeconds = today.getSeconds();          
+                var tempd = window.open("../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+               
+            }
+            function SetReturnValueInOpenner_Suppliers1(temp) {
+                if (temp != undefined) {
+                    var ss;
+                    ss = temp.split("|");
+                    document.all('Tbx_Cc').value+= ss[5]+",";
+                   
                 }
                 else {
                     document.all('Tbx_Cc').value = "";
+                    
                 }
             }
             function btnGetContentPerson_onclick2() {
@@ -156,6 +164,7 @@
                                                             <asp:TextBox runat="server" ID="Tbx_Cc" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" Width="400px" Height="50px"></asp:TextBox>
                                                             <img tabindex="8" src="../../themes/softed/images/select.gif" alt="选择" title="选择"
                                                                 onclick="return btnGetContentPerson_onclick1()" />
+                                                            
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -268,6 +277,7 @@
                                                         <td class="dvtCellInfo" align="left">
 
                                                             <asp:TextBox ID="Tbx_Text" runat="server" Style="display: none;"></asp:TextBox>
+                                                             <%--<asp:TextBox ID="Tbx_QfEmail" runat="server" Style="display: none;"></asp:TextBox>--%>
                                                             <iframe src='../eWebEditor/ewebeditor.htm?id=Tbx_Text&style=gray'
                                                                 frameborder='0' scrolling='no' width='620' height='350'></iframe>
                                                         </td>

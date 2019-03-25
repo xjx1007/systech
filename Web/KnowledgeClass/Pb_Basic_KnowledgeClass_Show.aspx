@@ -7,6 +7,7 @@
 <head  runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+        <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <title></title>
 </head>
 <base target="_self" />
@@ -18,29 +19,25 @@
 <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
 <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
 <style type="text/css">
-    a.x
-    {
+    a.x {
         color: black;
         text-align: center;
         text-decoration: none;
         padding: 5px;
         font-weight: bold;
     }
-    
-    a.x:hover
-    {
-        color: #333333;
-        text-decoration: underline;
-        font-weight: bold;
-    }
-    
-    ul
-    {
+
+        a.x:hover {
+            color: #333333;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+    ul {
         color: black;
     }
-    
-    .drag_Element
-    {
+
+    .drag_Element {
         position: relative;
         left: 0px;
         top: 0px;
@@ -49,9 +46,8 @@
         border: 0px dashed #CCCCCC;
         visibility: hidden;
     }
-    
-    #Drag_content
-    {
+
+    #Drag_content {
         position: absolute;
         left: 0px;
         top: 0px;

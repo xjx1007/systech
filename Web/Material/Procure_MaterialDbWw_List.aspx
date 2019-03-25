@@ -9,6 +9,7 @@
     <title>原材料调拨单</title>
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+<link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../../Web/DatePicker/WdatePicker.js"></script>
 <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
@@ -211,7 +212,7 @@
                                 <div id="selectoperate" class="drop_mnu1" onmouseout="fnHideDrop('selectoperate')"
                                     onmouseover="fnShowDrop('selectoperate')">
                                     <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                
+
                                         <tr>
                                             <td>
 
@@ -252,7 +253,7 @@
                                                 <%# DataBinder.Eval(Container.DataItem, "AllocateNo")%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField HeaderText="日期" DataField="AllocateDateTime" DataFormatString="{0:yyyy-MM-dd}"  ReadOnly="True" 
+                                        <asp:BoundField HeaderText="日期" DataField="AllocateDateTime" DataFormatString="{0:yyyy-MM-dd}" ReadOnly="True"
                                             SortExpression="AllocateDateTime">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
@@ -287,7 +288,7 @@
                                                 <%# base.Base_GetProductsEdition_Link(DataBinder.Eval(Container.DataItem, "ProductsBarCode").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField HeaderText="数量" DataField="allocateAmount"  ReadOnly="True" 
+                                        <asp:BoundField HeaderText="数量" DataField="allocateAmount" ReadOnly="True"
                                             SortExpression="COD_DZNumber">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
@@ -304,7 +305,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:BoundField HeaderText="委外金额" DataField="Allocate_WwMoney"
-                                            SortExpression="Allocate_WwMoney"  ReadOnly="True" >
+                                            SortExpression="Allocate_WwMoney" ReadOnly="True">
                                             <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                             <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                         </asp:BoundField>

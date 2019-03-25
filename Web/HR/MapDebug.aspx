@@ -4,12 +4,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Xm6AEwD6v36WQgUhi2wPE5kYCdG6XErU"></script>
     <title>地图显示</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <style type="text/css">
-        body,html,#map {
-            width:100%;
+        body, html, #map {
+            width: 100%;
             height: 100%;
             overflow: hidden;
             margin: 0;
@@ -20,18 +21,17 @@
     </style>
 </head>
 <body>
-    
+
     <div id="map">
-    
     </div>
-   
+
 </body>
 </html>
 <script type="text/javascript">
     window.onload = function () {
         var pointArray = new Array();
         debugger;
-        var points = [{ "lat": 29.320054, "lng": 118.220204,"nam":'B1' },
+        var points = [{ "lat": 29.320054, "lng": 118.220204, "nam": 'B1' },
             { "lat": 29.328644, "lng": 118.235204, "nam": 'B2' },
             { "lat": 29.334564, "lng": 118.220204, "nam": 'B3' },
             { "lat": 29.302024, "lng": 118.238204, "nam": 'B4' },
@@ -44,7 +44,7 @@
             height: 100,     // 信息窗口高度    
             title: "Hello"  // 信息窗口标题   
         }
-           // 打开信息窗口
+        // 打开信息窗口
         //根据各个点自适应显示地图
         var map = new BMap.Map("map");
         var view = map.getViewport(points);

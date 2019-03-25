@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <link rel="stylesheet" href="../../../themes/softed/style_cn.css" type="text/css" />
+    <link rel="stylesheet" href="../../themes/softed/style_cn.css" type="text/css" />
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <style type="text/css">
         TABLE.print {
             vertical-align: middle;

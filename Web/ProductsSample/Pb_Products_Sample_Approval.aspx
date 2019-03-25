@@ -7,6 +7,7 @@
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <title>样品申请审核</title>
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -53,37 +54,37 @@
         today = new Date();
         intSeconds = today.getSeconds();
         v_newNum = $("Products_BomNum").value;
-            var ss, s_Value, s_Name, i_row, s_ID;
-            i_row = ProductsBomTable.rows.length;
-            s_ID = document.all("Products_BomID").value + ",";
-            ss = tempd.split("|");
-            for (var i = 0; i < ss.length - 1; i++) {
-                s_Value = ss[i].split(",");
-                var objRow = ProductsBomTable.insertRow(i_row);
-                v_newNum = parseInt(v_newNum) + i + 1;
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = "<font color=green>&nbsp;</font>";
-                objCel.className = "ListHeadDetails";
-                var objCel = objRow.insertCell();
-                objCel.innerHTML = '&nbsp;';
-                objCel.className = "ListHeadDetails";
-                var objCel = objRow.insertCell();
-                objCel.className = "ListHeadDetails";
-                objCel.innerHTML = '<input type=input Name=\"DemoProdoctsBarCode_' + v_newNum + '\" style=\"display:none;\" value=' + s_Value[0] + ' >' + s_Value[1];
-                var objCel = objRow.insertCell();
-                objCel.className = "ListHeadDetails";
-                objCel.innerHTML = s_Value[3];
+        var ss, s_Value, s_Name, i_row, s_ID;
+        i_row = ProductsBomTable.rows.length;
+        s_ID = document.all("Products_BomID").value + ",";
+        ss = tempd.split("|");
+        for (var i = 0; i < ss.length - 1; i++) {
+            s_Value = ss[i].split(",");
+            var objRow = ProductsBomTable.insertRow(i_row);
+            v_newNum = parseInt(v_newNum) + i + 1;
+            var objCel = objRow.insertCell();
+            objCel.innerHTML = "<font color=green>&nbsp;</font>";
+            objCel.className = "ListHeadDetails";
+            var objCel = objRow.insertCell();
+            objCel.innerHTML = '&nbsp;';
+            objCel.className = "ListHeadDetails";
+            var objCel = objRow.insertCell();
+            objCel.className = "ListHeadDetails";
+            objCel.innerHTML = '<input type=input Name=\"DemoProdoctsBarCode_' + v_newNum + '\" style=\"display:none;\" value=' + s_Value[0] + ' >' + s_Value[1];
+            var objCel = objRow.insertCell();
+            objCel.className = "ListHeadDetails";
+            objCel.innerHTML = s_Value[3];
 
-                var objCel = objRow.insertCell();
-                objCel.className = "ListHeadDetails";
-                objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;\" value=' + s_Value[2] + '  >'
+            var objCel = objRow.insertCell();
+            objCel.className = "ListHeadDetails";
+            objCel.innerHTML = '<input type=input Name=\"DemoNumber_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;\" value=' + s_Value[2] + '  >'
 
-                var objCel = objRow.insertCell();
-                objCel.className = "ListHeadDetails";
-                objCel.innerHTML = '<input type=input Name=\"DemoOrder_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;\" value=0 >'
+            var objCel = objRow.insertCell();
+            objCel.className = "ListHeadDetails";
+            objCel.innerHTML = '<input type=input Name=\"DemoOrder_' + v_newNum.toString() + '\" style=\"detailedViewTextBox;\" value=0 >'
 
-                i_row = i_row + 1;
-                s_ID = s_ID + s_Value[0] + ",";
+            i_row = i_row + 1;
+            s_ID = s_ID + s_Value[0] + ",";
             $("Products_BomID").value = s_ID;
             $("Products_BomNum").value = v_newNum;
         }
@@ -168,43 +169,43 @@
                                                         <asp:Label runat="server" ID="Lbl_Tiltle"></asp:Label>&nbsp;
                                                     </td>
                                                 </tr>
-                                                
-                                <asp:Panel runat="server" ID="Pan_Details" Visible="false">
-                                    <tr>
-                                        <td colspan="4" class="detailedViewHeader">
-                                            <b>产品信息</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="dvtCellInfo" colspan="4">
-                                        <table id="Table2" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
-                                            class="ListDetails" style="height: 28px">
-                                            <!-- Header for the Product Details -->
-                                            <tr valign="top">
-                                                <td class="ListHead" align="left" nowrap>
-                                                    <b>产品</b>
-                                                </td>
-                                                <td class="ListHead" align="left" nowrap>
-                                                    <b>样品要求</b>
-                                                </td>
-                                                <td class="ListHead" align="left" nowrap>
-                                                    <b>产品参数</b>
-                                                </td>
-                                                <td class="ListHead" align="left" nowrap>
-                                                    <b>库存数量</b>
-                                                </td>
-                                                <td class="ListHead" align="left" nowrap>
-                                                    <b>未入库采购单</b>
-                                                </td>
-                                                <td class="ListHead" align="left" nowrap>
-                                                    <b>处理方式</b>
-                                                </td>
-                                            </tr>
-                                            <asp:Label runat="server" ID="Lbl_ProductsDetails"></asp:Label>
-                                        </table>
-                                    </td>
-                                    </tr>
-                                </asp:Panel>
+
+                                                <asp:Panel runat="server" ID="Pan_Details" Visible="false">
+                                                    <tr>
+                                                        <td colspan="4" class="detailedViewHeader">
+                                                            <b>产品信息</b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="dvtCellInfo" colspan="4">
+                                                            <table id="Table2" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
+                                                                class="ListDetails" style="height: 28px">
+                                                                <!-- Header for the Product Details -->
+                                                                <tr valign="top">
+                                                                    <td class="ListHead" align="left" nowrap>
+                                                                        <b>产品</b>
+                                                                    </td>
+                                                                    <td class="ListHead" align="left" nowrap>
+                                                                        <b>样品要求</b>
+                                                                    </td>
+                                                                    <td class="ListHead" align="left" nowrap>
+                                                                        <b>产品参数</b>
+                                                                    </td>
+                                                                    <td class="ListHead" align="left" nowrap>
+                                                                        <b>库存数量</b>
+                                                                    </td>
+                                                                    <td class="ListHead" align="left" nowrap>
+                                                                        <b>未入库采购单</b>
+                                                                    </td>
+                                                                    <td class="ListHead" align="left" nowrap>
+                                                                        <b>处理方式</b>
+                                                                    </td>
+                                                                </tr>
+                                                                <asp:Label runat="server" ID="Lbl_ProductsDetails"></asp:Label>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </asp:Panel>
 
                                                 <tr>
                                                     <td class="detailedViewHeader" colspan="4">

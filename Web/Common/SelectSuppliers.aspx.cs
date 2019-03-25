@@ -231,7 +231,7 @@ public partial class Knet_Common_SelectSuppliers : BasePage
         //}
         return Sb_Return.ToString();
     }
-    public string GetSupp(string s_ID)
+    public string GetSupp(string s_ID,string email)
     {
         string s_Return = "";
         string Tbx_ID = Request.QueryString["Tbx_ID"] == null ? "" : Request.QueryString["Tbx_ID"].ToString();
@@ -251,7 +251,7 @@ public partial class Knet_Common_SelectSuppliers : BasePage
                 catch
                 { }
 
-                s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + this.KNetOddNumbers(s_ID) + "\", \"" + GetSuppNoAddress(s_ID,select) + "\", \"" + s_WareHouseNo + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
+                s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + this.KNetOddNumbers(s_ID) + "\", \"" + GetSuppNoAddress(s_ID,select) + "\", \"" + s_WareHouseNo + "\",\"" + email + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
             }
             else
             {

@@ -8,6 +8,7 @@
     <title>请购入库</title>
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+<link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
 <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -72,8 +73,8 @@
                                                     </td>
                                                     <td style="padding-right: 10px">
                                                         <%--<a href="#"  onclick="GPrint('+ s_ID + ')"><img src="../../images/Print1.gif" alt="*打印" title="*打印" border="2"></a>--%>
-                                                           <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../images/Print1.gif" OnClick="Btn_Del_OnClick"  /> 
-                                                           
+                                                        <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../images/Print1.gif" OnClick="Btn_Del_OnClick" />
+
                                                     </td>
                                                 </tr>
                                             </table>
@@ -212,98 +213,97 @@
                 <td>
                     <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
                         <tr>
-                            <td>
-                                制单人：<asp:DropDownList runat="server" ID="Ddl_StaffNo" AutoPostBack="true" OnSelectedIndexChanged="Ddl_StaffNo_OnSelectedIndexChanged"></asp:DropDownList>
+                            <td>制单人：<asp:DropDownList runat="server" ID="Ddl_StaffNo" AutoPostBack="true" OnSelectedIndexChanged="Ddl_StaffNo_OnSelectedIndexChanged"></asp:DropDownList>
                                 <asp:TextBox runat="server" ID="Tbx_Type" CssClass="Custom_Hidden"></asp:TextBox>
-                                  <asp:TextBox runat="server" ID="IDS" CssClass="Custom_Hidden"></asp:TextBox>
-                                 <asp:TextBox runat="server" ID="s_ID" CssClass="Custom_Hidden"></asp:TextBox>
-                                  <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
-                                            AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="8"
-                                            BorderColor="#4974C2"
-                                            EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"
-                                            OnRowDataBound="GridView1_DataRowBinding">
-                                            <Columns>
-                                                <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <HeaderTemplate>
-                                                        <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server" />
-                                                    </HeaderTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:CheckBox ID="Chbk" runat="server" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="入库单号" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>  
-                                                    <%# DataBinder.Eval(Container.DataItem, "ID").ToString()%>
-                                                   </ItemTemplate>
+                                <asp:TextBox runat="server" ID="IDS" CssClass="Custom_Hidden"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="s_ID" CssClass="Custom_Hidden"></asp:TextBox>
+                                <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True"
+                                    AutoGenerateColumns="False" CssClass="Custom_DgMain" Width="100%" PageSize="8"
+                                    BorderColor="#4974C2"
+                                    EmptyDataText="<div style='border: 3px solid rgb(153, 153, 153); background-color: rgb(255, 255, 255); width: 45%; position: relative; z-index: 10000000;'> <table border='0' cellpadding='5' cellspacing='0' width='98%'><tr> <td rowspan='2' width='25%'><img src='../../../themes/softed/images/empty.jpg' height='60' width='61'></td> <td style='border-bottom: 1px solid rgb(204, 204, 204);' nowrap='nowrap' width='75%'><span class='genHeaderSmall'>记录为空</span></td></tr></table> </div>"
+                                    OnRowDataBound="GridView1_DataRowBinding">
+                                    <Columns>
+                                        <asp:TemplateField ItemStyle-Width="40px" ItemStyle-Height="25px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <HeaderTemplate>
+                                                <asp:CheckBox ID="CheckBox1" onclick="selectAll(this)" runat="server" />
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="Chbk" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="入库单号" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# DataBinder.Eval(Container.DataItem, "ID").ToString()%>
+                                            </ItemTemplate>
 
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="请购单号" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# Base_GetSamplingID(DataBinder.Eval(Container.DataItem, "ID").ToString())  %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="请购部门" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                     <ItemTemplate>
-                                                      <%# Base_GetProjectGroup(DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 <asp:TemplateField HeaderText="供应商" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                     <ItemTemplate>
-                                                      <%# base.Base_GetSupplierName_Link(Base_GetSuppNo(DataBinder.Eval(Container.DataItem, "ID").ToString())) %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="物品名称" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetSamplingName( DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                               <asp:TemplateField HeaderText="入库数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                   <ItemTemplate>
-                                                    <%# Base_GetSamplingNumber(DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                                <asp:TemplateField HeaderText="单价" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# Base_GetSamplingPrice( DataBinder.Eval(Container.DataItem, "ID").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="入库时间" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" 
-                                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%#  Base_GetSamplingTime(DataBinder.Eval(Container.DataItem, "ID").ToString())%>
-                                                   </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="操作人" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                     <ItemTemplate>
-                                                     <%# Base_GetProposer(DataBinder.Eval(Container.DataItem, "ID").ToString())%>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                                <asp:TemplateField HeaderText="状态" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                     <%# GetInState(DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                 
-                                              
-                                            </Columns>
-                                            <HeaderStyle CssClass='colHeader' />
-                                            <RowStyle CssClass='listTableRow' />
-                                            <AlternatingRowStyle BackColor="#E3EAF2" />
-                                            <PagerStyle CssClass='Custom_DgPage' />
-                                        </cc1:MyGridView>
-                          
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="请购单号" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSamplingID(DataBinder.Eval(Container.DataItem, "ID").ToString())  %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="请购部门" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetProjectGroup(DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="供应商" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# base.Base_GetSupplierName_Link(Base_GetSuppNo(DataBinder.Eval(Container.DataItem, "ID").ToString())) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="物品名称" HeaderStyle-Font-Size="12px" ItemStyle-Width="140px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSamplingName( DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="入库数量" HeaderStyle-Font-Size="12px" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSamplingNumber(DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="单价" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetSamplingPrice( DataBinder.Eval(Container.DataItem, "ID").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="入库时间" SortExpression="ID" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%#  Base_GetSamplingTime(DataBinder.Eval(Container.DataItem, "ID").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="操作人" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# Base_GetProposer(DataBinder.Eval(Container.DataItem, "ID").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="状态" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <%# GetInState(DataBinder.Eval(Container.DataItem, "ID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+
+
+                                    </Columns>
+                                    <HeaderStyle CssClass='colHeader' />
+                                    <RowStyle CssClass='listTableRow' />
+                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                    <PagerStyle CssClass='Custom_DgPage' />
+                                </cc1:MyGridView>
+
                             </td>
                         </tr>
                     </table>

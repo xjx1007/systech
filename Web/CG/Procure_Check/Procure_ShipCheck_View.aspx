@@ -4,6 +4,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
     <title>士腾与供应商对账确认单</title>
     
     <script language="javascript" type="text/javascript">

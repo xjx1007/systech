@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/knetwork.css" type="text/css">
 <title></title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script type="text/javascript" language="javascript">
 function printPage() {
 var newWin = window.open('printer','','');

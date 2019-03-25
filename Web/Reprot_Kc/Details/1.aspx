@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>固定表格表头 </title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta name="Generator" content="EditPlus">
     <meta name="Author" content="">

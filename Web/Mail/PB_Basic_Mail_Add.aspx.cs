@@ -42,8 +42,8 @@ public partial class PB_Basic_Mail_Add : BasePage
             string s_HouseNo = Request.QueryString["HouseNo"] == null ? "" : Request.QueryString["HouseNo"].ToString();
             string s_SuppNo = Request.QueryString["SuppNo"] == null ? "" : Request.QueryString["SuppNo"].ToString();
 
-
-
+            //string s_QfEmail= Request.QueryString["Tbx_QfEmail"] == null ? "" : Request.QueryString["Tbx_QfEmail"].ToString();
+            //this.Tbx_QfEmail.Text = s_QfEmail;
             base.Base_EMail(this.Ddl_SendEmail);
 
             this.Tbx_MailType.Text = "0";
@@ -905,4 +905,6 @@ public partial class PB_Basic_Mail_Add : BasePage
         imagesurl2 = imagesurl2.Replace(@"/", @"\");
         return imagesurl2;
     }
+
+   
 }

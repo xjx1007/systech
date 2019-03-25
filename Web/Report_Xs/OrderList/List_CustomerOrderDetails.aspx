@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>客户合同出货明细表</title>
- 
+ <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 <style type="text/css">
 body {
  background: #FFF;

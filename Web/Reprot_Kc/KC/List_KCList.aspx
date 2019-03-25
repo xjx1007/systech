@@ -1,8 +1,9 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="List_KCList.aspx.cs" Inherits="Web_Report_Xs_List_KCList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="List_KCList.aspx.cs" Inherits="Web_Report_Xs_List_KCList" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head runat="server">
     <title>库存报表</title>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <style type="text/css" id="style1">
 body {
  background: #FFF;

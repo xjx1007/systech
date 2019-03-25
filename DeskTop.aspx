@@ -7,7 +7,7 @@
     <title>个人桌面</title>
     <link href="Images/Custom.css" type="text/css" rel="stylesheet">
     <link href="Images/main.css" type="text/css" rel="stylesheet">
-
+    <link rel="alternate icon" type="image/png" href="images/士腾.png"/>
     <script language="JScript" src="Images/Calendar.js"></script>
     <script language="JavaScript" src="Images/Comm_JScript.js"></script>
     <style type="text/css"> 

@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <base target="_self" />
     <title>对账单发票导入设置</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="../../Js/ajax_func.js"></script>

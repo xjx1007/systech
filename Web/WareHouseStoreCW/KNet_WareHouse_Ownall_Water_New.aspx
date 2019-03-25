@@ -14,6 +14,7 @@
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">

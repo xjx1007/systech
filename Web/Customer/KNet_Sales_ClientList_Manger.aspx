@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
     <title>客户列表</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script type="text/javascript" src="../js/ajax_func.js"></script>
     <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -132,7 +133,7 @@
         </asp:ScriptManager>
         <asp:UpdateProgress ID="UpdateProgress1" runat="server">
             <ProgressTemplate>
-                <div style="text-align:center">
+                <div style="text-align: center">
                     <asp:Image runat="server" ID="Imag_Load" ImageUrl="../images/loading.gif" />
                 </div>
             </ProgressTemplate>
@@ -349,7 +350,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:BoundField HeaderText="简称" DataField="KSC_SampleName" ItemStyle-Font-Size="12px"
-                                                     HeaderStyle-Font-Size="12px" SortExpression="KSC_SampleName">
+                                                    HeaderStyle-Font-Size="12px" SortExpression="KSC_SampleName">
                                                     <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                                     <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                                                 </asp:BoundField>

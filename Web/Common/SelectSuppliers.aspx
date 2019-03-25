@@ -8,6 +8,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+     <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <base target="_self" />
     <script>
         function closeWindow() {
@@ -15,9 +16,9 @@
             window.close();
         }
 
-        function GetReturn(Value1, Value2, Value3, Value4, Value5) {
+        function GetReturn(Value1, Value2, Value3, Value4, Value5,Value6) {
             var returnValue = "";
-            returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5;
+            returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5+"|"+Value6;
             if (window.opener != undefined) {
                 window.opener.returnValue = returnValue;
                 <% if(Request.QueryString["callback"] != null && Request.QueryString["callback"] != ""){%>
@@ -99,7 +100,7 @@
                             <asp:TemplateField HeaderText="供应商名称" SortExpression="SuppName" ItemStyle-HorizontalAlign="Left" ItemStyle-Height="25px"
                                 HeaderStyle-HorizontalAlign="center">
                                 <ItemTemplate>
-                                    <%# GetSupp(DataBinder.Eval(Container.DataItem, "SuppNo").ToString())%>
+                                    <%# GetSupp(DataBinder.Eval(Container.DataItem, "SuppNo").ToString(),DataBinder.Eval(Container.DataItem, "SuppEmail").ToString())%>
                                     <a href="#" onclick="javascript:window.open('../Supp/Knet_Procure_Suppliers_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "ID")%>','查看详细','top=120,left=150,toolbar=no, menubar=no,scrollbars=yes, resizable=no, location=no, status=no, width=750,height=450');">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="../../images/Deitail.gif" ToolTip="查看供应商详细信息" /></a>
                                 </ItemTemplate>
@@ -122,6 +123,11 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="SuppPhone" ItemStyle-Font-Size="12px" HeaderText="联系电话"
                                 HeaderStyle-Font-Size="12px" SortExpression="SuppPhone">
+                                <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                            </asp:BoundField>
+                             <asp:BoundField DataField="SuppEmail" ItemStyle-Font-Size="12px" HeaderText="邮箱"
+                                HeaderStyle-Font-Size="12px" SortExpression="SuppEmail">
                                 <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
                                 <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
                             </asp:BoundField>

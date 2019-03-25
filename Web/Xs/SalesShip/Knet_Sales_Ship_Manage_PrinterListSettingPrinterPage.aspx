@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="/Web/css/knetwork.css" type="text/css">
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 <script language="javascript" src="/Web/js/CheckActivX.js"></script>
 <object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
 </object> 

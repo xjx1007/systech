@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>

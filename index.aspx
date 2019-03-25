@@ -12,6 +12,7 @@
     <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link rel="alternate icon" type="image/png" href="images/士腾.png"/>
     
     <link rel="stylesheet" href="themes/softed/style.css" type="text/css" />
     <link rel="stylesheet" href="themes/softed/index.css" type="text/css" />

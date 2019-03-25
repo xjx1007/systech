@@ -4,6 +4,7 @@
 <head runat="server">
     <title>成品领料明细</title>
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <style type="text/css" id="style1">
 body {
  background: #FFF;

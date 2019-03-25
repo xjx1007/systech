@@ -4,6 +4,7 @@
 <html xmlns="http://Xhw.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <title>生产入库明细</title>
     
     <style type="text/css" id="style2">

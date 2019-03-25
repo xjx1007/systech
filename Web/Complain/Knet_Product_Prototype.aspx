@@ -8,6 +8,7 @@
     <title>治具管理</title>
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+<link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
 <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -69,7 +70,7 @@
                                                                 border="0"></a>
                                                     </td>
                                                     <td style="padding-right: 0px; padding-left: 10px;">
-                                                        <a href="javascript:;" >
+                                                        <a href="javascript:;">
                                                             <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 新的治具" title="*导入 新的治具"
                                                                 border="0">
                                                         </a>
@@ -307,7 +308,7 @@
                                                 <%#  Base_GetProposer(DataBinder.Eval(Container.DataItem, "KPI_SID").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                       
+
 
                                         <asp:TemplateField HeaderText="申请时间" HeaderStyle-Font-Size="12px" ItemStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
                                             HeaderStyle-HorizontalAlign="Center">

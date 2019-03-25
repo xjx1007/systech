@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../KDialog/lhgdialog.js"></script>
     <base target="_self" />
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script>
         function changsheng(va) {
             if (va != '0') {

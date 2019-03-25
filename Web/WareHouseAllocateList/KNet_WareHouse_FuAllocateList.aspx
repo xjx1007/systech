@@ -5,6 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
     <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
@@ -54,10 +55,10 @@
                                                         <asp:ImageButton ImageUrl="../../themes/softed/images/btnL3Delete.gif" runat="server" ID="Btn_Del" OnClick="Btn_Del_Click" /></td>
                                                     <td style="padding-right: 10px"><a href="javascript:;" onclick="ShowDiv()">
                                                         <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 库间调拨..." title="查找 库间调拨..." border="0"></a></td>
-                                                   <%-- <td style="padding-right: 0px; padding-left: 10px;">
-                                                        <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 库间调拨" title="*导入 库间调拨" border="0"></td>
-                                                    <td style="padding-right: 10px">
-                                                        <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 库间调拨" title="*导出 库间调拨" border="0"></td>--%>
+                                                   <td style="padding-right: 10px">
+                                                        <asp:Button ID="BtnSave" runat="server" Text="未入库" title="未入库 "
+                                                            class="crmbutton small save" OnClick="BtnSave_OnClick" />
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </td>

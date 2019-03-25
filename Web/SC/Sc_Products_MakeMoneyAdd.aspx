@@ -15,7 +15,7 @@
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <title runat="server" ID="titl" >制造费用添加</title>
-    
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form2" runat="server">

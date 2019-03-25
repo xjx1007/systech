@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>新供应商评审</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
@@ -319,14 +320,14 @@
                                                                 onkeydown='window.event.cancelBubble = true;if(event.keyCode==13){return false;}' class="detailedViewTextBox"
                                                                 style="width: 103px; height: 20; border: 1 solid #0000FF; overflow-y: auto"></input>
                                                         </td>
-                                                        
-                                                <td width="15%" height="25" align="right" class="dvtCellLabel">审批流程：
-                                                </td>
-                                                <td width="35%" class="dvtCellInfo" align="left">
-                                                    <asp:DropDownList ID="Ddl_Flow" runat="server"
-                                                        CssClass="detailedViewTextBox" Width="200px">
-                                                    </asp:DropDownList>
-                                                </td>
+
+                                                        <td width="15%" height="25" align="right" class="dvtCellLabel">审批流程：
+                                                        </td>
+                                                        <td width="35%" class="dvtCellInfo" align="left">
+                                                            <asp:DropDownList ID="Ddl_Flow" runat="server"
+                                                                CssClass="detailedViewTextBox" Width="200px">
+                                                            </asp:DropDownList>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="4" class="detailedViewHeader"><b>账户信息</b>
@@ -436,12 +437,12 @@
                                                 </table>
                                             </td>
                                         </tr>
-                                        
-                                            <tr>
-                                                <td colspan="4">
-                                                    <uc2:CommentList ID="CommentList2" runat="server" CommentFID="" CommentType="-1" />
-                                                </td>
-                                            </tr>
+
+                                        <tr>
+                                            <td colspan="4">
+                                                <uc2:CommentList ID="CommentList2" runat="server" CommentFID="" CommentType="-1" />
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td colspan="4" align="center">&nbsp;
   <br />

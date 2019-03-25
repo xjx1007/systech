@@ -5,62 +5,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
-<title><%=s_Title%></title>
+    <title><%=s_Title%></title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <script type="text/javascript" src="../js/ajax_func.js"></script>
 <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
-	<script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
-	<script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
-	<script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
-	<script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>	
+<script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
+<script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
+<script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
+<script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
 
-<table border="0" cellspacing=0 cellpadding=0 width=100% class=small>
-<tr><td style="height:2px"></td></tr>
-<tr>
-	<td style="padding-left:10px;padding-right:50px" class="moduleName" nowrap><%=s_Title%> >
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap><%=s_Title%> >
 	<a class="hdrLink" href="Cw_Accounting_Payment_List.aspx"><%=s_Title%></a>
-        </td>
-	<td width=100% nowrap>
-		<table border="0" cellspacing="0" cellpadding="0" >
-		<tr>
-		<td class="sep1" style="width:1px;"></td>
-		<td class="small" >
-			<!-- Add and Search -->
-			<table border=0 cellspacing=0 cellpadding=0>
-			<tr>
-			<td>
-				<table border=0 cellspacing=0 cellpadding=5>
-				<tr>
-				<td style="padding-right:0px;padding-left:10px;"><a href="javascript:;"  onclick="PageGo('Cw_Accounting_Payment_Add.aspx')"><img src="../../themes/softed/images/btnL3Add.gif" alt="创建 <%=s_Title%>..." title="创建 <%=s_Title%>..." border=0></a></td>
-				<td style="padding-right:0px;"><asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../themes/softed/images/btnL3Delete.gif"  OnClick="Btn_Del_Click"/></td>
-				<td style="padding-right:10px"><a href="javascript:;" onClick="ShowDiv()" ><img src="../../themes/softed/images/btnL3Search.gif" alt="查找 <%=s_Title%>..." title="查找 <%=s_Title%>..." border=0></a></td>
-				<td style="padding-right:0px;padding-left:10px;"><img src="../../themes/softed/images/tbarImport.gif" alt="*导入 <%=s_Title%>" title="*导入 <%=s_Title%>" border="0"></td>	
-				<td style="padding-right:10px"><img src="../../themes/softed/images/tbarExport.gif" alt="*导出 <%=s_Title%>" title="*导出 <%=s_Title%>" border="0"></td>
-				</tr>
-				</table>
-			</td>
-			</tr>
-			</table>
-		</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr><td style="height:2px"></td></tr>
-</table>
+                </td>
+                <td width="100%" nowrap>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="sep1" style="width: 1px;"></td>
+                            <td class="small">
+                                <!-- Add and Search -->
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" cellspacing="0" cellpadding="5">
+                                                <tr>
+                                                    <td style="padding-right: 0px; padding-left: 10px;"><a href="javascript:;" onclick="PageGo('Cw_Accounting_Payment_Add.aspx')">
+                                                        <img src="../../themes/softed/images/btnL3Add.gif" alt="创建 <%=s_Title%>..." title="创建 <%=s_Title%>..." border="0"></a></td>
+                                                    <td style="padding-right: 0px;">
+                                                        <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../themes/softed/images/btnL3Delete.gif" OnClick="Btn_Del_Click" /></td>
+                                                    <td style="padding-right: 10px"><a href="javascript:;" onclick="ShowDiv()">
+                                                        <img src="../../themes/softed/images/btnL3Search.gif" alt="查找 <%=s_Title%>..." title="查找 <%=s_Title%>..." border="0"></a></td>
+                                                    <td style="padding-right: 0px; padding-left: 10px;">
+                                                        <img src="../../themes/softed/images/tbarImport.gif" alt="*导入 <%=s_Title%>" title="*导入 <%=s_Title%>" border="0"></td>
+                                                    <td style="padding-right: 10px">
+                                                        <img src="../../themes/softed/images/tbarExport.gif" alt="*导出 <%=s_Title%>" title="*导出 <%=s_Title%>" border="0"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+        </table>
 
 
-<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="tablecss">
-<tr>
- <td>
-    <%=base.Base_BindView("Cw_Accounting_Payment1", "Cw_Accounting_Payment_List.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
-</td>
-</tr>
+        <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
+            <tr>
+                <td>
+                    <%=base.Base_BindView("Cw_Accounting_Payment1", "Cw_Accounting_Payment_List.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <div id="Search_basic" style="display: none" runat="server">
@@ -87,8 +97,7 @@
                                     <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
                                         value=" 取消查找 ">&nbsp;
                                 </td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">[x]</td>
                             </tr>
                         </table>
                     </div>
@@ -105,16 +114,15 @@
                                 <td nowrap width="60%" class="small">
                                     <b>
                                         <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b></td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]</td>
                             </tr>
                         </table>
                         <table cellpadding="2" cellspacing="0" width="80%" align="center" class="searchUIAdv2 small"
                             border="0">
                             <tr>
                                 <td align="center" class="small" width="90%">
-                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px;
-                                        overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff" class="small">
+                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px; overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff"
+                                        class="small">
                                         <table border="0" width="95%">
                                             <tr>
                                                 <td align="left">
@@ -154,7 +162,7 @@
                             align="center">
                             <tr>
                                 <td align="left" width="40%">
-                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Cw_Accounting_Payment")%>','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
+                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Cw_Accounting_Payment")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
                                         class="crmbuttom small edit">
                                     <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit">
                                 </td>
@@ -168,129 +176,130 @@
                     </div>
                 </td>
             </tr>
-  <tr>
-    <td>
-        
-<table border=0 cellspacing=0 cellpadding=2 width=100% class="small">
+            <tr>
+                <td>
 
-                    <tr>
-                        <!-- Buttons -->
-                        <td style="padding-right: 20px" align="left" nowrap>
-                            查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged1">
+                    <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
+
+                        <tr>
+                            <!-- Buttons -->
+                            <td style="padding-right: 20px" align="left" nowrap>查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged1">
                             </asp:DropDownList>
-                            <a id="moreoperate" href="" target="main" onmouseover="BatchfnDropDown(this,'selectoperate');"
-                                onmouseout="fnHideDrop('selectoperate');" onclick="return false;">批量操作</a>
-                            <img border="0" src="../../themes/images/collapse.gif">
-                            <div id="selectoperate" class="drop_mnu" onmouseout="fnHideDrop('selectoperate')"
-                                onmouseover="fnShowDrop('selectoperate')">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                        <td>
-                                            <a href="#" onclick="javascript:return fnvshobj(this,'changeowner');" class="drop_down">
-                                                修改负责人</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#" onclick="javascript:return fnvshobj(this,'sharerecorddiv');" class="drop_down">
-                                                共享</a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-    <td >
-    
-    <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True" IsShowEmptyTemplate="true"  
-            AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%" OnRowDataBound="GridView1_DataRowBinding">
-<Columns>
+                                <a id="moreoperate" href="" target="main" onmouseover="BatchfnDropDown(this,'selectoperate');"
+                                    onmouseout="fnHideDrop('selectoperate');" onclick="return false;">批量操作</a>
+                                <img border="0" src="../../themes/images/collapse.gif">
+                                <div id="selectoperate" class="drop_mnu" onmouseout="fnHideDrop('selectoperate')"
+                                    onmouseover="fnShowDrop('selectoperate')">
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <a href="#" onclick="javascript:return fnvshobj(this,'changeowner');" class="drop_down">修改负责人</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#" onclick="javascript:return fnvshobj(this,'sharerecorddiv');" class="drop_down">共享</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-        <asp:TemplateField>
-                <HeaderTemplate> 
-                 <input type="CheckBox" onclick="selectAll(this)">
-                 </HeaderTemplate>
-                 <ItemTemplate>
-                     <asp:CheckBox ID="Chbk" runat="server" />
-                 </ItemTemplate>
-            <HeaderStyle HorizontalAlign="Left" />
-            <ItemStyle Height="25px" HorizontalAlign="Left" />
-        </asp:TemplateField>
-        
-         <asp:TemplateField HeaderText="应付款编号"  SortExpression="CAP_Code" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <a href="Cw_Accounting_Payment_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAP_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CAP_Code").ToString()%></a>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField HeaderText="对账单号"  SortExpression="CAP_FID" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-           <a href="../Procure_Check/Procure_ShipCheck_CView.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAP_FID") %>">
-                                                <%# DataBinder.Eval(Container.DataItem, "CAP_FID")%></a>  </ItemTemplate>
-        </asp:TemplateField>
-         <asp:BoundField  HeaderText="应付金额"  DataField="CAP_ReceiveMoney"  SortExpression="CAP_ReceiveMoney"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:BoundField  HeaderText="应付日期"  DataField="CAP_Stime"  SortExpression="CAP_Stime" DataFormatString="{0:yyyy-MM-dd}"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:BoundField  HeaderText="期次"  DataField="CAP_State"  SortExpression="CAP_State"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:TemplateField HeaderText="供应商"  SortExpression="CAP_CustomerValue" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <%#base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "CAP_CustomerValue").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField HeaderText="负责人"  SortExpression="CAP_DutyPerson" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <%#base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "CAP_DutyPerson").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:BoundField  HeaderText="付款总金额"  DataField="CAP_ReceiveMoney"  SortExpression="CAP_ReceiveMoney"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:TemplateField HeaderText="付款日期"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <%#GetPayTime(DataBinder.Eval(Container.DataItem, "CAP_ID").ToString())%>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:BoundField  HeaderText="未付金额"  DataField="CAP_LeftMoney"  SortExpression="CAP_LeftMoney"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-        <asp:TemplateField HeaderText="是否付款" SortExpression=" CAP_PayState" ItemStyle-HorizontalAlign="center"
-            HeaderStyle-HorizontalAlign="center">
-            <ItemTemplate>
-                <%#base.Base_GetBasicCodeName("208", DataBinder.Eval(Container.DataItem, " CAP_PayState").ToString())%>
-            </ItemTemplate>
-        </asp:TemplateField>
-         <asp:BoundField  HeaderText="创建日期"  DataField="CAP_CTime"  SortExpression="CAP_CTime"  ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-        <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center" >
-            <ItemTemplate>
-                <a href="Cw_Accounting_Payment_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAP_ID") %>&Code=<%# DataBinder.Eval(Container.DataItem, "CAP_Code") %>"><asp:Image ID="Image1" runat="server"  ImageUrl="../../images/Edit.gif" border=0 ToolTip="修改" /></a>
-           </ItemTemplate>
-        </asp:TemplateField>
-</Columns>
-         <HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' />
-            <AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' />
-</cc1:MyGridView>
-    </td>
-</tr>
-</table>
-<!--分页-->
-<!--底部功能栏-->
+                                <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True" IsShowEmptyTemplate="true"
+                                    AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%" OnRowDataBound="GridView1_DataRowBinding">
+                                    <Columns>
 
-    </td>
-  </tr>
-</table>
+                                        <asp:TemplateField>
+                                            <HeaderTemplate>
+                                                <input type="CheckBox" onclick="selectAll(this)">
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="Chbk" runat="server" />
+                                            </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle Height="25px" HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="应付款编号" SortExpression="CAP_Code" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="Cw_Accounting_Payment_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAP_ID") %>"><%# DataBinder.Eval(Container.DataItem, "CAP_Code").ToString()%></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="对账单号" SortExpression="CAP_FID" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="../Procure_Check/Procure_ShipCheck_CView.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAP_FID") %>">
+                                                    <%# DataBinder.Eval(Container.DataItem, "CAP_FID")%></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="应付金额" DataField="CAP_ReceiveMoney" SortExpression="CAP_ReceiveMoney" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField HeaderText="应付日期" DataField="CAP_Stime" SortExpression="CAP_Stime" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField HeaderText="期次" DataField="CAP_State" SortExpression="CAP_State" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="供应商" SortExpression="CAP_CustomerValue" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%#base.Base_GetSupplierName_Link(DataBinder.Eval(Container.DataItem, "CAP_CustomerValue").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="负责人" SortExpression="CAP_DutyPerson" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%#base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "CAP_DutyPerson").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="付款总金额" DataField="CAP_ReceiveMoney" SortExpression="CAP_ReceiveMoney" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="付款日期" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%#GetPayTime(DataBinder.Eval(Container.DataItem, "CAP_ID").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="未付金额" DataField="CAP_LeftMoney" SortExpression="CAP_LeftMoney" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="是否付款" SortExpression=" CAP_PayState" ItemStyle-HorizontalAlign="center"
+                                            HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%#base.Base_GetBasicCodeName("208", DataBinder.Eval(Container.DataItem, " CAP_PayState").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="创建日期" DataField="CAP_CTime" SortExpression="CAP_CTime" ItemStyle-HorizontalAlign="center" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="Cw_Accounting_Payment_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CAP_ID") %>&Code=<%# DataBinder.Eval(Container.DataItem, "CAP_Code") %>">
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl="../../images/Edit.gif" border="0" ToolTip="修改" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <HeaderStyle CssClass='colHeader' />
+                                    <RowStyle CssClass='listTableRow' />
+                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                    <PagerStyle CssClass='Custom_DgPage' />
+                                </cc1:MyGridView>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--分页-->
+                    <!--底部功能栏-->
+
+                </td>
+            </tr>
+        </table>
     </form>
 </body>
 </html>

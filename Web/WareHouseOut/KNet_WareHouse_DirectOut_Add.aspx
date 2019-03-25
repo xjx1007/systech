@@ -14,6 +14,7 @@
     <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
     <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
     <title>出库添加</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script language="JAVASCRIPT">
         function btnGetReturnValue_onclick() {
             var today, seconds;

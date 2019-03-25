@@ -3,7 +3,7 @@
 <head id="Head1" runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>士腾与供应商对账确认单</title>
-
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script language="javascript" type="text/javascript">   
         var LODOP; //声明为全局变量 
 	function prn1_preview() {	

@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/knetwork.css" type="text/css" />
     <title>发货对账单</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="../KDialog/lhgdialog.js"></script>

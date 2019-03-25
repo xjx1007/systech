@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/knetwork.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <title></title>
   <SCRIPT LANGUAGE=JAVASCRIPT>
    function btnGetReturnValue_onclick1()  

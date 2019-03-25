@@ -11,6 +11,7 @@
     <script language="JavaScript" type="text/javascript" src="/include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
     <title>物流报价添加</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script type="text/javascript">
         function btnGetReturnValue_onclick() {
             /*选择客户*/

@@ -7,6 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>成品出库单</title>
+     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 </head>
 <link rel="stylesheet" href="/Web/../themes/softed/style.css" type="text/css">
 <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>

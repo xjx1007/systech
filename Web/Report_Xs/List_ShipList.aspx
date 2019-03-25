@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
     <title>销售发货明细</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <style type="text/css">
 body {
  background: #FFF;

@@ -15,6 +15,7 @@
     <script language="javascript" type="text/javascript" src="/include/scriptaculous/dom-drag.js"></script>
     <title>权限注册页面</title>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form2" runat="server">

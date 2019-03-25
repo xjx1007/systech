@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <%@ Register Src="../Control/CommentList.ascx" TagName="CommentList" TagPrefix="uc1" %>
 <style type="text/css">
 TABLE.print {vertical-align: middle;BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; BORDER-COLLAPSE: collapse

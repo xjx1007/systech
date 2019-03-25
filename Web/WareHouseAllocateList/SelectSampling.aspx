@@ -12,15 +12,16 @@
             window.close();
         }
     </script>
-    <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
-    <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
-    <script language="javascript" type="text/javascript" src="../../../Web/DatePicker/WdatePicker.js"></script>
-    <script language="javascript" type="text/javascript" src="../../js/Global.js"></script>
-    <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
-    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
-    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
-    <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
-    <script language="javascript" type="text/javascript" src="../../../include/js/ListView.js"></script>
+    <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
+    <script language="JavaScript" src="../Js/Global.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript" src="../../Web/DatePicker/WdatePicker.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/Global.js"></script>
+    <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/scriptaculous.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/scriptaculous/dom-drag.js"></script>
+    <script language="javascript" type="text/javascript" src="../../include/js/ListView.js"></script>
     <script>
         function changsheng(va) {
             if (va != '0') {

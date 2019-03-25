@@ -104,7 +104,6 @@ public partial class Web_List_OrderIn : BasePage
                                 }
 
                                 s_Details += "<td  class='thstyleLeftDetails' align=left  noWrap>&nbsp;" + Dtb_LinkMan.Rows[j]["XOL_Name"].ToString() + "</td>\n";
-
                                 s_Details += "<td  class='thstyleLeftDetails' align=left  noWrap>&nbsp;" + Dtb_LinkMan.Rows[j]["XOL_Responsible"].ToString() + "</td>\n";
                                 s_Details += "<td  class='thstyleLeftDetails' align=left  noWrap>&nbsp;" + Dtb_LinkMan.Rows[j]["XOL_phone"].ToString() + "</td>\n";
                                 s_Details += "<td  class='thstyleLeftDetails' align=left  noWrap>&nbsp;" + Dtb_LinkMan.Rows[j]["XOL_Officephone"].ToString() + "</td>\n";

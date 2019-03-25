@@ -8,6 +8,7 @@
     <title>财务报表</title>
 </head>
 <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css" />
+<link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
 <script language="javascript" type="text/javascript" src="../../include/scriptaculous/prototype.js"></script>
@@ -63,16 +64,16 @@
                                                     <tr>
                                                         <td>
                                                             <ul>
-                                                                 <li><a href="../Report_Cw/Bank/Report_Bank.aspx">银行日记账</a></li>
-                                                                 <li><a href="../Report_Cw/Money/Report_Bank.aspx">现金日记账</a></li>
-                                                                 <li><a href="../Report_Cw/Bill/Report_Bank.aspx">票据往来账</a></li>
-                                                                 <li><a href="../Report_Cw/TransferCheque/Report_Details.aspx">支出明细</a></li>
-                                                                 <li><a href="../Report_Cw/Pay/Report_Reveive.aspx">收款单明细表</a></li>
-                                                                 <li><a href="../Report_Cw/Receive/Report_Reveive.aspx">应收款结存表</a></li>
-                                                                 <li><a href="../Report_Cw/YS/Report_Reveive.aspx">应收帐款明细</a></li>
+                                                                <li><a href="../Report_Cw/Bank/Report_Bank.aspx">银行日记账</a></li>
+                                                                <li><a href="../Report_Cw/Money/Report_Bank.aspx">现金日记账</a></li>
+                                                                <li><a href="../Report_Cw/Bill/Report_Bank.aspx">票据往来账</a></li>
+                                                                <li><a href="../Report_Cw/TransferCheque/Report_Details.aspx">支出明细</a></li>
+                                                                <li><a href="../Report_Cw/Pay/Report_Reveive.aspx">收款单明细表</a></li>
+                                                                <li><a href="../Report_Cw/Receive/Report_Reveive.aspx">应收款结存表</a></li>
+                                                                <li><a href="../Report_Cw/YS/Report_Reveive.aspx">应收帐款明细</a></li>
                                                                 <li><a href="../Report_Cw/Report_DlkDetails.aspx">代理费明细</a></li>
                                                                 <li><a href="../Report_Cw/Bond/Report_Bank.aspx">保证金</a></li>
-                                                                
+
                                                                 <li><a href="../Report_Cw/Products/Report_Kc.aspx">成品最新成本明细</a></li>
                                                             </ul>
                                                         </td>

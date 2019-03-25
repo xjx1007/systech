@@ -5,62 +5,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
-<title></title>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
+    <title></title>
 </head>
 <script type="text/javascript" src="../../js/ajax_func.js"></script>
 <script language="JavaScript" src="../../Js/Global.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
-	<script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
-	<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
-	<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
-	<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>	
+<script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
+<script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">
 
-<table border="0" cellspacing=0 cellpadding=0 width=100% class=small>
-<tr><td style="height:2px"></td></tr>
-<tr>
-	<td style="padding-left:10px;padding-right:50px" class="moduleName" nowrap>财务 >
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" class="small">
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px; padding-right: 50px" class="moduleName" nowrap>财务 >
 	<a class="hdrLink" href="Cw_Material_MoneyChange_List.aspx">原材料调整单</a>
-        </td>
-	<td width=100% nowrap>
-		<table border="0" cellspacing="0" cellpadding="0" >
-		<tr>
-		<td class="sep1" style="width:1px;"></td>
-		<td class="small" >
-			<!-- Add and Search -->
-			<table border=0 cellspacing=0 cellpadding=0>
-			<tr>
-			<td>
-				<table border=0 cellspacing=0 cellpadding=5>
-				<tr>
-				<td style="padding-right:0px;padding-left:10px;"><a href="javascript:;"  onclick="PageGo('Cw_Material_MoneyChange_Add.aspx')"><img src="../../../themes/softed/images/btnL3Add.gif" alt="创建 原材料调整单..." title="创建 原材料调整单..." border=0></a></td>
-				<td style="padding-right:0px;"><asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../../themes/softed/images/btnL3Delete.gif"  OnClick="Btn_Del_Click"/></td>
-				<td style="padding-right:10px"><a href="javascript:;" onClick="ShowDiv()" ><img src="../../../themes/softed/images/btnL3Search.gif" alt="查找 原材料调整单..." title="查找 原材料调整单..." border=0></a></td>
-				<td style="padding-right:0px;padding-left:10px;"><img src="../../../themes/softed/images/tbarImport.gif" alt="*导入 原材料调整单" title="*导入 原材料调整单" border="0"></td>	
-				<td style="padding-right:10px"><img src="../../../themes/softed/images/tbarExport.gif" alt="*导出 原材料调整单" title="*导出 原材料调整单" border="0"></td>
-				</tr>
-				</table>
-			</td>
-			</tr>
-			</table>
-		</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr><td style="height:2px"></td></tr>
-</table>
+                </td>
+                <td width="100%" nowrap>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="sep1" style="width: 1px;"></td>
+                            <td class="small">
+                                <!-- Add and Search -->
+                                <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            <table border="0" cellspacing="0" cellpadding="5">
+                                                <tr>
+                                                    <td style="padding-right: 0px; padding-left: 10px;"><a href="javascript:;" onclick="PageGo('Cw_Material_MoneyChange_Add.aspx')">
+                                                        <img src="../../../themes/softed/images/btnL3Add.gif" alt="创建 原材料调整单..." title="创建 原材料调整单..." border="0"></a></td>
+                                                    <td style="padding-right: 0px;">
+                                                        <asp:ImageButton runat="server" ID="Btn_Del" ImageUrl="../../../themes/softed/images/btnL3Delete.gif" OnClick="Btn_Del_Click" /></td>
+                                                    <td style="padding-right: 10px"><a href="javascript:;" onclick="ShowDiv()">
+                                                        <img src="../../../themes/softed/images/btnL3Search.gif" alt="查找 原材料调整单..." title="查找 原材料调整单..." border="0"></a></td>
+                                                    <td style="padding-right: 0px; padding-left: 10px;">
+                                                        <img src="../../../themes/softed/images/tbarImport.gif" alt="*导入 原材料调整单" title="*导入 原材料调整单" border="0"></td>
+                                                    <td style="padding-right: 10px">
+                                                        <img src="../../../themes/softed/images/tbarExport.gif" alt="*导出 原材料调整单" title="*导出 原材料调整单" border="0"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 2px"></td>
+            </tr>
+        </table>
 
 
-<table width="99%" border="0" align="center"  cellpadding="0" cellspacing="0" class="tablecss">
-<tr>
- <td>
-    <%=base.Base_BindView("Cw_Material_MoneyChange", "Cw_Material_MoneyChange_List.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
-</td>
-</tr>
+        <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="tablecss">
+            <tr>
+                <td>
+                    <%=base.Base_BindView("Cw_Material_MoneyChange", "Cw_Material_MoneyChange_List.aspx", Request.QueryString["WhereID"] == null ? "" : Request.QueryString["WhereID"].ToString())%>
+                </td>
+            </tr>
 
             <tr>
                 <td>
@@ -88,8 +98,7 @@
                                     <input name="Btn_submit" type="button" class="crmbutton small edit" onclick="ShowDiv()"
                                         value=" 取消查找 ">&nbsp;
                                 </td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="ShowDiv()">[x]</td>
                             </tr>
                         </table>
                     </div>
@@ -106,16 +115,15 @@
                                 <td nowrap width="60%" class="small">
                                     <b>
                                         <input name="matchtype" id="matchtype2" type="radio" value="any" runat="server" checked>&nbsp;匹配以下任意条件</b></td>
-                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">
-                                    [x]</td>
+                                <td class="small" valign="top" onmouseover="this.style.cursor='pointer';" onclick="fnshow()">[x]</td>
                             </tr>
                         </table>
                         <table cellpadding="2" cellspacing="0" width="80%" align="center" class="searchUIAdv2 small"
                             border="0">
                             <tr>
                                 <td align="center" class="small" width="90%">
-                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px;
-                                        overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff" class="small">
+                                    <div id="fixed" style="position: relative; width: 95%; height: 80px; padding: 0px; overflow: auto; border: 1px solid #CCCCCC; background-color: #ffffff"
+                                        class="small">
                                         <table border="0" width="95%">
                                             <tr>
                                                 <td align="left">
@@ -155,7 +163,7 @@
                             align="center">
                             <tr>
                                 <td align="left" width="40%">
-                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Cw_Material_MoneyChange")%>','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
+                                    <input type="button" name="more" value=" 增加条件 " onclick="fnAddSrch('<%=Base_GetBindSearch("Cw_Material_MoneyChange")%>    ','<option value=\'cts\'>包含</option><option value=\'dcts\'>不包含</option><option value=\'is\'>等于</option><option value=\'isn\'>不等于</option><option value=\'bwt\'>开始为</option><option value=\'grt\'>大于</option><option value=\'lst\'>小于</option><option value=\'grteq\'>大于等于</option><option value=\'lsteq\'>小于等于</option>')"
                                         class="crmbuttom small edit">
                                     <input name="button" type="button" value=" 删除条件 " onclick="delRow()" class="crmbuttom small edit">
                                 </td>
@@ -169,96 +177,109 @@
                     </div>
                 </td>
             </tr>
-  <tr>
-    <td>
-        
-<table border=0 cellspacing=0 cellpadding=2 width=100% class="small">
- <tr>
-				<!-- Buttons -->
-				<td style="padding-right:20px" align="left" nowrap>				
-				查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged"></asp:DropDownList>
-				<a id="moreoperate" href="" target="main" onmouseover="BatchfnDropDown(this,'selectoperate');" onmouseout="fnHideDrop('selectoperate');" onclick="return false;">批量操作</a> <img border="0" src="../../../themes/images/collapse.gif">
-				<div id="selectoperate" class="drop_mnu" onMouseOut="fnHideDrop('selectoperate')" onMouseOver="fnShowDrop('selectoperate')" >
-				<table width="100%" border="0" cellpadding="0" cellspacing="0">
-							<tr><td>
-							<a href="#" class="drop_down">修改负责人</a>
-							</td></tr>
-							<tr><td>
-							<a href="#" class="drop_down">共享</a>
-							</td></tr>
-							<tr><td>
-							<asp:LinkButton runat="server" ID="lbtn_Del" class="drop_down" OnClick="Btn_Del_Click" >批量删除</asp:LinkButton>
-							</td></tr>
-							<tr><td><a href="#"  class="drop_down">批量发短信</a></td></tr>
-                    <tr><td>
-						<a href="#"  class="drop_down">批量发邮件</a>
-					</td></tr>
-									</table>
-				</div>
-				</td>
-				</tr>
-  <tr>
-    <td >
-    
-    <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True" IsShowEmptyTemplate="true"  
-            AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%" OnRowDataBound="GridView1_DataRowBinding" >
-<Columns>
+            <tr>
+                <td>
 
-        <asp:TemplateField>
-                <HeaderTemplate> 
-                 <input type="CheckBox" onclick="selectAll(this)">
-                 </HeaderTemplate>
-                 <ItemTemplate>
-                     <asp:CheckBox ID="Chbk" runat="server" />
-                 </ItemTemplate>
-            <HeaderStyle HorizontalAlign="Left" />
-            <ItemStyle Height="25px" HorizontalAlign="Left" />
-        </asp:TemplateField>
-        
-         <asp:TemplateField HeaderText="编号"  SortExpression="CMM_Code" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-               <a href="Cw_Material_MoneyChange_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CMM_ID") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "CMM_Code").ToString()%></a>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField HeaderText="发票编号"  SortExpression="CMM_Code" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
-          <ItemTemplate>
-              <%# GetURl(DataBinder.Eval(Container.DataItem, "CMM_FID").ToString()) %>
-          </ItemTemplate>
-        </asp:TemplateField>
-         <asp:BoundField  HeaderText="日期"  DataField="CMM_Stime"  SortExpression="CMM_Stime" DataFormatString="{0:yyyy-MM-dd}"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:BoundField  HeaderText="金额"  DataField="CMM_Money"  SortExpression="CMM_Money" DataFormatString="{0:f3}"  ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:BoundField  HeaderText="备注"  DataField="CMM_Remarks"  SortExpression="CMM_Remarks" >
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-         <asp:BoundField  HeaderText="创建人"  DataField="CMM_CTime"  SortExpression="CMM_CTime" >
-            <ItemStyle HorizontalAlign="Left"   Font-Size="12px"   />
-            <HeaderStyle HorizontalAlign="Left" Font-Size="12px"  />
-        </asp:BoundField>
-        <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center" >
-            <ItemTemplate>
-                <a href="Cw_Material_MoneyChange_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CMM_ID") %>"><asp:Image ID="Image1" runat="server"  ImageUrl="../../../images/Edit.gif" border=0 ToolTip="修改" /></a>
-           </ItemTemplate>
-        </asp:TemplateField>
-</Columns>
-         <HeaderStyle CssClass='colHeader' /><RowStyle CssClass='listTableRow' />
-            <AlternatingRowStyle BackColor="#E3EAF2" /><PagerStyle CssClass='Custom_DgPage' />
-</cc1:MyGridView>
-    </td>
-</tr>
-</table>
-<!--分页-->
-<!--底部功能栏-->
+                    <table border="0" cellspacing="0" cellpadding="2" width="100%" class="small">
+                        <tr>
+                            <!-- Buttons -->
+                            <td style="padding-right: 20px" align="left" nowrap>查看范围:<asp:DropDownList runat="server" ID="Ddl_Batch" AutoPostBack="True" OnTextChanged="Ddl_Batch_TextChanged"></asp:DropDownList>
+                                <a id="moreoperate" href="" target="main" onmouseover="BatchfnDropDown(this,'selectoperate');" onmouseout="fnHideDrop('selectoperate');" onclick="return false;">批量操作</a>
+                                <img border="0" src="../../../themes/images/collapse.gif">
+                                <div id="selectoperate" class="drop_mnu" onmouseout="fnHideDrop('selectoperate')" onmouseover="fnShowDrop('selectoperate')">
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="drop_down">修改负责人</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="drop_down">共享</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton runat="server" ID="lbtn_Del" class="drop_down" OnClick="Btn_Del_Click">批量删除</asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="drop_down">批量发短信</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#" class="drop_down">批量发邮件</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-    </td>
-  </tr>
-</table>
+                                <cc1:MyGridView ID="MyGridView1" runat="server" AllowPaging="True" AllowSorting="True" IsShowEmptyTemplate="true"
+                                    AutoGenerateColumns="False" CssClass="Custom_DgMain" PageSize="10" Width="100%" OnRowDataBound="GridView1_DataRowBinding">
+                                    <Columns>
+
+                                        <asp:TemplateField>
+                                            <HeaderTemplate>
+                                                <input type="CheckBox" onclick="selectAll(this)">
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="Chbk" runat="server" />
+                                            </ItemTemplate>
+                                            <HeaderStyle HorizontalAlign="Left" />
+                                            <ItemStyle Height="25px" HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="编号" SortExpression="CMM_Code" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="Cw_Material_MoneyChange_View.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CMM_ID") %>" target="_blank"><%# DataBinder.Eval(Container.DataItem, "CMM_Code").ToString()%></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="发票编号" SortExpression="CMM_Code" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <%# GetURl(DataBinder.Eval(Container.DataItem, "CMM_FID").ToString()) %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField HeaderText="日期" DataField="CMM_Stime" SortExpression="CMM_Stime" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField HeaderText="金额" DataField="CMM_Money" SortExpression="CMM_Money" DataFormatString="{0:f3}" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="center">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField HeaderText="备注" DataField="CMM_Remarks" SortExpression="CMM_Remarks">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField HeaderText="创建人" DataField="CMM_CTime" SortExpression="CMM_CTime">
+                                            <ItemStyle HorizontalAlign="Left" Font-Size="12px" />
+                                            <HeaderStyle HorizontalAlign="Left" Font-Size="12px" />
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="修改" HeaderStyle-HorizontalAlign="center">
+                                            <ItemTemplate>
+                                                <a href="Cw_Material_MoneyChange_Add.aspx?ID=<%# DataBinder.Eval(Container.DataItem, "CMM_ID") %>">
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl="../../../images/Edit.gif" border="0" ToolTip="修改" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <HeaderStyle CssClass='colHeader' />
+                                    <RowStyle CssClass='listTableRow' />
+                                    <AlternatingRowStyle BackColor="#E3EAF2" />
+                                    <PagerStyle CssClass='Custom_DgPage' />
+                                </cc1:MyGridView>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--分页-->
+                    <!--底部功能栏-->
+
+                </td>
+            </tr>
+        </table>
     </form>
 </body>
 </html>

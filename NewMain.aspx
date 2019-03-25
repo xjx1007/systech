@@ -18,6 +18,8 @@
     <script language="text/javascript" type="text/javascript" src="themes/js/index.js" charset="gb2312"></script>
     <script language="text/javascript" type="text/javascript" src="themes/js/tree.js" charset="gb2312"></script>
     <script language="text/javascript" type="text/javascript" src="themes/js/treeview.js" charset="gb2312"></script>
+    <link rel="alternate icon" type="image/png" href="images/士腾.png"/>
+
     <script>
         //var bTabStyle = true;
         //var menuExpand = "";

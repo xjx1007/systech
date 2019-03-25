@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/knetwork.css" type="text/css">
 <title></title>
-
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 </head>
 <body topmargin="0" leftmargin="0" rightmargin="0">
     <form id="form1" runat="server">

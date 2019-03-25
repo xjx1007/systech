@@ -8,6 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../themes/softed/style.css" type="text/css">
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script type="text/javascript" src="../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../include/js/general.js"></script>
@@ -94,9 +95,9 @@
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">样品编号：
                                                         </td>
                                                         <td class="dvtCellInfo" align="left" colspan="3">
-                                                            <pc:PTextBox ID="Tbx_SampleName" Width="200px"  CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                            <pc:PTextBox ID="Tbx_SampleName" Width="200px" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
                                                                 OnBlur="this.className='detailedViewTextBox'" runat="server" Enabled="false"></pc:PTextBox>
-                                                            <pc:PTextBox ID="Tbx_SampleID" CssClass="Custom_Hidden"  runat="server"></pc:PTextBox>
+                                                            <pc:PTextBox ID="Tbx_SampleID" CssClass="Custom_Hidden" runat="server"></pc:PTextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -107,19 +108,19 @@
                                                         </td>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">审批流程：
                                                         </td>
-                                                        <td class="dvtCellInfo" align="left" >
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:DropDownList runat="server" ID="Ddl_Flow"></asp:DropDownList>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">状态：
                                                         </td>
-                                                        <td class="dvtCellInfo" align="left" >
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:DropDownList runat="server" ID="Ddl_State"></asp:DropDownList>
                                                         </td>
                                                         <td width="16%" height="25" align="right" class="dvtCellLabel">类型：
                                                         </td>
-                                                        <td class="dvtCellInfo" align="left" >
+                                                        <td class="dvtCellInfo" align="left">
                                                             <asp:DropDownList runat="server" ID="Ddl_Type"></asp:DropDownList>
                                                             <font color="red">*</font>
                                                         </td>
@@ -132,11 +133,11 @@
                                                                 OnBlur="this.className='detailedViewTextBox'" Width="280px" Height="50px"></pc:PTextBox>
                                                         </td>
                                                     </tr>
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <uc2:CommentList ID="CommentList2" runat="server" CommentFID="" CommentType="-1" />
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <uc2:CommentList ID="CommentList2" runat="server" CommentFID="" CommentType="-1" />
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </td>
                                         </tr>
@@ -155,10 +156,10 @@
                         <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                         <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                 </td>
-    <td align="right" valign="top">
-        <img src="../../themes/softed/images/showPanelTopRight.gif" />
-    </td>
-        </tr>
+                <td align="right" valign="top">
+                    <img src="../../themes/softed/images/showPanelTopRight.gif" />
+                </td>
+            </tr>
         </table>
     </form>
 </body>

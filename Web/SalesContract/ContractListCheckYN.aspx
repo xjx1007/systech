@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../../css/knetwork.css" type="text/css">
 <script language="javascript" type="text/javascript" src="../DatePicker/WdatePicker.js"></script>
 <title>合同进展操作--审核</title>
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
 <script>   
   function closeWindow()   
   {   

@@ -465,4 +465,13 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuAllocateList : B
     {
         this.DataShows();
     }
+
+    protected void BtnSave_OnClick(object sender, EventArgs e)
+    {
+        string sql =" select *from KNet_WareHouse_FuAllocateList where AllocateNo not in (select AllocateNo from KNet_WareHouse_FuAllocateList where AllocateNo   in (SELECT AllocateNo from KNet_WareHouse_AllocateList))";
+        DataSet ds = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql);
+        GridView1.DataSource = ds;
+        GridView1.DataKeyNames = new string[] { "AllocateNo" };
+        GridView1.DataBind();
+    }
 }

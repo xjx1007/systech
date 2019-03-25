@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="/themes/softed/style.css" type="text/css" />
+    <link rel="alternate icon" type="image/png" href="../../images/士腾.png" />
     <script type="text/javascript" src="/Web/Js/ajax_func.js"></script>
     <script language="JavaScript" src="/Web/Js/Global.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript" src="/Web/DatePicker/WdatePicker.js"></script>
