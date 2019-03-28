@@ -854,7 +854,8 @@ public partial class Web_Procure_ShipCheck_Add : BasePage
                         Model_Order_ChecklistDetails.COD_Details = s_Details;
                         Model_Order_ChecklistDetails.COD_Money = d_Money;
                         Model_Order_ChecklistDetails.COD_NoTaxLag = 0;
-                        Model_Order_ChecklistDetails.COD_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.16")), 2));
+                        //税率改动
+                        Model_Order_ChecklistDetails.COD_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / base.Get_Tax_Rate()), 2));
                         Model_Order_ChecklistDetails.COD_BNumber = d_BNumber;
                         arr_Details.Add(Model_Order_ChecklistDetails);
                     }

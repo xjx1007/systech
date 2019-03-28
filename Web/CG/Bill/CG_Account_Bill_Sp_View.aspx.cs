@@ -402,7 +402,8 @@ public partial class CG_Account_Bill_Sp_View : BasePage
                     decimal d_Money = decimal.Parse(FormatNumber1(Dts_Table.Tables[0].Rows[i]["COD_Money"].ToString(), 3));
                     if (d_KWD_NoTaxMoney == 0)
                     {
-                        d_KWD_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / Decimal.Parse("1.16")), 2));
+                        //税率改动
+                        d_KWD_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Money / base.Get_Tax_Rate()), 2));
                     }
                     string s_CustomerValue = base.Base_GetHouseName(Dts_Table.Tables[0].Rows[i]["COD_CustomerValue"].ToString());
                     if (s_CustomerValue == "")

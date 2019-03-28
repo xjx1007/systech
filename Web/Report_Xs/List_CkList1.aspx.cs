@@ -143,9 +143,10 @@ public partial class List_CkList1 : BasePage
                     }
                     catch { }
                     s_Details += "<td align=right  class='thstyleLeftDetails' noWrap>" + base.FormatNumber1(d_TotalNet.ToString(), 2) + "</td>\n";//金额
-                    string s_RantTotal = base.FormatNumber1(Convert.ToString(d_TotalNet - decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.16")), 2))), 2);
+                    //税率改动
+                    string s_RantTotal = base.FormatNumber1(Convert.ToString(d_TotalNet - decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / base.Get_Tax_Rate()), 2))), 2);
                     string s_LeftTotal="0";
-                    decimal d_LeftTotal = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.16")),2));
+                    decimal d_LeftTotal = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / base.Get_Tax_Rate()),2));
                    
                     s_LeftTotal= base.FormatNumber1(d_LeftTotal.ToString(),2);
                     s_Details += "<td align=right  class='thstyleLeftDetails' noWrap>" + s_RantTotal + "</td>\n";//税额

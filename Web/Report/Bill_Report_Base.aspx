@@ -110,7 +110,7 @@
                                                         <td valign="top" width="33%">
                                                             <ul>
                                                                 <li><a href="../Report_Bill/Report_CustomerPayTime.aspx">客户帐期统计</a></li>
-                                                              
+                                                               <li><a href="../Report_Bill/Report_Tax_Rate.aspx">税率更改</a></li>
                                                                 
                                                             </ul>
                                                         </td>

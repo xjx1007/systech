@@ -163,8 +163,11 @@
                                         </tr>
                                         <tr>
                                             <td class="dvtCellLabel">客户:</td>
-                                            <td class="dvtCellInfo" colspan="3">
+                                            <td class="dvtCellInfo">
                                                 <asp:Label ID="Lbl_Customer" runat="server"></asp:Label></td>
+                                             <td class="dvtCellLabel">订单号:</td>
+                                            <td class="dvtCellInfo">
+                                                <asp:Label ID="KSP_Order" runat="server"></asp:Label></td>
                                         </tr>
 
                                         <tr>

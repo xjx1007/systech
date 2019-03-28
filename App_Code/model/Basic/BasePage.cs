@@ -4177,7 +4177,28 @@ public class BasePage : System.Web.UI.Page
         }
         return s_Return;
     }
-
+    /// <summary>
+    /// 获取最新税率
+    /// </summary>
+    /// <returns></returns>
+    public decimal Get_Tax_Rate()
+    {
+        string sql = "select top 1 * from KNet_Tax_Rate order by CTime desc";
+        DataTable dt = DbHelperSQL.ExecuteDataSet(CommandType.Text,sql).Tables[0];
+        return decimal.Parse(dt.Rows[0]["New_TaxRate"].ToString());
+    }
+    /// <summary>
+    /// 获取税率百分之
+    /// </summary>
+    /// <returns></returns>
+    public string GetTaxRate_Percent()
+    {
+        string sql = "select top 1 * from KNet_Tax_Rate order by CTime desc";
+        DataTable dt = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        decimal d = decimal.Parse(dt.Rows[0]["New_TaxRate"].ToString())-1;
+        string s = (d * 100).ToString("F2") + "%";
+        return s;
+    }
     public string DateToString(string s_Date)
     {
         string s_Return = "";

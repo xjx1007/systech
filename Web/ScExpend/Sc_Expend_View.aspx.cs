@@ -167,7 +167,7 @@ public partial class Web_Sc_Expend_View : BasePage
                         s_MyTable_Detail1 += "<tr>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Convert.ToString(i + 1) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + "</td>";
-
+                        //s_MyTable_Detail1 += "<td class=\"ListHeadDetails\"></td>";
                         //s_MyTable_Detail1 +=
                         //  "<td class='ListHeadDetails'><a class='deleteExpend' id=" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + " href='javascript:void(0);'>删除</a></td>";
                         s_MyTable_Detail1 +=
@@ -209,6 +209,7 @@ public partial class Web_Sc_Expend_View : BasePage
                         s_MyTable_Detail1 += "<tr>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Convert.ToString(i + 1) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + Dts_Mater.Tables[0].Rows[i]["SED_ID"].ToString() + "</td>";
+                        //s_MyTable_Detail1 += "<td class=\"ListHeadDetails\"></td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProdutsName_Link(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsCode(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";
                         s_MyTable_Detail1 += "<td class=\"ListHeadDetails\">" + base.Base_GetProductsEdition(Dts_Mater.Tables[0].Rows[i]["SED_ProductsBarCode"].ToString()) + "</td>";

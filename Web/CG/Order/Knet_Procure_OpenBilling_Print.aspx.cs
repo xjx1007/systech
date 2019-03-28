@@ -150,6 +150,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_Print : BasePage
                         d_All_Total += d_Amount;
                         d_All_OrderTotal+= d_Amount;
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_Amount.ToString(), 2) + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber((d_Amount/Get_Tax_Rate()).ToString(), 2) + "</td>";
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Rows[i]["Remark"].ToString() + "</td>";
                         s_MyTable_Detail += " </tr>";
 
@@ -227,6 +228,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_Print : BasePage
                         d_All_HandTotal += Decimal.Parse(Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString() == "" ? "0" : Dts_Table.Tables[0].Rows[i]["HandTotal"].ToString());
                         d_All_Total += d_Amount;
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_Amount.ToString(), 2) + "</td>";
+                        s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber((d_Amount/Get_Tax_Rate()).ToString(), 2) + "</td>";
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Tables[0].Rows[i]["OrderRemarks"].ToString() + "</td>";
                         s_MyTable_Detail += " </tr>";
 
@@ -243,11 +245,11 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_Print : BasePage
             }
             if (Model_Supp.KPS_Check=="1")
             {
-                this.Lbl_AllCount.Text = " 材料总计：￥" + FormatNumber(d_All_OrderTotal.ToString(), 2) + "   加工费总计：￥" + FormatNumber(d_All_HandTotal.ToString(), 2) + "  总计：￥" + FormatNumber(d_All_Total.ToString(), 2) + "<br/>金额大写：" + base.ConvertMoney(d_All_Total)+ "(含16%增值税)(银行承兑汇票)";
+                this.Lbl_AllCount.Text = " 材料总计：￥" + FormatNumber(d_All_OrderTotal.ToString(), 2) + "   加工费总计：￥" + FormatNumber(d_All_HandTotal.ToString(), 2) + "  总计：￥" + FormatNumber(d_All_Total.ToString(), 2) + "<br/>金额大写：" + base.ConvertMoney(d_All_Total)+ "(含"+GetTaxRate_Percent()+"增值税)(银行承兑汇票)";
             }
             else
             {
-                this.Lbl_AllCount.Text = " 材料总计：￥" + FormatNumber(d_All_OrderTotal.ToString(), 2) + "   加工费总计：￥" + FormatNumber(d_All_HandTotal.ToString(), 2) + "  总计：￥" + FormatNumber(d_All_Total.ToString(), 2) + "<br/>金额大写：" + base.ConvertMoney(d_All_Total)+ "(含16%增值税)";
+                this.Lbl_AllCount.Text = " 材料总计：￥" + FormatNumber(d_All_OrderTotal.ToString(), 2) + "   加工费总计：￥" + FormatNumber(d_All_HandTotal.ToString(), 2) + "  总计：￥" + FormatNumber(d_All_Total.ToString(), 2) + "<br/>金额大写：" + base.ConvertMoney(d_All_Total)+ "(含"+GetTaxRate_Percent()+"增值税)";
             }
            
             //this.Lbl_Rate.Text = " 增值税：￥" + Convert.ToString((d_All_Total * 17) / 100) + "  合计(不含税)：￥" + Convert.ToString((d_All_Total * 83) / 100) + "   总计：￥" + d_All_Total.ToString();

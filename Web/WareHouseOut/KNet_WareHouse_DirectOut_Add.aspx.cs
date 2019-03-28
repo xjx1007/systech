@@ -396,6 +396,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
         this.Remarks.Text = model.DirectOutRemarks;
         this.KPS_InvoiceUrl1.Text = model.KWD_UploadUrl;
         this.KPS_Invoice1.Text = model.KWD_UploadName;
+        this.OrderFaterNo.Text = model.KWD_Order;
         KNet.BLL.KNet_WareHouse_DirectOutList_Details BLL_Details = new KNet.BLL.KNet_WareHouse_DirectOutList_Details();
 
         if (model.KWD_IsSupp == 1)

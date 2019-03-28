@@ -355,7 +355,8 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                     Model_Details.WareHouseRemarks = s_Remarks[i];
                     Model_Details.ProductsUnits = s_ID[i];
                     Model_Details.WareHouseBAmount = int.Parse(s_BNumber[i]);
-                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(decimal.Parse(s_Number[i]) * decimal.Parse(s_Price[i]) / Decimal.Parse("1.16")), 2));
+                    //税率改动
+                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(decimal.Parse(s_Number[i]) * decimal.Parse(s_Price[i]) / base.Get_Tax_Rate()), 2));
                     if ((Model_Details.WareHouseAmount != 0) || (d_Money != 0))
                     {
                         Arr_Products.Add(Model_Details);

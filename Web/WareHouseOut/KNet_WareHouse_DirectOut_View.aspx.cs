@@ -61,7 +61,8 @@ public partial class Web_KNet_WareHouse_DirectOut_View : BasePage
             this.Lbl_Project.Text = base.Base_GetBasicCodeName("779", model.KWD_Project);
             this.Lbl_LyTYpe.Text = base.Base_GetBasicCodeName("1135", model.KWD_LyType);
             this.Lbl_OEM.Text = base.Base_GetSupplierName_Link(model.KWD_SuppNo);
-            this.KWD_Upload.Text= "<a href=\"" + model.KWD_UploadUrl + "\" >" + model.KWD_UploadName + "</a>"; ;
+            this.KWD_Upload.Text= "<a href=\"" + model.KWD_UploadUrl + "\" >" + model.KWD_UploadName + "</a>";
+            this.KSP_Order.Text = model.KWD_Order;
             if (model.KWD_IsSupp == 1)
             {
 

@@ -85,9 +85,10 @@ public partial class Sales_ShipWareOut_Print_Cw : BasePage
                     d_TotalNet = decimal.Parse(s_Number) * decimal.Parse(s_Price);
                 }
                 catch { }
-                string s_RantTotal = base.FormatNumber1(Convert.ToString(d_TotalNet - decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.16")), 2))), 2);
+                //税率改动
+                string s_RantTotal = base.FormatNumber1(Convert.ToString(d_TotalNet - decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / base.Get_Tax_Rate()), 2))), 2);
                 string s_LeftTotal = "0";
-                decimal d_LeftTotal = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / decimal.Parse("1.16")), 2));
+                decimal d_LeftTotal = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TotalNet / base.Get_Tax_Rate()), 2));
                    
                 this.Lbl_Details.Text += "<td class=\"style10\" >" + base.FormatNumber(Convert.ToString(decimal.Parse(Dtb_Table.Rows[i]["DirectOutAmount"].ToString()) * decimal.Parse(s_Price)), 2) + "</td>";
                 this.Lbl_Details.Text += "<td class=\"style9\" >" + s_RantTotal + "</td>";

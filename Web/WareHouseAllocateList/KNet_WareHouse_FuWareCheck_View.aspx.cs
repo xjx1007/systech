@@ -677,8 +677,9 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
             string AllocateTopic = KNetPage.KHtmlEncode("");
             string AllocateCause = KNetPage.KHtmlEncode(this.Lbl_Case.Text.Trim());
 
-            DateTime AllocateDateTime = DateTime.Parse(Lbl_Stime.Text.ToString());
-
+            //DateTime AllocateDateTime = DateTime.Parse(Lbl_Stime.Text.ToString());
+            DateTime AllocateDateTime = DateTime.Parse(DateTime.Now.ToShortDateString());
+           
 
             string HouseNo_out = KNetPage.KHtmlEncode(this.Lbl_HouseNo.Text);
             string HouseNo_int = KNetPage.KHtmlEncode(this.Lbl_House_int0.Text);

@@ -1296,7 +1296,8 @@ public partial class CG_Account_Bill_Add : BasePage
                 {
                     d_NowPrice = d_HandPrice;
                     d_NowMoney = (dd_Total1 * d_HandPrice);
-                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / decimal.Parse("1.16")), 10));
+                    //税率改动
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_HandPrice / base.Get_Tax_Rate()), 10));
                     d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
                     d_TaxMoney = dd_TotalHandPrice - d_FPMoney;
                 }
@@ -1304,7 +1305,8 @@ public partial class CG_Account_Bill_Add : BasePage
                 {
                     d_NowMoney = dd_Total3;
                     d_NowPrice = d_Price;
-                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Price / decimal.Parse("1.16")), 10));
+                    //税率改动
+                    d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_Price / base.Get_Tax_Rate()), 10));
                     d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * dd_Total1), 2));
                     d_TaxMoney = dd_Total3 - d_FPMoney;
                 }
@@ -1328,7 +1330,7 @@ public partial class CG_Account_Bill_Add : BasePage
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(dd_Total1.ToString(), 0) + "</td>";
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 3) + "</td>";
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
-                        s_Return += "<td class=\"ListHeadDetails\" align=\"center\">17%</td>";
+                        s_Return += "<td class=\"ListHeadDetails\" align=\"center\">"+GetTaxRate_Percent()+"</td>";
                         s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
                         s_Return += "</tr>";
                         ddd_Total += dd_Total1;
@@ -1419,8 +1421,8 @@ public partial class CG_Account_Bill_Add : BasePage
 
                     s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber(d_NowPrice.ToString(), 3) + "</td>";
                     s_Return += "<td class=\"ListHeadDetails\" align=\"right\">" + FormatNumber1(d_NowMoney.ToString(), 2) + "</td>";
-
-                    s_Return += "<td class=\"ListHeadDetails\" align=\"center\">17%</td>";
+                    //税率改动
+                    s_Return += "<td class=\"ListHeadDetails\" align=\"center\">"+GetTaxRate_Percent()+"</td>";
                     s_Return += "<td class=\"ListHeadDetails\" align=\"right\"  colspan=2>" + FormatNumber1(d_TaxMoney.ToString(), 2) + "</td>";
 
                     s_Return += "</tr>";
@@ -1496,9 +1498,9 @@ public partial class CG_Account_Bill_Add : BasePage
                         s_Return += "<td  class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(d_ProductsCostPrice.ToString(), 2) + "</td>\n";
                         decimal d_TotalMoney = d_Number1 * d_ProductsCostPrice;
                         s_Return += "<td  class='ListHeadDetails' align=right  >&nbsp;" + base.FormatNumber1(d_TotalMoney.ToString(), 2) + "</td>\n";
-                        s_Return += "<td  class='ListHeadDetails' align=right >&nbsp;17%</td>\n";
-
-                        decimal d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_ProductsCostPrice / decimal.Parse("1.16")), 10));
+                        s_Return += "<td  class='ListHeadDetails' align=right >&nbsp;"+GetTaxRate_Percent()+"</td>\n";
+                        //税率改动
+                        decimal d_TaxPrice = decimal.Parse(base.FormatNumber1(Convert.ToString(d_ProductsCostPrice / base.Get_Tax_Rate()), 10));
                         decimal d_FPMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(d_TaxPrice * d_Number1), 2));
                         decimal d_TaxMoney = d_TotalMoney - d_FPMoney;
 

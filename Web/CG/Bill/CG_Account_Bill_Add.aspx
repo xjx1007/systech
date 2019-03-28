@@ -439,7 +439,7 @@
                     </table>
                 </td>
                 <td valign="top">
-                    <img src="/../themes/softed/images/showPanelTopRight.gif">
+                    <img src="../../../themes/softed/images/showPanelTopRight.gif">
                 </td>
             </tr>
         </table>

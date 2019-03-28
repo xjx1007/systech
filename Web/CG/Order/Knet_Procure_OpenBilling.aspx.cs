@@ -719,11 +719,11 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                 if (KSP_BigUnits != "")//如果有大单位
                 {
                     string c = KSP_BigUnits.Remove(KSP_BigUnits.LastIndexOf("/"));
-                    Model_Details.OrderTotalNet = int.Parse(s_Number)/Convert.ToInt32(c) * decimal.Parse(s_Price);
+                    Model_Details.OrderTotalNet = Math.Round(int.Parse(s_Number) / Convert.ToInt32(c) * decimal.Parse(s_Price),2);
                 }
                 else
                 {
-                    Model_Details.OrderTotalNet = int.Parse(s_Number) * decimal.Parse(s_Price);
+                    Model_Details.OrderTotalNet = Math.Round(int.Parse(s_Number) * decimal.Parse(s_Price),2);
                 }
               
 
