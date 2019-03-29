@@ -43,7 +43,7 @@ public partial class Web_Procure_ShipCheck_List : BasePage
 
             this.Btn_Del.Attributes.Add("onclick", "return confirm('你确信要删除所选记录吗?！')");
             this.BtnSave.Attributes.Add("onclick", "return confirm('你确信要合并所选记录吗?！')");
-            
+
             base.Base_DropBindSearch(this.bas_searchfield, "Cg_Order_Checklist");
             base.Base_DropBindSearch(this.Fields, "Cg_Order_Checklist");
         }
@@ -136,7 +136,7 @@ public partial class Web_Procure_ShipCheck_List : BasePage
         }
         KNet.BLL.Cg_Order_Checklist BLL = new KNet.BLL.Cg_Order_Checklist();
         KNet.Model.Cg_Order_Checklist Model = new KNet.Model.Cg_Order_Checklist();
-        DataSet ds = BLL.GetList(SqlWhere+" Order by COC_Ctime desc");
+        DataSet ds = BLL.GetList(SqlWhere + " Order by COC_Ctime desc");
         this.MyGridView1.DataSource = ds;
         this.MyGridView1.DataKeyNames = new string[] { "COC_Code" };
         this.MyGridView1.DataBind();
@@ -170,12 +170,12 @@ public partial class Web_Procure_ShipCheck_List : BasePage
             AM.Add_Logs("对账单 删除 编号：" + s_Log + "");
             Alert("删除成功！");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Alert("删除失败！");
             return;
         }
-       
+
     }
 
     /// <summary>
@@ -216,51 +216,89 @@ public partial class Web_Procure_ShipCheck_List : BasePage
         StringBuilder s_Log = new StringBuilder();
         try
         {
-            string s_SuppNo0 = "", s_SuppNo1="";
-            int i_Flag=0;
+            string s_SuppNo0 = "", s_SuppNo1 = "";
+            int i_Flag = 0, num = -1;
+            //string str = "";
             for (int i = 0; i < MyGridView1.Rows.Count; i++)
             {
                 CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
                 string s_FaterID = MyGridView1.DataKeys[i].Value.ToString();
                 if (Ckb.Checked)
                 {
-                    KNet.BLL.Cg_Order_Checklist Bll = new KNet.BLL.Cg_Order_Checklist();
-                    KNet.Model.Cg_Order_Checklist Model = Bll.GetModel(s_FaterID);
-                    if (i == 0)
+                    if (num != 1)
                     {
+                        num = 1;
+                        KNet.BLL.Cg_Order_Checklist Bll = new KNet.BLL.Cg_Order_Checklist();
+                        KNet.Model.Cg_Order_Checklist Model = Bll.GetModel(s_FaterID);
                         s_SuppNo0 = Model.COC_SuppNo;
                     }
                     else
                     {
+                        //KNet.BLL.Cg_Order_Checklist Bll = new KNet.BLL.Cg_Order_Checklist();
+                        //KNet.Model.Cg_Order_Checklist Model = Bll.GetModel(s_FaterID);
+                        //if (i == 0)
+                        //{
+                        //    s_SuppNo0 = Model.COC_SuppNo;
+                        //}
+                        //else
+                        //{
+                        //    if (Model.COC_SuppNo != s_SuppNo0)
+                        //    {
+                        //        Alert("供应商不同不能合并!");
+                        //        i_Flag = 1;
+                        //        return;
+                        //    }
+                        //}
+                        KNet.BLL.Cg_Order_Checklist Bll = new KNet.BLL.Cg_Order_Checklist();
+                        KNet.Model.Cg_Order_Checklist Model = Bll.GetModel(s_FaterID);                       
                         if (Model.COC_SuppNo != s_SuppNo0)
                         {
                             Alert("供应商不同不能合并!");
                             i_Flag = 1;
                             return;
                         }
+
                     }
+
                 }
             }
             if (i_Flag == 0)
             {
-                string s_FaterID = "";
+                string s_FaterID = "",str="";
+                int a = -1;
                 for (int i = 0; i < MyGridView1.Rows.Count; i++)
                 {
                     CheckBox Ckb = (CheckBox)MyGridView1.Rows[i].Cells[0].FindControl("Chbk");
-                    if (i > 0)
+                    //if (i > 0)
+                    //{
+                    //    if (Ckb.Checked)
+                    //    {
+                    //        string s_ID = MyGridView1.DataKeys[i].Value.ToString();
+                    //        s_Sql.Append(" delete from  Cg_Order_Checklist Where COC_Code='" + s_ID + "' ");
+                    //        s_Sql.Append(" Update Cg_Order_Checklist_Details set COD_CheckNo='" + s_FaterID + "' where COD_CheckNO='" + s_ID + "' ");
+                    //        s_Log.Append(s_ID);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    s_FaterID = MyGridView1.DataKeys[i].Value.ToString();
+                    //}
+                    if (Ckb.Checked)
                     {
-                        if (Ckb.Checked)
+                        if (a!=1)
+                        {
+                            a = 1;
+                            str = MyGridView1.DataKeys[i].Value.ToString();
+                        }
+                        else
                         {
                             string s_ID = MyGridView1.DataKeys[i].Value.ToString();
                             s_Sql.Append(" delete from  Cg_Order_Checklist Where COC_Code='" + s_ID + "' ");
-                            s_Sql.Append(" Update Cg_Order_Checklist_Details set COD_CheckNo='" + s_FaterID + "' where COD_CheckNO='" + s_ID + "' ");
-                            s_Log.Append(s_ID);
+                            s_Sql.Append(" Update Cg_Order_Checklist_Details set COD_CheckNo='" + str + "' where COD_CheckNO='" + s_ID + "' ");
+                            s_Log.Append(str);
                         }
                     }
-                    else
-                    {
-                        s_FaterID = MyGridView1.DataKeys[i].Value.ToString();
-                    }
+                   
                 }
                 DbHelperSQL.ExecuteSql(s_Sql.ToString());
                 this.DataShow();
@@ -268,7 +306,7 @@ public partial class Web_Procure_ShipCheck_List : BasePage
                 AM.Add_Logs("采购对账单 合并 编号：" + s_Log + "");
                 Alert("合并成功！");
             }
-           
+
         }
         catch (Exception ex)
         {
@@ -334,7 +372,7 @@ public partial class Web_Procure_ShipCheck_List : BasePage
                 s_Return += "<Br/><font color=red>已登记发票</font>";
             }
         }
-        catch(Exception ex) { }
+        catch (Exception ex) { }
         return s_Return;
     }
     private bool IsFP(string s_COC_COde)

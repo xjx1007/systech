@@ -97,7 +97,7 @@
                                                  <input id="Button2" type="button" runat="server" value="备份数据" class="crmbutton small save"
                                                     OnServerClick="Button2_OnServerClick" style="width: 80px; height: 30px" />&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <input id="Button1" type="button" runat="server" value="更改税率" Visible="False" class="crmbutton small save"
-                                                    OnServerClick="Button1_OnServerClick" style="width: 55px; height: 30px" />&nbsp;&nbsp;
+                                                    OnServerClick="Button1_OnServerClick" style="width: 80px; height: 30px" />&nbsp;&nbsp;
             <input type="button" class="crmbutton small cancel" value="返回" onclick="PageGo('../../Report/Bill_Report_Base.aspx')" style="width: 55px; height: 30px">
                                             </td>
                                         </tr>

@@ -330,14 +330,17 @@
     <script>
         var fileTypes = [".xls", ".xlsx", ".csv", ".doc", ".docx", ".pdf", ".PDF", ".txt", ".zip", ".rar",".avi"];
         function FileUpload_onselect(objFileUpload) {
+            debugger;
             var path;
             path = objFileUpload.value;
             var name;
             name = path.split('\\');
-            var filetype = name[name.length - 1].split(".")[1].toLowerCase();
-            if (fileTypes.toString().indexOf(filetype) > -1) {
+            var index = name[name.length - 1].lastIndexOf(".");
+            //var index = filename.lastIndexOf(".");
+            var suffix = name[name.length - 1].substr(index);
+            if (fileTypes.toString().indexOf(suffix) > -1) {
                 var bb = name[name.length - 1];
-                document.getElementById('Tbx_Name').value = bb.substr(0, bb.indexOf('.'));  //AddFile 结果
+                document.getElementById('Tbx_Name').value = bb.substr(0, index);  //AddFile 结果
             } else {
                 objFileUpload.value = "";
                 alert("不支持的文件类型，请重新上传！");
