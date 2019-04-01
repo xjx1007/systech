@@ -6,14 +6,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../../../themes/softed/style.css" type="text/css">
-     <link rel="alternate icon" type="image/png" href="../../../images/士腾.png"/>
+    <link rel="alternate icon" type="image/png" href="../../../images/士腾.png" />
     <script type="text/javascript" src="../../Js/ajax_func.js"></script>
     <script language="javascript" type="text/javascript" src="../../DatePicker/WdatePicker.js"></script>
     <script language="JavaScript" type="text/javascript" src="../../../include/js/general.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/prototype.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/scriptaculous.js"></script>
     <script language="javascript" type="text/javascript" src="../../../include/scriptaculous/dom-drag.js"></script>
-    
+
     <script src="../../../assets/js/libs/jquery-1.10.2.min.js"></script>
     <title>采购管理</title>
     <script language="JAVASCRIPT">
@@ -22,13 +22,13 @@
             var today, seconds;
             today = new Date();
             intSeconds = today.getSeconds();
-             if(document.all('Tbx_OrderNo').value=="") {
-           var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            if (document.all('Tbx_OrderNo').value == "") {
+                var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&callback=SetReturnValueInOpenner_Suppliers1", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
-            //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
-             else {
+                //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=750px;dialogHeight=500px");
+            else {
                 // alert("dfd")
-                 var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Tbx_ID=" + document.all('Tbx_OrderNo').value + "&callback=SetReturnValueInOpenner_Suppliers12", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+                var tempd = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&Tbx_ID=" + document.all('Tbx_OrderNo').value + "&callback=SetReturnValueInOpenner_Suppliers12", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
         }
         function SetReturnValueInOpenner_Suppliers1(temp) {
@@ -39,7 +39,7 @@
                 document.all('SuppNoSelectValue').value = ss[0];
                 document.all('SuppNo').value = ss[1];
                 document.all('OrderNo').value = ss[2];
-               
+
 
             }
             else {
@@ -51,54 +51,41 @@
         function SetReturnValueInOpenner_Suppliers12(temp) {
             debugger;
             if (temp != undefined) {
-              
+
                 var ss;
                 ss = temp.split("|");
                 if (ss[5] == 0) {
-               alert("所选加工厂对应的产品的加工费还没有报价或者还没审核")
+                    alert("所选加工厂对应的产品的加工费还没有报价或者还没审核")
                 } else {
                     document.all('SuppNoSelectValue').value = ss[0];
                     document.all('SuppNo').value = ss[1];
-                    document.all('OrderNo').value = ss[2];
-                    //alert(ss[5])
-                    //if (ss[5] != "") {
-                    //for (var s = 0; s < ss[5]; i++) {
-                        
-                    //}
+                    document.all('OrderNo').value = ss[2];                   
                     var g = 1;
                     var aa = ss[6].split(",");
                     var bb = ss[7].split(",");
-                        for (var i = 1; i <=ss[5]; i++) {
-                            var vr=document.all('ProductsBarCode_' + (i-1)).value
-                           // if (vr !== bb[i-1]) {
-                                // if ((i + 1) >= ss[5]) {
-                               
-                                    document.all('HandPrice_' + (i-1)).value = aa[i-1];
-                                    //alert(aa[i-1]* document.all('Number_' + (i - 1)).value);
-                                document
-                                    .all('HandMoney_' + (i - 1))
-                                    .value = aa[i-1] * document.all('Number_' + (i - 1)).value;
-                                g = g - 1;
-                                //}
-                                //else {
-                                //document.all('HandPrice_' + (i + 1 )).value = aa[i];
-                                ////alert(aa[i-1]* document.all('Number_' + (i - 1)).value);
-                                //document
-                                //    .all('HandMoney_' + (i + 1))
-                                //    .value = aa[i] * document.all('Number_' + (i - 1)).value
-                                //}
+                    var cc = ss[8].split(",");
+                    for (var i = 1; i <= ss[5]; i++) {
+                        var st = bb[i - 1];
+                        for (var a = 1; a <= ss[5]; a++) {
+                            var vr = document.all('ProductsBarCode_' + (a - 1)).value;
+                            if (st==vr) {
+                                document.all('HandPrice_' + (a - 1)).value = aa[i - 1];
 
-                           // }
-                            //document.getElementsByName("HandPrice_" + i - 1).value = aa[i - 1]
-                            //else {
-                            //    document.all('HandPrice_' + (i - 1)).value = aa[i-1];
-                            //    //alert(aa[i-1]* document.all('Number_' + (i - 1)).value);
-                            //    document .all('HandMoney_' + (i - 1)) .value = aa[i-1] * document.all('Number_' + (i - 1)).value
-                            //}
-                       }
-                    //}
+                                document
+                                    .all('HandMoney_' + (a - 1))
+                                    .value = aa[i - 1] * document.all('Number_' + (a - 1)).value;
+
+                                document.all('Price_' + (a - 1)).value = cc[i - 1];
+                                document.all('Money_' + (a - 1)).value = cc[i - 1] * document.all('Number_' + (a - 1)).value;
+                                g = g - 1;
+                            }
+                        }
+                       
+                       
+                    }
+                    
                 }
-               
+
 
             }
             else {
@@ -107,8 +94,7 @@
                 document.all('OrderNo').value = "";
             }
         }
-        function TextisNaN(t)
-        {
+        function TextisNaN(t) {
             if (t == "") {
 
                 alert(t + " 为空不能保存");
@@ -150,7 +136,7 @@
                 document.all('SuppNoSelectValue2').value = ss[0];
                 document.all('SuppNo2').value = ss[1];
                 document.all('OrderNo2').value = ss[2];
-               
+
             }
             else {
                 document.all('SuppNoSelectValue2').value = "";
@@ -165,7 +151,7 @@
             intSeconds = today.getSeconds();
             var vr = document.all("OrderStaffDepart").value;
             //var temp = window.showModalDialog("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "", "", "dialogtop=150px;dialogleft=160px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=780px;dialogHeight=550px");
-            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&selectValue="+vr+"&Type=128860698200781250&callback=SetReturnValueInOpenner_Suppliers3", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+            var temp = window.open("../../Common/SelectSuppliers.aspx?ID=" + intSeconds + "&selectValue=" + vr + "&Type=128860698200781250&callback=SetReturnValueInOpenner_Suppliers3", "选择供应商", "width=850px, height=500,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
         }//129652784259578018
         function SetReturnValueInOpenner_Suppliers3(temp) {
             if (temp != undefined) {
@@ -175,7 +161,7 @@
                 document.getElementById("Tbx_SuppName").value = ss[1];
                 document.all('OrderAddress').value = ss[3].replace(/\$/g, "\n");
                 objSelect = document.getElementById("Ddl_HouseNo");
-               
+
                 for (var i = 0; i < objSelect.options.length; i++) {
                     if (objSelect.options[i].value == ss[4]) {
                         objSelect.options[i].selected = true;
@@ -207,7 +193,7 @@
                 document.all('OrderRemarks').value = ss[3];
                 var response = Knet_Web_Procure_Knet_Procure_OrderList.GetScDetails(ss[1]);
                 document.all('Tbx_ScDetails').value = response.value;
-               
+
             }
             else {
                 document.all('SalesOrderNoSelectValue').value = "";
@@ -222,13 +208,13 @@
             today = new Date();
             intSeconds = today.getSeconds();
             var TxbSuppNo = document.all('SuppNo').value;
-            if (document.all('SamplingID').value=="") {
+            if (document.all('SamplingID').value == "") {
                 var tempd = window.open("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&ScNo=" + document.all("OrderFaterNo").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "选择供应商", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             } else {
-                var tempd = window.open("SelectSampling.aspx?SamplingID="+document.all('SamplingID').value+"", "选择样品申请", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
+                var tempd = window.open("SelectSampling.aspx?SamplingID=" + document.all('SamplingID').value + "", "选择样品申请", "width=1200px, height=900,top=150px,left=160px,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no,alwaysRaised=yes,depended=yes");
             }
             //var tempd = window.showModalDialog("SelectSuppliersPrice.aspx?sID=" + document.all("Xs_ProductsCode").value + "&SuppNo=" + document.all("SuppNoSelectValue").value + "&Contract=" + document.all("SalesOrderNo").value + "&isModiy=" + document.all("Tbx_ID").value + " ", "", "dialogtop=100px;dialogleft=120px;help=no;toolbar=no; menubar=no;scrollbars=yes; resizable=yes; location=no; status=no; dialogwidth=1000px;dialogHeight=500px");
-           
+
         }
         function SetReturnValueInOpenner_SuppliersPrice(tempd) {
             if (tempd != undefined) {
@@ -237,7 +223,7 @@
                 i_row = myTable.rows.length;
                 s_ID = document.all("Xs_ProductsCode").value;
                 var v_Num = document.all("Tbx_Num").value;
-                var v_SuppNo = "", v_SuppName = "", v_HouseNo="";
+                var v_SuppNo = "", v_SuppName = "", v_HouseNo = "";
                 for (var i = 0; i < ss.length - 1; i++) {
                     s_Value = ss[i].split(",");
                     var objRow = myTable.insertRow(i_row);
@@ -274,7 +260,7 @@
                     objCel.className = "ListHeadDetails";
                     ///添加一个单位
                     var objCel = objRow.insertCell();
-                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Units_' + v_NumInt + '\" value='+s_Value[17] + '>';
+                    objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\"  style="width:70px;"   Name=\"Units_' + v_NumInt + '\" value=' + s_Value[17] + '>';
                     objCel.className = "ListHeadDetails";
                     var objCel = objRow.insertCell();
                     objCel.innerHTML = '<input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\"  readonly style="width:70px;"  Name=\"Money_' + v_NumInt + '\" value=' + s_Value[6] + '>';
@@ -298,11 +284,10 @@
                     v_SuppName = s_Value[11];
                     v_HouseNo = s_Value[12];
                 }
-                
+
                 document.all("Tbx_Num").value = parseInt(v_Num) + ss.length - 1;
                 document.all("Xs_ProductsCode").value = s_ID;
-                if (v_SuppNo != "")
-                {
+                if (v_SuppNo != "") {
 
                     //document.all('SuppNoSelectValue').value = v_SuppNo;
                     //document.all('SuppNo').value = v_SuppName;
@@ -325,7 +310,7 @@
                     //if (document.all("BigUnits_" + i).value!="") {
                     //    document.all("CountWeight_" + i).value = document.all("Number_" + i).value * document.all("BigUnits_" + i).value / 1000;
                     //}
-                   
+
                 }
                 else {
                     document.all("Money_" + i).value = document.all("Price_" + i).value * document.all("Number_" + i).value
@@ -351,7 +336,7 @@
 
         function Submitcheck() {
             var suppno = document.all('SuppNoSelectValue').value;
-            if (suppno=="") {
+            if (suppno == "") {
                 alert('供应商不能为空，请选择供应商');
                 return false;
             }
@@ -421,7 +406,7 @@
                                                         </td>
                                                         <td class="dvtCellInfo" align="left">
                                                             <asp:TextBox ID="OrderNo" MaxLength="45" runat="server" Width="200px" CssClass="detailedViewTextBox"
-                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'" ></asp:TextBox>(<font
+                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"></asp:TextBox>(<font
                                                                     color="red">*</font>)
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="采购单号不能为空"
                                                             ControlToValidate="OrderNo" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -450,232 +435,235 @@
                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="预到日期"
                                                                 ControlToValidate="OrderPreToDate" Display="Dynamic"></asp:RequiredFieldValidator>
                                                         </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="17%" height="25" align="right" class="dvtCellLabel">供应商:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo">
-                                                <input type="hidden" name="SuppNoSelectValue" id="SuppNoSelectValue" runat="server" value="" />
-                                                <asp:TextBox ID="SuppNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48" Enabled="false"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" id="Img_SelectSuppNo" runat="server" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />
-                                                    
-                                            </td>
-                                            <td align="right" class="dvtCellLabel">成品订单:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo">
-                                                <asp:TextBox ID="OrderFaterNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnSelectOrder_onclick()" />
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="17%" height="25" align="right" class="dvtCellLabel">供应商:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <input type="hidden" name="SuppNoSelectValue" id="SuppNoSelectValue" runat="server" value="" />
+                                                            <asp:TextBox ID="SuppNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                OnBlur="this.className='detailedViewTextBox'" Width="150px" MaxLength="48" Enabled="false"></asp:TextBox>
+                                                            <img src="../../../themes/softed/images/select.gif" id="Img_SelectSuppNo" runat="server" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick()" />
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="right" class="dvtCellLabel">&nbsp;选择订单:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo">
-                                                <input type="hidden" name="SalesOrderNoSelectValue" id="SalesOrderNoSelectValue"
-                                                    runat="server" />
-                                                <asp:TextBox ID="SalesOrderNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnOrderValue_onclick()" />
-                                            </td>
-                                            
-                                            <td align="right" class="dvtCellLabel">价格需确认:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo" >
-                                                <asp:CheckBox ID="Chk_PriceState" runat="server" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="right" class="dvtCellLabel">采购部门:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo">
-                                                <asp:DropDownList ID="OrderStaffDepart" runat="server" Width="150px">
-                                                </asp:DropDownList>
-                                                <asp:DropDownList ID="OrderStaffBranch" Visible="false" runat="server" Width="150px"
-                                                    OnSelectedIndexChanged="OrderStaffBranch_SelectedIndexChanged" AutoPostBack="true">
-                                                </asp:DropDownList>
-                                            </td>
-                                            <td align="right" class="dvtCellLabel" height="25">采购类型:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo" height="25">
-                                                <asp:DropDownList ID="OrderType" runat="server" Width="150px">
-                                                </asp:DropDownList>
-                                                (<font color="red">*</font>)
+                                                        </td>
+                                                        <td align="right" class="dvtCellLabel">成品订单:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <asp:TextBox ID="OrderFaterNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
+                                                            <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnSelectOrder_onclick()" />
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right" class="dvtCellLabel">&nbsp;选择订单:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <input type="hidden" name="SalesOrderNoSelectValue" id="SalesOrderNoSelectValue"
+                                                                runat="server" />
+                                                            <asp:TextBox ID="SalesOrderNo" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
+                                                            <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnOrderValue_onclick()" />
+                                                        </td>
+
+                                                        <td align="right" class="dvtCellLabel">价格需确认:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <asp:CheckBox ID="Chk_PriceState" runat="server" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right" class="dvtCellLabel">采购部门:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <asp:DropDownList ID="OrderStaffDepart" runat="server" Width="150px">
+                                                            </asp:DropDownList>
+                                                            <asp:DropDownList ID="OrderStaffBranch" Visible="false" runat="server" Width="150px"
+                                                                OnSelectedIndexChanged="OrderStaffBranch_SelectedIndexChanged" AutoPostBack="true">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        <td align="right" class="dvtCellLabel" height="25">采购类型:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo" height="25">
+                                                            <asp:DropDownList ID="OrderType" runat="server" Width="150px">
+                                                            </asp:DropDownList>
+                                                            (<font color="red">*</font>)
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="采购类型不能为空"
                                                 ControlToValidate="OrderType" Display="Dynamic"></asp:RequiredFieldValidator>
-                                            </td>
-                                            <asp:TextBox ID="OrderTransShare" runat="server" MaxLength="8" Text="0.00" CssClass="Custom_Hidden"
-                                                Width="150px"></asp:TextBox>
-                                            <asp:TextBox ID="InvoRate" runat="server" CssClass="Custom_Hidden" MaxLength="8"
-                                                Text="0.17" Width="150px"></asp:TextBox>
-                                            <asp:TextBox ID="AdvancesPrice" runat="server" MaxLength="8" Text="0.00" CssClass="Custom_Hidden"
-                                                Width="150px"></asp:TextBox>
-                                            <asp:DropDownList ID="paykings" runat="server" Width="150px" Visible="false">
-                                                <asp:ListItem Value="1">预付款</asp:ListItem>
-                                                <asp:ListItem Value="2">后付款</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td align="right" class="dvtCellLabel">&nbsp;选择收货供应商:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo">
-                                                <input type="hidden" name="Tbx_SuppNo" id="Tbx_SuppNo" runat="server" />
-                                                <asp:TextBox ID="Tbx_SuppName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
-                                                <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick1()" />
-                                                
-                                                (<font color="red">*</font>)
+                                                        </td>
+                                                        <asp:TextBox ID="OrderTransShare" runat="server" MaxLength="8" Text="0.00" CssClass="Custom_Hidden"
+                                                            Width="150px"></asp:TextBox>
+                                                        <asp:TextBox ID="InvoRate" runat="server" CssClass="Custom_Hidden" MaxLength="8"
+                                                            Text="0.17" Width="150px"></asp:TextBox>
+                                                        <asp:TextBox ID="AdvancesPrice" runat="server" MaxLength="8" Text="0.00" CssClass="Custom_Hidden"
+                                                            Width="150px"></asp:TextBox>
+                                                        <asp:DropDownList ID="paykings" runat="server" Width="150px" Visible="false">
+                                                            <asp:ListItem Value="1">预付款</asp:ListItem>
+                                                            <asp:ListItem Value="2">后付款</asp:ListItem>
+                                                        </asp:DropDownList>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td align="right" class="dvtCellLabel">&nbsp;选择收货供应商:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <input type="hidden" name="Tbx_SuppNo" id="Tbx_SuppNo" runat="server" />
+                                                            <asp:TextBox ID="Tbx_SuppName" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                OnBlur="this.className='detailedViewTextBox'" MaxLength="48" Width="150px" AutoPostBack="True"></asp:TextBox>
+                                                            <img src="../../../themes/softed/images/select.gif" alt="选择" title="选择" onclick="return btnGetReturnValue_onclick1()" />
+
+                                                            (<font color="red">*</font>)
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="收货供应商不能为空"
                                                 ControlToValidate="Tbx_SuppName" Display="Dynamic"></asp:RequiredFieldValidator>
-                                            </td>
-                                            <td align="right" class="dvtCellLabel">预入仓库:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo" >
-                                                <asp:DropDownList runat="server" ID="Ddl_HouseNo"></asp:DropDownList>
-                                                (<font color="red">*</font>)
+                                                        </td>
+                                                        <td align="right" class="dvtCellLabel">预入仓库:
+                                                        </td>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <asp:DropDownList runat="server" ID="Ddl_HouseNo"></asp:DropDownList>
+                                                            (<font color="red">*</font>)
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="预入仓库不能为空"
                                                 ControlToValidate="Ddl_HouseNo" Display="Dynamic"></asp:RequiredFieldValidator>
-                                            </td>
-                                        
-                                        </tr>
-                                        <tr>
-                                            <td align="right" class="dvtCellLabel">送货地址:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo" >
-                                                <asp:TextBox ID="OrderAddress" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" Height="50px" TextMode="MultiLine"
-                                                    Width="400px"></asp:TextBox>
-                                            </td>
-                                            <td height="39" align="right" class="dvtCellLabel">备注说明:
-                                            </td>
-                                            <td align="left" valign="top" class="dvtCellInfo">
-                                                <asp:TextBox ID="OrderRemarks" TextMode="MultiLine" runat="server" CssClass="detailedViewTextBox"
-                                                    OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
-                                                    Width="400px" Height="50px"></asp:TextBox>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="OrderRemarks"
-                                                    ValidationExpression="^(\s|\S){0,500}$" ErrorMessage="备注说明太多，限少于500个字." Display="dynamic"></asp:RegularExpressionValidator>
-                                                <asp:TextBox ID="OrderCheckStaffNo" runat="server" CssClass="Custom_Hidden" Width="150px"
-                                                    ReadOnly="true"></asp:TextBox>
-                                                <asp:Label ID="OrderCheckStaffNotxt" runat="server" Visible="false"></asp:Label>
-                                                <asp:TextBox ID="OrderStaffNo" runat="server" CssClass="Custom_Hidden" Width="150px"
-                                                    ReadOnly="true"></asp:TextBox>
-                                                <asp:Label ID="OrderStaffNotxt" runat="server" Text="" Visible="false"></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="right" class="dvtCellLabel">生产说明:
-                                            </td>
-                                            <td align="left" class="dvtCellInfo" colspan="3">
-                                                <asp:TextBox ID="Tbx_ScDetails" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
-                                                    OnBlur="this.className='detailedViewTextBox'" Height="50px" TextMode="MultiLine"
-                                                    Width="800px"></asp:TextBox>
-                                            </td>
-                                            </tr>
-                                        <tr>
-                                            <td colspan="4" class="dvInnerHeader" align="left">
-                                                <b>产品详细信息</b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" align="left">
-                                                <asp:TextBox ID="Xs_ProductsCode" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
-                                                <asp:TextBox ID="Tbx_Num" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
-                                                <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
-                                                    class="ListDetails" style="height: 28px">
-                                                    <!-- Header for the Product Details -->
-                                                    <tr valign="top">
-                                                        <td valign="top" class="ListHead" align="right" nowrap>
-                                                            <b>工具</b>
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>产品名称</b>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right" class="dvtCellLabel">送货地址:
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>产品编码</b>
+                                                        <td align="left" class="dvtCellInfo">
+                                                            <asp:TextBox ID="OrderAddress" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                OnBlur="this.className='detailedViewTextBox'" Height="50px" TextMode="MultiLine"
+                                                                Width="400px"></asp:TextBox>
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>型号</b>
+                                                        <td height="39" align="right" class="dvtCellLabel">备注说明:
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>版本号</b>
+                                                        <td align="left" valign="top" class="dvtCellInfo">
+                                                            <asp:TextBox ID="OrderRemarks" TextMode="MultiLine" runat="server" CssClass="detailedViewTextBox"
+                                                                OnFocus="this.className='detailedViewTextBoxOn'" OnBlur="this.className='detailedViewTextBox'"
+                                                                Width="400px" Height="50px"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="OrderRemarks"
+                                                                ValidationExpression="^(\s|\S){0,500}$" ErrorMessage="备注说明太多，限少于500个字." Display="dynamic"></asp:RegularExpressionValidator>
+                                                            <asp:TextBox ID="OrderCheckStaffNo" runat="server" CssClass="Custom_Hidden" Width="150px"
+                                                                ReadOnly="true"></asp:TextBox>
+                                                            <asp:Label ID="OrderCheckStaffNotxt" runat="server" Visible="false"></asp:Label>
+                                                            <asp:TextBox ID="OrderStaffNo" runat="server" CssClass="Custom_Hidden" Width="150px"
+                                                                ReadOnly="true"></asp:TextBox>
+                                                            <asp:Label ID="OrderStaffNotxt" runat="server" Text="" Visible="false"></asp:Label>
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>品牌</b>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right" class="dvtCellLabel">生产说明:
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>包装数</b>
+                                                        <td align="left" class="dvtCellInfo" colspan="3">
+                                                            <asp:TextBox ID="Tbx_ScDetails" runat="server" CssClass="detailedViewTextBox" OnFocus="this.className='detailedViewTextBoxOn'"
+                                                                OnBlur="this.className='detailedViewTextBox'" Height="50px" TextMode="MultiLine"
+                                                                Width="800px"></asp:TextBox>
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>包装数</b>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4" class="dvInnerHeader" align="left">
+                                                            <b>产品详细信息</b>
                                                         </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>数量</b>
-                                                        </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>单价</b>
-                                                        </td>
-                                                         <td class="ListHead" nowrap>
-                                                            <b>单位</b>
-                                                        </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>金额</b>
-                                                        </td>
-                                                       <%--  <td class="ListHead" nowrap>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4" align="left">
+                                                            <asp:TextBox ID="Xs_ProductsCode" runat="Server" CssClass="Custom_Hidden"></asp:TextBox>
+                                                            <asp:TextBox ID="Tbx_Num" runat="Server" CssClass="Custom_Hidden" Text="0"></asp:TextBox>
+                                                            <table id="myTable" width="100%" border="0" align="center" cellpadding="5" cellspacing="0"
+                                                                class="ListDetails" style="height: 28px">
+                                                                <!-- Header for the Product Details -->
+                                                                <tr valign="top">
+                                                                    <td valign="top" class="ListHead" align="right" nowrap>
+                                                                        <b>工具</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>产品名称</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>产品编码</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>型号</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>版本号</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>品牌</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>包装数</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>包装数</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>数量</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>单价</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>单位</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>金额</b>
+                                                                    </td>
+                                                                    <%--  <td class="ListHead" nowrap>
                                                             <b>大单位</b>
                                                         </td>--%>
-                                                         <%--<td class="ListHead" runat="server" id="selectSupp" style="display: none" nowrap>
+                                                                    <%--<td class="ListHead" runat="server" id="selectSupp" style="display: none" nowrap>
                                                             <b>供应商</b>
                                                         </td>--%>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>加工费单价</b>
-                                                        </td>
-                                                        <td class="ListHead" nowrap>
-                                                            <b>加工费金额</b>
-                                                        </td> 
-                                                        <td class="ListHead" nowrap>
-                                                            <b>备注</b>
-                                                        </td>
-                                                    </tr>
-                                                    <%=s_MyTable_Detail %>
-                                                </table>
-                                                <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" class="crmTable">
-                                                    <!-- Add Product Button -->
-                                                    <tr>
-                                                        <td colspan="3">①选择产品:
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>加工费单价</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>加工费金额</b>
+                                                                    </td>
+                                                                    <td class="ListHead" nowrap>
+                                                                        <b>备注</b>
+                                                                    </td>
+                                                                </tr>
+                                                                <%=s_MyTable_Detail %>
+                                                            </table>
+                                                            <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" class="crmTable">
+                                                                <!-- Add Product Button -->
+                                                                <tr>
+                                                                    <td colspan="3">①选择产品:
                                                         <input type="button" name="Button" class="crmbutton small create" value="添加产品" onclick="btnGetProducts_onclick();" />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                         </td>
                                                     </tr>
-                                                </table>
                                             </td>
                                         </tr>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" align="center" style="height: 30px">
-                                    <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
-                                        class="crmbutton small save" OnClientClick="return Submitcheck();" OnClick="Button1_Click" Style="width: 55px; height: 30px;" />
-                                    <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
-                                        type="button" name="button" value="取 消" style="width: 55px; height: 30px">
+                                        <tr>
+                                            <td colspan="4" align="center" style="height: 30px">
+                                                <asp:Button ID="Btn_Save" runat="server" Text="保 存" AccessKey="S" title="保存 [Alt+S]"
+                                                    class="crmbutton small save" OnClientClick="return Submitcheck();" OnClick="Button1_Click" Style="width: 55px; height: 30px;" />
+                                                <input title="取消 [Alt+X]" accesskey="X" class="crmbutton small cancel" onclick="window.history.back()"
+                                                    type="button" name="button" value="取 消" style="width: 55px; height: 30px">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
+                        <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="NumCount" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="Tbx_OrderNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="Tbx_Title" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="Tbx_Change" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="Tbx_OldID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="Sampling" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
+                        <asp:TextBox ID="SamplingID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
                 </td>
             </tr>
         </table>
-        <asp:TextBox ID="Tbx_ID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="NumCount" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="TextBox1" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="Tbx_OrderNo" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="Tbx_Title" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="Tbx_Type" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="Tbx_Change" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="Tbx_OldID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="Sampling" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        <asp:TextBox ID="SamplingID" runat="server" CssClass="Custom_Hidden"></asp:TextBox>
-        </td> </tr> </table> </td>
+        </td>
     <td align="right" valign="top">
         <img src="../../../themes/softed/images/showPanelTopRight.gif" />
     </td>

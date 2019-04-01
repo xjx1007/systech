@@ -246,7 +246,7 @@
                                     <td nowrap align="center" width="50px">赔偿单价</td>
                                     <td nowrap align="center" width="50px">加工费</td>
                                     <td nowrap align="center" width="50px">总金额</td>
-                                    <td nowrap align="center" width="50px">未税金额</td>
+                                   <%-- <td nowrap align="center" width="50px">未税金额</td>--%>
                                     <td nowrap align="center">备注</td>
                                 </tr>
                                 <%=s_MyTable_Detail %>

@@ -267,7 +267,7 @@ public partial class Knet_Common_SelectSuppliers : BasePage
 
 
 
-                this.BeginQuery("select HandPrice,ProductsBarCode from Knet_Procure_SuppliersPrice where ProductsBarCode in  (select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo = '" +
+                this.BeginQuery("select HandPrice,ProductsBarCode,ProcureUnitPrice from Knet_Procure_SuppliersPrice where ProductsBarCode in  (select ProductsBarCode from Knet_Procure_OrdersList_Details where OrderNo = '" +
                     Tbx_ID +
                     "') and KPP_Del = '0' and SuppNo='" +
                     s_ID + "' order by ProductsBarCode ");//order by ProcureUpdateDateTime desc
@@ -275,13 +275,15 @@ public partial class Knet_Common_SelectSuppliers : BasePage
                 int count = Dtb_Result.Rows.Count;
                 string str = "";
                 string str1 = "";
+                string str2 = "";
                 for (int i = 0; i < count; i++)
                 {
                     str += Dtb_Result.Rows[i][0] + ",";
                     str1+= Dtb_Result.Rows[i][1] + ",";
+                    str2 += Dtb_Result.Rows[i][2] + ",";
                 }
                
-                s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn1(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + Tbx_ID + "\", \"" + GetSuppNoAddress(s_ID,select) + "\", \"" + s_WareHouseNo + "\",\"" + count + "\",\"" + str + "\" ,\"" + str1 + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
+                s_Return += "<a href=\"javascript:window.close();\" onclick='GetReturn1(\"" + s_ID + "\", \"" + base.Base_GetSupplierName(s_ID) + "\", \"" + Tbx_ID + "\", \"" + GetSuppNoAddress(s_ID,select) + "\", \"" + s_WareHouseNo + "\",\"" + count + "\",\"" + str + "\" ,\"" + str1 + "\",\"" + str2 + "\");'>" + base.Base_GetSupplierName(s_ID) + "</a>";
 
             }
 

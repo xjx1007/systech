@@ -41,14 +41,14 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_List : BasePage
                     Model.OrderNo = s_ID;
                     int i_QrState = Math.Abs(Model.KPO_QRState - 1);
                     Model.KPO_QRState = i_QrState;
-                    if (i_QrState == 1)
-                    {
-                        Model.WareHouseDateTime = DateTime.Now;
-                    }
-                    else
-                    {
-                        Model.WareHouseDateTime = null;
-                    }
+                    //if (i_QrState == 1)
+                    //{
+                    //    Model.WareHouseDateTime = DateTime.Now;
+                    //}
+                    //else
+                    //{
+                    //    Model.WareHouseDateTime = null;
+                    //}
                     Model.KPW_CheckPerson = AM.KNet_StaffNo;
                     Bll.UpdateQRState(Model);
                 }

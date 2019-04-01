@@ -31,10 +31,10 @@
                 window.returnValue = returnValue;
             }
         }
-        function GetReturn1(Value1, Value2, Value3, Value4, Value5,Value6,Value7,Value8) {
+        function GetReturn1(Value1, Value2, Value3, Value4, Value5,Value6,Value7,Value8,Value9) {
             debugger;
             var returnValue = "";
-            returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5+ "|" + Value6+ "|" + Value7+ "|" + Value8;
+            returnValue = Value1 + "|" + Value2 + "|" + Value3 + "|" + Value4 + "|" + Value5+ "|" + Value6+ "|" + Value7+ "|" + Value8+ "|" + Value9;
             if (window.opener != undefined) {
                 window.opener.returnValue = returnValue;
                 <% if(Request.QueryString["callback"] != null && Request.QueryString["callback"] != ""){%>

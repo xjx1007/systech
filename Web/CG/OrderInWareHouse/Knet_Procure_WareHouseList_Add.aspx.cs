@@ -287,7 +287,7 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
             model.ShipDetials = this.Tbx_ShipDetials.Text;
             model.WareHouseStaffNo = AM.KNet_StaffNo;
             model.SuppNo = this.Tbx_SuppNo.Text;
-            model.WareHouseDateTime = DateTime.Parse("1900-01-01");
+            model.WareHouseDateTime = DateTime.Parse(ReceivDateTime.Text);
             model.KPO_CheckTime = DateTime.Parse(this.ReceivDateTime.Text);
             model.WareHouseRemarks = this.ReceivRemarks.Text;
             model.KPW_CTime = DateTime.Now;
@@ -355,8 +355,8 @@ public partial class Web_Sales_Knet_Procure_WareHouseList_Add : BasePage
                     Model_Details.WareHouseRemarks = s_Remarks[i];
                     Model_Details.ProductsUnits = s_ID[i];
                     Model_Details.WareHouseBAmount = int.Parse(s_BNumber[i]);
-                    //税率改动
-                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(decimal.Parse(s_Number[i]) * decimal.Parse(s_Price[i]) / base.Get_Tax_Rate()), 2));
+                    //税率改动base.Get_Tax_Rate()
+                    Model_Details.KWP_NoTaxMoney = decimal.Parse(base.FormatNumber1(Convert.ToString(decimal.Parse(s_Number[i]) * decimal.Parse(s_Price[i]) /decimal.Parse("1.16") ), 2));
                     if ((Model_Details.WareHouseAmount != 0) || (d_Money != 0))
                     {
                         Arr_Products.Add(Model_Details);

@@ -150,6 +150,7 @@ public partial class Web_Sales_Knet_Procure_OpenBilling_Print : BasePage
                         d_All_Total += d_Amount;
                         d_All_OrderTotal+= d_Amount;
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber(d_Amount.ToString(), 2) + "</td>";
+                        
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + FormatNumber((d_Amount/Get_Tax_Rate()).ToString(), 2) + "</td>";
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\" align=\"center\">" + Dts_Table.Rows[i]["Remark"].ToString() + "</td>";
                         s_MyTable_Detail += " </tr>";
