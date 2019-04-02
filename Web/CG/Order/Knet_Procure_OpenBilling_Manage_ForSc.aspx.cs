@@ -478,7 +478,7 @@ public partial class Knet_Procure_OpenBilling_Manage_ForSc : BasePage
         {
             return "<font color=red>订单关闭</font>";
         }
-        if (Model.OrderCheckYN == false)
+       else if (Model.OrderCheckYN == false)
         {
             s_Return = "";
         }
@@ -502,7 +502,7 @@ public partial class Knet_Procure_OpenBilling_Manage_ForSc : BasePage
             }
             else
             {
-                JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "";
+                JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "&Type=SC";
                 s_Return = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=120,left=150,toolbar=yes, menubar=yes,scrollbars=yes, resizable=yes, location=yes, status=yes, width=780,height=500');\"  title=\"点击查看\"><img src=\"../../images/View.gif\"  border=\"0\" /></a>";
                 s_Return += "  <a href=\"PDF/" + Model.OrderNo + ".PDF\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/pdf.gif\"  border=\"0\" /></a> ";
                 s_Return += "  <a href=\"../../Mail/PB_Basic_Mail_Add.aspx?OrderNo=" + Model.OrderNo + "\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/email.gif\"  border=\"0\" /></a> ";

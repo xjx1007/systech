@@ -243,8 +243,8 @@
                                     <td nowrap align="center">单位</td>
                                     <td nowrap align="center">数量</td>
                                     <td nowrap align="center" width="50px">单价</td>
-                                    <td nowrap align="center" width="50px">赔偿单价</td>
-                                    <td nowrap align="center" width="50px">加工费</td>
+                                    <td nowrap align="center" width="50px" runat="server" id="PC">赔偿单价</td>
+                                    <td nowrap align="center" width="50px" runat="server" id="Hnad">加工单价</td>
                                     <td nowrap align="center" width="50px">总金额</td>
                                    <%-- <td nowrap align="center" width="50px">未税金额</td>--%>
                                     <td nowrap align="center">备注</td>

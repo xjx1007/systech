@@ -483,19 +483,12 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
         KNet.BLL.Knet_Procure_OrdersList BLl = new KNet.BLL.Knet_Procure_OrdersList();
         KNet.Model.Knet_Procure_OrdersList Model = BLl.GetModel(s_OrderNo);
         string str = OrderNo.Substring(0, 2);
-        if (str=="YP")
-        {
-            JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "";
-            s_Return = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=120,left=150,toolbar=yes, menubar=yes,scrollbars=yes, resizable=yes, location=yes, status=yes, width=780,height=500');\"  title=\"点击查看\"><img src=\"../../images/View.gif\"  border=\"0\" /></a>";
-            s_Return += "  <a href=\"PDF/" + Model.OrderNo + ".PDF\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/pdf.gif\"  border=\"0\" /></a> ";
-            s_Return += "  <a href=\"../../Mail/PB_Basic_Mail_Add.aspx?OrderNo=" + Model.OrderNo + "\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/email.gif\"  border=\"0\" /></a> ";
-            return s_Return;
-        }
+       
         if (Model.KPO_Del == 1)
         {
             return "<font color=red>订单关闭</font>";
         }
-        if (Model.OrderCheckYN == false)
+        else if (Model.OrderCheckYN == false)
         {
             s_Return = "";
         }
@@ -515,7 +508,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OpenBilling_Manage : BasePage
                 }
                 else
                 {
-                    JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "";
+                    JSD = "Knet_Procure_OpenBilling_Print.aspx?ID=" + s_OrderNo + "&Type=CG";
                     s_Return = "<a href=\"#\" onclick=\"javascript:window.open('" + JSD + "','','top=120,left=150,toolbar=yes, menubar=yes,scrollbars=yes, resizable=yes, location=yes, status=yes, width=780,height=500');\"  title=\"点击查看\"><img src=\"../../images/View.gif\"  border=\"0\" /></a>";
                     s_Return += "  <a href=\"PDF/" + Model.OrderNo + ".PDF\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/pdf.gif\"  border=\"0\" /></a> ";
                     s_Return += "  <a href=\"../../Mail/PB_Basic_Mail_Add.aspx?OrderNo=" + Model.OrderNo + "\" class=\"webMnu\" target=\"_blank\"><img src=\"../../images/email.gif\"  border=\"0\" /></a> ";

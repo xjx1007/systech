@@ -885,13 +885,19 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                         BLL.Add(model);
                         AdminloginMess LogAM = new AdminloginMess();
                         LogAM.Add_Logs("采购入库--->采购开单--->开单 添加 操作成功！采购单号：" + OrderNo1);
-
-                        string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "";
+                        string JSD = "";
+                        if (OrderType.SelectedValue== "128860698200781250")//如果是生产订单
+                        {
+                             JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "&Type=SC";
+                        }
+                        else
+                        {
+                             JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "&Type=CG";
+                        }
+                       
                         base.HtmlToPdf1(JSD, Server.MapPath("PDF"), OrderNo1);
-                        //发给研发中心经理
-                        // base.Base_SendMessage(Base_GetDeptPerson("研发中心", 1), KNetPage.KHtmlEncode("有 采购订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + OrderNo1 + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNo1 + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
-                        //base.Base_SendMessage(Base_GetDeptPerson("供应链平台", 1), KNetPage.KHtmlEncode("有 采购订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + OrderNo1 + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNo1 + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
-                        if ((AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffName == "薛建新"))//如果是生产部
+                       
+                        if (OrderType.SelectedValue == "128860698200781250")//如果是生产订单
                         {
                             AlertAndRedirect("采购开单 添加  操作成功", "Knet_Procure_OpenBilling_Manage_ForSc.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
 
@@ -947,6 +953,7 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                             KNet.BLL.PB_Basic_Mail Bll_Mail = new KNet.BLL.PB_Basic_Mail();
                             for (int i = 0; i < Dtb_table1.Rows.Count; i++)
                             {
+
                                 string JSD1 = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Dtb_table1.Rows[i]["ID"].ToString() + "";
                                 string s_OrderDetailsNo = Dtb_table1.Rows[i]["OrderNo"].ToString();
                                 base.HtmlToPdf1(JSD1, Server.MapPath("PDF"), s_OrderDetailsNo);
@@ -1029,13 +1036,21 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
                         BLL.Add(model);
                         AdminloginMess LogAM = new AdminloginMess();
                         LogAM.Add_Logs("采购入库--->采购开单--->开单 添加 操作成功！采购单号：" + OrderNo1);
-
-                        string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "";
+                        string JSD = "";
+                        if (OrderType.SelectedValue == "128860698200781250")//如果是生产订单
+                        {
+                            JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "&Type=SC";
+                        }
+                        else
+                        {
+                            JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "&Type=CG";
+                        }
+                        //string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "";
                         base.HtmlToPdf1(JSD, Server.MapPath("PDF"), OrderNo1);
                         //发给研发中心经理
                         // base.Base_SendMessage(Base_GetDeptPerson("研发中心", 1), KNetPage.KHtmlEncode("有 采购订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + OrderNo1 + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNo1 + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
                         //base.Base_SendMessage(Base_GetDeptPerson("供应链平台", 1), KNetPage.KHtmlEncode("有 采购订单 <a href='Web/Order/Knet_Procure_OpenBilling_View.aspx?ID=" + OrderNo1 + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'> " + OrderNo1 + "</a> 需要您作为负责人选择审批流程，敬请关注！"));
-                        if ((AM.KNet_StaffDepart == "131161769392290242") || (AM.KNet_StaffName == "薛建新"))//如果是生产部
+                        if (OrderType.SelectedValue == "128860698200781250")//如果是生产订单
                         {
                             AlertAndRedirect("采购开单 添加  操作成功", "Knet_Procure_OpenBilling_Manage_ForSc.aspx?SalesOrderNo=" + this.SalesOrderNoSelectValue.Value + "");
 
@@ -1057,7 +1072,16 @@ public partial class Knet_Web_Procure_Knet_Procure_OrderList : BasePage
             {
                 model.ID = this.Tbx_ID.Text;
                 BLL.Update(model);
-                string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "";
+                string JSD = "";
+                if (OrderType.SelectedValue == "128860698200781250")//如果是生产订单
+                {
+                    JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "&Type=SC";
+                }
+                else
+                {
+                    JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "&Type=CG";
+                }
+                //string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + model.ID + "";
                 base.HtmlToPdf1(JSD, Server.MapPath("PDF"), OrderNo1);
                 AdminloginMess LogAM = new AdminloginMess();
                 LogAM.Add_Logs("采购入库--->采购开单--->开单 修改 操作成功！采购单号：" + OrderNo1);
