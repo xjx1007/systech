@@ -820,12 +820,13 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
 
                 for (int i = 0; i < data.Rows.Count; i++)
                 {
-                    if (GetKCNumber(data.Rows[i][0].ToString()) < int.Parse(data.Rows[i][1].ToString()))
+                    //string df = data.Rows[i][1].ToString();
+                    if (GetKCNumber(data.Rows[i][0].ToString().Trim()) < int.Parse(data.Rows[i][1].ToString().Trim()))
                     {
                         s_KCcode += data.Rows[i][0].ToString() + ",";
                     }
                     int a = i + 1;
-                    bomlist[i] = data.Rows[i][0].ToString();
+                    bomlist[i] = data.Rows[i][0].ToString().Trim();
                     string productbarcode = GetProductByCode(data.Rows[i][0].ToString().Trim());
                     if (productbarcode == "")
                     {
@@ -839,29 +840,29 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
                         s_MyTable_Detail += "<tr>\n";
                         s_MyTable_Detail += "<td class=\"ListHeadDetails\"><A onclick=\"deleteRow(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>\n";
                         s_MyTable_Detail += "<td class='ListHeadDetails'>";
-                        s_MyTable_Detail += "<input type=\"hidden\"  Name=\"ProductsName_" + i + "\" value=" + GetProductName(data.Rows[i][0].ToString()) + ">" + GetProductName(data.Rows[i][0].ToString()) + "</td>\n";
+                        s_MyTable_Detail += "<input type=\"hidden\"  Name=\"ProductsName_" + i + "\" value=" + GetProductName(data.Rows[i][0].ToString().Trim()) + ">" + GetProductName(data.Rows[i][0].ToString().Trim()) + "</td>\n";
                         s_MyTable_Detail += "<td class='ListHeadDetails'>";
-                        s_MyTable_Detail += "<input type=\"hidden\"  Name=\"ProductsBarCode_" + i + "\" value=" + GetProductCode(data.Rows[i][0].ToString()) + ">" + data.Rows[i][0].ToString() + "</td>\n";
-                        s_MyTable_Detail += "<td class='ListHeadDetails' width=\"100px\"><input type=\"hidden\"  Name=\"ProductsPattern_" + i + "\" value=" + GetProductsEdition(data.Rows[i][0].ToString()) + ">" + GetProductsEdition(data.Rows[i][0].ToString()) + "</td>\n";
-                        s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width: 100px; \" Name=\"Number_" + i + "\" value=" + data.Rows[i][1].ToString() + " ></td>\n";
+                        s_MyTable_Detail += "<input type=\"hidden\"  Name=\"ProductsBarCode_" + i + "\" value=" + GetProductCode(data.Rows[i][0].ToString().Trim()) + ">" + data.Rows[i][0].ToString() + "</td>\n";
+                        s_MyTable_Detail += "<td class='ListHeadDetails' width=\"100px\"><input type=\"hidden\"  Name=\"ProductsPattern_" + i + "\" value=" + GetProductsEdition(data.Rows[i][0].ToString().Trim()) + ">" + GetProductsEdition(data.Rows[i][0].ToString().Trim()) + "</td>\n";
+                        s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width: 100px; \" Name=\"Number_" + i + "\" value=" + data.Rows[i][1].ToString().Trim() + " ></td>\n";
                         if (Chk_IsSuppNo.Checked == true)
                         {
-                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Price_" + i + "\" value=" + GetProductsPrice(data.Rows[i][0].ToString()) + " ></td>\n";//位号
+                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Price_" + i + "\" value=" + GetProductsPrice(data.Rows[i][0].ToString().Trim()) + " ></td>\n";
 
-                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Money_" + i + "\" value=" + GetMoney(data.Rows[i][0].ToString(), data.Rows[i][1].ToString()) + " ></td>\n";//替换编号
+                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Money_" + i + "\" value=" + GetMoney(data.Rows[i][0].ToString().Trim(), data.Rows[i][1].ToString().Trim()) + " ></td>\n";
                         }
                         else
                         {
-                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Price_" + i + "\" value=" + GetProductsJsPrice(data.Rows[i][0].ToString()) + " ></td>\n";//位号
+                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"ChangPrice();this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Price_" + i + "\" value=" + GetProductsJsPrice(data.Rows[i][0].ToString().Trim()) + " ></td>\n";//位号
 
-                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Money_" + i + "\" value=" + GetJsMoney(data.Rows[i][0].ToString(), data.Rows[i][1].ToString()) + " ></td>\n";//替换编号
+                            s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"Money_" + i + "\" value=" + GetJsMoney(data.Rows[i][0].ToString().Trim(), data.Rows[i][1].ToString().Trim()) + " ></td>\n";//替换编号
                         }
 
 
 
-                        s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"BPrice_" + i + "\"  value=" + GetProductsPrice(data.Rows[i][0].ToString()) + " ></td>\n";//数量
+                        s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"BPrice_" + i + "\"  value=" + GetProductsPrice(data.Rows[i][0].ToString().Trim()) + " ></td>\n";//数量
 
-                        s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"BMoney_" + i + "\" value=" + GetMoney(data.Rows[i][0].ToString(), data.Rows[i][1].ToString()) + " ></td>\n";//数量
+                        s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\" Name=\"BMoney_" + i + "\" value=" + GetMoney(data.Rows[i][0].ToString().Trim(), data.Rows[i][1].ToString().Trim()) + " ></td>\n";//数量
 
                         s_MyTable_Detail += "<td class='ListHeadDetails'><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width: 100px;\"  Name=\"Remarks_" + i + "\"    ></td>\n";//数量
 
@@ -954,6 +955,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
     {
         string sql = "select ProductsName from KNet_Sys_Products where KSP_COde='" + code + "'";
         DataTable rownum = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        
         if (rownum.Rows.Count > 0)
         {
             return rownum.Rows[0][0].ToString();
@@ -1085,6 +1087,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_DirectOut_Add : BasePage
         string s_Sql =
         "select isnull(sum(DirectInAmount),0) from v_Store where ksp_code='" + code + "' AND HouseNo='" + HouseNo.SelectedValue.ToString() + "' ";
         DataTable rownum = DbHelperSQL.ExecuteDataSet(CommandType.Text, s_Sql).Tables[0];
+        //string gh = rownum.Rows[0][0].ToString();
         if (rownum.Rows.Count > 0)
         {
             return int.Parse(rownum.Rows[0][0].ToString());

@@ -204,14 +204,14 @@ public partial class Web_Complain_Knet_Product_Prototype_InOut : BasePage
             if (Ddl_OutOrIn.SelectedValue == "1")
             {
                 string body = "编号为" + TextBox1.Text + "的治具借出审核创建成功,请及时查看";
-                string email_list = "lxj@systech.com.cn" + "|" + "xb@systech.com.cn" + "|";
+                string email_list = "luoxingjun@systech.com.cn" + "|" + "crq@systech.com.cn" + "|";
                 string File_Path = "";
                 Send("治具借出审核通知", body, email_list, File_Path);
             }
             else
             {
                 string body = "编号为" + TextBox1.Text + "的治具归还审核创建成功,请及时查看";
-                string email_list = "lxj@systech.com.cn" + "|" + "xb@systech.com.cn" + "|";
+                string email_list = "luoxingjun@systech.com.cn" + "|" + "crq@systech.com.cn" + "|";
                 string File_Path = "";
                 Send("治具归还审核通知", body, email_list, File_Path);
             }

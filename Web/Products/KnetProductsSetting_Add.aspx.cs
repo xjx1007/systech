@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Expressions;
 using System.Data;
 using System.Configuration;
 using System.Collections;
@@ -176,14 +177,14 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         //{
         //    if (this.Tbx_ID.Text != "")
         //    {
-               
+
         //        this.ShowInfo(this.Tbx_ID.Text);
-              
+
         //    }
         //    else
         //    {
         //        this.Lbl_Title.Text = "新增产品";
-               
+
         //    }
         //}
         //this.Button1.Attributes.Add("onclick", "return confirm('有订单正在进行中，是否用于此次生产？')");
@@ -298,24 +299,24 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
     protected void Btn_Create_OnServerClick(object sender, EventArgs e)
     {
-       
+
         string fileName = FileUpload1.FileName;
         //string sheetName = "day";
         string filePath = Server.MapPath("/UploadBOMExcel/");
         //string tmpRootDir = Server.MapPath(HttpContext.Current.Request.ApplicationPath.ToString());//获取程序根目录
         string s_Date = DateTime.Now.ToString("yyMMddhhmmss");
-        string fileserverurl = (filePath + s_Date+fileName).Replace(filePath, ""); //转换成相对路径
+        string fileserverurl = (filePath + s_Date + fileName).Replace(filePath, ""); //转换成相对路径
         fileserverurl = fileserverurl.Replace(@"\", @"/");
-        if (File.Exists(fileserverurl)) 
+        if (File.Exists(fileserverurl))
         {
-           Alert("你已经上传过一次了，不可再次上传");
+            Alert("你已经上传过一次了，不可再次上传");
             return;
         }
         else
         {
-            FileUpload1.SaveAs(filePath + s_Date+fileName);
+            FileUpload1.SaveAs(filePath + s_Date + fileName);
         }
-       
+
         //DataTable dt = ReadExcelToDataTable(filePath + fileName);
         string sheetName = null;
         bool isFirstRowColumn = true;
@@ -400,7 +401,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
             if (data.Rows.Count > 0)
             {
                 //s_ProductsTable_BomDetail = "";
-                string[] bomlist=new string[data.Rows.Count];
+                string[] bomlist = new string[data.Rows.Count];
 
                 for (int i = 0; i < data.Rows.Count; i++)
                 {
@@ -415,7 +416,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     {
                         if (this.Lbl_Title.Text == "新增产品")
                         {
-                           
+
                             s_DemoProductsID += productbarcode + ",";
                             s_ProductsTable_BomDetail += "<tr>\n";
                             s_ProductsTable_BomDetail += "<td class=\"ListHeadDetails\"><input type=input Name=\"DemoOrder_" + a + " \" style=\"detailedViewTextBox;width:50px\" value='" + a.ToString() + "' ></td>\n";
@@ -448,16 +449,16 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             s_ProductsTable_BomDetail += "<td class='ListHeadDetails' width=\"100px\"><input type=\"hidden\"  Name=\"DemoRepacleProdoctsBarCode_" + i.ToString() + "\" value=''><input type=\"hidden\"  Name=\"DemoProdoctsBarCode_" + i.ToString() + "\" value='" + productbarcode + "'><input type=\"input\"  readonly=\"true\"  Name=\"ProductsName_" + i.ToString() + "\" value='" + base.Base_GetProdutsName(productbarcode) + "'></td>\n";
                             s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\"  readonly=\"true\" style=\"width:300px\"  Name=\"ProductsEdition_" + i.ToString() + "\" value='" + base.Base_GetProductsEdition(productbarcode) + "'></td>\n";
 
-                            s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"Place_" + i.ToString() + "\"   ID=\"Place_" + i.ToString() + "\"   style=\"width:350px\" onblur=\"onPlaceblur()\"  value='" + data.Rows[i][0].ToString().Replace(" ","") + "'></td>\n";
+                            s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"Place_" + i.ToString() + "\"   ID=\"Place_" + i.ToString() + "\"   style=\"width:350px\" onblur=\"onPlaceblur()\"  value='" + data.Rows[i][0].ToString().Replace(" ", "") + "'></td>\n";
 
                             s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"ReplaceNum_" + i.ToString() + "\"   ID=\"ReplaceNum_" + i.ToString() + "\"   style=\"width:350px\" onblur=\"onPlaceblur()\"  value='0'></td>\n";
 
                             s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"DemoNumber_" + i.ToString() + "\"  onblur=\"onPlaceblur()\" value='" + data.Rows[i][1].ToString() + "'></td>\n";
 
-                            
+
                             s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"checkbox\"  Name=\"DemoDel_" + i.ToString() + "\"></td>\n";
 
-                           
+
                             //onclick=\"ChangeOnly('" + i.ToString() + "')
                             s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"checkbox\"  Name=\"DemoOnly_" + i.ToString() + "\" checked></td>\n";
                             //图片
@@ -465,9 +466,9 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
                             s_ProductsTable_BomDetail += "</tr>\n";
                         }
-                       
+
                     }
-                   
+
                 }
                 if (s_DemoProductCode.Length > 0)
                 {
@@ -487,8 +488,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             if (bomlist[i] == bomlist[j])
                             {
                                 flag = false; //设置标志变量为重复 
-                                cfcode +=bomlist[i];
-                               
+                                cfcode += bomlist[i];
+
                             }
                         }
                     }
@@ -502,11 +503,11 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     else
                     {
                         s_ProductsTable_BomDetail = "";
-                        Alert("你上传的EXCEL表中有重复的物料，料号为："+ cfcode);
+                        Alert("你上传的EXCEL表中有重复的物料，料号为：" + cfcode);
                     }
                 }
 
-                
+
             }
             else
             {
@@ -514,10 +515,10 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 s_ProductsTable_BomDetail = "";
                 Alert("EXCEL表格内容不能为空");
             }
-        
+
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             //File.Delete(fileserverurl);
             //Alert("匹配失败！！请检查你上传的EXCEL表，重新上传");
@@ -531,8 +532,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
     public string GetProductByCode(string code)
     {
         string sql = "select * from KNet_Sys_Products where KSP_COde='" + code + "' and KSP_Del=0 and KSP_isModiy=0";
-        DataTable rownum = DbHelperSQL.ExecuteDataSet(CommandType.Text,sql).Tables[0];
-        if (rownum.Rows.Count>0)
+        DataTable rownum = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+        if (rownum.Rows.Count > 0)
         {
             return rownum.Rows[0]["ProductsBarCode"].ToString();
         }
@@ -540,12 +541,12 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         {
             return "";
         }
-        
+
     }
 
     public string GetProductClass(string code)
     {
-        string sql = "select top 1 PBP_Name from PB_Basic_ProductsClass where PBP_ID in(select ProductsType from KNet_Sys_Products where KSP_COde='"+code+"')";
+        string sql = "select top 1 PBP_Name from PB_Basic_ProductsClass where PBP_ID in(select ProductsType from KNet_Sys_Products where KSP_COde='" + code + "')";
         DataTable rownum = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
         if (rownum.Rows.Count > 0)
         {
@@ -564,7 +565,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
     protected void Button1_Click(object sender, EventArgs e)
     {
         AdminloginMess AM = new AdminloginMess();
-        
+
         string ProductsName = KNetPage.KHtmlEncode(this.ProductsName.Text.Trim());
         string ProductsBarCode = KNetPage.KHtmlEncode(this.ProductsBarCode.Text.Trim());
         string ProductsPattern = KNetPage.KHtmlEncode(this.ProductsPattern.Text.Trim());
@@ -643,7 +644,25 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         model.KSP_Mender = AM.KNet_StaffNo;
         model.KSP_CTime = DateTime.Now;
         model.KSP_MTime = DateTime.Now;
-        model.KSP_Code = this.Tbx_Code.Text;
+        string newcode = "";
+        if (this.Tbx_Type.Text == "1" || this.Tbx_Type.Text == "2")
+        {
+            string sql = "select * from KNet_Sys_Products where KSP_COde='" + this.Tbx_Code.Text + "'";
+            DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text, sql).Tables[0];
+            if (dataTable.Rows.Count > 0)
+            {
+                newcode = base.Base_GetNewProductsCode(this.Tbx_ProductsTypeNo.Text);
+                model.KSP_Code = newcode;
+            }
+            else
+            {
+                model.KSP_Code = this.Tbx_Code.Text;
+            }
+        }
+        else
+        {
+            model.KSP_Code = this.Tbx_Code.Text;
+        }
         model.KSP_GProductsBarCode = this.Tbx_GProductsBarCode.Value;
         model.KSP_UseType = this.Ddl_UseType.SelectedValue;
         model.KSP_Remark = ProductRemark.Text;
@@ -906,7 +925,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     Model_Demo.XPD_ProductsBarCode = ProductsBarCode;
                     Model_Demo.XPD_FaterBarCode = s_ProdoctsBarCode;
                     string place = XPD_Place.Replace("，", ",");
-                    Model_Demo.XPD_Place = place.Replace(" ","");
+                    Model_Demo.XPD_Place = place.Replace(" ", "");
                     Model_Demo.XPD_Number = int.Parse(XPD_Number);
                     if (ReplacNum == "")
                     {
@@ -1017,23 +1036,16 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     catch
                     { }
                 }
+                if (newcode == "")
+                {
+                    AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
+                }
+                else
+                {
+                    AlertAndRedirect("产品字典 修改 成功！料号已被占用，系统已帮您重新生成:" + newcode + "", "KnetProductsSetting.aspx");
+                }
+                //AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
 
-                AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
-                //    SqlParameter[] parameters = {
-                //new SqlParameter("@ProductBarCode", SqlDbType.NVarChar,100),
-                //  new SqlParameter("@OldProductBarCode", SqlDbType.NVarChar,100),
-                //   new SqlParameter("@Old1ProductBarCode", SqlDbType.NVarChar,100),
-                // new SqlParameter("@ProductsPattern", SqlDbType.NVarChar,200),
-                //  new SqlParameter("@ProductsEdition", SqlDbType.NVarChar,200)
-                //    };
-                //    parameters[0].Value = ProductsBarCode;
-                //    parameters[1].Value = Request.QueryString["ID"].ToString().Trim();
-                //    parameters[2].Value = Request.QueryString["ID"].ToString().Trim();
-                //    parameters[3].Value = this.ProductsPattern.Text;
-                //    parameters[4].Value = this.Tbx_Edition.Text;
-                //    int i_Row;
-                //    DbHelperSQL.RunProcedure("VersionUpgrade", parameters, out i_Row);
-                AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
             }
             else
             {
@@ -1042,30 +1054,42 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     BLL.Add(model);
                     AdminloginMess LogAM = new AdminloginMess();
                     LogAM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！编码：" + ProductsBarCode);
-                    //       SqlParameter[] parameters = {
-                    // new SqlParameter("@ProductBarCode", SqlDbType.NVarChar,100),
-                    // new SqlParameter("@OldProductBarCode", SqlDbType.NVarChar,100),
-                    //  new SqlParameter("@Old1ProductBarCode", SqlDbType.NVarChar,100),
-                    //new SqlParameter("@ProductsPattern", SqlDbType.NVarChar,200),
-                    // new SqlParameter("@ProductsEdition", SqlDbType.NVarChar,200)
-                    //   };
-                    //       parameters[0].Value = ProductsBarCode;
-                    //       parameters[1].Value = Request.QueryString["ID"].ToString().Trim();
-                    //       parameters[2].Value = Request.QueryString["ID"].ToString().Trim();
-                    //       parameters[3].Value = this.ProductsPattern.Text;
-                    //       parameters[4].Value = this.Tbx_Edition.Text;
-                    //       int i_Row;
-                    //       DbHelperSQL.RunProcedure("VersionUpgrade", parameters, out i_Row);
-                    AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
-                    if (this.Tbx_SampleID.Text != "")
+                    if (newcode == "")
                     {
-                        Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
-                        Response.End();
+                        AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
                     }
                     else
                     {
-                        Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
-                        Response.End();
+                        AlertAndRedirect("产品字典 修改 成功！料号已被占用，系统已帮您重新生成:" + newcode + "", "KnetProductsSetting.aspx");
+                    }
+                    //AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
+                    if (this.Tbx_SampleID.Text != "")
+                    {
+                        if (newcode == "")
+                        {
+                            Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                            Response.End();
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('产品字典 添加 成功！料号已被占用，系统已帮您重新生成:" + newcode + "');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                            Response.End();
+                        }
+
+                    }
+                    else
+                    {
+
+                        if (newcode == "")
+                        {
+                            Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
+                            Response.End();
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('产品字典 添加 成功！料号已被占用，系统已帮您重新生成:" + newcode + "');location.href='KnetProductsSetting.aspx';</script>");
+                            Response.End();
+                        }
 
                     }
                 }
@@ -1081,13 +1105,8 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
         catch (Exception ex)
         {
             throw ex;
-            Response.Write("<script>alert('产品字典 添加失败1！');history.back(-1);</script>");
-            Response.End();
+
         }
-
-        //    }
-        //}
-
 
     }
 
@@ -1113,7 +1132,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
         bool b_Isadd = true;
         bool b_Isadd1 = true;
-        if (AM.KNet_StaffName!="薛建新")
+        if (AM.KNet_StaffName != "薛建新")
         {
             if ((model.KSP_Code != "") && (model.KSP_Code != null))
             {
@@ -1141,7 +1160,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 }
             }
         }
-       
+
         /*
         if (AM.YNAuthority("一般元器件增删改权限"))
         {
@@ -1606,7 +1625,26 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 model.KSP_Mender = AM.KNet_StaffNo;
                 model.KSP_CTime = DateTime.Now;
                 model.KSP_MTime = DateTime.Now;
-                model.KSP_Code = this.Tbx_Code.Text;
+                string newcode = "";
+                if (this.Tbx_Type.Text == "1" || this.Tbx_Type.Text == "2")
+                {
+                    string sql = "select * from KNet_Sys_Products where KSP_COde='" + this.Tbx_Code.Text + "'";
+                    DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text,sql).Tables[0];
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        newcode = base.Base_GetNewProductsCode(this.Tbx_ProductsTypeNo.Text);
+                        model.KSP_Code = newcode;
+                    }
+                    else
+                    {
+                        model.KSP_Code = this.Tbx_Code.Text;
+                    }
+                }
+                else
+                {
+                    model.KSP_Code = this.Tbx_Code.Text;
+                }
+                //model.KSP_Code = this.Tbx_Code.Text;
                 model.KSP_GProductsBarCode = this.Tbx_GProductsBarCode.Value;
                 model.KSP_UseType = this.Ddl_UseType.SelectedValue;
                 //model.KSP_BigUnits = this.BigUnits.Text;
@@ -1941,7 +1979,15 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                         parameters[4].Value = this.Tbx_Edition.Text;
                         int i_Row;
                         DbHelperSQL.RunProcedure("VersionUpgrade", parameters, out i_Row);
-                        AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
+                        if (newcode == "")
+                        {
+                            AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
+                        }
+                        else
+                        {
+                            AlertAndRedirect("产品字典 修改 成功！料号已被占用，系统已帮您重新生成:" + newcode + "", "KnetProductsSetting.aspx");
+                        }
+
                     }
                     else
                     {
@@ -1966,13 +2012,31 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             DbHelperSQL.RunProcedure("VersionUpgrade", parameters, out i_Row);
                             if (this.Tbx_SampleID.Text != "")
                             {
-                                Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
-                                Response.End();
+                                if (newcode == "")
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                                    Response.End();
+                                }
+                                else
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！料号已被占用，系统已帮您重新生成:" + newcode + "');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                                    Response.End();
+                                }
+
                             }
                             else
                             {
-                                Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
-                                Response.End();
+
+                                if (newcode == "")
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
+                                    Response.End();
+                                }
+                                else
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！料号已被占用，系统已帮您重新生成:" + newcode + "');location.href='KnetProductsSetting.aspx';</script>");
+                                    Response.End();
+                                }
 
                             }
                         }
@@ -2067,7 +2131,25 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 model.KSP_Mender = AM.KNet_StaffNo;
                 model.KSP_CTime = DateTime.Now;
                 model.KSP_MTime = DateTime.Now;
-                model.KSP_Code = this.Tbx_Code.Text;
+                string newcode = "";
+                if (this.Tbx_Type.Text == "1" || this.Tbx_Type.Text == "2")
+                {
+                    string sql = "select * from KNet_Sys_Products where KSP_COde='" + this.Tbx_Code.Text + "'";
+                    DataTable dataTable = DbHelperSQL.ExecuteDataSet(CommandType.Text,sql).Tables[0];
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        newcode = base.Base_GetNewProductsCode(this.Tbx_ProductsTypeNo.Text);
+                        model.KSP_Code = newcode;
+                    }
+                    else
+                    {
+                        model.KSP_Code = this.Tbx_Code.Text;
+                    }
+                }
+                else
+                {
+                    model.KSP_Code = this.Tbx_Code.Text;
+                }
                 model.KSP_GProductsBarCode = this.Tbx_GProductsBarCode.Value;
                 model.KSP_UseType = this.Ddl_UseType.SelectedValue;
                 //model.KSP_BigUnits = this.BigUnits.Text;
@@ -2256,7 +2338,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
 
                             Model_DemoProducts_Prodocts.XPD_FaterBarCode = ProductsBarCode;
                             Model_DemoProducts_Prodocts.XPD_ReplaceProductsBarCode = s_DemoRepacleProdoctsBarCode;
-                            string place= s_XPD_Place.Replace("，", ",");
+                            string place = s_XPD_Place.Replace("，", ",");
                             Model_DemoProducts_Prodocts.XPD_Place = place.Replace(" ", "");
                             Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
                             Arr_DemoProducts.Add(Model_DemoProducts_Prodocts);
@@ -2387,23 +2469,16 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             catch
                             { }
                         }
+                        if (newcode == "")
+                        {
+                            AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
+                        }
+                        else
+                        {
+                            AlertAndRedirect("产品字典 修改 成功！料号已被占用，系统已帮您重新生成:" + newcode + "", "KnetProductsSetting.aspx");
+                        }
+                        //AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
 
-                        AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
-                        //    SqlParameter[] parameters = {
-                        //new SqlParameter("@ProductBarCode", SqlDbType.NVarChar,100),
-                        //  new SqlParameter("@OldProductBarCode", SqlDbType.NVarChar,100),
-                        //   new SqlParameter("@Old1ProductBarCode", SqlDbType.NVarChar,100),
-                        // new SqlParameter("@ProductsPattern", SqlDbType.NVarChar,200),
-                        //  new SqlParameter("@ProductsEdition", SqlDbType.NVarChar,200)
-                        //    };
-                        //    parameters[0].Value = ProductsBarCode;
-                        //    parameters[1].Value = Request.QueryString["ID"].ToString().Trim();
-                        //    parameters[2].Value = Request.QueryString["ID"].ToString().Trim();
-                        //    parameters[3].Value = this.ProductsPattern.Text;
-                        //    parameters[4].Value = this.Tbx_Edition.Text;
-                        //    int i_Row;
-                        //    DbHelperSQL.RunProcedure("VersionUpgrade", parameters, out i_Row);
-                        AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
                     }
                     else
                     {
@@ -2412,30 +2487,43 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             BLL.Add(model);
                             AdminloginMess LogAM = new AdminloginMess();
                             LogAM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！编码：" + ProductsBarCode);
-                            //       SqlParameter[] parameters = {
-                            // new SqlParameter("@ProductBarCode", SqlDbType.NVarChar,100),
-                            // new SqlParameter("@OldProductBarCode", SqlDbType.NVarChar,100),
-                            //  new SqlParameter("@Old1ProductBarCode", SqlDbType.NVarChar,100),
-                            //new SqlParameter("@ProductsPattern", SqlDbType.NVarChar,200),
-                            // new SqlParameter("@ProductsEdition", SqlDbType.NVarChar,200)
-                            //   };
-                            //       parameters[0].Value = ProductsBarCode;
-                            //       parameters[1].Value = Request.QueryString["ID"].ToString().Trim();
-                            //       parameters[2].Value = Request.QueryString["ID"].ToString().Trim();
-                            //       parameters[3].Value = this.ProductsPattern.Text;
-                            //       parameters[4].Value = this.Tbx_Edition.Text;
-                            //       int i_Row;
-                            //       DbHelperSQL.RunProcedure("VersionUpgrade", parameters, out i_Row);
-                            AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
-                            if (this.Tbx_SampleID.Text != "")
+
+                            if (newcode == "")
                             {
-                                Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
-                                Response.End();
+                                AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
                             }
                             else
                             {
-                                Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
-                                Response.End();
+                                AlertAndRedirect("产品字典 修改 成功！料号已被占用，系统已帮您重新生成:" + newcode + "", "KnetProductsSetting.aspx");
+                            }
+                            //AlertAndRedirect("产品字典 修改 成功！", "KnetProductsSetting.aspx");
+                            if (this.Tbx_SampleID.Text != "")
+                            {
+                                if (newcode == "")
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                                    Response.End();
+                                }
+                                else
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！料号已被占用，系统已帮您重新生成:" + newcode + "');location.href='../ProductsSample/Pb_Products_Sample_Approval.aspx?ID=" + this.Tbx_SampleID.Text + "';</script>");
+                                    Response.End();
+                                }
+
+                            }
+                            else
+                            {
+
+                                if (newcode == "")
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！');location.href='KnetProductsSetting.aspx';</script>");
+                                    Response.End();
+                                }
+                                else
+                                {
+                                    Response.Write("<script>alert('产品字典 添加 成功！料号已被占用，系统已帮您重新生成:" + newcode + "');location.href='KnetProductsSetting.aspx';</script>");
+                                    Response.End();
+                                }
 
                             }
                         }
@@ -2451,8 +2539,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                 catch (Exception ex)
                 {
                     throw ex;
-                    Response.Write("<script>alert('产品字典 添加失败1！');history.back(-1);</script>");
-                    Response.End();
+
                 }
 
             }
