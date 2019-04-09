@@ -886,7 +886,14 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     Model_DemoProducts_Prodocts.XPD_ReplaceProductsBarCode = s_DemoRepacleProdoctsBarCode;
                     string place = s_XPD_Place.Replace("，", ",");
                     Model_DemoProducts_Prodocts.XPD_Place = place.Replace(" ", "");
-                    Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
+                    if (ReplaceNum=="")
+                    {
+                        Model_DemoProducts_Prodocts.ReplaceNum = 0;
+                    }
+                    else
+                    {
+                        Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
+                    }
                     Arr_DemoProducts.Add(Model_DemoProducts_Prodocts);
                     if (s_DemoID == "")
                     {
@@ -1411,7 +1418,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                     s_ProductsTable_BomDetail += "</td>\n";
                     s_ProductsTable_BomDetail += "<td class='ListHeadDetails'>";
                     s_ProductsTable_BomDetail += "<A onclick=\"deleteRow2(this)\" href=\"#\"><img src=\"../../themes/softed/images/delete.gif\" alt=\"CRMone\" title=\"CRMone\" border=0></a></td>\n";
-                    s_ProductsTable_BomDetail += "<td class='ListHeadDetails' width=\"100px\"><input type=\"hidden\"  Name=\"DemoRepacleProdoctsBarCode_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString() + "'><input type=\"hidden\"  Name=\"DemoProdoctsBarCode_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() + "'><input type=\"input\"  readonly=\"true\"  Name=\"ProductsName_" + i.ToString() + "\" value='" + base.Base_GetProdutsName(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "'></td>\n";
+                    s_ProductsTable_BomDetail += "<td class='ListHeadDetails' width=\"100px\"><input type=\"hidden\"  Name=\"DemoRepacleProdoctsBarCode_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ReplaceProductsBarCode"].ToString() + "'><input type=\"hidden\"  Name=\"DemoProdoctsBarCode_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString() + "'><input type=\"input\"  readonly=\"true\"  Name=\"ProductsName_" + i.ToString() + "\" value='" + Dtb_DemoProducts.Rows[i]["ProductsName"].ToString() + "'></td>\n";
                     s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\"  readonly=\"true\" style=\"width:300px\"  Name=\"ProductsEdition_" + i.ToString() + "\" value='" + base.Base_GetProductsEdition(Dtb_DemoProducts.Rows[i]["XPD_ProductsBarCode"].ToString()) + "'></td>\n";
 
                     s_ProductsTable_BomDetail += "<td class='ListHeadDetails'><input type=\"input\" class=\"detailedViewTextBox\" Name=\"Place_" + i.ToString() + "\"   ID=\"Place_" + i.ToString() + "\"   style=\"width:350px\" onblur=\"onPlaceblur()\"  value='" + Dtb_DemoProducts.Rows[i]["XPD_Place"].ToString() + "'></td>\n";
@@ -1835,7 +1842,15 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             Model_DemoProducts_Prodocts.XPD_ReplaceProductsBarCode = s_DemoRepacleProdoctsBarCode;
                             string place = s_XPD_Place.Replace("，", ",");
                             Model_DemoProducts_Prodocts.XPD_Place = place.Replace(" ", "");
-                            Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
+                            if (ReplaceNum == "")
+                            {
+                                Model_DemoProducts_Prodocts.ReplaceNum = 0;
+                            }
+                            else
+                            {
+                                Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
+                            }
+                            //Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
                             Arr_DemoProducts.Add(Model_DemoProducts_Prodocts);
                             if (s_DemoID == "")
                             {
@@ -2340,7 +2355,15 @@ public partial class Knet_Web_System_KnetProductsSetting_Add : BasePage
                             Model_DemoProducts_Prodocts.XPD_ReplaceProductsBarCode = s_DemoRepacleProdoctsBarCode;
                             string place = s_XPD_Place.Replace("，", ",");
                             Model_DemoProducts_Prodocts.XPD_Place = place.Replace(" ", "");
-                            Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
+                            if (ReplaceNum == "")
+                            {
+                                Model_DemoProducts_Prodocts.ReplaceNum = 0;
+                            }
+                            else
+                            {
+                                Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
+                            }
+                            //Model_DemoProducts_Prodocts.ReplaceNum = Convert.ToInt32(ReplaceNum);
                             Arr_DemoProducts.Add(Model_DemoProducts_Prodocts);
                             if (s_DemoID == "")
                             {

@@ -1583,7 +1583,7 @@ public partial class Knet_Procure_OpenBilling_View_ForSc : BasePage
         {
             KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
             KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(this.Tbx_ID.Text);
-            string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Model.ID + "";
+            string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Model.ID + "&Type=SC";
             base.HtmlToPdf1(JSD, Server.MapPath("PDF"), this.Tbx_ID.Text);
             AM.Add_Logs("采购订单审批：" + this.Tbx_ID.Text);
             Alert("审批成功！");
@@ -1618,7 +1618,7 @@ public partial class Knet_Procure_OpenBilling_View_ForSc : BasePage
         {
             KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
             KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(this.Tbx_ID.Text);
-            string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Model.ID + "";
+            string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Model.ID + "&Type=SC";
             base.HtmlToPdf1(JSD, Server.MapPath("PDF"), this.Tbx_ID.Text);
             AM.Add_Logs("采购订单审批：" + this.Tbx_ID.Text);
             Alert("审批成功！");
@@ -1632,7 +1632,7 @@ public partial class Knet_Procure_OpenBilling_View_ForSc : BasePage
     {
         KNet.BLL.Knet_Procure_OrdersList Bll = new KNet.BLL.Knet_Procure_OrdersList();
         KNet.Model.Knet_Procure_OrdersList Model = Bll.GetModelB(this.Tbx_ID.Text);
-        string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Model.ID + "";
+        string JSD = "CG/Order/Knet_Procure_OpenBilling_Print.aspx?ID=" + Model.ID + "&Type=SC";
         if (base.HtmlToPdf1(JSD, Server.MapPath("PDF"), this.Tbx_ID.Text))
         {
             Alert("生成成功！");
