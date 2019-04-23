@@ -34,6 +34,7 @@ namespace KNet.Model
         private int _KWAD_SDNumber;
         private int _KWAD_BFNumber;
         private int _KWAD_BLNumber;
+        private int _AllocateBadAmount;
         //private string _KWAD_DirectOutNo;
 
         /// <summary>
@@ -43,6 +44,14 @@ namespace KNet.Model
         {
             set { _OwnallPID = value; }
             get { return _OwnallPID; }
+        }
+        /// <summary>
+        /// 退货数量
+        /// </summary>
+        public int AllocateBadAmount
+        {
+            set { _AllocateBadAmount = value; }
+            get { return _AllocateBadAmount; }
         }
         public int KWAD_BLNumber
         {

@@ -745,6 +745,7 @@ public partial class Knet_Web_System_KnetProductsSetting_Details : BasePage
                 Model.KSP_isModiy = i_Del;
                 Bll.UpdateisModiy(Model);
                 AM.Add_Logs("系统设置--->产品字典--->产品字典 添加 操作成功！确认产品编码：" + s_ID);
+                AlertAndRedirect("操作成功！", "KnetProductsSetting.aspx?ProductsBarCode=" + s_ID + "");
             }
             else
             {

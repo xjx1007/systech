@@ -196,7 +196,7 @@
                                                             <asp:Label runat="server" ID="Lbl_Spce"></asp:Label>
                                                         </td>
                                                     </tr>
-                                                     <tr>
+                                                    <tr>
                                                         <td align="left" style="padding-left: 10px;">
                                                             <img src="../../themes/softed/images/pointer.gif" hspace="5" align="middle" />
                                                             <asp:Label runat="server" ID="UpdateBom"></asp:Label>

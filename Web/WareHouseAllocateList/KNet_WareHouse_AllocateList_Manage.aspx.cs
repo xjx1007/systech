@@ -143,6 +143,11 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Manage : Bas
         {
             SqlWhere += " and AllocateTopic='102'";
         }
+        if (this.Tbx_Type.Text=="2")
+        {
+            SqlWhere +=
+                " and (HouseNo='131429356506502002' or HouseNo_int='131429356506502002') and SystemDatetimes>'2019-04-23'";
+        }
         SqlWhere = SqlWhere + " order by systemDateTimes desc";
         DataSet ds = bll.GetList(SqlWhere);
         GridView1.DataSource = ds;

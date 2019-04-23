@@ -171,7 +171,7 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuAllocateList : B
     }
 
     /// <summary>
-    /// 退货产品总数量
+    /// 调拨产品总数量
     /// </summary>
     /// <param name="s_Order"></param>
     /// <returns></returns>
@@ -189,7 +189,25 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuAllocateList : B
         }
         return s_Return;
     }
-
+    /// <summary>
+    /// 退货产品总数量
+    /// </summary>
+    /// <param name="s_Order"></param>
+    /// <returns></returns>
+    public string GetDirectBadNumbers(string s_Order)
+    {
+        string s_Return = "";
+        this.BeginQuery("Select Sum(AllocateBadAmount) as AllocateAmount from KNet_WareHouse_FuAllocateList_Details Where AllocateNo='" + s_Order + "'");
+        this.QueryForDataTable();
+        if (this.Dtb_Result.Rows.Count > 0)
+        {
+            for (int i = 0; i < Dtb_Result.Rows.Count; i++)
+            {
+                s_Return = Dtb_Result.Rows[i]["AllocateAmount"].ToString();
+            }
+        }
+        return s_Return;
+    }
 
     /// <summary>
     /// 添加提示

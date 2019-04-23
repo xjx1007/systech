@@ -1389,6 +1389,7 @@ public partial class Knet_Web_WareHouse_KNet_WareHouse_AllocateList_Add : BasePa
                     Model_Details.ProductsBarCode = s_ProductsBarCode;
                     Model_Details.AllocateNo = molel.AllocateNo;
                     Model_Details.AllocateAmount = int.Parse(s_Number);
+                    Model_Details.AllocateBadAmount = 0;
                     try
                     {
                         Model_Details.KWAD_CPBZNumber = int.Parse(s_CPBZNumber);

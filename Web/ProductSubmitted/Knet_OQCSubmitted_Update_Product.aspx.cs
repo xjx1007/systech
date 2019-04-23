@@ -449,7 +449,21 @@ public partial class Web_ProductSubmitted_Knet_OQCSubmitted_Update_Product : Bas
                 {
                     string DoSqlOrder = " update Knet_Submitted_Product set  KSP_State=1,KSP_Sproposer='" + AM.KNet_StaffNo + "' where KSP_SID='" + this.Tbx_ID.Text + "' ";
                     DbHelperSQL.ExecuteSql(DoSqlOrder);
-                    //Button1.Text = "反审核";
+
+                    /*更新入库单的退货数量*/
+                    string selectsql =
+                        "select KPD_Code,KPD_BadNumber from Knet_Submitted_Product a join Knet_Submitted_Product_Details b on a.KSP_SID=b.KPD_SID where KSP_SID='"+ this.Tbx_ID.Text + "'";
+                    this.BeginQuery(selectsql);
+                    DataTable Dtb_seTable = this.QueryForDataTable();
+                    if (Dtb_seTable.Rows.Count>0)
+                    {
+                        for (int i = 0; i < Dtb_seTable.Rows.Count; i++)
+                        {
+                            string Updatesql = "update KNet_WareHouse_FuAllocateList_Details set AllocateBadAmount="+int.Parse(Dtb_seTable.Rows[i][1].ToString()) + " where AllocateNo in (select AllocateNo from KNet_WareHouse_FuAllocateList where KSP_SID='" + this.Tbx_ID.Text + "')and ProductsBarCode='"+ Dtb_seTable.Rows[i][0].ToString() + "'";
+                            DbHelperSQL.ExecuteSql(Updatesql);
+                        }
+                    }
+
                     string sql =
           "select * from  Knet_Submitted_Product_Details  where KPD_SID='" + this.Tbx_ID.Text + "' and KPD_YNTState=2";
                     this.BeginQuery(sql);
@@ -467,6 +481,20 @@ public partial class Web_ProductSubmitted_Knet_OQCSubmitted_Update_Product : Bas
                 {
                     string DoSqlOrder = " update Knet_Submitted_Product set  KSP_State=0,KSP_Sproposer='" + AM.KNet_StaffNo + "' where KSP_SID='" + this.Tbx_ID.Text + "' ";
                     DbHelperSQL.ExecuteSql(DoSqlOrder);
+
+                    /**/
+                    string selectsql =
+                       "select KPD_Code,KPD_BadNumber from Knet_Submitted_Product a join Knet_Submitted_Product_Details b on a.KSP_SID=b.KPD_SID where KSP_SID='" + this.Tbx_ID.Text + "'";
+                    this.BeginQuery(selectsql);
+                    DataTable Dtb_seTable = this.QueryForDataTable();
+                    if (Dtb_seTable.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < Dtb_seTable.Rows.Count; i++)
+                        {
+                            string Updatesql = "update KNet_WareHouse_FuAllocateList_Details set AllocateBadAmount=" + int.Parse(Dtb_seTable.Rows[i][1].ToString()) + " where AllocateNo in (select AllocateNo from KNet_WareHouse_FuAllocateList where KSP_SID='" + this.Tbx_ID.Text + "')and ProductsBarCode='" + Dtb_seTable.Rows[i][0].ToString() + "'";
+                            DbHelperSQL.ExecuteSql(Updatesql);
+                        }
+                    }
                     //Button1.Text = "审核";
                     Alert("反审核成功");
                 }

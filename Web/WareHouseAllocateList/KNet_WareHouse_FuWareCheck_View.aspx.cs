@@ -245,99 +245,7 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
         catch { }
         return s_Return;
     }
-    //protected void btn_Chcek_Click(object sender, EventArgs e)
-    //{
-    //    AdminloginMess AM = new AdminloginMess();
-    //    try
-    //    {
-
-    //        //if (btn_Chcek.Text == "审批")
-    //        //{
-    //        //    string DoSql = "update KNet_WareHouse_AllocateList  set AllocateCheckYN=1  where  AllocateNo='" + this.Tbx_ID.Text + "' ";
-    //        //    DbHelperSQL.ExecuteSql(DoSql);
-    //        //    try
-    //        //    {
-    //        //        for (int i = 0; i < int.Parse(this.Tbx_Num.Text); i++)
-    //        //        {
-
-    //        //            if (Request["ID_" + i.ToString()] != null)
-    //        //            {
-    //        //                string s_ID = Request.Form["ID_" + i.ToString()] == null ? "" : Request.Form["ID_" + i.ToString()].ToString();
-    //        //                string s_Number = Request.Form["Number_" + i.ToString()] == null ? "" : Request.Form["Number_" + i.ToString()].ToString();
-    //        //                string s_OldNumber = Request.Form["OldNumber_" + i.ToString()] == null ? "" : Request.Form["OldNumber_" + i.ToString()].ToString();
-    //        //                DoSql = "update KNet_WareHouse_AllocateList_Details  set KWAD_SCDBNumber='" + s_OldNumber + "'  where  ID='" + s_ID + "' and KWAD_SCDBNumber=0 ";
-    //        //                DbHelperSQL.ExecuteSql(DoSql);
-    //        //                string s_BadNumber = Request.Form["BadNumber_" + i.ToString()] == null ? "" : Request.Form["BadNumber_" + i.ToString()].ToString();
-    //        //                string s_AddBadNumber = Request.Form["AddBadNumber_" + i.ToString()] == null ? "" : Request.Form["AddBadNumber_" + i.ToString()].ToString();
-
-
-
-    //        //                DoSql = "update KNet_WareHouse_AllocateList_Details  set AllocateAmount='" + s_Number + "',KWAD_OldNumber='" + s_Number + "' ,KWAD_BadNumber='" + s_BadNumber + "' ,KWAD_AddBadNumber='" + s_AddBadNumber + "'  where  ID='" + s_ID + "' ";
-    //        //                DbHelperSQL.ExecuteSql(DoSql);
-
-    //        //            }
-    //        //        }
-    //        //        DoSql = "update KNet_WareHouse_AllocateList  set KWA_IsSave='0' where  AllocateNo='" + this.Tbx_ID.Text + "' ";
-    //        //        DbHelperSQL.ExecuteSql(DoSql);
-    //        //    }
-    //        //    catch { }
-    //        //    btn_Chcek.Text = "反审批";
-    //        //    AM.Add_Logs("审批成功" + this.Tbx_ID.Text);
-    //        //    AlertAndRedirect("审批成功！", "KNet_WareHouse_WareCheck_View.aspx?ID=" + this.Tbx_ID.Text + "");
-    //        //}
-    //        //else if (btn_Chcek.Text == "反审批")
-    //        //{
-    //        //    string DoSql = "update KNet_WareHouse_AllocateList  set AllocateCheckYN=0  where  AllocateNo='" + this.Tbx_ID.Text + "' ";
-    //        //    DbHelperSQL.ExecuteSql(DoSql);
-    //        //    try
-    //        //    {
-    //        //        for (int i = 0; i < int.Parse(this.Tbx_Num.Text); i++)
-    //        //        {
-
-    //        //            if (Request["ID_" + i.ToString()] != null)
-    //        //            {
-    //        //                string s_ID = Request.Form["ID_" + i.ToString()] == null ? "" : Request.Form["ID_" + i.ToString()].ToString();
-    //        //                //string s_Number = Request.Form["Number_" + i.ToString()] == null ? "" : Request.Form["Number_" + i.ToString()].ToString();
-    //        //                // DoSql = "update KNet_WareHouse_AllocateList_Details  set AllocateAmount=KWAD_SCDBNumber  where  ID='" + s_ID + "' ";
-    //        //                //  DbHelperSQL.ExecuteSql(DoSql);
-
-    //        //            }
-    //        //        }
-    //        //    }
-    //        //    catch { }
-    //        //    btn_Chcek.Text = "审批";
-    //        //    AM.Add_Logs("反审批成功" + this.Tbx_ID.Text);
-    //        //    AlertAndRedirect("反审批成功！", "KNet_WareHouse_WareCheck_View.aspx?ID=" + this.Tbx_ID.Text + "");
-    //        //}
-    //        //else if (btn_Chcek.Text == "财务审批")
-    //        //{
-    //        //    if (AM.YNAuthority("单据财务审批"))
-    //        //    {
-    //        //        string DoSql = "update KNet_WareHouse_AllocateList  set AllocateCheckYN=3  where  AllocateNo='" + this.Tbx_ID.Text + "' ";
-    //        //        DbHelperSQL.ExecuteSql(DoSql);
-    //        //        btn_Chcek.Text = "反财务审批";
-    //        //        AM.Add_Logs("财务审批成功" + this.Tbx_ID.Text);
-    //        //        AlertAndRedirect("财务审批成功！", "KNet_WareHouse_WareCheck_View.aspx?ID=" + this.Tbx_ID.Text + "");
-    //        //    }
-    //        //}
-    //        //else if (btn_Chcek.Text == "反财务审批")
-    //        //{
-    //        //    if (AM.YNAuthority("单据财务审批"))
-    //        //    {
-    //        //        string DoSql = "update KNet_WareHouse_AllocateList  set AllocateCheckYN=1  where  AllocateNo='" + this.Tbx_ID.Text + "' ";
-    //        //        DbHelperSQL.ExecuteSql(DoSql);
-    //        //        btn_Chcek.Text = "反财务审批";
-    //        //        AM.Add_Logs("反财务审批成功" + this.Tbx_ID.Text);
-    //        //        AlertAndRedirect("反财务审批成功！", "KNet_WareHouse_WareCheck_View.aspx?ID=" + this.Tbx_ID.Text + "");
-    //        //    }
-    //        //}
-
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Alert(ex.Message);
-    //    }
-    //}
+   
 
 
     protected void btn_Chcek1_Click1(object sender, EventArgs e)
@@ -445,66 +353,12 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
             {
                 Label1.Text = "否";
             }
-            //try
-            //{
-            //    string SqlWhere = " AllocateNo='" + s_ID + "'";
-            //    SqlWhere += " and KWA_DBType='0'   ";
-            //    SqlWhere += " and  AllocateNo in( select b.AllocateNo  FROM       dbo.KNet_WareHouse_AllocateList_Details AS b INNER JOIN";
-            //    SqlWhere += "         dbo.KNet_WareHouse_AllocateList AS a ON a.AllocateNo = b.AllocateNo  where b.KWAD_AddBadNumber<>0 ";
-            //    SqlWhere += "  )  ";
-            //    SqlWhere = SqlWhere + " order by systemDateTimes desc";
-            //    DataSet ds = bll.GetList(SqlWhere);
-            //    GridView1.DataSource = ds;
-            //    GridView1.DataKeyNames = new string[] { "AllocateNo" };
-            //    GridView1.DataBind();
-            //    //string s_Sql = "select* from KNet_WareHouse_DirectOutList_Details a join KNet_WareHouse_DirectOutList b on a.DirectOutNo=b.DirectOutNo where KWD_AllocateNo='" + s_ID + "';";
-            //    //this.BeginQuery(s_Sql);
-            //    //this.QueryForDataTable();
-            //    string SqlWhere1 = " KWD_AllocateNo='" + s_ID + "'";
-            //    DataSet ds1 = kwd.GetList1(SqlWhere1);
-            //    MyGridView1.DataSource = ds1;
-            //    MyGridView1.DataKeyNames = new string[] { "DirectOutNo" };
-            //    MyGridView1.DataBind();
-            //}
-            //catch
-            //{ }
-
+           
             this.Tbx_OrderNo.Text = "<a href=\"/Web/Cg/Order/Knet_Procure_OpenBilling_View_ForSc.aspx?ID=" + model.KWA_OrderNo + "\" target=\"_blank\">" + model.KWA_OrderNo + "</a>";
             this.Tbx_OrderNo1.Text = model.KWA_OrderNo;
             this.Chk_Type.Text = base.Base_GetBasicCodeName("1132", model.KWA_DBType.ToString());
             this.Chk_Type1.Text = model.KWA_DBType.ToString();
-            //if (model.AllocateCheckYN == 1)
-            //{
-            //    btn_Chcek.Text = "反审批";
-            //    btn_Chcek1.Visible = false;
-            //    if (AM.KNet_StaffName != "薛建新")
-            //    {
-            //        if (AM.YNAuthority("单据财务审批"))
-            //        {
-            //            this.btn_Chcek.Text = "财务审批";
-            //        }
-            //    }
-            //}
-            //else if (model.AllocateCheckYN == 3)
-            //{
-
-            //    this.btn_Chcek.Text = "反财务审批";
-            //    btn_Chcek1.Visible = false;
-
-            //    if (AM.YNAuthority("单据财务审批"))
-            //    {
-            //        btn_Chcek.Visible = true;
-            //    }
-            //    else
-            //    {
-            //        btn_Chcek.Visible = false;
-            //    }
-            //}
-            //else
-            //{
-            //    btn_Chcek.Text = "审批";
-            //    btn_Chcek1.Visible = true;
-            //}
+          
             KNet.BLL.KNet_WareHouse_FuAllocateList_Details BLL_Details = new KNet.BLL.KNet_WareHouse_FuAllocateList_Details();
             string s_SqlWhere = " a.AllocateNo='" + model.AllocateNo + "' ";
             if (this.Lbl_OrderNo.Text != "")
@@ -525,6 +379,8 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
             Sb_Details.Append("<td class=\"ListHead\" nowrap><b>调拨数量</b></td>");
            
             Sb_Details.Append("<td class=\"ListHead\" nowrap><b>确认数量</b></td>");
+
+            Sb_Details.Append("<td class=\"ListHead\" nowrap><b>退货数量</b></td>");
             Sb_Details.Append("<td class=\"ListHead\" nowrap><b>缺料数量</b></td>");
             //Sb_Details.Append("<td class=\"ListHead\" nowrap><b>差额数量</b></td>");
             Sb_Details.Append(" <td class=\"ListHead\" nowrap><b>单价</b></td>");
@@ -557,12 +413,15 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
 
                     string s_DBNumber = Dts_Details.Tables[0].Rows[i]["KWAD_SCDBNumber"].ToString() == "0" || Dts_Details.Tables[0].Rows[i]["KWAD_SCDBNumber"].ToString() == "" ? Dts_Details.Tables[0].Rows[i]["AllocateAmount"].ToString() : Dts_Details.Tables[0].Rows[i]["KWAD_SCDBNumber"].ToString();
                     string s_Number = Dts_Details.Tables[0].Rows[i]["AllocateAmount"].ToString();
+                    string sBadNumber= Dts_Details.Tables[0].Rows[i]["AllocateBadAmount"].ToString();
 
                     Sb_Details.Append("<td class=\"ListHeadDetails\">" + s_DBNumber + "</td>");
 
 
 
                     Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"Number_" + i.ToString() + "\" readonly=\"readonly\" value='" + s_Number + "'></td>");
+
+                    Sb_Details.Append("<td class=\"ListHeadDetails\"><input type=\"text\" Class=\"detailedViewTextBox\" OnFocus=\"this.className=\'detailedViewTextBoxOn\'\" OnBlur=\"this.className=\'detailedViewTextBox\'\" style=\"width:70px;\" Name=\"AllocateBadAmount_" + i.ToString() + "\" readonly=\"readonly\" value='" + sBadNumber + "'></td>");
 
                     string s_Sql = "Select isnull(Sum(NeedNumber),0)  from v_NeedNumberStore where ProductsBarCode='" + Dts_Details.Tables[0].Rows[i]["ProductsBarCode"].ToString() + "' and HouseNo='" + this.Lbl_House_int0.Text + "'  ";
                     this.BeginQuery(s_Sql);
@@ -628,28 +487,34 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
        
 
         KNet.BLL.KNet_WareHouse_AllocateList BLL3 = new KNet.BLL.KNet_WareHouse_AllocateList();
-        KNet.Model.KNet_WareHouse_AllocateList Mode2 = new KNet.Model.KNet_WareHouse_AllocateList();
+        KNet.Model.KNet_WareHouse_AllocateList Mode3 = new KNet.Model.KNet_WareHouse_AllocateList();
+
+        KNet.BLL.KNet_WareHouse_AllocateList BLL4 = new KNet.BLL.KNet_WareHouse_AllocateList();
+        KNet.Model.KNet_WareHouse_AllocateList Mode4 = new KNet.Model.KNet_WareHouse_AllocateList();
 
         string s_ID = this.Tbx_ID.Text;
         AdminloginMess LogAM = new AdminloginMess();
 
-        if (this.SetValue(Mode2) == false)
+        if (this.SetValue(Mode3) == false)
+        {
+            Alert("系统错误！");
+            return;
+        }
+        if (this.SetValue1(Mode4) == false)
         {
             Alert("系统错误！");
             return;
         }
 
-
         try
         {
-
-            BLL3.Add(Mode2);
-            //BLL2.Add(model1);//插入一条研发领料数据
-
-
-            //发送给仓库有新的库间调拨单
-            base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台（物料部/仓库管理）", 0), "有新的库间调拨申请单需要您操作入库：<a href='Web/WareHouseAllocateList/KNet_WareHouse_FuWareCheck_View.aspx?ID=" + Mode2.AllocateNo + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'></a> 需要您作为负责人选择审批流程，敬请关注！ ");
-            LogAM.Add_Logs("库存管理--->库间调拨申请--->调拨开单申请 添加 操作成功！调拨单号：" + Mode2.AllocateNo);
+            BLL3.Add(Mode3);//插入一条入成品库的调拨单
+            if (Mode4.Arr_List!=null)
+            {
+                BLL4.Add(Mode4);
+            }
+            base.Base_SendMessage(base.Base_GetDeptPerson("供应链平台（物料部/仓库管理）", 0), "有新的库间调拨申请单需要您操作入库：<a href='Web/WareHouseAllocateList/KNet_WareHouse_FuWareCheck_View.aspx?ID=" + Mode3.AllocateNo + "'  target=\"_blank\" onclick='RemoveSms('#ID', '', 0);'></a> 需要您作为负责人选择审批流程，敬请关注！ ");
+            LogAM.Add_Logs("库存管理--->库间调拨申请--->调拨开单申请 添加 操作成功！调拨单号：" + Mode3.AllocateNo);
 
             Response.Write("<script>alert('入成品库申请 添加  操作成功！');location.href='KNet_WareHouse_AllocateList_Manage.aspx';</script>");
             Response.End();
@@ -699,15 +564,6 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
             molel.AllocateNo = AllocateNo;
             molel.AllocateTopic = AllocateTopic;
             molel.AllocateCause = AllocateCause;
-            //if (this.Tbx_Type.Text == "1")
-            //{
-            //    if (KPS_InvoiceUrl1.Text == "")
-            //    {
-            //        Response.Write("<script language=javascript>alert('请上传送货单!');history.back(-1);</script>");
-            //        Response.End();
-            //    }
-            //}
-
             molel.KWA_UploadName = KWA_UploadName.Text;
             molel.KWA_UploadUrl = KWA_UploadUrl1.Text;
             molel.AllocateDateTime = AllocateDateTime;
@@ -895,6 +751,244 @@ public partial class Web_WareHouseAllocateList_KNet_WareHouse_FuWareCheck_View :
                         Arr_Products.Add(Model_Details);
                         molel.Arr_List = Arr_Products;
                     //}
+
+                }
+            }
+
+
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+            return false;
+        }
+    }
+    private bool SetValue1(KNet.Model.KNet_WareHouse_AllocateList molel)
+    {
+
+        AdminloginMess AM = new AdminloginMess();
+        try
+        {
+            string AllocateNo= "CP" + base.GetNewID("KNet_WareHouse_FuAllocateList", 1); 
+            //if (this.Tbx_ID.Text != "")
+            //{
+            //    AllocateNo = this.Lbl_Code.Text;
+            //}
+
+            string AllocateTopic = KNetPage.KHtmlEncode("");
+            string AllocateCause = KNetPage.KHtmlEncode(this.Lbl_Case.Text.Trim());
+
+            //DateTime AllocateDateTime = DateTime.Parse(Lbl_Stime.Text.ToString());
+            DateTime AllocateDateTime = DateTime.Parse(DateTime.Now.ToShortDateString());
+
+
+            string HouseNo_out = KNetPage.KHtmlEncode(this.Lbl_HouseNo.Text);
+            string HouseNo_int = KNetPage.KHtmlEncode(this.Lbl_House_int0.Text);
+
+            if (HouseNo_out.ToLower() == HouseNo_int.ToLower())
+            {
+                Response.Write("<script>alert('错误！！\\n\\n调出仓库不能与调入仓库一样！');history.back(-1);</script>");
+                Response.End();
+            }
+            string AllocateStaffBranch = "";
+            string AllocateStaffDepart = "";
+            string AllocateStaffNo = AM.KNet_StaffNo;
+            string AllocateCheckStaffNo = "";
+            string AllocateRemarks = KNetPage.KHtmlEncode(this.Lbl_Remarks.Text.Trim());
+
+
+            molel.AllocateNo = AllocateNo;
+            molel.AllocateTopic = AllocateTopic;
+            molel.AllocateCause = AllocateCause;
+            molel.KWA_UploadName = "";
+            molel.KWA_UploadUrl = "";
+            molel.AllocateDateTime = AllocateDateTime;
+            molel.HouseNo = HouseNo_out;
+            molel.HouseNo_int = HouseNo_int;
+
+            molel.KWA_Type = "3";
+            molel.AllocateStaffBranch = AllocateStaffBranch;
+            molel.AllocateStaffDepart = AllocateStaffDepart;
+
+            molel.AllocateStaffNo = AllocateStaffNo;
+            molel.AllocateCheckStaffNo = AllocateCheckStaffNo;
+            molel.AllocateRemarks = AllocateRemarks;
+            molel.AllocateCheckYN = 0;
+            molel.AllocateTopic = "102"; //维修品调拨
+            molel.KWA_OrderNo = this.Tbx_OrderNo1.Text;
+            molel.KWA_DBType = int.Parse(this.Chk_Type1.Text);
+            molel.KWA_IsEntity = int.Parse(this.KWA_IsEntity.Text);
+            ArrayList Arr_Products = new ArrayList();
+            for (int i = 0; i < int.Parse(this.Tbx_Num.Text); i++)
+            {
+
+                if (Request["ProductsBarCode_" + i.ToString()] != null)
+                {
+                    string s_ProductsBarCode = Request.Form["ProductsBarCode_" + i.ToString()] == null
+                        ? ""
+                        : Request.Form["ProductsBarCode_" + i.ToString()].ToString();
+                    string s_FaterBarCode = Request.Form["FaterBarCode_" + i.ToString()] == null
+                        ? ""
+                        : Request.Form["FaterBarCode_" + i.ToString()].ToString();
+
+                    string s_Number = Request.Form["AllocateBadAmount_" + i.ToString()] == ""
+                        ? "0"
+                        : Request.Form["AllocateBadAmount_" + i.ToString()].ToString();
+
+                    string s_Price = "0", s_Money = "0";
+                    try
+                    {
+                        s_Price = Request.Form["AllocateUnitPrice_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["AllocateUnitPrice_" + i.ToString()].ToString();
+                    }
+                    catch
+                    {
+                    }
+                    try
+                    {
+                        s_Money = Request.Form["AllocateTotalNet_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["AllocateTotalNet_" + i.ToString()].ToString();
+
+                    }
+                    catch
+                    {
+                    }
+                    if (decimal.Parse(s_Money) != 0)
+                    {
+                        try
+                        {
+                            s_Price = Convert.ToString(decimal.Parse(s_Money) / decimal.Parse(s_Number)*(-1));
+                        }
+                        catch
+                        {
+                        }
+                    }
+                    else
+                    {
+                        s_Money = Convert.ToString(decimal.Parse(s_Price) * decimal.Parse(s_Number) * (-1));
+                    }
+                    string s_CPBZNumber = "0";
+                    string s_BZNumber = "0";
+
+                    try
+                    {
+                        s_CPBZNumber = Request.Form["Tbx_CPBZNumber_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["Tbx_CPBZNumber_" + i.ToString()].ToString();
+                        s_BZNumber = Request.Form["Tbx_BZNumber_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["Tbx_BZNumber_" + i.ToString()].ToString();
+
+                    }
+                    catch
+                    {
+                        s_CPBZNumber = "0";
+                        s_BZNumber = "0";
+                    }
+                    string s_BadNumber = "0", s_AddBadNumber = "0", s_SDNumber = "0", s_BFNumber = "0";
+
+                    try
+                    {
+                        s_BadNumber = Request.Form["BadNumber_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["BadNumber_" + i.ToString()].ToString();
+
+                    }
+                    catch
+                    {
+                        s_BadNumber = "0";
+                    }
+
+                    try
+                    {
+                        s_AddBadNumber = Request.Form["AddBadNumber_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["AddBadNumber_" + i.ToString()].ToString();
+
+                    }
+                    catch
+                    {
+                        s_AddBadNumber = "0";
+                    }
+                    try
+                    {
+                        s_SDNumber = Request.Form["SDNumber_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["SDNumber_" + i.ToString()].ToString();
+
+                    }
+                    catch
+                    {
+                        s_SDNumber = "0";
+                    }
+                    try
+                    {
+                        s_BFNumber = Request.Form["BFNumber_" + i.ToString()] == ""
+                            ? "0"
+                            : Request.Form["BFNumber_" + i.ToString()].ToString();
+
+                    }
+                    catch
+                    {
+                        s_BFNumber = "0";
+                    }
+                    string s_Remarks = Request.Form["AllocateRemarks_" + i.ToString()].ToString();
+                    KNet.Model.KNet_WareHouse_AllocateList_Details Model_Details =
+                        new KNet.Model.KNet_WareHouse_AllocateList_Details();
+                    Model_Details.ID = GetNewID("KNet_WareHouse_FuAllocateList_Details", 1);
+                    Model_Details.ProductsBarCode = s_ProductsBarCode;
+                    Model_Details.AllocateNo = molel.AllocateNo;
+                    Model_Details.AllocateAmount = int.Parse(s_Number)*(-1);
+                    try
+                    {
+                        Model_Details.KWAD_CPBZNumber = int.Parse(s_CPBZNumber);
+                        Model_Details.KWAD_BZNumber = int.Parse(s_BZNumber);
+                    }
+                    catch
+                    {
+                        Model_Details.KWAD_CPBZNumber = 0;
+                        Model_Details.KWAD_BZNumber = 0;
+                    }
+                    Model_Details.AllocateUnitPrice = decimal.Parse(s_Price);
+                    Model_Details.AllocateTotalNet = decimal.Parse(s_Money);
+                    Model_Details.AllocateRemarks = s_Remarks;
+                    Model_Details.KWAD_FaterBarCode = s_FaterBarCode;
+                    try
+                    {
+                        Model_Details.KWAD_SDNumber = int.Parse(s_Number) * (-1);
+                    }
+                    catch
+                    {
+                        Model_Details.KWAD_SDNumber = 0;
+                    }
+                    try
+                    {
+                        Model_Details.KWAD_BFNumber = int.Parse(s_BFNumber);
+                    }
+                    catch
+                    {
+                        Model_Details.KWAD_BFNumber = 0;
+                    }
+
+                    try
+                    {
+                        Model_Details.KWAD_BadNumber = int.Parse(s_BadNumber);
+                    }
+                    catch { Model_Details.KWAD_BadNumber = 0; }
+                    try
+                    {
+                        Model_Details.KWAD_AddBadNumber = int.Parse(s_AddBadNumber);
+                    }
+                    catch { Model_Details.KWAD_AddBadNumber = 0; }
+                    if (decimal.Parse(s_Number) != 0)
+                    {
+                        Arr_Products.Add(Model_Details);
+                        molel.Arr_List = Arr_Products;
+                    }
 
                 }
             }

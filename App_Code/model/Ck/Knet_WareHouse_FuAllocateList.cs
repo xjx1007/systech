@@ -35,6 +35,7 @@ namespace KNet.Model
         private string _KWA_UploadName;
         private string _KSP_SID;
         private int _KWA_IsEntity;
+       
         /// <summary>
         /// 自动ID值
         /// </summary>
@@ -43,6 +44,7 @@ namespace KNet.Model
             set { _id = value; }
             get { return _id; }
         }
+       
         /// <summary>
         /// 判断入库通知是否为实物
         /// </summary>

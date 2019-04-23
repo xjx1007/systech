@@ -277,6 +277,11 @@
                                                 <%# GetDirectInNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="退货数量" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# GetDirectBadNumbers(DataBinder.Eval(Container.DataItem, "AllocateNo").ToString())%>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="经手人" SortExpression="AllocateStaffNo" HeaderStyle-Font-Size="12px" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
                                                 <%# base.Base_GetUserName(DataBinder.Eval(Container.DataItem, "AllocateStaffNo").ToString())%>

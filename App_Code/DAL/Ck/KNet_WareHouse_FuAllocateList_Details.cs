@@ -47,9 +47,9 @@ namespace KNet.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into KNet_WareHouse_FuAllocateList_Details(");
-            strSql.Append("AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID,KWAD_FaterBarCode,KWAD_CPBZNumber,KWAD_BZNumber,KWAD_BadNumber,KWAD_AddBadNumber,KWAD_SDNumber,KWAD_BFNumber,KWAD_BLNumber)");
+            strSql.Append("AllocateNo,ProductsName,ProductsBarCode,ProductsPattern,ProductsUnits,AllocateAmount,AllocateBadAmount,AllocateUnitPrice,AllocateDiscount,AllocateTotalNet,AllocateRemarks,OwnallPID,KWAD_FaterBarCode,KWAD_CPBZNumber,KWAD_BZNumber,KWAD_BadNumber,KWAD_AddBadNumber,KWAD_SDNumber,KWAD_BFNumber,KWAD_BLNumber)");
             strSql.Append(" values (");
-            strSql.Append("@AllocateNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@AllocateAmount,@AllocateUnitPrice,@AllocateDiscount,@AllocateTotalNet,@AllocateRemarks,@OwnallPID,@KWAD_FaterBarCode,@KWAD_CPBZNumber,@KWAD_BZNumber,@KWAD_BadNumber,@KWAD_AddBadNumber,@KWAD_SDNumber,@KWAD_BFNumber,@KWAD_BLNumber)");
+            strSql.Append("@AllocateNo,@ProductsName,@ProductsBarCode,@ProductsPattern,@ProductsUnits,@AllocateAmount,@AllocateBadAmount,@AllocateUnitPrice,@AllocateDiscount,@AllocateTotalNet,@AllocateRemarks,@OwnallPID,@KWAD_FaterBarCode,@KWAD_CPBZNumber,@KWAD_BZNumber,@KWAD_BadNumber,@KWAD_AddBadNumber,@KWAD_SDNumber,@KWAD_BFNumber,@KWAD_BLNumber)");
             SqlParameter[] parameters = {
                     new SqlParameter("@AllocateNo", SqlDbType.NVarChar,50),
                     new SqlParameter("@ProductsName", SqlDbType.NVarChar,50),
@@ -57,6 +57,7 @@ namespace KNet.DAL
                     new SqlParameter("@ProductsPattern", SqlDbType.NVarChar,50),
                     new SqlParameter("@ProductsUnits", SqlDbType.NVarChar,50),
                     new SqlParameter("@AllocateAmount", SqlDbType.Int,4),
+                    new SqlParameter("@AllocateBadAmount", SqlDbType.Int,4),
                     new SqlParameter("@AllocateUnitPrice", SqlDbType.Decimal,9),
                     new SqlParameter("@AllocateDiscount", SqlDbType.Decimal,9),
                     new SqlParameter("@AllocateTotalNet", SqlDbType.Decimal,9),
@@ -79,19 +80,20 @@ namespace KNet.DAL
             parameters[3].Value = model.ProductsPattern;
             parameters[4].Value = model.ProductsUnits;
             parameters[5].Value = model.AllocateAmount;
-            parameters[6].Value = model.AllocateUnitPrice;
-            parameters[7].Value = model.AllocateDiscount;
-            parameters[8].Value = model.AllocateTotalNet;
-            parameters[9].Value = model.AllocateRemarks;
-            parameters[10].Value = model.OwnallPID;
-            parameters[11].Value = model.KWAD_FaterBarCode;
-            parameters[12].Value = model.KWAD_CPBZNumber;
-            parameters[13].Value = model.KWAD_BZNumber;
-            parameters[14].Value = model.KWAD_BadNumber;
-            parameters[15].Value = model.KWAD_AddBadNumber;
-            parameters[16].Value = model.KWAD_SDNumber;
-            parameters[17].Value = model.KWAD_BFNumber;
-            parameters[18].Value = model.KWAD_BLNumber;
+            parameters[6].Value = model.AllocateBadAmount;
+            parameters[7].Value = model.AllocateUnitPrice;
+            parameters[8].Value = model.AllocateDiscount;
+            parameters[9].Value = model.AllocateTotalNet;
+            parameters[10].Value = model.AllocateRemarks;
+            parameters[11].Value = model.OwnallPID;
+            parameters[12].Value = model.KWAD_FaterBarCode;
+            parameters[13].Value = model.KWAD_CPBZNumber;
+            parameters[14].Value = model.KWAD_BZNumber;
+            parameters[15].Value = model.KWAD_BadNumber;
+            parameters[16].Value = model.KWAD_AddBadNumber;
+            parameters[17].Value = model.KWAD_SDNumber;
+            parameters[18].Value = model.KWAD_BFNumber;
+            parameters[19].Value = model.KWAD_BLNumber;
             //parameters[18].Value = model.KWAD_DirectOutNo;
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
