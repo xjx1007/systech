@@ -80,16 +80,26 @@
         }
         //改变价格方法
         function Keap1(ipt) {
-            var trs = document.getElementById("MyGridView2");
-            var pipt = ipt.parentNode.parentNode;
-            var i_row = pipt.rowIndex;
-            var i_rows = trs.rows.length;
-            var v_Number = trs.rows(i_row).cells(10).childNodes[0].value
-            var v_Price = trs.rows(i_row).cells(11).childNodes[0].value
-            if (i_rows > 0) {
-                trs.rows(i_row).cells(12).childNodes[0].value = parseFloat(v_Price) * parseFloat(v_Number);
+            //var trs = document.getElementById("MyGridView2");
+            //var pipt = ipt.parentNode.parentNode;
+            //var i_row = pipt.rowIndex;
+            //var i_rows = trs.rows.length;
+            //var v_Number = trs.rows(i_row).cells(10).childNodes[0].value
+            //var v_Price = trs.rows(i_row).cells(11).childNodes[0].value
+            //if (i_rows > 0) {
+            //    trs.rows(i_row).cells(12).childNodes[0].value = parseFloat(v_Price) * parseFloat(v_Number);
+            //}
+            //GetTotal();
+            var tb = document.getElementById("MyGridView2");
+            debugger;
+            var rows = tb.rows;
+            for (var i = 1; i < rows.length; i++) {                            
+                var Tbx_number = rows[i].cells[10].childNodes[1].value;//数量
+                var v_Price = rows[i].cells[11].childNodes[1].value;//单价
+                var money = parseInt(Tbx_number) * parseFloat(v_Price);
+                rows[i].cells[12].childNodes[1].value = money;
+
             }
-            GetTotal();
         }
 
 
